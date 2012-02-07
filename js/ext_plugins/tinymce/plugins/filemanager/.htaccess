@@ -1,0 +1,2 @@
+# Add this rule to a .htaccess file in the imagemanager directory
+RewriteEngine Off

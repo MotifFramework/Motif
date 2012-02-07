@@ -1,0 +1,47 @@
+/* Popup Window */
+
+.boxOverlay {position:fixed; width:100%; height:100%; top:0; left:0; background:#000; display:none; opacity:.5; filter:alpha(opacity=50); -ms-filter:"alpha(opacity=50)"; -khtml-opacity:.5; -moz-opacity:.5;}
+.boxContainer {position:absolute; top:0; left:0; display:none;}
+.iframecontent {background: #fff; width:100%; height:100%;}
+
+.alertwindow {background:#fff; height:100%;}
+.alert_delete {width:440px;}
+.alert_load {width:320px;}
+.alert_version {width:440px;}
+.global {width:440px;}
+
+.alertwindow .title {width:100%; height:40px; background:#212121; font-size:18px; line-height:40px; color:#fff; font-family:Helvetica, Arial, sans-serif; text-indent:10px;}
+.alertwindow .alertpad {padding:15px;}
+.alertwindow .alert {font-size:30px; line-height:32px; color:#666; font-family:Helvetica, Arial, sans-serif; letter-spacing:-1px; margin:0 0 10px 0;}
+
+.alertwindow .bluebox {padding:10px; background:#e7f2f7; font-size:10px; line-height:14px; color:#616161; margin:5px 0;}
+.alertwindow .bluebox .left {width:70%; float:left;}
+.alertwindow .bluebox .right {float:right;}
+.alertwindow .bluebox .label {font-size:14px; line-height:18px; font-weight:bold; color:#424242;}
+
+.alertwindow .graybox {padding:10px; background:#efefef; font-size:10px; line-height:14px; color:#616161; margin:5px 0;}
+.alertwindow .graybox .left {width:33%; float:left;}
+.alertwindow .graybox .right {width:65%; float:right;}
+.alertwindow .graybox .label {font-size:14px; line-height:18px; font-weight:bold; color:#424242;}
+
+.alertwindow .graybox input {width:240px; background:#fff; border:#9fbbcd 1px solid; padding:5px 4px; font-size:14px; line-height:22px; color:#848484;}
+.alertwindow .graybox input.checkbox {width:25px; background:none; border:none; padding:0;}
+.alertwindow .graybox select {background:#fff; border:#9fbbcd 1px solid; padding:3px; font-size:14px; line-height:22px; color:#848484;}
+
+.alertwindow .confirm {font-size:14px; line-height:35px; color:#7e7e7e; padding:10px 0 15px 0;}
+.alertwindow .confirm a {text-decoration:underline;}
+.alertwindow .confirm .button a {width:115px; height:35px; display:block; background:url(../../images/admin/button_confirm.gif); margin:0 10px 0 0; float:left;}
+.alertwindow .confirm .button a:hover {background:url(../../images/admin/button_confirm_over.gif);}
+.alertwindow .confirm .button span {display:none;}
+.alertwindow .note {font-size:10px; line-height:12px; color:#939393;}
+
+.alertwindow .versionicons ul {margin:0; padding:0;}
+.alertwindow .versionicons li {margin:0 1px; padding:0; float:left; list-style:none;}
+.alertwindow .versionicons a {width:25px; height:25px; display:block;}
+.alertwindow .versionicons span {display:none;}
+
+.alertwindow .versionicons .icon1 {background:url(../../images/admin/icon_version1.gif);}
+.alertwindow .versionicons .icon2 {background:url(../../images/admin/icon_version2.gif);}
+.alertwindow .versionicons .icon3 {background:url(../../images/admin/icon_version3.gif);}
+
+.alertwindow-loader {background:url(../../images/admin/dialog/ajax-loader.gif) top center no-repeat; height:25px; width:300px;}
