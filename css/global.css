@@ -90,8 +90,8 @@ q {
   quotes: none;
 }
 blockquote:before,
-blockquote:after,
 q:before,
+blockquote:after,
 q:after {
   content: "";
   content: none;
@@ -103,10 +103,10 @@ table {
   border-collapse: collapse;
 }
 table,
-th,
-tr,
-td,
-caption {
+table th,
+table tr,
+table td,
+table caption {
   font-weight: normal;
   text-align: left;
   vertical-align: top;
@@ -130,39 +130,57 @@ summary,
 img {
   display: block;
 }
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.no-boxsizing * {
+  behavior: url(/resources/js/boxsizing.htc);
+}
 /* -- Forms -- */
 /* -- Input Widths -- */
 .input-nano {
-  width: 8.799999999999999px;
+  width: 3.799999999999999px;
 }
 .input-tiny {
-  width: 42px;
+  width: 37px;
 }
 .input-small {
-  width: 125px;
+  width: 120px;
 }
 .input-normal {
-  width: 208px;
+  width: 203px;
 }
 .input-big {
-  width: 291px;
+  width: 286px;
 }
 .input-huge {
-  width: 374px;
+  width: 369px;
 }
 .input-massive {
-  width: 457px;
+  width: 452px;
 }
 .input-full {
-  width: 955px;
+  width: 950px;
 }
 /* -- Labels -- */
 label {
   display: block;
 }
+.input-label {
+  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+}
 .input-label,
-.checkbox-label {
+.input-label .checkbox-label {
   margin: 15px 0 0;
+}
+.input-label.required {
+  color: #2575ae;
+}
+.input-label .hint {
+  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
 }
 .checkbox-label {
   font-size: 13px;
@@ -208,13 +226,12 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
-  height: 20px;
+  height: 40px;
   margin: 5px 0;
-  padding: 4px 4px;
+  padding: 8px 4px;
   -webkit-appearance: none;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
+  -moz-appearance: none;
+  appearance: none;
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
   background-clip: padding-box;
@@ -223,12 +240,28 @@ input[type="week"] {
   border-color: #cfcbca;
   color: #434142;
   outline: 0;
-  font-family: Arial, 'Liberation Sans', FreeSans, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;
   border-radius: 0;
+}
+.input-label textarea,
+.input-label select,
+.input-label input[type="date"],
+.input-label input[type="datetime"],
+.input-label input[type="datetime-local"],
+.input-label input[type="email"],
+.input-label input[type="month"],
+.input-label input[type="number"],
+.input-label input[type="password"],
+.input-label input[type="search"],
+.input-label input[type="tel"],
+.input-label input[type="text"],
+.input-label input[type="time"],
+.input-label input[type="url"],
+.input-label input[type="week"] {
+  width: 100%;
 }
 .lte7 textarea,
 .lte7 select,
@@ -414,6 +447,10 @@ textarea[disabled] {
   margin: 0;
   float: left;
 }
+.search .input {
+  width: 150px;
+  height: 30px;
+}
 .search .submit {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -459,6 +496,7 @@ textarea[disabled] {
   border-radius: 5px;
   color: #7c7c7c;
   text-shadow: 0 1px 1px #ffffff;
+  background: #cfcbca url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #ffffff 0, #cfcbca 100%);
   /* FF3.6+ */
 
@@ -478,6 +516,9 @@ textarea[disabled] {
   /* W3C */
 
   border-color: #b7b1af;
+}
+p .button {
+  margin-top: 0;
 }
 .button.round {
   -webkit-border-radius: 1000px;
@@ -506,6 +547,7 @@ textarea[disabled] {
 .button:hover,
 .button:focus {
   color: #646464;
+  background: #c3bebd url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
   /* FF3.6+ */
 
@@ -530,6 +572,7 @@ textarea[disabled] {
 .button.primary {
   color: #ffffff;
   text-shadow: 0 1px 1px #ffffff;
+  background: #2575ae url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #5da7dc 0, #2575ae 100%);
   /* FF3.6+ */
 
@@ -556,6 +599,7 @@ textarea[disabled] {
 .button.blue:focus,
 .button.primary:focus {
   color: #ffffff;
+  background: #216799 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #489cd8 0, #216799 100%);
   /* FF3.6+ */
 
@@ -580,6 +624,7 @@ textarea[disabled] {
 .button.danger {
   color: #ffffff;
   text-shadow: 0 1px 1px #ffffff;
+  background: #e63c4d url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #f296a0 0, #e63c4d 100%);
   /* FF3.6+ */
 
@@ -606,6 +651,7 @@ textarea[disabled] {
 .button.red:focus,
 .button.danger:focus {
   color: #ffffff;
+  background: #e32538 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #ef808b 0, #e32538 100%);
   /* FF3.6+ */
 
@@ -630,6 +676,7 @@ textarea[disabled] {
 .button.success {
   color: #ffffff;
   text-shadow: 0 1px 1px #ffffff;
+  background: #0b9a45 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #1cef72 0, #0b9a45 100%);
   /* FF3.6+ */
 
@@ -656,6 +703,7 @@ textarea[disabled] {
 .button.green:focus,
 .button.success:focus {
   color: #ffffff;
+  background: #09823a url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #10e165 0, #09823a 100%);
   /* FF3.6+ */
 
@@ -680,6 +728,7 @@ textarea[disabled] {
 .button.rogue {
   color: #ffffff;
   text-shadow: 0 1px 1px #ffffff;
+  background: #434142 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #777375 0, #434142 100%);
   /* FF3.6+ */
 
@@ -706,6 +755,7 @@ textarea[disabled] {
 .button.black:focus,
 .button.rogue:focus {
   color: #ffffff;
+  background: #363435 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #6a6768 0, #363435 100%);
   /* FF3.6+ */
 
@@ -725,9 +775,6 @@ textarea[disabled] {
   /* W3C */
 
   border-color: #1c1b1c;
-}
-p .button {
-  margin-top: 0;
 }
 /* -- Font-Face Declarations -- */
 @font-face {
@@ -860,7 +907,8 @@ ul,
 ol,
 dl,
 address,
-table {
+table,
+figure {
   margin-top: 20px;
 }
 ul,
@@ -951,6 +999,12 @@ a:hover,
 a:focus {
   color: #a05ea5;
 }
+.figcaption {
+  padding: 5px 9px;
+  display: block;
+  font-family: "PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  background-color: #cfcbca;
+}
 /* -- Inline Tags -- */
 .tag {
   padding: 3px 4px 1px;
@@ -958,8 +1012,6 @@ a:focus {
   font-weight: normal;
   color: #ffffff;
   text-transform: uppercase;
-  font-size: 10px;
-  line-height: 10px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -o-border-radius: 3px;
@@ -985,9 +1037,6 @@ a.tag:hover {
   background-color: #a05ea5;
 }
 /* -- Tables -- */
-.lte7 table {
-  border-collapse: collapse;
-}
 table {
   width: 100%;
   padding: 0;
@@ -997,6 +1046,9 @@ table {
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+}
+.lte7 table {
+  border-collapse: collapse;
 }
 table th,
 table td {
@@ -1098,18 +1150,14 @@ table .headerSortUp:after {
   -moz-box-shadow: none 0 10px #cccccc;
   -o-box-shadow: none 0 10px #cccccc;
   box-shadow: none 0 10px #cccccc;
-  filter: alpha(opacity=60);
-  -moz-opacity: 0.6;
-  -khtml-opacity: 0.6;
   opacity: 0.6;
+  filter: alpha(opacity=60);
 }
 table .headerSortDown:after,
 table .headerSortDown:hover:after {
   visibility: visible;
-  filter: alpha(opacity=60);
-  -moz-opacity: 0.6;
-  -khtml-opacity: 0.6;
   opacity: 0.6;
+  filter: alpha(opacity=60);
 }
 table .blue {
   color: #2575ae;
@@ -1164,8 +1212,8 @@ table .purple {
 .clear {
   clear: both;
 }
-.group {
-  *zoom: 1;
+.lte7 .group {
+  zoom: 1;
 }
 .group:before,
 .group:after {
@@ -1179,16 +1227,14 @@ table .purple {
 }
 /* -- Boxes -- */
 .box {
-  margin-top: 10px;
-  margin-left: -18px;
-  margin-right: -18px;
+  margin-top: 20px;
   padding: 20px 18px;
   background: #e7e5e5;
 }
-.box > :first-child {
+.box  > :first-child {
   margin-top: 0;
 }
-.fancy.box {
+.box.fancy {
   padding: 19px 17px;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
   -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -1200,13 +1246,21 @@ table .purple {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
+.box.thin {
+  padding: 10px 9px;
+}
 /* -- Media Object -- */
 .media-object,
-.desc {
+.media-object .desc {
   overflow: hidden;
 }
+.ie6 .media-object,
+.ie6 .media-object .desc {
+  overflow: visible;
+  zoom: 1;
+}
 .media-object .object {
-  margin-right: 72px;
+  margin-right: 36px;
   float: left;
 }
 .media-object .object img {
@@ -1215,17 +1269,14 @@ table .purple {
 .media-object .desc {
   float: left;
 }
-.ie6 .media-object,
-.ie6 .desc {
-  overflow: visible;
-  zoom: 1;
-}
 /* -- Media Grid -- */
 .media-grid {
   margin-top: 0;
   margin-left: -18px;
   margin-right: -18px;
-  *zoom: 1;
+}
+.lte7 .media-grid {
+  zoom: 1;
 }
 .media-grid:before,
 .media-grid:after {
@@ -1241,11 +1292,13 @@ table .purple {
   display: inline;
   list-style: none outside none;
 }
-.media-grid a {
+.media-grid a,
+.media-grid label {
   display: inline-block;
-  margin: 20px 18px 0;
+  margin: 20px 15px 0 18px;
 }
-.media-grid a img {
+.media-grid a img,
+.media-grid label img {
   display: block;
 }
 /* -- Tabs -- */
@@ -1258,7 +1311,9 @@ table .purple {
 .tabs .nav {
   margin-left: 1px;
   border-bottom: 1px solid #a05ea5;
-  *zoom: 1;
+}
+.lte7 .tabs .nav {
+  zoom: 1;
 }
 .tabs .nav:before,
 .tabs .nav:after {
@@ -1348,6 +1403,7 @@ table .purple {
 /* -- Nav Bar -- */
 .nav-bar {
   margin: 0 0 20px 0;
+  background: #434142 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* FF3.6+ */
 
@@ -1383,6 +1439,7 @@ table .purple {
 }
 .nav-bar a:hover,
 .nav-bar a:focus {
+  background: #292829 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #434142 0, #292829 100%);
   /* FF3.6+ */
 
@@ -1415,6 +1472,109 @@ table .purple {
 .sub-nav a:hover,
 .sub-nav a:focus {
   background: #292829;
+}
+/* -- Breadcrumb -- */
+.breadcrumb {
+  font-size: 13px;
+}
+.lte7 .breadcrumb {
+  zoom: 1;
+}
+.breadcrumb:before,
+.breadcrumb:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.breadcrumb:after {
+  clear: both;
+}
+.breadcrumb .label {
+  margin: 0 10px 0 0;
+  display: inline;
+  float: left;
+}
+.breadcrumb .nav {
+  margin: 0;
+  float: left;
+  text-transform: capitalize;
+}
+.breadcrumb li {
+  margin-right: 9px;
+  float: left;
+}
+.breadcrumb li:before {
+  content: "/";
+  margin-right: 9px;
+}
+.breadcrumb li:first-child:before {
+  content: "";
+  margin: 0;
+}
+/* -- Steps -- */
+.steps {
+  margin: 20px 0 0;
+}
+.steps ol {
+  margin: 0;
+  margin-left: 0;
+  list-style: none outside none;
+}
+.lte7 .steps.horizontal {
+  zoom: 1;
+}
+.steps.horizontal:before,
+.steps.horizontal:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.steps.horizontal:after {
+  clear: both;
+}
+.steps.horizontal .title {
+  margin: 0 10px 0 0;
+  padding: 5px 0;
+  float: left;
+}
+.steps.horizontal li {
+  margin: 0 0 0 3px;
+  float: left;
+}
+.steps.horizontal li:first-child {
+  margin-left: 0;
+}
+.steps li {
+  margin-top: 3px;
+}
+.steps li:first-child {
+  margin-top: 0;
+}
+.steps a {
+  padding: 5px 10px;
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #cfcbca;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.steps a:hover,
+.steps a:focus {
+  cursor: default;
+}
+.steps a[href] {
+  background-color: #df65a6;
+}
+.steps a[href]:hover,
+.steps a[href]:focus,
+.steps a[href].current {
+  background-color: #a05ea5;
+  cursor: pointer;
 }
 /* -- Pagination -- */
 .pagination {
@@ -1504,6 +1664,7 @@ table .purple {
   color: #ffffff;
   text-shadow: 0 -1px 1px #fb9b0e;
   background: #fcb040;
+  background: #fcb040 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #fedaa4 0, #fcb040 100%);
   /* FF3.6+ */
 
@@ -1531,6 +1692,7 @@ table .purple {
   color: #ffffff;
   text-shadow: 0 -1px 1px #d41b2e;
   background: #e63c4d;
+  background: #e63c4d url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #f296a0 0, #e63c4d 100%);
   /* FF3.6+ */
 
@@ -1555,6 +1717,7 @@ table .purple {
   color: #ffffff;
   text-shadow: 0 -1px 1px #086a30;
   background: #0b9a45;
+  background: #0b9a45 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #1cef72 0, #0b9a45 100%);
   /* FF3.6+ */
 
@@ -1579,6 +1742,7 @@ table .purple {
   color: #ffffff;
   text-shadow: 0 -1px 1px #007da5;
   background: #00a4d8;
+  background: #00a4d8 url(../images/gradient-highlight.png) repeat-x left bottom;
   background: -moz-linear-gradient(top, #3fd1ff 0, #00a4d8 100%);
   /* FF3.6+ */
 
@@ -1621,7 +1785,9 @@ table .purple {
   margin-left: -18px;
   margin-right: -18px;
   display: inline-block;
-  *zoom: 1;
+}
+.lte7 .row {
+  zoom: 1;
 }
 .row:before,
 .row:after {
@@ -1669,6 +1835,24 @@ table .purple {
 }
 .twelve {
   width: 960px;
+}
+.thirteen {
+  width: 1043px;
+}
+.fourteen {
+  width: 1126px;
+}
+.fifteen {
+  width: 1209px;
+}
+.sixteen {
+  width: 1292px;
+}
+.seventeen {
+  width: 1375px;
+}
+.eighteen {
+  width: 1458px;
 }
 /* -- Grid Padded Column Widths -- */
 .one-padded {
@@ -1719,6 +1903,30 @@ table .purple {
   width: 920px;
   padding: 20px 20px;
 }
+.thirteen-padded {
+  width: 1003px;
+  padding: 20px 20px;
+}
+.fourteen-padded {
+  width: 1086px;
+  padding: 20px 20px;
+}
+.fifteen-padded {
+  width: 1169px;
+  padding: 20px 20px;
+}
+.sixteen-padded {
+  width: 1252px;
+  padding: 20px 20px;
+}
+.seventeen-padded {
+  width: 1335px;
+  padding: 20px 20px;
+}
+.eighteen-padded {
+  width: 1418px;
+  padding: 20px 20px;
+}
 /* -- Grid Offset -- */
 .offset-by-one {
   margin-left: 101px;
@@ -1752,6 +1960,24 @@ table .purple {
 }
 .offset-by-eleven {
   margin-left: 931px;
+}
+.offset-by-twelve {
+  margin-left: 1014px;
+}
+.offset-by-thirteen {
+  margin-left: 1097px;
+}
+.offset-by-fourteen {
+  margin-left: 1180px;
+}
+.offset-by-fifteen {
+  margin-left: 1263px;
+}
+.offset-by-sixteen {
+  margin-left: 1346px;
+}
+.offset-by-seventeen {
+  margin-left: 1429px;
 }
 /* -- Custom Styles -- */
 .wrapper {
