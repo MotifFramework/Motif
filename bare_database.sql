@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.44, for apple-darwin8.11.1 (i386)
 --
--- Host: localhost    Database: grpx_local
+-- Host: localhost    Database: lbcore
 -- ------------------------------------------------------
 -- Server version	5.1.44
 
@@ -436,6 +436,31 @@ LOCK TABLES `LB_ContentWorkflowLog` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `LB_Crud`
+--
+
+DROP TABLE IF EXISTS `LB_Crud`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `LB_Crud` (
+  `crudId` int(11) NOT NULL AUTO_INCREMENT,
+  `crudName` varchar(256) NOT NULL,
+  `dateCreated` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`crudId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `LB_Crud`
+--
+
+LOCK TABLES `LB_Crud` WRITE;
+/*!40000 ALTER TABLE `LB_Crud` DISABLE KEYS */;
+/*!40000 ALTER TABLE `LB_Crud` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `LB_DataTypeDefinition`
 --
 
@@ -622,7 +647,7 @@ CREATE TABLE `LB_ModuleSections` (
 
 LOCK TABLES `LB_ModuleSections` WRITE;
 /*!40000 ALTER TABLE `LB_ModuleSections` DISABLE KEYS */;
-INSERT INTO `LB_ModuleSections` VALUES ('Users','Users','/admin/users/index.html',0,'Manage Users'),('Users','Roles','/admin/users/usertypes.html',1,'Manage Users'),('Content','All Content','/admin/content/items.html',0,'Create Content,Delete Content,Manage Navigation'),('Content','Content Templates','/admin/content/contentTypes.html',2,'Manage Content Types'),('Resources','Overview','/admin/resources/index.html',0,NULL),('Resources','Files','/admin/resources/files.html',1,NULL),('Resources','Images','/admin/resources/images.html',2,NULL),('Resources','Tags','/admin/resources/tags.html',3,NULL),('Content','Workflow Rules','/admin/content/workflowRules.html',3,'Manage Workflow Rules');
+INSERT INTO `LB_ModuleSections` VALUES ('Users','Users','/admin/users/index.html',0,'Manage Users'),('Users','Roles','/admin/users/usertypes.html',1,'Manage Users'),('Content','All Content','/admin/content/items.html',0,'Create Content,Delete Content,Manage Navigation'),('Content','Content Templates','/admin/content/contentTypes.html',2,'Manage Content Types'),('Resources','Overview','/admin/resources/index.html',0,NULL),('Resources','Files','/admin/resources/files.html',1,NULL),('Resources','Images','/admin/resources/images.html',2,NULL),('Resources','Tags','/admin/resources/tags.html',3,NULL),('Content','Workflow Rules','/admin/content/workflowRules.html',3,'Manage Workflow Rules'),('Crud','Overview','/admin/crud/index.html',0,'Crud Overview');
 /*!40000 ALTER TABLE `LB_ModuleSections` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,7 +667,7 @@ CREATE TABLE `LB_Modules` (
   `adminDisplay` int(11) NOT NULL,
   PRIMARY KEY (`moduleId`),
   KEY `moduleName` (`moduleName`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -651,7 +676,7 @@ CREATE TABLE `LB_Modules` (
 
 LOCK TABLES `LB_Modules` WRITE;
 /*!40000 ALTER TABLE `LB_Modules` DISABLE KEYS */;
-INSERT INTO `LB_Modules` VALUES (1,'User Management','Users','Allows for the authorization of users, admin panel accessibility, and additional user-based functionality.','LB_UserManagement_Logic_User',1),(2,'Content Management','Content','Allows for the generation and rendering of generic content, admin panel accessibility, and additional content-based functionality including extendible content types.','LB_ContentManagement_Logic_Content',2);
+INSERT INTO `LB_Modules` VALUES (1,'User Management','Users','Allows for the authorization of users, admin panel accessibility, and additional user-based functionality.','LB_UserManagement_Logic_User',1),(2,'Content Management','Content','Allows for the generation and rendering of generic content, admin panel accessibility, and additional content-based functionality including extendible content types.','LB_ContentManagement_Logic_Content',2),(4,'Crud Management','Crud','Allows for the management of a Crud.','LB_Crud_Logic_Crud',1);
 /*!40000 ALTER TABLE `LB_Modules` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -990,7 +1015,7 @@ CREATE TABLE `LB_UserPermissions` (
   `userPermissionDescription` varchar(512) NOT NULL,
   PRIMARY KEY (`userPermissionId`),
   KEY `userPermissionName` (`userPermissionName`)
-) ENGINE=MyISAM AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -999,7 +1024,7 @@ CREATE TABLE `LB_UserPermissions` (
 
 LOCK TABLES `LB_UserPermissions` WRITE;
 /*!40000 ALTER TABLE `LB_UserPermissions` DISABLE KEYS */;
-INSERT INTO `LB_UserPermissions` VALUES (24,'Content','Edit Content Sections','Allows for the modification of Content Section details'),(23,'Content','View Content Sections','Allows for the viewing of Content Sections'),(22,'Content','Delete Generic Content','Allows for the deletion of content under the Generic Content type'),(21,'Content','Edit Generic Content','Allows for the modification of details for content under the Generic Content type'),(20,'Content','View Generic Content','Allows for the viewing of content under the Generic Content type'),(19,'Content','Archive Content','Allows for the archiving of content'),(18,'Content','Publish Content','Allows for the publishing of content'),(17,'Content','Approve Content','Allows for the approving of content'),(16,'Content','Draft Content','Allows for the drafting of content'),(15,'Content','Access Control Editor','Allows general access to the Control Content Editor'),(14,'Content','Access Template Editor','Allows general access to the Template Content Editor'),(13,'Content','Access Content Module','Allows general access to the Content Module'),(12,'Users','Delete User Types','Allows for the deletion of User Types'),(11,'Users','Edit User Type Permissions','Allows for the modification of User Type permissions'),(10,'Users','Edit User Types','Allows for the modification of User Type data'),(8,'Users','Delete Users','Allows for the deletion of Users'),(9,'Users','View User Types','Allows for the viewing of User Types'),(7,'Users','Edit User Permissions','Allows for the modification of User permissions'),(6,'Users','Edit Users','Allows for the modification of User data'),(5,'Users','View Users','Allows for the viewing of Users'),(4,'Users','Access Users Module','Allows general access to the Users Module'),(3,'System','Delete Settings','Allows for the deletion of Settings'),(2,'System','Edit Settings','Allows for the modification of Setting details'),(1,'System','View Settings','Allows general access to the Settings section'),(41,'Permissions','Delete Content','Delete and Remove content from the site.'),(40,'Permissions','Create Content','Create and edit content in the system.'),(39,'Permissions','Manage Navigation','Manage site navigation order and strucutre.'),(38,'Permissions','Manage Users','Add, Edit, and Delete Users'),(37,'Permissions','Manage Content Types','Manage content types and structure'),(36,'Permissions','Manage System Settings','Manage system settings and information'),(25,'Content','Delete Content Sections','Allows for the deletion of Content Sections'),(26,'Resources','Access Resources Module','Allows general access to the Resource Module'),(27,'Resources','View Files','Allows for the viewing of resources under the Files type'),(28,'Resources','Edit Files','Allows for the modification of details for resources under the Files type'),(29,'Resources','Delete Files','Allows for the deletion of resources under the Files type'),(30,'Resources','View Images','Allows for the viewing of resources under the Images type'),(31,'Resources','Edit Images','Allows for the modification of details for resources under the Images type'),(32,'Resources','Delete Images','Allows for the deletion of resources under the Images type'),(33,'Resources','View Tags','Allows for the viewing of resources under the Tags type'),(34,'Resources','Edit Tags','Allows for the modification of details for resources under the Tags type'),(35,'Resources','Delete Tags','Allows for the deletion of resources under the Tags type'),(42,'Permissions','Manage Workflow Rules','Permission to manage system workflow rules.'),(43,'Permissions','Delete Folders','Delete folders/sections in your tree structure.');
+INSERT INTO `LB_UserPermissions` VALUES (24,'Content','Edit Content Sections','Allows for the modification of Content Section details'),(23,'Content','View Content Sections','Allows for the viewing of Content Sections'),(22,'Content','Delete Generic Content','Allows for the deletion of content under the Generic Content type'),(21,'Content','Edit Generic Content','Allows for the modification of details for content under the Generic Content type'),(20,'Content','View Generic Content','Allows for the viewing of content under the Generic Content type'),(19,'Content','Archive Content','Allows for the archiving of content'),(18,'Content','Publish Content','Allows for the publishing of content'),(17,'Content','Approve Content','Allows for the approving of content'),(16,'Content','Draft Content','Allows for the drafting of content'),(15,'Content','Access Control Editor','Allows general access to the Control Content Editor'),(14,'Content','Access Template Editor','Allows general access to the Template Content Editor'),(13,'Content','Access Content Module','Allows general access to the Content Module'),(12,'Users','Delete User Types','Allows for the deletion of User Types'),(11,'Users','Edit User Type Permissions','Allows for the modification of User Type permissions'),(10,'Users','Edit User Types','Allows for the modification of User Type data'),(8,'Users','Delete Users','Allows for the deletion of Users'),(9,'Users','View User Types','Allows for the viewing of User Types'),(7,'Users','Edit User Permissions','Allows for the modification of User permissions'),(6,'Users','Edit Users','Allows for the modification of User data'),(5,'Users','View Users','Allows for the viewing of Users'),(4,'Users','Access Users Module','Allows general access to the Users Module'),(3,'System','Delete Settings','Allows for the deletion of Settings'),(2,'System','Edit Settings','Allows for the modification of Setting details'),(1,'System','View Settings','Allows general access to the Settings section'),(41,'Permissions','Delete Content','Delete and Remove content from the site.'),(40,'Permissions','Create Content','Create and edit content in the system.'),(39,'Permissions','Manage Navigation','Manage site navigation order and strucutre.'),(38,'Permissions','Manage Users','Add, Edit, and Delete Users'),(37,'Permissions','Manage Content Types','Manage content types and structure'),(36,'Permissions','Manage System Settings','Manage system settings and information'),(25,'Content','Delete Content Sections','Allows for the deletion of Content Sections'),(26,'Resources','Access Resources Module','Allows general access to the Resource Module'),(27,'Resources','View Files','Allows for the viewing of resources under the Files type'),(28,'Resources','Edit Files','Allows for the modification of details for resources under the Files type'),(29,'Resources','Delete Files','Allows for the deletion of resources under the Files type'),(30,'Resources','View Images','Allows for the viewing of resources under the Images type'),(31,'Resources','Edit Images','Allows for the modification of details for resources under the Images type'),(32,'Resources','Delete Images','Allows for the deletion of resources under the Images type'),(33,'Resources','View Tags','Allows for the viewing of resources under the Tags type'),(34,'Resources','Edit Tags','Allows for the modification of details for resources under the Tags type'),(35,'Resources','Delete Tags','Allows for the deletion of resources under the Tags type'),(42,'Permissions','Manage Workflow Rules','Permission to manage system workflow rules.'),(43,'Permissions','Delete Folders','Delete folders/sections in your tree structure.'),(44,'Permissions','Crud Overview','Crud overview description');
 /*!40000 ALTER TABLE `LB_UserPermissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1049,7 +1074,7 @@ CREATE TABLE `LB_UserToUserPermission` (
 
 LOCK TABLES `LB_UserToUserPermission` WRITE;
 /*!40000 ALTER TABLE `LB_UserToUserPermission` DISABLE KEYS */;
-INSERT INTO `LB_UserToUserPermission` VALUES (1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(1,43);
+INSERT INTO `LB_UserToUserPermission` VALUES (1,36),(1,37),(1,38),(1,39),(1,40),(1,41),(1,42),(1,43),(1,44);
 /*!40000 ALTER TABLE `LB_UserToUserPermission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1236,4 +1261,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-01-18 15:41:01
+-- Dump completed on 2012-02-21 14:37:26
