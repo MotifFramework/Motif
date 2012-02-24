@@ -405,9 +405,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 					}
 
 					
-					
-					LB_ContentManagement_Logic_Content::CreateContentNoValidation(str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath()), $filename, $filename, $filename, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);
-					
 					$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.upload_ok}");
 
 					return $result;
@@ -486,8 +483,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 							}
 							
 							
-							LB_ContentManagement_Logic_Content::CreateContent(str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath()), $filename, $filename, $filename, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);
-
 							$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.upload_ok}");
 						} else
 							$result->add("GENERAL_ERROR", $man->encryptPath($file->getAbsolutePath()), "{#error.upload_failed}");

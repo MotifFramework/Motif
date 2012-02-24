@@ -423,26 +423,12 @@ class Moxiecode_ImageManagerPlugin extends Moxiecode_ManagerPlugin {
 					}
 				}
 				
-				/*require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-				$fileUrl = str_replace($_SERVER['DOCUMENT_ROOT'], "", $filedata["target"]);
-				
-				if(!LB_ContentManagement_Logic_Content::LoadContentByUrl($fileUrl)){
-					LB_ContentManagement_Logic_Content::CreateContent($fileUrl, $flName, $flName, $flName, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);					
-				}*/
-
 				$result->add("OK", $man->encryptPath($targetfile->getAbsolutePath()), "{#message.save_success}");
 			} else {
 				$file->delete();
 				$tempFile->renameTo($file);
 				$file->importFile();
 				
-				/*require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-				$fileUrl = str_replace($_SERVER['DOCUMENT_ROOT'], "", $filedata["target"]);
-				
-				if(!LB_ContentManagement_Logic_Content::LoadContentByUrl($fileUrl)){
-					LB_ContentManagement_Logic_Content::CreateContent($fileUrl, $flName, $flName, $flName, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);					
-				}*/
-
 				$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.save_success}");
 			}
 		} else {
@@ -463,13 +449,6 @@ class Moxiecode_ImageManagerPlugin extends Moxiecode_ManagerPlugin {
 					$targetfile->importFile();
 				}
 
-				/*require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-				$fileUrl = str_replace($_SERVER['DOCUMENT_ROOT'], "", $filedata["target"]);
-				
-				if(!LB_ContentManagement_Logic_Content::LoadContentByUrl($fileUrl)){
-					LB_ContentManagement_Logic_Content::CreateContent($fileUrl, $flName, $flName, $flName, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);					
-				}*/
-				
 				$result->add("OK", $man->encryptPath($targetfile->getAbsolutePath()), "{#message.save_success}");
 			} else {
 				// No temp, no target, abort!

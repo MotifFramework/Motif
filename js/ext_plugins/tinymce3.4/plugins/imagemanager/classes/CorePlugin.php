@@ -406,9 +406,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 					}
 
 					
-					
-					//LB_ContentManagement_Logic_Content::CreateContentNoValidation(str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath()), $filename, $filename, $filename, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);
-					
 					$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.upload_ok}");
 
 					return $result;
@@ -487,8 +484,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 							}
 							
 							
-							//LB_ContentManagement_Logic_Content::CreateContent(str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath()), $filename, $filename, $filename, LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), 0, 3, 1, 200, "", 0, "", 1, 0);
-
 							$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.upload_ok}");
 						} else
 							$result->add("GENERAL_ERROR", $man->encryptPath($file->getAbsolutePath()), "{#error.upload_failed}");
@@ -542,15 +537,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 
 			if ($file->delete($config['filesystem.delete_recursive'])){
 				
-				// remove from LB CMS
-				require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-				$fileUrl = str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath());
-				
-				$content = LB_ContentManagement_Logic_Content::LoadContentByUrl($fileUrl);
-				if($content){
-					$content->DeleteContent();
-				}
-				
 				$result->add("OK", $man->encryptPath($file->getAbsolutePath()), "{#message.delete_success}");
 			}else
 				$result->add("FAILED", $man->encryptPath($file->getAbsolutePath()), "{#error.delete_failed}");
@@ -583,22 +569,6 @@ class Moxiecode_CorePlugin extends Moxiecode_ManagerPlugin {
 			$attribs = ($file->canRead() && checkBool($config["filesystem.readable"]) ? "R" : "-") . ($file->canWrite() && checkBool($config["filesystem.writable"]) ? "W" : "-");
 			$url = $man->removeTrailingSlash($config['preview.urlprefix']) . $man->convertPathToURI($file->getAbsolutePath(), $config["preview.wwwroot"]);
 
-			
-			
-			// add to LB CMS
-			require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-			$dirPath = str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getParent()) . "/";
-			$fileUrl = str_replace($_SERVER['DOCUMENT_ROOT'], "", $file->getAbsolutePath());
-			$flName = $file->getName();
-			
-			if(!LB_ContentManagement_Logic_Content::LoadContentByUrl($fileUrl)){
-				
-				// get folder section
-				$cmsFolder = LB_ContentManagement_Logic_ContentSections::LoadSectionById(LB_ContentManagement_Logic_ContentSections::CreateSectionByUrl($dirPath));
-				
-				LB_ContentManagement_Logic_Content::CreateContent($fileUrl, $flName, $flName, "", LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), LB_UserManagement_Logic_User::GetCurrentUser()->GetUserID(), time(), $cmsFolder->GetSectionId(), 3, 1, 200, "", 0, "", 1, 0);					
-			}
-			
 			$result->add($file->getName(), $man->encryptPath($file->getAbsolutePath()), utf8_encode($url), $file->getLength(), $ext, $file->getCreationDate(), $file->getLastModified(), $attribs, $custom);
 		}
 
