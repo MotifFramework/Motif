@@ -1,0 +1,1 @@
+$(document).ready(function(){$(".alert .close").click(function(){$(this).parents(".alert").fadeOut();return!1});$("input, textarea").placeholder();$(".tabs > .section").armyKnife({sections:"> .tab",transition:"fade",autoResize:!0,generateNav:!0,navType:"text",navItemSource:function(a){return a.attr("title")},navClass:"nav"})});
