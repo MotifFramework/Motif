@@ -34,4 +34,13 @@ $(document).ready(function() {
 		navID		:	"tabs-nav",
 		navClass	: "nav"
 	});
+	
+	var	wireframeBlock	=	$(".wireframe").find(".block");
+	
+	wireframeBlock.each(function () {
+		var	baseHeight	=	20,
+			blockHeight	=	$(this).attr("data-height") * baseHeight;
+			
+		$(this).css("height", blockHeight + "px");
+	});
 });
