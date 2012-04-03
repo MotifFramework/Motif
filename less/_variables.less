@@ -1,61 +1,83 @@
 // Grid Variables
-@base-column:	47px;
-@base-margin:	36px;
-@base-padding:	20px;
-@total-columns:	12;
+@base-column:				47px;
+@base-margin:				36px;
+@base-padding:				20px;
+@total-columns:				12;
+
+// Typographic Scale
+@canon-text-size:			48;
+@paragon-text-size:			28;
+@primer-text-size:			21;
+@normal-text-size:			16;
+@petite-text-size:			13;
+@minion-text-size:			10;
+
+// In Pixels...
+@canon-text-px:				@canon-text-size * 1px;
+@paragon-text-px:			@paragon-text-size * 1px;
+@primer-text-px:			@primer-text-size * 1px;
+@normal-text-px:			@normal-text-size * 1px;
+@petite-text-px:			@petite-text-size * 1px;
+@minion-text-px:			@minion-text-size * 1px;
+
+// Baseline Typography
+@base-text-size:			@normal-text-px;
+
+// Vertical Rhythm
+@base-vertical:				20;
+@base-vertical-px:			@base-vertical * 1px;
+
+@default-border-width:		1px;
+@default-border-radius:		5px;
 
 // Color Variables
-@black:			rgb(67, 65, 66);
-@dark-grey:		rgb(133, 131, 132);
-@grey:			rgb(169, 166, 167);
-@light-grey:	rgb(207, 203, 202);
-@dark-blue:		rgb(2, 79, 130);
-@blue:			rgb(37, 117, 174);
-@light-blue:	rgb(0, 164, 216);
-@green:			rgb(11, 154, 69);
-@yellow:		rgb(252, 176, 64);
-@orange:		rgb(242, 101, 39);
-@red:			rgb(230, 60, 77);
-@purple:		rgb(160, 94, 165);
-@light-purple:	rgb(223, 101, 166);
-@white:			rgb(255, 255, 255);
+@black:						rgb(67, 65, 66);
+@dark-grey:					rgb(133, 131, 132);
+@grey:						rgb(169, 166, 167);
+@light-grey:				rgb(207, 203, 202);
+@dark-blue:					rgb(2, 79, 130);
+@blue:						rgb(37, 117, 174);
+@light-blue:				rgb(0, 164, 216);
+@green:						rgb(11, 154, 69);
+@yellow:					rgb(252, 176, 64);
+@orange:					rgb(242, 101, 39);
+@red:						rgb(230, 60, 77);
+@purple:					rgb(160, 94, 165);
+@light-purple:				rgb(223, 101, 166);
+@white:						rgb(255, 255, 255);
+
+// Applied Color Variables
+@base-text-color:			@black;
+@inverse-text-color:		@white;
+@inverse-header-color:		@light-blue;
 
 // Form Variables
-@input-border:			1px;
-@input-padding:			4px;
-@input-border-color:	@light-grey;
+@input-border:				@default-border-width;
+@input-padding:				4px;
+@input-background-color:	@white;
+@input-border-color:		@light-grey;
 
 // Table Variables
-@table-border-color:	lighten(@light-grey, 10%);
+@table-border-color:		lighten(@light-grey, 10%);
 
 // Typography Variables
-@primary-text-color:	@black;
-@secondary-text-color:	@dark-grey;
-@inverse-text-color:	@white;
-@button-color:			@white;
-@text-font:				"PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
-@text-font-bold:		"PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
-@text-font-italic:		"PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
-@text-font-bold-italic:	"PT Sans Bold Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
-@text-font-code:		"Anonymous Pro Bold", Courier, monospace;
+@primary-text-color:		@black;
+@secondary-text-color:		@dark-grey;
+@inverse-text-color:		@white;
+@button-color:				@white;
+@text-font:					"PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+@text-font-bold:			"PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+@text-font-italic:			"PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+@text-font-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+@text-font-code:			"Anonymous Pro Bold", Courier, monospace;
+@text-font-icons:			"EntypoRegular";
 
 // Link Variables
-@primary-link-color:	@light-purple;
-@primary-link-hover:	@purple;
+@primary-link-color:		@light-purple;
+@primary-link-hover:		@purple;
 
 @primary-header-color:		@dark-blue;
 @secondary-header-color:	@blue;
 @header-highlight-color:	@light-blue;
 @primary-header-font:		"Museo700", Helvetica, Arial, Verdana, serif;
 @secondary-header-font:		'Futura Book', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-
-@canon-text-size:	48;
-@paragon-text-size:	28;
-@primer-text-size:	21;
-@normal-text-size:	16;
-@petite-text-size:	13;
-@minion-text-size:	10;
-
-// Baseline Typography
-@base-text-size:	@normal-text-size;
-@base-vertical:		10;
