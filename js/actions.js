@@ -21,19 +21,8 @@ $(document).ready(function() {
 
 	// Placeholder text for form inputs
 	$("input, textarea").placeholder();
-	
-	$(".tabs > .section").armyKnife({
-		sections	:	"> .tab",
-		transition	:	"fade",
-		autoResize	:	true,
-		generateNav	:	true,
-		navType		:	"text",
-		navItemSource	:	function(section) {
-			return section.attr("title");
-		},
-		navID		:	"tabs-nav",
-		navClass	: "nav"
-	});
+
+	$("[data-tabs]").tabs();
 	
 	var	wireframeBlock	=	$(".wireframe").find(".block");
 	

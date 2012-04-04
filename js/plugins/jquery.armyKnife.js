@@ -390,10 +390,10 @@
 						&& (data.nav = $(data.nav.children()[0]));
 					if(data.navID) {
 						($("#" + data.navID).length && $("#" + data.navID).replaceWith(data.nav))
-							|| $this.after(data.nav);
+							|| $this.before(data.nav);
 						data.nav.attr("id",data.navID);
 					} else {
-						$this.after(data.nav);
+						$this.before(data.nav);
 					};
 				};
 			},
