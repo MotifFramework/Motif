@@ -944,7 +944,7 @@ CREATE TABLE `LB_Templates` (
 
 LOCK TABLES `LB_Templates` WRITE;
 /*!40000 ALTER TABLE `LB_Templates` DISABLE KEYS */;
-INSERT INTO `LB_Templates` VALUES (1,'Interior Template','Reef_DefaultInterior',1);
+INSERT INTO `LB_Templates` VALUES (1,'Interior Template','Reef_Default',1);
 /*!40000 ALTER TABLE `LB_Templates` ENABLE KEYS */;
 UNLOCK TABLES;
 
