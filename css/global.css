@@ -1820,6 +1820,67 @@ List your webfont declarations below.
   font-weight: normal;
   font-style: normal;
 }
+/*
+
+@font-face Styles
+-----------------
+
+Often, webfonts require separate font files for different weights. Here's where you can override weight and style defaults, allowing you to, for example, pass through a font with a heavier weight rather than using "font-weight: bold".
+
+*/
+strong {
+  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-weight: normal;
+}
+em {
+  font-family: "PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-style: normal;
+}
+em strong,
+strong em {
+  font-family: "PT Sans Bold Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+}
+.input-label {
+  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-weight: normal;
+}
+table th {
+  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-weight: normal;
+}
+.figcaption {
+  font-family: "PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  font-style: normal;
+  font-weight: 500;
+}
+h1 em,
+h2 em,
+h3 em,
+h4 em,
+h5 em,
+h6 em,
+.heading em {
+  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
+  color: #00a4d8;
+}
+h1 strong,
+h2 strong,
+h3 strong,
+h4 strong,
+h5 strong,
+h6 strong,
+.heading strong {
+  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
+  color: #00a4d8;
+}
 /* -- Inline Tags -- */
 .tag {
   padding: 3px 4px 1px;
