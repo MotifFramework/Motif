@@ -1326,8 +1326,8 @@ You can then apply grid-system classes to the .object to constrain the widths.
   display: block;
 }
 .media-grid.half {
-  margin-left: 9px;
-  margin-right: 9px;
+  margin-left: -9px;
+  margin-right: -9px;
 }
 .media-grid.half .object {
   margin-left: 9px;
@@ -1709,6 +1709,12 @@ label .alert:last-of-type {
 .eighteen {
   width: 1458px;
 }
+.nineteen {
+  width: 1541px;
+}
+.twenty {
+  width: 1624px;
+}
 /**
  * Grid Offset
  */
@@ -1762,6 +1768,12 @@ label .alert:last-of-type {
 }
 .offset-by-seventeen {
   margin-left: 1429px;
+}
+.offset-by-eighteen {
+  margin-left: 1512px;
+}
+.offset-by-nineteen {
+  margin-left: 1595px;
 }
 /*
 
@@ -1904,6 +1916,13 @@ h6 strong,
 }
 .tag.notice {
   background-color: #00a4d8;
+}
+.tag.inverse {
+  color: #434142;
+  background: #f2f2f2;
+}
+.tag.is-block {
+  display: block;
 }
 a.tag {
   text-decoration: none;
