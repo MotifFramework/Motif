@@ -318,7 +318,16 @@ textarea.twelve {
 
 ### Labels ###
 
+Form labels, by default, are displayed `inline-block`, but most will have the class `.input-label` attached, which bolds the label and displays it `block`. The `required` class is purely presentational, and for the moment, only colors the text.
 
+	<label class="input-label">
+		Input Label<br />
+		<input type="text" class="input-m" />
+	</label>
+	<label class="required input-label">
+		Required Input Label<br />
+		<input type="text" class="input-m" required="required" />
+	</label>
 
 */
 label {
@@ -333,8 +342,44 @@ label {
   color: #2575ae;
 }
 .input-label .hint {
-  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
+/*
+
+#### Checkbox and Radio Labels ###
+
+Checkbox and radio inputs can be grouped in unordered lists with the `.checkbox-list` class attached. Within that list, we use the Media Object to float the `<input />` to the left and prevent the accompanying `<label>` from wrapping around.
+
+	<ul class="checkbox-list">
+		<li class="media-object">
+			<input id="checkbox-1" class="object" type="checkbox" name="checkboxList" value="1" /> 
+			<label for="checkbox-1" class="desc">Checkbox List</label>
+		</li>
+		<li class="media-object">
+			<input id="checkbox-2" class="object" type="checkbox" name="checkboxList" value="2" /> 
+			<label for="checkbox-2" class="desc">Checkbox List</label>
+		</li>
+		<li class="media-object">
+			<input id="checkbox-3" class="object" type="checkbox" name="checkboxList" value="3" /> 
+			<label for="checkbox-3" class="desc">Checkbox List</label>
+		</li>
+	</ul>
+	<ul class="inline checkbox-list">
+		<li class="media-object">
+			<input id="radio-1" class="object" type="radio" name="radioList" value="1" /> 
+			<label for="radio-1" class="desc">Inline Radio List</label>
+		</li>
+		<li class="media-object">
+			<input id="radio-2" class="object" type="radio" name="radioList" value="2" /> 
+			<label for="radio-2" class="desc">Inline Radio List</label>
+		</li>
+		<li class="media-object">
+			<input id="radio-3" class="object" type="radio" name="radioList" value="3" /> 
+			<label for="radio-3" class="desc">Inline Radio List</label>
+		</li>
+	</ul>
+
+*/
 .checkbox-list {
   margin-left: 0;
   list-style: none outside none;
@@ -362,7 +407,7 @@ select[multiple] {
   height: auto;
 }
 optgroup {
-  color: #434142;
+  color: #000000;
   font-style: normal;
   font-weight: normal;
 }
@@ -392,7 +437,7 @@ input[type="week"] {
   height: 20px;
   margin: 10px 0 0;
   padding: 4px 4px;
-  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
   font-size: 16px;
   color: #434142;
   background-color: #ffffff;
@@ -631,8 +676,18 @@ textarea[disabled] {
     border: 0;
   }
 }
-.search {
+.lte7 .search {
+  zoom: 1;
+}
+.search:before,
+.search:after {
+  content: "\0020";
+  height: 0;
+  display: block;
   overflow: hidden;
+}
+.search:after {
+  clear: both;
 }
 .search .input,
 .search .submit {
@@ -729,7 +784,6 @@ p .button {
   width: 100%;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  font-weight: bold;
   text-align: center;
 }
 .button:hover,
@@ -797,6 +851,9 @@ The Button Group takes a list of buttons (`<input />`, `<button>` or `<a>` in an
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+html {
+  font-size: 62.5%;
+}
 /* -- Headings -- */
 h1,
 h2,
@@ -813,32 +870,38 @@ h6,
 h1,
 .canon-text {
   font-size: 48px;
-  line-height: 50px;
+  font-size: 4.8rem;
+  line-height: 1.0416666666666667;
 }
 h2,
 .paragon-text {
   font-size: 28px;
-  line-height: 30px;
+  font-size: 2.8rem;
+  line-height: 1.0714285714285714;
 }
 h3,
 .primer-text {
   font-size: 21px;
-  line-height: 30px;
+  font-size: 2.1rem;
+  line-height: 1.4285714285714286;
 }
 h4,
 .normal-text {
   font-size: 16px;
-  line-height: 20px;
+  font-size: 1.6rem;
+  line-height: 1.25;
 }
 h5,
 .petite-text {
   font-size: 13px;
-  line-height: 20px;
+  font-size: 1.3rem;
+  line-height: 1.5384615384615385;
 }
 h6,
 .minion-text {
   font-size: 10px;
-  line-height: 10px;
+  font-size: 1rem;
+  line-height: 1;
 }
 .subtitle {
   margin-top: 0;
@@ -848,15 +911,16 @@ h6,
 }
 /* -- Body Text -- */
 body {
-  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
   font-style: normal;
   font-weight: normal;
   color: #434142;
   font-size: 16px;
-  line-height: 20px;
+  font-size: 1.6rem;
+  line-height: 1.25;
 }
 .body-text {
-  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
 p,
 blockquote,
@@ -885,7 +949,7 @@ li ol {
   margin-bottom: 10px;
 }
 dt {
-  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
 blockquote {
   padding: 0 18px 0 13px;
@@ -907,7 +971,8 @@ code {
   padding: 0 2px;
   background-color: rgba(243, 123, 131, 0.1);
   font-size: 13px;
-  line-height: 20px;
+  font-size: 1.3rem;
+  line-height: 1.5384615384615385;
 }
 code,
 code pre {
@@ -971,7 +1036,8 @@ a a:active {
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 10px;
-  line-height: 10px;
+  font-size: 1rem;
+  line-height: 1;
 }
 /*
 
@@ -980,7 +1046,104 @@ Tables
 
 Tables have a basic style with a couple of simpler variations.
 
-### Simple
+### Base ###
+
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Language</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>Some</td>
+				<td>One</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Joe</td>
+				<td>Sixpack</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Stu</td>
+				<td>Dent</td>
+				<td>Code</td>
+			</tr>
+		</tbody>
+	</table>
+
+### Simple ###
+
+	<table class="simple-table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Language</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>Some</td>
+				<td>One</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Joe</td>
+				<td>Sixpack</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Stu</td>
+				<td>Dent</td>
+				<td>Code</td>
+			</tr>
+		</tbody>
+	</table>
+
+### Zebra Striped ###
+
+	<table class="zebra-striped">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Language</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>Some</td>
+				<td>One</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>Joe</td>
+				<td>Sixpack</td>
+				<td>English</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>Stu</td>
+				<td>Dent</td>
+				<td>Code</td>
+			</tr>
+		</tbody>
+	</table>
 
 */
 table {
@@ -1006,16 +1169,16 @@ table td {
 }
 /*
 
-General
--------
+General Classes
+---------------
 
 General, handy, presentational helper classes.
 
 First, we have classes for aligning text and floating images.
 
     <p class="align-left">Left-aligned text.</p>
-    <p class="center-left">Center-aligned text.</p>
-    <p class="right-left">Right-aligned text.</p>
+    <p class="align-center">Center-aligned text.</p>
+    <p class="align-right">Right-aligned text.</p>
 
 */
 .align-left {
@@ -1060,11 +1223,15 @@ First, we have classes for aligning text and floating images.
 }
 /* 
 
+### Spacing Helpers ###
+
 Spacing helpers are quick but powerful classes that add margin or padding to any given element. These classes are !important, so they override all other styles.
 
 p, m				=	padding, margin  
 a, t, r, b, l, h, v	=	all, top, right, bottom, left, horizontal, vertical  
 s, m, l, n			=	small (5px), medium (10px), large (20px), none (0)
+
+For example: `.pam` means "padding, all, medium".
 
 */
 .ptn,
@@ -1237,7 +1404,11 @@ Flexible, generic, reusable components for layout and interaction.
 */
 /*
 
-The Media Object is an image (or media-type) to the left with (typically) descriptive content to the right. The media object can be whatever size it wants, the basic format will remain the same. (Text will NOT wrap.)  This has any number of applications, such as a checkbox next to a label with lots of text.
+### Media Object ###
+
+The Media Object is an image (or media-type) to the left with (typically) descriptive content to the right. The media object can be whatever size it wants, the basic format will remain the same. (Text will **not** wrap.)  This has any number of applications, such as a checkbox next to a label with lots of text.
+
+See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
 
     <div class="media-object">
         <b class="object">
@@ -1247,8 +1418,6 @@ The Media Object is an image (or media-type) to the left with (typically) descri
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget risus libero, id venenatis ante. Curabitur iaculis turpis vitae velit luctus in luctus mi molestie. Curabitur bibendum magna lorem. Curabitur enim lectus, scelerisque non pellentesque in, suscipit eget nibh. Pellentesque vitae nunc vel tortor rhoncus euismod. Maecenas pretium porta ultricies. Quisque feugiat sem sit amet sapien consequat non fringilla leo suscipit.</p>
         </div>
     </div>
-
-See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
 
 */
 .media-object,
@@ -1283,11 +1452,23 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
 }
 /*
 
-The Media Grid allows you to place a grid of photos or videos (catalog or retail products, etc.) without floating them, alleviating the need to concern yourself with clearing the floats should an object extend further than another.  The .object class can be applied to block or inline elements (<b>, <span>, <a>, <div>) depending on your need.
+### Media Grid ###
+
+The Media Grid allows you to place a grid of photos or videos (catalog or retail products, etc.) without floating them, alleviating the need to concern yourself with clearing the floats should an object extend further than another.  The .object class can be applied to block or inline elements (`<b>`, `<span>`, `<a>`, `<div>`) depending on your need.
 
 You can then apply grid-system classes to the .object to constrain the widths.
 
     <ul class="media-grid">
+        <li>
+            <b class="object">
+                <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+            </b>
+        </li>
+        <li>
+            <b class="object">
+                <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+            </b>
+        </li>
         <li>
             <b class="object">
                 <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
@@ -1321,6 +1502,7 @@ You can then apply grid-system classes to the .object to constrain the widths.
   display: inline-block;
   margin: 20px 18px 0;
   font-size: 16px;
+  vertical-align: top;
 }
 .media-grid .object img {
   display: block;
@@ -1334,6 +1516,8 @@ You can then apply grid-system classes to the .object to constrain the widths.
   margin-right: 9px;
 }
 /*
+
+### Tabs ###
 
 The Tabs module (and accompanying plugin) creates a very basic widget that allows module embedding and basic styling.
 
@@ -1411,7 +1595,9 @@ The Tabs module (and accompanying plugin) creates a very basic widget that allow
 }
 /*
 
-The basic Nav module simply removes bullets from lists and inlines the list items, making the link inline-block. The idea is to give the skeleton of a horizontal nav without adding too much style (yet).
+### Nav ###
+
+The basic Nav module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal nav without adding too much style (yet).
 
     <ul class="nav">
         <li><a href="#">Nav Item</a></li>
@@ -1601,7 +1787,7 @@ label .alert {
   margin: 0;
   padding: 9.5px 8px;
   display: block;
-  font-family: "PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
   font-size: 13px;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -1621,14 +1807,79 @@ label .alert:last-of-type {
 .modal-overlay {
   background: #000;
 }
-/**
- * Fixed Grid
- * 
- * Fixed-width grid system for complex column layout. Very lego.
- * 
- * @section Fixed Grid
- * @see     http://gridsystemgenerator.com
- */
+/*
+
+Fixed Grid
+----------
+
+Fixed-width grid system for complex column layout. Very lego.
+
+Each row of columns must be wrapped by an element with the `.row` class. Columns all have the `.columns` class along with an additional class specifying its width.
+
+See: http://gridsystemgenerator.com
+
+	<div class="wireframe">
+		<div class="row">
+			<div class="twelve columns block">12 Column Grid System</div>
+		</div>
+		<div class="row">
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+			<div class="one columns block">1</div>
+		</div>
+		<div class="row">
+			<div class="two columns block">2</div>
+			<div class="two columns block">2</div>
+			<div class="two columns block">2</div>
+			<div class="two columns block">2</div>
+			<div class="two columns block">2</div>
+			<div class="two columns block">2</div>
+		</div>
+		<div class="row">
+			<div class="three columns block">3</div>
+			<div class="three columns block">3</div>
+			<div class="three columns block">3</div>
+			<div class="three columns block">3</div>
+		</div>
+		<div class="row">
+			<div class="four columns block">4</div>
+			<div class="four columns block">4</div>
+			<div class="four columns block">4</div>
+		</div>
+		<div class="row">
+			<div class="five columns block">5</div>
+			<div class="two columns block">2</div>
+			<div class="five columns block">5</div>
+		</div>
+		<div class="row">
+			<div class="six columns block">6</div>
+			<div class="six columns block">6</div>
+		</div>
+		<div class="row">
+			<div class="seven columns block">7</div>
+			<div class="three columns block">3</div>
+			<div class="two columns block">2</div>
+		</div>
+		<div class="row">
+			<div class="eight columns block">8</div>
+			<div class="four columns block">4</div>
+		</div>
+		<div class="row">
+			<div class="nine columns block">9</div>
+			<div class="three columns block">3</div>
+		</div>
+	</div>
+
+*/
 .columns {
   margin-left: 18px;
   margin-right: 18px;
@@ -1652,9 +1903,6 @@ label .alert:last-of-type {
 .row:after {
   clear: both;
 }
-/**
- * Grid Column Widths
- */
 .one {
   width: 47px;
 }
@@ -1715,9 +1963,6 @@ label .alert:last-of-type {
 .twenty {
   width: 1624px;
 }
-/**
- * Grid Offset
- */
 .offset-by-one {
   margin-left: 101px;
 }
@@ -1774,6 +2019,63 @@ label .alert:last-of-type {
 }
 .offset-by-nineteen {
   margin-left: 1595px;
+}
+.followed-by-one {
+  margin-right: 101px;
+}
+.followed-by-two {
+  margin-right: 184px;
+}
+.followed-by-three {
+  margin-right: 267px;
+}
+.followed-by-four {
+  margin-right: 350px;
+}
+.followed-by-five {
+  margin-right: 433px;
+}
+.followed-by-six {
+  margin-right: 516px;
+}
+.followed-by-seven {
+  margin-right: 599px;
+}
+.followed-by-eight {
+  margin-right: 682px;
+}
+.followed-by-nine {
+  margin-right: 765px;
+}
+.followed-by-ten {
+  margin-right: 848px;
+}
+.followed-by-eleven {
+  margin-right: 931px;
+}
+.followed-by-twelve {
+  margin-right: 1014px;
+}
+.followed-by-thirteen {
+  margin-right: 1097px;
+}
+.followed-by-fourteen {
+  margin-right: 1180px;
+}
+.followed-by-fifteen {
+  margin-right: 1263px;
+}
+.followed-by-sixteen {
+  margin-right: 1346px;
+}
+.followed-by-seventeen {
+  margin-right: 1429px;
+}
+.followed-by-eighteen {
+  margin-right: 1512px;
+}
+.followed-by-nineteen {
+  margin-right: 1595px;
 }
 /*
 
@@ -1841,27 +2143,27 @@ Often, webfonts require separate font files for different weights. Here's where 
 
 */
 strong {
-  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
   font-weight: normal;
 }
 em {
-  font-family: "PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
   font-style: normal;
 }
 em strong,
 strong em {
-  font-family: "PT Sans Bold Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
 .input-label {
-  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
   font-weight: normal;
 }
 table th {
-  font-family: "PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
   font-weight: normal;
 }
 .figcaption {
-  font-family: "PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
 h1,
 h2,
@@ -1893,54 +2195,36 @@ h6 strong,
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
   color: #00a4d8;
 }
-/* -- Inline Tags -- */
-.tag {
-  padding: 3px 4px 1px;
-  background-color: #a9a6a7;
-  font-weight: normal;
-  color: #ffffff;
-  text-transform: uppercase;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-}
-.tag.important {
-  background-color: #f26527;
-}
-.tag.warning {
-  background-color: #e63c4d;
-}
-.tag.success {
-  background-color: #0b9a45;
-}
-.tag.notice {
-  background-color: #00a4d8;
-}
-.tag.inverse {
-  color: #434142;
-  background: #f2f2f2;
-}
-.tag.is-block {
-  display: block;
-}
-a.tag {
-  text-decoration: none;
-}
-a.tag:hover {
-  color: #ffffff;
-  background-color: #a05ea5;
+.caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: top;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000000;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+  content: "";
 }
 [data-icon] i {
   padding-right: 9px;
   display: inline-block;
   font-family: "EntypoRegular";
-  font-size: 1.846em;
-  line-height: 0.583;
+  line-height: 1;
+  vertical-align: top;
 }
 [data-icon] i.icon-appended {
   padding-right: 0;
   padding-left: 9px;
+}
+[data-icon] i.solo {
+  padding-right: 0;
+}
+h1 [data-icon] i {
+  font-size: 0.5em;
+  line-height: 1.5em;
+  padding-right: 19px;
 }
 table {
   border: 1px solid #e7e5e5;
@@ -2226,26 +2510,26 @@ table tbody tr:last-child td:last-child {
 }
 .button.black,
 .button.rogue {
-  text-shadow: 0 -1px 0px #292829;
+  text-shadow: 0 -1px 0px #000000;
   color: #ffffff;
-  border-color: #292829;
-  background: #434142 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #777375 0, #434142 100%);
+  border-color: #000000;
+  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #333333 0, #000000 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #777375), color-stop(100%, #434142));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(100%, #000000));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #777375 0, #434142 100%);
+  background: -webkit-linear-gradient(top, #333333 0, #000000 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #777375 0, #434142 100%);
+  background: -o-linear-gradient(top, #333333 0, #000000 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #777375 0, #434142 100%);
+  background: -ms-linear-gradient(top, #333333 0, #000000 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #777375 0, #434142 100%);
+  background: linear-gradient(top, #333333 0, #000000 100%);
   /* W3C */
 
 }
@@ -2254,52 +2538,52 @@ table tbody tr:last-child td:last-child {
 .button.black:focus,
 .button.rogue:focus {
   color: #ffffff;
-  border-color: #1c1b1c;
-  background: #363435 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #6a6768 0, #363435 100%);
+  border-color: #000000;
+  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #333333 0, #000000 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6a6768), color-stop(100%, #363435));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(100%, #000000));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #6a6768 0, #363435 100%);
+  background: -webkit-linear-gradient(top, #333333 0, #000000 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #6a6768 0, #363435 100%);
+  background: -o-linear-gradient(top, #333333 0, #000000 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #6a6768 0, #363435 100%);
+  background: -ms-linear-gradient(top, #333333 0, #000000 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #6a6768 0, #363435 100%);
+  background: linear-gradient(top, #333333 0, #000000 100%);
   /* W3C */
 
 }
 /* -- Nav Bar -- */
 .nav-bar {
-  background: #434142 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #5d5a5c 0, #434142 100%);
+  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #1a1a1a 0, #000000 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5a5c), color-stop(100%, #434142));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #1a1a1a), color-stop(100%, #000000));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #5d5a5c 0, #434142 100%);
+  background: -webkit-linear-gradient(top, #1a1a1a 0, #000000 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #5d5a5c 0, #434142 100%);
+  background: -o-linear-gradient(top, #1a1a1a 0, #000000 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #5d5a5c 0, #434142 100%);
+  background: -ms-linear-gradient(top, #1a1a1a 0, #000000 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #5d5a5c 0, #434142 100%);
+  background: linear-gradient(top, #1a1a1a 0, #000000 100%);
   /* W3C */
 
-  -webkit-box-shadow: 0 1px 2px #5d5a5c;
-  -moz-box-shadow: 0 1px 2px #5d5a5c;
-  -o-box-shadow: 0 1px 2px #5d5a5c;
-  box-shadow: 0 1px 2px #5d5a5c;
+  -webkit-box-shadow: 0 1px 2px #1a1a1a;
+  -moz-box-shadow: 0 1px 2px #1a1a1a;
+  -o-box-shadow: 0 1px 2px #1a1a1a;
+  box-shadow: 0 1px 2px #1a1a1a;
   margin-bottom: 20px;
 }
 .nav-bar ul {
@@ -2327,28 +2611,28 @@ table tbody tr:last-child td:last-child {
   color: #ffffff;
   display: inline-block;
   text-decoration: none;
-  text-shadow: 0 -1px 1px #292829;
+  text-shadow: 0 -1px 1px #000000;
 }
 .nav-bar a:hover,
 .nav-bar a:focus,
 .nav-bar a.is-current {
-  background: #292829 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #434142 0, #292829 100%);
+  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #000000 0, #000000 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #434142), color-stop(100%, #292829));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(100%, #000000));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #434142 0, #292829 100%);
+  background: -webkit-linear-gradient(top, #000000 0, #000000 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #434142 0, #292829 100%);
+  background: -o-linear-gradient(top, #000000 0, #000000 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #434142 0, #292829 100%);
+  background: -ms-linear-gradient(top, #000000 0, #000000 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #434142 0, #292829 100%);
+  background: linear-gradient(top, #000000 0, #000000 100%);
   /* W3C */
 
 }
@@ -2374,12 +2658,32 @@ table tbody tr:last-child td:last-child {
 
 }
 .nav-bar.divided a {
-  border-left: 1px solid #5d5a5c;
-  border-right: 1px solid #292829;
+  border-left: 1px solid #1a1a1a;
+  border-right: 1px solid #000000;
+}
+.display-table .nav-bar.filled ul {
+  width: 100%;
+  display: table;
+}
+.display-table .nav-bar.filled li {
+  display: table-cell;
+  float: none;
+}
+.display-table .nav-bar.filled a {
+  padding-left: 0;
+  padding-right: 0;
+  display: block;
+  text-align: center;
+}
+.display-table .nav-bar.filled.divided li:first-child a {
+  border-left: none;
+}
+.display-table .nav-bar.filled.divided li:last-child a {
+  border-right: none;
 }
 .nav-bar .sub-nav {
   margin: 0;
-  background: #434142;
+  background: #000000;
 }
 .nav-bar .sub-nav a {
   padding: 5px 18px;
@@ -2390,10 +2694,76 @@ table tbody tr:last-child td:last-child {
 .nav-bar .sub-nav a:hover,
 .nav-bar .sub-nav a:focus,
 .nav-bar .sub-nav a.is-current {
-  background: #292829;
+  background: #000000;
 }
 .nav-bar .sub-nav .highlight {
   background: #814b85;
+}
+.nav-bar .caret {
+  margin-top: 8px;
+  margin-left: 4px;
+  border-top-color: #ffffff;
+}
+.nav-bar .dropdown:hover .caret {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.condensed {
+  position: relative;
+}
+.condensed .nav-title {
+  padding: 10px 18px;
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: #ffffff;
+  display: inline-block;
+  text-decoration: none;
+  text-shadow: 0 -1px 1px #000000;
+}
+.condensed .nav-title:hover,
+.condensed .nav-title:focus,
+.condensed .nav-title.is-current {
+  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #000000 0, #000000 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(100%, #000000));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #000000 0, #000000 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #000000 0, #000000 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #000000 0, #000000 100%);
+  /* IE10+ */
+
+  background: linear-gradient(top, #000000 0, #000000 100%);
+  /* W3C */
+
+}
+.condensed .nav {
+  width: 200px;
+  position: absolute;
+  top: 40px;
+  left: 0;
+}
+.condensed .nav li {
+  float: none;
+}
+.condensed .nav a {
+  padding: 5px 18px;
+  color: #ffffff;
+  display: block;
+  text-decoration: none;
+  background: #000000;
+}
+.condensed .nav a:hover,
+.condensed .nav a:focus,
+.condensed .nav a.is-current {
+  background: #000000;
 }
 .vertical-nav .current a {
   color: #a05ea5;
@@ -2446,10 +2816,10 @@ table tbody tr:last-child td:last-child {
   background: linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
   /* W3C */
 
-  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2462,10 +2832,10 @@ table tbody tr:last-child td:last-child {
 }
 .panel.inset {
   text-shadow: 0 1px 1px #ffffff;
-  -webkit-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -o-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
   background: #fbfafa url("../images/gradient-highlight.png") repeat-x left bottom;
   background: -moz-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
   /* FF3.6+ */
@@ -2505,7 +2875,7 @@ table tbody tr:last-child td:last-child {
   background: #000000;
   background: rgba(0, 0, 0, 0.75);
   border: none;
-  text-shadow: 0 2px 1px #434142;
+  text-shadow: 0 2px 1px #000000;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;

@@ -27,57 +27,65 @@
 @base-vertical:				20;
 @base-vertical-px:			@base-vertical * 1px;
 
+// Border Variables
 @default-border-width:		1px;
 @default-border-radius:		5px;
 
 // Color Variables
-@black:						rgb(67, 65, 66);
+@black:						rgb(  0,   0,   0);
+@light-black:				rgb( 67,  65,  66);
 @dark-grey:					rgb(133, 131, 132);
 @grey:						rgb(169, 166, 167);
 @light-grey:				rgb(207, 203, 202);
-@dark-blue:					rgb(2, 79, 130);
-@blue:						rgb(37, 117, 174);
-@light-blue:				rgb(0, 164, 216);
-@green:						rgb(11, 154, 69);
-@yellow:					rgb(252, 176, 64);
-@orange:					rgb(242, 101, 39);
-@red:						rgb(230, 60, 77);
-@purple:					rgb(160, 94, 165);
+@dark-blue:					rgb(  2,  79, 130);
+@blue:						rgb( 37, 117, 174);
+@light-blue:				rgb(  0, 164, 216);
+@dark-green:				darken(@green, 10%);
+@green:						rgb( 11, 154,  69);
+@light-green:				lighten(@green, 10%);
+@dark-yellow:				darken(@yellow, 10%);
+@yellow:					rgb(252, 176,  64);
+@light-yellow:				lighten(@yellow, 10%);
+@dark-orange:				darken(@orange, 10%);
+@orange:					rgb(242, 101,  39);
+@light-orange:				lighten(@orange, 10%);
+@dark-red:					darken(@red, 10%);
+@red:						rgb(230,  60,  77);
+@light-red:					lighten(@red, 10%);
+@dark-purple:				darken(@purple, 10%);
+@purple:					rgb(160,  94, 165);
 @light-purple:				rgb(223, 101, 166);
 @white:						rgb(255, 255, 255);
-
-// Applied Color Variables
-@base-text-color:			@black;
-@inverse-text-color:		@white;
-@inverse-header-color:		@light-blue;
 
 // Form Variables
 @input-border:				@default-border-width;
 @input-padding:				4px;
 @input-background-color:	@white;
 @input-border-color:		@light-grey;
+@label-required-color:		@blue;
 
 // Table Variables
 @table-border-color:		lighten(@light-grey, 10%);
 
 // Typography Variables
-@primary-text-color:		@black;
+@primary-text-color:		@light-black;
 @secondary-text-color:		@dark-grey;
 @inverse-text-color:		@white;
-@button-color:				@white;
-@text-font:					"PT Sans Regular", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', sans-serif;
-@text-font-bold:			"PT Sans Bold", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
-@text-font-italic:			"PT Sans Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
-@text-font-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, 'Arial Unicode', 'Lucida Sans Unicode', Arial, sans-serif;
+@button-color:				@inverse-text-color;
+@text-font:					"PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+@text-font-bold:			"PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@text-font-italic:			"PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@text-font-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 @text-font-code:			"Anonymous Pro Bold", Courier, monospace;
 @text-font-icons:			"EntypoRegular";
+
+// Header Variables
+@primary-header-color:		@dark-blue;
+@secondary-header-color:	@blue;
+@header-highlight-color:	@light-blue;
+@inverse-header-color:		@light-blue;
+@primary-header-font:		"Museo700", Helvetica, Arial, Verdana, serif;
 
 // Link Variables
 @primary-link-color:		@light-purple;
 @primary-link-hover:		@purple;
-
-@primary-header-color:		@dark-blue;
-@secondary-header-color:	@blue;
-@header-highlight-color:	@light-blue;
-@primary-header-font:		"Museo700", Helvetica, Arial, Verdana, serif;
-@secondary-header-font:		'Futura Book', 'Gill Sans', Arial, 'Helvetica Neue', Helvetica, sans-serif;
