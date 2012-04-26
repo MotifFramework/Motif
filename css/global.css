@@ -832,24 +832,24 @@ The Button Group takes a list of buttons (`<input />`, `<button>` or `<a>` in an
 }
 .button-group li:first-child .button {
   margin-left: 0;
-  -webkit-border-top-left-radius: 5px;
   -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
+  -webkit-border-top-left-radius: 5px;
   -moz-border-radius-bottomleft: 5px;
-  -o-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
   -o-border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
+  -o-border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
 }
 .button-group li:last-child .button {
-  -webkit-border-top-right-radius: 5px;
   -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
+  -webkit-border-top-right-radius: 5px;
   -moz-border-radius-bottomright: 5px;
+  -moz-border-radius-topright: 5px;
   -o-border-bottom-right-radius: 5px;
   -o-border-top-right-radius: 5px;
-  border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 html {
   font-size: 62.5%;
@@ -1479,30 +1479,26 @@ You can then apply grid-system classes to the .object to constrain the widths.
 */
 .media-grid {
   margin: 0 -18px;
-  font-size: 0;
-}
-.lte7 .media-grid {
-  zoom: 1;
-}
-.media-grid:before,
-.media-grid:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.media-grid:after {
-  clear: both;
 }
 .media-grid li {
   display: inline;
+  letter-spacing: -0.31em;
+  word-spacing: -0.43em;
   list-style: none outside none;
 }
+.lte7 .media-grid li {
+  letter-spacing: normal;
+}
 .media-grid .object {
-  display: inline-block;
+  letter-spacing: normal;
+  word-spacing: normal;
   margin: 20px 18px 0;
-  font-size: 16px;
   vertical-align: top;
+  display: inline-block;
+}
+.lte7 .media-grid .object {
+  display: inline;
+  zoom: 1;
 }
 .media-grid .object img {
   display: block;
@@ -1685,24 +1681,24 @@ The basic Nav module simply removes bullets from lists and inlines the list item
   border-left: none;
 }
 .pagination li.first a {
-  -webkit-border-top-left-radius: 2px;
   -webkit-border-bottom-left-radius: 2px;
-  -moz-border-radius-topleft: 2px;
+  -webkit-border-top-left-radius: 2px;
   -moz-border-radius-bottomleft: 2px;
-  -o-border-top-left-radius: 2px;
+  -moz-border-radius-topleft: 2px;
   -o-border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
+  -o-border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
 }
 .pagination li.last a {
-  -webkit-border-top-right-radius: 2px;
   -webkit-border-bottom-right-radius: 2px;
-  -moz-border-radius-topright: 2px;
+  -webkit-border-top-right-radius: 2px;
   -moz-border-radius-bottomright: 2px;
+  -moz-border-radius-topright: 2px;
   -o-border-bottom-right-radius: 2px;
   -o-border-top-right-radius: 2px;
-  border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
 }
 .pagination li.disabled a,
 .pagination li.disabled a:hover,
@@ -2561,29 +2557,29 @@ table tbody tr:last-child td:last-child {
 }
 /* -- Nav Bar -- */
 .nav-bar {
-  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #1a1a1a 0, #000000 100%);
+  background: #434142 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #1a1a1a), color-stop(100%, #000000));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5a5c), color-stop(100%, #434142));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #1a1a1a 0, #000000 100%);
+  background: -webkit-linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #1a1a1a 0, #000000 100%);
+  background: -o-linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #1a1a1a 0, #000000 100%);
+  background: -ms-linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #1a1a1a 0, #000000 100%);
+  background: linear-gradient(top, #5d5a5c 0, #434142 100%);
   /* W3C */
 
-  -webkit-box-shadow: 0 1px 2px #1a1a1a;
-  -moz-box-shadow: 0 1px 2px #1a1a1a;
-  -o-box-shadow: 0 1px 2px #1a1a1a;
-  box-shadow: 0 1px 2px #1a1a1a;
+  -webkit-box-shadow: 0 1px 2px #5d5a5c;
+  -moz-box-shadow: 0 1px 2px #5d5a5c;
+  -o-box-shadow: 0 1px 2px #5d5a5c;
+  box-shadow: 0 1px 2px #5d5a5c;
   margin-bottom: 20px;
 }
 .nav-bar ul {
@@ -2611,28 +2607,28 @@ table tbody tr:last-child td:last-child {
   color: #ffffff;
   display: inline-block;
   text-decoration: none;
-  text-shadow: 0 -1px 1px #000000;
+  text-shadow: 0 -1px 1px #292829;
 }
 .nav-bar a:hover,
 .nav-bar a:focus,
 .nav-bar a.is-current {
-  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #000000 0, #000000 100%);
+  background: #292829 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #434142 0, #292829 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(100%, #000000));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #434142), color-stop(100%, #292829));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #000000 0, #000000 100%);
+  background: -webkit-linear-gradient(top, #434142 0, #292829 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #000000 0, #000000 100%);
+  background: -o-linear-gradient(top, #434142 0, #292829 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #000000 0, #000000 100%);
+  background: -ms-linear-gradient(top, #434142 0, #292829 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #000000 0, #000000 100%);
+  background: linear-gradient(top, #434142 0, #292829 100%);
   /* W3C */
 
 }
@@ -2658,8 +2654,8 @@ table tbody tr:last-child td:last-child {
 
 }
 .nav-bar.divided a {
-  border-left: 1px solid #1a1a1a;
-  border-right: 1px solid #000000;
+  border-left: 1px solid #5d5a5c;
+  border-right: 1px solid #292829;
 }
 .display-table .nav-bar.filled ul {
   width: 100%;
@@ -2683,7 +2679,7 @@ table tbody tr:last-child td:last-child {
 }
 .nav-bar .sub-nav {
   margin: 0;
-  background: #000000;
+  background: #434142;
 }
 .nav-bar .sub-nav a {
   padding: 5px 18px;
@@ -2694,7 +2690,7 @@ table tbody tr:last-child td:last-child {
 .nav-bar .sub-nav a:hover,
 .nav-bar .sub-nav a:focus,
 .nav-bar .sub-nav a.is-current {
-  background: #000000;
+  background: #292829;
 }
 .nav-bar .sub-nav .highlight {
   background: #814b85;
@@ -2719,28 +2715,28 @@ table tbody tr:last-child td:last-child {
   color: #ffffff;
   display: inline-block;
   text-decoration: none;
-  text-shadow: 0 -1px 1px #000000;
+  text-shadow: 0 -1px 1px #292829;
 }
 .condensed .nav-title:hover,
 .condensed .nav-title:focus,
 .condensed .nav-title.is-current {
-  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #000000 0, #000000 100%);
+  background: #292829 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #434142 0, #292829 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000000), color-stop(100%, #000000));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #434142), color-stop(100%, #292829));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #000000 0, #000000 100%);
+  background: -webkit-linear-gradient(top, #434142 0, #292829 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #000000 0, #000000 100%);
+  background: -o-linear-gradient(top, #434142 0, #292829 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #000000 0, #000000 100%);
+  background: -ms-linear-gradient(top, #434142 0, #292829 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #000000 0, #000000 100%);
+  background: linear-gradient(top, #434142 0, #292829 100%);
   /* W3C */
 
 }
@@ -2758,12 +2754,12 @@ table tbody tr:last-child td:last-child {
   color: #ffffff;
   display: block;
   text-decoration: none;
-  background: #000000;
+  background: #292829;
 }
 .condensed .nav a:hover,
 .condensed .nav a:focus,
 .condensed .nav a.is-current {
-  background: #000000;
+  background: #292829;
 }
 .vertical-nav .current a {
   color: #a05ea5;
@@ -2816,10 +2812,10 @@ table tbody tr:last-child td:last-child {
   background: linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
   /* W3C */
 
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -2832,10 +2828,10 @@ table tbody tr:last-child td:last-child {
 }
 .panel.inset {
   text-shadow: 0 1px 1px #ffffff;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  -o-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15000000000000002);
+  -webkit-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   background: #fbfafa url("../images/gradient-highlight.png") repeat-x left bottom;
   background: -moz-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
   /* FF3.6+ */
@@ -2875,7 +2871,7 @@ table tbody tr:last-child td:last-child {
   background: #000000;
   background: rgba(0, 0, 0, 0.75);
   border: none;
-  text-shadow: 0 2px 1px #000000;
+  text-shadow: 0 2px 1px #434142;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;
@@ -3030,9 +3026,6 @@ table tbody tr:last-child td:last-child {
 .wrapper {
   width: 960px;
   margin: 0 auto;
-}
-.row {
-  background: #e63c4d;
 }
 .main-header .logo {
   margin-bottom: 40px;
