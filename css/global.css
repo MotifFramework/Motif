@@ -121,6 +121,19 @@ table caption {
   text-align: left;
   vertical-align: top;
 }
+i,
+address {
+  font-style: normal;
+}
+b {
+  font-weight: normal;
+}
+legend {
+  white-space: normal;
+}
+.lte7 legend {
+  margin-left: -7px;
+}
 img {
   border: 0;
 }
@@ -153,17 +166,11 @@ video {
   zoom: 1;
 }
 audio:not([controls]) {
-  display: none;
   height: 0;
+  display: none;
 }
 [hidden] {
   display: none;
-}
-legend {
-  white-space: normal;
-}
-.lte7 legend {
-  margin-left: -7px;
 }
 /*
 
