@@ -2198,51 +2198,6 @@ h6 strong,
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
   color: #00a4d8;
 }
-.tag {
-  padding: 3px 4px 1px;
-  background-color: #a9a6a7;
-  font-weight: normal;
-  color: #ffffff;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-size: 1rem;
-  line-height: 1;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-}
-.tag.important {
-  background-color: #f26527;
-}
-.tag.warning {
-  background-color: #e63c4d;
-}
-.tag.success {
-  background-color: #0b9a45;
-}
-.tag.notice {
-  background-color: #00a4d8;
-}
-.tag.is-current {
-  background-color: #a05ea5;
-}
-.tag.inverse {
-  color: #434142;
-  background: #f2f2f2;
-}
-.tag.block {
-  display: block;
-}
-a.tag {
-  text-decoration: none;
-}
-a.tag:hover,
-a.tag:focus,
-a.tag.is-current {
-  color: #ffffff;
-  background-color: #a05ea5;
-}
 .caret {
   display: inline-block;
   width: 0;
@@ -2705,6 +2660,29 @@ table tbody tr:last-child td:last-child {
   /* W3C */
 
 }
+.nav-bar .highlight:hover,
+.nav-bar .highlight:focus,
+.nav-bar .highlight.is-current {
+  background: #623865 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #a05ea5 0, #623865 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a05ea5), color-stop(100%, #623865));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #a05ea5 0, #623865 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #a05ea5 0, #623865 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #a05ea5 0, #623865 100%);
+  /* IE10+ */
+
+  background: linear-gradient(top, #a05ea5 0, #623865 100%);
+  /* W3C */
+
+}
 .nav-bar.divided a {
   border-left: 1px solid #5d5a5c;
   border-right: 1px solid #292829;
@@ -2718,8 +2696,6 @@ table tbody tr:last-child td:last-child {
   float: none;
 }
 .display-table .nav-bar.filled a {
-  padding-left: 0;
-  padding-right: 0;
   display: block;
   text-align: center;
 }
