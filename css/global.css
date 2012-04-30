@@ -2198,6 +2198,51 @@ h6 strong,
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
   color: #00a4d8;
 }
+.tag {
+  padding: 3px 4px 1px;
+  background-color: #a9a6a7;
+  font-weight: normal;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-size: 1rem;
+  line-height: 1;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.tag.important {
+  background-color: #f26527;
+}
+.tag.warning {
+  background-color: #e63c4d;
+}
+.tag.success {
+  background-color: #0b9a45;
+}
+.tag.notice {
+  background-color: #00a4d8;
+}
+.tag.is-current {
+  background-color: #a05ea5;
+}
+.tag.inverse {
+  color: #434142;
+  background: #f2f2f2;
+}
+.tag.block {
+  display: block;
+}
+a.tag {
+  text-decoration: none;
+}
+a.tag:hover,
+a.tag:focus,
+a.tag.is-current {
+  color: #ffffff;
+  background-color: #a05ea5;
+}
 .caret {
   display: inline-block;
   width: 0;
