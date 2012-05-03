@@ -786,6 +786,9 @@ INSERT INTO `LB_Settings` VALUES(14, 'LB_USER_ALLOWED_LOGIN_ATTEMPTS', 'Determin
 INSERT INTO `LB_Settings` VALUES(15, 'LB_USER_LOGIN_LOCKOUT_WINDOW', 'Determines the number of minutes that must pass after a user maxes out login attempts', 'User Management', '10', 1);
 INSERT INTO `LB_Settings` VALUES(16, 'LB_CONTENT_HAS_CMS', 'Determines the type of Request Handler that will be used to handle page requests', 'Content', '1', 1);
 INSERT INTO `LB_Settings` VALUES(17, 'LB_CONTENT_DEFAULT_TEMPLATE', 'Sets a default template to use for CMS and frontend pages in the scenario that a template is not specified', 'Content', 'Reef_Blank', 1);
+INSERT INTO `LB_Settings` VALUES(18, 'LB_SYSTEM_MULTISERVER_PUBLISH', 'Determines whether the workflow and publishing system will push content to multiple presentation servers or just a single server', 'System', '0', 1);
+INSERT INTO `LB_Settings` VALUES(19, 'LB_CONTENT_GOOGLE_ANALYTICS_ID', 'Activate Google analytics code by putting GA ID here', 'Content', '0', 1);
+INSERT INTO `LB_Settings` VALUES(20, 'LB_CONTENT_FACEBOOK_APP_ID', 'Load basic Facebook SDK code by entering your app id here', 'Content', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -1090,6 +1093,8 @@ CREATE TABLE `LB_WorkflowPath` (
 -- Dumping data for table `LB_WorkflowPath`
 --
 
+INSERT INTO `LB_WorkflowPath` VALUES(1, 1, 1, 'Both', 'Always');
+
 
 -- --------------------------------------------------------
 
@@ -1136,3 +1141,4 @@ CREATE TABLE `LB_WorkflowRule` (
 -- Dumping data for table `LB_WorkflowRule`
 --
 
+INSERT INTO `LB_WorkflowRule` VALUES(1, 'Default', 'Default workflow with only a superuser', 1);
