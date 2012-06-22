@@ -122,7 +122,8 @@ table caption {
   vertical-align: top;
 }
 i,
-address {
+address,
+cite {
   font-style: normal;
 }
 b {
@@ -401,6 +402,14 @@ Checkbox and radio inputs can be grouped in unordered lists with the `.checkbox-
 .checkbox-label {
   padding-right: 9px;
 }
+/*-----------Validation Styles------------*/
+.success {
+  -webkit-box-shadow: #0b9a45 0 0 7px;
+  -moz-box-shadow: #0b9a45 0 0 7px;
+  -o-box-shadow: #0b9a45 0 0 7px;
+  box-shadow: #0b9a45 0 0 7px;
+}
+/*-----------End Validation Style--------*/
 /* -- UI Consistency -- */
 input,
 button,
@@ -412,6 +421,7 @@ textarea,
 select[size],
 select[multiple] {
   height: auto;
+  width: 100%;
 }
 optgroup {
   color: #000000;
@@ -441,8 +451,9 @@ input[type="text"],
 input[type="time"],
 input[type="url"],
 input[type="week"] {
+  display: block;
   height: 20px;
-  margin: 10px 0 0;
+  margin: 0 0 10px;
   padding: 4px 4px;
   font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
   font-size: 16px;
@@ -592,12 +603,16 @@ input[type="checkbox"] {
 /* -- States -- */
 button:focus,
 button:active,
+button:hover,
 input:focus,
 input:active,
+input:hover,
 select:focus,
 select:active,
+select:hover,
 textarea:focus,
-textarea:active {
+textarea:active,
+textarea:hover {
   z-index: 1;
   -webkit-box-shadow: #0066ff 0 0 7px;
   -moz-box-shadow: #0066ff 0 0 7px;
