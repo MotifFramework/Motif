@@ -338,6 +338,9 @@ Form labels, by default, are displayed `inline-block`, but most will have the cl
 	</label>
 
 */
+legend {
+  padding-bottom: 20px;
+}
 label {
   display: inline-block;
 }
@@ -495,6 +498,23 @@ input[type="week"] {
 .input-label input[type="week"] {
   margin-top: 5px;
 }
+.input-label.error textarea,
+.input-label.error select,
+.input-label.error input[type="date"],
+.input-label.error input[type="datetime"],
+.input-label.error input[type="datetime-local"],
+.input-label.error input[type="email"],
+.input-label.error input[type="month"],
+.input-label.error input[type="number"],
+.input-label.error input[type="password"],
+.input-label.error input[type="search"],
+.input-label.error input[type="tel"],
+.input-label.error input[type="text"],
+.input-label.error input[type="time"],
+.input-label.error input[type="url"],
+.input-label.error input[type="week"] {
+  border-color: #e63c4d;
+}
 textarea.input-thin,
 select.input-thin,
 input[type="date"].input-thin,
@@ -601,23 +621,28 @@ input[type="checkbox"] {
   }
 }
 /* -- States -- */
-button:focus,
-button:active,
 button:hover,
-input:focus,
-input:active,
 input:hover,
-select:focus,
-select:active,
 select:hover,
+textarea:hover,
+button:focus,
+input:focus,
+select:focus,
 textarea:focus,
+button:active,
+input:active,
+select:active,
 textarea:active,
-textarea:hover {
+button.is-current,
+input.is-current,
+select.is-current,
+textarea.is-current {
   z-index: 1;
-  -webkit-box-shadow: #0066ff 0 0 7px;
-  -moz-box-shadow: #0066ff 0 0 7px;
-  -o-box-shadow: #0066ff 0 0 7px;
-  box-shadow: #0066ff 0 0 7px;
+  border-color: #00a4d8;
+  -webkit-box-shadow: 0 0 3px #0b9a45;
+  -moz-box-shadow: 0 0 3px #0b9a45;
+  -o-box-shadow: 0 0 3px #0b9a45;
+  box-shadow: 0 0 3px #0b9a45;
 }
 input[type="file"]:focus,
 input[type="file"]:active,
@@ -1907,6 +1932,7 @@ See: http://gridsystemgenerator.com
 .row {
   margin-left: -18px;
   margin-right: -18px;
+  display: inline-block;
 }
 .lte7 .row {
   zoom: 1;
