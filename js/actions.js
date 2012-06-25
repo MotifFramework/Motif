@@ -23,6 +23,20 @@ $(document).ready(function() {
 	// Placeholder text for form inputs
 	$("input, textarea").placeholder();
 
+	// Validation
+	//$("[data-validation=true]").lb_validation();
+	$("#contact-form").lb_validation({
+		ajaxSubmit	:	function () {
+			var $this 		= $(this),
+				dataString	=	$this.serialize();
+			console.log(dataString);
+			$.post("test.php", dataString, function (data) {
+	            alert(data.time);
+	        }, "json");
+	        return false;
+		}
+	});
+
 	// Tabbed widget
 	$("[data-tabs]").lb_tabs();
 
