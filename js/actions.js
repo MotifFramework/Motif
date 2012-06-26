@@ -33,7 +33,6 @@ $(document).ready(function() {
 			$.post("test.php", dataString, function (data) {
 	            alert(data.time);
 	        }, "json");
-	        return false;
 		}
 	});
 
