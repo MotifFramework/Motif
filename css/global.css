@@ -1839,7 +1839,9 @@ See: http://gridsystemgenerator.com
 .row {
   margin-left: -18px;
   margin-right: -18px;
-  display: inline-block;
+}
+.lte7 .row {
+  zoom: 1;
 }
 .lte7 .row {
   zoom: 1;
@@ -2047,6 +2049,9 @@ See: http://gridsystemgenerator.com
 .input-label:after {
   clear: both;
 }
+.input-label.columns {
+  display: inline;
+}
 .input-label.required {
   color: #2575ae;
 }
@@ -2196,6 +2201,10 @@ textarea.is-current {
 .lte7 .input-alert {
   display: inline;
   zoom: 1;
+}
+.lte7 .input-alert {
+  float: left;
+  margin-top: -7px;
 }
 .input-alert:before {
   border: 6px solid transparent;
