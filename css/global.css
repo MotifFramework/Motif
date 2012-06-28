@@ -2233,6 +2233,12 @@ textarea.is-current {
   background-color: rgba(11, 154, 69, 0.050000000000000044);
   border: 1px solid rgba(11, 154, 69, 0.19999999999999996);
 }
+.fail-message {
+  margin-top: 20px;
+  padding: 20px 18px;
+  background-color: rgba(230, 60, 77, 0.050000000000000044);
+  border: 1px solid rgba(230, 60, 77, 0.19999999999999996);
+}
 /*
 
 @font-face Declarations
