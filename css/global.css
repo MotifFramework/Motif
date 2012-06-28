@@ -2030,6 +2030,9 @@ See: http://gridsystemgenerator.com
 .followed-by-nineteen {
   margin-right: 1595px;
 }
+.clover {
+  display: none;
+}
 .input-label {
   display: block;
   font-weight: bold;
@@ -2223,6 +2226,12 @@ textarea.is-current {
 }
 .input-alert.error:before {
   border-bottom-color: #e63c4d;
+}
+.success-message {
+  margin-top: 20px;
+  padding: 20px 18px;
+  background-color: rgba(11, 154, 69, 0.050000000000000044);
+  border: 1px solid rgba(11, 154, 69, 0.19999999999999996);
 }
 /*
 
