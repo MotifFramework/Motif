@@ -77,7 +77,7 @@ $(document).ready(function() {
 			
 		} else{
 		
-		    $form.prepend('<div id="form-response" class="fail-message">This form could not be submitted.</div>');
+		    $form.append('<div id="form-response" class="fail-message">This form could not be submitted.</div>');
 
 		}
 		
