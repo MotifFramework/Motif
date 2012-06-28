@@ -24,17 +24,65 @@ $(document).ready(function() {
 	$("input, textarea").placeholder();
 
 	// Validation
-	//$("[data-validation=true]").lb_validation();
 	$("#contact-form").lb_validation({
 		ajaxSubmit	:	function () {
 			var $this 		= $(this),
-				dataString	=	$this.serialize();
-			console.log(dataString);
-			$.post("test.php", dataString, function (data) {
-	            alert(data.time);
-	        }, "json");
+				dataString	=	decodeURIComponent($this.serialize());
+			
+			$.ajax({
+				type: "POST",
+				url: "test.php",
+				data: dataString,
+				cache: false,
+				success: function(result){
+					$this.result=result;
+					respond($this);
+				}
+			});
+						
+            return false;  
+	        
 		}
 	});
+	function respond($form){
+	
+		if($form.result){
+		
+			$form.find(':input').each(function() {
+				
+		        switch(this.type) {
+	
+					case 'email':
+		            case 'password':
+		            case 'select-multiple':
+		            case 'select-one':
+		            case 'tel':
+		            case 'text':
+		            case 'textarea':
+		                $(this).val('');
+		                break;
+			        
+			        case 'checkbox':
+					case 'radio':
+		                this.checked = false;
+		                break;		
+		        }
+		        
+		
+		    });
+		    $("html, body").animate({scrollTop:0},200);
+		    
+		    
+		    $form.prepend('<div id="form-response" class="success-message">Thank you for filling out the Contact Form</div>');
+			
+		} else{
+		
+		    $form.append('<div id="form-response" class="fail-message">This form could not be submitted.</div>');
+
+		}
+		
+		setTimeout(function(){$('#form-response').hide();},5000,function(){$('#form-response').remove();});
+	}
 
 	// Tabbed widget
 	$("[data-tabs]").lb_tabs();
