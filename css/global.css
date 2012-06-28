@@ -985,19 +985,10 @@ dt {
   font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
 blockquote {
-  padding: 0 18px 0 13px;
-  border-left: 5px solid #2575ae;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  padding: 0 18px;
 }
 blockquote p:first-child {
   margin: 0;
-}
-blockquote cite {
-  color: #858384;
-}
-blockquote cite:before {
-  content: '\2014 \00A0';
 }
 code {
   color: #6c559f;
@@ -1057,20 +1048,6 @@ a:focus {
 a:hover,
 a a:active {
   outline: 0;
-}
-.figcaption {
-  padding: 5px 9px;
-  display: block;
-  font-style: italic;
-  background-color: #cfcbca;
-}
-.meta {
-  margin: 5px 0 0;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-size: 1rem;
-  line-height: 1;
 }
 /*
 
@@ -1839,9 +1816,7 @@ See: http://gridsystemgenerator.com
 .row {
   margin-left: -18px;
   margin-right: -18px;
-}
-.lte7 .row {
-  zoom: 1;
+  display: inline-block;
 }
 .lte7 .row {
   zoom: 1;
@@ -2049,9 +2024,6 @@ See: http://gridsystemgenerator.com
 .input-label:after {
   clear: both;
 }
-.input-label.columns {
-  display: inline;
-}
 .input-label.required {
   color: #2575ae;
 }
@@ -2202,10 +2174,6 @@ textarea.is-current {
   display: inline;
   zoom: 1;
 }
-.lte7 .input-alert {
-  float: left;
-  margin-top: -7px;
-}
 .input-alert:before {
   border: 6px solid transparent;
   position: absolute;
@@ -2341,6 +2309,34 @@ h6 strong,
 .heading strong {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
   color: #00a4d8;
+}
+blockquote {
+  padding: 0 18px 0 13px;
+  border-left: 5px solid #2575ae;
+  margin-bottom: 20px;
+}
+blockquote p:first-child {
+  margin: 0;
+}
+blockquote cite {
+  color: #858384;
+}
+blockquote cite:before {
+  content: '\2014 \00A0';
+}
+.figcaption {
+  padding: 5px 9px;
+  display: block;
+  font-style: italic;
+  background-color: #cfcbca;
+}
+.meta {
+  margin: 5px 0 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-size: 1rem;
+  line-height: 1;
 }
 .caret {
   display: inline-block;
