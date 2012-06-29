@@ -73,15 +73,15 @@ $(document).ready(function() {
 		    $("html, body").animate({scrollTop:0},200);
 		    
 		    
-		    $form.prepend('<div id="form-response" class="success-message">Thank you for filling out the Contact Form</div>');
+		    $form.prepend('<div id="form-response" class="success alert">Thank you for filling out the Contact Form</div>');
 			
 		} else{
 		
-		    $form.append('<div id="form-response" class="fail-message">This form could not be submitted.</div>');
+		    $form.append('<div id="form-response" class="error alert">This form could not be submitted.</div>');
 
 		}
 		
-		setTimeout(function(){$('#form-response').hide();},5000,function(){$('#form-response').remove();});
+		setTimeout(function(){$('#form-response').slideUp();},5000,function(){$('#form-response').remove();console.log("slide");});
 	}
 
 	// Tabbed widget
