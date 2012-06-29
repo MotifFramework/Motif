@@ -2038,6 +2038,13 @@ textarea.is-current {
   -o-box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
   box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
 }
+.hint {
+  margin-top: 0px;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5384615384615385;
+  color: #858384;
+}
 /*
 
 ### Validation ###
@@ -2141,6 +2148,9 @@ textarea.is-current {
 }
 .input-alert.error:before {
   border-bottom-color: #e63c4d;
+}
+.disabled {
+  opacity: .5;
 }
 /*
 
