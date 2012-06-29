@@ -47,38 +47,11 @@ $(document).ready(function() {
 	function respond($form){
 	
 		if($form.result){
-		
-			$form.find(':input').each(function() {
-				
-		        switch(this.type) {
-	
-					case 'email':
-		            case 'password':
-		            case 'select-multiple':
-		            case 'select-one':
-		            case 'tel':
-		            case 'text':
-		            case 'textarea':
-		                $(this).val('');
-		                break;
-			        
-			        case 'checkbox':
-					case 'radio':
-		                this.checked = false;
-		                break;		
-		        }
-		        
-		
-		    });
+			$form[0].reset();
 		    $("html, body").animate({scrollTop:0},200);
-		    
-		    
 		    $form.prepend('<div id="form-response" class="success alert">Thank you for filling out the Contact Form</div>');
-			
 		} else{
-		
 		    $form.append('<div id="form-response" class="error alert">This form could not be submitted.</div>');
-
 		}
 		
 		setTimeout(function(){$('#form-response').slideUp();},5000,function(){$('#form-response').remove();console.log("slide");});
