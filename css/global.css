@@ -1816,7 +1816,9 @@ See: http://gridsystemgenerator.com
 .row {
   margin-left: -18px;
   margin-right: -18px;
-  display: inline-block;
+}
+.lte7 .row {
+  zoom: 1;
 }
 .lte7 .row {
   zoom: 1;
@@ -2027,6 +2029,9 @@ See: http://gridsystemgenerator.com
 .input-label:after {
   clear: both;
 }
+.input-label.columns {
+  display: inline;
+}
 .input-label.required {
   color: #2575ae;
 }
@@ -2177,6 +2182,10 @@ textarea.is-current {
   display: inline;
   zoom: 1;
 }
+.lte7 .input-alert {
+  float: left;
+  margin-top: -7px;
+}
 .input-alert:before {
   border: 6px solid transparent;
   position: absolute;
@@ -2324,6 +2333,27 @@ h6 strong,
 .heading strong {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
   color: #00a4d8;
+}
+.museo {
+  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
+}
+.pt-sans-regular {
+  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+}
+.pt-sans-bold {
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+}
+.pt-sans-italic {
+  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+}
+.pt-sans-bold-italic {
+  font-family: "PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+}
+.anonymous-pro-bold {
+  font-family: "Anonymous Pro Bold", Courier, monospace;
+}
+.entypo {
+  font-family: "EntypoRegular";
 }
 blockquote {
   padding: 0 18px 0 13px;

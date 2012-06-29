@@ -67,24 +67,34 @@
 // Table Variables
 @table-border-color:		lighten(@light-grey, 10%);
 
-// Typography Variables
+// Typographic Variables
 @primary-text-color:		@light-black;
 @secondary-text-color:		@dark-grey;
 @inverse-text-color:		@white;
 @button-color:				@inverse-text-color;
-@text-font:					"PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-@text-font-bold:			"PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@text-font-italic:			"PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@text-font-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@text-font-code:			"Anonymous Pro Bold", Courier, monospace;
-@text-font-icons:			"EntypoRegular";
+
+// Font Declarations
+@museo:						"Museo700", Helvetica, Arial, Verdana, serif;
+@pt-sans-regular:			"PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+@pt-sans-bold:				"PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@pt-sans-italic:			"PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@pt-sans-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@anonymous-pro-bold:		"Anonymous Pro Bold", Courier, monospace;
+@entypo:					"EntypoRegular";
+
+@text-font:					@pt-sans-regular;
+@text-font-bold:			@pt-sans-bold;
+@text-font-italic:			@pt-sans-italic;
+@text-font-bold-italic:		@pt-sans-bold-italic;
+@text-font-code:			@anonymous-pro-bold;
+@text-font-icons:			@entypo;
+@primary-header-font:		@museo;
 
 // Header Variables
 @primary-header-color:		@dark-blue;
 @secondary-header-color:	@blue;
 @header-highlight-color:	@light-blue;
 @inverse-header-color:		@light-blue;
-@primary-header-font:		"Museo700", Helvetica, Arial, Verdana, serif;
 
 // Link Variables
 @primary-link-color:		@light-purple;
@@ -95,3 +105,6 @@
 @warning-color:				@dark-yellow;
 @success-color:				@green;
 @error-color:				@red;
+
+// Sprite Variables
+@sprite-grid:				50px;
