@@ -832,6 +832,23 @@ INSERT INTO `LB_Templates` VALUES(1, 'Default Template', 'Reef_Default', 1);
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `LB_TrashCan`
+--
+
+DROP TABLE IF EXISTS `LB_TrashCan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `LB_TrashCan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fullURL` varchar(500) NOT NULL DEFAULT '',
+  `publishedData` text,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `LB_UserData`
 --
 
