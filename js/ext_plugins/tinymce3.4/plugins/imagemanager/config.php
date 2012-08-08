@@ -19,8 +19,8 @@
 	$mcImageManagerConfig['general.allow_override'] = "*";
 
 	// Preview options
-	$mcImageManagerConfig['preview.wwwroot'] = ''; // absolute or relative from this script path, try to leave blank system figures it out.
-	$mcImageManagerConfig['preview.urlprefix'] = "{proto}://{host}/"; // domain name
+	$mcImageManagerConfig['preview.wwwroot'] = $_SERVER['DOCUMENT_ROOT'] . '/media/images'; // absolute or relative from this script path, try to leave blank system figures it out.
+	$mcImageManagerConfig['preview.urlprefix'] = "{proto}://{host}/media/images/"; // domain name
 	$mcImageManagerConfig['preview.urlsuffix'] = "";
 	$mcImageManagerConfig['preview.allow_export'] = "urlprefix,urlsuffix";
 	$mcImageManagerConfig['preview.allow_override'] = "*";
@@ -33,8 +33,8 @@
 	// General filesystem options
 	;
 	$mcImageManagerConfig['filesystem'] = "Moxiecode_LocalFileImpl";
-	$mcImageManagerConfig['filesystem.path'] = $_SERVER['DOCUMENT_ROOT'] . '/edumedia'; // absolute or relative from this script path, optional.
-	$mcImageManagerConfig['filesystem.rootpath'] = "MEDIA=" . $_SERVER['DOCUMENT_ROOT'] . '/media;VGN=' . $_SERVER['DOCUMENT_ROOT'] . '/vgn;EDUMEDIA=' . $_SERVER['DOCUMENT_ROOT'] . '/edumedia'; // absolute or relative from this script path, required.
+	$mcImageManagerConfig['filesystem.path'] = $_SERVER['DOCUMENT_ROOT'] . '/media/images'; // absolute or relative from this script path, optional.
+	$mcImageManagerConfig['filesystem.rootpath'] = $_SERVER['DOCUMENT_ROOT'] . '/media/images'; // absolute or relative from this script path, required.
 	$mcImageManagerConfig['filesystem.datefmt'] = "Y-m-d H:i";
 	$mcImageManagerConfig['filesystem.include_directory_pattern'] = '';
 	$mcImageManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';
