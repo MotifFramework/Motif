@@ -1,0 +1,9 @@
+.opacity(@opacity: 1.0)	{
+
+	// Variables
+	@ie-opacity:			@opacity * 100;
+
+	// Create
+    opacity:				@opacity;
+	filter:					~"alpha(opacity=@{ie-opacity})";
+}

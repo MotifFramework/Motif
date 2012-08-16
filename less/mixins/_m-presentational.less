@@ -1,0 +1,48 @@
+.remove-styles() {
+	width:			auto;
+	height:			auto;
+	margin:			0;
+	padding:		0;
+	display:		inline;
+	font-family:	inherit;
+	font-size:		inherit;
+	color:			inherit;
+	text-shadow:	none;
+	background:		none;
+	border:			none;
+	outline:		none;
+
+	// Mixins
+	.box-shadow-none();
+}
+.hide-text() {
+	font:			0px/0 a;
+	text-shadow:	none;
+	color:			transparent;
+}
+.hide-img() {
+	display:		block;
+	text-indent:	100%;
+	white-space:	nowrap;
+	overflow:		hidden;
+}
+.pseudo-clear() {
+	content:		"";
+	width:			0;
+	height:			0;
+	margin:			0;
+	padding:		0;
+	display:		block;
+}
+.hasLayout() {
+	.lte7 & {
+		display:	inline;
+		zoom:		1;
+	}
+}
+.inline-block-fallback()	{
+	display:		inline-block;
+
+	// Mixins
+	.hasLayout();
+}

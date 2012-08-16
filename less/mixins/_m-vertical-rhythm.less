@@ -1,0 +1,88 @@
+// Calculate rhythm units.
+.rhythm(
+			@property:	margin-top,
+			@lines:		1,
+			@size:		@base-text-size,
+			@vertical:	@base-vertical
+		) 
+		when 
+		(@property = margin-top)
+{
+	// Variables
+	@rhythm:			@lines * @vertical;
+	@rhythm-em:			@rhythm / @size;
+
+	// Create
+	margin-top: 		~"@{rhythm-em}em";
+}
+.rhythm(
+			@property:	margin-top,
+			@lines:		1,
+			@size:		@base-text-size,
+			@vertical:	@base-vertical
+		) 
+		when 
+		(@property = margin-bottom)
+{
+	// Variables
+	@rhythm:			@lines * @vertical;
+	@rhythm-em:			@rhythm / @size;
+
+	// Create
+	margin-bottom: 		~"@{rhythm-em}em";
+}
+.rhythm(
+			@property:	margin-top,
+			@lines:		1,
+			@size:		@base-text-size,
+			@vertical:	@base-vertical
+		) 
+		when  
+		(@property = padding-top)
+{
+	// Variables
+	@rhythm:			@lines * @vertical;
+	@rhythm-em:			@rhythm / @size;
+
+	// Create
+	padding-top: 		~"@{rhythm-em}em";
+}
+.rhythm(
+			@property:	margin-top,
+			@lines:		1,
+			@size:		@base-text-size,
+			@vertical:	@base-vertical
+		) 
+		when 
+		(@property = padding-bottom)
+{
+	// Variables
+	@rhythm:			@lines * @vertical;
+	@rhythm-em:			@rhythm / @size;
+
+	// Create
+	padding-bottom: 	~"@{rhythm-em}em";
+}
+
+
+ //Apply leading whitespace as margin.
+.margin-leader(@lines: 1, @font-size: @base-text-size)		{
+  .rhythm(margin-top, @lines, @font-size);
+}
+.margin-trailer(@lines: 1, @font-size: @base-text-size)		{
+  .rhythm(margin-bottom, @lines, @font-size);
+}
+.margin-vertical(@lines: 1, @font-size: @base-text-size)	{
+  .rhythm(margin-top, @lines, @font-size);
+  .rhythm(margin-bottom, @lines, @font-size);
+}
+.padding-leader(@lines: 1, @font-size: @base-text-size)		{
+  .rhythm(padding-top, @lines, @font-size);
+}
+.padding-trailer(@lines: 1, @font-size: @base-text-size)	{
+  .rhythm(padding-bottom, @lines, @font-size);
+}
+.padding-vertical(@lines: 1, @font-size: @base-text-size)	{
+  .rhythm(padding-top, @lines, @font-size);
+  .rhythm(padding-bottom, @lines, @font-size);
+}

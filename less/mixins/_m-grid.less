@@ -1,0 +1,126 @@
+// Set @total-width to 100% for a fluid layout
+@total-width:	100%;
+
+// Clearfix Mixin
+.clearfix() {
+	.lte7 & {
+		zoom:			1;
+	}
+	&:before,
+	&:after {
+		content:		"\0020";
+		height:			0;
+		display:		block;
+		overflow:		hidden;
+	}
+	&:after {
+		clear:			both;
+	}
+}
+
+// Fixed Grid namespace
+#fixed {
+
+	// Negative margins to absorb the margins of the first and last items.
+	.row(@mar: @base-margin) {
+
+		// Create
+		margin-left: 	-1em * ((@mar / 2) / @base-text-size);
+		margin-right: 	-1em * ((@mar / 2) / @base-text-size);
+
+		// Mixins
+		.clearfix();
+	}
+	.column(@mar: @base-margin) {
+
+		// Create
+		margin-left: 	1em * ((@mar / 2) / @base-text-size);
+		margin-right: 	1em * ((@mar / 2) / @base-text-size);
+		display: 		inline;
+		float: 			left;
+	}
+	.grid(@x, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		width:			1em * (((@col * @x) + (@mar * (@x - 1))) / @base-text-size);
+	}
+	.input-grid(@x, @pad: @input-padding, @bor: @input-border, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		width: 			1em * ((((@col * @x) + (@mar * (@x - 1))) - ((@pad + @bor) * 2)) / @base-text-size);
+	}
+	.padded-grid(@x, @pad: @base-padding, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		width: 			1em * (((@col * @x) + (@mar * (@x - 1))) / @base-text-size);
+		margin:			@pad;
+		font-size:		@base-text-size;
+	}
+	.padded-bordered-grid(@x, @pad: @base-padding, @bor: @default-border-width, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		width: 			1em * ((((@col * @x) + (@mar * (@x - 1))) - ((@pad + @bor) * 2)) / @base-text-size);
+	}
+	.offset(@x, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		margin-left:	1em * ((@mar / 2) + ((@col + @mar) * @x) / @base-text-size);
+	}
+	.followed(@x, @col: @base-column, @mar: @base-margin) {
+
+		// Create
+		margin-right:	1em * ((@mar / 2) + ((@col + @mar) * @x) / @base-text-size);
+	}	
+}
+
+
+
+
+// Fluid Grid namespace
+#fluid {
+	.row(@columns: @total-columns) {
+
+		// Variables
+		@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
+
+		// Create
+		width: 			@total-width * ((@base-margin + @grid-width) / @grid-width);
+		margin: 		0 @total-width * (((@base-margin * 0.5) / @grid-width) * -1);
+		display: 		inline-block;
+
+		// Mixins
+		.clearfix();
+	}
+	.column(@x, @columns: @total-columns) {
+
+		// Variables
+		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
+		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
+
+		// Create
+		width: 			((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) - (@grid-margin * 2);
+		margin-right: 	@grid-margin;
+		margin-left: 	@grid-margin;
+		display: 		inline;
+		float: 			left;
+	}
+	.offset(@x, @columns: @total-columns) {
+
+		// Variables
+		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
+		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
+
+		// Create
+		margin-left:	((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) + @grid-margin;
+	}
+	.pull(@x, @columns: @total-columns) {
+
+		// Variables
+		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
+		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
+
+		// Create
+		left:			(((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) + @grid-margin) * -1;
+		position:		relative;
+	}
+}

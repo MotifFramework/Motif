@@ -1,145 +1,51 @@
 /*
 
-Reset
------
-
-Resets and normalizes baseline styles.
-
-See: http://necolas.github.com/normalize.css/
+Type Mixins
+-----------
 
 */
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section,
-summary,
-time,
-mark,
-audio,
-video,
-output {
+/*
+
+Convert type size into rems, with a pixel fallback.
+
+*/
+/*
+
+### Vertical Rhythm ###
+
+Calculate the minimum multiple of rhythm units needed to contain the font-size.
+Optionally, you can specify a custom line-height (sans unit).
+
+*/
+/*
+
+Combine the font sizing mixin with the line-height one. Package deal.
+
+*/
+/*
+
+### Lists ###
+
+*/
+/*
+
+### Webfonts ###
+
+Mixins to generate `@font-face` code, with and sans SVG.
+
+*/
+/*
+
+HTML5 Display Definitions
+-------------------------
+
+Set the appropriate `display` definitions for new HTML5 elements.
+
+The majority will be displayed `block`.
+
+*/
+body {
   margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote:before,
-q:before,
-blockquote:after,
-q:after {
-  content: "";
-  content: none;
-}
-table {
-  border-spacing: 0;
-}
-.lte7 table {
-  border-collapse: collapse;
-}
-table,
-table th,
-table tr,
-table td,
-table caption {
-  font-weight: normal;
-  text-align: left;
-  vertical-align: top;
-}
-i,
-address,
-cite {
-  font-style: normal;
-}
-b {
-  font-weight: normal;
-}
-legend {
-  white-space: normal;
-}
-.lte7 legend {
-  margin-left: -7px;
-}
-img {
-  border: 0;
-}
-.lte7 img {
-  -ms-interpolation-mode: bicubic;
 }
 article,
 aside,
@@ -149,12 +55,16 @@ figure,
 footer,
 header,
 hgroup,
-menu,
 nav,
 section,
 summary {
   display: block;
 }
+/*
+
+Some, however, need to be `inline-block` with an IE7 fallback.
+
+*/
 audio,
 canvas,
 video {
@@ -166,964 +76,489 @@ video {
   display: inline;
   zoom: 1;
 }
+/*
+
+From normalize.css:
+
+> Prevents modern browsers from displaying `audio` without controls.
+> Remove excess height in iOS5 devices.
+
+*/
 audio:not([controls]) {
-  height: 0;
   display: none;
+  height: 0;
 }
 [hidden] {
   display: none;
 }
 /*
-
-Forms
------
-
-Form elements are normalized to a simple but pleasing baseline style.
-
-### Input Widths ###
-
-Input elements can be assigned basic widths, from .xxxs to .xxl.
-
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-xxxs" placeholder=".xxxs" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-xxs" placeholder=".xxs" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-xs" placeholder=".xs" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-s" placeholder=".s" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-m" placeholder=".m" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-l" placeholder=".l" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-xl" placeholder=".xl" />
-    </label>
-    <label class="input-label">
-    	Alternate Size<br />
-    	<input type="text" class="input-xxl" placeholder=".xxl" />
-    </label>
-
-*/
-.input-xxxs {
-  width: 30px;
-}
-.input-xxs {
-  width: 50px;
-}
-.input-xs {
-  width: 100px;
-}
-.input-s {
-  width: 150px;
-}
-.input-m {
-  width: 250px;
-}
-.input-l {
-  width: 350px;
-}
-.input-xl {
-  width: 450px;
-}
-.input-xxl {
-  width: 550px;
-}
-/*
-
-### Input Widths (Grid) ###
-
-Perhaps more pleasing to the design, you can match the width of the input to your grid layout.
-
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="one" placeholder=".one" />
-    </label>
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="two" placeholder=".two" />
-    </label>
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="three" placeholder=".three" />
-    </label>
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="four" placeholder=".four" />
-    </label>
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="five" placeholder=".five" />
-    </label>
-    <label class="input-label">
-    	Input Set to Grid<br />
-    	<input type="text" class="six" placeholder=".six" />
-    </label>
-
-*/
-input.one,
-textarea.one {
-  width: 37px;
-}
-input.two,
-textarea.two {
-  width: 120px;
-}
-input.three,
-textarea.three {
-  width: 203px;
-}
-input.four,
-textarea.four {
-  width: 286px;
-}
-input.five,
-textarea.five {
-  width: 369px;
-}
-input.six,
-textarea.six {
-  width: 452px;
-}
-input.seven,
-textarea.seven {
-  width: 535px;
-}
-input.eight,
-textarea.eight {
-  width: 618px;
-}
-input.nine,
-textarea.nine {
-  width: 701px;
-}
-input.ten,
-textarea.ten {
-  width: 784px;
-}
-input.eleven,
-textarea.eleven {
-  width: 867px;
-}
-input.twelve,
-textarea.twelve {
-  width: 950px;
-}
-/*
-
-### Labels ###
-
-Form labels, by default, are displayed `inline-block`, but most will have the class `.input-label` attached, which bolds the label and displays it `block`. The `required` class is purely presentational, and for the moment, only colors the text.
-
-	<label class="input-label">
-		Input Label<br />
-		<input type="text" class="input-m" />
-	</label>
-	<label class="required input-label">
-		Required Input Label<br />
-		<input type="text" class="input-m" required="required" />
-	</label>
-
-*/
-legend {
-  padding-bottom: 20px;
-}
-label {
-  display: inline-block;
-}
-/*
-
-#### Checkbox and Radio Labels ###
-
-Checkbox and radio inputs can be grouped in unordered lists with the `.checkbox-list` class attached. Within that list, we use the Media Object to float the `<input />` to the left and prevent the accompanying `<label>` from wrapping around.
-
-	<ul class="checkbox-list">
-		<li class="media-object">
-			<input id="checkbox-1" class="object" type="checkbox" name="checkboxList" value="1" /> 
-			<label for="checkbox-1" class="desc">Checkbox List</label>
-		</li>
-		<li class="media-object">
-			<input id="checkbox-2" class="object" type="checkbox" name="checkboxList" value="2" /> 
-			<label for="checkbox-2" class="desc">Checkbox List</label>
-		</li>
-		<li class="media-object">
-			<input id="checkbox-3" class="object" type="checkbox" name="checkboxList" value="3" /> 
-			<label for="checkbox-3" class="desc">Checkbox List</label>
-		</li>
-	</ul>
-	<ul class="inline checkbox-list">
-		<li class="media-object">
-			<input id="radio-1" class="object" type="radio" name="radioList" value="1" /> 
-			<label for="radio-1" class="desc">Inline Radio List</label>
-		</li>
-		<li class="media-object">
-			<input id="radio-2" class="object" type="radio" name="radioList" value="2" /> 
-			<label for="radio-2" class="desc">Inline Radio List</label>
-		</li>
-		<li class="media-object">
-			<input id="radio-3" class="object" type="radio" name="radioList" value="3" /> 
-			<label for="radio-3" class="desc">Inline Radio List</label>
-		</li>
-	</ul>
-
-*/
-.checkbox-list {
-  margin-left: 0;
-  list-style: none outside none;
-}
-.checkbox-list .media-object .object {
-  margin-right: 9px;
-}
-.checkbox-list.inline li {
-  padding-right: 18px;
-  display: inline-block;
-}
-.checkbox-label {
-  padding-right: 9px;
-}
-/* -- UI Consistency -- */
-input,
-button,
-select,
-textarea {
-  vertical-align: middle;
-}
-textarea,
-select[size],
-select[multiple] {
-  height: auto;
-  width: 100%;
-}
-optgroup {
-  color: #000000;
-  font-style: normal;
-  font-weight: normal;
-}
-::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-input[type="search"]::-webkit-search-decoration {
-  display: none;
-}
-/* -- Input Fields -- */
-textarea,
-select,
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"] {
-  display: block;
-  height: 20px;
-  margin: 0 0 10px;
-  padding: 4px 4px;
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-  font-size: 16px;
-  color: #434142;
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #cfcdcd;
-  outline: 0;
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  -ms-box-sizing: content-box;
-  box-sizing: content-box;
-}
-textarea.input-thin,
-select.input-thin,
-input[type="date"].input-thin,
-input[type="datetime"].input-thin,
-input[type="datetime-local"].input-thin,
-input[type="email"].input-thin,
-input[type="month"].input-thin,
-input[type="number"].input-thin,
-input[type="password"].input-thin,
-input[type="search"].input-thin,
-input[type="tel"].input-thin,
-input[type="text"].input-thin,
-input[type="time"].input-thin,
-input[type="url"].input-thin,
-input[type="week"].input-thin {
-  height: 60px;
-  padding: 9px 2px;
-  font-size: 13px;
-}
-.lte7 textarea,
-.lte7 select,
-.lte7 input[type="date"],
-.lte7 input[type="datetime"],
-.lte7 input[type="datetime-local"],
-.lte7 input[type="email"],
-.lte7 input[type="month"],
-.lte7 input[type="number"],
-.lte7 input[type="password"],
-.lte7 input[type="search"],
-.lte7 input[type="tel"],
-.lte7 input[type="text"],
-.lte7 input[type="time"],
-.lte7 input[type="url"],
-.lte7 input[type="week"] {
-  height: auto;
-  padding: 4px 4px 3px;
-}
-textarea {
-  min-height: 80px;
-  overflow: auto;
-  resize: vertical;
-}
-select {
-  height: auto;
-}
-::-webkit-input-placeholder {
-  color: #cfcdcd;
-}
-input:-moz-placeholder,
-textarea:-moz-placeholder {
-  color: #cfcdcd;
-}
-input.placeholder_text,
-textarea.placeholder_text {
-  color: #cfcdcd;
-}
-:invalid {
-  -webkit-box-shadow: none 0 10px #cccccc;
-  -moz-box-shadow: none 0 10px #cccccc;
-  -o-box-shadow: none 0 10px #cccccc;
-  box-shadow: none 0 10px #cccccc;
-}
-/* -- Radios & Checkboxes -- */
-input[type="radio"],
-input[type="checkbox"] {
-  position: relative;
-  vertical-align: top;
-  top: 1px;
-}
-.ie input[type="radio"],
-.ie input[type="checkbox"],
-.button input[type="radio"],
-.button input[type="checkbox"],
-.tag input[type="radio"],
-.tag input[type="checkbox"] {
-  top: 0;
-}
-.lte7 input[type="radio"],
-.lte7 input[type="checkbox"] {
-  top: -3px;
-}
-/* -- iPad -- */
-@media (-webkit-min-device-pixel-ratio: 1) and (max-device-width: 1024px) {
-  input[type="radio"],
-  input[type="checkbox"] {
-    vertical-align: baseline;
-    top: 2px;
-  }
-}
-/* -- iPhone 3 -- */
-@media (-webkit-min-device-pixel-ratio: 1) and (max-device-width: 480px) {
-  input[type="radio"],
-  input[type="checkbox"] {
-    vertical-align: baseline;
-    top: 0;
-  }
-}
-/* -- iPhone 4 -- */
-@media (-webkit-min-device-pixel-ratio: 2) and (max-device-width: 480px) {
-  input[type="radio"],
-  input[type="checkbox"] {
-    vertical-align: baseline;
-    top: 0;
-  }
-}
-/* -- States -- */
-input[type="file"]:focus,
-input[type="file"]:active,
-input[type="radio"]:focus,
-input[type="radio"]:active,
-input[type="checkbox"]:focus,
-input[type="checkbox"]:active {
-  -webkit-box-shadow: none 0 10px #cccccc;
-  -moz-box-shadow: none 0 10px #cccccc;
-  -o-box-shadow: none 0 10px #cccccc;
-  box-shadow: none 0 10px #cccccc;
-}
-/* -- Disabled -- */
-select[disabled],
-textarea[disabled],
-input[type="date"][disabled],
-input[type="datetime"][disabled],
-input[type="datetime-local"][disabled],
-input[type="email"][disabled],
-input[type="month"][disabled],
-input[type="number"][disabled],
-input[type="password"][disabled],
-input[type="search"][disabled],
-input[type="tel"][disabled],
-input[type="text"][disabled],
-input[type="time"][disabled],
-input[type="url"][disabled],
-input[type="week"][disabled] {
-  background-color: #a9a6a7;
-}
-button[disabled],
-input[disabled],
-select[disabled],
-select[disabled] option,
-select[disabled] optgroup,
-textarea[disabled] {
-  color: #837f81;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-  cursor: default;
-  -webkit-box-shadow: none 0 10px #cccccc;
-  -moz-box-shadow: none 0 10px #cccccc;
-  -o-box-shadow: none 0 10px #cccccc;
-  box-shadow: none 0 10px #cccccc;
-}
-/* -- Webkit -- */
-@media (-webkit-min-device-pixel-ratio: 0) {
-  select {
-    padding-right: 20px;
-    background-image: url(../images/select-arrow.gif);
-    background-repeat: no-repeat;
-    background-position: right center;
-  }
-  select[size],
-  select[multiple] {
-    padding: 0;
-    background-image: none;
-  }
-  ::-webkit-validation-bubble-message {
-    height: 16px;
-    padding: 15px 15px 17px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #666666), color-stop(1, #000000));
-    border: 1px solid;
-    border-color: #747474 #5e5e5e #4f4f4f;
-    font: 13px/17px 'Lucida Grande', Arial, 'Liberation Sans', FreeSans, sans-serif;
-    color: #ffffff;
-    overflow: hidden;
-    text-shadow: 0 0 1px #000000;
-  }
-  ::-webkit-validation-bubble-arrow,
-  ::-webkit-validation-bubble-top-outer-arrow,
-  ::-webkit-validation-bubble-top-inner-arrow {
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    background: #666;
-    border: 0;
-  }
-}
-.lte7 .search {
-  zoom: 1;
-}
-.search:before,
-.search:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.search:after {
-  clear: both;
-}
-.search .input,
-.search .submit {
-  margin: 0;
-  float: left;
-}
-.search .input {
-  width: 150px;
-}
-.search .submit {
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  -webkit-box-shadow: none 0 10px #cccccc;
-  -moz-box-shadow: none 0 10px #cccccc;
-  -o-box-shadow: none 0 10px #cccccc;
-  box-shadow: none 0 10px #cccccc;
-}
-/*
-
-Buttons
--------
-
-Buttons can be applied to `<input />`, `<button>` and `<a>` elements using the baseline class, .button, and any complementary classes to alter its color or size.
-
-    <input class="button" type="submit" value="Button" />
-    <button class="button">Button</button>
-    <a href="#" class="button">Button</a>
-
-
-### Size & Shape ###
-
-Variations in size and shape exist for the .button class by simply adding another class.
-
-    <input type="submit" class="round button" value=".round" />
-    <input type="submit" class="tiny button" value=".tiny" />
-    <input type="submit" class="small button" value=".small" />
-    <input type="submit" class="button" value="Default" />
-    <input type="submit" class="large button" value=".large" />
-    <input type="submit" class="full-width button" value=".full-width" />
-
-### Colors ###
-
-A base set of colors provides significance to the buttons.
-
-    <input type="submit" class="button" value="Default" />
-    <input type="submit" class="primary button" value=".primary" />
-    <input type="submit" class="danger button" value=".danger" />
-    <input type="submit" class="success button" value=".success" />
-    <input type="submit" class="rogue button" value=".rogue" />
-
-*/
-.button {
-  width: auto;
-  height: auto;
-  margin: 0;
-  padding: 9px 17px;
-  display: inline-block;
-  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.3;
-  color: #434142;
-  text-align: center;
-  text-decoration: none;
-  position: relative;
-  background: #cfcdcd;
-  -webkit-appearance: none;
-  -webkit-background-clip: padding;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  border: 1px solid #a9a6a7;
-  outline: 0;
-  overflow: visible;
-  cursor: pointer;
-  vertical-align: middle;
-  margin-top: 20px;
-}
-p .button {
-  margin-top: 0;
-}
-.button.tiny {
-  font-size: 10px;
-  padding: 3px 5px;
-}
-.button.small {
-  font-size: 13px;
-  padding: 6px 8px;
-}
-.button.large {
-  font-size: 21px;
-}
-.button.full-width {
-  width: 100%;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  text-align: center;
-}
-.button:hover,
-.button:focus {
-  color: inherit;
-  background: #a9a6a7;
-}
-/*
-
-### Button Group ###
-
-The Button Group takes a list of buttons (`<input />`, `<button>` or `<a>` in any combination) and clumps them together.
-
-    <ul class="button-group">
-    	<li><a href="#" class="button">Cancel</a></li>
-    	<li><input class="primary button" type="submit" name="submit" id="submit" value="Submit" /></li>
-    </ul>
-
-*/
-.button-group {
-  margin-left: 0;
-}
-.lte7 .button-group {
-  zoom: 1;
-}
-.button-group:before,
-.button-group:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.button-group:after {
-  clear: both;
-}
-.button-group li {
-  float: left;
-  list-style: none outside none;
-}
-.button-group li .button {
-  margin-left: -1px;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-}
-.button-group li:first-child .button {
-  margin-left: 0;
-  -webkit-border-bottom-left-radius: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -moz-border-radius-topleft: 5px;
-  -o-border-bottom-left-radius: 5px;
-  -o-border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-}
-.button-group li:last-child .button {
-  -webkit-border-bottom-right-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -moz-border-radius-topright: 5px;
-  -o-border-bottom-right-radius: 5px;
-  -o-border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
+ * 1. Corrects text resizing oddly in IE6/7 when body `font-size` is set using
+ *    `em` units.
+ * 2. Prevents iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
 html {
-  font-size: 62.5%;
+  font-size: 100%;
+  /* 1 */
+
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+
 }
-/* -- Headings -- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading {
-  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #184b6f;
-  margin-top: 20px;
+html,
+button,
+input,
+select,
+textarea {
+  font-family: sans-serif;
 }
-/* -- Font Sizes -- */
-h1,
-.canon-text {
-  font-size: 48px;
-  font-size: 4.8rem;
-  line-height: 1.0416666666666667;
+abbr[title] {
+  border-bottom: 1px dotted;
 }
-h2,
-.paragon-text {
-  font-size: 28px;
-  font-size: 2.8rem;
-  line-height: 1.0714285714285714;
-}
-h3,
-.primer-text {
-  font-size: 21px;
-  font-size: 2.1rem;
-  line-height: 1.4285714285714286;
-}
-h4,
-.normal-text {
-  font-size: 16px;
-  font-size: 1.6rem;
-  line-height: 1.25;
-}
-h5,
-.petite-text {
-  font-size: 13px;
-  font-size: 1.3rem;
-  line-height: 1.5384615384615385;
-}
-h6,
-.minion-text {
-  font-size: 10px;
-  font-size: 1rem;
-  line-height: 1;
-}
-.subtitle {
-  margin-top: 0;
-}
-.title-group .subtitle {
-  color: #2575ae;
-}
-/* -- Body Text -- */
-body {
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+i,
+cite,
+address {
   font-style: normal;
+}
+dfn {
+  font-style: italic;
+}
+b {
   font-weight: normal;
-  color: #434142;
-  font-size: 16px;
-  font-size: 1.6rem;
-  line-height: 1.25;
 }
-.body-text {
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+strong {
+  font-weight: bold;
 }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
+pre,
 blockquote,
+menu,
 ul,
 ol,
 dl,
 address,
 table,
 figure {
-  margin-top: 20px;
+  margin: 0;
+  margin-top: 1.25em;
 }
-ul,
+menu,
 ol,
-dd {
-  margin-left: 20px;
+ul {
+  padding-left: 2.5em;
 }
-ul.unstyled,
+menu.unstyled,
 ol.unstyled,
-dd.unstyled {
-  margin-left: 0;
+ul.unstyled {
+  padding-left: 0;
   list-style: none outside none;
 }
 li ul,
 li ol {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+}
+dd {
+  margin-left: 2.5em;
 }
 blockquote {
-  padding: 0 18px;
+  padding: 1.25em 2.5em;
 }
-blockquote p:first-child {
-  margin: 0;
+blockquote > :first-child {
+  margin-top: 0;
 }
-code {
-  color: #6c559f;
-  padding: 0 2px;
-  background-color: rgba(243, 123, 131, 0.1);
-  font-size: 13px;
-  font-size: 1.3rem;
-  line-height: 1.5384615384615385;
+q {
+  quotes: none;
+}
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+mark {
+  background: #ff0;
+  color: #000;
 }
 code,
-code pre {
-  padding: 0 3px 2px;
-  font-family: "Anonymous Pro Bold", Courier, monospace;
-  font-style: normal;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em;
 }
 pre {
-  margin: 20px 0 0;
-  padding: 8.5px;
-  display: block;
-  background-color: rgba(207, 203, 202, 0.2);
-  border: 1px solid #cfcdcd;
   white-space: pre;
   white-space: pre-wrap;
   word-wrap: break-word;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
 }
-pre code {
-  display: block;
+small {
+  font-size: 1em;
 }
-abbr[title] {
-  border-bottom: 1px dotted;
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
-strong {
-  font-weight: bold;
+sup {
+  top: -0.5em;
 }
-em {
-  font-style: italic;
-}
-a {
-  color: #bd8fc0;
-}
-a:hover,
-a:focus,
-a.is-current {
-  color: #a05ea5;
+sub {
+  bottom: -0.25em;
 }
 a:focus {
   outline: thin dotted;
 }
-a:hover,
-a a:active {
+a:active,
+a:hover {
   outline: 0;
 }
-/*
-
-Tables
-------
-
-Tables have a basic style with a couple of simpler variations.
-
-### Base ###
-
-	<table>
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First Name</th>
-				<th scope="col">Last Name</th>
-				<th scope="col">Language</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Some</td>
-				<td>One</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Joe</td>
-				<td>Sixpack</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Stu</td>
-				<td>Dent</td>
-				<td>Code</td>
-			</tr>
-		</tbody>
-	</table>
-
-### Simple ###
-
-	<table class="simple-table">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First Name</th>
-				<th scope="col">Last Name</th>
-				<th scope="col">Language</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Some</td>
-				<td>One</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Joe</td>
-				<td>Sixpack</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Stu</td>
-				<td>Dent</td>
-				<td>Code</td>
-			</tr>
-		</tbody>
-	</table>
-
-### Zebra Striped ###
-
-	<table class="zebra-striped">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col">First Name</th>
-				<th scope="col">Last Name</th>
-				<th scope="col">Language</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>1</td>
-				<td>Some</td>
-				<td>One</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>Joe</td>
-				<td>Sixpack</td>
-				<td>English</td>
-			</tr>
-			<tr>
-				<td>3</td>
-				<td>Stu</td>
-				<td>Dent</td>
-				<td>Code</td>
-			</tr>
-		</tbody>
-	</table>
-
-*/
-table {
-  width: 100%;
+img {
+  border: 0;
+}
+.lte7 img {
+  -ms-interpolation-mode: bicubic;
+}
+svg:not(:root) {
+  overflow: hidden;
+}
+form {
+  margin: 0;
+}
+fieldset {
+  border: none;
+  margin: 0;
   padding: 0;
-  border-collapse: separate;
 }
-.lte7 table {
-  border-collapse: collapse;
+legend {
+  border: 0;
+  padding: 0;
+  white-space: normal;
 }
-table th,
-table td {
-  padding: 5px 5px 4px;
-  text-align: left;
+.lte7 legend {
+  margin-left: -7px;
 }
-table th {
-  padding-top: 4px;
-  font-weight: bold;
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  display: block;
+}
+button .lte7,
+input .lte7,
+select .lte7,
+textarea .lte7 {
   vertical-align: middle;
 }
-table td {
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  display: inline-block;
+  cursor: pointer;
+}
+button .lte7,
+html input[type="button"] .lte7,
+input[type="reset"] .lte7,
+input[type="submit"] .lte7 {
+  overflow: visible;
+  display: inline;
+  zoom: 1;
+}
+button,
+input {
+  line-height: normal;
+}
+button[disabled],
+input[disabled] {
+  cursor: default;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  margin: 3px;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
   vertical-align: top;
+}
+input[type="checkbox"] .lte7,
+input[type="radio"] .lte7 {
+  width: 13px;
+  height: 13px;
+}
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -ms-box-sizing: content-box;
+  box-sizing: content-box;
+}
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 /*
 
-General Classes
+Helpfull Variables
+------------------
+
+Mostly spacing, to be honest.
+
+*/
+/*
+
+### Horizontal Margins ###
+
+Take the base grid margin, divide it (if necessary), then divide 
+the result by the `body`'s base text size. Convert to ems.
+
+*/
+/*
+#### Minus Border ####
+
+Ditto, but subtract the project's default border width before 
+dividing by the base text size.
+*/
+/*
+
+### Vertical Margins ###
+
+Take the base vertical unit, divide it (if necessary), then divide 
+the result by the `body`'s base text size. Convert to ems.
+
+*/
+/*
+#### Minus Border ####
+
+Ditto, but subtract the project's default border width before 
+dividing by the base text size.
+*/
+/*
+
+### Misc ###
+
+*/
+/* 
+
+Spacing Helpers
 ---------------
+
+Spacing helpers are quick but powerful classes that add margin or padding to 
+any given element. These classes are !important, so they override all other 
+styles.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+p, m				=	padding, margin  
+a, t, r, b, l, h, v	=	all, top, right, bottom, left, horizontal, vertical  
+s, m, l, n			=	small (~5px), medium (~10px), large (~20px), none (0)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For example: `.pam` means "padding, all, medium".
+
+**Note:** These are all based on the current element's font size and the 
+project's vertical rhythm (even on the sides, to provide uniform spacing). 
+As such, they require `_vars.less`.
+
+*/
+.ptn,
+.pvn,
+.pan {
+  padding-top: 0					!important;
+}
+.pts,
+.pvs,
+.pas {
+  padding-top: 0.3125em !important;
+}
+.ptm,
+.pvm,
+.pam {
+  padding-top: 0.625em !important;
+}
+.ptl,
+.pvl,
+.pal {
+  padding-top: 1.25em !important;
+}
+.prn,
+.phn,
+.pan {
+  padding-right: 0					!important;
+}
+.prs,
+.phs,
+.pas {
+  padding-right: 0.3125em !important;
+}
+.prm,
+.phm,
+.pam {
+  padding-right: 0.625em !important;
+}
+.prl,
+.phl,
+.pal {
+  padding-right: 1.25em !important;
+}
+.pbn,
+.pvn,
+.pan {
+  padding-bottom: 0					!important;
+}
+.pbs,
+.pvs,
+.pas {
+  padding-bottom: 0.3125em !important;
+}
+.pbm,
+.pvm,
+.pam {
+  padding-bottom: 0.625em !important;
+}
+.pbl,
+.pvl,
+.pal {
+  padding-bottom: 1.25em !important;
+}
+.pln,
+.phn,
+.pan {
+  padding-left: 0					!important;
+}
+.pls,
+.phs,
+.pas {
+  padding-left: 0.3125em !important;
+}
+.plm,
+.phm,
+.pam {
+  padding-left: 0.625em !important;
+}
+.pll,
+.phl,
+.pal {
+  padding-left: 1.25em !important;
+}
+.mtn,
+.mvn,
+.man {
+  margin-top: 0					!important;
+}
+.mts,
+.mvs,
+.mas {
+  margin-top: 0.3125em !important;
+}
+.mtm,
+.mvm,
+.mam {
+  margin-top: 0.625em !important;
+}
+.mtl,
+.mvl,
+.mal {
+  margin-top: 1.25em !important;
+}
+.mrn,
+.mhn,
+.man {
+  margin-right: 0					!important;
+}
+.mrs,
+.mhs,
+.mas {
+  margin-right: 0.3125em !important;
+}
+.mrm,
+.mhm,
+.mam {
+  margin-right: 0.625em !important;
+}
+.mrl,
+.mhl,
+.mal {
+  margin-right: 1.25em !important;
+}
+.mbn,
+.mvn,
+.man {
+  margin-bottom: 0					!important;
+}
+.mbs,
+.mvs,
+.mas {
+  margin-bottom: 0.3125em !important;
+}
+.mbm,
+.mvm,
+.mam {
+  margin-bottom: 0.625em !important;
+}
+.mbl,
+.mvl,
+.mal {
+  margin-bottom: 1.25em !important;
+}
+.mln,
+.mhn,
+.man {
+  margin-left: 0					!important;
+}
+.mls,
+.mhs,
+.mas {
+  margin-left: 0.3125em !important;
+}
+.mlm,
+.mhm,
+.mam {
+  margin-left: 0.625em !important;
+}
+.mll,
+.mhl,
+.mal {
+  margin-left: 1.25em !important;
+}
+/*
+
+Presentational Classes
+----------------------
 
 General, handy, presentational helper classes.
 
+*/
+/*
 First, we have classes for aligning text and floating images.
 
-    <p class="align-left">Left-aligned text.</p>
-    <p class="align-center">Center-aligned text.</p>
-    <p class="align-right">Right-aligned text.</p>
+	<p class="align-left">Left-aligned text.</p>
+	<p class="align-center">Center-aligned text.</p>
+	<p class="align-right">Right-aligned text.</p>
 
 */
 .align-left {
@@ -1165,515 +600,9 @@ First, we have classes for aligning text and floating images.
   clear: both;
 }
 .text-hide {
-  font: 0/0 serif;
+  font: 0px/0 a;
   text-shadow: none;
   color: transparent;
-}
-/* 
-
-### Spacing Helpers ###
-
-Spacing helpers are quick but powerful classes that add margin or padding to any given element. These classes are !important, so they override all other styles.
-
-p, m				=	padding, margin  
-a, t, r, b, l, h, v	=	all, top, right, bottom, left, horizontal, vertical  
-s, m, l, n			=	small (5px), medium (10px), large (20px), none (0)
-
-For example: `.pam` means "padding, all, medium".
-
-*/
-.ptn,
-.pvn,
-.pan {
-  padding-top: 0		!important;
-}
-.pts,
-.pvs,
-.pas {
-  padding-top: 5px		!important;
-}
-.ptm,
-.pvm,
-.pam {
-  padding-top: 10px	!important;
-}
-.ptl,
-.pvl,
-.pal {
-  padding-top: 20px	!important;
-}
-.prn,
-.phn,
-.pan {
-  padding-right: 0		!important;
-}
-.prs,
-.phs,
-.pas {
-  padding-right: 5px		!important;
-}
-.prm,
-.phm,
-.pam {
-  padding-right: 10px	!important;
-}
-.prl,
-.phl,
-.pal {
-  padding-right: 20px	!important;
-}
-.pbn,
-.pvn,
-.pan {
-  padding-bottom: 0		!important;
-}
-.pbs,
-.pvs,
-.pas {
-  padding-bottom: 5px		!important;
-}
-.pbm,
-.pvm,
-.pam {
-  padding-bottom: 10px	!important;
-}
-.pbl,
-.pvl,
-.pal {
-  padding-bottom: 20px	!important;
-}
-.pln,
-.phn,
-.pan {
-  padding-left: 0		!important;
-}
-.pls,
-.phs,
-.pas {
-  padding-left: 5px		!important;
-}
-.plm,
-.phm,
-.pam {
-  padding-left: 10px	!important;
-}
-.pll,
-.phl,
-.pal {
-  padding-left: 20px	!important;
-}
-.mtn,
-.mvn,
-.man {
-  margin-top: 0		!important;
-}
-.mts,
-.mvs,
-.mas {
-  margin-top: 5px		!important;
-}
-.mtm,
-.mvm,
-.mam {
-  margin-top: 10px	!important;
-}
-.mtl,
-.mvl,
-.mal {
-  margin-top: 20px	!important;
-}
-.mrn,
-.mhn,
-.man {
-  margin-right: 0		!important;
-}
-.mrs,
-.mhs,
-.mas {
-  margin-right: 5px		!important;
-}
-.mrm,
-.mhm,
-.mam {
-  margin-right: 10px	!important;
-}
-.mrl,
-.mhl,
-.mal {
-  margin-right: 20px	!important;
-}
-.mbn,
-.mvn,
-.man {
-  margin-bottom: 0		!important;
-}
-.mbs,
-.mvs,
-.mas {
-  margin-bottom: 5px		!important;
-}
-.mbm,
-.mvm,
-.mam {
-  margin-bottom: 10px	!important;
-}
-.mbl,
-.mvl,
-.mal {
-  margin-bottom: 20px	!important;
-}
-.mln,
-.mhn,
-.man {
-  margin-left: 0		!important;
-}
-.mls,
-.mhs,
-.mas {
-  margin-left: 5px		!important;
-}
-.mlm,
-.mhm,
-.mam {
-  margin-left: 10px	!important;
-}
-.mll,
-.mhl,
-.mal {
-  margin-left: 20px	!important;
-}
-/*
-
-Modules
--------
-
-Flexible, generic, reusable components for layout and interaction.
-
-*/
-/*
-
-### Media Object ###
-
-The Media Object is an image (or media-type) to the left with (typically) descriptive content to the right. The media object can be whatever size it wants, the basic format will remain the same. (Text will **not** wrap.)  This has any number of applications, such as a checkbox next to a label with lots of text.
-
-See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
-
-    <div class="media-object">
-        <b class="object">
-            <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
-        </b>
-        <div class="desc">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eget risus libero, id venenatis ante. Curabitur iaculis turpis vitae velit luctus in luctus mi molestie. Curabitur bibendum magna lorem. Curabitur enim lectus, scelerisque non pellentesque in, suscipit eget nibh. Pellentesque vitae nunc vel tortor rhoncus euismod. Maecenas pretium porta ultricies. Quisque feugiat sem sit amet sapien consequat non fringilla leo suscipit.</p>
-        </div>
-    </div>
-
-*/
-.media-object,
-.media-object .desc {
-  overflow: hidden;
-}
-.ie6 .media-object,
-.ie6 .media-object .desc {
-  overflow: visible;
-  zoom: 1;
-}
-.media-object .object {
-  margin-right: 18px;
-  float: left;
-}
-.media-object .object img {
-  display: block;
-}
-.media-object .desc {
-  display: block;
-}
-.media-object .desc  > :first-child {
-  margin-top: 0;
-}
-.media-object.half {
-  margin-left: 9px;
-  margin-right: 9px;
-}
-.media-object.half .object {
-  margin-left: 9px;
-  margin-right: 9px;
-}
-.media-object.checkbox-label .object {
-  margin-right: 10px;
-}
-/*
-
-### Media Grid ###
-
-The Media Grid allows you to place a grid of photos or videos (catalog or retail products, etc.) without floating them, alleviating the need to concern yourself with clearing the floats should an object extend further than another.  The .object class can be applied to block or inline elements (`<b>`, `<span>`, `<a>`, `<div>`) depending on your need.
-
-You can then apply grid-system classes to the .object to constrain the widths.
-
-    <ul class="media-grid">
-        <li>
-            <b class="object">
-                <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
-            </b>
-        </li>
-        <li>
-            <b class="object">
-                <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
-            </b>
-        </li>
-        <li>
-            <b class="object">
-                <img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
-            </b>
-        </li>
-    </ul>
-
-*/
-.media-grid {
-  margin: 0 -18px;
-}
-.media-grid li {
-  display: inline;
-  letter-spacing: -0.31em;
-  word-spacing: -0.43em;
-  list-style: none outside none;
-}
-.lte7 .media-grid li {
-  letter-spacing: normal;
-}
-.media-grid .object {
-  letter-spacing: normal;
-  word-spacing: normal;
-  margin: 20px 18px 0;
-  vertical-align: top;
-  display: inline-block;
-}
-.lte7 .media-grid .object {
-  display: inline;
-  zoom: 1;
-}
-.media-grid .object img {
-  display: block;
-}
-.media-grid.half {
-  margin-left: -9px;
-  margin-right: -9px;
-}
-.media-grid.half .object {
-  margin-left: 9px;
-  margin-right: 9px;
-}
-/*
-
-### Tabs ###
-
-The Tabs module (and accompanying plugin) creates a very basic widget that allows module embedding and basic styling.
-
-    <section class="tabs" data-tabs="tabbed-widget">
-    	<ul class="nav group" data-tabs-nav="tabbed-widget">
-    		<li class="is-current"><a href="#first-tab">First Tab</a></li>
-    		<li><a href="#second-tab">Second Tab</a></li>
-    		<li><a href="#third-tab">Third Tab</a></li>
-    		<li><a href="#fourth-tab">Fourth Tab</a></li>
-    	</ul>
-    	<div class="section">
-    		<section id="first-tab" class="tab is-current" data-tabs-section="tabbed-widget">
-    			<h3>First Tab</h3>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    		</section>
-    		<section id="second-tab" class="tab" data-tabs-section="tabbed-widget">
-    			<h3>Second Tab</h3>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    		</section>
-    		<section id="third-tab" class="tab" data-tabs-section="tabbed-widget">
-    			<h3>Third Tab</h3>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    		</section>
-    		<section id="fourth-tab" class="tab" data-tabs-section="tabbed-widget">
-    			<h3>Fourth Tab</h3>
-    			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    		</section>
-    	</div>
-    </section>
-
-*/
-.tabs .section {
-  position: relative;
-}
-.lte7 .tabs .nav {
-  zoom: 1;
-}
-.tabs .nav:before,
-.tabs .nav:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.tabs .nav:after {
-  clear: both;
-}
-.tabs .nav li {
-  display: block;
-  margin: 0;
-  float: left;
-  position: relative;
-  z-index: 30;
-}
-.tabs .nav li.is-current {
-  z-index: 60;
-}
-.tabs .nav li.is-current a {
-  color: #a05ea5;
-}
-.tabs .nav a {
-  padding: 5px 9px;
-  display: block;
-  text-decoration: none;
-}
-.tabs .nav.sub-nav {
-  font-size: 13px;
-  margin-top: 10px;
-}
-.tabs .tab {
-  display: none;
-}
-.tabs .tab.is-current {
-  display: block;
-}
-/*
-
-### Nav ###
-
-The basic Nav module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal nav without adding too much style (yet).
-
-    <ul class="nav">
-        <li><a href="#">Nav Item</a></li>
-        <li><a href="#">Nav Item</a></li>
-        <li><a href="#">Nav Item</a></li>
-        <li><a href="#">Nav Item</a></li>
-    </ul>
-
-*/
-.nav {
-  margin-left: 0;
-}
-.nav li {
-  display: inline;
-  list-style: none outside none;
-}
-.nav a {
-  display: inline-block;
-}
-.lte7 .nav a {
-  display: inline;
-  zoom: 1;
-}
-/* -- Breadcrumb -- */
-.breadcrumb {
-  font-size: 13px;
-}
-.lte7 .breadcrumb {
-  zoom: 1;
-}
-.breadcrumb:before,
-.breadcrumb:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.breadcrumb:after {
-  clear: both;
-}
-.breadcrumb .label {
-  margin: 0 10px 0 0;
-  display: inline;
-  float: left;
-}
-.breadcrumb .nav {
-  margin: 0;
-  float: left;
-  text-transform: capitalize;
-}
-.breadcrumb li {
-  margin-right: 9px;
-  float: left;
-}
-.breadcrumb li:before {
-  content: "/";
-  margin-right: 9px;
-}
-.breadcrumb li:first-child:before {
-  content: "";
-  margin: 0;
-}
-/* -- Pagination -- */
-.pagination {
-  height: 30px;
-  margin: 20px 0;
-  display: inline-block;
-  border: 1px solid #dddddd;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-.pagination li {
-  margin: 0;
-  display: inline;
-  list-style: none outside none;
-}
-.pagination li:first-child a {
-  border-left: none;
-}
-.pagination li.first a {
-  -webkit-border-bottom-left-radius: 2px;
-  -webkit-border-top-left-radius: 2px;
-  -moz-border-radius-bottomleft: 2px;
-  -moz-border-radius-topleft: 2px;
-  -o-border-bottom-left-radius: 2px;
-  -o-border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-  border-top-left-radius: 2px;
-}
-.pagination li.last a {
-  -webkit-border-bottom-right-radius: 2px;
-  -webkit-border-top-right-radius: 2px;
-  -moz-border-radius-bottomright: 2px;
-  -moz-border-radius-topright: 2px;
-  -o-border-bottom-right-radius: 2px;
-  -o-border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
-}
-.pagination li.disabled a,
-.pagination li.disabled a:hover,
-.pagination li.disabled a:focus {
-  color: #cfcdcd;
-  cursor: default;
-  background-color: transparent;
-}
-.pagination a {
-  padding: 0 10px;
-  float: left;
-  line-height: 30px;
-  border-left: 1px solid;
-  border-left-color: #cfcdcd;
-  text-decoration: none;
-}
-.pagination a:hover,
-.pagination a:focus {
-  color: #ffffff;
-  background: #a05ea5;
-}
-.pagination .current a {
-  color: #ffffff;
-  background: #a05ea5;
 }
 /*
 
@@ -1682,7 +611,9 @@ Fixed Grid
 
 Fixed-width grid system for complex column layout. Very lego.
 
-Each row of columns must be wrapped by an element with the `.row` class. Columns all have the `.columns` class along with an additional class specifying its width.
+Each row of columns must be wrapped by an element with the `.row` class. 
+Columns all have the `.columns` class along with an additional class 
+specifying its width.
 
 See: http://gridsystemgenerator.com
 
@@ -1749,14 +680,14 @@ See: http://gridsystemgenerator.com
 
 */
 .columns {
-  margin-left: 18px;
-  margin-right: 18px;
+  margin-left: 1.125em;
+  margin-right: 1.125em;
   display: inline;
   float: left;
 }
 .row {
-  margin-left: -18px;
-  margin-right: -18px;
+  margin-left: -1.125em;
+  margin-right: -1.125em;
 }
 .lte7 .row {
   zoom: 1;
@@ -1771,642 +702,429 @@ See: http://gridsystemgenerator.com
 .row:after {
   clear: both;
 }
+.row.rtl .columns {
+  float: right;
+}
 .one {
-  width: 47px;
+  width: 2.9375em;
 }
 .two {
-  width: 130px;
+  width: 8.125em;
 }
 .three {
-  width: 213px;
+  width: 13.3125em;
 }
 .four {
-  width: 296px;
+  width: 18.5em;
 }
 .five {
-  width: 379px;
+  width: 23.6875em;
 }
 .six {
-  width: 462px;
+  width: 28.875em;
 }
 .seven {
-  width: 545px;
+  width: 34.0625em;
 }
 .eight {
-  width: 628px;
+  width: 39.25em;
 }
 .nine {
-  width: 711px;
+  width: 44.4375em;
 }
 .ten {
-  width: 794px;
+  width: 49.625em;
 }
 .eleven {
-  width: 877px;
+  width: 54.8125em;
 }
 .twelve {
-  width: 960px;
-}
-.thirteen {
-  width: 1043px;
-}
-.fourteen {
-  width: 1126px;
-}
-.fifteen {
-  width: 1209px;
-}
-.sixteen {
-  width: 1292px;
-}
-.seventeen {
-  width: 1375px;
-}
-.eighteen {
-  width: 1458px;
-}
-.nineteen {
-  width: 1541px;
-}
-.twenty {
-  width: 1624px;
+  width: 60em;
 }
 .offset-by-one {
-  margin-left: 101px;
+  margin-left: 23.1875em;
 }
 .offset-by-two {
-  margin-left: 184px;
+  margin-left: 28.375em;
 }
 .offset-by-three {
-  margin-left: 267px;
+  margin-left: 33.5625em;
 }
 .offset-by-four {
-  margin-left: 350px;
+  margin-left: 38.75em;
 }
 .offset-by-five {
-  margin-left: 433px;
+  margin-left: 43.9375em;
 }
 .offset-by-six {
-  margin-left: 516px;
+  margin-left: 49.125em;
 }
 .offset-by-seven {
-  margin-left: 599px;
+  margin-left: 54.3125em;
 }
 .offset-by-eight {
-  margin-left: 682px;
+  margin-left: 59.5em;
 }
 .offset-by-nine {
-  margin-left: 765px;
+  margin-left: 64.6875em;
 }
-.offset-by-ten {
-  margin-left: 848px;
+/*
+
+Modules
+-------
+
+Flexible, generic, reusable components for layout and interaction.
+Some require `_vars.less`.
+
+*/
+/*
+
+### Media Object ###
+
+The Media Object is an image (or media-type) to the left with 
+(typically) descriptive content to the right. The media object 
+can be whatever size it wants, the basic format will remain the 
+same. (Text will **not** wrap.)  This has any number of 
+applications, such as a checkbox next to a label with lots of 
+text.
+
+See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+
+	<div class="media-object">
+		<b class="object">
+			<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+		</b>
+		<div class="desc">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing 
+			elit. Maecenas eget risus libero, id venenatis ante. 
+			Curabitur iaculis turpis vitae velit luctus in luctus 
+			mi molestie. Curabitur bibendum magna lorem. Curabitur 
+			enim lectus, scelerisque non pellentesque in, suscipit 
+			eget nibh. Pellentesque vitae nunc vel tortor rhoncus 
+			euismod. Maecenas pretium porta ultricies. Quisque 
+			feugiat sem sit amet sapien consequat non fringilla 
+			leo suscipit.</p>
+		</div>
+	</div>
+
+*/
+.media-object,
+.media-object .desc {
+  overflow: hidden;
 }
-.offset-by-eleven {
-  margin-left: 931px;
+.media-object .object {
+  margin-right: 1.125em;
+  float: left;
 }
-.offset-by-twelve {
-  margin-left: 1014px;
-}
-.offset-by-thirteen {
-  margin-left: 1097px;
-}
-.offset-by-fourteen {
-  margin-left: 1180px;
-}
-.offset-by-fifteen {
-  margin-left: 1263px;
-}
-.offset-by-sixteen {
-  margin-left: 1346px;
-}
-.offset-by-seventeen {
-  margin-left: 1429px;
-}
-.offset-by-eighteen {
-  margin-left: 1512px;
-}
-.offset-by-nineteen {
-  margin-left: 1595px;
-}
-.followed-by-one {
-  margin-right: 101px;
-}
-.followed-by-two {
-  margin-right: 184px;
-}
-.followed-by-three {
-  margin-right: 267px;
-}
-.followed-by-four {
-  margin-right: 350px;
-}
-.followed-by-five {
-  margin-right: 433px;
-}
-.followed-by-six {
-  margin-right: 516px;
-}
-.followed-by-seven {
-  margin-right: 599px;
-}
-.followed-by-eight {
-  margin-right: 682px;
-}
-.followed-by-nine {
-  margin-right: 765px;
-}
-.followed-by-ten {
-  margin-right: 848px;
-}
-.followed-by-eleven {
-  margin-right: 931px;
-}
-.followed-by-twelve {
-  margin-right: 1014px;
-}
-.followed-by-thirteen {
-  margin-right: 1097px;
-}
-.followed-by-fourteen {
-  margin-right: 1180px;
-}
-.followed-by-fifteen {
-  margin-right: 1263px;
-}
-.followed-by-sixteen {
-  margin-right: 1346px;
-}
-.followed-by-seventeen {
-  margin-right: 1429px;
-}
-.followed-by-eighteen {
-  margin-right: 1512px;
-}
-.followed-by-nineteen {
-  margin-right: 1595px;
-}
-.clover {
-  display: none;
-}
-.input-label {
+.media-object .object img {
   display: block;
-  font-weight: bold;
-  position: relative;
-  margin-top: 20px;
 }
-.lte7 .input-label {
+.media-object .desc {
+  display: block;
+}
+.media-object .desc > :first-child {
+  margin-top: 0;
+}
+.media-object.half {
+  margin-left: 0.5625em;
+  margin-right: 0.5625em;
+}
+.media-object.half .object {
+  margin-left: 0.5625em;
+  margin-right: 0.5625em;
+}
+.media-object.checkbox-label .object {
+  margin-right: 0.28125em;
+}
+/*
+
+### Media Grid ###
+
+The Media Grid allows you to place a grid of photos or videos 
+(catalog or retail products, etc.) without floating them, 
+alleviating the need to concern yourself with clearing the floats 
+should an object extend further than another.  The `.columns` 
+class can be applied to block or inline elements (`<b>`, `<span>`, 
+`<a>`, `<div>`) depending on your need.
+
+You can then apply grid-system classes to the .object to constrain 
+the widths.
+
+	<ul class="media-grid">
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+	</ul>
+
+*/
+.media-grid {
+  margin-top: 0;
+  padding: 0;
+  letter-spacing: -0.31em;
+  word-spacing: -0.43em;
+}
+.lte7 .media-grid {
+  letter-spacing: normal;
+}
+.media-grid .columns {
+  float: none;
+  list-style: none outside none;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  margin-top: 1.25em;
+  display: inline-block;
+}
+.lte7 .media-grid .columns {
+  display: inline;
   zoom: 1;
 }
-.input-label:before,
-.input-label:after {
+.media-grid .columns img {
+  display: block;
+}
+/*
+
+### Nav ###
+
+The basic Nav module simply removes bullets from lists and inlines 
+the list items, making the link `inline-block`. The idea is to give 
+the skeleton of a horizontal nav without adding too much style (yet).
+
+	<ul class="nav">
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+	</ul>
+
+*/
+.nav {
+  padding-left: 0;
+}
+.nav li {
+  display: inline;
+  list-style: none outside none;
+}
+.nav a {
+  display: inline-block;
+}
+.lte7 .nav a {
+  display: inline;
+  zoom: 1;
+}
+.lte7 .nav.forceful {
+  zoom: 1;
+}
+.nav.forceful:before,
+.nav.forceful:after {
   content: "\0020";
   height: 0;
   display: block;
   overflow: hidden;
 }
-.input-label:after {
+.nav.forceful:after {
   clear: both;
 }
-.input-label.columns {
-  display: inline;
+.nav.forceful li {
+  display: block;
+  float: left;
 }
-.input-label.required {
-  color: #2575ae;
-}
-.input-label .hint {
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-}
-legend.input-label {
-  padding-bottom: 5px;
-}
-button:hover,
-input:hover,
-select:hover,
-textarea:hover,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus,
-button:active,
-input:active,
-select:active,
-textarea:active,
-button.is-current,
-input.is-current,
-select.is-current,
-textarea.is-current {
-  z-index: 1;
-  border-color: #a9a6a7;
-  -webkit-box-shadow: 0 1px 4px rgba(169, 166, 167, 0.5);
-  -moz-box-shadow: 0 1px 4px rgba(169, 166, 167, 0.5);
-  -o-box-shadow: 0 1px 4px rgba(169, 166, 167, 0.5);
-  box-shadow: 0 1px 4px rgba(169, 166, 167, 0.5);
-}
-.input-label.error input:hover,
-.input-label.error select:hover,
-.input-label.error textarea:hover,
-.input-label.error input:focus,
-.input-label.error select:focus,
-.input-label.error textarea:focus,
-.input-label.error input:active,
-.input-label.error select:active,
-.input-label.error textarea:active,
-.input-label.error input.is-current,
-.input-label.error select.is-current,
-.input-label.error textarea.is-current {
-  background-color: rgba(230, 60, 77, 0.15000000000000002);
-  -webkit-box-shadow: 0 1px 4px rgba(230, 60, 77, 0.5);
-  -moz-box-shadow: 0 1px 4px rgba(230, 60, 77, 0.5);
-  -o-box-shadow: 0 1px 4px rgba(230, 60, 77, 0.5);
-  box-shadow: 0 1px 4px rgba(230, 60, 77, 0.5);
-}
-.input-label.success input:hover,
-.input-label.success select:hover,
-.input-label.success textarea:hover,
-.input-label.success input:focus,
-.input-label.success select:focus,
-.input-label.success textarea:focus,
-.input-label.success input:active,
-.input-label.success select:active,
-.input-label.success textarea:active,
-.input-label.success input.is-current,
-.input-label.success select.is-current,
-.input-label.success textarea.is-current {
-  background-color: rgba(11, 154, 69, 0.15000000000000002);
-  -webkit-box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
-  -moz-box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
-  -o-box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
-  box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
-}
-.hint {
-  margin-top: 0px;
-  font-size: 13px;
-  font-size: 1.3rem;
-  line-height: 1.5384615384615385;
-<<<<<<< HEAD
-  color: #837f81;
-=======
-  color: #858384;
->>>>>>> 35074f928b95e93d0f6dbcde9d451d333901125b
+.nav.forceful a,
+.lte7 .nav.forceful a {
+  display: block;
 }
 /*
 
-### Validation ###
+### Tabs ###
+
+The Tabs module (and accompanying plugin) creates a very basic widget 
+that allows module embedding and basic styling.
+
+	<section class="tabs" data-tabs="tabbed-widget">
+		<ul class="forceful nav" data-tabs-nav="tabbed-widget">
+			<li class="is-current"><a href="#first-tab">First Tab</a></li>
+			<li><a href="#second-tab">Second Tab</a></li>
+			<li><a href="#third-tab">Third Tab</a></li>
+			<li><a href="#fourth-tab">Fourth Tab</a></li>
+		</ul>
+		<div class="section">
+			<section id="first-tab" class="tab is-current" data-tabs-section="tabbed-widget">
+				<h3>First Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="second-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Second Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="third-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Third Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="fourth-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Fourth Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+		</div>
+	</section>
 
 */
-.input-label textarea,
-.input-label select,
-.input-label input[type="date"],
-.input-label input[type="datetime"],
-.input-label input[type="datetime-local"],
-.input-label input[type="email"],
-.input-label input[type="month"],
-.input-label input[type="number"],
-.input-label input[type="password"],
-.input-label input[type="search"],
-.input-label input[type="tel"],
-.input-label input[type="text"],
-.input-label input[type="time"],
-.input-label input[type="url"],
-.input-label input[type="week"] {
-  margin-top: 5px;
+.tabs .section {
+  position: relative;
+}
+.tabs .nav li {
+  position: relative;
+  z-index: 30;
+}
+.tabs .nav li.is-current {
+  z-index: 60;
+}
+.tabs .nav a {
+  padding: 0.3125em 0.28125em;
+  text-decoration: none;
+}
+.tabs .nav.sub-nav {
+  margin-top: 0.625em;
+}
+.tabs .tab {
+  display: none;
+}
+.tabs .tab.is-current {
   display: block;
 }
-.input-label.error textarea,
-.input-label.error select,
-.input-label.error input[type="date"],
-.input-label.error input[type="datetime"],
-.input-label.error input[type="datetime-local"],
-.input-label.error input[type="email"],
-.input-label.error input[type="month"],
-.input-label.error input[type="number"],
-.input-label.error input[type="password"],
-.input-label.error input[type="search"],
-.input-label.error input[type="tel"],
-.input-label.error input[type="text"],
-.input-label.error input[type="time"],
-.input-label.error input[type="url"],
-.input-label.error input[type="week"] {
-  background-color: rgba(230, 60, 77, 0.050000000000000044);
-  border-color: #e63c4d;
-  border-color: rgba(230, 60, 77, 0.6);
-}
-.input-label.success textarea,
-.input-label.success select,
-.input-label.success input[type="date"],
-.input-label.success input[type="datetime"],
-.input-label.success input[type="datetime-local"],
-.input-label.success input[type="email"],
-.input-label.success input[type="month"],
-.input-label.success input[type="number"],
-.input-label.success input[type="password"],
-.input-label.success input[type="search"],
-.input-label.success input[type="tel"],
-.input-label.success input[type="text"],
-.input-label.success input[type="time"],
-.input-label.success input[type="url"],
-.input-label.success input[type="week"] {
-  background-color: rgba(11, 154, 69, 0.050000000000000044);
-  border-color: #0b9a45;
-  border-color: rgba(11, 154, 69, 0.6);
-}
-.input-alert {
-  margin: 10px 0 0;
-  padding: 5px 9px;
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-  font-size: 13px;
-  color: #ffffff;
-  position: relative;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
+/*
+
+### Pagination ###
+
+	<ol class="pagination nav">
+		<li class="first disabled"><a href="#" data-icon="ç">Previous</a></li>
+		<li><a href="#" class="is-current">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">6</a></li>
+		<li><a href="#">7</a></li>
+		<li><a href="#">8</a></li>
+		<li><a href="#">9</a></li>
+		<li><a href="#">10</a></li>
+		<li class="last"><a href="#" data-icon="ê" data-icon-position="append">Next</a></li>
+	</ol>
+
+*/
+.pagination {
   display: inline-block;
 }
-.input-label .input-alert {
-  margin-top: 0;
-  top: -5px;
+.pagination li.disabled a,
+.pagination li.disabled a:hover,
+.pagination li.disabled a:focus {
+  cursor: default;
 }
-.lte7 .input-alert {
-  display: inline;
-  zoom: 1;
-}
-.lte7 .input-alert {
+.pagination a {
+  padding: 0 0.625em;
   float: left;
-  margin-top: -7px;
 }
-.input-alert:before {
-  border: 6px solid transparent;
-  position: absolute;
-  top: -12px;
-  left: 9px;
-  content: "";
-  width: 0;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  display: block;
-}
-.input-alert.error {
-  background-color: #e63c4d;
-}
-.input-alert.error:before {
-  border-bottom-color: #e63c4d;
-}
-<<<<<<< HEAD
-.input-alert.success {
-  background-color: #0b9a45;
-}
-.input-alert.success:before {
-  border-bottom-color: #0b9a45;
-}
-.input-alert.info {
-  background-color: #2575ae;
-}
-.input-alert.info:before {
-  border-bottom-color: #2575ae;
-}
-.input-alert.warning {
-  background-color: #ec8e04;
-}
-.input-alert.warning:before {
-  border-bottom-color: #ec8e04;
-}
-=======
->>>>>>> 35074f928b95e93d0f6dbcde9d451d333901125b
-.disabled {
-  opacity: .5;
-}
-/*
-
-@font-face Declarations
------------------------
-
-List your webfont declarations below.
-
-*/
 @font-face {
-  font-family: 'Museo700';
-  src: url('../fonts/museo/Museo700-Regular-webfont.eot');
-  src: url('../fonts/museo/Museo700-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/museo/Museo700-Regular-webfont.woff') format('woff'), url('../fonts/museo/Museo700-Regular-webfont.ttf') format('truetype'), url('../fonts/museo/Museo700-Regular-webfont.svg#Museo700') format('svg');
+  font-family: "Museo Slab 700";
+  src: url("../fonts/museo-slab/museo-slab-700.eot");
+  src: url("../fonts/museo-slab/museo-slab-700.eot?#iefix") format('embedded-opentype'), url("../fonts/museo-slab/museo-slab-700.woff") format('woff'), url("../fonts/museo-slab/museo-slab-700.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'PT Sans Bold Italic';
-  src: url('../fonts/pt-sans/PTS76F-webfont.eot');
-  src: url('../fonts/pt-sans/PTS76F-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/pt-sans/PTS76F-webfont.woff') format('woff'), url('../fonts/pt-sans/PTS76F-webfont.ttf') format('truetype'), url('../fonts/pt-sans/PTS76F-webfont.svg#PTSansBoldItalic') format('svg');
+  font-family: "Museo 700";
+  src: url("../fonts/museo/Museo700-Regular-webfont.eot");
+  src: url("../fonts/museo/Museo700-Regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/museo/Museo700-Regular-webfont.woff") format('woff'), url("../fonts/museo/Museo700-Regular-webfont.ttf") format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'PT Sans Bold';
-  src: url('../fonts/pt-sans/PTS75F-webfont.eot');
-  src: url('../fonts/pt-sans/PTS75F-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/pt-sans/PTS75F-webfont.woff') format('woff'), url('../fonts/pt-sans/PTS75F-webfont.ttf') format('truetype'), url('../fonts/pt-sans/PTS75F-webfont.svg#PTSansBold') format('svg');
+  font-family: "Source Sans Pro";
+  src: url("../fonts/source-sans-pro/SourceSansPro-Regular-webfont.eot");
+  src: url("../fonts/source-sans-pro/SourceSansPro-Regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/source-sans-pro/SourceSansPro-Regular-webfont.woff") format('woff'), url("../fonts/source-sans-pro/SourceSansPro-Regular-webfont.ttf") format('truetype'), url("../fonts/source-sans-pro/SourceSansPro-Regular-webfont.svg#SourceSansProRegular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'PT Sans Italic';
-  src: url('../fonts/pt-sans/PTS56F-webfont.eot');
-  src: url('../fonts/pt-sans/PTS56F-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/pt-sans/PTS56F-webfont.woff') format('woff'), url('../fonts/pt-sans/PTS56F-webfont.ttf') format('truetype'), url('../fonts/pt-sans/PTS56F-webfont.svg#PTSansItalic') format('svg');
+  font-family: "Source Sans Pro Bold";
+  src: url("../fonts/source-sans-pro/SourceSansPro-Bold-webfont.eot");
+  src: url("../fonts/source-sans-pro/SourceSansPro-Bold-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/source-sans-pro/SourceSansPro-Bold-webfont.woff") format('woff'), url("../fonts/source-sans-pro/SourceSansPro-Bold-webfont.ttf") format('truetype'), url("../fonts/source-sans-pro/SourceSansPro-Bold-webfont.svg#SourceSansProBold") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'PT Sans Regular';
-  src: url('../fonts/pt-sans/PTS55F-webfont.eot');
-  src: url('../fonts/pt-sans/PTS55F-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/pt-sans/PTS55F-webfont.woff') format('woff'), url('../fonts/pt-sans/PTS55F-webfont.ttf') format('truetype'), url('../fonts/pt-sans/PTS55F-webfont.svg#PTSansRegular') format('svg');
+  font-family: "Source Sans Pro Italic";
+  src: url("../fonts/source-sans-pro/SourceSansPro-It-webfont.eot");
+  src: url("../fonts/source-sans-pro/SourceSansPro-It-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/source-sans-pro/SourceSansPro-It-webfont.woff") format('woff'), url("../fonts/source-sans-pro/SourceSansPro-It-webfont.ttf") format('truetype'), url("../fonts/source-sans-pro/SourceSansPro-It-webfont.svg#SourceSansProItalic") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Anonymous Pro Bold';
-  src: url('../fonts/anonymous-pro/Anonymous_Pro_B-webfont.eot');
-  src: url('../fonts/anonymous-pro/Anonymous_Pro_B-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/anonymous-pro/Anonymous_Pro_B-webfont.woff') format('woff'), url('../fonts/anonymous-pro/Anonymous_Pro_B-webfont.ttf') format('truetype'), url('../fonts/anonymous-pro/Anonymous_Pro_B-webfont.svg#AnonymousProBold') format('svg');
+  font-family: "Source Sans Pro Bold Italic";
+  src: url("../fonts/source-sans-pro/SourceSansPro-BoldIt-webfont.eot");
+  src: url("../fonts/source-sans-pro/SourceSansPro-BoldIt-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/source-sans-pro/SourceSansPro-BoldIt-webfont.woff") format('woff'), url("../fonts/source-sans-pro/SourceSansPro-BoldIt-webfont.ttf") format('truetype'), url("../fonts/source-sans-pro/SourceSansPro-BoldIt-webfont.svg#SourceSansProBoldItalic") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Anonymous Pro Bold";
+  src: url("../fonts/anonymous-pro/Anonymous_Pro_B-webfont.eot");
+  src: url("../fonts/anonymous-pro/Anonymous_Pro_B-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/anonymous-pro/Anonymous_Pro_B-webfont.woff") format('woff'), url("../fonts/anonymous-pro/Anonymous_Pro_B-webfont.ttf") format('truetype'), url("../fonts/anonymous-pro/Anonymous_Pro_B-webfont.svg#AnonymousProBold") format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Symbolset";
-  src: url('../fonts/symbolset/ss-standard.eot');
-  src: url('../fonts/symbolset/ss-standard.eot?#iefix') format('embedded-opentype'), url('../fonts/symbolset/ss-standard.woff') format('woff'), url('../fonts/symbolset/ss-standard.ttf') format('truetype'), url('../fonts/symbolset/ss-standard.svg#SSStandardRegular') format('svg');
+  src: url("../fonts/symbolset/ss-standard.eot");
+  src: url("../fonts/symbolset/ss-standard.eot?#iefix") format('embedded-opentype'), url("../fonts/symbolset/ss-standard.woff") format('woff'), url("../fonts/symbolset/ss-standard.ttf") format('truetype'), url("../fonts/symbolset/ss-standard.svg#SSStandardRegular") format('svg');
   font-weight: normal;
   font-style: normal;
 }
-/*
-
-@font-face Styles
------------------
-
-Often, webfonts require separate font files for different weights. Here's where you can override weight and style defaults, allowing you to, for example, pass through a font with a heavier weight rather than using "font-weight: bold".
-
-*/
-strong {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@font-face {
+  font-family: "Symbolset Social";
+  src: url("../fonts/symbolset/ss-social-regular.eot");
+  src: url("../fonts/symbolset/ss-social-regular.eot?#iefix") format('embedded-opentype'), url("../fonts/symbolset/ss-social-regular.woff") format('woff'), url("../fonts/symbolset/ss-social-regular.ttf") format('truetype'), url("../fonts/symbolset/ss-social-regular.svg#SSSocialRegular") format('svg');
   font-weight: normal;
-}
-em {
-  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
   font-style: normal;
 }
-em strong,
-strong em {
-  font-family: "PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
-.input-label {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@font-face {
+  font-family: "Symbolset Social Circle";
+  src: url("../fonts/symbolset/ss-social-circle.eot");
+  src: url("../fonts/symbolset/ss-social-circle.eot?#iefix") format('embedded-opentype'), url("../fonts/symbolset/ss-social-circle.woff") format('woff'), url("../fonts/symbolset/ss-social-circle.ttf") format('truetype'), url("../fonts/symbolset/ss-social-circle.svg#SSSocialCircle") format('svg');
   font-weight: normal;
-}
-table th {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-  font-weight: normal;
-}
-.figcaption {
-  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
-dt {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.heading {
   font-style: normal;
-  font-weight: 500;
 }
-h1 em,
-h2 em,
-h3 em,
-h4 em,
-h5 em,
-h6 em,
-.heading em {
-  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #489cd8;
+.museo-slab-700 {
+  font-family: "Museo Slab 700", Helvetica, Arial, Verdana, serif;
 }
-h1 strong,
-h2 strong,
-h3 strong,
-h4 strong,
-h5 strong,
-h6 strong,
-.heading strong {
-  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #489cd8;
+.source-sans-regular {
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
-.museo {
-  font-family: "Museo700", Helvetica, Arial, Verdana, serif;
+.source-sans-bold {
+  font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-.pt-sans-regular {
-  font-family: "PT Sans Regular", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+.source-sans-italic {
+  font-family: "Source Sans Pro Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-.pt-sans-bold {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
-.pt-sans-italic {
-  font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
-.pt-sans-bold-italic {
-  font-family: "PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+.source-sans-bold-italic {
+  font-family: "Source Sans Pro Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
 .anonymous-pro-bold {
   font-family: "Anonymous Pro Bold", Courier, monospace;
 }
 .symbolset {
   font-family: "Symbolset";
-}
-blockquote {
-  padding: 0 18px 0 13px;
-  border-left: 5px solid #2575ae;
-  margin-bottom: 20px;
-}
-blockquote p:first-child {
-  margin: 0;
-}
-blockquote cite {
-  color: #837f81;
-}
-blockquote cite:before {
-  content: '\2014 \00A0';
-}
-.figcaption {
-  padding: 5px 9px;
-  display: block;
-  font-style: italic;
-  background-color: #cfcdcd;
-}
-.meta {
-  margin: 5px 0 0;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-size: 10px;
-  font-size: 1rem;
-  line-height: 1;
-}
-/* -- Inline Tags -- */
-.tag {
-  padding: 3px 4px 1px;
-  background-color: #a9a6a7;
-  font-weight: normal;
-  color: #ffffff;
-  text-transform: uppercase;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  border-radius: 3px;
-}
-.tag.important {
-  background-color: #f26527;
-}
-.tag.warning {
-  background-color: #e63c4d;
-}
-.tag.success {
-  background-color: #0b9a45;
-}
-.tag.notice {
-  background-color: #489cd8;
-}
-.tag.is-current {
-  background-color: #a05ea5;
-}
-.tag.inverse {
-  color: #434142;
-  background: #f2f2f2;
-}
-.tag.block {
-  display: block;
-}
-a.tag {
-  text-decoration: none;
-}
-a.tag:hover,
-a.tag:focus,
-a.tag.is-current {
-  color: #ffffff;
-  background-color: #a05ea5;
-}
-.caret {
-  display: inline-block;
-  width: 0;
-  height: 0;
-  vertical-align: top;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #000000;
-  opacity: 0.3;
-  filter: alpha(opacity=30);
-  content: "";
-}
-i {
-  padding-right: 0.6em;
-  display: inline-block;
-  font-family: "Symbolset";
-  vertical-align: bottom;
   font-size: 0.85em;
   font-style: normal;
   font-weight: normal;
@@ -2420,623 +1138,396 @@ i {
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
 }
-i.icon-appended {
-  padding-right: 0;
-  padding-left: 9px;
+.symbolset-social {
+  font-family: "Symbolset Social";
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
 }
-i.solo {
-  padding-right: 0;
+.symbolset-social-circle {
+  font-family: "Symbolset Social Circle";
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
 }
-table {
-  border: 1px solid #e8e7e7;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -o-border-radius: 4px;
-  border-radius: 4px;
+body {
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
-table.simple-table {
-  border: none;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
+dt,
+th,
+strong {
+  font-weight: normal;
+  font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-table.simple-table th,
-table.simple-table td {
-  padding: 5px 10px 4px;
+em {
+  font-style: normal;
+  font-family: "Source Sans Pro Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-table th,
-table td {
-  padding: 10px 10px 9px;
+strong em,
+em strong {
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Source Sans Pro Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-table th {
-  padding-top: 9px;
-  border-bottom: 1px solid #e8e7e7;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+  font-weight: normal;
+  font-family: "Museo Slab 700", Helvetica, Arial, Verdana, serif;
+  color: #184b6f;
 }
-table th + th,
-table td + td {
-  border-left: 1px solid #e8e7e7;
+/*
+
+### Heading Typographic Scale ###
+
+*/
+h1,
+.canon-text {
+  font-size: 48px;
+  font-size: 3rem;
+  line-height: 1.0416666666666667;
 }
-table tr + tr td {
-  border-top: 1px solid #e8e7e7;
+h2,
+.paragon-text {
+  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1.0714285714285714;
 }
-table tbody tr:first-child td:first-child {
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  -o-border-top-left-radius: 5px;
-  border-top-left-radius: 5px;
+h3,
+.primer-text {
+  font-size: 21px;
+  font-size: 1.3125rem;
+  line-height: 1.4285714285714286;
 }
-table tbody tr:first-child td:last-child {
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  -o-border-top-right-radius: 5px;
-  border-top-right-radius: 5px;
+h4,
+.normal-text {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
 }
-table tbody tr:last-child td:first-child {
-  -webkit-border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -o-border-bottom-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+h5,
+.petite-text {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  line-height: 1.5384615384615385;
 }
-table tbody tr:last-child td:last-child {
-  -webkit-border-bottom-right-radius: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -o-border-bottom-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+h6,
+.minion-text {
+  font-size: 10px;
+  font-size: 0.625rem;
+  line-height: 1;
 }
-.zebra-striped tbody tr:nth-child(odd) td {
-  background-color: #f9f9f9;
+/*
+
+### Heading Spacing ###
+
+*/
+h1 {
+  margin-top: 0.4166666666666667em;
 }
-.zebra-striped tbody tr:hover td {
-  background-color: #f4f4f4;
+h2 {
+  margin-top: 0.7142857142857143em;
+}
+h3 {
+  margin-top: 0.9523809523809523em;
+}
+h4 {
+  margin-top: 1.25em;
+}
+h5 {
+  margin-top: 1.5384615384615385em;
+}
+h6 {
+  margin-top: 2em;
+}
+body {
+  color: #434142;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+}
+.icon {
+  display: inline-block;
+  vertical-align: bottom;
+  font-family: "Symbolset";
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+.icon.social {
+  font-family: "Symbolset Social";
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+.icon.social-circle {
+  font-family: "Symbolset Social Circle";
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+.icon.prepended {
+  padding-right: 0.2857em;
+}
+.icon.appended {
+  padding-left: 0.2857em;
 }
 .button {
-  text-shadow: 0 -1px 0px #ffffff;
-  -webkit-transition: background-color 0.15s ease-in-out;
-  -moz-transition: background-color 0.15s ease-in-out;
-  -o-transition: background-color 0.15s ease-in-out;
-  transition: background-color 0.15s ease-in-out;
-  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  -o-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  color: #7c7c7c;
-  border-color: #b6b3b4;
-  background: #cfcdcd url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
-  /* FF3.6+ */
+  width: auto;
+  height: auto;
+  margin: 0;
+  line-height: normal;
+  text-align: center;
+  text-decoration: none;
+  position: relative;
+  -webkit-appearance: none;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  outline: 0;
+  overflow: visible;
+  cursor: pointer;
+  vertical-align: middle;
+  padding: 0.625em 1.125em;
+  border: 0.0625em solid #cfcdcd;
+  color: #837f81;
+  text-shadow: 0 0.0625em 0.0625em #ffffff;
+  margin-top: 1.25em;
+  font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+  -webkit-border-radius: 0.1875em;
+  -moz-border-radius: 0.1875em;
+  -o-border-radius: 0.1875em;
+  border-radius: 0.1875em;
+  display: inline-block;
+  -webkit-box-shadow: inset 0 0.0625em 0.0625em rgba(255, 255, 255, 0.4), 0 0.125em 0.125em -0.0625em rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 0.0625em 0.0625em rgba(255, 255, 255, 0.4), 0 0.125em 0.125em -0.0625em rgba(0, 0, 0, 0.5);
+  -o-box-shadow: inset 0 0.0625em 0.0625em rgba(255, 255, 255, 0.4), 0 0.125em 0.125em -0.0625em rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0.0625em 0.0625em rgba(255, 255, 255, 0.4), 0 0.125em 0.125em -0.0625em rgba(0, 0, 0, 0.5);
+  background-color: #dbdada;
+  /* fallback color if gradients are not supported */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, #cfcdcd));
-  /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #ffffff, #dbdada);
+  background-image: -moz-linear-gradient(top, #ffffff, #dbdada);
+  /* For Fx 3.6 to Fx 15 */
 
-  background: -webkit-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
-  /* Chrome10+,Safari5.1+ */
+  background-image: -ms-linear-gradient(top, #ffffff, #dbdada);
+  /* For IE 10 Platform Previews and Consumer Preview */
 
-  background: -o-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
-  /* Opera 11.10+ */
+  background-image: -o-linear-gradient(top, #ffffff, #dbdada);
+  background-image: linear-gradient(to bottom, #ffffff, #dbdada);
+  /* Standard syntax; must be the last statement */
 
-  background: -ms-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #ffffff 0, #cfcdcd 100%);
-  /* W3C */
-
+}
+.lte7 .button {
+  display: inline;
+  zoom: 1;
 }
 .button:hover,
 .button:focus {
-  color: #646464;
+  color: #6a6667;
   border-color: #a9a6a7;
-  background: #c2c0c1 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f4f4f4), color-stop(100%, #c2c0c1));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
-  /* W3C */
-
+}
+p .button {
+  margin-top: 0;
+}
+.button.tiny {
+  padding: 0.3125em 0.5625em;
+  font-size: 13px;
+  font-size: 0.8125rem;
+}
+.button.small {
+  font-size: 13px;
+  font-size: 0.8125rem;
+}
+.button.large {
+  font-size: 21px;
+  font-size: 1.3125rem;
+}
+.button.full-width {
+  width: 100%;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
 }
 .button.round {
-  -webkit-border-radius: 1000px;
-  -moz-border-radius: 1000px;
-  -o-border-radius: 1000px;
-  border-radius: 1000px;
+  -webkit-border-radius: 1000em;
+  -moz-border-radius: 1000em;
+  -o-border-radius: 1000em;
+  border-radius: 1000em;
 }
 .button.blue,
 .button.primary {
-  text-shadow: 0 -1px 0px #1c5984;
-  color: #ffffff;
-  border-color: #1c5984;
-  background: #2575ae url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #5da7dc 0, #2575ae 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5da7dc), color-stop(100%, #2575ae));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #5da7dc 0, #2575ae 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #5da7dc 0, #2575ae 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #5da7dc 0, #2575ae 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #5da7dc 0, #2575ae 100%);
-  /* W3C */
-
+  color: #2575ae;
 }
 .button.blue:hover,
 .button.primary:hover,
 .button.blue:focus,
 .button.primary:focus {
-  color: #ffffff;
-  border-color: #184b6f;
-  background: #216799 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #489cd8 0, #216799 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #489cd8), color-stop(100%, #216799));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #489cd8 0, #216799 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #489cd8 0, #216799 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #489cd8 0, #216799 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #489cd8 0, #216799 100%);
-  /* W3C */
-
+  color: #1c5984;
+  border-color: #1c5984;
 }
 .button.red,
 .button.danger {
-  text-shadow: 0 -1px 0px #d41b2e;
-  color: #ffffff;
-  border-color: #d41b2e;
-  background: #e63c4d url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #f296a0 0, #e63c4d 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f296a0), color-stop(100%, #e63c4d));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #f296a0 0, #e63c4d 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #f296a0 0, #e63c4d 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #f296a0 0, #e63c4d 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #f296a0 0, #e63c4d 100%);
-  /* W3C */
-
+  color: #e63c4d;
 }
 .button.red:hover,
 .button.danger:hover,
 .button.red:focus,
 .button.danger:focus {
-  color: #ffffff;
-  border-color: #bd1829;
-  background: #e32538 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #ef808b 0, #e32538 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ef808b), color-stop(100%, #e32538));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #ef808b 0, #e32538 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #ef808b 0, #e32538 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #ef808b 0, #e32538 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #ef808b 0, #e32538 100%);
-  /* W3C */
-
+  color: #d41b2e;
+  border-color: #d41b2e;
 }
 .button.green,
 .button.success {
-  text-shadow: 0 -1px 0px #086a30;
-  color: #ffffff;
-  border-color: #086a30;
-  background: #0b9a45 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #1cef72 0, #0b9a45 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #1cef72), color-stop(100%, #0b9a45));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #1cef72 0, #0b9a45 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #1cef72 0, #0b9a45 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #1cef72 0, #0b9a45 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #1cef72 0, #0b9a45 100%);
-  /* W3C */
-
+  color: #0b9a45;
 }
 .button.green:hover,
 .button.success:hover,
 .button.green:focus,
 .button.success:focus {
-  color: #ffffff;
-  border-color: #065325;
-  background: #09823a url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #10e165 0, #09823a 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #10e165), color-stop(100%, #09823a));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #10e165 0, #09823a 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #10e165 0, #09823a 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #10e165 0, #09823a 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #10e165 0, #09823a 100%);
-  /* W3C */
-
+  color: #086a30;
+  border-color: #086a30;
 }
 .button.black,
 .button.rogue {
-  text-shadow: 0 -1px 0px #000000;
-  color: #ffffff;
-  border-color: #000000;
-  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #333333 0, #000000 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(100%, #000000));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #333333 0, #000000 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #333333 0, #000000 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #333333 0, #000000 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #333333 0, #000000 100%);
-  /* W3C */
-
+  color: #434142;
 }
 .button.black:hover,
 .button.rogue:hover,
 .button.black:focus,
 .button.rogue:focus {
-  color: #ffffff;
-  border-color: #000000;
-  background: #000000 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #333333 0, #000000 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333333), color-stop(100%, #000000));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #333333 0, #000000 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #333333 0, #000000 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #333333 0, #000000 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #333333 0, #000000 100%);
-  /* W3C */
-
+  color: #292829;
+  border-color: #292829;
 }
-/* -- Nav Bar -- */
-.nav-bar {
-  background: #434142 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #5d5a5c 0, #434142 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #5d5a5c), color-stop(100%, #434142));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #5d5a5c 0, #434142 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #5d5a5c 0, #434142 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #5d5a5c 0, #434142 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #5d5a5c 0, #434142 100%);
-  /* W3C */
-
-  -webkit-box-shadow: 0 1px 2px #5d5a5c;
-  -moz-box-shadow: 0 1px 2px #5d5a5c;
-  -o-box-shadow: 0 1px 2px #5d5a5c;
-  box-shadow: 0 1px 2px #5d5a5c;
-  margin-bottom: 20px;
-}
-.nav-bar ul {
+.nav-bar .nav {
   margin: 0;
+  background-color: #133c5a;
+  /* fallback color if gradients are not supported */
+
+  background-image: -webkit-linear-gradient(top, #184b6f, #133c5a);
+  background-image: -moz-linear-gradient(top, #184b6f, #133c5a);
+  /* For Fx 3.6 to Fx 15 */
+
+  background-image: -ms-linear-gradient(top, #184b6f, #133c5a);
+  /* For IE 10 Platform Previews and Consumer Preview */
+
+  background-image: -o-linear-gradient(top, #184b6f, #133c5a);
+  background-image: linear-gradient(to bottom, #184b6f, #133c5a);
+  /* Standard syntax; must be the last statement */
+
 }
-.lte7 .nav-bar ul {
-  zoom: 1;
-}
-.nav-bar ul:before,
-.nav-bar ul:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.nav-bar ul:after {
-  clear: both;
-}
-.nav-bar li {
-  float: left;
-}
-.nav-bar a {
-  padding: 10px 18px;
-  margin: 0;
+.nav-bar .nav a {
   color: #ffffff;
-  display: inline-block;
   text-decoration: none;
-  text-shadow: 0 -1px 1px #292829;
+  padding: 1.25em 1.125em;
+  font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
-.nav-bar a:hover,
-.nav-bar a:focus,
-.nav-bar a.is-current {
-  background: #292829 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #434142 0, #292829 100%);
-  /* FF3.6+ */
+.nav-bar .nav a:hover,
+.nav-bar .nav a:focus,
+.nav-bar .nav a.is-current {
+  background-color: #0f2e45;
+  /* fallback color if gradients are not supported */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #434142), color-stop(100%, #292829));
-  /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #133c5a, #0f2e45);
+  background-image: -moz-linear-gradient(top, #133c5a, #0f2e45);
+  /* For Fx 3.6 to Fx 15 */
 
-  background: -webkit-linear-gradient(top, #434142 0, #292829 100%);
-  /* Chrome10+,Safari5.1+ */
+  background-image: -ms-linear-gradient(top, #133c5a, #0f2e45);
+  /* For IE 10 Platform Previews and Consumer Preview */
 
-  background: -o-linear-gradient(top, #434142 0, #292829 100%);
-  /* Opera 11.10+ */
+  background-image: -o-linear-gradient(top, #133c5a, #0f2e45);
+  background-image: linear-gradient(to bottom, #133c5a, #0f2e45);
+  /* Standard syntax; must be the last statement */
 
-  background: -ms-linear-gradient(top, #434142 0, #292829 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #434142 0, #292829 100%);
-  /* W3C */
-
-}
-.nav-bar .highlight {
-  background: #814b85 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #b37fb7 0, #814b85 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #b37fb7), color-stop(100%, #814b85));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #b37fb7 0, #814b85 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #b37fb7 0, #814b85 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #b37fb7 0, #814b85 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #b37fb7 0, #814b85 100%);
-  /* W3C */
-
-}
-.nav-bar .highlight:hover,
-.nav-bar .highlight:focus,
-.nav-bar .highlight.is-current {
-  background: #623865 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #a05ea5 0, #623865 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a05ea5), color-stop(100%, #623865));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #a05ea5 0, #623865 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #a05ea5 0, #623865 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #a05ea5 0, #623865 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #a05ea5 0, #623865 100%);
-  /* W3C */
-
-}
-.nav-bar.divided a {
-  border-left: 1px solid #5d5a5c;
-  border-right: 1px solid #292829;
-}
-.display-table .nav-bar.filled ul {
-  width: 100%;
-  display: table;
-}
-.display-table .nav-bar.filled li {
-  display: table-cell;
-  float: none;
-}
-.display-table .nav-bar.filled a {
-  display: block;
-  text-align: center;
-}
-.display-table .nav-bar.filled.divided li:first-child a {
-  border-left: none;
-}
-.display-table .nav-bar.filled.divided li:last-child a {
-  border-right: none;
 }
 .nav-bar .sub-nav {
-  margin: 0;
-  background: #434142;
+  background: #0f2e45;
 }
 .nav-bar .sub-nav a {
-  padding: 5px 18px;
-  color: #ffffff;
-  display: inline-block;
-  text-decoration: none;
+  padding: 0.625em 1.125em;
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
 .nav-bar .sub-nav a:hover,
 .nav-bar .sub-nav a:focus,
 .nav-bar .sub-nav a.is-current {
-  background: #292829;
-}
-.nav-bar .sub-nav .highlight {
-  background: #814b85;
-}
-.nav-bar .caret {
-  margin-top: 8px;
-  margin-left: 4px;
-  border-top-color: #ffffff;
-}
-.nav-bar .dropdown:hover .caret {
-  opacity: 1;
-  filter: alpha(opacity=100);
-}
-.condensed {
-  position: relative;
-}
-.condensed .nav-title {
-  padding: 10px 18px;
-  margin: 0;
-  font-size: inherit;
-  line-height: inherit;
-  color: #ffffff;
-  display: inline-block;
-  text-decoration: none;
-  text-shadow: 0 -1px 1px #292829;
-}
-.condensed .nav-title:hover,
-.condensed .nav-title:focus,
-.condensed .nav-title.is-current {
-  background: #292829 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #434142 0, #292829 100%);
-  /* FF3.6+ */
-
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #434142), color-stop(100%, #292829));
-  /* Chrome,Safari4+ */
-
-  background: -webkit-linear-gradient(top, #434142 0, #292829 100%);
-  /* Chrome10+,Safari5.1+ */
-
-  background: -o-linear-gradient(top, #434142 0, #292829 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #434142 0, #292829 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #434142 0, #292829 100%);
-  /* W3C */
-
-}
-.condensed .nav {
-  width: 200px;
-  position: absolute;
-  top: 40px;
-  left: 0;
-}
-.condensed .nav li {
-  float: none;
-}
-.condensed .nav a {
-  padding: 5px 18px;
-  color: #ffffff;
-  display: block;
-  text-decoration: none;
-  background: #292829;
-}
-.condensed .nav a:hover,
-.condensed .nav a:focus,
-.condensed .nav a.is-current {
-  background: #292829;
-}
-.vertical-nav .current a {
-  color: #a05ea5;
-  background: rgba(189, 143, 192, 0.09999999999999998);
-}
-.vertical-nav li:first-child a {
-  border: none;
-}
-.vertical-nav a {
-  padding: 4px 0;
-  display: block;
-  text-decoration: none;
-  border-top: 1px solid rgba(189, 143, 192, 0.30000000000000004);
-}
-.vertical-nav a:hover,
-.vertical-nav a:focus {
-  background: rgba(189, 143, 192, 0.09999999999999998);
-}
-.vertical-nav .is-current {
-  background: rgba(189, 143, 192, 0.09999999999999998);
-}
-.vertical-nav li ul {
-  margin: 0;
-  border-top: 1px solid rgba(189, 143, 192, 0.30000000000000004);
-}
-.vertical-nav li ul li {
-  margin: 0 0 0 20px;
-  list-style: none outside none;
+  background: #0a2030;
 }
 .panel {
-  padding: 19px 17px;
-  border: 1px solid;
+  padding: 2.5em;
+  background-color: #f2f1f1;
+  margin-top: 1.25em;
+}
+.panel > :first-child {
+  margin-top: 0;
+}
+.panel.thin {
+  padding: 0.625em;
+}
+.panel.fancy {
+  padding: 2.4375em;
   border: 1px solid #cfcdcd;
-  background: #e8e7e7 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
-  /* FF3.6+ */
+  background-color: #e8e7e7;
+  /* fallback color if gradients are not supported */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(100%, #e8e7e7));
-  /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #fcfcfc, #e8e7e7);
+  background-image: -moz-linear-gradient(top, #fcfcfc, #e8e7e7);
+  /* For Fx 3.6 to Fx 15 */
 
-  background: -webkit-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
-  /* Chrome10+,Safari5.1+ */
+  background-image: -ms-linear-gradient(top, #fcfcfc, #e8e7e7);
+  /* For IE 10 Platform Previews and Consumer Preview */
 
-  background: -o-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
-  /* W3C */
+  background-image: -o-linear-gradient(top, #fcfcfc, #e8e7e7);
+  background-image: linear-gradient(to bottom, #fcfcfc, #e8e7e7);
+  /* Standard syntax; must be the last statement */
 
   -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
@@ -3046,11 +1537,6 @@ table tbody tr:last-child td:last-child {
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
-  margin-top: 20px;
-}
-.panel  > :first-child,
-.panel  > :first-child > :first-child {
-  margin-top: 0;
 }
 .panel.inset {
   text-shadow: 0 1px 1px #ffffff;
@@ -3058,256 +1544,194 @@ table tbody tr:last-child td:last-child {
   -moz-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -o-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  background: #fcfcfc url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
-  /* FF3.6+ */
+  background-color: #fcfcfc;
+  /* fallback color if gradients are not supported */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e8e7e7), color-stop(100%, #fcfcfc));
-  /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #e8e7e7, #fcfcfc);
+  background-image: -moz-linear-gradient(top, #e8e7e7, #fcfcfc);
+  /* For Fx 3.6 to Fx 15 */
 
-  background: -webkit-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
-  /* Chrome10+,Safari5.1+ */
+  background-image: -ms-linear-gradient(top, #e8e7e7, #fcfcfc);
+  /* For IE 10 Platform Previews and Consumer Preview */
 
-  background: -o-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
-  /* Opera 11.10+ */
-
-  background: -ms-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
-  /* IE10+ */
-
-  background: linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
-  /* W3C */
+  background-image: -o-linear-gradient(top, #e8e7e7, #fcfcfc);
+  background-image: linear-gradient(to bottom, #e8e7e7, #fcfcfc);
+  /* Standard syntax; must be the last statement */
 
 }
-.panel.simple {
-  background: #e8e7e7;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  box-shadow: none;
+.panel.error {
+  background: #f4c7cb;
 }
-.panel.thin {
-  padding: 9px 8px;
+.panel.success {
+  background: #0b9a45;
 }
-.panel.hud {
-  color: #ffffff;
-  background: #000000;
-  background: rgba(0, 0, 0, 0.75);
-  border: none;
-  text-shadow: 0 2px 1px #434142;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  box-shadow: none;
+.panel.info {
+  background: #2575ae;
 }
-.panel.hud h1,
-.panel.hud h2,
-.panel.hud h3,
-.panel.hud h4,
-.panel.hud h5,
-.panel.hud h6,
-.panel.hud .heading {
-  color: #489cd8;
+/*
+
+### Breadcrumb ###
+
+Another extension of the `.nav` module, adding a breadcrumb `.label`, 
+floating it and the ordered list and adding a `>` divider.
+
+	<nav class="breadcrumb group">
+		<p class="label">You are here:</p>
+		<ol class="forceful nav">
+			<li><a href="#">First Level</a></li>
+			<li><a href="#">Second Level</a></li>
+			<li><a href="#">Third Level</a></li>
+			<li><strong>Fourth Level</strong></li>
+		</ol>
+	</nav>
+
+*/
+.breadcrumb .label {
+  margin: 0 0.5625em 0 0;
+  display: inline;
+  float: left;
 }
-.wireframe .block {
-  padding: 20px 0;
-  color: #ffffff;
-  text-align: center;
-  background: #489cd8;
-  margin-top: 20px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+.breadcrumb .nav {
+  margin: 0;
+  float: left;
+  text-transform: capitalize;
 }
-.wireframe .block:hover {
-  background: #184b6f;
+.breadcrumb li {
+  margin-right: 0.5em;
 }
-/* -- Tabs -- */
-.tabs .nav {
-  margin-left: 1px;
-  border-bottom: 1px solid #cfcdcd;
+.breadcrumb li:before {
+  content: "/";
+  margin-right: 0.5em;
 }
-.tabs .nav li {
-  margin: 0 0 -1px -1px;
+.breadcrumb li:first-child:before {
+  content: "";
+  margin: 0;
 }
-.tabs .nav li.is-current a {
-  padding-bottom: 6px;
-  color: #bd8fc0;
-  border-bottom: none;
-  border-color: #cfcdcd;
-}
-.tabs .nav a {
-  color: #cfcdcd;
-  border: 1px solid transparent;
-  border-bottom: none;
+input,
+textarea {
+  padding: 0.3125em 0.25em;
   background: #ffffff;
-  -webkit-border-top-right-radius: 5px;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  -moz-border-radius-topleft: 5px;
-  -o-border-top-right-radius: 5px;
-  -o-border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
+  border: 0.0625em solid #a9a6a7;
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+  -webkit-border-radius: 0.125em;
+  -moz-border-radius: 0.125em;
+  -o-border-radius: 0.125em;
+  border-radius: 0.125em;
+  -webkit-box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
+  -moz-box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
+  -o-box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
+  box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
 }
-.tabs .nav a:hover,
-.tabs .nav a:focus {
-  color: #bd8fc0;
+input.one,
+textarea.one {
+  width: 2.3125em;
 }
-.tabs .nav.sub-nav,
-.tabs .nav.sub-nav a {
-  border: none;
+input.two,
+textarea.two {
+  width: 7.5em;
 }
-.tabs .nav.sub-nav .is-current a {
-  background: rgba(189, 143, 192, 0.09999999999999998);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+input.three,
+textarea.three {
+  width: 12.6875em;
 }
-.tabs .nav.sub-nav .is-current a:hover,
-.tabs .nav.sub-nav .is-current a:focus {
-  background: rgba(189, 143, 192, 0.09999999999999998);
+input.four,
+textarea.four {
+  width: 17.875em;
 }
-.tabs.enclosed .padded.section {
-  padding: 20px 17px;
-  border: 1px solid #cfcdcd;
-  border-top: 0;
+input.five,
+textarea.five {
+  width: 23.0625em;
 }
-.tabs.enclosed .padded.section .sub-nav {
-  margin-top: -10px;
+input.six,
+textarea.six {
+  width: 28.25em;
 }
-.tabs.enclosed .padded.section > .tab > :first-child {
-  margin-top: 0;
+input.seven,
+textarea.seven {
+  width: 33.4375em;
 }
-.steps {
-  margin: 20px 0 0;
-  margin-left: 0;
-  list-style: none outside none;
+input.eight,
+textarea.eight {
+  width: 38.625em;
 }
-.lte7 .steps.horizontal {
-  zoom: 1;
+input.nine,
+textarea.nine {
+  width: 43.8125em;
 }
-.steps.horizontal:before,
-.steps.horizontal:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
+input.ten,
+textarea.ten {
+  width: 49em;
 }
-.steps.horizontal:after {
-  clear: both;
+input.eleven,
+textarea.eleven {
+  width: 54.1875em;
 }
-.steps.horizontal .title {
-  margin: 0 10px 0 0;
-  padding: 5px 0;
+input.twelve,
+textarea.twelve {
+  width: 59.375em;
+}
+.search .input {
   float: left;
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-topright: 0;
+  -o-border-bottom-right-radius: 0;
+  -o-border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
-.steps.horizontal li {
-  margin: 0 0 0 3px;
+.search .submit {
+  margin: 0;
   float: left;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 0;
+  -o-border-bottom-left-radius: 0;
+  -o-border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
-.steps.horizontal li:first-child {
-  margin-left: 0;
+/*
+
+Tables
+------
+
+*/
+table th,
+table td {
+  padding: 0.625em 1.125em 0.5625em;
 }
-.steps li {
-  margin-top: 3px;
+table th {
+  padding-top: 0.5625em;
+  border-bottom: 0.0625em solid #cfcdcd;
 }
-.steps li:first-child {
-  margin-top: 0;
+table th + th,
+table td + td {
+  border-left: 0.0625em solid #cfcdcd;
 }
-.steps a {
-  padding: 5px 10px;
-  display: block;
-  color: #ffffff;
-  text-decoration: none;
-  background-color: #cfcdcd;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+table tr + tr td {
+  border-top: 0.0625em solid #cfcdcd;
 }
-.steps a:hover,
-.steps a:focus {
-  cursor: default;
-}
-.steps a[href] {
-  background-color: #bd8fc0;
-}
-.steps a[href]:hover,
-.steps a[href]:focus,
-.steps a[href].current {
-  background-color: #a05ea5;
-  cursor: pointer;
-}
-/* -- Alerts -- */
-.alert {
-  padding: 19px 17px;
-  border: 1px solid;
-  overflow: hidden;
-  position: relative;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  margin-top: 20px;
-  color: #ba7003;
-  background-color: #ffffff;
-  border-color: #ec8e04;
-}
-.alert  > :first-child {
-  margin-top: 0;
-}
-.alert.thin {
-  padding: 9px 8px;
-}
-.alert.error {
-  color: #d41b2e;
-  background-color: #ffffff;
-  border-color: #e63c4d;
-}
-.alert.success {
-  color: #086a30;
-  background-color: #e2f5ea;
-  border-color: #0b9a45;
-}
-.alert.info {
-  color: #1c5984;
-  background-color: #ffffff;
-  border-color: #2575ae;
-}
-.alert .close {
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0;
-  position: absolute;
-  text-indent: -90000em;
-  display: block;
-  top: 50%;
-  right: 0;
-  background: transparent url(../images/close-x.png) no-repeat center center;
-}
-.modal {
-  width: 500px;
-  display: none;
-}
-.modal-overlay {
-  background: #000;
-}
-/* -- Custom Styles -- */
+/*
+
+Global Styles
+-------------
+
+*/
 .wrapper {
-  width: 960px;
+  width: 60em;
   margin: 0 auto;
 }
-.main-header .logo {
-  margin-bottom: 40px;
-  display: inline-block;
+/*
+
+### Global Header ###
+
+*/
+/*
+#### Institute Nav ####
+*/
+.institute-nav {
+  display: none;
 }

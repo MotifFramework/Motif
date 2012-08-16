@@ -1,0 +1,148 @@
+.nav-bar	{
+
+	// Variables
+	@base-color:						@dark-blue;
+	@top-gradient:						@base-color;
+	@bottom-gradient:					darken(@base-color, 5%);
+	@highlight-top:						lighten(@purple, 10%);
+	@highlight-bottom:					darken(@purple, 10%);
+
+	.nav	{
+		margin:							0;
+		
+		// Mixins
+		.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+		
+		a {
+			color:						@white;
+			text-decoration:			none;
+			padding:					@full-vertical @full-side;
+			
+			// Mixins
+			.source-sans-bold();
+			
+			&:hover,
+			&:focus,
+			&.is-current	{
+				
+				// Variables
+				@base-color:			darken(@dark-blue, 5%);
+				@top-gradient:			@base-color;
+				@bottom-gradient:		darken(@base-color, 5%);
+
+				// Mixins
+				.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+			}
+		}
+	}
+	.sub-nav	{
+		background:						darken(@dark-blue, 10%);
+		
+		a	{
+			padding:					@half-vertical @full-side;
+		
+			// Mixins
+			.source-sans-regular();
+
+			&:hover,
+			&:focus,
+			&.is-current	{
+				background:				darken(@dark-blue, 15%);
+			}
+		}
+	}
+}
+
+// INCOMPLETE
+.panel	{
+
+	// Variables
+	@top-gradient:						lighten(@light-grey, 18%);
+	@bottom-gradient:					lighten(@light-grey, 10%);
+
+	padding:							@double-vertical;
+	background-color:					lighten(@light-grey, 14%);
+
+	// Mixins
+	.margin-leader();
+
+	> :first-child	{
+		margin-top:						0;
+	}
+	
+	&.thin	{
+		padding:						@half-vertical;
+	}
+	&.fancy	{
+		
+		// Create
+		padding:						@double-vertical-bordered;
+		border:							1px solid @light-grey;
+		
+		// Mixins
+		.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);	
+		.box-shadow(0, 1px, 3px, fadeout(@light-black, 85%));
+		.border-radius(5px);
+	}
+	&.inset {
+		text-shadow:	0 1px 1px @white;
+		
+		// Mixins
+		.box-shadow-inset(0, 1px, 3px, fadeout(@light-black, 85%));
+		.background-linear-gradient(0, @bottom-gradient, 100%, @top-gradient);
+	}
+	&.error {
+		@bg:							desaturate(lighten(@error-color, 30%), 10%);
+		background:						@bg;
+	}
+	&.success {
+		background:						@success-color;
+	}
+	&.info {
+		background:						@active-color;
+	}
+}
+/*
+
+### Breadcrumb ###
+
+Another extension of the `.nav` module, adding a breadcrumb `.label`, 
+floating it and the ordered list and adding a `>` divider.
+
+	<nav class="breadcrumb group">
+		<p class="label">You are here:</p>
+		<ol class="forceful nav">
+			<li><a href="#">First Level</a></li>
+			<li><a href="#">Second Level</a></li>
+			<li><a href="#">Third Level</a></li>
+			<li><strong>Fourth Level</strong></li>
+		</ol>
+	</nav>
+
+*/
+
+.breadcrumb {
+	.label {
+		margin:					0 @half-side 0 0;
+		display:				inline;
+		float:					left;
+	}
+	.nav {
+		margin:					0;
+		float:					left;
+		text-transform:			capitalize;
+	}
+
+		li {
+			margin-right:		@half-side-bordered;
+
+			&:before {
+				content:		"/";
+				margin-right:	@half-side-bordered;
+			}
+			&:first-child:before {
+				content:		"";
+				margin:			0;
+			}
+		}
+}

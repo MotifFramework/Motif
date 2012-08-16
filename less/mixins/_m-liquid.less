@@ -1,0 +1,51 @@
+.liquidThree(@left-size: 33%, @center-size: 33%, @right-size: 33%, @left-background: none, @center-background: none, @right-background: @white){
+	background: @right-background;    	/* Right column background color */
+	
+	.colmid {
+	   float:left;
+	   width:200%;
+	   margin-left:(@right-size*-1); 	/* Width of right column */
+	   position:relative;
+	   right:100%;
+	   background:#fff;    	/* center column background color */
+	}
+	.colleft {
+	   float:left;
+	   width:100%;
+	   margin-left:-50%;
+	   position:relative;
+	   left:400px;         	/* Left column width + right column width */
+	   background:#FFD8B7;    	/* Left column background color */
+	}
+	.col1wrap {
+	   float:left;
+	    width:50%;
+	    position:relative;
+	    right:200px;        	/* Width of left column */
+	    padding-bottom:1em; 	/* center column bottom padding. Leave it out if it's zero */
+	}
+	.col1 {
+	   margin:0 215px;     	/* center column side padding:
+	                       	Left padding = left column width + center column left padding width
+	                       	Right padding = right column width + center column right padding width */
+	   position:relative;
+	    left:200%;
+	    overflow:hidden;
+	}
+	.col2 {
+	   float:left;
+	   float:right;			/* This overrides the float:left above */
+	   width:170px;        	/* Width of left column content (left column width minus left and right padding) */
+	   position:relative;
+	   right:15px;         	/* Width of the left-had side padding on the left column */
+	}
+	.col3 {
+	   float:left;
+	   float:right;			/* This overrides the float:left above */
+	   width:170px;        	/* Width of right column content (right column width minus left and right padding) */
+	   margin-right:45px;  	/* Width of right column right-hand padding + left column left and right padding */
+	   position:relative;
+	   left:50%;
+	}
+	
+}

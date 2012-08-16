@@ -1,1 +1,114 @@
-*{background:transparent!important;color:black!important;box-shadow:none!important;text-shadow:none!important}html{font:12pt/1.5em Georgia,"Times New Roman",Times,serif}h1,h2,h3,h4,h5,h6{font-weight:bold;line-height:1.1em;margin-bottom:.5em;margin-top:1em;page-break-after:avoid;orphans:3;widows:3}li h1,li h2,li h3,li h4,li h5,li h6{margin-top:0}h1{font-size:24pt}h2{font-size:21pt}h3{font-size:18pt}h4{font-size:16pt}h5{font-size:14pt}h6{font-size:12pt}blockquote,p,ul,ol,dl,figure,img{margin-bottom:1em}figure img{margin-bottom:0}ul,ol,dd{margin-left:3em}pre,blockquote{border-left:.5em solid #999;padding-left:1.5em;page-break-inside:avoid}a,a:visited{text-decoration:underline}a[href]:after{content:" (" attr(href) ")"}abbr[title]:after{content:" (" attr(title) ")"}a[href^="javascript:"]:after,a[href^="#"]:after{content:""}figcaption{text-transform:uppercase;font-size:10pt}strong{font-weight:bold}em{font-style:italic}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100%!important}form,video,nav{display:none!important}@page{margin:2cm}
+* {
+  background: transparent	!important;
+  color: black		!important;
+  box-shadow: none		!important;
+  text-shadow: none		!important;
+}
+html {
+  font: 12pt/1.5em Georgia, "Times New Roman", Times, serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  line-height: 1.1em;
+  margin-bottom: 0.5em;
+  margin-top: 1em;
+  page-break-after: avoid;
+  orphans: 3;
+  widows: 3;
+}
+li h1,
+li h2,
+li h3,
+li h4,
+li h5,
+li h6 {
+  margin-top: 0;
+}
+h1 {
+  font-size: 24pt;
+}
+h2 {
+  font-size: 21pt;
+}
+h3 {
+  font-size: 18pt;
+}
+h4 {
+  font-size: 16pt;
+}
+h5 {
+  font-size: 14pt;
+}
+h6 {
+  font-size: 12pt;
+}
+blockquote,
+p,
+ul,
+ol,
+dl,
+figure,
+img {
+  margin-bottom: 1em;
+}
+figure img {
+  margin-bottom: 0;
+}
+ul,
+ol,
+dd {
+  margin-left: 3em;
+}
+pre,
+blockquote {
+  border-left: 0.5em solid #999;
+  padding-left: 1.5em;
+  page-break-inside: avoid;
+}
+a,
+a:visited {
+  text-decoration: underline;
+}
+a[href]:after {
+  content: " (" attr(href) ")";
+}
+abbr[title]:after {
+  content: " (" attr(title) ")";
+}
+a[href^="javascript:"]:after,
+a[href^="#"]:after {
+  content: "";
+}
+figcaption {
+  text-transform: uppercase;
+  font-size: 10pt;
+}
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}
+thead {
+  display: table-header-group;
+}
+tr,
+img {
+  page-break-inside: avoid;
+}
+img {
+  max-width: 100%		!important;
+}
+form,
+video,
+nav {
+  display: none		!important;
+}
+@page  {
+  margin: 2cm;
+}

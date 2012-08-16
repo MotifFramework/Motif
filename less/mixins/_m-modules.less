@@ -1,0 +1,16 @@
+// Determine background and border colors for .alert boxes
+.alert-color(
+		@color: @warning-color
+	)						{
+
+	// Variables
+	@lighter-color:				desaturate(lighten(@color, 60%),40%);
+	@darker-color:				darken(@color, 10%);
+
+	// Create
+	color:						@darker-color;
+	background-color:			@lighter-color;
+	border-color:				@color;
+}
+
+

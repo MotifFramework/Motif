@@ -1,0 +1,103 @@
+// Classes based on @font-face
+.museo-slab-700 {
+	font-family:					@museo-slab-700;
+}
+.source-sans-regular {
+	font-family:					@source-sans-regular;
+}
+.source-sans-bold {
+	font-family:					@source-sans-bold;
+}
+.source-sans-italic {
+	font-family:					@source-sans-italic;
+}
+.source-sans-bold-italic {
+	font-family:					@source-sans-bold-italic;
+}
+.anonymous-pro-bold {
+	font-family:					@anonymous-pro-bold;
+}
+.symbolset {
+	font-family:					@symbolset;
+	font-size:						0.85em;
+	font-style:						normal;
+	font-weight:					normal;
+	text-decoration:				none;
+	text-rendering:					optimizeLegibility;
+	white-space:					nowrap;
+	-webkit-font-feature-settings:	"liga", "dlig";
+	-moz-font-feature-settings:		"liga=1, dlig=1";
+	-moz-font-feature-settings:		"liga", "dlig";
+	-ms-font-feature-settings:		"liga", "dlig";
+	-o-font-feature-settings:		"liga", "dlig";
+	font-feature-settings:			"liga", "dlig";
+}
+.symbolset-social {
+	font-family:					@symbolset-social;
+	font-size:						0.85em;
+	font-style:						normal;
+	font-weight:					normal;
+	text-decoration:				none;
+	text-rendering:					optimizeLegibility;
+	white-space:					nowrap;
+	-webkit-font-feature-settings:	"liga", "dlig";
+	-moz-font-feature-settings:		"liga=1, dlig=1";
+	-moz-font-feature-settings:		"liga", "dlig";
+	-ms-font-feature-settings:		"liga", "dlig";
+	-o-font-feature-settings:		"liga", "dlig";
+	font-feature-settings:			"liga", "dlig";
+}
+.symbolset-social-circle {
+	font-family:					@symbolset-social-circle;
+	font-size:						0.85em;
+	font-style:						normal;
+	font-weight:					normal;
+	text-decoration:				none;
+	text-rendering:					optimizeLegibility;
+	white-space:					nowrap;
+	-webkit-font-feature-settings:	"liga", "dlig";
+	-moz-font-feature-settings:		"liga=1, dlig=1";
+	-moz-font-feature-settings:		"liga", "dlig";
+	-ms-font-feature-settings:		"liga", "dlig";
+	-o-font-feature-settings:		"liga", "dlig";
+	font-feature-settings:			"liga", "dlig";
+}
+
+body {
+
+	// Mixins
+	.source-sans-regular();
+}
+dt,
+th,
+strong {
+	font-weight:					normal;
+
+	// Mixins
+	.source-sans-bold();
+}
+em {
+	font-style:						normal;
+
+	// Mixins
+	.source-sans-italic();
+}
+strong em,
+em strong {
+	font-style:						normal;
+	font-weight:					normal;
+
+	// Mixins
+	.source-sans-bold-italic();
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+	font-weight:					normal;
+	font-family:					@primary-header-font;
+	color:							@primary-header-color;
+}

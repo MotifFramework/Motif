@@ -1,0 +1,24 @@
+/*
+
+Tables
+------
+
+*/
+
+table	{
+	th,
+	td {
+		padding:			@half-vertical @full-side @half-vertical-bordered;
+	}
+	th {
+		padding-top:		@half-vertical-bordered;
+		border-bottom:		@border-width solid @table-border-color;
+	}
+	th + th,
+	td + td {
+		border-left:		@border-width solid @table-border-color;
+	}
+	tr + tr td {
+		border-top:			@border-width solid @table-border-color;
+	}
+}
