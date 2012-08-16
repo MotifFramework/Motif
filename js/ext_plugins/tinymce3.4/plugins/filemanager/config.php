@@ -19,8 +19,8 @@
 	$mcFileManagerConfig['general.allow_export'] = "demo,tools,disabled_tools,debug";
 
 	// Preview options
-	$mcFileManagerConfig['preview.wwwroot'] = ''; // absolute or relative from this script path (c:/Inetpub/wwwroot).
-	$mcFileManagerConfig['preview.urlprefix'] = "{proto}://{host}/"; // domain name
+	$mcFileManagerConfig['preview.wwwroot'] = $_SERVER['DOCUMENT_ROOT'] . '/media/files'; // absolute or relative from this script path (c:/Inetpub/wwwroot).
+	$mcFileManagerConfig['preview.urlprefix'] = "{proto}://{host}/media/files/"; // domain name
 	$mcFileManagerConfig['preview.urlsuffix'] = "";
 	$mcFileManagerConfig['preview.include_file_pattern'] = '';
 	$mcFileManagerConfig['preview.exclude_file_pattern'] = '';
@@ -30,8 +30,8 @@
 
 	// General file system options
 	$mcFileManagerConfig['filesystem'] = "Moxiecode_LocalFileImpl";
-	$mcFileManagerConfig['filesystem.path'] = $_SERVER['DOCUMENT_ROOT'] . '/edumedia'; // absolute or relative from this script path, optional.
-	$mcFileManagerConfig['filesystem.rootpath'] = "MEDIA=" . $_SERVER['DOCUMENT_ROOT'] . '/media;EDUMEDIA=' . $_SERVER['DOCUMENT_ROOT'] . '/edumedia'; // absolute or relative from this script path, required.
+	$mcFileManagerConfig['filesystem.path'] = $_SERVER['DOCUMENT_ROOT'] . '/media/files'; // absolute or relative from this script path, optional.
+	$mcFileManagerConfig['filesystem.rootpath'] = $_SERVER['DOCUMENT_ROOT'] . '/media/files'; // absolute or relative from this script path, required.
 	$mcFileManagerConfig['filesystem.datefmt'] = "Y-m-d H:i";
 	$mcFileManagerConfig['filesystem.include_directory_pattern'] = '';
 	$mcFileManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';

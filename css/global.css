@@ -2043,7 +2043,11 @@ textarea.is-current {
   font-size: 13px;
   font-size: 1.3rem;
   line-height: 1.5384615384615385;
+<<<<<<< HEAD
   color: #837f81;
+=======
+  color: #858384;
+>>>>>>> 35074f928b95e93d0f6dbcde9d451d333901125b
 }
 /*
 
@@ -2149,6 +2153,7 @@ textarea.is-current {
 .input-alert.error:before {
   border-bottom-color: #e63c4d;
 }
+<<<<<<< HEAD
 .input-alert.success {
   background-color: #0b9a45;
 }
@@ -2167,6 +2172,8 @@ textarea.is-current {
 .input-alert.warning:before {
   border-bottom-color: #ec8e04;
 }
+=======
+>>>>>>> 35074f928b95e93d0f6dbcde9d451d333901125b
 .disabled {
   opacity: .5;
 }
