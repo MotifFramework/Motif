@@ -444,7 +444,7 @@ input[type="week"] {
   color: #434142;
   background-color: #ffffff;
   border: 1px solid;
-  border-color: #cfcbca;
+  border-color: #cfcdcd;
   outline: 0;
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
@@ -508,15 +508,15 @@ select {
   height: auto;
 }
 ::-webkit-input-placeholder {
-  color: #cfcbca;
+  color: #cfcdcd;
 }
 input:-moz-placeholder,
 textarea:-moz-placeholder {
-  color: #cfcbca;
+  color: #cfcdcd;
 }
 input.placeholder_text,
 textarea.placeholder_text {
-  color: #cfcbca;
+  color: #cfcdcd;
 }
 :invalid {
   -webkit-box-shadow: none 0 10px #cccccc;
@@ -603,7 +603,7 @@ select[disabled],
 select[disabled] option,
 select[disabled] optgroup,
 textarea[disabled] {
-  color: #858384;
+  color: #837f81;
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
@@ -725,7 +725,7 @@ A base set of colors provides significance to the buttons.
   text-align: center;
   text-decoration: none;
   position: relative;
-  background: #cfcbca;
+  background: #cfcdcd;
   -webkit-appearance: none;
   -webkit-background-clip: padding;
   -moz-background-clip: padding;
@@ -834,7 +834,7 @@ h5,
 h6,
 .heading {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #024f82;
+  color: #184b6f;
   margin-top: 20px;
 }
 /* -- Font Sizes -- */
@@ -919,9 +919,6 @@ li ol {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-dt {
-  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-}
 blockquote {
   padding: 0 18px;
 }
@@ -951,7 +948,7 @@ pre {
   padding: 8.5px;
   display: block;
   background-color: rgba(207, 203, 202, 0.2);
-  border: 1px solid #cfcbca;
+  border: 1px solid #cfcdcd;
   white-space: pre;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -973,7 +970,7 @@ em {
   font-style: italic;
 }
 a {
-  color: #df65a6;
+  color: #bd8fc0;
 }
 a:hover,
 a:focus,
@@ -1150,6 +1147,9 @@ First, we have classes for aligning text and floating images.
 }
 .clear {
   clear: both;
+}
+.new-line {
+  display: block;
 }
 .lte7 .group {
   zoom: 1;
@@ -1382,6 +1382,9 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
   float: left;
 }
 .media-object .object img {
+  display: block;
+}
+.media-object .desc {
   display: block;
 }
 .media-object .desc  > :first-child {
@@ -1651,7 +1654,7 @@ The basic Nav module simply removes bullets from lists and inlines the list item
 .pagination li.disabled a,
 .pagination li.disabled a:hover,
 .pagination li.disabled a:focus {
-  color: #cfcbca;
+  color: #cfcdcd;
   cursor: default;
   background-color: transparent;
 }
@@ -1660,7 +1663,7 @@ The basic Nav module simply removes bullets from lists and inlines the list item
   float: left;
   line-height: 30px;
   border-left: 1px solid;
-  border-left-color: #cfcbca;
+  border-left-color: #cfcdcd;
   text-decoration: none;
 }
 .pagination a:hover,
@@ -1754,9 +1757,6 @@ See: http://gridsystemgenerator.com
 .row {
   margin-left: -18px;
   margin-right: -18px;
-}
-.lte7 .row {
-  zoom: 1;
 }
 .lte7 .row {
   zoom: 1;
@@ -2038,6 +2038,13 @@ textarea.is-current {
   -o-box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
   box-shadow: 0 1px 4px rgba(11, 154, 69, 0.5);
 }
+.hint {
+  margin-top: 0px;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.5384615384615385;
+  color: #837f81;
+}
 /*
 
 ### Validation ###
@@ -2142,6 +2149,27 @@ textarea.is-current {
 .input-alert.error:before {
   border-bottom-color: #e63c4d;
 }
+.input-alert.success {
+  background-color: #0b9a45;
+}
+.input-alert.success:before {
+  border-bottom-color: #0b9a45;
+}
+.input-alert.info {
+  background-color: #2575ae;
+}
+.input-alert.info:before {
+  border-bottom-color: #2575ae;
+}
+.input-alert.warning {
+  background-color: #ec8e04;
+}
+.input-alert.warning:before {
+  border-bottom-color: #ec8e04;
+}
+.disabled {
+  opacity: .5;
+}
 /*
 
 @font-face Declarations
@@ -2193,9 +2221,9 @@ List your webfont declarations below.
   font-style: normal;
 }
 @font-face {
-  font-family: 'EntypoRegular';
-  src: url('../fonts/entypo/entypo-webfont.eot');
-  src: url('../fonts/entypo/entypo-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/entypo/entypo-webfont.woff') format('woff'), url('../fonts/entypo/entypo-webfont.ttf') format('truetype'), url('../fonts/entypo/entypo-webfont.svg#EntypoRegular') format('svg');
+  font-family: "Symbolset";
+  src: url('../fonts/symbolset/ss-standard.eot');
+  src: url('../fonts/symbolset/ss-standard.eot?#iefix') format('embedded-opentype'), url('../fonts/symbolset/ss-standard.woff') format('woff'), url('../fonts/symbolset/ss-standard.ttf') format('truetype'), url('../fonts/symbolset/ss-standard.svg#SSStandardRegular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -2230,6 +2258,9 @@ table th {
 .figcaption {
   font-family: "PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 }
+dt {
+  font-family: "PT Sans Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+}
 h1,
 h2,
 h3,
@@ -2248,7 +2279,7 @@ h5 em,
 h6 em,
 .heading em {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #00a4d8;
+  color: #489cd8;
 }
 h1 strong,
 h2 strong,
@@ -2258,7 +2289,7 @@ h5 strong,
 h6 strong,
 .heading strong {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
-  color: #00a4d8;
+  color: #489cd8;
 }
 .museo {
   font-family: "Museo700", Helvetica, Arial, Verdana, serif;
@@ -2278,8 +2309,8 @@ h6 strong,
 .anonymous-pro-bold {
   font-family: "Anonymous Pro Bold", Courier, monospace;
 }
-.entypo {
-  font-family: "EntypoRegular";
+.symbolset {
+  font-family: "Symbolset";
 }
 blockquote {
   padding: 0 18px 0 13px;
@@ -2290,7 +2321,7 @@ blockquote p:first-child {
   margin: 0;
 }
 blockquote cite {
-  color: #858384;
+  color: #837f81;
 }
 blockquote cite:before {
   content: '\2014 \00A0';
@@ -2299,7 +2330,7 @@ blockquote cite:before {
   padding: 5px 9px;
   display: block;
   font-style: italic;
-  background-color: #cfcbca;
+  background-color: #cfcdcd;
 }
 .meta {
   margin: 5px 0 0;
@@ -2308,6 +2339,49 @@ blockquote cite:before {
   font-size: 10px;
   font-size: 1rem;
   line-height: 1;
+}
+/* -- Inline Tags -- */
+.tag {
+  padding: 3px 4px 1px;
+  background-color: #a9a6a7;
+  font-weight: normal;
+  color: #ffffff;
+  text-transform: uppercase;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+.tag.important {
+  background-color: #f26527;
+}
+.tag.warning {
+  background-color: #e63c4d;
+}
+.tag.success {
+  background-color: #0b9a45;
+}
+.tag.notice {
+  background-color: #489cd8;
+}
+.tag.is-current {
+  background-color: #a05ea5;
+}
+.tag.inverse {
+  color: #434142;
+  background: #f2f2f2;
+}
+.tag.block {
+  display: block;
+}
+a.tag {
+  text-decoration: none;
+}
+a.tag:hover,
+a.tag:focus,
+a.tag.is-current {
+  color: #ffffff;
+  background-color: #a05ea5;
 }
 .caret {
   display: inline-block;
@@ -2321,27 +2395,33 @@ blockquote cite:before {
   filter: alpha(opacity=30);
   content: "";
 }
-[data-icon] i {
-  padding-right: 9px;
+i {
+  padding-right: 0.6em;
   display: inline-block;
-  font-family: "EntypoRegular";
-  line-height: 1;
-  vertical-align: top;
+  font-family: "Symbolset";
+  vertical-align: bottom;
+  font-size: 0.85em;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -webkit-font-feature-settings: "liga", "dlig";
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -moz-font-feature-settings: "liga", "dlig";
+  -ms-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
 }
-[data-icon] i.icon-appended {
+i.icon-appended {
   padding-right: 0;
   padding-left: 9px;
 }
-[data-icon] i.solo {
+i.solo {
   padding-right: 0;
 }
-h1 [data-icon] i {
-  font-size: 0.5em;
-  line-height: 1.5em;
-  padding-right: 19px;
-}
 table {
-  border: 1px solid #e7e5e5;
+  border: 1px solid #e8e7e7;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -o-border-radius: 4px;
@@ -2364,14 +2444,14 @@ table td {
 }
 table th {
   padding-top: 9px;
-  border-bottom: 1px solid #e7e5e5;
+  border-bottom: 1px solid #e8e7e7;
 }
 table th + th,
 table td + td {
-  border-left: 1px solid #e7e5e5;
+  border-left: 1px solid #e8e7e7;
 }
 table tr + tr td {
-  border-top: 1px solid #e7e5e5;
+  border-top: 1px solid #e8e7e7;
 }
 table tbody tr:first-child td:first-child {
   -webkit-border-top-left-radius: 5px;
@@ -2398,10 +2478,10 @@ table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 5px;
 }
 .zebra-striped tbody tr:nth-child(odd) td {
-  background-color: #f8f8f7;
+  background-color: #f9f9f9;
 }
 .zebra-striped tbody tr:hover td {
-  background-color: #f3f2f2;
+  background-color: #f4f4f4;
 }
 .button {
   text-shadow: 0 -1px 0px #ffffff;
@@ -2418,48 +2498,48 @@ table tbody tr:last-child td:last-child {
   -o-border-radius: 5px;
   border-radius: 5px;
   color: #7c7c7c;
-  border-color: #b7b1af;
-  background: #cfcbca url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #ffffff 0, #cfcbca 100%);
+  border-color: #b6b3b4;
+  background: #cfcdcd url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, #cfcbca));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, #cfcdcd));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #ffffff 0, #cfcbca 100%);
+  background: -webkit-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #ffffff 0, #cfcbca 100%);
+  background: -o-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #ffffff 0, #cfcbca 100%);
+  background: -ms-linear-gradient(top, #ffffff 0, #cfcdcd 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #ffffff 0, #cfcbca 100%);
+  background: linear-gradient(top, #ffffff 0, #cfcdcd 100%);
   /* W3C */
 
 }
 .button:hover,
 .button:focus {
   color: #646464;
-  border-color: #aba4a2;
-  background: #c3bebd url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
+  border-color: #a9a6a7;
+  background: #c2c0c1 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f3f2f2), color-stop(100%, #c3bebd));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f4f4f4), color-stop(100%, #c2c0c1));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
+  background: -webkit-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
+  background: -o-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
+  background: -ms-linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #f3f2f2 0, #c3bebd 100%);
+  background: linear-gradient(top, #f4f4f4 0, #c2c0c1 100%);
   /* W3C */
 
 }
@@ -2902,7 +2982,7 @@ table tbody tr:last-child td:last-child {
 }
 .vertical-nav .current a {
   color: #a05ea5;
-  background: rgba(223, 101, 166, 0.09999999999999998);
+  background: rgba(189, 143, 192, 0.09999999999999998);
 }
 .vertical-nav li:first-child a {
   border: none;
@@ -2911,18 +2991,18 @@ table tbody tr:last-child td:last-child {
   padding: 4px 0;
   display: block;
   text-decoration: none;
-  border-top: 1px solid rgba(223, 101, 166, 0.30000000000000004);
+  border-top: 1px solid rgba(189, 143, 192, 0.30000000000000004);
 }
 .vertical-nav a:hover,
 .vertical-nav a:focus {
-  background: rgba(223, 101, 166, 0.09999999999999998);
+  background: rgba(189, 143, 192, 0.09999999999999998);
 }
 .vertical-nav .is-current {
-  background: rgba(223, 101, 166, 0.09999999999999998);
+  background: rgba(189, 143, 192, 0.09999999999999998);
 }
 .vertical-nav li ul {
   margin: 0;
-  border-top: 1px solid rgba(223, 101, 166, 0.30000000000000004);
+  border-top: 1px solid rgba(189, 143, 192, 0.30000000000000004);
 }
 .vertical-nav li ul li {
   margin: 0 0 0 20px;
@@ -2931,24 +3011,24 @@ table tbody tr:last-child td:last-child {
 .panel {
   padding: 19px 17px;
   border: 1px solid;
-  border: 1px solid #cfcbca;
-  background: #e7e5e5 url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
+  border: 1px solid #cfcdcd;
+  background: #e8e7e7 url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fbfafa), color-stop(100%, #e7e5e5));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fcfcfc), color-stop(100%, #e8e7e7));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
+  background: -webkit-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
+  background: -o-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
+  background: -ms-linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #fbfafa 0, #e7e5e5 100%);
+  background: linear-gradient(top, #fcfcfc 0, #e8e7e7 100%);
   /* W3C */
 
   -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
@@ -2971,28 +3051,28 @@ table tbody tr:last-child td:last-child {
   -moz-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -o-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  background: #fbfafa url("../images/gradient-highlight.png") repeat-x left bottom;
-  background: -moz-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
+  background: #fcfcfc url("../images/gradient-highlight.png") repeat-x left bottom;
+  background: -moz-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
   /* FF3.6+ */
 
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e7e5e5), color-stop(100%, #fbfafa));
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e8e7e7), color-stop(100%, #fcfcfc));
   /* Chrome,Safari4+ */
 
-  background: -webkit-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
+  background: -webkit-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
   /* Chrome10+,Safari5.1+ */
 
-  background: -o-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
+  background: -o-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
   /* Opera 11.10+ */
 
-  background: -ms-linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
+  background: -ms-linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
   /* IE10+ */
 
-  background: linear-gradient(top, #e7e5e5 0, #fbfafa 100%);
+  background: linear-gradient(top, #e8e7e7 0, #fcfcfc 100%);
   /* W3C */
 
 }
 .panel.simple {
-  background: #e7e5e5;
+  background: #e8e7e7;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -o-border-radius: 0;
@@ -3027,13 +3107,13 @@ table tbody tr:last-child td:last-child {
 .panel.hud h5,
 .panel.hud h6,
 .panel.hud .heading {
-  color: #00a4d8;
+  color: #489cd8;
 }
 .wireframe .block {
   padding: 20px 0;
   color: #ffffff;
   text-align: center;
-  background: #00a4d8;
+  background: #489cd8;
   margin-top: 20px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -3041,24 +3121,24 @@ table tbody tr:last-child td:last-child {
   border-radius: 5px;
 }
 .wireframe .block:hover {
-  background: #024f82;
+  background: #184b6f;
 }
 /* -- Tabs -- */
 .tabs .nav {
   margin-left: 1px;
-  border-bottom: 1px solid #cfcbca;
+  border-bottom: 1px solid #cfcdcd;
 }
 .tabs .nav li {
   margin: 0 0 -1px -1px;
 }
 .tabs .nav li.is-current a {
   padding-bottom: 6px;
-  color: #df65a6;
+  color: #bd8fc0;
   border-bottom: none;
-  border-color: #cfcbca;
+  border-color: #cfcdcd;
 }
 .tabs .nav a {
-  color: #cfcbca;
+  color: #cfcdcd;
   border: 1px solid transparent;
   border-bottom: none;
   background: #ffffff;
@@ -3073,14 +3153,14 @@ table tbody tr:last-child td:last-child {
 }
 .tabs .nav a:hover,
 .tabs .nav a:focus {
-  color: #df65a6;
+  color: #bd8fc0;
 }
 .tabs .nav.sub-nav,
 .tabs .nav.sub-nav a {
   border: none;
 }
 .tabs .nav.sub-nav .is-current a {
-  background: rgba(223, 101, 166, 0.09999999999999998);
+  background: rgba(189, 143, 192, 0.09999999999999998);
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -3088,11 +3168,11 @@ table tbody tr:last-child td:last-child {
 }
 .tabs .nav.sub-nav .is-current a:hover,
 .tabs .nav.sub-nav .is-current a:focus {
-  background: rgba(223, 101, 166, 0.09999999999999998);
+  background: rgba(189, 143, 192, 0.09999999999999998);
 }
 .tabs.enclosed .padded.section {
   padding: 20px 17px;
-  border: 1px solid #cfcbca;
+  border: 1px solid #cfcdcd;
   border-top: 0;
 }
 .tabs.enclosed .padded.section .sub-nav {
@@ -3142,7 +3222,7 @@ table tbody tr:last-child td:last-child {
   display: block;
   color: #ffffff;
   text-decoration: none;
-  background-color: #cfcbca;
+  background-color: #cfcdcd;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -o-border-radius: 5px;
@@ -3153,7 +3233,7 @@ table tbody tr:last-child td:last-child {
   cursor: default;
 }
 .steps a[href] {
-  background-color: #df65a6;
+  background-color: #bd8fc0;
 }
 .steps a[href]:hover,
 .steps a[href]:focus,
@@ -3172,9 +3252,9 @@ table tbody tr:last-child td:last-child {
   -o-border-radius: 5px;
   border-radius: 5px;
   margin-top: 20px;
-  color: #d37f03;
+  color: #ba7003;
   background-color: #ffffff;
-  border-color: #fb9b0e;
+  border-color: #ec8e04;
 }
 .alert  > :first-child {
   margin-top: 0;

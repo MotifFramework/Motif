@@ -34,27 +34,31 @@
 // Color Variables
 @black:						rgb(  0,   0,   0);
 @light-black:				rgb( 67,  65,  66);
-@dark-grey:					rgb(133, 131, 132);
+@dark-grey:					darken(@grey, 15%);
 @grey:						rgb(169, 166, 167);
-@light-grey:				rgb(207, 203, 202);
-@dark-blue:					rgb(  2,  79, 130);
+@light-grey:				lighten(@grey, 15%);
+@dark-blue:					darken(@blue, 15%);
 @blue:						rgb( 37, 117, 174);
-@light-blue:				rgb(  0, 164, 216);
-@dark-green:				darken(@green, 10%);
+@light-blue:				lighten(@blue, 15%);
+@dark-green:				darken(@green, 15%);
 @green:						rgb( 11, 154,  69);
-@light-green:				lighten(@green, 10%);
-@dark-yellow:				darken(@yellow, 10%);
+@light-green:				lighten(@green, 15%);
+@dark-yellow:				darken(@yellow, 15%);
 @yellow:					rgb(252, 176,  64);
-@light-yellow:				lighten(@yellow, 10%);
-@dark-orange:				darken(@orange, 10%);
+@light-yellow:				lighten(@yellow, 15%);
+@dark-orange:				darken(@orange, 15%);
 @orange:					rgb(242, 101,  39);
-@light-orange:				lighten(@orange, 10%);
-@dark-red:					darken(@red, 10%);
+@light-orange:				lighten(@orange, 15%);
+@dark-red:					darken(@red, 15%);
 @red:						rgb(230,  60,  77);
-@light-red:					lighten(@red, 10%);
-@dark-purple:				darken(@purple, 10%);
+@light-red:					lighten(@red, 15%);
+@dark-pink:					darken(@pink, 15%);
+@pink:						rgb(223, 101, 166);
+@light-pink:				lighten(@pink, 15%);
+@dark-purple:				darken(@purple, 15%);
 @purple:					rgb(160,  94, 165);
-@light-purple:				rgb(223, 101, 166);
+@light-purple:				lighten(@purple, 15%);
+@dark-white:				rgb(250, 250, 250);
 @white:						rgb(255, 255, 255);
 
 // Form Variables
@@ -80,14 +84,14 @@
 @pt-sans-italic:			"PT Sans Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 @pt-sans-bold-italic:		"PT Sans Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
 @anonymous-pro-bold:		"Anonymous Pro Bold", Courier, monospace;
-@entypo:					"EntypoRegular";
+@symbolset:					"Symbolset";
 
 @text-font:					@pt-sans-regular;
 @text-font-bold:			@pt-sans-bold;
 @text-font-italic:			@pt-sans-italic;
 @text-font-bold-italic:		@pt-sans-bold-italic;
 @text-font-code:			@anonymous-pro-bold;
-@text-font-icons:			@entypo;
+@text-font-icons:			@symbolset;
 @primary-header-font:		@museo;
 
 // Header Variables
