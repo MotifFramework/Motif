@@ -1,3 +1,4 @@
+/* Uncomment this for Responsive */
 /*
 
 Type Mixins
@@ -1714,24 +1715,9 @@ table td + td {
 table tr + tr td {
   border-top: 0.0625em solid #cfcdcd;
 }
-/*
-
-Global Styles
--------------
-
-*/
 .wrapper {
-  width: 60em;
+  width: 960px;
   margin: 0 auto;
 }
-/*
-
-### Global Header ###
-
-*/
-/*
-#### Institute Nav ####
-*/
-.institute-nav {
-  display: none;
-}
+/* Uncomment this for Responsive */
+/* Uncomment this for Responsive */
