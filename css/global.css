@@ -1,4 +1,33 @@
 /* Uncomment this for Responsive */
+#fluid {
+  /* .row(@columns: @total-columns) {
+
+		// Variables
+		@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
+
+		// Create
+		width: 			@total-width * ((@base-margin + @grid-width) / @grid-width);
+		margin: 		0 @total-width * (((@base-margin * 0.5) / @grid-width) * -1);
+		display: 		inline-block;
+
+		// Mixins
+		.clearfix();
+	}
+	.column(@x, @columns: @total-columns) {
+
+		// Variables
+		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
+		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
+
+		// Create
+		width: 			((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) - (@grid-margin * 2);
+		margin-right: 	@grid-margin;
+		margin-left: 	@grid-margin;
+		display: 		inline;
+		float: 			left;
+	} */
+
+}
 /*
 
 Type Mixins
@@ -1715,9 +1744,167 @@ table td + td {
 table tr + tr td {
   border-top: 0.0625em solid #cfcdcd;
 }
+/*
+
+Wireframe
+---------
+
+Superfluous. Remove when unnecessary.
+
+*/
+.wireframe .row {
+  width: 103.75000000000001%;
+  margin-left: -1.875%;
+  margin-right: -1.875%;
+}
+.wireframe .one {
+  width: 4.718875502008032%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .two {
+  width: 13.052208835341366%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .three {
+  width: 21.385542168674696%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .four {
+  width: 29.71887550200803%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .five {
+  width: 38.05220883534137%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .six {
+  width: 46.3855421686747%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .seven {
+  width: 54.71887550200803%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .eight {
+  width: 63.05220883534136%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .nine {
+  width: 71.3855421686747%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .ten {
+  width: 79.71887550200803%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .eleven {
+  width: 88.05220883534136%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .twelve {
+  width: 96.3855421686747%;
+  margin-left: 1.8072289156626504%;
+  margin-right: 1.8072289156626504%;
+  display: inline;
+  float: left;
+}
+.wireframe .columns {
+  color: #ffffff;
+  text-align: center;
+  background: #2575ae;
+  margin-top: 1.25em;
+  padding-top: 1.25em;
+  padding-bottom: 1.25em;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
 .wrapper {
-  width: 960px;
+  width: 93.75%;
   margin: 0 auto;
 }
 /* Uncomment this for Responsive */
-/* Uncomment this for Responsive */
+@media only screen {
+  /* .row {
+  	#fluid > .row(@total-columns);
+  }
+  .columns {
+  	&.one {
+  		#fluid > .column(12, @total-columns);
+  	}
+  	&.two {
+  		#fluid > .column(12, @total-columns);
+  	}
+  	&.three {
+  		#fluid > .column(12, @total-columns);
+  	}
+  	&.nine {
+  		#fluid > .column(12, @total-columns);
+  	}
+  } */
+}
+@media only screen and (min-width: 48em) {
+  /* .row {
+  	#fluid > .row(@total-columns);
+  }
+  .columns {
+  	&.one {
+  		#fluid > .column(1, @total-columns);
+  	}
+  	&.two {
+  		#fluid > .column(2, @total-columns);
+  	}
+  	&.three {
+  		#fluid > .column(3, @total-columns);
+  	}
+  	&.nine {
+  		#fluid > .column(9, @total-columns);
+  	}
+  } */
+}
+@media only screen and (min-width: 62em) {
+  /* .wrapper,
+  .header-wrapper {
+  	width:							88%;
+  } */
+}
+@media only screen and (min-width: 64em) {
+  /* .wrapper,
+  .header-wrapper {
+  	width:							60em;
+  } */
+}

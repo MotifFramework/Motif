@@ -81,7 +81,7 @@
 
 // Fluid Grid namespace
 #fluid {
-	.row(@columns: @total-columns) {
+	/* .row(@columns: @total-columns) {
 
 		// Variables
 		@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
@@ -106,6 +106,41 @@
 		margin-left: 	@grid-margin;
 		display: 		inline;
 		float: 			left;
+	} */
+	.row(@context: @total-columns, @col: @base-column, @mar: @base-margin)	{
+
+		// Variables
+		@context-width: (@col * @context) + (@mar * (@context - 1));
+		@grid-margin:	100% * ((@mar / 2) / @context-width);
+
+		// Create
+		width:			100% * (((@col * @context) + (@mar * @context)) / @context-width);
+		margin-left: 	-@grid-margin;
+		margin-right: 	-@grid-margin;
+	}
+	.grid-column(@context: @total-columns, @col: @base-column, @mar: @base-margin)	{
+
+		// Variables
+		@context-width: (@col * @context) + (@mar * @context);
+		@grid-margin:	100% * ((@mar / 2) / @context-width);
+
+		// Create
+		margin-left: 	@grid-margin;
+		margin-right: 	@grid-margin;
+		display: 		inline;
+		float: 			left;
+	}
+	.grid-width(@x, @context: @total-columns, @col: @base-column, @mar: @base-margin)	{
+
+		// Variables
+		@context-width:	(@col * @context) + (@mar * @context); // Width of parent row
+
+		// Create
+		width:			100% * (((@col * @x) + (@mar * (@x - 1))) / @context-width);
+	}
+	.column(@x, @context: @total-columns, @col: @base-column, @mar: @base-margin)	{
+		#fluid > .grid-width(@x, @context, @col, @mar);
+		#fluid > .grid-column(@context, @col, @mar);
 	}
 	.offset(@x, @columns: @total-columns) {
 
