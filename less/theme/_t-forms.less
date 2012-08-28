@@ -1,56 +1,135 @@
+/*
+
+Themed Forms
+------------
+
+*/
+
+
+/*
+
+Style inputs and set them to `width: 100%` to adapt to the width of their wrapper. (Great for grids.)
+
+*/
+
 input,
 textarea {
 
 	// Variables
 	@1px:					1em * (1 / @base-text-size);
 	@2px:					1em * (2 / @base-text-size);
+	@4px:					1em * (4 / @base-text-size);
 	@input-side-padding:	1em * (@input-padding / @base-text-size);
 
 	// Create
-	padding:				@quarter-vertical @input-side-padding;
+	width:					100%;
+	font-size:				1em;
+	padding:				@quarter-vertical-bordered @input-side-padding;
 	background:				@white;
 	border:					@1px solid @grey;
+	outline:				none;
 	
 	// Mixins
 	.source-sans-regular();
+	.box-sizing(border-box);
 	.border-radius(@2px);
 	.box-shadow-inset(0, @1px, @2px, @light-grey);
+	
+	&:hover,
+	&:focus,
+	&:active,
+	&.is-current	{
+		border-color:		@light-black;
+		z-index:			1;
 
-	&.one {
-		#fixed > .input-grid(1);
+		// Mixins
+		
+		.box-shadow(0, @1px, @4px, @light-grey);
 	}
-	&.two {
-		#fixed > .input-grid(2);
+}
+input	{
+	&[type="checkbox"],
+	&[type="radio"]	{
+		width:				auto;
+
+		.lte7	{
+			width:			13px;
+		}
 	}
-	&.three {
-		#fixed > .input-grid(3);
+}
+textarea	{
+	height:					@full-vertical * 4;
+}
+select	{
+	font-size:				0.8125em;
+}
+
+
+/*
+### Useful Input Widths ###
+
+Useful widths for form inputs, both fluid- and fixed-width.
+*/
+
+.input-eighth	{
+	width:					12.5%;
+}
+.input-quarter	{
+	width:					25%;
+}
+.input-half	{
+	width:					50%;
+}
+.input-xxxs {
+	width:	1em * ( 30 / @base-text-size);
+}
+.input-xxs {
+	width:	1em * ( 50 / @base-text-size);
+}
+.input-xs {
+	width:	1em * (100 / @base-text-size);
+}
+.input-s {
+	width:	1em * (175 / @base-text-size);
+}
+.input-m {
+	width:	1em * (250 / @base-text-size);
+}
+.input-l {
+	width:	1em * (350 / @base-text-size);
+}
+
+
+.input-label	{
+	display:				block;
+
+	// Mixins
+	.margin-leader(0.75);
+
+	input,
+	textarea,
+	select	{
+	
+		// Mixins
+		.margin-vertical(0.25);
 	}
-	&.four {
-		#fixed > .input-grid(4);
+	.hint	{
+		color:				@grey;
+
+		// Mixins
+		.body-text();
+		.margin-leader(0.25);
 	}
-	&.five {
-		#fixed > .input-grid(5);
-	}
-	&.six {
-		#fixed > .input-grid(6);
-	}
-	&.seven {
-		#fixed > .input-grid(7);
-	}
-	&.eight {
-		#fixed > .input-grid(8);
-	}
-	&.nine {
-		#fixed > .input-grid(9);
-	}
-	&.ten {
-		#fixed > .input-grid(10);
-	}
-	&.eleven {
-		#fixed > .input-grid(11);
-	}
-	&.twelve {
-		#fixed > .input-grid(12);
+}
+legend {
+
+	// Mixins
+	.padding-trailer(0.5);
+
+	&.input-label	{
+
+		// Mixins
+		.padding-trailer(0.25);
 	}
 }
 .search	{
@@ -66,5 +145,25 @@ textarea {
 
 		// Mixins
 		.border-radius-left(0);
+	}
+}
+
+/*
+
+### Form Validation ###
+
+*/
+.success	{
+	input,
+	textarea,
+	select	{
+		border-color:		@success-color;
+	}
+}
+.error	{
+	input,
+	textarea,
+	select	{
+		border-color:		@error-color;
 	}
 }

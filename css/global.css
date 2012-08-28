@@ -322,7 +322,7 @@ input::-moz-focus-inner {
 }
 input[type="checkbox"],
 input[type="radio"] {
-  margin: 3px;
+  margin: 2px;
   padding: 0;
   box-sizing: border-box;
   position: relative;
@@ -735,70 +735,72 @@ See: http://gridsystemgenerator.com
 .row.rtl .columns {
   float: right;
 }
-.one {
-  width: 2.9375em;
+/* .one {
+	#fixed > .grid(1);
 }
 .two {
-  width: 8.125em;
+	#fixed > .grid(2);
 }
 .three {
-  width: 13.3125em;
+	#fixed > .grid(3);
 }
 .four {
-  width: 18.5em;
+	#fixed > .grid(4);
 }
 .five {
-  width: 23.6875em;
+	#fixed > .grid(5);
 }
 .six {
-  width: 28.875em;
+	#fixed > .grid(6);
 }
 .seven {
-  width: 34.0625em;
+	#fixed > .grid(7);
 }
 .eight {
-  width: 39.25em;
+	#fixed > .grid(8);
 }
 .nine {
-  width: 44.4375em;
+	#fixed > .grid(9);
 }
 .ten {
-  width: 49.625em;
+	#fixed > .grid(10);
 }
 .eleven {
-  width: 54.8125em;
+	#fixed > .grid(11);
 }
 .twelve {
-  width: 60em;
+	#fixed > .grid(12);
 }
+
+// Grid Offset
+
 .offset-by-one {
-  margin-left: 23.1875em;
+	#fixed > .offset(1);
 }
 .offset-by-two {
-  margin-left: 28.375em;
+	#fixed > .offset(2);
 }
 .offset-by-three {
-  margin-left: 33.5625em;
+	#fixed > .offset(3);
 }
 .offset-by-four {
-  margin-left: 38.75em;
+	#fixed > .offset(4);
 }
 .offset-by-five {
-  margin-left: 43.9375em;
+	#fixed > .offset(5);
 }
 .offset-by-six {
-  margin-left: 49.125em;
+	#fixed > .offset(6);
 }
 .offset-by-seven {
-  margin-left: 54.3125em;
+	#fixed > .offset(7);
 }
 .offset-by-eight {
-  margin-left: 59.5em;
+	#fixed > .offset(8);
 }
 .offset-by-nine {
-  margin-left: 64.6875em;
-}
-/*
+	#fixed > .offset(9);
+} *//*
 
 Modules
 -------
@@ -1198,11 +1200,13 @@ that allows module embedding and basic styling.
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
 }
-body {
+body,
+.body-text {
   font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
 }
 dt,
 th,
+.input-label,
 strong {
   font-weight: normal;
   font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
@@ -1411,14 +1415,17 @@ p .button {
 }
 .button.tiny {
   padding: 0.3125em 0.5625em;
+  border-width: 0.07692307692307693em;
   font-size: 13px;
   font-size: 0.8125rem;
 }
 .button.small {
+  border-width: 0.07692307692307693em;
   font-size: 13px;
   font-size: 0.8125rem;
 }
 .button.large {
+  border-width: 0.047619047619047616em;
   font-size: 21px;
   font-size: 1.3125rem;
 }
@@ -1637,12 +1644,30 @@ floating it and the ordered list and adding a `>` divider.
   content: "";
   margin: 0;
 }
+/*
+
+Themed Forms
+------------
+
+*/
+/*
+
+Style inputs and set them to `width: 100%` to adapt to the width of their wrapper. (Great for grids.)
+
+*/
 input,
 textarea {
-  padding: 0.3125em 0.25em;
+  width: 100%;
+  font-size: 1em;
+  padding: 0.25em 0.25em;
   background: #ffffff;
   border: 0.0625em solid #a9a6a7;
+  outline: none;
   font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
   -webkit-border-radius: 0.125em;
   -moz-border-radius: 0.125em;
   -o-border-radius: 0.125em;
@@ -1652,53 +1677,87 @@ textarea {
   -o-box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
   box-shadow: inset 0 0.0625em 0.125em #cfcdcd;
 }
-input.one,
-textarea.one {
-  width: 2.3125em;
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus,
+input:active,
+textarea:active,
+input.is-current,
+textarea.is-current {
+  border-color: #434142;
+  z-index: 1;
+  -webkit-box-shadow: 0 0.0625em 0.25em #cfcdcd;
+  -moz-box-shadow: 0 0.0625em 0.25em #cfcdcd;
+  -o-box-shadow: 0 0.0625em 0.25em #cfcdcd;
+  box-shadow: 0 0.0625em 0.25em #cfcdcd;
 }
-input.two,
-textarea.two {
-  width: 7.5em;
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
 }
-input.three,
-textarea.three {
-  width: 12.6875em;
+input[type="checkbox"] .lte7,
+input[type="radio"] .lte7 {
+  width: 13px;
 }
-input.four,
-textarea.four {
-  width: 17.875em;
+textarea {
+  height: 5em;
 }
-input.five,
-textarea.five {
-  width: 23.0625em;
+select {
+  font-size: 0.8125em;
 }
-input.six,
-textarea.six {
-  width: 28.25em;
+/*
+### Useful Input Widths ###
+
+Useful widths for form inputs, both fluid- and fixed-width.
+*/
+.input-eighth {
+  width: 12.5%;
 }
-input.seven,
-textarea.seven {
-  width: 33.4375em;
+.input-quarter {
+  width: 25%;
 }
-input.eight,
-textarea.eight {
-  width: 38.625em;
+.input-half {
+  width: 50%;
 }
-input.nine,
-textarea.nine {
-  width: 43.8125em;
+.input-xxxs {
+  width: 1.875em;
 }
-input.ten,
-textarea.ten {
-  width: 49em;
+.input-xxs {
+  width: 3.125em;
 }
-input.eleven,
-textarea.eleven {
-  width: 54.1875em;
+.input-xs {
+  width: 6.25em;
 }
-input.twelve,
-textarea.twelve {
-  width: 59.375em;
+.input-s {
+  width: 10.9375em;
+}
+.input-m {
+  width: 15.625em;
+}
+.input-l {
+  width: 21.875em;
+}
+.input-label {
+  display: block;
+  margin-top: 0.9375em;
+}
+.input-label input,
+.input-label textarea,
+.input-label select {
+  margin-top: 0.3125em;
+  margin-bottom: 0.3125em;
+}
+.input-label .hint {
+  color: #a9a6a7;
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+  margin-top: 0.3125em;
+}
+legend {
+  padding-bottom: 0.625em;
+}
+legend.input-label {
+  padding-bottom: 0.3125em;
 }
 .search .input {
   float: left;
@@ -1722,6 +1781,21 @@ textarea.twelve {
   -o-border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+}
+/*
+
+### Form Validation ###
+
+*/
+.success input,
+.success textarea,
+.success select {
+  border-color: #0b9a45;
+}
+.error input,
+.error textarea,
+.error select {
+  border-color: #e63c4d;
 }
 /*
 
@@ -1841,7 +1915,7 @@ Superfluous. Remove when unnecessary.
   display: inline;
   float: left;
 }
-.wireframe .columns {
+.wireframe .block {
   color: #ffffff;
   text-align: center;
   background: #2575ae;

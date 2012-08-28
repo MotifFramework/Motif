@@ -46,17 +46,35 @@
 		margin-top:				0;
 	}
 	&.tiny {
+
+		// Variables
+		@1px:					1em * (1 / @petite-text-size);
+
+		// Create
 		padding:				@quarter-vertical @half-side;
+		border-width:			@1px;
 		
 		// Mixins
 		.size-for-font(@petite-text-size);
 	}
 	&.small {
 
+		// Variables
+		@1px:					1em * (1 / @petite-text-size);
+
+		// Create
+		border-width:			@1px;
+
 		// Mixins
 		.size-for-font(@petite-text-size);
 	}
 	&.large {
+
+		// Variables
+		@1px:					1em * (1 / @primer-text-size);
+
+		// Create
+		border-width:			@1px;
 
 		// Mixins
 		.size-for-font(@primer-text-size);
