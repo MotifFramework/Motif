@@ -175,3 +175,40 @@ floating it and the ordered list and adding a `>` divider.
 			}
 		}
 }
+
+.tabs {
+	.nav {
+
+		// Variables
+		@current-border-width:		3;
+		@current-border-top:		1em * (@current-border-width / @base-text-size);
+		@current-padding-top:		1em * (((@base-vertical / 2) - @current-border-width) / @base-text-size);
+		@current-padding-bottom:	1em * (((@base-vertical / 2) + @default-border-width) / @base-text-size);
+
+		// Create
+		border-bottom:				@border-width solid @light-grey;
+
+		a {
+			padding:				@half-vertical @full-side;
+			color:					@light-grey;
+			text-decoration:		none;
+			background-color:		@white;
+			position:				relative;
+			bottom:					-@border-width;
+			z-index:				30;
+
+			&:hover,
+			&:focus	{
+				color:				@light-black;
+			}
+		}
+		.is-current	{
+			padding:				@current-padding-top @full-side-bordered @current-padding-bottom;
+			color:					@light-black;
+			border-left:			@border-width solid @light-grey;
+			border-right:			@border-width solid @light-grey;
+			border-top:				@current-border-top solid @light-blue;
+			z-index:				60;
+		}
+	}
+}

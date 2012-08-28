@@ -985,20 +985,6 @@ that allows module embedding and basic styling.
 .tabs .section {
   position: relative;
 }
-.tabs .nav li {
-  position: relative;
-  z-index: 30;
-}
-.tabs .nav li.is-current {
-  z-index: 60;
-}
-.tabs .nav a {
-  padding: 0.3125em 0.28125em;
-  text-decoration: none;
-}
-.tabs .nav.sub-nav {
-  margin-top: 0.625em;
-}
 .tabs .tab {
   display: none;
 }
@@ -1648,6 +1634,30 @@ floating it and the ordered list and adding a `>` divider.
 .breadcrumb li:first-child:before {
   content: "";
   margin: 0;
+}
+.tabs .nav {
+  border-bottom: 0.0625em solid #cfcdcd;
+}
+.tabs .nav a {
+  padding: 0.625em 1.125em;
+  color: #cfcdcd;
+  text-decoration: none;
+  background-color: #ffffff;
+  position: relative;
+  bottom: -0.0625em;
+  z-index: 30;
+}
+.tabs .nav a:hover,
+.tabs .nav a:focus {
+  color: #434142;
+}
+.tabs .nav .is-current {
+  padding: 0.4375em 1.0625em 0.6875em;
+  color: #434142;
+  border-left: 0.0625em solid #cfcdcd;
+  border-right: 0.0625em solid #cfcdcd;
+  border-top: 0.1875em solid #489cd8;
+  z-index: 60;
 }
 /*
 

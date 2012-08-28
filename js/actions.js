@@ -84,7 +84,10 @@ $(document).ready(function() {
 	}
 
 	// Tabbed widget
-	$("[data-tabs]").lb_tabs();
+	$("[data-reveal-group='tabbed-widget']").lb_reveal({
+		"trigger"	: 	"click",
+		"exclusive"	: 	"radio"
+	});
 
 	// Modals
 	$("[data-modal]").lb_modal({

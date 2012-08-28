@@ -1,6 +1,6 @@
 //@codekit-prepend "jquery.js"
 //@codekit-prepend "jquery.placeholder.js"
-//@codekit-prepend "jquery.lb-tabs.js"
+//@codekit-prepend "jquery.lb-reveal.js"
 //@codekit-prepend "jquery.lb-scrolling.js"
 //@codekit-prepend "jquery.lb-validation.js"
 //@codekit-prepend "jquery.lb-modal.js"
