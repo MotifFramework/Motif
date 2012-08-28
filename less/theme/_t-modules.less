@@ -92,14 +92,43 @@
 		.background-linear-gradient(0, @bottom-gradient, 100%, @top-gradient);
 	}
 	&.error {
-		@bg:							desaturate(lighten(@error-color, 30%), 10%);
-		background:						@bg;
+	
+		border:							1px solid lighten(desaturate(@error-color, 50%), 10%);
+		background-color:					fadeout(lighten(@error-color, 20%), 95%);	
+		
+		h1, h2, h3, h4, h5, h6{
+			color: 						@error-color;
+		}
+		
+		// Mixins
+		.box-shadow(0, 1px, 3px, fadeout(@light-black, 85%));
+		.border-radius(5px);
 	}
 	&.success {
-		background:						@success-color;
+	
+		border:							1px solid lighten(desaturate(@success-color, 50%), 20%);
+		background-color:				fadeout(lighten(@success-color, 35%), 95%);
+		
+		h1, h2, h3, h4, h5, h6{
+			color: 						@success-color;
+		}
+		
+		// Mixins	
+		.box-shadow(0, 1px, 3px, fadeout(@light-black, 85%));
+		.border-radius(5px);
 	}
 	&.info {
-		background:						@active-color;
+	
+		border:							1px solid lighten(desaturate(@info-color, 50%), 20%);
+		background-color:					fadeout(lighten(@info-color, 45%), 95%);	
+		
+		h1, h2, h3, h4, h5, h6{
+			color: 						@info-color;
+		}
+		
+		// Mixins
+		.box-shadow(0, 1px, 3px, fadeout(@light-black, 85%));
+		.border-radius(5px);
 	}
 }
 /*

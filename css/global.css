@@ -1590,13 +1590,64 @@ p .button {
 
 }
 .panel.error {
-  background: #f4c7cb;
+  border: 1px solid #c29398;
+  background-color: rgba(242, 150, 160, 0.050000000000000044);
+  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.panel.error h1,
+.panel.error h2,
+.panel.error h3,
+.panel.error h4,
+.panel.error h5,
+.panel.error h6 {
+  color: #e63c4d;
 }
 .panel.success {
-  background: #0b9a45;
+  border: 1px solid #59b27d;
+  background-color: rgba(100, 244, 158, 0.050000000000000044);
+  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.panel.success h1,
+.panel.success h2,
+.panel.success h3,
+.panel.success h4,
+.panel.success h5,
+.panel.success h6 {
+  color: #0b9a45;
 }
 .panel.info {
-  background: #2575ae;
+  border: 1px solid #657988;
+  background-color: rgba(135, 190, 229, 0.050000000000000044);
+  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+.panel.info h1,
+.panel.info h2,
+.panel.info h3,
+.panel.info h4,
+.panel.info h5,
+.panel.info h6 {
+  color: #184b6f;
 }
 /*
 
