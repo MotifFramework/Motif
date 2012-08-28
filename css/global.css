@@ -1478,6 +1478,34 @@ p .button {
 .nav-bar .sub-nav a.is-current {
   background: #0a2030;
 }
+.vertical-nav .current a {
+  color: #184b6f;
+  background: rgba(37, 117, 174, 0.09999999999999998);
+}
+.vertical-nav li:first-child a {
+  border: none;
+}
+.vertical-nav a {
+  color: #184b6f;
+  padding: 0.3125em 0.5625em;
+  display: block;
+  text-decoration: none;
+  font-family: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+}
+.vertical-nav a:hover,
+.vertical-nav a:focus {
+  background: rgba(37, 117, 174, 0.09999999999999998);
+}
+.vertical-nav .is-current {
+  background: rgba(37, 117, 174, 0.09999999999999998);
+}
+.vertical-nav li ul {
+  margin: 0;
+  padding: 0 0 0 1.125em;
+}
+.vertical-nav li ul li {
+  list-style: none outside none;
+}
 .panel {
   padding: 2.5em;
   background-color: #f2f1f1;
@@ -1487,33 +1515,65 @@ p .button {
   margin-top: 0;
 }
 .panel.thin {
-  padding: 0.625em;
+  padding: 1.25em;
 }
-.panel.fancy {
+.panel.alert {
   padding: 2.4375em;
-  border: 1px solid #cfcdcd;
-  background-color: #e8e7e7;
-  /* fallback color if gradients are not supported */
-
-  background-image: -webkit-linear-gradient(top, #fcfcfc, #e8e7e7);
-  background-image: -moz-linear-gradient(top, #fcfcfc, #e8e7e7);
-  /* For Fx 3.6 to Fx 15 */
-
-  background-image: -ms-linear-gradient(top, #fcfcfc, #e8e7e7);
-  /* For IE 10 Platform Previews and Consumer Preview */
-
-  background-image: -o-linear-gradient(top, #fcfcfc, #e8e7e7);
-  background-image: linear-gradient(to bottom, #fcfcfc, #e8e7e7);
-  /* Standard syntax; must be the last statement */
-
+  border: 1px solid;
+  border: 1px solid #e7e7e7;
+  background-color: rgba(255, 255, 255, 0.050000000000000044);
+  -webkit-border-radius: 0.3125em;
+  -moz-border-radius: 0.3125em;
+  -o-border-radius: 0.3125em;
+  border-radius: 0.3125em;
   -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
   box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
+}
+.panel.alert h1,
+.panel.alert h2,
+.panel.alert h3,
+.panel.alert h4,
+.panel.alert h5,
+.panel.alert h6 {
+  color: #184b6f;
+}
+.panel.alert.error {
+  border: 1px solid #c29398;
+  background-color: rgba(242, 150, 160, 0.050000000000000044);
+}
+.panel.alert.error h1,
+.panel.alert.error h2,
+.panel.alert.error h3,
+.panel.alert.error h4,
+.panel.alert.error h5,
+.panel.alert.error h6 {
+  color: #e63c4d;
+}
+.panel.alert.success {
+  border: 1px solid #449465;
+  background-color: rgba(28, 239, 114, 0.050000000000000044);
+}
+.panel.alert.success h1,
+.panel.alert.success h2,
+.panel.alert.success h3,
+.panel.alert.success h4,
+.panel.alert.success h5,
+.panel.alert.success h6 {
+  color: #0b9a45;
+}
+.panel.alert.info {
+  border: 1px solid #4f5f6b;
+  background-color: rgba(41, 131, 195, 0.050000000000000044);
+}
+.panel.alert.info h1,
+.panel.alert.info h2,
+.panel.alert.info h3,
+.panel.alert.info h4,
+.panel.alert.info h5,
+.panel.alert.info h6 {
+  color: #184b6f;
 }
 .panel.inset {
   text-shadow: 0 1px 1px #ffffff;
@@ -1535,66 +1595,6 @@ p .button {
   background-image: linear-gradient(to bottom, #e8e7e7, #fcfcfc);
   /* Standard syntax; must be the last statement */
 
-}
-.panel.error {
-  border: 1px solid #c29398;
-  background-color: rgba(242, 150, 160, 0.050000000000000044);
-  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-.panel.error h1,
-.panel.error h2,
-.panel.error h3,
-.panel.error h4,
-.panel.error h5,
-.panel.error h6 {
-  color: #e63c4d;
-}
-.panel.success {
-  border: 1px solid #59b27d;
-  background-color: rgba(100, 244, 158, 0.050000000000000044);
-  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-.panel.success h1,
-.panel.success h2,
-.panel.success h3,
-.panel.success h4,
-.panel.success h5,
-.panel.success h6 {
-  color: #0b9a45;
-}
-.panel.info {
-  border: 1px solid #657988;
-  background-color: rgba(135, 190, 229, 0.050000000000000044);
-  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-.panel.info h1,
-.panel.info h2,
-.panel.info h3,
-.panel.info h4,
-.panel.info h5,
-.panel.info h6 {
-  color: #184b6f;
 }
 /*
 
