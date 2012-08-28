@@ -88,11 +88,16 @@ body {
 
 // Icons
 .icon {
-	display:						inline-block;
-	vertical-align:					bottom;
+
+	// Variables
+	@icon-padding:					1em * (5 / 12);
+
+	// Create
+	vertical-align:					middle;
 
 	// Mixins
 	.symbolset();
+	.inline-block-fallback();
 
 	&.social {
 
@@ -107,9 +112,9 @@ body {
 	}
 
 	&.prepended {
-		padding-right:				0.2857em;
+		padding-right:				@icon-padding;
 	}
 	&.appended {
-		padding-left:				0.2857em;
+		padding-left:				@icon-padding;
 	}
 }

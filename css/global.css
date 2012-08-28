@@ -1,33 +1,3 @@
-/* Uncomment this for Responsive */
-#fluid {
-  /* .row(@columns: @total-columns) {
-
-		// Variables
-		@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
-
-		// Create
-		width: 			@total-width * ((@base-margin + @grid-width) / @grid-width);
-		margin: 		0 @total-width * (((@base-margin * 0.5) / @grid-width) * -1);
-		display: 		inline-block;
-
-		// Mixins
-		.clearfix();
-	}
-	.column(@x, @columns: @total-columns) {
-
-		// Variables
-		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
-		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
-
-		// Create
-		width: 			((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) - (@grid-margin * 2);
-		margin-right: 	@grid-margin;
-		margin-left: 	@grid-margin;
-		display: 		inline;
-		float: 			left;
-	} */
-
-}
 /*
 
 Type Mixins
@@ -354,8 +324,8 @@ table {
 }
 /*
 
-Helpfull Variables
-------------------
+Helpful Variables
+-----------------
 
 Mostly spacing, to be honest.
 
@@ -1155,9 +1125,10 @@ that allows module embedding and basic styling.
 .anonymous-pro-bold {
   font-family: "Anonymous Pro Bold", Courier, monospace;
 }
-.symbolset {
-  font-family: "Symbolset";
-  font-size: 0.85em;
+.symbolset,
+.symbolset-social,
+.symbolset-social-circle {
+  font-size: 0.75em;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -1169,36 +1140,15 @@ that allows module embedding and basic styling.
   -ms-font-feature-settings: "liga", "dlig";
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
+}
+.symbolset {
+  font-family: "Symbolset";
 }
 .symbolset-social {
   font-family: "Symbolset Social";
-  font-size: 0.85em;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  text-rendering: optimizeLegibility;
-  white-space: nowrap;
-  -webkit-font-feature-settings: "liga", "dlig";
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
 }
 .symbolset-social-circle {
   font-family: "Symbolset Social Circle";
-  font-size: 0.85em;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  text-rendering: optimizeLegibility;
-  white-space: nowrap;
-  -webkit-font-feature-settings: "liga", "dlig";
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
 }
 body,
 .body-text {
@@ -1303,10 +1253,8 @@ body {
   line-height: 1.25;
 }
 .icon {
-  display: inline-block;
-  vertical-align: bottom;
-  font-family: "Symbolset";
-  font-size: 0.85em;
+  vertical-align: middle;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -1318,10 +1266,15 @@ body {
   -ms-font-feature-settings: "liga", "dlig";
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
+  font-family: "Symbolset";
+  display: inline-block;
+}
+.lte7 .icon {
+  display: inline;
+  zoom: 1;
 }
 .icon.social {
-  font-family: "Symbolset Social";
-  font-size: 0.85em;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -1333,10 +1286,10 @@ body {
   -ms-font-feature-settings: "liga", "dlig";
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
+  font-family: "Symbolset Social";
 }
 .icon.social-circle {
-  font-family: "Symbolset Social Circle";
-  font-size: 0.85em;
+  font-size: 0.75em;
   font-style: normal;
   font-weight: normal;
   text-decoration: none;
@@ -1348,12 +1301,13 @@ body {
   -ms-font-feature-settings: "liga", "dlig";
   -o-font-feature-settings: "liga", "dlig";
   font-feature-settings: "liga", "dlig";
+  font-family: "Symbolset Social Circle";
 }
 .icon.prepended {
-  padding-right: 0.2857em;
+  padding-right: 0.4166666666666667em;
 }
 .icon.appended {
-  padding-left: 0.2857em;
+  padding-left: 0.4166666666666667em;
 }
 .button {
   width: auto;
@@ -1847,6 +1801,107 @@ legend.input-label {
 .error textarea,
 .error select {
   border-color: #e63c4d;
+}
+.bubble {
+  margin: 0;
+  padding: 0.625em;
+  background-color: #ffffff;
+  position: relative;
+  -webkit-border-radius: 0.1875em;
+  -moz-border-radius: 0.1875em;
+  -o-border-radius: 0.1875em;
+  border-radius: 0.1875em;
+  -webkit-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.bubble:after {
+  position: absolute;
+  border: 0.3125em solid transparent;
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+.bubble.left-wisp:after,
+.bubble.right-wisp:after {
+  top: 50%;
+  margin-top: -0.3125em;
+}
+.bubble.left-wisp:after {
+  left: -0.625em;
+  border-right-color: #ffffff;
+}
+.bubble.right-wisp:after {
+  right: -0.625em;
+  border-left-color: #ffffff;
+}
+.bubble.top-wisp:after,
+.bubble.bottom-wisp:after {
+  left: 50%;
+  margin-left: -0.3125em;
+}
+.bubble.top-wisp:after {
+  top: -0.625em;
+  border-bottom-color: #ffffff;
+}
+.bubble.bottom-wisp:after {
+  bottom: -0.625em;
+  border-top-color: #ffffff;
+}
+.bubble.input-alert {
+  padding: 0.3125em 0.625em;
+  color: #ffffff;
+  font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  display: inline-block;
+}
+.lte7 .bubble.input-alert {
+  display: inline;
+  zoom: 1;
+}
+.bubble.input-alert:after {
+  left: 0.625em;
+  margin-left: 0;
+  top: -0.625em;
+  border-bottom-color: #ffffff;
+}
+.bubble.input-alert.warning {
+  background-color: #ec8e04;
+}
+.bubble.input-alert.warning:after {
+  border-bottom-color: #ec8e04;
+}
+.bubble.input-alert.info {
+  background-color: #184b6f;
+}
+.bubble.input-alert.info:after {
+  border-bottom-color: #184b6f;
+}
+.bubble.input-alert.error {
+  background-color: #e63c4d;
+}
+.bubble.input-alert.error:after {
+  border-bottom-color: #e63c4d;
+}
+.bubble.input-alert.success {
+  background-color: #0b9a45;
+}
+.bubble.input-alert.success:after {
+  border-bottom-color: #0b9a45;
+}
+.no-boxshadow .bubble {
+  border: 0.0625em solid #a9a6a7;
 }
 /*
 

@@ -1,7 +1,7 @@
 // Set @total-width to 100% for a fluid layout
 @total-width: 960px;
 
-/* Uncomment this for Responsive */
+// Uncomment this for Responsive
 //@total-width:	100%;
 
 // Clearfix Mixin
@@ -81,32 +81,32 @@
 
 // Fluid Grid namespace
 #fluid {
-	/* .row(@columns: @total-columns) {
+	// .row(@columns: @total-columns) {
 
 		// Variables
-		@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
+	//	@grid-width:	(@base-column * @columns) + (@base-margin * @columns);
 
 		// Create
-		width: 			@total-width * ((@base-margin + @grid-width) / @grid-width);
-		margin: 		0 @total-width * (((@base-margin * 0.5) / @grid-width) * -1);
-		display: 		inline-block;
+	//	width: 			@total-width * ((@base-margin + @grid-width) / @grid-width);
+	//	margin: 		0 @total-width * (((@base-margin * 0.5) / @grid-width) * -1);
+	//	display: 		inline-block;
 
 		// Mixins
-		.clearfix();
-	}
-	.column(@x, @columns: @total-columns) {
+	//	.clearfix();
+	//}
+	//.column(@x, @columns: @total-columns) {
 
 		// Variables
-		@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
-		@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
+	//	@grid-width: 	(@base-column * @columns) + (@base-margin * @columns);
+	//	@grid-margin: 	@total-width * ((@base-margin * 0.5) / @grid-width);
 
 		// Create
-		width: 			((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) - (@grid-margin * 2);
-		margin-right: 	@grid-margin;
-		margin-left: 	@grid-margin;
-		display: 		inline;
-		float: 			left;
-	} */
+	//	width: 			((@total-width * ((@base-margin + @base-column) * @x)) / @grid-width) - (@grid-margin * 2);
+	//	margin-right: 	@grid-margin;
+	//	margin-left: 	@grid-margin;
+	//	display: 		inline;
+	//	float: 			left;
+	//}
 	.row(@context: @total-columns, @col: @base-column, @mar: @base-margin)	{
 
 		// Variables

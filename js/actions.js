@@ -14,13 +14,13 @@ $(document).ready(function() {
 			icon			=	$("<i class='icon'>" + target.attr("data-icon") + "</i>");
 	
 		icon.attr("aria-hidden", "true");
-	
+
 		if (iconSet === "social") {
 			icon.addClass("social");
 		} else if (iconSet === "social-circle") {
 			icon.addClass("social-circle");
 		}
-	
+
 		if (iconPosition === "append") {
 			icon.addClass("appended");
 			target.append(icon);
