@@ -215,13 +215,14 @@ sub {
   bottom: -0.25em;
 }
 a:focus {
-  outline: thin dotted;
+  outline: 0;
 }
 a:active,
 a:hover {
   outline: 0;
 }
 img {
+  max-width: 100%;
   border: 0;
 }
 .lte7 img {
@@ -814,29 +815,39 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
 .media-object .desc {
   overflow: hidden;
 }
-.media-object .object {
-  margin-right: 1.125em;
+.media-object.checkbox-item .object {
   float: left;
-}
-.media-object .object img {
-  display: block;
+  margin-right: 0.28125em;
 }
 .media-object .desc {
   display: block;
 }
-.media-object .desc > :first-child {
-  margin-top: 0;
+@media only screen and (min-width: 30em) {
+  .media-object .object {
+    max-width: 40%;
+    margin-right: 2.25em;
+    float: left;
+  }
+  .media-object .object img {
+    display: block;
+  }
+  .media-object .desc > :first-child {
+    margin-top: 0;
+  }
+  .media-object.half {
+    margin-left: 0.5625em;
+    margin-right: 0.5625em;
+  }
+  .media-object.half .object {
+    margin-left: 0.5625em;
+    margin-right: 0.5625em;
+  }
 }
-.media-object.half {
-  margin-left: 0.5625em;
-  margin-right: 0.5625em;
-}
-.media-object.half .object {
-  margin-left: 0.5625em;
-  margin-right: 0.5625em;
-}
-.media-object.checkbox-label .object {
-  margin-right: 0.28125em;
+@media only screen and (min-width: 48em) {
+  .media-object .object {
+    max-width: 50%;
+    margin-right: 1.125em;
+  }
 }
 /*
 
@@ -874,27 +885,43 @@ the widths.
 .media-grid {
   margin-top: 0;
   padding: 0;
-  letter-spacing: -0.31em;
-  word-spacing: -0.43em;
 }
-.lte7 .media-grid {
-  letter-spacing: normal;
-}
-.media-grid .columns {
-  float: none;
+.media-grid .object {
   list-style: none outside none;
-  letter-spacing: normal;
-  word-spacing: normal;
-  vertical-align: top;
   margin-top: 1.25em;
-  display: inline-block;
 }
-.lte7 .media-grid .columns {
-  display: inline;
-  zoom: 1;
-}
-.media-grid .columns img {
+.media-grid .object img {
   display: block;
+}
+@media only screen and (min-width: 30em) {
+  .media-grid {
+    letter-spacing: -0.31em;
+    word-spacing: -0.43em;
+    width: 103.75000000000001%;
+    margin-left: -1.875%;
+    margin-right: -1.875%;
+  }
+  .lte7 .media-grid {
+    letter-spacing: normal;
+  }
+  .media-grid .object {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    width: 46.3855421686747%;
+    margin-left: 1.8072289156626504%;
+    margin-right: 1.8072289156626504%;
+    display: inline-block;
+  }
+  .lte7 .media-grid .object {
+    display: inline;
+    zoom: 1;
+  }
+}
+@media only screen and (min-width: 48em) {
+  .media-grid .object {
+    width: 29.71887550200803%;
+  }
 }
 /*
 
@@ -926,26 +953,30 @@ the skeleton of a horizontal nav without adding too much style (yet).
   display: inline;
   zoom: 1;
 }
-.lte7 .nav.forceful {
-  zoom: 1;
-}
-.nav.forceful:before,
-.nav.forceful:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.nav.forceful:after {
-  clear: both;
-}
 .nav.forceful li {
   display: block;
-  float: left;
 }
 .nav.forceful a,
 .lte7 .nav.forceful a {
   display: block;
+}
+@media only screen and (min-width: 30em) {
+  .lte7 .nav.forceful {
+    zoom: 1;
+  }
+  .nav.forceful:before,
+  .nav.forceful:after {
+    content: "\0020";
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .nav.forceful:after {
+    clear: both;
+  }
+  .nav.forceful li {
+    float: left;
+  }
 }
 /*
 
@@ -1752,6 +1783,7 @@ Useful widths for form inputs, both fluid- and fixed-width.
 }
 .input-l {
   width: 21.875em;
+  max-width: 100%;
 }
 .input-label {
   display: block;
@@ -1921,7 +1953,7 @@ Tables
 */
 table th,
 table td {
-  padding: 0.625em 1.125em 0.5625em;
+  padding: 0.625em 0.5625em 0.5625em;
 }
 table th {
   padding-top: 0.5625em;
@@ -1933,6 +1965,16 @@ table td + td {
 }
 table tr + tr td {
   border-top: 0.0625em solid #cfcdcd;
+}
+@media only screen and (min-width: 30em) {
+  table th,
+  table td {
+    padding: 0.625em 1.125em 0.5625em;
+  }
+  table th {
+    padding-top: 0.5625em;
+    border-bottom: 0.0625em solid #cfcdcd;
+  }
 }
 /*
 
@@ -2044,11 +2086,10 @@ Superfluous. Remove when unnecessary.
   border-radius: 5px;
 }
 .wrapper {
-  width: 93.75%;
-  margin: 0 auto;
+  margin: 0 3.614457831325301%;
 }
 /* Uncomment this for Responsive */
-@media only screen {
+@media only screen and (min-width: 30em) {
   /* .row {
   	#fluid > .row(@total-columns);
   }

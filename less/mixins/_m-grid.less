@@ -118,17 +118,19 @@
 		margin-left: 	-@grid-margin;
 		margin-right: 	-@grid-margin;
 	}
-	.grid-column(@context: @total-columns, @col: @base-column, @mar: @base-margin)	{
-
+	.grid-column()	{
+		display: 		inline;
+		float: 			left;
+	}
+	.grid-margin(@context: @total-columns, @col: @base-column, @mar: @base-margin)	{
+	
 		// Variables
 		@context-width: (@col * @context) + (@mar * @context);
 		@grid-margin:	100% * ((@mar / 2) / @context-width);
-
+	
 		// Create
 		margin-left: 	@grid-margin;
 		margin-right: 	@grid-margin;
-		display: 		inline;
-		float: 			left;
 	}
 	.grid-width(@x, @context: @total-columns, @col: @base-column, @mar: @base-margin)	{
 
@@ -140,7 +142,8 @@
 	}
 	.column(@x, @context: @total-columns, @col: @base-column, @mar: @base-margin)	{
 		#fluid > .grid-width(@x, @context, @col, @mar);
-		#fluid > .grid-column(@context, @col, @mar);
+		#fluid > .grid-margin(@context, @col, @mar);
+		#fluid > .grid-column();
 	}
 	.offset(@x, @columns: @total-columns) {
 

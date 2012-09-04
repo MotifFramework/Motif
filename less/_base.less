@@ -3,9 +3,11 @@
 .wrapper {
 
 	// Variables
-	@960px:	100% * (960 / 1024);
+	@960px:			100% * (960 / 1024);
+	@context-width: (@base-column * @total-columns) + (@base-margin * @total-columns);
+	@grid-margin:	100% * (@base-margin / @context-width);
 
 	// Create
-	width:	@960px;
-	margin:	0 auto;
+	//width:	@960px;
+	margin:	0 @grid-margin;
 }

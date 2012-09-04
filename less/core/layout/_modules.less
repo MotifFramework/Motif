@@ -42,34 +42,50 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
 
 .media-object {
 	&, .desc {
-		overflow:			hidden;
+		overflow:				hidden;
 	}
-	.object {
-		margin-right:		@full-side;
-		float:				left;
-
-		img {
-			display:		block;
-		}
+	&.checkbox-item .object {
+		float:					left;
+		margin-right:			@quarter-side;
 	}
 	.desc {
-		display:			block;
-
-		& > :first-child {
-			margin-top:		0;
-		}
+		display:				block;
 	}
-	&.half {
-		margin-left:		@half-side;
-		margin-right:		@half-side;
+}
 
+@media only screen and (min-width: 30em) {
+	.media-object {
 		.object {
-			margin-left:	@half-side;
-			margin-right:	@half-side;
+			max-width:			40%;
+			margin-right:		@double-side;
+			float:				left;
+	
+			img {
+				display:		block;
+			}
+		}
+		.desc {	
+			& > :first-child {
+				margin-top:		0;
+			}
+		}
+		&.half {
+			margin-left:		@half-side;
+			margin-right:		@half-side;
+	
+			.object {
+				margin-left:	@half-side;
+				margin-right:	@half-side;
+			}
 		}
 	}
-	&.checkbox-label .object {
-		margin-right:		@quarter-side;
+}
+@media only screen and (min-width: 48em) {
+	.media-object	{
+		.object	{
+			max-width:			50%;
+			margin-right:		@full-side;
+		}
 	}
 }
 
@@ -106,32 +122,54 @@ the widths.
 	</ul>
 
 */
-.media-grid {
-	margin-top:			0;
-	padding:			0;
-	letter-spacing:		-0.31em;
-	word-spacing:		-0.43em;
 
-	.lte7 & {
-		letter-spacing:	normal;
-	}
-	.columns {
-		float:			none;
-		list-style:		none outside none;
-		letter-spacing:	normal;
-		word-spacing:	normal;
-		vertical-align:	top;
+.media-grid	{
+	margin-top:				0;
+	padding:				0;
+	.object	{
+		list-style:			none outside none;
 
 		// Mixins
 		.margin-leader();
-		.inline-block-fallback();
 
 		img {
-			display:	block;
+			display:		block;
 		}
 	}
 }
 
+@media only screen and (min-width: 30em) {
+	.media-grid {
+		letter-spacing:		-0.31em;
+		word-spacing:		-0.43em;
+
+		// Mixins
+		#fluid > .row();
+
+		.lte7 & {
+			letter-spacing:	normal;
+		}
+		.object {
+			letter-spacing:	normal;
+			word-spacing:	normal;
+			vertical-align:	top;
+
+			// Mixins
+			#fluid > .grid-width(6);
+			#fluid > .grid-margin();
+			.inline-block-fallback();
+		}
+	}
+}
+@media only screen and (min-width: 48em) {
+	.media-grid	{
+		.object	{
+
+			// Mixins
+			#fluid > .grid-width(4);
+		}
+	}
+}
 
 /*
 
@@ -161,18 +199,26 @@ the skeleton of a horizontal nav without adding too much style (yet).
 			.inline-block-fallback();
 		}
 	&.forceful {
-
-		// Mixins
-		.clearfix();
-
 		li {
 			display:		block;
-			float:			left;
 		}
 			a,
 			.lte7 & a {
 				display:	block;
 			}
+	}
+}
+@media only screen and (min-width: 30em) {
+	.nav {
+		&.forceful {
+	
+			// Mixins
+			.clearfix();
+	
+			li {
+				float:			left;
+			}
+		}
 	}
 }
 
