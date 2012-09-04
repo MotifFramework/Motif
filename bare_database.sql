@@ -418,6 +418,7 @@ INSERT INTO `LB_DataTypeDefinition` VALUES(7, 'Tag Picker', 'Tag input box w/ au
 INSERT INTO `LB_DataTypeDefinition` VALUES(8, 'Curriculum Chart', 'Curriculum Chart Builder (Introduced in SHP)', 'LB_ContentManagement_Presentation_DataTypes_CurriculumChart', 1, 'Text');
 INSERT INTO `LB_DataTypeDefinition` VALUES(9, 'Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MediaPicker', 1, 'Text');
 INSERT INTO `LB_DataTypeDefinition` VALUES(10, 'Date Time Picker', 'Use this data type to add a date time element.', 'LB_ContentManagement_Presentation_DataTypes_DateTimePicker', 1, 'Int');
+INSERT INTO `LB_DataTypeDefinition` VALUES(11, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', 'LB_ContentManagement_Presentation_DataTypes_ContentDropDownList', 1, 'Text');
 
 -- --------------------------------------------------------
 
