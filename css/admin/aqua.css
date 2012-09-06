@@ -300,7 +300,7 @@ a:hover {color:#df408b; font-weight:bold; text-decoration:none;}
 .mainbody .filetype .clear {position:absolute; margin:-25px 0 0 415px; cursor:pointer;}
 .mainbody .filetype .download {position:absolute; margin:-25px 0 0 475px; text-decoration:underline; cursor:pointer;}
 
-.mainbody .errornote {font-size:10px; line-height:12px; color:#a31b13; background:url(../../images/admin/icon_error.gif) top left no-repeat; width:175px; padding:0 0 7px 25px;}
+.mainbody .errornote {font-size:10px; line-height:12px; color:#a31b13; background:url(../../images/admin/icon_error.gif) top left no-repeat; width:175px; padding:0 0 20px 25px;}
 .mainbody .val .errornote {display:none;}
 .mainbody .error .errornote {display:block !important;}
 
