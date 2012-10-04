@@ -1,18 +1,12 @@
 $(document).ready(function() {
 	
-	// Close alert boxes
-	$(".alert .close").click(function() {
-		$(this).parents(".alert").fadeOut();
-		return false;
-	});
-
 	// Insert Icons
 	$("[data-icon]").each(function(){
 		var	target			=	$(this),
 			iconPosition	=	target.attr("data-icon-position"),
 			iconSet			=	target.attr("data-icon-set"),
 			icon			=	$("<i class='icon'>" + target.attr("data-icon") + "</i>");
-	
+
 		icon.attr("aria-hidden", "true");
 
 		if (iconSet === "social") {
@@ -32,6 +26,7 @@ $(document).ready(function() {
 			target.prepend(icon);
 		}
 	});
+	
 
 	// Placeholder text for form inputs
 	$("input, textarea").placeholder();
@@ -87,11 +82,6 @@ $(document).ready(function() {
 	$("[data-reveal-group='tabbed-widget']").lb_reveal({
 		"trigger"	: 	"click",
 		"exclusive"	: 	"radio"
-	});
-
-	// Modals
-	$("[data-modal]").lb_modal({
-		position	:	"absolute"
 	});
 
 	// Simple Wireframing
