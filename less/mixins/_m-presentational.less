@@ -1,48 +1,89 @@
 .remove-styles() {
-	width:			auto;
-	height:			auto;
-	margin:			0;
-	padding:		0;
-	display:		inline;
-	font-family:	inherit;
-	font-size:		inherit;
-	color:			inherit;
-	text-shadow:	none;
-	background:		none;
-	border:			none;
-	outline:		none;
+	width:				auto;
+	height:				auto;
+	margin:				0;
+	padding:			0;
+	display:			inline;
+	font-family:		inherit;
+	font-size:			inherit;
+	color:				inherit;
+	text-shadow:		none;
+	background:			none;
+	border:				none;
+	outline:			none;
 
 	// Mixins
 	.box-shadow-none();
 }
 .hide-text() {
-	font:			0px/0 a;
-	text-shadow:	none;
-	color:			transparent;
+	font:				0px/0 a;
+	text-shadow:		none;
+	color:				transparent;
+	background-color:	transparent;
+	border:				0;
 }
 .hide-img() {
-	display:		block;
-	text-indent:	100%;
-	white-space:	nowrap;
-	overflow:		hidden;
+	display:			block;
+	text-indent:		100%;
+	white-space:		nowrap;
+	overflow:			hidden;
+}
+.hide-block()			{
+	border:				0;
+	clip:				rect(0 0 0 0);
+	height:				1px;
+	margin:				-1px;
+	overflow:			hidden;
+	padding:			0;
+	position:			absolute;
+	width:				1px;
+	
+	&.focusable:active,
+	&.focusable:focus {
+		width:			auto;
+		height:			auto;
+		margin:			0;
+		clip:			auto;
+		overflow:		visible;
+		position:		static;
+	}
+}
+.show-block()	{
+	width:				auto;
+	height:				auto;
+	margin:				0;
+	position:			relative;
+	clip:				auto;
 }
 .pseudo-clear() {
-	content:		"";
-	width:			0;
-	height:			0;
-	margin:			0;
-	padding:		0;
-	display:		block;
+	content:			"";
+	width:				0;
+	height:				0;
+	margin:				0;
+	padding:			0;
+	display:			block;
 }
 .hasLayout() {
 	.lte7 & {
-		display:	inline;
-		zoom:		1;
+		display:		inline;
+		zoom:			1;
 	}
 }
 .inline-block-fallback()	{
-	display:		inline-block;
+	display:			inline-block;
 
 	// Mixins
 	.hasLayout();
+}
+.hidden()	{
+	display:			none !important;
+	visibility:			hidden;
+}
+.word-wrap()	{
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
 }

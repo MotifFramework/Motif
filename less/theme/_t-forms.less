@@ -24,17 +24,16 @@ textarea {
 	// Create
 	width:					100%;
 	font-size:				1em;
-	padding:				@quarter-vertical-bordered @input-side-padding;
+	padding:				@quarter-vertical @input-side-padding;
 	background:				@white;
 	border:					@1px solid @grey;
 	outline:				none;
-	
+
 	// Mixins
-	.source-sans-regular();
-	.box-sizing(border-box);
+	.body-text();
 	.border-radius(@2px);
 	.box-shadow-inset(0, @1px, @2px, @light-grey);
-	
+
 	&:hover,
 	&:focus,
 	&:active,
@@ -172,11 +171,9 @@ legend {
 
 	// Variables
 	@1px:							1em * (1 / @base-text-size);
-	@3px:							1em * (3 / @base-text-size);
 	@5px:							1em * (5 / @base-text-size);
 	@7px:							1em * (7 / @base-text-size);
 
-	@border-radius:					@3px;
 	@wisp-width:					@5px;
 	@bubble-color:					@white;
 	@shadow:						fadeout(@black, 50%);
@@ -189,7 +186,7 @@ legend {
 	position:						relative;
 
 	// Mixins
-	.border-radius(@border-radius);
+	.border-radius(@default-radius);
 	.box-shadow(0, 0, @shadow-radius, @shadow);
 	.transition(opacity, 0.15s, linear);
 
@@ -239,8 +236,8 @@ legend {
 		}
 	}
 	&.input-alert	{
-		padding:						@quarter-vertical @half-vertical;
-		color:							@white;
+		padding:					@quarter-vertical @half-vertical;
+		color:						@white;
 
 		// Mixins
 		.body-text();

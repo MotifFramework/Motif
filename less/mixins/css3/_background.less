@@ -2,12 +2,14 @@
                             @stop2: 50% ,   @color2: #BBB )
 {
     background-color: @color2; /* fallback color if gradients are not supported */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(@stop1,@color1), color-stop(@stop2,@color2)); 
     background-image: -webkit-linear-gradient(top, @color1, @color2); 
     background-image:    -moz-linear-gradient(top, @color1, @color2); /* For Fx 3.6 to Fx 15 */
     background-image:     -ms-linear-gradient(top, @color1, @color2); /* For IE 10 Platform Previews and Consumer Preview */
     background-image:      -o-linear-gradient(top, @color1, @color2); 
     background-image:         linear-gradient(to bottom, @color1, @color2); /* Standard syntax; must be the last statement */
 }
+
 
 .background-linear-gradient-and-image(@stop1: 0, @color1: #AAA, @stop2: 50%, @color2: #BBB, @repeat: no-repeat, @left: left, @top: top, @bgimg: img, @imgformat: jpg )
 {   

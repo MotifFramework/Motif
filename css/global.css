@@ -44,6 +44,12 @@ Set the appropriate `display` definitions for new HTML5 elements.
 The majority will be displayed `block`.
 
 */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
 }
@@ -114,7 +120,7 @@ textarea {
   font-family: sans-serif;
 }
 abbr[title] {
-  border-bottom: 1px dotted;
+  border: none;
 }
 i,
 cite,
@@ -143,7 +149,6 @@ menu,
 ul,
 ol,
 dl,
-address,
 table,
 figure {
   margin: 0;
@@ -215,7 +220,7 @@ sub {
   bottom: -0.25em;
 }
 a:focus {
-  outline: 0;
+  outline: thin dotted;
 }
 a:active,
 a:hover {
@@ -293,7 +298,7 @@ input::-moz-focus-inner {
 }
 input[type="checkbox"],
 input[type="radio"] {
-  margin: 2px;
+  margin: 3px;
   padding: 0;
   box-sizing: border-box;
   position: relative;
@@ -604,174 +609,291 @@ First, we have classes for aligning text and floating images.
   font: 0px/0 a;
   text-shadow: none;
   color: transparent;
+  background-color: transparent;
+  border: 0;
 }
 /*
 
-Fixed Grid
+Responsive Grid
 ----------
 
-Fixed-width grid system for complex column layout. Very lego.
+Responsive fluid-width grid system for complex column layout. Very lego.
 
 Each row of columns must be wrapped by an element with the `.row` class. 
 Columns all have the `.columns` class along with an additional class 
 specifying its width.
 
-See: http://gridsystemgenerator.com
-
-	<div class="wireframe">
-		<div class="row">
-			<div class="twelve columns block">12 Column Grid System</div>
-		</div>
-		<div class="row">
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-			<div class="one columns block">1</div>
-		</div>
-		<div class="row">
-			<div class="two columns block">2</div>
-			<div class="two columns block">2</div>
-			<div class="two columns block">2</div>
-			<div class="two columns block">2</div>
-			<div class="two columns block">2</div>
-			<div class="two columns block">2</div>
-		</div>
-		<div class="row">
-			<div class="three columns block">3</div>
-			<div class="three columns block">3</div>
-			<div class="three columns block">3</div>
-			<div class="three columns block">3</div>
-		</div>
-		<div class="row">
-			<div class="four columns block">4</div>
-			<div class="four columns block">4</div>
-			<div class="four columns block">4</div>
-		</div>
-		<div class="row">
-			<div class="five columns block">5</div>
-			<div class="two columns block">2</div>
-			<div class="five columns block">5</div>
-		</div>
-		<div class="row">
-			<div class="six columns block">6</div>
-			<div class="six columns block">6</div>
-		</div>
-		<div class="row">
-			<div class="seven columns block">7</div>
-			<div class="three columns block">3</div>
-			<div class="two columns block">2</div>
-		</div>
-		<div class="row">
-			<div class="eight columns block">8</div>
-			<div class="four columns block">4</div>
-		</div>
-		<div class="row">
-			<div class="nine columns block">9</div>
-			<div class="three columns block">3</div>
-		</div>
-	</div>
-
 */
-.columns {
-  margin-left: 1.125em;
-  margin-right: 1.125em;
-  display: inline;
-  float: left;
+@media only screen and (max-width: 47.9375em) {
+  /*
+  
+  ### Mobile Responsive Grid ###
+  
+  `.gm-` signifies "grid, mobile"
+  
+  */
+  .gm-row {
+    margin-left: -0.75em;
+    margin-right: -0.75em;
+  }
+  .lte7 .gm-row {
+    zoom: 1;
+  }
+  .gm-row:before,
+  .gm-row:after {
+    content: "\0020";
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .gm-row:after {
+    clear: both;
+  }
+  .gm-row.gm-rtl .gm-columns {
+    float: right;
+  }
+  .gm-columns {
+    display: inline;
+    float: left;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+  }
+  .gm-half {
+    width: 50%;
+  }
+  .gm-third {
+    width: 33.333333333333336%;
+  }
 }
-.row {
-  margin-left: -1.125em;
-  margin-right: -1.125em;
+@media only screen and (min-width: 48em) and (max-width: 61.9375em) {
+  /*
+  
+  ### Tablet Responsive Grid ###
+  
+  `.gt-` signifies "grid, tablet"
+  
+  */
+  .gt-row {
+    margin-left: -1em;
+    margin-right: -1em;
+  }
+  .lte7 .gt-row {
+    zoom: 1;
+  }
+  .gt-row:before,
+  .gt-row:after {
+    content: "\0020";
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .gt-row:after {
+    clear: both;
+  }
+  .gt-row.gt-rtl .gt-columns {
+    float: right;
+  }
+  .gt-row.gt-ltr .gt-columns {
+    float: left;
+  }
+  .gt-columns {
+    display: inline;
+    float: left;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .gt-2of9 {
+    width: 22.22222222222222%;
+  }
+  .gt-quarter {
+    width: 25%;
+  }
+  .gt-3of9,
+  .gt-2of6,
+  .gt-third {
+    width: 33.33333333333333%;
+  }
+  .gt-4of9 {
+    width: 44.44444444444444%;
+  }
+  .gt-half {
+    width: 50%;
+  }
+  .gt-5of9 {
+    width: 55.55555555555556%;
+  }
+  .gt-2of5 {
+    width: 40%;
+  }
+  .gt-3of5 {
+    width: 60%;
+  }
+  .gt-6of9,
+  .gt-4of6,
+  .gt-two-thirds {
+    width: 66.66666666666666%;
+  }
+  .gt-three-quarters {
+    width: 75%;
+  }
+  .gt-7of9 {
+    width: 77.77777777777779%;
+  }
+  .gt-2of7 {
+    width: 28.57142857142857%;
+  }
+  .gt-3of7 {
+    width: 42.857142857142854%;
+  }
+  .gt-4of7 {
+    width: 57.14285714285714%;
+  }
+  .gt-5of7 {
+    width: 71.42857142857143%;
+  }
+  .gt-full {
+    width: 100%;
+  }
+  .gt-clear {
+    clear: both;
+  }
 }
-.lte7 .row {
-  zoom: 1;
+@media only screen and (min-width: 62em) {
+  /*
+  
+  ### Desktop Responsive Grid ###
+  
+  `.gd-` signifies "grid, desktop"
+  
+  */
+  .gd-row {
+    margin-left: -1.125em;
+    margin-right: -1.125em;
+  }
+  .lte7 .gd-row {
+    zoom: 1;
+  }
+  .gd-row:before,
+  .gd-row:after {
+    content: "\0020";
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .gd-row:after {
+    clear: both;
+  }
+  .gd-row.gd-rtl .gd-columns {
+    float: right;
+  }
+  .gd-row.gd-ltr .gd-columns {
+    float: left;
+  }
+  .gd-columns {
+    display: inline;
+    float: left;
+    padding-left: 1.125em;
+    padding-right: 1.125em;
+  }
+  .gd-2of12 {
+    width: 16.666666666666664%;
+  }
+  .gd-3of12,
+  .gd-2of8,
+  .gd-quarter {
+    width: 25%;
+  }
+  .gd-4of12,
+  .gd-3of9,
+  .gd-2of6,
+  .gd-third {
+    width: 33.33333333333333%;
+  }
+  .gd-5of12 {
+    width: 41.66666666666667%;
+  }
+  .gd-2of10,
+  .gd-1of5 {
+    width: 20%;
+  }
+  .gd-4of10,
+  .gd-2of5 {
+    width: 40%;
+  }
+  .gd-6of10,
+  .gd-3of5 {
+    width: 60%;
+  }
+  .gd-8of10,
+  .gd-4of5 {
+    width: 80%;
+  }
+  .gd-6of12,
+  .gd-3of6,
+  .gd-4of8,
+  .gd-5of10,
+  .gd-2of4,
+  .gd-half {
+    width: 50%;
+  }
+  .gd-7of12 {
+    width: 58.333333333333336%;
+  }
+  .gd-2of7 {
+    width: 28.57142857142857%;
+  }
+  .gd-3of7 {
+    width: 42.857142857142854%;
+  }
+  .gd-4of7 {
+    width: 57.14285714285714%;
+  }
+  .gd-5of7 {
+    width: 71.42857142857143%;
+  }
+  .gd-8of12,
+  .gd-4of6,
+  .gd-6of9,
+  .gd-two-thirds {
+    width: 66.66666666666666%;
+  }
+  .gd-3of8 {
+    width: 37.5%;
+  }
+  .gd-5of8 {
+    width: 62.5%;
+  }
+  .gd-6of8,
+  .gd-9of12,
+  .gd-three-quarters {
+    width: 75%;
+  }
+  .gd-2of9 {
+    width: 22.22222222222222%;
+  }
+  .gd-5of9 {
+    width: 55.55555555555556%;
+  }
+  .gd-7of9 {
+    width: 77.77777777777779%;
+  }
+  .gd-10of12 {
+    width: 83.33333333333334%;
+  }
+  .gd-3of10 {
+    width: 30%;
+  }
+  .gd-7of10 {
+    width: 70%;
+  }
+  .gd-full {
+    width: 100%;
+  }
+  .gd-clear {
+    clear: both;
+  }
 }
-.row:before,
-.row:after {
-  content: "\0020";
-  height: 0;
-  display: block;
-  overflow: hidden;
-}
-.row:after {
-  clear: both;
-}
-.row.rtl .columns {
-  float: right;
-}
-/* .one {
-	#fixed > .grid(1);
-}
-.two {
-	#fixed > .grid(2);
-}
-.three {
-	#fixed > .grid(3);
-}
-.four {
-	#fixed > .grid(4);
-}
-.five {
-	#fixed > .grid(5);
-}
-.six {
-	#fixed > .grid(6);
-}
-.seven {
-	#fixed > .grid(7);
-}
-.eight {
-	#fixed > .grid(8);
-}
-.nine {
-	#fixed > .grid(9);
-}
-.ten {
-	#fixed > .grid(10);
-}
-.eleven {
-	#fixed > .grid(11);
-}
-.twelve {
-	#fixed > .grid(12);
-}
-
-// Grid Offset
-
-.offset-by-one {
-	#fixed > .offset(1);
-}
-.offset-by-two {
-	#fixed > .offset(2);
-}
-.offset-by-three {
-	#fixed > .offset(3);
-}
-.offset-by-four {
-	#fixed > .offset(4);
-}
-.offset-by-five {
-	#fixed > .offset(5);
-}
-.offset-by-six {
-	#fixed > .offset(6);
-}
-.offset-by-seven {
-	#fixed > .offset(7);
-}
-.offset-by-eight {
-	#fixed > .offset(8);
-}
-.offset-by-nine {
-	#fixed > .offset(9);
-} *//*
+/*
 
 Modules
 -------
@@ -822,33 +944,6 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
 .media-object .desc {
   display: block;
 }
-@media only screen and (min-width: 30em) {
-  .media-object .object {
-    max-width: 40%;
-    margin-right: 2.25em;
-    float: left;
-  }
-  .media-object .object img {
-    display: block;
-  }
-  .media-object .desc > :first-child {
-    margin-top: 0;
-  }
-  .media-object.half {
-    margin-left: 0.5625em;
-    margin-right: 0.5625em;
-  }
-  .media-object.half .object {
-    margin-left: 0.5625em;
-    margin-right: 0.5625em;
-  }
-}
-@media only screen and (min-width: 48em) {
-  .media-object .object {
-    max-width: 50%;
-    margin-right: 1.125em;
-  }
-}
 /*
 
 ### Media Grid ###
@@ -885,43 +980,31 @@ the widths.
 .media-grid {
   margin-top: 0;
   padding: 0;
+  letter-spacing: -0.31em;
+  word-spacing: -0.43em;
+}
+.lte7 .media-grid {
+  letter-spacing: normal;
 }
 .media-grid .object {
   list-style: none outside none;
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  display: inline-block;
   margin-top: 1.25em;
+}
+.lte7 .media-grid .object {
+  display: inline;
+  zoom: 1;
 }
 .media-grid .object img {
   display: block;
 }
-@media only screen and (min-width: 30em) {
-  .media-grid {
-    letter-spacing: -0.31em;
-    word-spacing: -0.43em;
-    width: 103.75000000000001%;
-    margin-left: -1.875%;
-    margin-right: -1.875%;
-  }
-  .lte7 .media-grid {
-    letter-spacing: normal;
-  }
-  .media-grid .object {
-    letter-spacing: normal;
-    word-spacing: normal;
-    vertical-align: top;
-    width: 46.3855421686747%;
-    margin-left: 1.8072289156626504%;
-    margin-right: 1.8072289156626504%;
-    display: inline-block;
-  }
-  .lte7 .media-grid .object {
-    display: inline;
-    zoom: 1;
-  }
-}
-@media only screen and (min-width: 48em) {
-  .media-grid .object {
-    width: 29.71887550200803%;
-  }
+.media-grid .object.gm-columns,
+.media-grid .object.gt-columns,
+.media-grid .object.gd-columns {
+  float: none;
 }
 /*
 
@@ -960,24 +1043,6 @@ the skeleton of a horizontal nav without adding too much style (yet).
 .lte7 .nav.forceful a {
   display: block;
 }
-@media only screen and (min-width: 30em) {
-  .lte7 .nav.forceful {
-    zoom: 1;
-  }
-  .nav.forceful:before,
-  .nav.forceful:after {
-    content: "\0020";
-    height: 0;
-    display: block;
-    overflow: hidden;
-  }
-  .nav.forceful:after {
-    clear: both;
-  }
-  .nav.forceful li {
-    float: left;
-  }
-}
 /*
 
 ### Tabs ###
@@ -1013,13 +1078,13 @@ that allows module embedding and basic styling.
 	</section>
 
 */
-.tabs .section {
+.js .tabs .section {
   position: relative;
 }
-.tabs .tab {
+.js .tabs .tab {
   display: none;
 }
-.tabs .tab.is-current {
+.js .tabs .tab.is-current {
   display: block;
 }
 /*
@@ -1141,22 +1206,6 @@ that allows module embedding and basic styling.
 }
 .anonymous-pro-bold {
   font-family: "Anonymous Pro Bold", Courier, monospace;
-}
-.symbolset,
-.symbolset-social,
-.symbolset-social-circle {
-  font-size: 0.75em;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  text-rendering: optimizeLegibility;
-  white-space: nowrap;
-  -webkit-font-feature-settings: "liga", "dlig";
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
 }
 .symbolset {
   font-family: "Symbolset";
@@ -1291,33 +1340,9 @@ body {
   zoom: 1;
 }
 .icon.social {
-  font-size: 0.75em;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  text-rendering: optimizeLegibility;
-  white-space: nowrap;
-  -webkit-font-feature-settings: "liga", "dlig";
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
   font-family: "Symbolset Social";
 }
 .icon.social-circle {
-  font-size: 0.75em;
-  font-style: normal;
-  font-weight: normal;
-  text-decoration: none;
-  text-rendering: optimizeLegibility;
-  white-space: nowrap;
-  -webkit-font-feature-settings: "liga", "dlig";
-  -moz-font-feature-settings: "liga=1, dlig=1";
-  -moz-font-feature-settings: "liga", "dlig";
-  -ms-font-feature-settings: "liga", "dlig";
-  -o-font-feature-settings: "liga", "dlig";
-  font-feature-settings: "liga", "dlig";
   font-family: "Symbolset Social Circle";
 }
 .icon.prepended {
@@ -1360,6 +1385,7 @@ body {
   background-color: #dbdada;
   /* fallback color if gradients are not supported */
 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(100%, #dbdada));
   background-image: -webkit-linear-gradient(top, #ffffff, #dbdada);
   background-image: -moz-linear-gradient(top, #ffffff, #dbdada);
   /* For Fx 3.6 to Fx 15 */
@@ -1461,6 +1487,7 @@ p .button {
   background-color: #133c5a;
   /* fallback color if gradients are not supported */
 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #184b6f), color-stop(100%, #133c5a));
   background-image: -webkit-linear-gradient(top, #184b6f, #133c5a);
   background-image: -moz-linear-gradient(top, #184b6f, #133c5a);
   /* For Fx 3.6 to Fx 15 */
@@ -1485,6 +1512,7 @@ p .button {
   background-color: #0f2e45;
   /* fallback color if gradients are not supported */
 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #133c5a), color-stop(100%, #0f2e45));
   background-image: -webkit-linear-gradient(top, #133c5a, #0f2e45);
   background-image: -moz-linear-gradient(top, #133c5a, #0f2e45);
   /* For Fx 3.6 to Fx 15 */
@@ -1549,18 +1577,18 @@ p .button {
   padding: 1.25em;
 }
 .panel.alert {
-  padding: 2.4375em;
-  border: 1px solid;
+  padding: 2.5em;
+  border: 0.0625em solid;
   border: 1px solid #e7e7e7;
   background-color: rgba(255, 255, 255, 0.050000000000000044);
   -webkit-border-radius: 0.3125em;
   -moz-border-radius: 0.3125em;
   -o-border-radius: 0.3125em;
   border-radius: 0.3125em;
-  -webkit-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  -webkit-box-shadow: 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
 }
 .panel.alert h1,
 .panel.alert h2,
@@ -1607,14 +1635,15 @@ p .button {
   color: #184b6f;
 }
 .panel.inset {
-  text-shadow: 0 1px 1px #ffffff;
-  -webkit-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -moz-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  -o-box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
-  box-shadow: inset 0 1px 3px rgba(67, 65, 66, 0.15000000000000002);
+  text-shadow: 0 0.0625em 0.0625em #ffffff;
+  -webkit-box-shadow: inset 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  -moz-box-shadow: inset 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  -o-box-shadow: inset 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
+  box-shadow: inset 0 0.0625em 0.1875em rgba(67, 65, 66, 0.15000000000000002);
   background-color: #fcfcfc;
   /* fallback color if gradients are not supported */
 
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e8e7e7), color-stop(100%, #fcfcfc));
   background-image: -webkit-linear-gradient(top, #e8e7e7, #fcfcfc);
   background-image: -moz-linear-gradient(top, #e8e7e7, #fcfcfc);
   /* For Fx 3.6 to Fx 15 */
@@ -1690,6 +1719,16 @@ floating it and the ordered list and adding a `>` divider.
   border-top: 0.1875em solid #489cd8;
   z-index: 60;
 }
+.figure {
+  margin-top: 1.25em;
+}
+.figure.float-left,
+.figure.float-right {
+  float: none;
+}
+.figure img {
+  display: block;
+}
 /*
 
 Themed Forms
@@ -1705,15 +1744,11 @@ input,
 textarea {
   width: 100%;
   font-size: 1em;
-  padding: 0.25em 0.25em;
+  padding: 0.3125em 0.25em;
   background: #ffffff;
   border: 0.0625em solid #a9a6a7;
   outline: none;
   font-family: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
   -webkit-border-radius: 0.125em;
   -moz-border-radius: 0.125em;
   -o-border-radius: 0.125em;
@@ -1849,10 +1884,10 @@ legend.input-label {
   padding: 0.625em;
   background-color: #ffffff;
   position: relative;
-  -webkit-border-radius: 0.1875em;
-  -moz-border-radius: 0.1875em;
-  -o-border-radius: 0.1875em;
-  border-radius: 0.1875em;
+  -webkit-border-radius: 0.3125em;
+  -moz-border-radius: 0.3125em;
+  -o-border-radius: 0.3125em;
+  border-radius: 0.3125em;
   -webkit-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
   -o-box-shadow: 0 0 0.4375em rgba(0, 0, 0, 0.5);
@@ -1966,7 +2001,64 @@ table td + td {
 table tr + tr td {
   border-top: 0.0625em solid #cfcdcd;
 }
+.wrapper {
+  width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Uncomment this for Responsive */
 @media only screen and (min-width: 30em) {
+  .media-object .object {
+    max-width: 40%;
+    margin-right: 2.25em;
+    float: left;
+  }
+  .media-object .desc > :first-child {
+    margin-top: 0;
+  }
+  .media-object.half {
+    margin-left: 0.5625em;
+    margin-right: 0.5625em;
+  }
+  .media-object.half .object {
+    margin-left: 0.5625em;
+    margin-right: 0.5625em;
+  }
+  .lte7 .nav.forceful {
+    zoom: 1;
+  }
+  .nav.forceful:before,
+  .nav.forceful:after {
+    content: "\0020";
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
+  .nav.forceful:after {
+    clear: both;
+  }
+  .nav.forceful li {
+    float: left;
+  }
+  .figure {
+    max-width: 50%;
+  }
+  .figure.float-left,
+  .figure.float-right {
+    padding-bottom: 0.625em;
+    margin-top: 1.875em;
+  }
+  .figure.float-left {
+    float: left;
+    padding-right: 2.25em;
+  }
+  .figure.float-right {
+    float: right;
+    padding-left: 2.25em;
+  }
+  .figure img {
+    display: block;
+  }
   table th,
   table td {
     padding: 0.625em 1.125em 0.5625em;
@@ -1976,166 +2068,18 @@ table tr + tr td {
     border-bottom: 0.0625em solid #cfcdcd;
   }
 }
-/*
-
-Wireframe
----------
-
-Superfluous. Remove when unnecessary.
-
-*/
-.wireframe .row {
-  width: 103.75000000000001%;
-  margin-left: -1.875%;
-  margin-right: -1.875%;
-}
-.wireframe .one {
-  width: 4.718875502008032%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .two {
-  width: 13.052208835341366%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .three {
-  width: 21.385542168674696%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .four {
-  width: 29.71887550200803%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .five {
-  width: 38.05220883534137%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .six {
-  width: 46.3855421686747%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .seven {
-  width: 54.71887550200803%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .eight {
-  width: 63.05220883534136%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .nine {
-  width: 71.3855421686747%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .ten {
-  width: 79.71887550200803%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .eleven {
-  width: 88.05220883534136%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .twelve {
-  width: 96.3855421686747%;
-  margin-left: 1.8072289156626504%;
-  margin-right: 1.8072289156626504%;
-  display: inline;
-  float: left;
-}
-.wireframe .block {
-  color: #ffffff;
-  text-align: center;
-  background: #2575ae;
-  margin-top: 1.25em;
-  padding-top: 1.25em;
-  padding-bottom: 1.25em;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-}
-.wrapper {
-  margin: 0 3.614457831325301%;
-}
-/* Uncomment this for Responsive */
-@media only screen and (min-width: 30em) {
-  /* .row {
-  	#fluid > .row(@total-columns);
-  }
-  .columns {
-  	&.one {
-  		#fluid > .column(12, @total-columns);
-  	}
-  	&.two {
-  		#fluid > .column(12, @total-columns);
-  	}
-  	&.three {
-  		#fluid > .column(12, @total-columns);
-  	}
-  	&.nine {
-  		#fluid > .column(12, @total-columns);
-  	}
-  } */
-}
 @media only screen and (min-width: 48em) {
-  /* .row {
-  	#fluid > .row(@total-columns);
+  .media-object .object {
+    max-width: 50%;
+    margin-right: 2.25em;
   }
-  .columns {
-  	&.one {
-  		#fluid > .column(1, @total-columns);
-  	}
-  	&.two {
-  		#fluid > .column(2, @total-columns);
-  	}
-  	&.three {
-  		#fluid > .column(3, @total-columns);
-  	}
-  	&.nine {
-  		#fluid > .column(9, @total-columns);
-  	}
-  } */
 }
 @media only screen and (min-width: 62em) {
-  /* .wrapper,
-  .header-wrapper {
-  	width:							88%;
-  } */
+  
 }
 @media only screen and (min-width: 64em) {
-  /* .wrapper,
-  .header-wrapper {
-  	width:							60em;
-  } */
+  .wrapper {
+    width: 80%;
+    max-width: 71.875em;
+  }
 }

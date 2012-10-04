@@ -53,42 +53,6 @@ See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundr
 	}
 }
 
-@media only screen and (min-width: 30em) {
-	.media-object {
-		.object {
-			max-width:			40%;
-			margin-right:		@double-side;
-			float:				left;
-	
-			img {
-				display:		block;
-			}
-		}
-		.desc {	
-			& > :first-child {
-				margin-top:		0;
-			}
-		}
-		&.half {
-			margin-left:		@half-side;
-			margin-right:		@half-side;
-	
-			.object {
-				margin-left:	@half-side;
-				margin-right:	@half-side;
-			}
-		}
-	}
-}
-@media only screen and (min-width: 48em) {
-	.media-object	{
-		.object	{
-			max-width:			50%;
-			margin-right:		@full-side;
-		}
-	}
-}
-
 /*
 
 ### Media Grid ###
@@ -126,50 +90,33 @@ the widths.
 .media-grid	{
 	margin-top:				0;
 	padding:				0;
+	letter-spacing:			-0.31em;
+	word-spacing:			-0.43em;
+
+	.lte7 & {
+		letter-spacing:		normal;
+	}
 	.object	{
 		list-style:			none outside none;
+		letter-spacing:		normal;
+		word-spacing:		normal;
+		vertical-align:		top;
 
 		// Mixins
+		.inline-block-fallback();
 		.margin-leader();
 
 		img {
 			display:		block;
 		}
-	}
-}
-
-@media only screen and (min-width: 30em) {
-	.media-grid {
-		letter-spacing:		-0.31em;
-		word-spacing:		-0.43em;
-
-		// Mixins
-		#fluid > .row();
-
-		.lte7 & {
-			letter-spacing:	normal;
-		}
-		.object {
-			letter-spacing:	normal;
-			word-spacing:	normal;
-			vertical-align:	top;
-
-			// Mixins
-			#fluid > .grid-width(6);
-			#fluid > .grid-margin();
-			.inline-block-fallback();
+		&.gm-columns,
+		&.gt-columns,
+		&.gd-columns	{
+			float:			none;
 		}
 	}
 }
-@media only screen and (min-width: 48em) {
-	.media-grid	{
-		.object	{
 
-			// Mixins
-			#fluid > .grid-width(4);
-		}
-	}
-}
 
 /*
 
@@ -206,19 +153,6 @@ the skeleton of a horizontal nav without adding too much style (yet).
 			.lte7 & a {
 				display:	block;
 			}
-	}
-}
-@media only screen and (min-width: 30em) {
-	.nav {
-		&.forceful {
-	
-			// Mixins
-			.clearfix();
-	
-			li {
-				float:			left;
-			}
-		}
 	}
 }
 
@@ -259,15 +193,17 @@ that allows module embedding and basic styling.
 
 */
 
-.tabs {
-	.section {
-		position:					relative;
-	}
-	.tab {
-		display:					none;
+.js	{
+	.tabs {
+		.section {
+			position:					relative;
+		}
+		.tab {
+			display:					none;
 
-		&.is-current {
-			display:				block;
+			&.is-current {
+				display:				block;
+			}
 		}
 	}
 }
