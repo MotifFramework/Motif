@@ -2010,85 +2010,214 @@ table td + td {
 table tr + tr td {
   border-top: 0.0625em solid #cfcdcd;
 }
+/*
+
+### Desktop Responsive Grid ###
+
+`.gd-` signifies "grid, desktop"
+
+*/
+.gd-row {
+  margin-left: -1.125em;
+  margin-right: -1.125em;
+}
+.lte7 .gd-row {
+  zoom: 1;
+}
+.gd-row:before,
+.gd-row:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.gd-row:after {
+  clear: both;
+}
+.gd-row.gd-rtl .gd-columns {
+  float: right;
+}
+.gd-row.gd-ltr .gd-columns {
+  float: left;
+}
+.gd-columns {
+  display: inline;
+  float: left;
+  padding-left: 1.125em;
+  padding-right: 1.125em;
+}
+.gd-2of12 {
+  width: 16.666666666666664%;
+}
+.gd-3of12,
+.gd-2of8,
+.gd-quarter {
+  width: 25%;
+}
+.gd-4of12,
+.gd-3of9,
+.gd-2of6,
+.gd-third {
+  width: 33.33333333333333%;
+}
+.gd-5of12 {
+  width: 41.66666666666667%;
+}
+.gd-2of10,
+.gd-1of5 {
+  width: 20%;
+}
+.gd-4of10,
+.gd-2of5 {
+  width: 40%;
+}
+.gd-6of10,
+.gd-3of5 {
+  width: 60%;
+}
+.gd-8of10,
+.gd-4of5 {
+  width: 80%;
+}
+.gd-6of12,
+.gd-3of6,
+.gd-4of8,
+.gd-5of10,
+.gd-2of4,
+.gd-half {
+  width: 50%;
+}
+.gd-7of12 {
+  width: 58.333333333333336%;
+}
+.gd-2of7 {
+  width: 28.57142857142857%;
+}
+.gd-3of7 {
+  width: 42.857142857142854%;
+}
+.gd-4of7 {
+  width: 57.14285714285714%;
+}
+.gd-5of7 {
+  width: 71.42857142857143%;
+}
+.gd-8of12,
+.gd-4of6,
+.gd-6of9,
+.gd-two-thirds {
+  width: 66.66666666666666%;
+}
+.gd-3of8 {
+  width: 37.5%;
+}
+.gd-5of8 {
+  width: 62.5%;
+}
+.gd-6of8,
+.gd-9of12,
+.gd-three-quarters {
+  width: 75%;
+}
+.gd-2of9 {
+  width: 22.22222222222222%;
+}
+.gd-5of9 {
+  width: 55.55555555555556%;
+}
+.gd-7of9 {
+  width: 77.77777777777779%;
+}
+.gd-10of12 {
+  width: 83.33333333333334%;
+}
+.gd-3of10 {
+  width: 30%;
+}
+.gd-7of10 {
+  width: 70%;
+}
+.gd-full {
+  width: 100%;
+}
+.gd-clear {
+  clear: both;
+}
 .wrapper {
   width: 92%;
   margin-left: auto;
   margin-right: auto;
 }
-/* Uncomment this for Responsive */
-@media only screen and (min-width: 30em) {
-  .media-object .object {
-    max-width: 40%;
-    margin-right: 2.25em;
-    float: left;
-  }
-  .media-object .desc > :first-child {
-    margin-top: 0;
-  }
-  .media-object.half {
-    margin-left: 0.5625em;
-    margin-right: 0.5625em;
-  }
-  .media-object.half .object {
-    margin-left: 0.5625em;
-    margin-right: 0.5625em;
-  }
-  .lte7 .nav.forceful {
-    zoom: 1;
-  }
-  .nav.forceful:before,
-  .nav.forceful:after {
-    content: "\0020";
-    height: 0;
-    display: block;
-    overflow: hidden;
-  }
-  .nav.forceful:after {
-    clear: both;
-  }
-  .nav.forceful li {
-    float: left;
-  }
-  .figure {
-    max-width: 50%;
-  }
-  .figure.float-left,
-  .figure.float-right {
-    padding-bottom: 0.625em;
-    margin-top: 1.875em;
-  }
-  .figure.float-left {
-    float: left;
-    padding-right: 2.25em;
-  }
-  .figure.float-right {
-    float: right;
-    padding-left: 2.25em;
-  }
-  .figure img {
-    display: block;
-  }
-  table th,
-  table td {
-    padding: 0.625em 1.125em 0.5625em;
-  }
-  table th {
-    padding-top: 0.5625em;
-    border-bottom: 0.0625em solid #cfcdcd;
-  }
+.media-object .object {
+  max-width: 40%;
+  margin-right: 2.25em;
+  float: left;
 }
-@media only screen and (min-width: 48em) {
-  .media-object .object {
-    max-width: 50%;
-    margin-right: 2.25em;
-  }
+.media-object .desc > :first-child {
+  margin-top: 0;
 }
-@media only screen and (min-width: 62em) {
-  
+.media-object.half {
+  margin-left: 0.5625em;
+  margin-right: 0.5625em;
 }
-@media only screen and (min-width: 64em) {
-  .wrapper {
-    width: 80%;
-    max-width: 71.875em;
-  }
+.media-object.half .object {
+  margin-left: 0.5625em;
+  margin-right: 0.5625em;
+}
+.lte7 .nav.forceful {
+  zoom: 1;
+}
+.nav.forceful:before,
+.nav.forceful:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.nav.forceful:after {
+  clear: both;
+}
+.nav.forceful li {
+  float: left;
+}
+.figure {
+  max-width: 50%;
+}
+.figure.float-left,
+.figure.float-right {
+  padding-bottom: 0.625em;
+  margin-top: 1.875em;
+}
+.figure.float-left {
+  float: left;
+  padding-right: 2.25em;
+}
+.figure.float-right {
+  float: right;
+  padding-left: 2.25em;
+}
+.figure img {
+  display: block;
+}
+table th,
+table td {
+  padding: 0.625em 1.125em 0.5625em;
+}
+table th {
+  padding-top: 0.5625em;
+  border-bottom: 0.0625em solid #cfcdcd;
+}
+.media-object .object {
+  max-width: 50%;
+  margin-right: 2.25em;
+}
+html,
+body {
+  min-width: 992px;
+}
+.wrapper {
+  width: 92%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }

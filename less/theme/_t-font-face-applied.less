@@ -26,6 +26,57 @@
 .symbolset-social-circle {
 	font-family:					@symbolset-social-circle;
 }
+[data-icon-position="solo"]:before,
+[data-icon-position="before"]:before,
+[data-icon-position="after"]:after,
+.data-icon	{
+	content:						attr(data-icon);
+	font-weight:					normal;
+	-webkit-font-smoothing:			antialiased;
+	vertical-align:					text-top;
+	font-size:						0.75em;
+	font-style:						normal;
+	font-weight:					normal;
+	text-decoration:				none;
+	text-rendering:					optimizeLegibility;
+	speak:							none;
+	white-space:					nowrap;
+
+	// Mixins
+	.inline-block-fallback();
+	.box-sizing(border-box);
+	.symbolset();
+}
+[data-icon-position="before"]	{
+	&:before,
+	> .data-icon	{
+
+		// Variables
+		@icon-padding:				1em * (5 / 12);
+
+		// Create
+		padding-right:				@icon-padding;
+	}
+}
+[data-icon-position="after"]	{
+	&:after,
+	> .data-icon	{
+
+		// Variables
+		@icon-padding:				1em * (5 / 12);
+
+		// Create
+		padding-left:				@icon-padding;
+	}
+}
+.lte8.js {
+	[data-icon-position="before"]:before,
+	[data-icon-position="solo"]:before,
+	[data-icon-position="after"]:after	{
+		content:					none !important;
+		display:					none;
+	}
+}
 
 body,
 .body-text {

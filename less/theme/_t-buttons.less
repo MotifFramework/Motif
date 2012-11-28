@@ -6,6 +6,12 @@
 	@gradient-top:				@white;
 	@gradient-bottom:			lighten(@light-grey, 5%);
 
+	// Shadow vars
+	@inset-shadow:				fadeout(@white, 60%);
+	@outset-shadow:				fadeout(@black, 50%);
+	@var-shadow-in:				0 @1px @1px @inset-shadow;
+	@var-shadow-out:			0 @2px @2px -@1px @outset-shadow;
+
 	// Baseline
 	width:						auto;
 	height:						auto;
@@ -34,7 +40,7 @@
 	.source-sans-bold();
 	.border-radius(@3px);
 	.inline-block-fallback();
-	.box-shadow-in-out((0 @1px @1px fadeout(@white, 60%)), (0 @2px @2px -@1px fadeout(@black, 50%)));
+	.box-shadow-in-out(@var-shadow-in, @var-shadow-out);
 	.background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
 	
 	&:hover,
@@ -92,42 +98,26 @@
 	}
 	&.blue,
 	&.primary {
-		color:					@blue;
 
-		&:hover,
-		&:focus {
-			color:				darken(@blue, 10%);
-			border-color:		darken(@blue, 10%);
-		}
+		// Mixins
+		.m-button-color(@blue);
 	}
 	&.red,
 	&.danger {
-		color:					@red;
-		
-		&:hover,
-		&:focus {
-			color:				darken(@red, 10%);
-			border-color:		darken(@red, 10%);
-		}
+
+		// Mixins
+		.m-button-color(@red);
 	}
 	&.green,
 	&.success {
-		color:					@green;
-		
-		&:hover,
-		&:focus {
-			color:				darken(@green, 10%);
-			border-color:		darken(@green, 10%);
-		}
+
+		// Mixins
+		.m-button-color(@green);
 	}
 	&.black,
 	&.rogue {
-		color:					@light-black;
-		
-		&:hover,
-		&:focus {
-			color:				darken(@light-black, 10%);
-			border-color:		darken(@light-black, 10%);
-		}
+
+		// Mixins
+		.m-button-color(@light-black);
 	}
 }
