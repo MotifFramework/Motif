@@ -1,60 +1,32 @@
 $(document).ready(function() {
-	//(function($) {
-		$.fn.spin = function(opts, color) {
-			var presets = {
-				"tiny": { lines: 8, length: 2, width: 2, radius: 3 },
-				"small": { lines: 8, length: 4, width: 3, radius: 5 },
-				"large": { lines: 10, length: 8, width: 4, radius: 8 }
-			};
-			if (Spinner) {
-				return this.each(function() {
-					var $this = $(this),
-						data = $this.data();
 	
-					if (data.spinner) {
-						data.spinner.stop();
-						delete data.spinner;
-					}
-					if (opts !== false) {
-						if (typeof opts === "string") {
-							if (opts in presets) {
-								opts = presets[opts];
-							} else {
-								opts = {};
-							}
-							if (color) {
-								opts.color = color;
-							}
-						}
-						data.spinner = new Spinner($.extend({color: $this.css('color')}, opts)).spin(this);
-					}
-				});
-			} else {
-				throw "Spinner class not available.";
-			}
-		};
-	//})(jQuery);
-	
-	// Close alert boxes
-	$(".alert .close").click(function() {
-		$(this).parents(".alert").fadeOut();
-		return false;
-	});
-
 	// Insert Icons
 	$("[data-icon]").each(function(){
 		var	target			=	$(this),
 			iconPosition	=	target.attr("data-icon-position"),
-			icon			=	$("<i>" + target.attr("data-icon") + "</i>");
+			iconSet			=	target.attr("data-icon-set"),
+			icon			=	$("<i class='icon'>" + target.attr("data-icon") + "</i>");
 
 		icon.attr("aria-hidden", "true");
+
+		if (iconSet === "social") {
+			icon.addClass("social");
+		} else if (iconSet === "social-circle") {
+			icon.addClass("social-circle");
+		}
+
 		if (iconPosition === "append") {
-			icon.addClass("icon-appended");
+			icon.addClass("appended");
+			target.append(icon);
+		} else if (iconPosition === "solo") {
+			icon.addClass("solo");
 			target.append(icon);
 		} else {
+			icon.addClass("prepended");
 			target.prepend(icon);
 		}
 	});
+	
 
 	// Placeholder text for form inputs
 	$("input, textarea").placeholder();
@@ -107,11 +79,9 @@ $(document).ready(function() {
 	}
 
 	// Tabbed widget
-	$("[data-tabs]").lb_tabs();
-
-	// Modals
-	$("[data-modal]").lb_modal({
-		position	:	"absolute"
+	$("[data-reveal-group='tabbed-widget']").lb_reveal({
+		"trigger"	: 	"click",
+		"exclusive"	: 	"radio"
 	});
 
 	// Simple Wireframing

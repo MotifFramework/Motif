@@ -1,14 +1,17 @@
 @import "_core.less";
+@import "_base.less";
 
-/* -- Custom Styles -- */
-.wrapper {
-	width:	@grid-width - @base-margin;
-	margin:	0 auto;
+
+/* Uncomment this for Responsive */
+@media only screen and (min-width: 30em) {
+	@import "_480.less";
 }
-	.main-header {
-
-		.logo {
-			margin-bottom:	@base-vertical * 2px;
-			display:		inline-block;
-		}
-	}
+@media only screen and (min-width: 48em) {
+	@import "_768.less";
+}
+@media only screen and (min-width: 62em) {
+	@import "_992.less";
+}
+@media only screen and (min-width: 64em) {
+	@import "_1200.less";
+}

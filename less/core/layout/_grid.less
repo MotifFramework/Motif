@@ -1,0 +1,41 @@
+/*
+
+Responsive Grid
+----------
+
+Responsive fluid-width grid system for complex column layout. Very lego.
+
+Each row of columns must be wrapped by an element with the `.row` class. 
+Columns all have the `.columns` class along with an additional class 
+specifying its width.
+
+*/
+
+
+// Variables
+@mobile-screen:			480;
+@tablet-screen:			768;
+@desktop-screen:		992;
+
+@mobile-max:			1em * ((@tablet-screen - 1) / 16);
+@tablet-min:			1em * (@tablet-screen / 16);
+@tablet-max:			1em * ((@desktop-screen - 1) / 16);
+@desktop-min:			1em * (@desktop-screen / 16);
+
+
+// Media Queries
+
+// Cap off mobile grid at @mobile-max
+@media only screen and (max-width: @mobile-max) {
+	@import "grid/_grid-mobile.less";
+}
+
+// Tablet starts after @mobile-max and caps off under @desktop-min
+@media only screen and (min-width: @tablet-min) and (max-width: @tablet-max) {
+	@import "grid/_grid-tablet.less";
+}
+
+// Desktop has a minimum but no maximum
+@media only screen and (min-width: @desktop-min) {
+	@import "grid/_grid-desktop.less";
+}

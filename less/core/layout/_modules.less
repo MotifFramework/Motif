@@ -1,0 +1,247 @@
+/*
+
+Modules
+-------
+
+Flexible, generic, reusable components for layout and interaction.
+Some require `_vars.less`.
+
+*/
+
+/*
+
+### Media Object ###
+
+The Media Object is an image (or media-type) to the left with 
+(typically) descriptive content to the right. The media object 
+can be whatever size it wants, the basic format will remain the 
+same. (Text will **not** wrap.)  This has any number of 
+applications, such as a checkbox next to a label with lots of 
+text.
+
+See: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+
+	<div class="media-object">
+		<b class="object">
+			<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+		</b>
+		<div class="desc">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing 
+			elit. Maecenas eget risus libero, id venenatis ante. 
+			Curabitur iaculis turpis vitae velit luctus in luctus 
+			mi molestie. Curabitur bibendum magna lorem. Curabitur 
+			enim lectus, scelerisque non pellentesque in, suscipit 
+			eget nibh. Pellentesque vitae nunc vel tortor rhoncus 
+			euismod. Maecenas pretium porta ultricies. Quisque 
+			feugiat sem sit amet sapien consequat non fringilla 
+			leo suscipit.</p>
+		</div>
+	</div>
+
+*/
+
+.media-object {
+	&, .desc {
+		overflow:				hidden;
+	}
+	&.checkbox-item .object {
+		float:					left;
+		margin-right:			@quarter-side;
+	}
+	.desc {
+		display:				block;
+	}
+}
+
+/*
+
+### Media Grid ###
+
+The Media Grid allows you to place a grid of photos or videos 
+(catalog or retail products, etc.) without floating them, 
+alleviating the need to concern yourself with clearing the floats 
+should an object extend further than another.  The `.columns` 
+class can be applied to block or inline elements (`<b>`, `<span>`, 
+`<a>`, `<div>`) depending on your need.
+
+You can then apply grid-system classes to the .object to constrain 
+the widths.
+
+	<ul class="media-grid">
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+		<li>
+			<b class="object">
+				<img src="http://placehold.it/200" width="200" height="200" alt="Media Object" />
+			</b>
+		</li>
+	</ul>
+
+*/
+
+.media-grid	{
+	margin-top:				0;
+	padding:				0;
+	letter-spacing:			-0.31em;
+	word-spacing:			-0.43em;
+
+	.lte7 & {
+		letter-spacing:		normal;
+	}
+	.object	{
+		list-style:			none outside none;
+		letter-spacing:		normal;
+		word-spacing:		normal;
+		vertical-align:		top;
+
+		// Mixins
+		.inline-block-fallback();
+		.margin-leader();
+
+		img {
+			display:		block;
+		}
+		&.gm-columns,
+		&.gt-columns,
+		&.gd-columns	{
+			float:			none;
+		}
+	}
+}
+
+
+/*
+
+### Nav ###
+
+The basic Nav module simply removes bullets from lists and inlines 
+the list items, making the link `inline-block`. The idea is to give 
+the skeleton of a horizontal nav without adding too much style (yet).
+
+	<ul class="nav">
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+		<li><a href="#">Nav Item</a></li>
+	</ul>
+
+*/
+
+.nav {
+	padding-left:			0;
+
+	li {
+		display:			inline;
+		list-style:			none outside none;
+	}
+		a {
+			.inline-block-fallback();
+		}
+	&.forceful {
+		li {
+			display:		block;
+		}
+			a,
+			.lte7 & a {
+				display:	block;
+			}
+	}
+}
+
+
+/*
+
+### Tabs ###
+
+The Tabs module (and accompanying plugin) creates a very basic widget 
+that allows module embedding and basic styling.
+
+	<section class="tabs" data-tabs="tabbed-widget">
+		<ul class="forceful nav" data-tabs-nav="tabbed-widget">
+			<li class="is-current"><a href="#first-tab">First Tab</a></li>
+			<li><a href="#second-tab">Second Tab</a></li>
+			<li><a href="#third-tab">Third Tab</a></li>
+			<li><a href="#fourth-tab">Fourth Tab</a></li>
+		</ul>
+		<div class="section">
+			<section id="first-tab" class="tab is-current" data-tabs-section="tabbed-widget">
+				<h3>First Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="second-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Second Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="third-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Third Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+			<section id="fourth-tab" class="tab" data-tabs-section="tabbed-widget">
+				<h3>Fourth Tab</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			</section>
+		</div>
+	</section>
+
+*/
+
+.js	{
+	.tabs {
+		.section {
+			position:					relative;
+		}
+		.tab {
+			display:					none;
+
+			&.is-current {
+				display:				block;
+			}
+		}
+	}
+}
+
+
+/*
+
+### Pagination ###
+
+	<ol class="pagination nav">
+		<li class="first disabled"><a href="#" data-icon="ç">Previous</a></li>
+		<li><a href="#" class="is-current">1</a></li>
+		<li><a href="#">2</a></li>
+		<li><a href="#">3</a></li>
+		<li><a href="#">4</a></li>
+		<li><a href="#">5</a></li>
+		<li><a href="#">6</a></li>
+		<li><a href="#">7</a></li>
+		<li><a href="#">8</a></li>
+		<li><a href="#">9</a></li>
+		<li><a href="#">10</a></li>
+		<li class="last"><a href="#" data-icon="ê" data-icon-position="append">Next</a></li>
+	</ol>
+
+*/
+
+.pagination {
+	display:					inline-block;
+
+	li {
+		&.disabled a,
+		&.disabled a:hover,
+		&.disabled a:focus {
+			cursor:				default;
+		}
+	}
+		a {
+			padding:			0 0.625em;
+			float:				left;
+		}
+}

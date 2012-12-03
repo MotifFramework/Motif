@@ -1,28 +1,31 @@
 // Imports. Comment and uncomment what you want.
 
 // Variables & Mixins. You'll want to keep these.
-@import "_variables.less";
+@import "_config.less";
 @import "_mixins.less";
 
 // Base. Normalization.
-@import "base/_reset.less";
-@import "base/_forms.less";
-@import "base/_buttons.less";
-@import "base/_type.less";
-@import "base/_tables.less";
+@import "core/normalize/_display.less";
+@import "core/normalize/_type.less";
+@import "core/normalize/_links.less";
+@import "core/normalize/_embedded.less";
+@import "core/normalize/_forms.less";
+@import "core/normalize/_tables.less";
+
+// Helpers
+@import "core/helpers/_vars.less";
+@import "core/helpers/_spacing.less";
+@import "core/helpers/_presentational.less";
 
 // Layout
-@import "layout/_general.less";
-@import "layout/_modules.less";
-//@import "layout/_fluid-grid.less;
-@import "layout/_fixed-grid.less";
+@import "core/layout/_grid.less";
+@import "core/layout/_modules.less";
 
 // Theme
-@import "theme/_t-forms.less";
 @import "theme/_t-font-face.less";
-@import "theme/_t-font-face-styles.less";
+@import "theme/_t-font-face-applied.less";
 @import "theme/_t-type.less";
-@import "theme/_t-general.less";
-@import "theme/_t-tables.less";
 @import "theme/_t-buttons.less";
 @import "theme/_t-modules.less";
+@import "theme/_t-forms.less";
+@import "theme/_t-tables.less";
