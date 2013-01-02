@@ -1,5 +1,4 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -8,46 +7,47 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE `LB_Actions` (
-  `actionId` int(11) NOT NULL AUTO_INCREMENT,
+  `actionId` int(11) NOT NULL auto_increment,
   `actionType` varchar(128) NOT NULL,
   `actionMessage` varchar(512) NOT NULL,
   `creationDate` int(11) NOT NULL,
-  PRIMARY KEY (`actionId`),
+  PRIMARY KEY  (`actionId`),
   KEY `actionType` (`actionType`),
   KEY `creationDate` (`creationDate`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11909 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_Content` (
-  `contentId` int(11) NOT NULL AUTO_INCREMENT,
+  `contentId` int(11) NOT NULL auto_increment,
   `fullURL` text,
-  `contentSlug` varchar(255) DEFAULT NULL,
-  `contentAlias` varchar(255) DEFAULT NULL,
+  `contentSlug` varchar(255) default NULL,
+  `contentAlias` varchar(255) default NULL,
   `contentDescription` text,
-  `creator` int(11) DEFAULT NULL,
-  `creationDate` int(11) DEFAULT NULL,
-  `updatedBy` int(11) DEFAULT NULL,
-  `updatedDate` int(11) DEFAULT NULL,
-  `contentSectionId` int(11) DEFAULT NULL,
-  `contentTypeId` int(11) DEFAULT NULL,
-  `templateId` int(11) DEFAULT NULL,
-  `headerStatus` varchar(128) DEFAULT NULL,
-  `redirectLocation` varchar(255) DEFAULT NULL,
-  `showInNavigation` int(11) DEFAULT NULL,
-  `navigationAnchor` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `navigationOrder` int(11) NOT NULL DEFAULT '0',
-  `ruleId` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`contentId`),
+  `creator` int(11) default NULL,
+  `creationDate` int(11) default NULL,
+  `updatedBy` int(11) default NULL,
+  `updatedDate` int(11) default NULL,
+  `contentSectionId` int(11) default NULL,
+  `contentTypeId` int(11) default NULL,
+  `templateId` int(11) default NULL,
+  `headerStatus` varchar(128) default NULL,
+  `redirectLocation` varchar(255) default NULL,
+  `showInNavigation` int(11) default NULL,
+  `navigationAnchor` varchar(255) default NULL,
+  `status` int(11) default NULL,
+  `navigationOrder` int(11) NOT NULL default '0',
+  `ruleId` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`contentId`),
   KEY `ruleId` (`ruleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Content` (`contentId`, `fullURL`, `contentSlug`, `contentAlias`, `contentDescription`, `creator`, `creationDate`, `updatedBy`, `updatedDate`, `contentSectionId`, `contentTypeId`, `templateId`, `headerStatus`, `redirectLocation`, `showInNavigation`, `navigationAnchor`, `status`, `navigationOrder`, `ruleId`) VALUES
 (1, '/index', 'index', 'index', '', 1, 1334010178, 1, 1334010178, 0, 1, 2, '404', '', 0, 'Home', 1, 0, 1);
 
 CREATE TABLE `LB_ContentCache` (
-  `fullURL` varchar(500) NOT NULL DEFAULT '',
+  `fullURL` varchar(500) NOT NULL default '',
   `publishedData` text,
-  PRIMARY KEY (`fullURL`)
+  PRIMARY KEY  (`fullURL`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentCache` (`fullURL`, `publishedData`) VALUES
@@ -56,21 +56,23 @@ INSERT INTO `LB_ContentCache` (`fullURL`, `publishedData`) VALUES
 CREATE TABLE `LB_ContentData_Float` (
   `versionId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
-  `contentKey` varchar(128) DEFAULT NULL,
-  `data` float DEFAULT NULL
+  `contentKey` varchar(128) default NULL,
+  `data` float default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ContentData_Int` (
   `versionId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
-  `contentKey` varchar(128) DEFAULT NULL,
-  `data` int(11) DEFAULT NULL
+  `contentKey` varchar(128) default NULL,
+  `data` int(11) default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ContentData_Text` (
   `versionId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
-  `contentKey` varchar(128) DEFAULT NULL,
+  `contentKey` varchar(128) default NULL,
   `data` text,
   KEY `versionId` (`versionId`,`contentId`,`contentKey`),
   KEY `contentId` (`contentId`)
@@ -85,16 +87,17 @@ INSERT INTO `LB_ContentData_Text` (`versionId`, `contentId`, `contentKey`, `data
 CREATE TABLE `LB_ContentData_VC64` (
   `versionId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
-  `contentKey` varchar(128) DEFAULT NULL,
-  `data` varchar(64) DEFAULT NULL
+  `contentKey` varchar(128) default NULL,
+  `data` varchar(64) default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ContentData_VC255` (
   `versionId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
-  `contentKey` varchar(128) NOT NULL DEFAULT '',
-  `data` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`versionId`,`contentId`,`contentKey`),
+  `contentKey` varchar(128) NOT NULL default '',
+  `data` varchar(255) default NULL,
+  PRIMARY KEY  (`versionId`,`contentId`,`contentKey`),
   KEY `contentId` (`contentId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -103,58 +106,49 @@ INSERT INTO `LB_ContentData_VC255` (`versionId`, `contentId`, `contentKey`, `dat
 (1, 1, 'metaDescription', 'This is the home page for the site'),
 (1, 1, 'openGraphTitle', '');
 
-CREATE TABLE `LB_ContentPublishQueue` (
-  `publishId` int(11) NOT NULL AUTO_INCREMENT,
-  `publishLock` int(11) DEFAULT NULL,
-  `publishType` varchar(255) DEFAULT NULL,
-  `publishKey` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`publishId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
-INSERT INTO `LB_ContentPublishQueue` (`publishId`, `publishLock`, `publishType`, `publishKey`) VALUES
-(1, 0, 'LB_Content', '1');
-
 CREATE TABLE `LB_ContentPublishSchedule` (
   `contentId` int(11) NOT NULL,
-  `publishStart` int(11) DEFAULT NULL,
-  `publishEnd` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`contentId`)
+  `publishStart` int(11) default NULL,
+  `publishEnd` int(11) default NULL,
+  `status` int(11) default NULL,
+  PRIMARY KEY  (`contentId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_ContentSections` (
-  `contentSectionId` int(11) NOT NULL AUTO_INCREMENT,
-  `parentContentSectionId` int(11) NOT NULL DEFAULT '0',
-  `sectionName` varchar(255) DEFAULT NULL,
-  `sectionSlug` varchar(255) DEFAULT NULL,
+  `contentSectionId` int(11) NOT NULL auto_increment,
+  `parentContentSectionId` int(11) NOT NULL default '0',
+  `sectionName` varchar(255) default NULL,
+  `sectionSlug` varchar(255) default NULL,
   `sectionDescription` text,
-  `showInNavigation` int(11) DEFAULT NULL,
-  `navigationAnchor` varchar(255) DEFAULT NULL,
+  `showInNavigation` int(11) default NULL,
+  `navigationAnchor` varchar(255) default NULL,
   `fullURL` text,
-  `status` int(11) DEFAULT NULL,
-  `sectionOrder` int(11) DEFAULT NULL,
-  PRIMARY KEY (`contentSectionId`),
+  `status` int(11) default NULL,
+  `sectionOrder` int(11) default NULL,
+  PRIMARY KEY  (`contentSectionId`),
   KEY `parentContentSectionId` (`parentContentSectionId`),
   KEY `sectionSlug` (`sectionSlug`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ContentTypes` (
-  `contentTypeId` int(11) NOT NULL AUTO_INCREMENT,
-  `contentTypeName` varchar(255) DEFAULT NULL,
+  `contentTypeId` int(11) NOT NULL auto_increment,
+  `contentTypeName` varchar(255) default NULL,
   `contentTypeDescription` text,
-  `templateId` int(11) DEFAULT NULL,
-  `defaultAllowsCommenting` int(11) DEFAULT NULL,
-  `defaultAllowsRating` int(11) DEFAULT NULL,
-  `defaultAllowsTagging` int(11) DEFAULT NULL,
-  `defaultAllowsFavoriting` int(11) DEFAULT NULL,
-  `parentContentTypeId` int(11) DEFAULT NULL,
-  `useOption` int(11) NOT NULL DEFAULT '1',
-  `status` int(11) NOT NULL DEFAULT '1',
-  `isSelectable` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`contentTypeId`),
+  `templateId` int(11) default NULL,
+  `defaultAllowsCommenting` int(11) default NULL,
+  `defaultAllowsRating` int(11) default NULL,
+  `defaultAllowsTagging` int(11) default NULL,
+  `defaultAllowsFavoriting` int(11) default NULL,
+  `parentContentTypeId` int(11) default NULL,
+  `useOption` int(11) NOT NULL default '1',
+  `status` int(11) NOT NULL default '1',
+  `isSelectable` int(11) NOT NULL default '1',
+  PRIMARY KEY  (`contentTypeId`),
   KEY `templateId` (`templateId`),
   KEY `parentContentTypeId` (`parentContentTypeId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentTypes` (`contentTypeId`, `contentTypeName`, `contentTypeDescription`, `templateId`, `defaultAllowsCommenting`, `defaultAllowsRating`, `defaultAllowsTagging`, `defaultAllowsFavoriting`, `parentContentTypeId`, `useOption`, `status`, `isSelectable`) VALUES
 (1, 'Basic Page', 'This is a basic interior page', 1, 0, 0, 0, 0, 2, 1, 1, 1),
@@ -162,64 +156,64 @@ INSERT INTO `LB_ContentTypes` (`contentTypeId`, `contentTypeName`, `contentTypeD
 (2, 'Meta Data', 'This is the meta data.', 1, 0, 0, 0, 0, 0, 2, 1, 1);
 
 CREATE TABLE `LB_ContentVersion` (
-  `versionId` int(11) NOT NULL AUTO_INCREMENT,
-  `contentId` int(11) DEFAULT NULL,
-  `createdBy` int(11) DEFAULT NULL,
-  `creationDate` int(11) DEFAULT NULL,
-  `updatedBy` int(11) DEFAULT NULL,
-  `updatedDate` int(11) DEFAULT NULL,
-  `workflowState` int(11) DEFAULT NULL,
-  `scheduleStart` int(11) DEFAULT NULL,
-  `scheduleEnd` int(11) DEFAULT NULL,
-  PRIMARY KEY (`versionId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `versionId` int(11) NOT NULL auto_increment,
+  `contentId` int(11) default NULL,
+  `createdBy` int(11) default NULL,
+  `creationDate` int(11) default NULL,
+  `updatedBy` int(11) default NULL,
+  `updatedDate` int(11) default NULL,
+  `workflowState` int(11) default NULL,
+  `scheduleStart` int(11) default NULL,
+  `scheduleEnd` int(11) default NULL,
+  PRIMARY KEY  (`versionId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentVersion` (`versionId`, `contentId`, `createdBy`, `creationDate`, `updatedBy`, `updatedDate`, `workflowState`, `scheduleStart`, `scheduleEnd`) VALUES
-(1, 1, 1, 1334010195, 1, 1334010195, 4, 0, 0),
-(2, 1, 1, 1350070325, 1, 1350070325, 4, 0, 0),
-(3, 1, 1, 1350270004, 1, 1350270004, 4, 0, 0),
-(4, 1, 1, 1350270141, 1, 1350270141, 4, 0, 0);
+(1, 1, 1, 1334010195, 1, 1334010195, 4, 0, 0);
 
 CREATE TABLE `LB_ContentWorkflow` (
   `contentId` int(11) NOT NULL,
-  `status` int(11) DEFAULT NULL,
-  `createdDate` int(11) DEFAULT NULL,
-  `userTypeId` int(11) DEFAULT NULL,
-  `userId` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`contentId`),
+  `status` int(11) default NULL,
+  `createdDate` int(11) default NULL,
+  `userTypeId` int(11) default NULL,
+  `userId` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`contentId`),
   KEY `status` (`status`),
   KEY `userTypeId` (`userTypeId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_ContentWorkflowLog` (
   `contentId` int(11) NOT NULL,
-  `peopleId` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `createdDate` int(11) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL,
+  `peopleId` int(11) default NULL,
+  `status` int(11) default NULL,
+  `createdDate` int(11) default NULL,
+  `message` varchar(255) default NULL,
+  `userId` int(11) default NULL,
   KEY `contentId` (`contentId`),
   KEY `peopleId` (`peopleId`),
   KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_Crud` (
-  `crudId` int(11) NOT NULL AUTO_INCREMENT,
+  `crudId` int(11) NOT NULL auto_increment,
   `crudName` varchar(256) NOT NULL,
   `dateCreated` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  PRIMARY KEY (`crudId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY  (`crudId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_DataTypeDefinition` (
-  `dataTypeDefinitionId` int(11) NOT NULL AUTO_INCREMENT,
-  `dataTypeName` varchar(255) DEFAULT NULL,
+  `dataTypeDefinitionId` int(11) NOT NULL auto_increment,
+  `dataTypeName` varchar(255) default NULL,
   `dataTypeDescription` text,
-  `dataTypeClass` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  `dataStorageType` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`dataTypeDefinitionId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  `dataTypeClass` varchar(255) default NULL,
+  `status` int(11) NOT NULL default '1',
+  `dataStorageType` varchar(255) default NULL,
+  PRIMARY KEY  (`dataTypeDefinitionId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `dataTypeDescription`, `dataTypeClass`, `status`, `dataStorageType`) VALUES
 (1, 'Input Field', 'A standard single line input field.', 'LB_ContentManagement_Presentation_DataTypes_InputField', 1, 'VC255'),
@@ -237,23 +231,23 @@ INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `da
 (13, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text');
 
 CREATE TABLE `LB_DataTypeEntity` (
-  `dataTypeEntityId` int(11) NOT NULL AUTO_INCREMENT,
-  `contentTypeId` int(11) DEFAULT NULL,
-  `dataTypeDefinitionId` int(11) DEFAULT NULL,
-  `entityKey` varchar(255) DEFAULT NULL,
-  `entityName` varchar(255) DEFAULT NULL,
+  `dataTypeEntityId` int(11) NOT NULL auto_increment,
+  `contentTypeId` int(11) default NULL,
+  `dataTypeDefinitionId` int(11) default NULL,
+  `entityKey` varchar(255) default NULL,
+  `entityName` varchar(255) default NULL,
   `entityDescription` text,
-  `required` int(11) DEFAULT NULL,
-  `validatorType` varchar(255) DEFAULT NULL,
-  `dataStorageType` varchar(128) DEFAULT NULL,
-  `contentTypeGroupId` int(11) DEFAULT NULL,
-  `entityOrder` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`dataTypeEntityId`),
+  `required` int(11) default NULL,
+  `validatorType` varchar(255) default NULL,
+  `dataStorageType` varchar(128) default NULL,
+  `contentTypeGroupId` int(11) default NULL,
+  `entityOrder` int(11) default NULL,
+  `status` int(11) NOT NULL default '1',
+  PRIMARY KEY  (`dataTypeEntityId`),
   KEY `contentTypeId` (`contentTypeId`),
   KEY `dataTypeDefinitionId` (`dataTypeDefinitionId`),
   KEY `contentTypeGroupId` (`contentTypeGroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeEntity` (`dataTypeEntityId`, `contentTypeId`, `dataTypeDefinitionId`, `entityKey`, `entityName`, `entityDescription`, `required`, `validatorType`, `dataStorageType`, `contentTypeGroupId`, `entityOrder`, `status`) VALUES
 (9, 3, 1, 'postTitle', 'Post Title', 'Title for this post', 1, '', 'VC255', 4, 0, 1),
@@ -268,14 +262,14 @@ INSERT INTO `LB_DataTypeEntity` (`dataTypeEntityId`, `contentTypeId`, `dataTypeD
 (11, 3, 12, 'postExcerpt', 'Post Excerpt', 'The brief excerpt visible on the blog landing page', 0, '', 'Text', 4, 0, 1);
 
 CREATE TABLE `LB_DataTypeEntityGroups` (
-  `entityGroupId` int(11) NOT NULL AUTO_INCREMENT,
-  `contentTypeId` int(11) DEFAULT NULL,
-  `entityGroupName` varchar(255) DEFAULT NULL,
+  `entityGroupId` int(11) NOT NULL auto_increment,
+  `contentTypeId` int(11) default NULL,
+  `entityGroupName` varchar(255) default NULL,
   `entityGroupDescription` text,
-  `entityGroupOrder` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`entityGroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `entityGroupOrder` int(11) default NULL,
+  `status` int(11) NOT NULL default '1',
+  PRIMARY KEY  (`entityGroupId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeEntityGroups` (`entityGroupId`, `contentTypeId`, `entityGroupName`, `entityGroupDescription`, `entityGroupOrder`, `status`) VALUES
 (1, 1, 'Content', '', 0, 1),
@@ -284,37 +278,40 @@ INSERT INTO `LB_DataTypeEntityGroups` (`entityGroupId`, `contentTypeId`, `entity
 (4, 3, 'Post Details', '', 0, 1);
 
 CREATE TABLE `LB_DataTypeEntityOptions` (
-  `dataTypeEntityOptionId` int(11) NOT NULL AUTO_INCREMENT,
-  `dataTypeEntityId` int(11) DEFAULT NULL,
-  `optionKey` varchar(255) DEFAULT NULL,
+  `dataTypeEntityOptionId` int(11) NOT NULL auto_increment,
+  `dataTypeEntityId` int(11) default NULL,
+  `optionKey` varchar(255) default NULL,
   `optionValue` text,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`dataTypeEntityOptionId`),
+  `status` int(11) NOT NULL default '1',
+  PRIMARY KEY  (`dataTypeEntityOptionId`),
   KEY `dataTypeEntityId` (`dataTypeEntityId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_Files` (
   `resourceId` int(11) NOT NULL,
   `fileUrl` varchar(256) NOT NULL,
-  PRIMARY KEY (`resourceId`)
+  PRIMARY KEY  (`resourceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_Images` (
   `resourceId` int(11) NOT NULL,
   `imageUrl` varchar(256) NOT NULL,
-  PRIMARY KEY (`resourceId`)
+  PRIMARY KEY  (`resourceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_Modules` (
-  `moduleId` int(11) NOT NULL AUTO_INCREMENT,
+  `moduleId` int(11) NOT NULL auto_increment,
   `moduleName` varchar(256) NOT NULL,
   `moduleAlias` varchar(128) NOT NULL,
   `moduleDescription` varchar(512) NOT NULL,
   `activityClass` varchar(128) NOT NULL,
   `adminDisplay` int(11) NOT NULL,
-  PRIMARY KEY (`moduleId`),
+  PRIMARY KEY  (`moduleId`),
   KEY `moduleName` (`moduleName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Modules` (`moduleId`, `moduleName`, `moduleAlias`, `moduleDescription`, `activityClass`, `adminDisplay`) VALUES
 (1, 'User Management', 'Users', 'Allows for the authorization of users, admin panel accessibility, and additional user-based functionality.', 'LB_UserManagement_Logic_User', 1),
@@ -325,8 +322,8 @@ CREATE TABLE `LB_ModuleSections` (
   `sectionName` varchar(64) NOT NULL,
   `sectionLink` varchar(256) NOT NULL,
   `displayOrder` int(11) NOT NULL,
-  `permission` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`moduleAlias`,`sectionName`)
+  `permission` varchar(255) default NULL,
+  PRIMARY KEY  (`moduleAlias`,`sectionName`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ModuleSections` (`moduleAlias`, `sectionName`, `sectionLink`, `displayOrder`, `permission`) VALUES
@@ -342,31 +339,30 @@ INSERT INTO `LB_ModuleSections` (`moduleAlias`, `sectionName`, `sectionLink`, `d
 ('Crud', 'Overview', '/admin/crud/index.html', 0, 'Crud Overview');
 
 CREATE TABLE `LB_Notifications` (
-  `notificationId` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL DEFAULT '0',
-  `message` varchar(500) DEFAULT NULL,
-  `createdDate` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `type` varchar(100) DEFAULT NULL,
-  `lookupId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`notificationId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `notificationId` int(11) NOT NULL auto_increment,
+  `userId` int(11) NOT NULL default '0',
+  `message` varchar(500) default NULL,
+  `createdDate` int(11) default NULL,
+  `status` int(11) default NULL,
+  `type` varchar(100) default NULL,
+  `lookupId` int(11) default NULL,
+  PRIMARY KEY  (`notificationId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
-INSERT INTO `LB_Notifications` (`notificationId`, `userId`, `message`, `createdDate`, `status`, `type`, `lookupId`) VALUES
-(1, 1, '<a href="/admin/content/manage.html?id=1">/index.html</a> has been published!', 1350070326, 1, 'Content', 0);
 
 CREATE TABLE `LB_RegisteredControls` (
-  `controlId` int(11) NOT NULL AUTO_INCREMENT,
-  `controlName` varchar(255) DEFAULT NULL,
+  `controlId` int(11) NOT NULL auto_increment,
+  `controlName` varchar(255) default NULL,
   `controlClass` text,
-  `useInline` int(11) DEFAULT NULL,
-  `useDesigner` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`controlId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `useInline` int(11) default NULL,
+  `useDesigner` int(11) default NULL,
+  `status` int(11) default NULL,
+  PRIMARY KEY  (`controlId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_Resources` (
-  `resourceId` int(11) NOT NULL AUTO_INCREMENT,
+  `resourceId` int(11) NOT NULL auto_increment,
   `alias` varchar(128) NOT NULL,
   `description` text NOT NULL,
   `creator` int(11) NOT NULL,
@@ -376,42 +372,46 @@ CREATE TABLE `LB_Resources` (
   `updateDate` int(11) NOT NULL,
   `adminSubmitted` tinyint(4) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  PRIMARY KEY (`resourceId`),
+  PRIMARY KEY  (`resourceId`),
   KEY `creator` (`creator`),
   KEY `resourceTypeId` (`resourceTypeId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ResourceToContent` (
   `resourceTypeId` int(11) NOT NULL,
   `contentId` int(11) NOT NULL,
   `resourceId` int(11) NOT NULL,
-  PRIMARY KEY (`resourceTypeId`,`contentId`,`resourceId`)
+  PRIMARY KEY  (`resourceTypeId`,`contentId`,`resourceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ResourceToResource` (
   `recessiveResourceTypeId` int(11) NOT NULL,
   `dominantResourceId` int(11) NOT NULL,
   `recessiveResourceId` int(11) NOT NULL,
-  PRIMARY KEY (`recessiveResourceTypeId`,`dominantResourceId`,`recessiveResourceId`)
+  PRIMARY KEY  (`recessiveResourceTypeId`,`dominantResourceId`,`recessiveResourceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_ResourceToUser` (
   `resourceTypeId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `resourceId` int(11) NOT NULL,
-  PRIMARY KEY (`resourceTypeId`,`userId`,`resourceId`)
+  PRIMARY KEY  (`resourceTypeId`,`userId`,`resourceId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_ResourceTypes` (
-  `resourceTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `resourceTypeId` int(11) NOT NULL auto_increment,
   `resourceTypeName` varchar(128) NOT NULL,
   `resourceTypeDescription` varchar(512) NOT NULL,
   `resourceTypePage` varchar(128) NOT NULL,
   `resourceTypeClass` varchar(128) NOT NULL,
   `adminSubmittable` tinyint(4) NOT NULL,
-  PRIMARY KEY (`resourceTypeId`),
+  PRIMARY KEY  (`resourceTypeId`),
   KEY `resourceTypeName` (`resourceTypeName`,`resourceTypeDescription`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ResourceTypes` (`resourceTypeId`, `resourceTypeName`, `resourceTypeDescription`, `resourceTypePage`, `resourceTypeClass`, `adminSubmittable`) VALUES
 (1, 'Files', 'Files are used to store and manage any file of any extension.', 'files', 'LB_ResourceManagement_Logic_ResourceTypes_File', 1),
@@ -419,16 +419,16 @@ INSERT INTO `LB_ResourceTypes` (`resourceTypeId`, `resourceTypeName`, `resourceT
 (3, 'Tags', 'Tags are used to characterize and group elements.', 'tags', 'LB_ResourceManagement_Logic_ResourceTypes_Tag', 1);
 
 CREATE TABLE `LB_Settings` (
-  `settingId` int(11) NOT NULL AUTO_INCREMENT,
+  `settingId` int(11) NOT NULL auto_increment,
   `settingName` varchar(128) NOT NULL,
   `settingDescription` varchar(512) NOT NULL,
   `settingGroup` varchar(256) NOT NULL,
   `settingValue` varchar(512) NOT NULL,
-  `settingStatus` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`settingId`),
+  `settingStatus` tinyint(4) NOT NULL default '1',
+  PRIMARY KEY  (`settingId`),
   KEY `settingName` (`settingName`),
   KEY `settingGroup` (`settingGroup`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `settingGroup`, `settingValue`, `settingStatus`) VALUES
 (1, 'LB_SYSTEM_PROJECT_NAME', 'Provides the display name for this project', 'System', 'LB Core Default', 1),
@@ -448,7 +448,6 @@ INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `se
 (15, 'LB_USER_LOGIN_LOCKOUT_WINDOW', 'Determines the number of minutes that must pass after a user maxes out login attempts', 'User Management', '10', 1),
 (16, 'LB_CONTENT_HAS_CMS', 'Determines the type of Request Handler that will be used to handle page requests', 'Content', '1', 1),
 (17, 'LB_CONTENT_DEFAULT_TEMPLATE', 'Sets a default template to use for CMS and frontend pages in the scenario that a template is not specified', 'Content', 'Reef_Blank', 1),
-(18, 'LB_SYSTEM_MULTISERVER_PUBLISH', 'Determines whether the workflow and publishing system will push content to multiple presentation servers or just a single server', 'System', '0', 1),
 (19, 'LB_CONTENT_GOOGLE_ANALYTICS_ID', 'Activate Google analytics code by putting GA ID here', 'Content', '0', 1),
 (20, 'LB_CONTENT_FACEBOOK_APP_ID', 'Load basic Facebook SDK code by entering your app id here', 'Content', '0', 1),
 (21, 'LB_CONTENT_DEFAULT_TITLE', 'Load the default page title here.', 'Content', 'Website', 1),
@@ -457,41 +456,43 @@ INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `se
 (24, 'LB_CONTENT_DEFAULT_KEYWORDS', 'Load the default keywords here for SEO.', 'Content', 'website, things, stuff', 1);
 
 CREATE TABLE `LB_SiteDesignOverride` (
-  `fullURL` varchar(500) NOT NULL DEFAULT '',
+  `fullURL` varchar(500) NOT NULL default '',
   `designOverride` text,
-  PRIMARY KEY (`fullURL`)
+  PRIMARY KEY  (`fullURL`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+
 CREATE TABLE `LB_Templates` (
-  `templateId` int(11) NOT NULL AUTO_INCREMENT,
-  `templateName` varchar(255) DEFAULT NULL,
-  `templateClass` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`templateId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+  `templateId` int(11) NOT NULL auto_increment,
+  `templateName` varchar(255) default NULL,
+  `templateClass` varchar(255) default NULL,
+  `status` int(11) NOT NULL default '1',
+  PRIMARY KEY  (`templateId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Templates` (`templateId`, `templateName`, `templateClass`, `status`) VALUES
 (1, 'Default Template', 'Reef_Default', 1),
 (2, 'Default Home Page Template', 'Reef_DefaultHome', 1);
 
 CREATE TABLE `LB_TrashCan` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fullURL` varchar(500) NOT NULL DEFAULT '',
+  `id` int(11) NOT NULL auto_increment,
+  `fullURL` varchar(500) NOT NULL default '',
   `publishedData` text,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_UserData` (
   `userId` int(11) NOT NULL,
   `userDataType` varchar(128) NOT NULL,
   `userDataValue` varchar(512) NOT NULL,
-  PRIMARY KEY (`userId`,`userDataType`),
+  PRIMARY KEY  (`userId`,`userDataType`),
   KEY `userDataType` (`userDataType`,`userDataValue`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserData` (`userId`, `userDataType`, `userDataValue`) VALUES
-(1, 'HomeDirectory', '0'),
-(1, 'description', '');
+(1, 'description', ''),
+(1, 'HomeDirectory', '0');
 
 CREATE TABLE `LB_UserLogins` (
   `userId` int(11) NOT NULL,
@@ -499,7 +500,7 @@ CREATE TABLE `LB_UserLogins` (
   `success` tinyint(4) NOT NULL,
   `active` tinyint(4) NOT NULL,
   `ipAddress` varchar(50) NOT NULL,
-  PRIMARY KEY (`userId`,`loginTime`)
+  PRIMARY KEY  (`userId`,`loginTime`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserLogins` (`userId`, `loginTime`, `success`, `active`, `ipAddress`) VALUES
@@ -507,16 +508,17 @@ INSERT INTO `LB_UserLogins` (`userId`, `loginTime`, `success`, `active`, `ipAddr
 (1, 1334008125, 1, 0, '127.0.0.1'),
 (1, 1334008316, 1, 0, '127.0.0.1'),
 (1, 1334008623, 1, 0, '127.0.0.1'),
-(1, 1350268030, 1, 0, '127.0.0.1');
+(1, 1350268030, 1, 0, '127.0.0.1'),
+(1, 1357159508, 1, 0, '127.0.0.1');
 
 CREATE TABLE `LB_UserPermissions` (
-  `userPermissionId` int(11) NOT NULL AUTO_INCREMENT,
+  `userPermissionId` int(11) NOT NULL auto_increment,
   `userPermissionSet` varchar(256) NOT NULL,
   `userPermissionName` varchar(256) NOT NULL,
   `userPermissionDescription` varchar(512) NOT NULL,
-  PRIMARY KEY (`userPermissionId`),
+  PRIMARY KEY  (`userPermissionId`),
   KEY `userPermissionName` (`userPermissionName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `userPermissionName`, `userPermissionDescription`) VALUES
 (24, 'Content', 'Edit Content Sections', 'Allows for the modification of Content Section details'),
@@ -565,34 +567,34 @@ INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `user
 (44, 'Permissions', 'Crud Overview', 'Crud overview description');
 
 CREATE TABLE `LB_Users` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL auto_increment,
   `userName` varchar(256) NOT NULL,
   `password` text NOT NULL,
   `email` varchar(256) NOT NULL,
   `dateCreated` int(11) NOT NULL,
   `approved` tinyint(4) NOT NULL,
-  `disabled` tinyint(4) NOT NULL DEFAULT '0',
-  `lockedOut` tinyint(4) NOT NULL DEFAULT '0',
-  `lastLogin` int(11) NOT NULL DEFAULT '0',
+  `disabled` tinyint(4) NOT NULL default '0',
+  `lockedOut` tinyint(4) NOT NULL default '0',
+  `lastLogin` int(11) NOT NULL default '0',
   `userTypeId` int(11) NOT NULL,
   `securityQuestion` varchar(512) NOT NULL,
   `securityAnswer` varchar(256) NOT NULL,
-  `notifications` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`userId`),
+  `notifications` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`userId`),
   KEY `userName` (`userName`),
   KEY `email` (`email`),
   KEY `securityQuestion` (`securityQuestion`),
   KEY `securityAnswer` (`securityAnswer`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Users` (`userId`, `userName`, `password`, `email`, `dateCreated`, `approved`, `disabled`, `lockedOut`, `lastLogin`, `userTypeId`, `securityQuestion`, `securityAnswer`, `notifications`) VALUES
-(1, 'LB ADMIN', 'a7c2ac0236c2b907e60d9db90070b56f169b64007f5a85d935e4c51a906b795222746c122b8c273b02e4f583fde08a7e298bbaa9dc0643d3086b88a4d5f074576660b095a79675f75d1f03c6d3a51a31dd897d46d1226c23417f088284ee4a0dfb4d8eb00fa24a2aa20a806a16c1053af741c408dd645a165ceaf5ede8a19592961001c35c889dee22ddba7d0e45e8e34d414887ae94ee7b8637e4ec5681ae9d29a25452f41efde7742e52a986772f956edbdbcb0fc1479ce3b7bcba4c5f8a562c2ea4ac0ced8da2fc05602cece256bcdfa28224ecb4a054da259320e502dcd90b7edbbd5cdc8d66a53d632d4dc97cccf550d07a8b427f4e91c061189f84e492', 'lbadmin@lifeblue.com', 2011, 1, 0, 0, 1350268030, 1, '', '', 1);
+(1, 'LB ADMIN', '726dc7375d4a663d347a09b5033154d746afd1f82e6fd5822433f666c01d94208869002d80ee912a1541c24d283992b12e07342e7a2479206a6aacfa2ba785d50b4f327f2e30d2ee6d61f6507c8e09c621ffcaf92514598b75e2e3612a26cf132c399d016c2fcb50a24d2e3f4a94cfdd8ac0daec446a937c20ac1a1c910c80c9d5bddf4ec8941355f4b8339179583e0a43c13faad322e7d198725a3d4e1d45af605aa8600833f95ad2b887e99fbc57a371be207857f09a1894ea520dee99f3a61eca74771eacd3b20cdeb6ea1c6b1d9d1024f42f59fcab750372356dadc8bfb72f84a3076995e845e9d23db1c904aa6a6bdceb6532d401319c33e2d8c9a16baf', 'lbadmin@lifeblue.com', 2011, 1, 0, 0, 1357159508, 1, '', '', 1);
 
 CREATE TABLE `LB_UserSectionPermissions` (
-  `id` int(11) DEFAULT NULL,
-  `type` varchar(100) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  `userId` int(11) DEFAULT NULL,
+  `id` int(11) default NULL,
+  `type` varchar(100) default NULL,
+  `status` int(11) NOT NULL default '0',
+  `userId` int(11) default NULL,
   UNIQUE KEY `id` (`id`,`type`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -602,7 +604,7 @@ INSERT INTO `LB_UserSectionPermissions` (`id`, `type`, `status`, `userId`) VALUE
 CREATE TABLE `LB_UserToUserPermission` (
   `userId` int(11) NOT NULL,
   `userPermissionId` int(11) NOT NULL,
-  PRIMARY KEY (`userId`,`userPermissionId`)
+  PRIMARY KEY  (`userId`,`userPermissionId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserToUserPermission` (`userId`, `userPermissionId`) VALUES
@@ -617,13 +619,13 @@ INSERT INTO `LB_UserToUserPermission` (`userId`, `userPermissionId`) VALUES
 (1, 44);
 
 CREATE TABLE `LB_UserTypes` (
-  `userTypeId` int(11) NOT NULL AUTO_INCREMENT,
+  `userTypeId` int(11) NOT NULL auto_increment,
   `userTypeName` varchar(256) NOT NULL,
   `userTypeDescription` varchar(512) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`userTypeId`),
+  `status` tinyint(4) NOT NULL default '1',
+  PRIMARY KEY  (`userTypeId`),
   KEY `userTypeName` (`userTypeName`,`userTypeDescription`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserTypes` (`userTypeId`, `userTypeName`, `userTypeDescription`, `status`) VALUES
 (1, 'Super Admin', 'Performs all site maintenance and monitors site activity.', 1);
@@ -631,7 +633,7 @@ INSERT INTO `LB_UserTypes` (`userTypeId`, `userTypeName`, `userTypeDescription`,
 CREATE TABLE `LB_UserTypeToUserPermission` (
   `userTypeId` int(11) NOT NULL,
   `userPermissionId` int(11) NOT NULL,
-  PRIMARY KEY (`userTypeId`,`userPermissionId`)
+  PRIMARY KEY  (`userTypeId`,`userPermissionId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserTypeToUserPermission` (`userTypeId`, `userPermissionId`) VALUES
@@ -645,44 +647,41 @@ INSERT INTO `LB_UserTypeToUserPermission` (`userTypeId`, `userPermissionId`) VAL
 (1, 43);
 
 CREATE TABLE `LB_WorkflowPath` (
-  `pathId` int(11) NOT NULL AUTO_INCREMENT,
-  `ruleId` int(11) DEFAULT NULL,
-  `userTypeId` int(11) DEFAULT NULL,
-  `action` varchar(25) DEFAULT NULL,
-  `publishWhen` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`pathId`),
+  `pathId` int(11) NOT NULL auto_increment,
+  `ruleId` int(11) default NULL,
+  `userTypeId` int(11) default NULL,
+  `action` varchar(25) default NULL,
+  `publishWhen` varchar(25) default NULL,
+  PRIMARY KEY  (`pathId`),
   KEY `userTypeId` (`userTypeId`),
   KEY `ruleId` (`ruleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_WorkflowPath` (`pathId`, `ruleId`, `userTypeId`, `action`, `publishWhen`) VALUES
 (1, 1, 1, 'Both', 'Always');
 
 CREATE TABLE `LB_WorkflowPeople` (
-  `peopleId` int(11) NOT NULL AUTO_INCREMENT,
-  `pathId` int(11) DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL,
-  `userTypeId` int(11) DEFAULT NULL,
-  `type` varchar(25) DEFAULT NULL,
-  `operator` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`peopleId`),
+  `peopleId` int(11) NOT NULL auto_increment,
+  `pathId` int(11) default NULL,
+  `userId` int(11) default NULL,
+  `userTypeId` int(11) default NULL,
+  `type` varchar(25) default NULL,
+  `operator` varchar(10) default NULL,
+  PRIMARY KEY  (`peopleId`),
   KEY `userId` (`userId`),
   KEY `pathId` (`pathId`),
   KEY `userTypeId` (`userTypeId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `LB_WorkflowRule` (
-  `ruleId` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `description` varchar(500) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  PRIMARY KEY (`ruleId`),
+  `ruleId` int(11) NOT NULL auto_increment,
+  `name` varchar(255) default NULL,
+  `description` varchar(500) default NULL,
+  `status` int(11) default NULL,
+  PRIMARY KEY  (`ruleId`),
   KEY `status` (`status`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_WorkflowRule` (`ruleId`, `name`, `description`, `status`) VALUES
 (1, 'Default', 'Default workflow with only a superuser', 1);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
