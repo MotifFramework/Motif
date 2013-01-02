@@ -1,10 +1,10 @@
 /*
 
-<a class="primary action button">Save</a>
+<a class="primary action lb-button">Save</a>
 
 */
 
-.button	{
+.lb-button {
 	width:						auto;
 	height:						auto;
 	margin:						0 0 5px 0;
@@ -42,8 +42,8 @@
 	*display:					inline;
 	*zoom:						1;
 }
-.button:hover,
-.button:focus	{
+.lb-button:hover,
+.lb-button:focus	{
 	color:						#555553;
 	background:					#c5c4c0;
 	background:					-moz-linear-gradient(top, #fefefe 0%, #c5c4c0 100%);
@@ -53,15 +53,15 @@
 	background:					-ms-linear-gradient(top, #fefefe 0%,#c5c4c0 100%);
 	background:					linear-gradient(to bottom, #fefefe 0%,#c5c4c0 100%);
 }
-.button:after,
-.button:before	{
+.lb-button:after,
+.lb-button:before	{
 	position:					relative;
 	display:					inline-block;
 	*display:					inline;
 	*zoom:						1;
 }
-.button.add:before,
-.button.delete:before	{
+.lb-button.add:before,
+.lb-button.delete:before	{
 	width:						15px;
 	height:						15px;
 	margin:						0 13px 0 0;
@@ -78,7 +78,7 @@
 	border-radius: 				4px;
 	vertical-align:				top;
 }
-.button.add:before	{
+.lb-button.add:before	{
 	content:					"+";
 	background: 				#00bf44;
 	background: 				-moz-linear-gradient(top, #00bf44 0%, #008f00 100%);
@@ -88,7 +88,7 @@
 	background: 				-ms-linear-gradient(top, #00bf44 0%,#008f00 100%);
 	background: 				linear-gradient(to bottom, #00bf44 0%,#008f00 100%);
 }
-.button.delete:before	{
+.lb-button.delete:before	{
 	content:					"×";
 	background: 				#f75539;
 	background: 				-moz-linear-gradient(top, #f75539 0%, #a2160d 100%);
@@ -98,15 +98,15 @@
 	background: 				-ms-linear-gradient(top, #f75539 0%,#a2160d 100%);
 	background: 				linear-gradient(to bottom, #f75539 0%,#a2160d 100%);
 }
-.button.primary,
-.button.primary:hover,
-.button.primary:focus,
-.button.secondary,
-.button.secondary:hover,
-.button.secondary:focus	{
+.lb-button.primary,
+.lb-button.primary:hover,
+.lb-button.primary:focus,
+.lb-button.secondary,
+.lb-button.secondary:hover,
+.lb-button.secondary:focus	{
 	color:						#fff;
 }
-.button.primary	{
+.lb-button.primary	{
 	background: 				#00b536;
 	background: 				-moz-linear-gradient(top, #00b536 0%, #009300 100%);
 	background: 				-webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b536), color-stop(100%,#009300));
@@ -116,8 +116,8 @@
 	background: 				linear-gradient(to bottom, #00b536 0%,#009300 100%);
 	border:						1px solid #378f23;
 }
-.button.primary:hover,
-.button.primary:focus	{
+.lb-button.primary:hover,
+.lb-button.primary:focus	{
 	background: 				#006a00;
 	background: 				-moz-linear-gradient(top, #00b534 0%, #006a00 100%);
 	background: 				-webkit-gradient(linear, left top, left bottom, color-stop(0%,#00b534), color-stop(100%,#006a00));
@@ -126,7 +126,7 @@
 	background: 				-ms-linear-gradient(top, #00b534 0%,#006a00 100%);
 	background: 				linear-gradient(to bottom, #00b534 0%,#006a00 100%);
 }
-.button.secondary	{
+.lb-button.secondary	{
 	background: 				#0077bf;
 	background: 				-moz-linear-gradient(top, #0077bf 0%, #005098 100%);
 	background: 				-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077bf), color-stop(100%,#005098));
@@ -136,8 +136,8 @@
 	background: 				linear-gradient(to bottom, #0077bf 0%,#005098 100%);
 	border:						1px solid #004385;
 }
-.button.secondary:hover,
-.button.secondary:focus	{
+.lb-button.secondary:hover,
+.lb-button.secondary:focus	{
 	background: 				#00396c;
 	background: 				-moz-linear-gradient(top, #0077bf 0%, #00396c 100%);
 	background: 				-webkit-gradient(linear, left top, left bottom, color-stop(0%,#0077bf), color-stop(100%,#00396c));
@@ -146,7 +146,7 @@
 	background: 				-ms-linear-gradient(top, #0077bf 0%,#00396c 100%);
 	background: 				linear-gradient(to bottom, #0077bf 0%,#00396c 100%);
 }
-.button.action:after	{
+.lb-button.action:after	{
 	content: 					"▶";
 	margin: 					-3px 0 -4px 15px;
 	position:					relative;
@@ -161,9 +161,9 @@
 	overflow: 					hidden;
 	padding-left: 				2px;
 }
-.button.primary.action:after	{
+.lb-button.primary.action:after	{
 	background: 				#24ba4e;
 }
-.button.secondary.action:after	{
+.lb-button.secondary.action:after	{
 	background: 				#004c85;
 }
