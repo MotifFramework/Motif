@@ -57,13 +57,15 @@
 				"successText"		:	"Great! Your form has been submitted.",
 				"errorText"			:	"There was an error submitting your form. Please contact the site's administrator.",
 				"alertSuccessClass"	:	"success",
-				"alertErrorClass"	:	"error"
+				"alertErrorClass"	:	"error",
+				"messageLocation"	:	"prepend",
+				"callback"			:	null
 			}, o),
-			responseMsg				=	$('<div id="form-response" class="alert panel"></div>');
+			responseMsg				=	$('<div class="form-response"></div>');
 
 		// Scroll to the top of the form
 		$("html, body").animate({
-			scrollTop	:	0
+			scrollTop	:	options.form.offset().top - 100
 	    }, 500);
 
 		// If there was an error submitting the form...
@@ -88,12 +90,18 @@
 		}
 
 		// Prepend response message to form
-		responseMsg.prependTo(options.form);
+		if (options.messageLocation === "prepend") {
+			responseMsg.prependTo(options.form);
+
+		// Append response message to form
+		} else if (options.messageLocation === "append") {
+			responseMsg.appendTo(options.form);
+		}
 
 		// After a few seconds, remove message
 		setTimeout(function () {
-			responseMsg.slideUp();
-		}, 5000, function () {
+			responseMsg.slideUp(150);
+		}, 8000, function () {
 			responseMsg.remove();
 		});
 	}
@@ -131,41 +139,37 @@
 					ajaxSubmit	:	function () {
 
 						// Variables
-						var $this		=	$(this),
-							dataString	=	decodeURIComponent($this.serialize());
+						var $this				=	$(this),
+							dataString			=	decodeURIComponent($this.serialize()),
+							successResponseOpts	=	{
+								"form"				:	$this,
+								"error"				:	false,
+								"fieldSuccessClass"	:	"success",
+								"successText"		:	"Great! Your form has been submitted.",
+								"alertSuccessClass"	:	"success"
+							},
+							errorResponseOpts	=	{
+								"form"				:	$this,
+								"error"				:	true,
+								"errorText"			:	"There was an error submitting your form. Please contact the site's administrator.",
+								"alertErrorClass"	:	"error"
+							};
 
 						// Make AJAX call
 						$.ajax({
 							type		:	"POST",
-							url			:	"test.php",
+							url			:	$this.attr("action"),
 							data		:	dataString,
 							cache		:	false,
 							success		:	function () {
 
-								// Variables
-								var responseOptions	=	{
-									"form"				:	$this,
-									"error"				:	false,
-									"fieldSuccessClass"	:	"success",
-									"successText"		:	"Great! Your form has been submitted.",
-									"alertSuccessClass"	:	"success"
-								};
-
 								// Call form response function
-								formResponse(responseOptions);
+								formResponse(successResponseOpts);
 							},
-							error	:	function () {
-
-								// Variables
-								var responseOptions	=	{
-									"form"				:	$this,
-									"error"				:	true,
-									"errorText"			:	"There was an error submitting your form. Please contact the site's administrator.",
-									"alertErrorClass"	:	"error"
-								};
+							error		:	function () {
 
 								// Call form response function
-								formResponse(responseOptions);
+								formResponse(errorResponseOpts);
 							}
 						});
 					}
@@ -209,10 +213,11 @@
 				var	target			=	$(this),
 					icon			=	$("<i></i>"),
 					iconValue		=	target.attr("data-icon"),
-					iconPosition	=	target.attr("data-icon-position");
+					iconPosition	=	target.attr("data-icon-position"),
+					iconFamily		=	target.attr("data-icon-family");
 
 				// Create icon details
-				icon.addClass("data-icon").attr("aria-hidden", "true").html(iconValue);
+				icon.addClass("data-icon").addClass("data-icon-" + iconFamily).attr("aria-hidden", "true").html(iconValue);
 
 				// Prepend or append
 				if (iconPosition === "before" || iconPosition === "solo") {
