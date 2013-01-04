@@ -1,12 +1,12 @@
 {
-	"scripts": [
+	"scripts"	:	[
 
 		{
 			"_description"	:	"Plugins required on every page",
 			"input_dir"		:	"js",
 			"input_files"	:	[
 				"helpers.js",
-				"plugins.js"
+				"jquery.js"
 			],
 			"output_dir"	:	"js/min",
 			"output_file"	:	"plugins.min.js",
@@ -39,11 +39,24 @@
 			"minify"		:	false,
 			"lint"			:	false,
 			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"LB Reveal",
+			"input_dir"		:	"js/plugins",
+			"input_files"	:	[
+				"jquery.lb-reveal.js"
+			],
+			"output_dir"	:	"js/min",
+			"output_file"	:	"jquery.lb-reveal.min.js",
+			"minify"		:	false,
+			"lint"			:	false,
+			"lint_config"	:	{}
 		}
 
 	],
 
-	"styles": [
+	"styles"	:	[
 
 		{
 			"_description"	:	"Global Stylesheet",

@@ -183,9 +183,11 @@
 
 		// Tabbed widget
 		if (tabbedWidget.length > 0) {
-			tabbedWidget.lb_reveal({
-				"trigger"	:	"click",
-				"exclusive"	:	"radio"
+			$.getScript('/resources/js/min/jquery.lb-reveal.min.js', function () {
+				tabbedWidget.lb_reveal({
+					"trigger"	:	"click",
+					"exclusive"	:	"radio"
+				});
 			});
 		}
 	}
