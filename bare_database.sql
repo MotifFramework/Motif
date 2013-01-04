@@ -14,7 +14,7 @@ CREATE TABLE `LB_Actions` (
   PRIMARY KEY  (`actionId`),
   KEY `actionType` (`actionType`),
   KEY `creationDate` (`creationDate`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Content` (
@@ -39,7 +39,7 @@ CREATE TABLE `LB_Content` (
   `ruleId` int(11) NOT NULL default '0',
   PRIMARY KEY  (`contentId`),
   KEY `ruleId` (`ruleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Content` (`contentId`, `fullURL`, `contentSlug`, `contentAlias`, `contentDescription`, `creator`, `creationDate`, `updatedBy`, `updatedDate`, `contentSectionId`, `contentTypeId`, `templateId`, `headerStatus`, `redirectLocation`, `showInNavigation`, `navigationAnchor`, `status`, `navigationOrder`, `ruleId`) VALUES
 (1, '/index', 'index', 'index', '', 1, 1334010178, 1, 1334010178, 0, 1, 2, '404', '', 0, 'Home', 1, 0, 1);
@@ -48,7 +48,7 @@ CREATE TABLE `LB_ContentCache` (
   `fullURL` varchar(500) NOT NULL default '',
   `publishedData` text,
   PRIMARY KEY  (`fullURL`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentCache` (`fullURL`, `publishedData`) VALUES
 ('/index', '{"template":"Reef_DefaultHome","data":[{"entityKey":"content","data":"<p>The home page content.<\\/p>"},{"entityKey":"metaTitle","data":"Home Page"},{"entityKey":"metaDescription","data":"This is the home page for the site"},{"entityKey":"tweetText","data":""},{"entityKey":"openGraphTitle","data":""},{"entityKey":"openGraphDescription","data":""},{"entityKey":"openGraphImage","data":""}]}');
@@ -58,7 +58,7 @@ CREATE TABLE `LB_ContentData_Float` (
   `contentId` int(11) NOT NULL,
   `contentKey` varchar(128) default NULL,
   `data` float default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentData_Int` (
@@ -66,7 +66,7 @@ CREATE TABLE `LB_ContentData_Int` (
   `contentId` int(11) NOT NULL,
   `contentKey` varchar(128) default NULL,
   `data` int(11) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentData_Text` (
@@ -76,7 +76,7 @@ CREATE TABLE `LB_ContentData_Text` (
   `data` text,
   KEY `versionId` (`versionId`,`contentId`,`contentKey`),
   KEY `contentId` (`contentId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentData_Text` (`versionId`, `contentId`, `contentKey`, `data`) VALUES
 (1, 1, 'content', '<p>The home page content.</p>'),
@@ -89,7 +89,7 @@ CREATE TABLE `LB_ContentData_VC64` (
   `contentId` int(11) NOT NULL,
   `contentKey` varchar(128) default NULL,
   `data` varchar(64) default NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentData_VC255` (
@@ -99,7 +99,7 @@ CREATE TABLE `LB_ContentData_VC255` (
   `data` varchar(255) default NULL,
   PRIMARY KEY  (`versionId`,`contentId`,`contentKey`),
   KEY `contentId` (`contentId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentData_VC255` (`versionId`, `contentId`, `contentKey`, `data`) VALUES
 (1, 1, 'metaTitle', 'Home Page'),
@@ -112,7 +112,7 @@ CREATE TABLE `LB_ContentPublishSchedule` (
   `publishEnd` int(11) default NULL,
   `status` int(11) default NULL,
   PRIMARY KEY  (`contentId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentSections` (
@@ -129,7 +129,7 @@ CREATE TABLE `LB_ContentSections` (
   PRIMARY KEY  (`contentSectionId`),
   KEY `parentContentSectionId` (`parentContentSectionId`),
   KEY `sectionSlug` (`sectionSlug`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentTypes` (
@@ -148,7 +148,7 @@ CREATE TABLE `LB_ContentTypes` (
   PRIMARY KEY  (`contentTypeId`),
   KEY `templateId` (`templateId`),
   KEY `parentContentTypeId` (`parentContentTypeId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentTypes` (`contentTypeId`, `contentTypeName`, `contentTypeDescription`, `templateId`, `defaultAllowsCommenting`, `defaultAllowsRating`, `defaultAllowsTagging`, `defaultAllowsFavoriting`, `parentContentTypeId`, `useOption`, `status`, `isSelectable`) VALUES
 (1, 'Basic Page', 'This is a basic interior page', 1, 0, 0, 0, 0, 2, 1, 1, 1),
@@ -166,7 +166,7 @@ CREATE TABLE `LB_ContentVersion` (
   `scheduleStart` int(11) default NULL,
   `scheduleEnd` int(11) default NULL,
   PRIMARY KEY  (`versionId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentVersion` (`versionId`, `contentId`, `createdBy`, `creationDate`, `updatedBy`, `updatedDate`, `workflowState`, `scheduleStart`, `scheduleEnd`) VALUES
 (1, 1, 1, 1334010195, 1, 1334010195, 4, 0, 0);
@@ -180,7 +180,7 @@ CREATE TABLE `LB_ContentWorkflow` (
   PRIMARY KEY  (`contentId`),
   KEY `status` (`status`),
   KEY `userTypeId` (`userTypeId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ContentWorkflowLog` (
@@ -193,7 +193,7 @@ CREATE TABLE `LB_ContentWorkflowLog` (
   KEY `contentId` (`contentId`),
   KEY `peopleId` (`peopleId`),
   KEY `userId` (`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Crud` (
@@ -202,7 +202,7 @@ CREATE TABLE `LB_Crud` (
   `dateCreated` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY  (`crudId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_DataTypeDefinition` (
@@ -213,7 +213,7 @@ CREATE TABLE `LB_DataTypeDefinition` (
   `status` int(11) NOT NULL default '1',
   `dataStorageType` varchar(255) default NULL,
   PRIMARY KEY  (`dataTypeDefinitionId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `dataTypeDescription`, `dataTypeClass`, `status`, `dataStorageType`) VALUES
 (1, 'Input Field', 'A standard single line input field.', 'LB_ContentManagement_Presentation_DataTypes_InputField', 1, 'VC255'),
@@ -247,7 +247,7 @@ CREATE TABLE `LB_DataTypeEntity` (
   KEY `contentTypeId` (`contentTypeId`),
   KEY `dataTypeDefinitionId` (`dataTypeDefinitionId`),
   KEY `contentTypeGroupId` (`contentTypeGroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeEntity` (`dataTypeEntityId`, `contentTypeId`, `dataTypeDefinitionId`, `entityKey`, `entityName`, `entityDescription`, `required`, `validatorType`, `dataStorageType`, `contentTypeGroupId`, `entityOrder`, `status`) VALUES
 (9, 3, 1, 'postTitle', 'Post Title', 'Title for this post', 1, '', 'VC255', 4, 0, 1),
@@ -269,7 +269,7 @@ CREATE TABLE `LB_DataTypeEntityGroups` (
   `entityGroupOrder` int(11) default NULL,
   `status` int(11) NOT NULL default '1',
   PRIMARY KEY  (`entityGroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeEntityGroups` (`entityGroupId`, `contentTypeId`, `entityGroupName`, `entityGroupDescription`, `entityGroupOrder`, `status`) VALUES
 (1, 1, 'Content', '', 0, 1),
@@ -285,21 +285,21 @@ CREATE TABLE `LB_DataTypeEntityOptions` (
   `status` int(11) NOT NULL default '1',
   PRIMARY KEY  (`dataTypeEntityOptionId`),
   KEY `dataTypeEntityId` (`dataTypeEntityId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Files` (
   `resourceId` int(11) NOT NULL,
   `fileUrl` varchar(256) NOT NULL,
   PRIMARY KEY  (`resourceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Images` (
   `resourceId` int(11) NOT NULL,
   `imageUrl` varchar(256) NOT NULL,
   PRIMARY KEY  (`resourceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Modules` (
@@ -311,7 +311,7 @@ CREATE TABLE `LB_Modules` (
   `adminDisplay` int(11) NOT NULL,
   PRIMARY KEY  (`moduleId`),
   KEY `moduleName` (`moduleName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Modules` (`moduleId`, `moduleName`, `moduleAlias`, `moduleDescription`, `activityClass`, `adminDisplay`) VALUES
 (1, 'User Management', 'Users', 'Allows for the authorization of users, admin panel accessibility, and additional user-based functionality.', 'LB_UserManagement_Logic_User', 1),
@@ -324,7 +324,7 @@ CREATE TABLE `LB_ModuleSections` (
   `displayOrder` int(11) NOT NULL,
   `permission` varchar(255) default NULL,
   PRIMARY KEY  (`moduleAlias`,`sectionName`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ModuleSections` (`moduleAlias`, `sectionName`, `sectionLink`, `displayOrder`, `permission`) VALUES
 ('Users', 'Users', '/admin/users/index.html', 0, 'Manage Users'),
@@ -347,7 +347,7 @@ CREATE TABLE `LB_Notifications` (
   `type` varchar(100) default NULL,
   `lookupId` int(11) default NULL,
   PRIMARY KEY  (`notificationId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_RegisteredControls` (
@@ -358,7 +358,7 @@ CREATE TABLE `LB_RegisteredControls` (
   `useDesigner` int(11) default NULL,
   `status` int(11) default NULL,
   PRIMARY KEY  (`controlId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Resources` (
@@ -375,7 +375,7 @@ CREATE TABLE `LB_Resources` (
   PRIMARY KEY  (`resourceId`),
   KEY `creator` (`creator`),
   KEY `resourceTypeId` (`resourceTypeId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ResourceToContent` (
@@ -383,7 +383,7 @@ CREATE TABLE `LB_ResourceToContent` (
   `contentId` int(11) NOT NULL,
   `resourceId` int(11) NOT NULL,
   PRIMARY KEY  (`resourceTypeId`,`contentId`,`resourceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ResourceToResource` (
@@ -391,7 +391,7 @@ CREATE TABLE `LB_ResourceToResource` (
   `dominantResourceId` int(11) NOT NULL,
   `recessiveResourceId` int(11) NOT NULL,
   PRIMARY KEY  (`recessiveResourceTypeId`,`dominantResourceId`,`recessiveResourceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ResourceToUser` (
@@ -399,7 +399,7 @@ CREATE TABLE `LB_ResourceToUser` (
   `userId` int(11) NOT NULL,
   `resourceId` int(11) NOT NULL,
   PRIMARY KEY  (`resourceTypeId`,`userId`,`resourceId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_ResourceTypes` (
@@ -411,7 +411,7 @@ CREATE TABLE `LB_ResourceTypes` (
   `adminSubmittable` tinyint(4) NOT NULL,
   PRIMARY KEY  (`resourceTypeId`),
   KEY `resourceTypeName` (`resourceTypeName`,`resourceTypeDescription`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ResourceTypes` (`resourceTypeId`, `resourceTypeName`, `resourceTypeDescription`, `resourceTypePage`, `resourceTypeClass`, `adminSubmittable`) VALUES
 (1, 'Files', 'Files are used to store and manage any file of any extension.', 'files', 'LB_ResourceManagement_Logic_ResourceTypes_File', 1),
@@ -428,7 +428,7 @@ CREATE TABLE `LB_Settings` (
   PRIMARY KEY  (`settingId`),
   KEY `settingName` (`settingName`),
   KEY `settingGroup` (`settingGroup`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `settingGroup`, `settingValue`, `settingStatus`) VALUES
 (1, 'LB_SYSTEM_PROJECT_NAME', 'Provides the display name for this project', 'System', 'LB Core Default', 1),
@@ -459,7 +459,7 @@ CREATE TABLE `LB_SiteDesignOverride` (
   `fullURL` varchar(500) NOT NULL default '',
   `designOverride` text,
   PRIMARY KEY  (`fullURL`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_Templates` (
@@ -468,7 +468,7 @@ CREATE TABLE `LB_Templates` (
   `templateClass` varchar(255) default NULL,
   `status` int(11) NOT NULL default '1',
   PRIMARY KEY  (`templateId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Templates` (`templateId`, `templateName`, `templateClass`, `status`) VALUES
 (1, 'Default Template', 'Reef_Default', 1),
@@ -479,7 +479,7 @@ CREATE TABLE `LB_TrashCan` (
   `fullURL` varchar(500) NOT NULL default '',
   `publishedData` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_UserData` (
@@ -488,7 +488,7 @@ CREATE TABLE `LB_UserData` (
   `userDataValue` varchar(512) NOT NULL,
   PRIMARY KEY  (`userId`,`userDataType`),
   KEY `userDataType` (`userDataType`,`userDataValue`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserData` (`userId`, `userDataType`, `userDataValue`) VALUES
 (1, 'description', ''),
@@ -501,7 +501,7 @@ CREATE TABLE `LB_UserLogins` (
   `active` tinyint(4) NOT NULL,
   `ipAddress` varchar(50) NOT NULL,
   PRIMARY KEY  (`userId`,`loginTime`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserLogins` (`userId`, `loginTime`, `success`, `active`, `ipAddress`) VALUES
 (1, 1326921745, 1, 0, '127.0.0.1'),
@@ -518,7 +518,7 @@ CREATE TABLE `LB_UserPermissions` (
   `userPermissionDescription` varchar(512) NOT NULL,
   PRIMARY KEY  (`userPermissionId`),
   KEY `userPermissionName` (`userPermissionName`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `userPermissionName`, `userPermissionDescription`) VALUES
 (24, 'Content', 'Edit Content Sections', 'Allows for the modification of Content Section details'),
@@ -585,7 +585,7 @@ CREATE TABLE `LB_Users` (
   KEY `email` (`email`),
   KEY `securityQuestion` (`securityQuestion`),
   KEY `securityAnswer` (`securityAnswer`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Users` (`userId`, `userName`, `password`, `email`, `dateCreated`, `approved`, `disabled`, `lockedOut`, `lastLogin`, `userTypeId`, `securityQuestion`, `securityAnswer`, `notifications`) VALUES
 (1, 'LB ADMIN', '726dc7375d4a663d347a09b5033154d746afd1f82e6fd5822433f666c01d94208869002d80ee912a1541c24d283992b12e07342e7a2479206a6aacfa2ba785d50b4f327f2e30d2ee6d61f6507c8e09c621ffcaf92514598b75e2e3612a26cf132c399d016c2fcb50a24d2e3f4a94cfdd8ac0daec446a937c20ac1a1c910c80c9d5bddf4ec8941355f4b8339179583e0a43c13faad322e7d198725a3d4e1d45af605aa8600833f95ad2b887e99fbc57a371be207857f09a1894ea520dee99f3a61eca74771eacd3b20cdeb6ea1c6b1d9d1024f42f59fcab750372356dadc8bfb72f84a3076995e845e9d23db1c904aa6a6bdceb6532d401319c33e2d8c9a16baf', 'lbadmin@lifeblue.com', 2011, 1, 0, 0, 1357159508, 1, '', '', 1);
@@ -596,7 +596,7 @@ CREATE TABLE `LB_UserSectionPermissions` (
   `status` int(11) NOT NULL default '0',
   `userId` int(11) default NULL,
   UNIQUE KEY `id` (`id`,`type`,`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserSectionPermissions` (`id`, `type`, `status`, `userId`) VALUES
 (0, 'section', 1, 1);
@@ -605,7 +605,7 @@ CREATE TABLE `LB_UserToUserPermission` (
   `userId` int(11) NOT NULL,
   `userPermissionId` int(11) NOT NULL,
   PRIMARY KEY  (`userId`,`userPermissionId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserToUserPermission` (`userId`, `userPermissionId`) VALUES
 (1, 36),
@@ -625,7 +625,7 @@ CREATE TABLE `LB_UserTypes` (
   `status` tinyint(4) NOT NULL default '1',
   PRIMARY KEY  (`userTypeId`),
   KEY `userTypeName` (`userTypeName`,`userTypeDescription`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserTypes` (`userTypeId`, `userTypeName`, `userTypeDescription`, `status`) VALUES
 (1, 'Super Admin', 'Performs all site maintenance and monitors site activity.', 1);
@@ -634,7 +634,7 @@ CREATE TABLE `LB_UserTypeToUserPermission` (
   `userTypeId` int(11) NOT NULL,
   `userPermissionId` int(11) NOT NULL,
   PRIMARY KEY  (`userTypeId`,`userPermissionId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserTypeToUserPermission` (`userTypeId`, `userPermissionId`) VALUES
 (1, 36),
@@ -655,7 +655,7 @@ CREATE TABLE `LB_WorkflowPath` (
   PRIMARY KEY  (`pathId`),
   KEY `userTypeId` (`userTypeId`),
   KEY `ruleId` (`ruleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_WorkflowPath` (`pathId`, `ruleId`, `userTypeId`, `action`, `publishWhen`) VALUES
 (1, 1, 1, 'Both', 'Always');
@@ -671,7 +671,7 @@ CREATE TABLE `LB_WorkflowPeople` (
   KEY `userId` (`userId`),
   KEY `pathId` (`pathId`),
   KEY `userTypeId` (`userTypeId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `LB_WorkflowRule` (
@@ -681,7 +681,7 @@ CREATE TABLE `LB_WorkflowRule` (
   `status` int(11) default NULL,
   PRIMARY KEY  (`ruleId`),
   KEY `status` (`status`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_WorkflowRule` (`ruleId`, `name`, `description`, `status`) VALUES
 (1, 'Default', 'Default workflow with only a superuser', 1);
