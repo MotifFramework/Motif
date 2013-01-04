@@ -24,7 +24,7 @@
 			"output_dir"	:	"js/min",
 			"output_file"	:	"actions.min.js",
 			"minify"		:	false,
-			"lint"			:	true,
+			"lint"			:	false,
 			"lint_config"	:	{}
 		},
 
@@ -40,6 +40,7 @@
 			"lint"			:	false,
 			"lint_config"	:	{}
 		}
+
 	],
 
 	"styles": [
@@ -52,8 +53,8 @@
 			],
 			"output_dir"	:	"css",
 			"output_file"	:	"global.css",
-			"minify"		:	true,
-			"lint"			:	true,
+			"minify"		:	false,
+			"lint"			:	false,
 			"lint_config"	:	{}
 		},
 
@@ -65,8 +66,8 @@
 			],
 			"output_dir"	:	"css",
 			"output_file"	:	"global-fixed.css",
-			"minify"		:	true,
-			"lint"			:	true,
+			"minify"		:	false,
+			"lint"			:	false,
 			"lint_config"	:	{}
 		},
 
@@ -78,9 +79,10 @@
 			],
 			"output_dir"	:	"css",
 			"output_file"	:	"print.css",
-			"minify"		:	true,
-			"lint"			:	true,
+			"minify"		:	false,
+			"lint"			:	false,
 			"lint_config"	:	{}
 		}
+
 	]
 }
