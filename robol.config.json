@@ -1,0 +1,86 @@
+{
+	"scripts": [
+
+		{
+			"_description"	:	"Plugins required on every page",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"helpers.js",
+				"plugins.js"
+			],
+			"output_dir"	:	"js/min",
+			"output_file"	:	"plugins.min.js",
+			"minify"		:	false,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Actions performed on page load",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"actions.js"
+			],
+			"output_dir"	:	"js/min",
+			"output_file"	:	"actions.min.js",
+			"minify"		:	false,
+			"lint"			:	true,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Modernizr",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"modernizr.js"
+			],
+			"output_dir"	:	"js/min",
+			"output_file"	:	"modernizr.min.js",
+			"minify"		:	false,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		}
+	],
+
+	"styles": [
+
+		{
+			"_description"	:	"Global Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"global.less"
+			],
+			"output_dir"	:	"css",
+			"output_file"	:	"global.css",
+			"minify"		:	true,
+			"lint"			:	true,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Fixed Global Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"global-fixed.less"
+			],
+			"output_dir"	:	"css",
+			"output_file"	:	"global-fixed.css",
+			"minify"		:	true,
+			"lint"			:	true,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Print Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"print.less"
+			],
+			"output_dir"	:	"css",
+			"output_file"	:	"print.css",
+			"minify"		:	true,
+			"lint"			:	true,
+			"lint_config"	:	{}
+		}
+	]
+}
