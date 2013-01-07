@@ -5,7 +5,7 @@
  * @version 0.5 (12/07/12)
  * @author Jonathan Pacheco (jonathan@lifeblue.com)
  * 
- * Copyright 2012-2013 Lifeblue
+ * Copyright 2012- Lifeblue
  */
 
 (function ($) {
