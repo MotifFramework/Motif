@@ -125,14 +125,14 @@
 
 		// Form placeholder text (if applicable)
 		if (!Modernizr.placeholder) {
-			$.getScript('/resources/js/min/jquery.placeholder.min.js', function () {
+			$.getScript('/resources/c/js/jquery.placeholder.min.js', function () {
 				$("input, textarea").placeholder();
 			});
 		}
 
 		// Validating forms
 		if (validatingForms.length > 0) {
-			$.getScript('/resources/js/min/jquery.lb-validation.min.js', function () {
+			$.getScript('/resources/c/js/jquery.lb-validation.min.js', function () {
 
 				// Call LB Validation plugin
 				validatingForms.lb_validation({
@@ -187,7 +187,7 @@
 
 		// Tabbed widget
 		if (tabbedWidget.length > 0) {
-			$.getScript('/resources/js/min/jquery.lb-reveal.min.js', function () {
+			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
 				tabbedWidget.lb_reveal({
 					"trigger"	:	"click",
 					"exclusive"	:	"radio"
