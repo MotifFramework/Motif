@@ -7,29 +7,28 @@
 	var vars	=	{
 
 			// System Variables
-			"pluginName"	:	"lb_reveal",
-			"trigger"		:	"click",
-			"transition"	:	"fade",
-			"exclusive"		:	"no",
+			"pluginName"		:	"lb_reveal",
+			"trigger"			:	"click",
+			"exclusive"			:	"no",
 
 			// Class Name
-			"activeClass"	:	"is-current",
-			"visitedClass"	:	"is-visited",
+			"activeClass"		:	"is-current",
+			"visitedClass"		:	"is-visited",
 
-			"hoverIntent"	:	{
+			"hoverIntent"		:	{
 				"sensitivity"	:	10,
 				"interval"		:	50,
 				"timeout"		:	0
 			},
 
 			// On Init
-			"onInit"		:	null,
+			"onInit"			:	null,
 
 			// On Reveal
-			"onReveal"		:	null,
+			"onReveal"			:	null,
 
 			// On Hide
-			"onHide"		:	null
+			"onHide"			:	null
 		},
 
 		// Methods
@@ -37,24 +36,23 @@
 			"init"	:	function (o, callback) {
 
 				return this.each(function () {
-					var $this			=	$(this),
-						s				=	$.extend(true, {}, vars, o),
+					var $this				=	$(this),
+						s					=	$.extend(true, {}, vars, o),
 
 						// Grab Variables
-						triggerElem		=	$this,
-						allData			=	triggerElem.data(),
-						revealTargetID	=	triggerElem.attr("data-reveal"),
-						revealTarget	=	$("#" + revealTargetID),
-						revealGroupID	=	triggerElem.attr("data-reveal-group"),
-						revealGroup		=	$("[data-reveal-group='" + revealGroupID + "']"),
+						trigger_elem		=	$this,
+						all_data			=	trigger_elem.data(),
+						reveal_target_id	=	trigger_elem.attr("data-reveal"),
+						reveal_target		=	$("#" + reveal_target_id),
+						reveal_group_id		=	trigger_elem.attr("data-reveal-group"),
+						reveal_group		=	$("[data-reveal-group='" + reveal_group_id + "']"),
 
-						data			=	{
-							"origData"		:	allData,
-							"triggerElem"	:	triggerElem,
-							"revealTarget"	:	revealTarget,
-							"revealGroup"	:	revealGroup,
+						data				=	{
+							"origData"		:	all_data,
+							"triggerElem"	:	trigger_elem,
+							"revealTarget"	:	reveal_target,
+							"revealGroup"	:	reveal_group,
 							"trigger"		:	s.trigger,
-							"transition"	:	s.transition,
 							"activeClass"	:	s.activeClass,
 							"visitedClass"	:	s.visitedClass,
 							"exclusive"		:	s.exclusive,
@@ -74,7 +72,10 @@
 					// On Hover...
 					if (s.trigger === "hover") {
 
+						// If the Hover Intent plugin is available...
 						if ($.fn.hoverIntent && s.hoverIntent) {
+
+							// ...use it!
 							$this.hoverIntent({
 								sensitivity	:	s.hoverIntent.sensitivity,
 								interval	:	s.hoverIntent.interval,
@@ -86,7 +87,11 @@
 									methods.hideTarget.call($this);
 								}
 							});
+
+						// Otherwise...
 						} else {
+
+							// ...bind on `mouseenter` and `mouseleave`
 							$this.on({
 								mouseenter:	function () {
 									methods.revealTarget.call($this);
@@ -96,6 +101,7 @@
 								}
 							});
 						}
+
 					// On Click...
 					} else if (s.trigger === "click") {
 						$this.on("click", function () {
@@ -107,27 +113,21 @@
 								if (data.exclusive !== "radio") {
 									methods.hideTarget.call($this);
 								}
+
+							// If it's not active...
 							} else {
+
+								// If it's exclusive or radio...
 								if (data.exclusive === "yes" || data.exclusive === "radio") {
-									revealGroup.each(function () {
+
+									// ...cycle through the group and hide all the others
+									reveal_group.each(function () {
 										methods.hideTarget.call($(this));
 									});
 								}
+
+								// Then, reveal this current target
 								methods.revealTarget.call($this);
-							}
-							return false;
-						});
-
-					// On Select...
-					} else if (s.trigger === "select") {
-						$this.parent().on("change", function () {
-
-							// If it has the active class...
-							if ($(this).val() === $this.attr("data-reveal-value")) {
-
-								methods.revealTarget.call($this);
-							} else {
-								methods.hideTarget.call($this);
 							}
 							return false;
 						});
