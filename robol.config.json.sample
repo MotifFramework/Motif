@@ -8,9 +8,9 @@
 				"helpers.js",
 				"jquery.js"
 			],
-			"output_dir"	:	"js/min",
+			"output_dir"	:	"c/js",
 			"output_file"	:	"plugins.min.js",
-			"minify"		:	false,
+			"minify"		:	true,
 			"lint"			:	false,
 			"lint_config"	:	{}
 		},
@@ -21,9 +21,9 @@
 			"input_files"	:	[
 				"actions.js"
 			],
-			"output_dir"	:	"js/min",
+			"output_dir"	:	"c/js",
 			"output_file"	:	"actions.min.js",
-			"minify"		:	false,
+			"minify"		:	true,
 			"lint"			:	false,
 			"lint_config"	:	{}
 		},
@@ -34,9 +34,9 @@
 			"input_files"	:	[
 				"modernizr.js"
 			],
-			"output_dir"	:	"js/min",
+			"output_dir"	:	"c/js",
 			"output_file"	:	"modernizr.min.js",
-			"minify"		:	false,
+			"minify"		:	true,
 			"lint"			:	false,
 			"lint_config"	:	{}
 		},
@@ -47,9 +47,9 @@
 			"input_files"	:	[
 				"jquery.lb-reveal.js"
 			],
-			"output_dir"	:	"js/min",
+			"output_dir"	:	"c/js",
 			"output_file"	:	"jquery.lb-reveal.min.js",
-			"minify"		:	false,
+			"minify"		:	true,
 			"lint"			:	false,
 			"lint_config"	:	{}
 		}
@@ -64,7 +64,7 @@
 			"input_files"	:	[
 				"global.less"
 			],
-			"output_dir"	:	"css",
+			"output_dir"	:	"c/css",
 			"output_file"	:	"global.css",
 			"minify"		:	false,
 			"lint"			:	false,
@@ -77,7 +77,7 @@
 			"input_files"	:	[
 				"global-fixed.less"
 			],
-			"output_dir"	:	"css",
+			"output_dir"	:	"c/css",
 			"output_file"	:	"global-fixed.css",
 			"minify"		:	false,
 			"lint"			:	false,
@@ -90,7 +90,7 @@
 			"input_files"	:	[
 				"print.less"
 			],
-			"output_dir"	:	"css",
+			"output_dir"	:	"c/css",
 			"output_file"	:	"print.css",
 			"minify"		:	false,
 			"lint"			:	false,
