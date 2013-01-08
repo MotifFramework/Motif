@@ -84,20 +84,20 @@ Mixins to generate `@font-face` code, with and sans SVG.
 
 .web-font(@name: "Web Font", @folder: folder, @filename: webfont) {
 	font-family:	"@{name}";
-	src:			url("../fonts/@{folder}/@{filename}.eot");
-	src:			url("../fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
-					url("../fonts/@{folder}/@{filename}.woff") format('woff'),
-					url("../fonts/@{folder}/@{filename}.ttf") format('truetype');
+	src:			url("../../fonts/@{folder}/@{filename}.eot");
+	src:			url("../../fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
+					url("../../fonts/@{folder}/@{filename}.woff") format('woff'),
+					url("../../fonts/@{folder}/@{filename}.ttf") format('truetype');
 	font-weight:	normal;
 	font-style:		normal;
 }
 .web-font-svg(@name: "Web Font", @folder: folder, @filename: webfont, @svg-name: WebFont) {
 	font-family:	"@{name}";
-	src:			url("../fonts/@{folder}/@{filename}.eot");
-	src:			url("../fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
-					url("../fonts/@{folder}/@{filename}.woff") format('woff'),
-					url("../fonts/@{folder}/@{filename}.ttf") format('truetype'),
-					url("../fonts/@{folder}/@{filename}.svg#@{svg-name}") format('svg');
+	src:			url("../../fonts/@{folder}/@{filename}.eot");
+	src:			url("../../fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
+					url("../../fonts/@{folder}/@{filename}.woff") format('woff'),
+					url("../../fonts/@{folder}/@{filename}.ttf") format('truetype'),
+					url("../../fonts/@{folder}/@{filename}.svg#@{svg-name}") format('svg');
 	font-weight:	normal;
 	font-style:		normal;
 }
