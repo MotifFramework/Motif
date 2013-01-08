@@ -7,13 +7,13 @@
 @import "less/theme/_base.less";
 
 // Media Query Equations
-@mq-mobile-min:				1em * (@mq-mobile-screen / 16);
-@mq-mobile-max:				1em * ((@mq-tablet-screen - 1) / 16);
-@mq-tablet-min:				1em * (@mq-tablet-screen / 16);
-@mq-tablet-max:				1em * ((@mq-desktop-screen - 1) / 16);
-@mq-desktop-min:			1em * (@mq-desktop-screen / 16);
-@mq-desktop-max:			1em * ((@mq-large-screen - 1) / 16);
-@mq-large-min:				1em * (@mq-large-screen / 16);
+@mq-mobile-min:				1em * (@mq-mobile-width / 16);
+@mq-mobile-max:				1em * ((@mq-tablet-width - 1) / 16);
+@mq-tablet-min:				1em * (@mq-tablet-width / 16);
+@mq-tablet-max:				1em * ((@mq-desktop-width - 1) / 16);
+@mq-desktop-min:			1em * (@mq-desktop-width / 16);
+@mq-desktop-max:			1em * ((@mq-widescreen-width - 1) / 16);
+@mq-widescreen-min:			1em * (@mq-widescreen-width / 16);
 
 
 // Responsive Breakpoints
@@ -52,6 +52,6 @@
 }
 
 // Large Screen
-@media only screen and (min-width: @mq-large-min) {
-	@import "less/theme/_large.less";
+@media only screen and (min-width: @mq-widescreen-min) {
+	@import "less/theme/_widescreen.less";
 }
