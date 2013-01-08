@@ -126,12 +126,14 @@ a:hover {color:#df408b; font-weight:bold; text-decoration:none;}
 .loginform .subtitle {font-size:18px; line-height:24px; color:#848484;}
 
 .loginform .box {width:500px; height:142px; background:url(../../images/admin/login_box_blue.jpg) #E7F2F6; margin:22px 0 0 0;}
-.loginform .email, .loginform .pass {position:absolute; font-size:14px; line-height:18px; color:#525252; font-weight:bold; margin-left:15px;}
+.loginform .email, .loginform .pass, .loginform .pass2 {position:absolute; font-size:14px; line-height:18px; color:#525252; font-weight:bold; margin-left:15px;}
 .loginform .email {margin-top:30px;}
 .loginform .pass {margin-top:95px;}
-.loginform .emailbox, .loginform .passbox {position:absolute; width:350px; height:42px; background:#d0e5f2; margin-left:130px;}
+.loginform .pass2 {margin-top:153px;}
+.loginform .emailbox, .loginform .passbox, .loginform .pass2box {position:absolute; width:350px; height:42px; background:#d0e5f2; margin-left:130px;}
 .loginform .emailbox {margin-top:20px;}
 .loginform .passbox {margin-top:80px;}
+.loginform .pass2box {margin-top:140px;}
 
 .loginform .formfield {width:340px; height:32px; position:absolute; background:url(../../images/admin/formfield.gif); margin:5px;}
 .loginform .formfield input {width:300px; height:18px; border:#fff 1px solid; padding:0 7px; font-size:14px; line-height:32px; color:#848484; margin:5px 0 0 5px;}
