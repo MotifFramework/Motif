@@ -440,7 +440,7 @@ INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `se
 (7, 'LB_USER_REQUIRES_UNIQUE_USERNAME', 'Determines whether a unique username is required upon creating a new user', 'User Management', '1', 1),
 (8, 'LB_USER_REQUIRES_EMAIL_VERIFICATION', 'Determines whether email verification is required upon creating a new user', 'User Management', '0', 1),
 (9, 'LB_USER_PASSWORD_REGULAR_EXPRESSION', 'Verifies that new passwords meet a required strength test', 'User Management', '', 1),
-(10, 'LB_USER_PASSWORD_FORMAT', 'Determines the type of encryption being used for user passwords and other sensitive data', 'User Management', 'Open SSL', 1),
+(10, 'LB_USER_PASSWORD_FORMAT', 'Determines the type of encryption being used for user passwords and other sensitive data', 'User Management', 'Blowfish', 1),
 (11, 'LB_USER_DEFAULT_LOGIN_URL', 'Provides a default page url to redirect users to when requesting authenticated sources', 'User Management', '/admin/login.html', 1),
 (12, 'LB_USER_DEFAULT_REGISTER_URL', 'Provides a default page url to redirect users to when requesting registration', 'User Management', '/register.html', 1),
 (13, 'LB_USER_QUESTION_AND_ANSWER_REQUIRED', 'Determines whether password retrieval question and answer are required upon creation of a new user', 'User Management', '0', 1),
@@ -569,7 +569,7 @@ INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `user
 CREATE TABLE `LB_Users` (
   `userId` int(11) NOT NULL auto_increment,
   `userName` varchar(256) NOT NULL,
-  `password` text NOT NULL,
+  `password` varchar(64) NOT NULL,
   `email` varchar(256) NOT NULL,
   `dateCreated` int(11) NOT NULL,
   `approved` tinyint(4) NOT NULL,
@@ -580,6 +580,7 @@ CREATE TABLE `LB_Users` (
   `securityQuestion` varchar(512) NOT NULL,
   `securityAnswer` varchar(256) NOT NULL,
   `notifications` int(11) NOT NULL default '0',
+  `resetToken` varchar(256) NOT NULL,
   PRIMARY KEY  (`userId`),
   KEY `userName` (`userName`),
   KEY `email` (`email`),
@@ -588,7 +589,7 @@ CREATE TABLE `LB_Users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Users` (`userId`, `userName`, `password`, `email`, `dateCreated`, `approved`, `disabled`, `lockedOut`, `lastLogin`, `userTypeId`, `securityQuestion`, `securityAnswer`, `notifications`) VALUES
-(1, 'LB ADMIN', '726dc7375d4a663d347a09b5033154d746afd1f82e6fd5822433f666c01d94208869002d80ee912a1541c24d283992b12e07342e7a2479206a6aacfa2ba785d50b4f327f2e30d2ee6d61f6507c8e09c621ffcaf92514598b75e2e3612a26cf132c399d016c2fcb50a24d2e3f4a94cfdd8ac0daec446a937c20ac1a1c910c80c9d5bddf4ec8941355f4b8339179583e0a43c13faad322e7d198725a3d4e1d45af605aa8600833f95ad2b887e99fbc57a371be207857f09a1894ea520dee99f3a61eca74771eacd3b20cdeb6ea1c6b1d9d1024f42f59fcab750372356dadc8bfb72f84a3076995e845e9d23db1c904aa6a6bdceb6532d401319c33e2d8c9a16baf', 'lbadmin@lifeblue.com', 2011, 1, 0, 0, 1357159508, 1, '', '', 1);
+(1, 'LB ADMIN', '$2a$08$0.a1p2ZUimC9q0Q64h.Pa.3xyNh9uVm4TfeJA6yWzgQuyjlI8SR8S', 'lbadmin@lifeblue.com', 1357159508, 1, 0, 0, 1357159508, 1, '', '', 1);
 
 CREATE TABLE `LB_UserSectionPermissions` (
   `id` int(11) default NULL,
