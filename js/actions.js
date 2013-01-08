@@ -25,6 +25,12 @@
 		// Validating Form
 		validatingForms	=	$("[data-validation='true']"),
 
+		// Off-Canvas Layouts
+		canvasTrigger	=	$(".canvas-trigger"),
+
+		// Mobile Nav
+		revealMainNav	=	$("#reveal-main-nav"),
+
 		// Icon Fonts
 		ie8				=	$("html.lte8"),
 		dataIcon		=	$("[data-icon]"),
@@ -198,6 +204,36 @@
 
 
 	/*
+	### Initialize Off-Canvas Layout Triggers ###
+	*/
+
+	function offCanvasInit() {
+		if (canvasTrigger.length > 0) {
+			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
+				canvasTrigger.lb_reveal({
+					"exclusive"		:	"yes",
+					"activeClass"	:	"is-active",
+					"visitedClass"	:	"was-active"
+				});
+			});
+		}
+	}
+
+
+	/*
+	### Initialize Mobile Menu Dropdown ###
+	*/
+
+	function mobileMenuDropdownInit() {
+		if (revealMainNav.length > 0) {
+			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
+				revealMainNav.lb_reveal();
+			});
+		}
+	}
+
+
+	/*
 	### Initialize Icon Fonts ###
 	*/
 
@@ -262,6 +298,8 @@
 	function init() {
 		formsInit();
 		tabsInit();
+		offCanvasInit();
+		mobileMenuDropdownInit();
 		iconsInit();
 		wireframeInit();
 	}

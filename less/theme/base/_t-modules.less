@@ -1,22 +1,66 @@
-.nav-bar	{
+// JS Main Nav Functionality
+.js	{
+	.menu	{
+		.nav	{
+			max-height:			0;
+			position:			relative;
+			overflow:			hidden;
 
-	// Variables
-	@base-color:						@dark-blue;
-	@top-gradient:						@base-color;
-	@bottom-gradient:					darken(@base-color, 5%);
-	@highlight-top:						lighten(@purple, 10%);
-	@highlight-bottom:					darken(@purple, 10%);
+			&.is-current	{
+				max-height:		999px;
+			}
+			&.is-current,
+			&.is-visited	{
+
+				// Mixins
+				.transition(all, 0.65s, ease-in-out);
+			}
+		}
+	}
+}
+.nav-bar	{
+	.title	{
+
+		// Variables
+		@base-color:			@dark-blue;
+		@top-gradient:			@base-color;
+		@bottom-gradient:		darken(@base-color, 3%);
+
+		// Create
+		padding:				@half-vertical 4%;
+		display:				block;
+		color:					@white;
+		cursor:					pointer;
+
+		// Mixins
+		.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+		.margin-leader();
+
+		&:hover,
+		&:focus,
+		&.is-current	{
+				
+			// Variables
+			@base-color:		darken(@dark-blue, 5%);
+			@top-gradient:		@base-color;
+			@bottom-gradient:	darken(@base-color, 5%);
+
+			// Mixins
+			.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+		}
+
+	}
 
 	.nav	{
 		margin:							0;
 		
 		// Mixins
-		.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+		background:						darken(@dark-blue, 10%);
 		
 		a {
 			color:						@white;
 			text-decoration:			none;
-			padding:					@full-vertical @full-side;
+			padding:					@half-vertical 4%;
 			
 			// Mixins
 			.source-sans-bold();
@@ -24,29 +68,8 @@
 			&:hover,
 			&:focus,
 			&.is-current	{
-				
-				// Variables
-				@base-color:			darken(@dark-blue, 5%);
-				@top-gradient:			@base-color;
-				@bottom-gradient:		darken(@base-color, 5%);
 
 				// Mixins
-				.background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
-			}
-		}
-	}
-	.sub-nav	{
-		background:						darken(@dark-blue, 10%);
-		
-		a	{
-			padding:					@half-vertical @full-side;
-		
-			// Mixins
-			.source-sans-regular();
-
-			&:hover,
-			&:focus,
-			&.is-current	{
 				background:				darken(@dark-blue, 15%);
 			}
 		}
