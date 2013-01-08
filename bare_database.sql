@@ -589,7 +589,7 @@ CREATE TABLE `LB_Users` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Users` (`userId`, `userName`, `password`, `email`, `dateCreated`, `approved`, `disabled`, `lockedOut`, `lastLogin`, `userTypeId`, `securityQuestion`, `securityAnswer`, `notifications`) VALUES
-(1, 'LB ADMIN', '$2a$08$0.a1p2ZUimC9q0Q64h.Pa.3xyNh9uVm4TfeJA6yWzgQuyjlI8SR8S', 'lbadmin@lifeblue.com', 1357159508, 1, 0, 0, 1357159508, 1, '', '', 1);
+(1, 'LB ADMIN', '$2a$08$Bzfugvj3QQuyA0WxaH2mp.HTCJxO2cwfRFu/IHb7g9qyx5/43WfD2', 'lbadmin@lifeblue.com', 1357159508, 1, 0, 0, 1357159508, 1, '', '', 1);
 
 CREATE TABLE `LB_UserSectionPermissions` (
   `id` int(11) default NULL,
