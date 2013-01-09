@@ -223,12 +223,11 @@ INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `da
 (5, 'Call Out Box', 'A Generator for call out boxes.', 'LB_ContentManagement_Presentation_DataTypes_CallOutBox', 1, 'Text'),
 (6, 'Drop Down List', 'Drop Down List', 'LB_ContentManagement_Presentation_DataTypes_DropDownList', 1, 'Text'),
 (7, 'Tag Picker', 'Tag input box w/ auto fill', 'LB_ContentManagement_Presentation_DataTypes_TagPicker', 1, 'Text'),
-(8, 'Curriculum Chart', 'Curriculum Chart Builder (Introduced in SHP)', 'LB_ContentManagement_Presentation_DataTypes_CurriculumChart', 1, 'Text'),
-(9, 'Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MediaPicker', 1, 'Text'),
-(10, 'Date Time Picker', 'Use this data type to add a date time element.', 'LB_ContentManagement_Presentation_DataTypes_DateTimePicker', 1, 'Int'),
-(11, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', 'LB_ContentManagement_Presentation_DataTypes_ContentDropDownList', 1, 'Text'),
-(12, 'Text Area', 'Use this data type to create unstyled text.', 'LB_ContentManagement_Presentation_DataTypes_TextArea', 1, 'Text'),
-(13, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text');
+(8, 'Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MediaPicker', 1, 'Text'),
+(9, 'Date Time Picker', 'Use this data type to add a date time element.', 'LB_ContentManagement_Presentation_DataTypes_DateTimePicker', 1, 'Int'),
+(10, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', 'LB_ContentManagement_Presentation_DataTypes_ContentDropDownList', 1, 'Text'),
+(11, 'Text Area', 'Use this data type to create unstyled text.', 'LB_ContentManagement_Presentation_DataTypes_TextArea', 1, 'Text'),
+(12, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text');
 
 CREATE TABLE `LB_DataTypeEntity` (
   `dataTypeEntityId` int(11) NOT NULL auto_increment,
@@ -285,20 +284,6 @@ CREATE TABLE `LB_DataTypeEntityOptions` (
   `status` int(11) NOT NULL default '1',
   PRIMARY KEY  (`dataTypeEntityOptionId`),
   KEY `dataTypeEntityId` (`dataTypeEntityId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_Files` (
-  `resourceId` int(11) NOT NULL,
-  `fileUrl` varchar(256) NOT NULL,
-  PRIMARY KEY  (`resourceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_Images` (
-  `resourceId` int(11) NOT NULL,
-  `imageUrl` varchar(256) NOT NULL,
-  PRIMARY KEY  (`resourceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -360,63 +345,6 @@ CREATE TABLE `LB_RegisteredControls` (
   PRIMARY KEY  (`controlId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
-
-CREATE TABLE `LB_Resources` (
-  `resourceId` int(11) NOT NULL auto_increment,
-  `alias` varchar(128) NOT NULL,
-  `description` text NOT NULL,
-  `creator` int(11) NOT NULL,
-  `lastUpdatedBy` int(11) NOT NULL,
-  `resourceTypeId` int(11) NOT NULL,
-  `creationDate` int(11) NOT NULL,
-  `updateDate` int(11) NOT NULL,
-  `adminSubmitted` tinyint(4) NOT NULL,
-  `status` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`resourceId`),
-  KEY `creator` (`creator`),
-  KEY `resourceTypeId` (`resourceTypeId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_ResourceToContent` (
-  `resourceTypeId` int(11) NOT NULL,
-  `contentId` int(11) NOT NULL,
-  `resourceId` int(11) NOT NULL,
-  PRIMARY KEY  (`resourceTypeId`,`contentId`,`resourceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_ResourceToResource` (
-  `recessiveResourceTypeId` int(11) NOT NULL,
-  `dominantResourceId` int(11) NOT NULL,
-  `recessiveResourceId` int(11) NOT NULL,
-  PRIMARY KEY  (`recessiveResourceTypeId`,`dominantResourceId`,`recessiveResourceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_ResourceToUser` (
-  `resourceTypeId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `resourceId` int(11) NOT NULL,
-  PRIMARY KEY  (`resourceTypeId`,`userId`,`resourceId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `LB_ResourceTypes` (
-  `resourceTypeId` int(11) NOT NULL auto_increment,
-  `resourceTypeName` varchar(128) NOT NULL,
-  `resourceTypeDescription` varchar(512) NOT NULL,
-  `resourceTypePage` varchar(128) NOT NULL,
-  `resourceTypeClass` varchar(128) NOT NULL,
-  `adminSubmittable` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`resourceTypeId`),
-  KEY `resourceTypeName` (`resourceTypeName`,`resourceTypeDescription`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
-
-INSERT INTO `LB_ResourceTypes` (`resourceTypeId`, `resourceTypeName`, `resourceTypeDescription`, `resourceTypePage`, `resourceTypeClass`, `adminSubmittable`) VALUES
-(1, 'Files', 'Files are used to store and manage any file of any extension.', 'files', 'LB_ResourceManagement_Logic_ResourceTypes_File', 1),
-(2, 'Images', 'Images are used to store and manage any image media.', 'images', 'LB_ResourceManagement_Logic_ResourceTypes_Image', 1),
-(3, 'Tags', 'Tags are used to characterize and group elements.', 'tags', 'LB_ResourceManagement_Logic_ResourceTypes_Tag', 1);
 
 CREATE TABLE `LB_Settings` (
   `settingId` int(11) NOT NULL auto_increment,
@@ -503,14 +431,6 @@ CREATE TABLE `LB_UserLogins` (
   PRIMARY KEY  (`userId`,`loginTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-INSERT INTO `LB_UserLogins` (`userId`, `loginTime`, `success`, `active`, `ipAddress`) VALUES
-(1, 1326921745, 1, 0, '127.0.0.1'),
-(1, 1334008125, 1, 0, '127.0.0.1'),
-(1, 1334008316, 1, 0, '127.0.0.1'),
-(1, 1334008623, 1, 0, '127.0.0.1'),
-(1, 1350268030, 1, 0, '127.0.0.1'),
-(1, 1357159508, 1, 0, '127.0.0.1');
-
 CREATE TABLE `LB_UserPermissions` (
   `userPermissionId` int(11) NOT NULL auto_increment,
   `userPermissionSet` varchar(256) NOT NULL,
@@ -521,50 +441,40 @@ CREATE TABLE `LB_UserPermissions` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `userPermissionName`, `userPermissionDescription`) VALUES
-(24, 'Content', 'Edit Content Sections', 'Allows for the modification of Content Section details'),
-(23, 'Content', 'View Content Sections', 'Allows for the viewing of Content Sections'),
-(22, 'Content', 'Delete Generic Content', 'Allows for the deletion of content under the Generic Content type'),
-(21, 'Content', 'Edit Generic Content', 'Allows for the modification of details for content under the Generic Content type'),
-(20, 'Content', 'View Generic Content', 'Allows for the viewing of content under the Generic Content type'),
-(19, 'Content', 'Archive Content', 'Allows for the archiving of content'),
-(18, 'Content', 'Publish Content', 'Allows for the publishing of content'),
-(17, 'Content', 'Approve Content', 'Allows for the approving of content'),
-(16, 'Content', 'Draft Content', 'Allows for the drafting of content'),
-(15, 'Content', 'Access Control Editor', 'Allows general access to the Control Content Editor'),
-(14, 'Content', 'Access Template Editor', 'Allows general access to the Template Content Editor'),
-(13, 'Content', 'Access Content Module', 'Allows general access to the Content Module'),
-(12, 'Users', 'Delete User Types', 'Allows for the deletion of User Types'),
-(11, 'Users', 'Edit User Type Permissions', 'Allows for the modification of User Type permissions'),
-(10, 'Users', 'Edit User Types', 'Allows for the modification of User Type data'),
-(8, 'Users', 'Delete Users', 'Allows for the deletion of Users'),
-(9, 'Users', 'View User Types', 'Allows for the viewing of User Types'),
-(7, 'Users', 'Edit User Permissions', 'Allows for the modification of User permissions'),
-(6, 'Users', 'Edit Users', 'Allows for the modification of User data'),
-(5, 'Users', 'View Users', 'Allows for the viewing of Users'),
-(4, 'Users', 'Access Users Module', 'Allows general access to the Users Module'),
-(3, 'System', 'Delete Settings', 'Allows for the deletion of Settings'),
-(2, 'System', 'Edit Settings', 'Allows for the modification of Setting details'),
-(1, 'System', 'View Settings', 'Allows general access to the Settings section'),
-(41, 'Permissions', 'Delete Content', 'Delete and Remove content from the site.'),
-(40, 'Permissions', 'Create Content', 'Create and edit content in the system.'),
-(39, 'Permissions', 'Manage Navigation', 'Manage site navigation order and strucutre.'),
-(38, 'Permissions', 'Manage Users', 'Add, Edit, and Delete Users'),
-(37, 'Permissions', 'Manage Content Types', 'Manage content types and structure'),
-(36, 'Permissions', 'Manage System Settings', 'Manage system settings and information'),
-(25, 'Content', 'Delete Content Sections', 'Allows for the deletion of Content Sections'),
-(26, 'Resources', 'Access Resources Module', 'Allows general access to the Resource Module'),
-(27, 'Resources', 'View Files', 'Allows for the viewing of resources under the Files type'),
-(28, 'Resources', 'Edit Files', 'Allows for the modification of details for resources under the Files type'),
-(29, 'Resources', 'Delete Files', 'Allows for the deletion of resources under the Files type'),
-(30, 'Resources', 'View Images', 'Allows for the viewing of resources under the Images type'),
-(31, 'Resources', 'Edit Images', 'Allows for the modification of details for resources under the Images type'),
-(32, 'Resources', 'Delete Images', 'Allows for the deletion of resources under the Images type'),
-(33, 'Resources', 'View Tags', 'Allows for the viewing of resources under the Tags type'),
-(34, 'Resources', 'Edit Tags', 'Allows for the modification of details for resources under the Tags type'),
-(35, 'Resources', 'Delete Tags', 'Allows for the deletion of resources under the Tags type'),
-(42, 'Permissions', 'Manage Workflow Rules', 'Permission to manage system workflow rules.'),
-(43, 'Permissions', 'Delete Folders', 'Delete folders/sections in your tree structure.'),
-(44, 'Permissions', 'Crud Overview', 'Crud overview description');
+(1, 'Content', 'Edit Content Sections', 'Allows for the modification of Content Section details'),
+(2, 'Content', 'View Content Sections', 'Allows for the viewing of Content Sections'),
+(3, 'Content', 'Delete Generic Content', 'Allows for the deletion of content under the Generic Content type'),
+(4, 'Content', 'Edit Generic Content', 'Allows for the modification of details for content under the Generic Content type'),
+(5, 'Content', 'View Generic Content', 'Allows for the viewing of content under the Generic Content type'),
+(6, 'Content', 'Archive Content', 'Allows for the archiving of content'),
+(7, 'Content', 'Publish Content', 'Allows for the publishing of content'),
+(8, 'Content', 'Approve Content', 'Allows for the approving of content'),
+(9, 'Content', 'Draft Content', 'Allows for the drafting of content'),
+(10, 'Content', 'Access Control Editor', 'Allows general access to the Control Content Editor'),
+(11, 'Content', 'Access Template Editor', 'Allows general access to the Template Content Editor'),
+(12, 'Content', 'Access Content Module', 'Allows general access to the Content Module'),
+(13, 'Content', 'Delete Content Sections', 'Allows for the deletion of Content Sections'),
+(14, 'Users', 'Delete User Types', 'Allows for the deletion of User Types'),
+(15, 'Users', 'Edit User Type Permissions', 'Allows for the modification of User Type permissions'),
+(16, 'Users', 'Edit User Types', 'Allows for the modification of User Type data'),
+(17, 'Users', 'Delete Users', 'Allows for the deletion of Users'),
+(18, 'Users', 'View User Types', 'Allows for the viewing of User Types'),
+(19, 'Users', 'Edit User Permissions', 'Allows for the modification of User permissions'),
+(20, 'Users', 'Edit Users', 'Allows for the modification of User data'),
+(21, 'Users', 'View Users', 'Allows for the viewing of Users'),
+(22, 'Users', 'Access Users Module', 'Allows general access to the Users Module'),
+(23, 'System', 'Delete Settings', 'Allows for the deletion of Settings'),
+(24, 'System', 'Edit Settings', 'Allows for the modification of Setting details'),
+(25, 'System', 'View Settings', 'Allows general access to the Settings section'),
+(26, 'Permissions', 'Delete Content', 'Delete and Remove content from the site.'),
+(27, 'Permissions', 'Create Content', 'Create and edit content in the system.'),
+(28, 'Permissions', 'Manage Navigation', 'Manage site navigation order and strucutre.'),
+(29, 'Permissions', 'Manage Users', 'Add, Edit, and Delete Users'),
+(30, 'Permissions', 'Manage Content Types', 'Manage content types and structure'),
+(31, 'Permissions', 'Manage System Settings', 'Manage system settings and information'),
+(32, 'Permissions', 'Manage Workflow Rules', 'Permission to manage system workflow rules.'),
+(33, 'Permissions', 'Delete Folders', 'Delete folders/sections in your tree structure.'),
+(34, 'Permissions', 'Crud Overview', 'Crud overview description');
 
 CREATE TABLE `LB_Users` (
   `userId` int(11) NOT NULL auto_increment,
