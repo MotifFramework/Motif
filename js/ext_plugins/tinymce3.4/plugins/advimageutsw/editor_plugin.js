@@ -31,7 +31,7 @@
 			ed.addButton('imageutsw', {
 				title : 'advimageutsw.image_desc',
 				cmd : 'mceAdvImageUTSW',
-				icon_src : '/resources/js/ext_plugins/tinymce/plugins/imagemanager/pages/im/img/insertimage.gif'
+				icon_src : '/resources/js/ext_plugins/tinymce3.4/plugins/imagemanager/pages/im/img/insertimage.gif'
 			});
 		},
 
