@@ -60,27 +60,27 @@
 				{
 					$.scrollTo("#" + options.prefix + "Top", "slow", {offset : -150});
 				}
-				
+
 				// store records per page value
 				$.get('/admin/recordsPerPage.html', {num:options.recordsPerPage}, function(data){});
-				
+
 			});
 			if(options.sortable) {
 				$("." + options.prefix + "Header").click(function() {
 					var key = $(this).attr("id");
-					
+
 					if(options.savedSortClass){
 						$("."+options.savedSortClass).removeClass('sort-ASC');
 						$("."+options.savedSortClass).removeClass('sort-DESC');
 					}
-					
+
 					options.savedSortClass = $(this).attr("class");
-					
+
 					if(options.sortKey == key)
 					{
-						
+
 						//$('#' + sortKey + 'header').removeClass('ajaxTableHeadCell');
-	
+
 						if(options.sortOrder == 'ASC')
 						{
 							options.sortOrder = 'DESC';
@@ -95,30 +95,30 @@
 						//$('#' + sortKey + 'header').addClass('ajaxTableHeadCell');
 						options.sortOrder = 'ASC';
 					}
-					
+
 					$(this).addClass('sort-'+options.sortOrder+'');
-	
+
 					options.sortKey = key;
-	
+
 					/*
 					$('#' + sortKey + 'header').removeClass('ajaxTableHeadCell');
 					$('#' + sortKey + 'header').removeClass('ajaxTableHeadCellASC');
 					$('#' + sortKey + 'header').removeClass('ajaxTableHeadCellDESC');
 					$('#' + sortKey + 'header').addClass('ajaxTableHeadCell' + sortOrder);
 					*/
-	
+
 					loadData();
 				});
 			}
 		});
-		
+
 		function loadData()
 		{
 			openLoader();
-			
+
 			var parameters = '';
 			var array = options.additionalParameters.split(',');
-			
+
 			for(var i=0; i<array.length; i++)
 			{
 				if(window[array[i]]==undefined)
@@ -128,14 +128,14 @@
 						window[array[i]]="";
 					}
 				}
-				
+
 				if(parameters != ''){
 					parameters += ", ";
 				}
-				
+
 				parameters += array[i] + ': ' + window[array[i]];
 			}
-			
+
 			if(options.usesPagination) {
 				if(parameters != '') {
 					parameters += ", ";
@@ -150,7 +150,7 @@
 				parameters += 'sortKey: ' + options.sortKey + ', ';
 				parameters += 'sortOrder: ' + options.sortOrder + '';
 			}
-						
+
 			$.post(options.ajaxUrl, {parameters: parameters},
 				function(data) {
 					if(options.usesPagination) {
