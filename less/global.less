@@ -1,17 +1,59 @@
-@import "_core.less";
-@import "_base.less";
+// Variables & Mixins. You'll want to keep these.
+@import "less/_config.less";
+@import "less/_mixins.less";
+
+// Base
+@import "less/core/_base.less";
+@import "less/theme/_base.less";
+
+// Media Query Equations
+@mq-mobile-min:				1em * (@mq-mobile-width / 16);
+@mq-mobile-max:				1em * ((@mq-tablet-width - 1) / 16);
+@mq-tablet-min:				1em * (@mq-tablet-width / 16);
+@mq-tablet-max:				1em * ((@mq-desktop-width - 1) / 16);
+@mq-desktop-min:			1em * (@mq-desktop-width / 16);
+@mq-desktop-max:			1em * ((@mq-widescreen-width - 1) / 16);
+@mq-widescreen-min:			1em * (@mq-widescreen-width / 16);
 
 
-/* Uncomment this for Responsive */
-@media only screen and (min-width: 30em) {
-	@import "_480.less";
+// Responsive Breakpoints
+
+// Mobile
+@media only screen and (min-width: @mq-mobile-min) {
+	@import "less/core/_mobile.less";
+	@import "less/theme/_mobile.less";
 }
-@media only screen and (min-width: 48em) {
-	@import "_768.less";
+
+// Mobile Only
+@media only screen and (max-width: @mq-mobile-max) {
+	@import "less/core/_mobile-only.less";
+	@import "less/theme/_mobile-only.less";
 }
-@media only screen and (min-width: 62em) {
-	@import "_992.less";
+
+// Tablet
+@media only screen and (min-width: @mq-tablet-min) {
+	@import "less/core/_tablet.less";
+	@import "less/theme/_tablet.less";
 }
-@media only screen and (min-width: 64em) {
-	@import "_1200.less";
+
+// Tablet Only
+@media only screen and (min-width: @mq-tablet-min) and (max-width: @mq-tablet-max) {
+	@import "less/core/_tablet-only.less";
+	@import "less/theme/_tablet-only.less";
+}
+
+// Desktop
+@media only screen and (min-width: @mq-desktop-min) {
+	@import "less/core/_desktop.less";
+	@import "less/theme/_desktop.less";
+}
+
+// Desktop Only
+@media only screen and (min-width: @mq-desktop-min) and (max-width: @mq-desktop-max) {
+	@import "less/theme/_desktop-only.less";
+}
+
+// Large Screen
+@media only screen and (min-width: @mq-widescreen-min) {
+	@import "less/theme/_widescreen.less";
 }

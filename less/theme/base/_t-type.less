@@ -1,0 +1,87 @@
+/*
+
+### Heading Typographic Scale ###
+
+*/
+
+h1,
+.canon-text {
+
+	// Mixins
+	.type-size(@canon-text-size);
+}
+h2,
+.paragon-text {
+
+	// Mixins
+	.type-size(@paragon-text-size);
+}
+h3,
+.primer-text {
+
+	// Mixins
+	.type-size(@primer-text-size);
+}
+h4,
+.normal-text {
+
+	// Mixins
+	.type-size(@normal-text-size);
+}
+h5,
+.petite-text {
+
+	// Mixins
+	.type-size(@petite-text-size);
+}
+h6,
+.minion-text {
+
+	// Mixins
+	.type-size(@minion-text-size);
+}
+
+
+/*
+
+### Heading Spacing ###
+
+*/
+
+h1	{
+
+	// Mixins
+	.margin-leader(1, @canon-text-size);
+}
+h2	{
+
+	// Mixins
+	.margin-leader(1, @paragon-text-size);
+}
+h3	{
+
+	// Mixins
+	.margin-leader(1, @primer-text-size);
+}
+h4	{
+
+	// Mixins
+	.margin-leader(1, @normal-text-size);
+}
+h5	{
+
+	// Mixins
+	.margin-leader(1, @petite-text-size);
+}
+h6	{
+
+	// Mixins
+	.margin-leader(1, @minion-text-size);
+}
+
+body {
+	color:							@primary-text-color;
+
+	// Mixins
+	.normal-text();
+}

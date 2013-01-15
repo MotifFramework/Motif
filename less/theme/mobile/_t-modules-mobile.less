@@ -1,0 +1,32 @@
+.figure	{
+	max-width:				50%;
+	
+	&.float-left,
+	&.float-right	{
+		padding-bottom:		@half-vertical;
+
+		// Mixins
+		.margin-leader(1.5);
+	}
+	&.float-left	{
+		float:				left;
+		padding-right:		@double-side;
+	}
+	&.float-right	{
+		float:				right;
+		padding-left:		@double-side;
+	}
+	img	{
+		display:			block;
+	}
+}
+.nav-bar {
+	.nav {
+		li {
+			width:			50%;
+		}
+			a {
+				padding:	@half-vertical @full-side;
+			}
+	}
+}

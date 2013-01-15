@@ -1,0 +1,120 @@
+// Classes based on @font-face
+.museo-slab-700 {
+	font-family:					@museo-slab-700;
+}
+.source-sans-regular {
+	font-family:					@source-sans-regular;
+}
+.source-sans-bold {
+	font-family:					@source-sans-bold;
+}
+.source-sans-italic {
+	font-family:					@source-sans-italic;
+}
+.source-sans-bold-italic {
+	font-family:					@source-sans-bold-italic;
+}
+.anonymous-pro-bold {
+	font-family:					@anonymous-pro-bold;
+}
+.symbolset {
+	font-family:					@symbolset;
+}
+.symbolset-social {
+	font-family:					@symbolset-social;
+}
+.symbolset-social-circle {
+	font-family:					@symbolset-social-circle;
+}
+[data-icon-position="solo"]:before,
+[data-icon-position="before"]:before,
+[data-icon-position="after"]:after,
+.data-icon	{
+	content:						attr(data-icon);
+	font-weight:					normal;
+	-webkit-font-smoothing:			antialiased;
+	vertical-align:					text-top;
+	font-size:						0.75em;
+	font-style:						normal;
+	font-weight:					normal;
+	text-decoration:				none;
+	text-rendering:					optimizeLegibility;
+	speak:							none;
+	white-space:					nowrap;
+
+	// Mixins
+	.inline-block-fallback();
+	.box-sizing(border-box);
+	.symbolset();
+}
+[data-icon-position="before"]	{
+	&:before,
+	> .data-icon	{
+
+		// Variables
+		@icon-padding:				1em * (5 / 12);
+
+		// Create
+		padding-right:				@icon-padding;
+	}
+}
+[data-icon-position="after"]	{
+	&:after,
+	> .data-icon	{
+
+		// Variables
+		@icon-padding:				1em * (5 / 12);
+
+		// Create
+		padding-left:				@icon-padding;
+	}
+}
+.lte8.js {
+	[data-icon-position="before"]:before,
+	[data-icon-position="solo"]:before,
+	[data-icon-position="after"]:after	{
+		content:					none !important;
+		display:					none;
+	}
+}
+
+body,
+.body-text {
+
+	// Mixins
+	.source-sans-regular();
+}
+dt,
+th,
+.input-label,
+strong {
+	font-weight:					normal;
+
+	// Mixins
+	.source-sans-bold();
+}
+em {
+	font-style:						normal;
+
+	// Mixins
+	.source-sans-italic();
+}
+strong em,
+em strong {
+	font-style:						normal;
+	font-weight:					normal;
+
+	// Mixins
+	.source-sans-bold-italic();
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading {
+	font-weight:					normal;
+	font-family:					@primary-header-font;
+	color:							@primary-header-color;
+}

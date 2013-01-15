@@ -1,0 +1,101 @@
+{
+	"scripts"	:	[
+
+		{
+			"_description"	:	"Plugins required on every page",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"helpers.js",
+				"jquery.js"
+			],
+			"output_dir"	:	"c/js",
+			"output_file"	:	"plugins.min.js",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Actions performed on page load",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"actions.js"
+			],
+			"output_dir"	:	"c/js",
+			"output_file"	:	"actions.min.js",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Modernizr",
+			"input_dir"		:	"js",
+			"input_files"	:	[
+				"modernizr.js"
+			],
+			"output_dir"	:	"c/js",
+			"output_file"	:	"modernizr.min.js",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"LB Reveal",
+			"input_dir"		:	"js/plugins",
+			"input_files"	:	[
+				"jquery.lb-reveal.js"
+			],
+			"output_dir"	:	"c/js",
+			"output_file"	:	"jquery.lb-reveal.min.js",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		}
+
+	],
+
+	"styles"	:	[
+
+		{
+			"_description"	:	"Global Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"global.less"
+			],
+			"output_dir"	:	"c/css",
+			"output_file"	:	"global.css",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Fixed Global Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"global-fixed.less"
+			],
+			"output_dir"	:	"c/css",
+			"output_file"	:	"global-fixed.css",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
+			"_description"	:	"Print Stylesheet",
+			"input_dir"		:	"less",
+			"input_files"	:	[
+				"print.less"
+			],
+			"output_dir"	:	"c/css",
+			"output_file"	:	"print.css",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		}
+
+	]
+}
