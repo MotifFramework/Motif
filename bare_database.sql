@@ -35,6 +35,7 @@ CREATE TABLE `LB_Content` (
   `showInNavigation` int(11) default NULL,
   `navigationAnchor` varchar(255) default NULL,
   `status` int(11) default NULL,
+  `published` int(11) NOT NULL default '0',
   `navigationOrder` int(11) NOT NULL default '0',
   `ruleId` int(11) NOT NULL default '0',
   PRIMARY KEY  (`contentId`),
