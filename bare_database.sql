@@ -228,7 +228,8 @@ INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `da
 (9, 'Date Time Picker', 'Use this data type to add a date time element.', 'LB_ContentManagement_Presentation_DataTypes_DateTimePicker', 1, 'Int'),
 (10, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', 'LB_ContentManagement_Presentation_DataTypes_ContentDropDownList', 1, 'Text'),
 (11, 'Text Area', 'Use this data type to create unstyled text.', 'LB_ContentManagement_Presentation_DataTypes_TextArea', 1, 'Text'),
-(12, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text');
+(12, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text'),
+(13, 'Multiple Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MultiMediaPicker', 1, 'Text');
 
 CREATE TABLE `LB_DataTypeEntity` (
   `dataTypeEntityId` int(11) NOT NULL auto_increment,
