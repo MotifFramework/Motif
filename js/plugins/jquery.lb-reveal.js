@@ -65,7 +65,7 @@
 					$this.data("revealSettings", data);
 
 					// If onInit callback...
-					if (typeof s.onInit === "function") {
+					if (typeof s.onInit == "function") {
 						s.onInit($this, $(this));
 					}
 
@@ -143,7 +143,7 @@
 				$this.addClass(o.activeClass);
 				o.revealTarget.addClass(o.activeClass);
 
-				if (typeof o.onReveal === "function") {
+				if (typeof o.onReveal == "function") {
 					o.onReveal.call($this, $(this));
 				}
 			},
@@ -169,7 +169,7 @@
 				// Remove Active Class
 				o.revealTarget.removeClass(o.activeClass);
 
-				if (typeof o.onHide === "function") {
+				if (typeof o.onHide == "function") {
 					o.onHide.call($this, $(this));
 				}
 			}

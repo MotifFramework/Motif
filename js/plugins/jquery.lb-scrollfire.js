@@ -58,7 +58,7 @@
 					$this.data("scrollfirePosition", old_scroll_pos);
 
 					// If onInit callback...
-					if (typeof s.onInit === "function") {
+					if (typeof s.onInit == "function") {
 						s.onInit($this);
 					}
 

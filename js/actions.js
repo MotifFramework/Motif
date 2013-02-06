@@ -35,7 +35,7 @@
 		ie8				=	$("html.lte8"),
 		dataIcon		=	$("[data-icon]"),
 
-		// Wireframing ***Remove Before Final Lunch!***
+		// Wireframing ***Remove Before Final Launch!***
 		wireframe		=	$(".wireframe"),
 		wfBlock			=	wireframe.find(".block"),
 		wfBaseHeight	=	20;
@@ -137,7 +137,7 @@
 		}
 
 		// Validating forms
-		if (validatingForms.length > 0) {
+		if (validatingForms.length) {
 			$.getScript('/resources/c/js/jquery.lb-validation.min.js', function () {
 
 				// Call LB Validation plugin
@@ -192,7 +192,7 @@
 	function tabsInit() {
 
 		// Tabbed widget
-		if (tabbedWidget.length > 0) {
+		if (tabbedWidget.length) {
 			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
 				tabbedWidget.lb_reveal({
 					"trigger"	:	"click",
@@ -208,7 +208,7 @@
 	*/
 
 	function offCanvasInit() {
-		if (canvasTrigger.length > 0) {
+		if (canvasTrigger.length) {
 			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
 				canvasTrigger.lb_reveal({
 					"exclusive"		:	"yes",
@@ -225,7 +225,7 @@
 	*/
 
 	function mobileMenuDropdownInit() {
-		if (revealMainNav.length > 0) {
+		if (revealMainNav.length) {
 			$.getScript('/resources/c/js/jquery.lb-reveal.min.js', function () {
 				revealMainNav.lb_reveal();
 			});
@@ -240,7 +240,7 @@
 	function iconsInit() {
 
 		// If generated content exists/it's IE8 _and_ `[data-icon]` exists on the page... 
-		if ((!Modernizr.generatedcontent || ie8.length > 0) && dataIcon.length > 0) {
+		if ((!Modernizr.generatedcontent || ie8.length) && dataIcon.length) {
 
 			// For each element w/ `[data-icon]`...
 			dataIcon.each(function () {
@@ -273,7 +273,7 @@
 	*/
 
 	function wireframeInit() {
-		if (wireframe.length > 0) {
+		if (wireframe.length) {
 			wfBlock.each(function () {
 
 				// Variables
