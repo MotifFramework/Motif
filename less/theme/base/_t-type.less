@@ -41,42 +41,20 @@ h6,
 	.type-size(@minion-text-size);
 }
 
-
-/*
-
-### Heading Spacing ###
-
-*/
-
-h1	{
-
-	// Mixins
-	.margin-leader(1, @canon-text-size);
-}
-h2	{
-
-	// Mixins
-	.margin-leader(1, @paragon-text-size);
-}
-h3	{
-
-	// Mixins
-	.margin-leader(1, @primer-text-size);
-}
-h4	{
-
-	// Mixins
-	.margin-leader(1, @normal-text-size);
-}
-h5	{
-
-	// Mixins
-	.margin-leader(1, @petite-text-size);
-}
+h1,
+h2,
+h3,
+h4,
+h5,
 h6	{
+	margin-top:						1.5em;
+}
+.secondary-heading	{
+	color:							@grey;
+	text-transform:					uppercase;
 
 	// Mixins
-	.margin-leader(1, @minion-text-size);
+	.source-sans-bold();
 }
 
 body {
