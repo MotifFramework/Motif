@@ -7,7 +7,7 @@
  * @copyright Copyright © 2007, Moxiecode Systems AB, All rights reserved.
  */
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Lifeblue/Init.php");
 
 
 // Use install
@@ -91,12 +91,12 @@ $pluginPaths = $man->getPluginPaths();
 foreach ($pluginPaths as $path)
 	require_once("../". $path);
 
-		
+
 // Dispatch onAuthenticate event
 if ($man->isAuthenticated()) {
 	if ($_SERVER["REQUEST_METHOD"] == "GET") {
 		$args = $_GET;
-	
+
 		// Dispatch event before starting to stream
 		$man->dispatchEvent("onBeforeStream", array($cmd, &$args));
 
@@ -106,7 +106,7 @@ if ($man->isAuthenticated()) {
 		// Dispatch event after stream
 		$man->dispatchEvent("onAfterStream", array($cmd, &$args));
 	} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		
+
 		$args = array_merge($_POST, $_GET);
 		$json = new Moxiecode_JSON();
 
@@ -116,7 +116,7 @@ if ($man->isAuthenticated()) {
 		// Check command, do command, stream file.
 		$result = $man->executeEvent("onUpload", array($cmd, &$args));
 		$data = $result->toArray();
-		
+
 		if (isset($args["chunk"])) {
 			// Output JSON response to multiuploader
 			die('{method:\'' . $method . '\',result:' . $json->encode($data) . ',error:null,id:\'m0\'}');
