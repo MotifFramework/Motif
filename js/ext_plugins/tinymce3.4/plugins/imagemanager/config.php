@@ -27,7 +27,7 @@
 
 	// Create directory options
 	$mcImageManagerConfig['createdir.include_directory_pattern'] = '';
-	$mcImageManagerConfig['createdir.exclude_directory_pattern'] = '/[^a-z0-9_\.]/i';
+	$mcImageManagerConfig['createdir.exclude_directory_pattern'] = '/[^a-z0-9_\-\.]/i';
 	$mcImageManagerConfig['createdir.allow_override'] = "*";
 
 	// General filesystem options
@@ -40,9 +40,9 @@
 	$mcImageManagerConfig['filesystem.exclude_directory_pattern'] = '/^mcith$/i';
 	$mcImageManagerConfig['filesystem.invalid_directory_name_msg'] = "";
 	$mcImageManagerConfig['filesystem.include_file_pattern'] = '';
-	$mcImageManagerConfig['filesystem.exclude_file_pattern'] = '/([^a-zA-Z0-9_\-\.]|^mcic_)/i';
+	$mcImageManagerConfig['filesystem.exclude_file_pattern'] = '/^mcic_/i';
 	$mcImageManagerConfig['filesystem.invalid_file_name_msg'] = "";
-	$mcImageManagerConfig['filesystem.extensions'] = "gif,jpg,png,bmp,swf,dcr,mov,qt,ram,rm,avi,mpg,mpeg,asf,flv";
+	$mcImageManagerConfig['filesystem.extensions'] = "gif,jpg,jpeg,png,bmp,swf,dcr,mov,qt,ram,rm,avi,mpg,mpeg,asf,flv";
 	$mcImageManagerConfig['filesystem.readable'] = true;
 	$mcImageManagerConfig['filesystem.writable'] = true;
 	$mcImageManagerConfig['filesystem.delete_recursive'] = false;
@@ -66,7 +66,7 @@
 	$mcImageManagerConfig['thumbnail.max_height'] = ""; // px (will not generate thumbnail if larger than this size)
 	$mcImageManagerConfig['thumbnail.scale_mode'] = "percentage"; // percentage,resize
 	$mcImageManagerConfig['thumbnail.folder'] = "mcith"; // required, exclude this folder with file pattern '/^mcith$/i' if you don't want it to show
-	$mcImageManagerConfig['thumbnail.prefix'] = "mcith_"; // 
+	$mcImageManagerConfig['thumbnail.prefix'] = "mcith_"; //
 	$mcImageManagerConfig['thumbnail.delete'] = true; // delete th when original is deleted
 	$mcImageManagerConfig['thumbnail.jpeg_quality'] = 75; // quality of th image, note that this is not checked against when regenerating ths.
 	$mcImageManagerConfig['thumbnail.allow_export'] = "width,height,insert";

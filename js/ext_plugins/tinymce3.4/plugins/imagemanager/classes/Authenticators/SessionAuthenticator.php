@@ -35,7 +35,7 @@ class Moxiecode_SessionAuthenticator extends Moxiecode_ManagerPlugin {
 	 * @return bool true/false if the user is authenticated.
 	 */
 	function onAuthenticate(&$man) {
-		
+
 		$config =& $man->getConfig();
 
 		// Support both old and new format
@@ -73,13 +73,13 @@ class Moxiecode_SessionAuthenticator extends Moxiecode_ManagerPlugin {
 
 		// Force update of internal state
 		$man->setConfig($config);
-		
-		require_once($_SERVER['DOCUMENT_ROOT'] . "/application/Init.php");
-		
+
+		require_once($_SERVER['DOCUMENT_ROOT'] . "/Lifeblue/Init.php");
+
 		if(LB_UserManagement_Logic_User::GetCurrentUser()){
 			$_SESSION[$loggedInKey] = true;
 		}
-		
+
 		return isset($_SESSION[$loggedInKey]) && checkBool($_SESSION[$loggedInKey]);
 	}
 }
