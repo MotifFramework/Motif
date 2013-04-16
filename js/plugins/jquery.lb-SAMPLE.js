@@ -1,84 +1,85 @@
 /**
  * LB_PLUGIN_NAME
+ * 
  * DESC
  * 
- * @version	0.X (MM/DD/YY)
- * @author	FULL_NAME (NAME@lifeblue.com)
+ * @version 0.X (MM/DD/YY)
+ * @author  FULL_NAME (NAME@lifeblue.com)
  * 
  * Copyright 2013 Lifeblue
  */
 
-(function ($) {
+(function ($, undefined) {
 
-	"use strict";
+    "use strict";
 
-	// Variables
-	var vars	=	{
+    // Variables
+    var vars = {
 
-			// System Variables
-			"pluginName"	:	"lb_PLUGIN",
+            // System Variables
+            "pluginName": "lb_PLUGIN",
 
-			// On Init
-			"onInit"		:	null,
+            // On Init
+            "onInit": null,
 
-			// On Trigger
-			"onTrigger"		:	null,
+            // On Trigger
+            "onTrigger": null,
 
-			// On Complete
-			"onComplete"	:	null
-		},
+            // On Complete
+            "onComplete": null
+        },
 
-		// Methods
-		methods	=	{
+        // Methods
+        methods = {
 
-			// Init method, run on initialization
-			"init"	:	function (o) {
+            // Init method, run on initialization
+            "init": function (o) {
 
-				// Loop through each instance of this plugin and return it
-				return this.each(function () {
-					var $this			=	$(this),
-						s				=	$.extend(true, {}, vars, o),
+                // Loop through each instance of this plugin and return it
+                return this.each(function () {
+                    var $this = $(this),
+                        s = $.extend(true, {}, vars, o),
 
-						// Grab variables
-						orig_data		=	$this.data(),
+                        // Grab variables
+                        originalData = $this.data(),
 
-						// Plugin settings
-						data			=	{
-							"origData"	:	orig_data
-						};
+                        // Plugin settings
+                        data = {
+                            "originalData": originalData
+                        };
 
-					// Add settings to data object
-					$this.data("PLUGIN_SETTINGS", data);
+                    // Add settings to data object
+                    $this.data("PLUGIN_SETTINGS", data);
 
-					// If onInit callback...
-					if (typeof s.onInit === "function") {
-						s.onInit($this);
-					}
-				});
-			}
-		};
+                    // If onInit callback...
+                    if (typeof s.onInit === "function") {
+                        s.onInit($this);
+                    }
+                });
+            }
+        };
 
-	// Initialize plugin
-	$.fn[vars.pluginName] = function (m) {
+    // Initialize plugin
+    $.fn[vars.pluginName] = function (m) {
 
-		// If a method is called by name...
-		if (methods[m]) {
+        // If a method is called by name...
+        if (methods[m]) {
 
-			// ...return specified method.
-			return methods[m].apply(this, Array.prototype.slice.call(arguments, 1));
+            // ...return specified method.
+            return methods[m].apply(this, Array.prototype.slice.call(arguments, 1));
 
-		// ...else if no method is called or an object is passed...
-		} else if (!m || typeof m === "object") {
+        // ...else if no method is called or an object is passed...
+        } else if (!m || typeof m === "object") {
 
-			// ...return the "init" method.
-			return methods.init.apply(this, arguments);
+            // ...return the "init" method.
+            return methods.init.apply(this, arguments);
 
-		// ...otherwise...
-		} else {
+        // ...otherwise...
+        } else {
 
-			// ...log an error.
-			console.log(vars.pluginName + ": Invalid method passed");
-		}
-	};
+            // ...log an error.
+            console.log(vars.pluginName + ": Invalid method passed");
+        }
+    };
 
 }(jQuery));
