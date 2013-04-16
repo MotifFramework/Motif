@@ -47,6 +47,14 @@
 	.box-sizing(border-box);
 	.symbolset();
 }
+.data-icon {
+	&.data-icon-social	{
+		.symbolset-social();
+	}
+	&.data-icon-social-circle	{
+		.symbolset-social-circle();
+	}
+}
 [data-icon-position="before"]	{
 	&:before,
 	> .data-icon	{
@@ -106,15 +114,4 @@ em strong {
 
 	// Mixins
 	.source-sans-bold-italic();
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.primary-heading {
-	font-weight:					normal;
-	font-family:					@primary-header-font;
-	color:							@primary-header-color;
 }

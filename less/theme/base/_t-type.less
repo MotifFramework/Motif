@@ -4,62 +4,83 @@
 
 */
 
-h1,
-.canon-text {
+.wysiwyg h1,
+.canon-text,
+.wysiwyg .canon-text {
 
 	// Mixins
 	.type-size(@canon-text-size);
 }
-h2,
-.paragon-text {
+.wysiwyg h2,
+.paragon-text,
+.wysiwyg .paragon-text {
 
 	// Mixins
 	.type-size(@paragon-text-size);
 }
-h3,
-.primer-text {
+.wysiwyg h3,
+.primer-text,
+.wysiwyg .primer-text {
 
 	// Mixins
 	.type-size(@primer-text-size);
 }
-h4,
-.normal-text {
+.wysiwyg h4,
+.normal-text,
+.wysiwyg .normal-text {
 
 	// Mixins
 	.type-size(@normal-text-size);
 }
-h5,
-.petite-text {
+.wysiwyg h5,
+.petite-text,
+.wysiwyg .petite-text {
 
 	// Mixins
 	.type-size(@petite-text-size);
 }
-h6,
-.minion-text {
+.wysiwyg h6,
+.minion-text,
+.wysiwyg .minion-text {
 
 	// Mixins
 	.type-size(@minion-text-size);
 }
 
+.wysiwyg {
+	h2,
+	h3,
+	h4,
+	h5,
+	h6	{
+		margin-top: 1.5em;
+	}
+}
 h1,
 h2,
 h3,
 h4,
 h5,
-h6	{
-	margin-top:						1.5em;
+h6,
+.primary-heading {
+	font-weight: normal;
+	font-family: @primary-header-font;
+	color: @primary-header-color;
 }
 .secondary-heading	{
-	color:							@grey;
-	text-transform:					uppercase;
 
 	// Mixins
 	.source-sans-bold();
-}
 
+	// Other
+	color: @grey;
+	text-transform: uppercase;
+}
 body {
-	color:							@primary-text-color;
 
 	// Mixins
 	.normal-text();
+
+	// Other
+	color: @primary-text-color;
 }

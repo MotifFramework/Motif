@@ -2,10 +2,24 @@
 	"scripts"	:	[
 
 		{
+			"_description"	:	"Helpers",
+			"input_dir"		:	"js/helpers",
+			"input_files"	:	[
+				"modernizr.js",
+				"viewport.js",
+				"loadScript.js"
+			],
+			"output_dir"	:	"c/js",
+			"output_file"	:	"helpers.min.js",
+			"minify"		:	true,
+			"lint"			:	false,
+			"lint_config"	:	{}
+		},
+
+		{
 			"_description"	:	"Plugins required on every page",
 			"input_dir"		:	"js",
 			"input_files"	:	[
-				"helpers.js",
 				"jquery.js"
 			],
 			"output_dir"	:	"c/js",
@@ -23,19 +37,6 @@
 			],
 			"output_dir"	:	"c/js",
 			"output_file"	:	"actions.min.js",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
-
-		{
-			"_description"	:	"Modernizr",
-			"input_dir"		:	"js",
-			"input_files"	:	[
-				"modernizr.js"
-			],
-			"output_dir"	:	"c/js",
-			"output_file"	:	"modernizr.min.js",
 			"minify"		:	true,
 			"lint"			:	false,
 			"lint_config"	:	{}
