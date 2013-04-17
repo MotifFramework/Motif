@@ -401,8 +401,8 @@ CREATE TABLE `LB_Templates` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Templates` (`templateId`, `templateName`, `templateClass`, `status`) VALUES
-(1, 'Default Template', 'Reef_Default', 1),
-(2, 'Default Home Page Template', 'Reef_DefaultHome', 1);
+(1, 'Basic Page', 'BasicInterior', 1),
+(2, 'Home Page', 'Home', 1);
 
 CREATE TABLE `LB_TrashCan` (
   `id` int(11) NOT NULL auto_increment,
