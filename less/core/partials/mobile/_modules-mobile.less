@@ -1,0 +1,33 @@
+.media-object {
+    .object {
+        max-width: 40%;
+        margin-right: @double-side;
+        float: left;
+    }
+    .desc { 
+        & > :first-child {
+            margin-top: 0;
+        }
+    }
+    &.half {
+        margin-left: @half-side;
+        margin-right: @half-side;
+
+        .object {
+            margin-left: @half-side;
+            margin-right: @half-side;
+        }
+    }
+}
+
+.nav {
+    &.forceful {
+
+        // Mixins
+        .clearfix();
+
+        li {
+            float: left;
+        }
+    }
+}

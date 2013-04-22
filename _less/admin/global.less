@@ -1,0 +1,59 @@
+// Variables & Mixins. You'll want to keep these.
+@import "less/_config.less";
+@import "less/_mixins.less";
+
+// Base
+@import "less/core/_base.less";
+@import "less/admin/theme/_base.less";
+
+// Media Query Equations
+@mq-mobile-min:				1em * (@mq-mobile-width / 16);
+@mq-mobile-max:				1em * ((@mq-tablet-width - 1) / 16);
+@mq-tablet-min:				1em * (@mq-tablet-width / 16);
+@mq-tablet-max:				1em * ((@mq-desktop-width - 1) / 16);
+@mq-desktop-min:			1em * (@mq-desktop-width / 16);
+@mq-desktop-max:			1em * ((@mq-widescreen-width - 1) / 16);
+@mq-widescreen-min:			1em * (@mq-widescreen-width / 16);
+
+
+// Responsive Breakpoints
+
+// Mobile
+@media only screen and (min-width: @mq-mobile-min) {
+	@import "less/core/_mobile.less";
+	@import "less/admin/theme/_mobile.less";
+}
+
+// Mobile Only
+@media only screen and (max-width: @mq-mobile-max) {
+	@import "less/core/_mobile-only.less";
+	@import "less/admin/theme/_mobile-only.less";
+}
+
+// Tablet
+@media only screen and (min-width: @mq-tablet-min) {
+	@import "less/core/_tablet.less";
+	@import "less/admin/theme/_tablet.less";
+}
+
+// Tablet Only
+@media only screen and (min-width: @mq-tablet-min) and (max-width: @mq-tablet-max) {
+	@import "less/core/_tablet-only.less";
+	@import "less/admin/theme/_tablet-only.less";
+}
+
+// Desktop
+@media only screen and (min-width: @mq-desktop-min) {
+	@import "less/core/_desktop.less";
+	@import "less/admin/theme/_desktop.less";
+}
+
+// Desktop Only
+@media only screen and (min-width: @mq-desktop-min) and (max-width: @mq-desktop-max) {
+	@import "less/admin/theme/_desktop-only.less";
+}
+
+// Large Screen
+@media only screen and (min-width: @mq-widescreen-min) {
+	@import "less/admin/theme/_widescreen.less";
+}

@@ -1,0 +1,39 @@
+.js {
+    .off-canvas-column {
+        overflow: hidden;
+
+        &.is-active {
+            .primary-canvas {
+                margin-right: -110%;
+            }
+            .secondary-canvas {
+                margin-left: 0;
+            }
+        }
+        &.is-active,
+        &.was-active {
+            .primary-canvas,
+            .secondary-canvas {
+
+                // Mixins
+                .transition(all, 0.15s, linear);
+            }
+        }
+    }
+
+        .primary-canvas,
+        .secondary-canvas {
+            width: 100%;
+            position: relative;
+        }
+        .primary-canvas {
+            margin-left: 0;
+            float: right;
+            z-index: 1;
+        }
+        .secondary-canvas {
+            margin-left: -100%;
+            float: left;
+            z-index: 2;
+        }
+}

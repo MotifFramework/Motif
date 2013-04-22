@@ -1,0 +1,72 @@
+/*
+
+Helpful Variables
+-----------------
+
+Mostly spacing, to be honest.
+
+*/
+
+/*
+
+### Horizontal Margins ###
+
+Take the base grid margin, divide it (if necessary), then divide 
+the result by the `body`'s base text size. Convert to ems.
+
+*/
+
+@full-side: 1em * ((@base-margin / 2) / @base-text-size);
+@half-side: 1em * ((@base-margin / 4) / @base-text-size);
+@quarter-side: 1em * ((@base-margin / 8) / @base-text-size);
+@double-side: 1em * (@base-margin / @base-text-size);
+
+/*
+#### Minus Border ####
+
+Ditto, but subtract the project's default border width before 
+dividing by the base text size.
+*/
+
+@full-side-bordered: 1em * (((@base-margin / 2) - @default-border-width) / @base-text-size);
+@half-side-bordered: 1em * (((@base-margin / 4) - @default-border-width) / @base-text-size);
+@quarter-side-bordered: 1em * (((@base-margin / 8) - @default-border-width) / @base-text-size);
+@double-side-bordered: 1em * ((@base-margin - @default-border-width) / @base-text-size);
+
+/*
+
+### Vertical Margins ###
+
+Take the base vertical unit, divide it (if necessary), then divide 
+the result by the `body`'s base text size. Convert to ems.
+
+*/
+
+@full-vertical: 1em * (@base-vertical / @base-text-size);
+@half-vertical: 1em * ((@base-vertical / 2) / @base-text-size);
+@quarter-vertical: 1em * ((@base-vertical / 4) / @base-text-size);
+@double-vertical: 1em * ((@base-vertical * 2) / @base-text-size);
+
+/*
+#### Minus Border ####
+
+Ditto, but subtract the project's default border width before 
+dividing by the base text size.
+*/
+
+@full-vertical-bordered: 1em * ((@base-vertical - @default-border-width) / @base-text-size);
+@half-vertical-bordered: 1em * (((@base-vertical / 2) - @default-border-width) / @base-text-size);
+@quarter-vertical-bordered: 1em * (((@base-vertical / 4) - @default-border-width) / @base-text-size);
+@double-vertical-bordered: 1em * (((@base-vertical * 2) - @default-border-width) / @base-text-size);
+
+
+/*
+
+### Misc ###
+
+*/
+
+@default-radius: 1em * (@default-border-radius / @base-text-size);
+@border-width: 1em * (@default-border-width / @base-text-size);
+@grid-width: 1em * ((((@base-column + @base-margin) * @total-columns) - @base-margin) / @base-text-size);
+@full-grid-width: 1em * (((@base-column + @base-margin) * @total-columns) / @base-text-size);

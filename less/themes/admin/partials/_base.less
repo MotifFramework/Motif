@@ -1,0 +1,159 @@
+/**
+ * Base Theme
+ * =============================================================================
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+/**
+ * Base Theme Imports
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+@import "base/_t-font-face.less";
+@import "base/_t-font-face-applied.less";
+@import "base/_t-type.less";
+@import "base/_t-buttons.less";
+@import "base/_t-modules.less";
+@import "base/_t-forms.less";
+@import "base/_t-tables.less";
+
+/**
+ * Global Base Styles
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+body {
+    background: @light-black;
+}
+.wrapper {
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/**
+ * Main Header
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+.main-header {
+    position: relative;
+    z-index: 80;
+}
+    .client-logo {
+        img {
+            display: block;
+        }
+    }
+
+/**
+ * Eyebrow Nav
+ */
+
+.main-eyebrow-bar {
+
+    /* Other */
+    background: @light-grey;
+}
+    .main-eyebrow {
+
+        /* Positioning */
+        float: right;
+
+        .dropdown-list {
+
+        }
+    }
+        .eyebrow-button {
+            padding: @quarter-vertical @half-side;
+        }
+
+/**
+ * Main Nav
+ */
+
+.main-nav {
+    a {
+        color: @white;
+    }
+}
+
+/**
+ * Main Content
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+.main-content {
+    position: relative;
+    z-index: 60;
+
+    /* Other */
+    background: @white;
+}
+
+/**
+ * Main Content Header
+ */
+
+.content-header {
+    background: lighten(@light-grey, 10%);
+}
+
+/**
+ * Content Page
+ */
+
+.content-page {
+    // padding: @full-vertical @full-side;
+}
+
+/**
+ * Edit View
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+.edit-content-footer {
+
+    /* Display & Box Model */
+    padding: @half-vertical @full-side;
+
+    /* Other */
+    background: lighten(@light-grey, 5%);
+}
+
+/**
+ * Quick Action Bar
+ * Sticky bar of hardcore actions like save, delete, etc.
+ */
+
+.quick-action-bar {
+
+    /* Display & Box Model */
+    padding: @half-vertical @full-side;
+
+    /* Other */
+    background: lighten(@light-grey, 15%);
+}

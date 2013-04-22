@@ -1,0 +1,155 @@
+/**
+ * Tablet Theme
+ * =============================================================================
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+/**
+ * Tablet Theme Imports
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+@import "tablet/_t-modules-tablet.less";
+
+/**
+ * Global Tablet Styles
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+body {
+    overflow: hidden;
+
+    /* Positioning */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/**
+ * Main Header
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+.client-logo {
+    float: left;
+}
+
+.main-nav {
+    height: 100%;
+    padding: 0;
+}
+
+/**
+ * Main Content
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+/**
+ * Main Content
+ * Section must be positioned absolute to enable individual overflow-scrolling
+ */
+
+.main-content {
+
+    /* Display & Box Model */
+    padding-top: @30px;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+
+    /* Positioning */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+    .content-header,
+    .content-page {
+        height: 100%;
+        overflow: auto;
+    }
+
+.content-page {
+    padding-left: 0 !important;
+}
+    .content-page-inner {
+        padding: @full-vertical @full-side;
+    }
+
+/**
+ * Main Footer
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+.main-footer {
+
+    /* Positioning */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/**
+ * Edit View
+ * -----------------------------------------------------------------------------
+ * 
+ * [Description]
+ * 
+ * @todo 
+ */
+
+/**
+ * Edit Content Footer
+ * `footer` bar with editing actions and meta data.
+ */
+
+.edit-content-footer {
+    padding-top: @50px;
+}
+
+/**
+ * Quick Action Bar
+ * Sticky bar of hardcore actions like save, delete, etc.
+ */
+
+.quick-action-bar {
+
+    /* Display & Box Model */
+    width: 100% * (6 / 9);
+
+    /* Positioning */
+    position: fixed;
+    top: @30px;
+    right: 0;
+    z-index: 80;
+}
+    .quick-action-buttons {
+        text-align: right;
+    }
+    .quick-action-other {
+
+    }

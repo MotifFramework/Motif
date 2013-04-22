@@ -1,0 +1,123 @@
+.button {
+	// Variables
+	@1px:						1em * (1 / @base-text-size);
+	@2px:						1em * (2 / @base-text-size);
+	@3px:						1em * (3 / @base-text-size);
+	@gradient-top:				@white;
+	@gradient-bottom:			lighten(@light-grey, 5%);
+
+	// Shadow vars
+	@inset-shadow:				fadeout(@white, 60%);
+	@outset-shadow:				fadeout(@black, 50%);
+	@var-shadow-in:				0 @1px @1px @inset-shadow;
+	@var-shadow-out:			0 @2px @2px -@1px @outset-shadow;
+
+	// Baseline
+	width:						auto;
+	height:						auto;
+	margin:						0;
+	line-height:				normal;
+	text-align:					center;
+	text-decoration:			none;
+	position:					relative;
+	-webkit-appearance:			none;
+	-webkit-background-clip:	padding;
+	   -moz-background-clip:	padding;
+			background-clip:	padding-box;
+	outline:					0;
+	overflow:					visible;
+	cursor:						pointer;
+	vertical-align:				middle;
+	
+	// Styling Begins
+	padding:					@half-vertical @full-side;
+	border:						@1px solid @light-grey;
+	color:						@dark-grey;
+	text-shadow:				0 @1px @1px @white;
+	
+	// Mixins
+	.margin-leader();
+	.source-sans-bold();
+	.border-radius(@3px);
+	.inline-block-fallback();
+	.box-shadow-in-out(@var-shadow-in, @var-shadow-out);
+	.background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
+	
+	&:hover,
+	&:focus {
+		color:					darken(@dark-grey, 10%);
+		border-color:			@grey;
+	}
+	p & {
+		margin-top:				0;
+	}
+	&.tiny {
+
+		// Variables
+		@1px:					1em * (1 / @petite-text-size);
+
+		// Create
+		padding:				@quarter-vertical @half-side;
+		border-width:			@1px;
+		
+		// Mixins
+		.size-for-font(@petite-text-size);
+	}
+	&.small {
+
+		// Variables
+		@1px:					1em * (1 / @petite-text-size);
+
+		// Create
+		border-width:			@1px;
+
+		// Mixins
+		.size-for-font(@petite-text-size);
+	}
+	&.large {
+
+		// Variables
+		@1px:					1em * (1 / @primer-text-size);
+
+		// Create
+		border-width:			@1px;
+
+		// Mixins
+		.size-for-font(@primer-text-size);
+	}
+	&.full-width { 
+		width:					100%;
+		padding-left:			0 !important;
+		padding-right:			0 !important;
+		text-align:				center; 
+	}
+	&.round {
+
+		// Mixins
+		.border-radius(1000em);
+	}
+	&.blue,
+	&.primary {
+
+		// Mixins
+		.m-button-color(@blue);
+	}
+	&.red,
+	&.danger {
+
+		// Mixins
+		.m-button-color(@red);
+	}
+	&.green,
+	&.success {
+
+		// Mixins
+		.m-button-color(@green);
+	}
+	&.black,
+	&.rogue {
+
+		// Mixins
+		.m-button-color(@light-black);
+	}
+}
