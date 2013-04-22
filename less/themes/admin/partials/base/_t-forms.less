@@ -108,7 +108,7 @@ Useful widths for form inputs, both fluid- and fixed-width.
 	display:				block;
 
 	// Mixins
-	.margin-leader(1);
+	.padding-leader(1);
 
 	input,
 	textarea,
@@ -127,28 +127,28 @@ Useful widths for form inputs, both fluid- and fixed-width.
 }
 .input-desc {
 	.source-sans-regular();
-	// .margin-leader(0.25, @base-text-size);
+	.margin-leader(0);
 
 	display: block;
 }
-// fieldset {
-// 	.margin-leader(1, @base-text-size);
-// }
 .fieldset {
-	.margin-leader(1, @base-text-size);
-	.padding-trailer(1, @base-text-size);
+	.margin-leader(1);
+	.padding-trailer(1);
 }
 .checkbox-list {
-	.margin-leader(0.5, @base-text-size);
+	.margin-leader(0.5);
 }
-legend + .checkbox-list,
-legend + .input-desc {
-	// .padding-leader(0.25);
-	.margin-leader(0, @base-text-size);
+legend + .checkbox-list {
+	.margin-leader(0);
 }
 legend {
 	.input-label {
-		.margin-trailer(0.25, @base-text-size);
+		.padding-trailer(0.25);
+	}
+
+	+ .input-desc {
+		top: -5px;
+		position: relative;
 	}
 }
 .search	{
