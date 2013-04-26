@@ -1,16 +1,12 @@
-/*
+// 
+// Type Mixins
+// -----------------------------------------------------------------------------
+// 
+// Functions for sizing and embedding type
+// 
 
-Type Mixins
------------
-
-*/
-
-
-/*
-
-Convert type size into rems, with a pixel fallback.
-
-*/
+// Size For Font
+// Convert type size into rems, with a pixel fallback.
 
 .size-for-font(@font-size)	{
 	@rem:					@font-size / 16;
@@ -19,15 +15,9 @@ Convert type size into rems, with a pixel fallback.
 	font-size:				~"@{rem}rem";
 }
 
-
-/*
-
-### Vertical Rhythm ###
-
-Calculate the minimum multiple of rhythm units needed to contain the font-size.
-Optionally, you can specify a custom line-height (sans unit).
-
-*/
+// Vertical Rhythm
+// Calculate the minimum multiple of rhythm units needed to contain the font-size.
+// Optionally, you can specify a custom line-height (sans unit).
 
 .lines-for-font-size(@font-size, @line-height) when (isnumber(@line-height))	{
 	line-height:	@line-height / @font-size;
@@ -49,11 +39,8 @@ Optionally, you can specify a custom line-height (sans unit).
 }
 
 
-/*
-
-Combine the font sizing mixin with the line-height one. Package deal.
-
-*/
+// Type Size
+// Combine the font sizing mixin with the line-height one. Package deal.
 
 .type-size(@font-size, @round: @round-to-nearest)	{
 
@@ -63,24 +50,16 @@ Combine the font sizing mixin with the line-height one. Package deal.
 }
 
 
-/*
+// Lists
 
-### Lists ###
-
-*/
 .unstyled-list()		{
 	padding-left:			0;
 	list-style:				none outside none;
 }
 
 
-/*
-
-### Webfonts ###
-
-Mixins to generate `@font-face` code, with and sans SVG.
-
-*/
+// Webfonts
+// Mixins to generate `@font-face` code, with and sans SVG.
 
 .web-font(@name: "Web Font", @folder: folder, @filename: webfont) {
 	font-family:	"@{name}";

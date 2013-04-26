@@ -1,18 +1,19 @@
 /*
 
-Presentational Classes
-----------------------
+Text Align
 
-General, handy, presentational helper classes.
+Simple classes to adjust your text alignment. They can be added to individual elements or on wrapping elements (an outer `div`, perhaps) to adjust the alignment of all the child elements.
 
-*/
+The default styling:
 
-/*
-First, we have classes for aligning text and floating images.
+Markup:
+<p class="{$modifiers}">Aligned Text</p>
 
-    <p class="align-left">Left-aligned text.</p>
-    <p class="align-center">Center-aligned text.</p>
-    <p class="align-right">Right-aligned text.</p>
+.align-left - Usually the same as the site default
+.align-center - Center aligns text as well as any non-block child elements
+.align-right - Aligns things to the right
+
+Styleguide 1.2.2
 
 */
 
@@ -25,6 +26,26 @@ First, we have classes for aligning text and floating images.
 .align-right {
     text-align: right;
 }
+
+/*
+
+Floats
+
+Next, we have classes for floating elements.
+
+Without floating:
+
+Markup:
+<div class="panel {$modifiers} gt-third gd-third">A Floating Panel</div>
+
+.float-left - Floats the element to the left
+.float-center - Doesn't actually float, but rather sets margins to `auto`. *Requires a set width!*
+.float-right - Floats the element to the right
+
+Styleguide 1.2.3
+
+*/
+
 .float-left {
     float: left;
 }
@@ -38,6 +59,21 @@ First, we have classes for aligning text and floating images.
 .clear {
     clear: both;
 }
+
+/*
+
+"New Line"
+
+Turns an `inline` or `inline-block` element into a `block` one. Like magic, 
+turns whatever it touches into block.
+
+Markup:
+This is text with a <span class="new-line">span tag</span> nested inline
+
+Styleguide 1.2.4
+
+*/
+
 .new-line {
     display: block;
 }
@@ -46,6 +82,21 @@ First, we have classes for aligning text and floating images.
     // Mixins
     .clearfix();
 }
+
+/*
+
+"Is Hidden"
+
+Visually hides content in a way that leaves it accessible to screen readers. 
+Like more magic, makes the visible invisible.
+
+Markup:
+Now you see me<span class="is-hidden">, now you don't.</span>
+
+Styleguide 1.2.5
+
+*/
+
 .is-hidden {
 
     // Mixins

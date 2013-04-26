@@ -1,23 +1,30 @@
 /* 
 
 Spacing Helpers
----------------
 
 Spacing helpers are quick but powerful classes that add margin or padding to 
-any given element. These classes are !important, so they override all other 
+any given element. These classes are `!important`, so they override all other 
 styles.
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-p, m                =   padding, margin  
-a, t, r, b, l, h, v =   all, top, right, bottom, left, horizontal, vertical  
-s, m, l, n          =   small (~5px), medium (~10px), large (~20px), none (0)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* `p`, `m`                          =   padding, margin  
+* `a`, `t`, `r`, `b`, `l`, `h`, `v` =   all, top, right, bottom, left, horizontal, vertical  
+* `s`, `m`, `l`, `n`                =   small (~`5px`), medium (~`10px`), large (~`20px`), none (`0`)
 
 For example: `.pam` means "padding, all, medium".
 
 **Note:** These are all based on the current element's font size and the 
 project's vertical rhythm (even on the sides, to provide uniform spacing). 
 As such, they require `_vars.less`.
+
+The default styling:
+
+Markup: <div class="panel {$modifiers}">An Example of Spacing Adjustment</div>
+
+.pam - padding, all, medium
+.mhl - margin, horizontal, large
+.pal.mbl.mtn - padding, all, large; margin, bottom, large; margin, top, none;
+
+Styleguide 1.2.1
 
 */
 

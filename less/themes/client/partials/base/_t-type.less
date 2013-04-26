@@ -1,6 +1,23 @@
 /*
 
-### Heading Typographic Scale ###
+Typographic Scale
+
+The building blocks for the site's type sizes. Almost exclusively, an element's font size is assigned with one of these classes. If a new size is needed, a new class is created here so it can be used and reused elsewhere.
+
+The list of type sizes can grow or shrink, but be vigilant in keeping the number of sizes to a minimum. A nice rule of thumb is that no two sizes can one pixel in difference (forcing you to choose one over the other, giving you one class where you previously had two).
+
+Styleguide 2.2
+
+*/
+
+/*
+
+Canon Text
+
+Markup:
+<p class="canon-text">Canon Text (48px)</p>
+
+Styleguide 2.2.1
 
 */
 
@@ -8,54 +25,134 @@
 .canon-text,
 .wysiwyg .canon-text {
 
-	// Mixins
-	.type-size(@canon-text-size);
+    // Mixins
+    .type-size(@canon-text-size);
 }
+
+/*
+
+Paragon Text
+
+Markup:
+<p class="paragon-text">Paragon Text (28px)</p>
+
+Styleguide 2.2.2
+
+*/
+
 .wysiwyg h2,
 .paragon-text,
 .wysiwyg .paragon-text {
 
-	// Mixins
-	.type-size(@paragon-text-size);
+    // Mixins
+    .type-size(@paragon-text-size);
 }
+
+/*
+
+Primer Text
+
+Markup:
+<p class="primer-text">Primer Text (21px)</p>
+
+Styleguide 2.2.3
+
+*/
+
 .wysiwyg h3,
 .primer-text,
 .wysiwyg .primer-text {
 
-	// Mixins
-	.type-size(@primer-text-size);
+    // Mixins
+    .type-size(@primer-text-size);
 }
+
+/*
+
+Normal Text
+
+Markup:
+<p class="normal-text">Normal Text (16px)</p>
+
+Styleguide 2.2.4
+
+*/
+
 .wysiwyg h4,
 .normal-text,
 .wysiwyg .normal-text {
 
-	// Mixins
-	.type-size(@normal-text-size);
+    // Mixins
+    .type-size(@normal-text-size);
 }
+
+/*
+
+Petite Text
+
+Markup:
+<p class="petite-text">Petite Text (13px)</p>
+
+Styleguide 2.2.5
+
+*/
+
 .wysiwyg h5,
 .petite-text,
 .wysiwyg .petite-text {
 
-	// Mixins
-	.type-size(@petite-text-size);
+    // Mixins
+    .type-size(@petite-text-size);
 }
+
+/*
+
+Minion Text
+
+Markup:
+<p class="minion-text">Minion Text (10px)</p>
+
+Styleguide 2.2.6
+
+*/
+
 .wysiwyg h6,
 .minion-text,
 .wysiwyg .minion-text {
 
-	// Mixins
-	.type-size(@minion-text-size);
+    // Mixins
+    .type-size(@minion-text-size);
 }
 
 .wysiwyg {
-	h2,
-	h3,
-	h4,
-	h5,
-	h6	{
-		margin-top: 1.5em;
-	}
+    h2,
+    h3,
+    h4,
+    h5,
+    h6  {
+        margin-top: 1.5em;
+    }
 }
+
+/*
+
+Heading Styles
+
+Styleguide 2.3
+
+*/
+
+/*
+
+Primary Heading
+
+Markup:
+<h2 class="primary-heading">Primary Heading</h2>
+
+Styleguide 2.3.1
+
+*/
+
 h1,
 h2,
 h3,
@@ -63,24 +160,135 @@ h4,
 h5,
 h6,
 .primary-heading {
-	font-weight: normal;
-	font-family: @primary-header-font;
-	color: @primary-header-color;
+    font-weight: normal;
+    font-family: @primary-header-font;
+    color: @primary-header-color;
 }
-.secondary-heading	{
 
-	// Mixins
-	.source-sans-bold();
+/*
 
-	// Other
-	color: @grey;
-	text-transform: uppercase;
+Secondary Heading
+
+Markup:
+<h2 class="secondary-heading">Secondary Heading</h2>
+
+Styleguide 2.3.2
+
+*/
+
+.secondary-heading  {
+
+    // Mixins
+    .source-sans-bold();
+
+    // Other
+    color: @grey;
+    text-transform: uppercase;
 }
+
+/*
+
+Body Text
+
+Markup:
+<p>This is a paragraph of text. Some of the text may be <em>emphasised</em> and some it might even be <strong>strongly emphasised</strong>. Occasionally <q>quoted text</q> may be found within a paragraph ... and of course <a href="#">a link</a> may appear at any point in the text. The average paragraph contains five or six sentences although some may contain as little or one or two while others carry on for anything up to ten sentences and beyond.</p>
+
+Styleguide 2.4
+
+*/
+
 body {
 
-	// Mixins
-	.normal-text();
+    // Mixins
+    .normal-text();
 
-	// Other
-	color: @primary-text-color;
+    // Other
+    color: @primary-text-color;
+}
+
+/*
+
+Blockquote
+
+A block of quoted text is particularly useful when presented as a pull-quote 
+within an article of text.
+
+Markup:
+<figure>
+    <blockquote class="primer-text">
+        <p>You were right about one thing: the negotiations were short.</p>
+    </blockquote>
+    <figcaption class="petite-text">Obi-Wan Kenobi</figcaption>
+</figure>
+
+Styleguide 2.5
+
+*/
+
+/*
+
+Lists
+
+Styleguide 2.6
+
+*/
+
+/*
+
+Ordered List
+
+Markup:
+<ol>
+    <li>I'm trying not to, kid.</li>
+    <li>Oh God, my uncle. How am I ever gonna explain this?</li>
+    <li>Still, she's got a lot of spirit. I don't know, what do you think?</li>
+    <li>Look, I ain't in this for your revolution, and I'm not in it for you, Princess. I expect to be well paid. I'm in it for the money.</li>
+</ol>
+
+Styleguide 2.6.1
+
+*/
+
+/*
+
+Unordered List
+
+Markup:
+<ul>
+    <li>The Force is strong with this one. I have you now.</li>
+    <li>The plans you refer to will soon be back in our hands.</li>
+    <li>Don't act so surprised, Your Highness. You weren't on any mercy mission this time. Several transmissions were beamed to this ship by Rebel spies. I want to know what happened to the plans they sent you.</li>
+    <li>Alderaan? I'm not going to Alderaan. I've got to go home. It's late, I'm in for it as it is.</li>
+</ul>
+
+Styleguide 2.6.2
+
+*/
+
+/*
+
+Unstyled List
+
+Markup:
+<ul class="unstyled">
+    <li>I call it luck.</li>
+    <li>Don't act so surprised, Your Highness.</li>
+    <li>I can't get involved! I've got work to do!</li>
+</ul>
+
+Styleguide 2.6.3
+
+*/
+
+code {
+    padding: 0 2px;
+    background: desaturate(lighten(@light-blue, 40%), 40%);
+    border: 1px solid @light-grey;
+    font-size: 0.85em;
+    .border-radius(2px);
+
+    pre & {
+        padding: @full-vertical;
+        display: block;
+    }
 }

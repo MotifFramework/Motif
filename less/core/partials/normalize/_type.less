@@ -1,9 +1,19 @@
 /*
- * 1. Corrects text resizing oddly in IE6/7 when body `font-size` is set using
- *    `em` units.
- * 2. Prevents iOS text size adjust after orientation change, without disabling
- *    user zoom.
- */
+
+Type
+
+*/
+
+/*
+
+HTML Font Size Adjust
+
+1. Corrects text resizing oddly in IE6/7 when body `font-size` is set using
+   `em` units.
+2. Prevents iOS text size adjust after orientation change, without disabling
+   user zoom.
+
+*/
 
 html {
     font-size: 100%; /* 1 */
@@ -51,11 +61,12 @@ ol,
 dl,
 table,
 figure {
-    margin: 0;
-    font-size: 1em;
 
-    // Mixins
-    .margin-leader();
+    /* Display & Box Model */
+    margin: @full-vertical 0 0 0;
+
+    /* Other */
+    font-size: 1em;
 }
 menu,
 ol,

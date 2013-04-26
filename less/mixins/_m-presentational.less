@@ -48,7 +48,7 @@
 	hyphens: auto;
 }
 
-/* http://developer.yahoo.com/blogs/ydn/posts/2012/10/clip-your-hidden-content-for-better-accessibility/ */
+// http://developer.yahoo.com/blogs/ydn/posts/2012/10/clip-your-hidden-content-for-better-accessibility/
 .visually-hidden() { 
 	width:				1px;
 	height:				1px;
@@ -94,46 +94,3 @@
 		}
 	}
 }
-
-/* DEPRECATED, REMOVE ASAP
-.hide-text() {
-	font:				0px/0 a;
-	text-shadow:		none;
-	color:				transparent;
-	background-color:	transparent;
-	border:				0;
-}
-.hide-img() {
-	display:			block;
-	text-indent:		100%;
-	white-space:		nowrap;
-	overflow:			hidden;
-}
-.hide-block()			{
-	border:				0;
-	clip:				rect(0 0 0 0);
-	height:				1px;
-	margin:				-1px;
-	overflow:			hidden;
-	padding:			0;
-	position:			absolute;
-	width:				1px;
-	
-	&.focusable:active,
-	&.focusable:focus {
-		width:			auto;
-		height:			auto;
-		margin:			0;
-		clip:			auto;
-		overflow:		visible;
-		position:		static;
-	}
-}
-.show-block()	{
-	width:				auto;
-	height:				auto;
-	margin:				0;
-	position:			relative;
-	clip:				auto;
-}
-*/
