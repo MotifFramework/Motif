@@ -37,7 +37,7 @@
     Admin.templates = {
         testTemplate: {
             name: "test",
-            output: [ 
+            output: [
                 "<h1>{name}</h1>",
                 "<p>What a dope.</p>"
             ].join("\n")
