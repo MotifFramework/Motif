@@ -2,7 +2,7 @@
  * Client Actions
  * =============================================================================
  * 
- * Creating the `Client` namespace
+ * Creating the `Client` namespace so that it can be publically accessed
  * 
  * @todo 
  */
@@ -533,6 +533,122 @@
     };
 
     /**
+     * Mobile Menu Dropdown
+     * -----------------------------------------------------------------------------
+     * 
+     * Use `lb_reveal` plugin to create a basic mobile menu dropdown
+     * 
+     * @todo 
+     */
+
+    Client.mobileMenu = {
+        config: {
+            targetElems: $("#reveal-main-nav"),
+            pluginName: "lb_reveal",
+            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js"
+        },
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} );
+
+            // Init the Plugin
+            Client.utils.initPlugin( settings );
+        }
+    };
+
+    /**
+     * Data Icons
+     * -----------------------------------------------------------------------------
+     * 
+     * In IE8 or browsers that don't support generated content, fake the [data-icon] 
+     * pseudo element by placing `<i>` elements inline.
+     * 
+     * @todo The `.each` in `init` might need to be its own method?
+     */
+
+    Client.dataIcons = {
+        config: {
+            ie8: $("html.lte8"),
+            dataIcon: $("[data-icon]")
+        },
+
+        /**
+         * Init
+         * Checks if it needs to generate icons, loops through each instance
+         * @param  {Object} config 
+         */
+
+        init: function ( config ) {
+            var context = Client.dataIcons,
+                settings = $.extend( true, {}, context.config, config || {} );
+
+            // Check if Modernizr can't find generated content, or if the browser 
+            // is IE8, which is known to have issues with [data-icon] via CSS
+            if ( (!Modernizr.generatedcontent || context.config.ie8.length) && context.config.dataIcon.length ) {
+
+                // Loop through each [data-icon] instance on the page...
+                context.config.dataIcon.each( function createIcons() {
+                    var elem = $(this),
+
+                        // Build a new icon
+                        newIcon = context.buildIcon.call( elem, settings );
+
+                    // Place the new icon
+                    context.placeIcon.call( elem, newIcon, settings );
+                });
+            }
+        },
+
+        /**
+         * Build Icons
+         * Build the icon string with `<i>` and data attributes
+         * @param  {Object} config
+         * @return {String}
+         */
+
+        buildIcon: function ( config ) {
+            var elem = $(this),
+                icon = "";
+
+            icon += "<i class='data-icon ";
+            icon += elem.attr("data-icon-family");
+            icon += "' aria-hidden='true'>";
+            icon += elem.attr("data-icon");
+            icon += "</i>";
+
+            return icon;
+        },
+
+        /**
+         * Place Icon
+         * Places the icon to its parent element based on data attribute position
+         * @param  {String} icon   
+         * @param  {Object} config 
+         */
+
+        placeIcon: function ( icon, config ) {
+            var elem = $(this),
+                newIcon = $(icon),
+                iconPosition = elem.attr("data-icon-position");
+
+            // If it's "before" or "solo"...
+            if ( iconPosition === "before" || iconPosition === "solo" ) {
+
+                // ...prepend it
+                newIcon.prependTo( elem );
+
+            // If it's "after"...
+            } else if ( iconPosition === "after" ) {
+
+                // ...append it
+                newIcon.appendTo( elem );
+            }
+        }
+    };
+
+    /**
      * Client Actions Init
      * -----------------------------------------------------------------------------
      * 
@@ -545,6 +661,8 @@
         Client.validateForms.init();
         Client.tabbedWidget.init();
         Client.offCanvas.init();
+        Client.mobileMenu.init();
+        Client.dataIcons.init();
     };
 
     Client.init();
