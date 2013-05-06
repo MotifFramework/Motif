@@ -12,8 +12,7 @@ Basic Themed Elements
 
 Style `input`s/`textarea`s and set them to `width: 100%` to adapt to the width of their wrapper. (Great for grids.)
 
-Markup:
-<input type="text">
+Markup: <input type="text">
 <textarea></textarea>
 <select>
     <option value="">Please Choose...</option>
@@ -30,10 +29,12 @@ textarea {
     @1px: 1em * (1 / @base-text-size);
     @2px: 1em * (2 / @base-text-size);
     @4px: 1em * (4 / @base-text-size);
+    @600px: 1em * (600 / @base-text-size);
     @input-side-padding: 1em * (@input-padding / @base-text-size);
 
     // Create
     width: 100%;
+    max-width: @600px;
     font-size: 1em;
     padding: @quarter-vertical @input-side-padding;
     background: @white;
@@ -71,17 +72,19 @@ textarea {
     height: @full-vertical * 4;
 }
 select {
+    width: auto;
+    max-width: 100%;
     font-size: 0.8125em;
 }
 
 
 /*
+
 Useful Input Widths
 
 Useful widths for form inputs, both fixed- and fluid-width.
 
-Markup:
-<input type="text" class="{$modifiers}" placeholder="Sample placeholder text">
+Markup: <input type="text" class="{$modifiers}" placeholder="Sample placeholder text">
 
 .input-xxxs - 
 .input-xxs - 
@@ -94,8 +97,18 @@ Markup:
 .gt-half.gd-half - Using the grid system for a 50% width
 
 Styleguide 5.2
+
 */
 
+.input-eighth {
+    width: 12.5%;
+}
+.input-quarter {
+    width: 25%;
+}
+.input-half {
+    width: 50%;
+}
 .input-xxxs {
     width: 1em * ( 30 / @base-text-size);
 }
@@ -120,8 +133,7 @@ Styleguide 5.2
 /*
 Input Label
 
-Markup:
-<label class="input-label">
+Markup: <label class="input-label">
     Input Label
     <input class="input-l" type="email" placeholder="Ex: name@email.com">
 </label>
@@ -132,8 +144,7 @@ Styleguide 5.3
 /*
 Input Label with Hint
 
-Markup:
-<label class="input-label">
+Markup: <label class="input-label">
     Input Label
     <input class="input-l" type="email" placeholder="Ex: name@email.com">
     <small class="hint">This is a hint.</small>
@@ -146,7 +157,7 @@ Styleguide 5.3.1
     display: block;
 
     // Mixins
-    .margin-leader(0.75);
+    .padding-leader(1);
 
     input,
     textarea,
@@ -163,38 +174,72 @@ Styleguide 5.3.1
         .margin-leader(0.25);
     }
 }
+.input-desc {
+
+    /* Mixins */
+    .source-sans-regular();
+    .margin-leader(0);
+
+    /* Display & Box Model */
+    display: block;
+}
+.fieldset {
+
+    /* Mixins */
+    .margin-leader(1);
+    .padding-trailer(1);
+}
+.checkbox-list {
+
+    /* Mixins */
+    .margin-leader(0.5);
+}
+legend + .checkbox-list {
+
+    /* Mixins */
+    .margin-leader(0);
+}
 legend {
+    .input-label {
 
-    // Mixins
-    .padding-trailer(0.5);
-
-    &.input-label {
-
-        // Mixins
+        /* Mixins */
         .padding-trailer(0.25);
+    }
+
+    + .input-desc {
+
+        /* Variables */
+        @5px: 1em * (5 / @base-text-size);
+
+        /* Positioning */
+        position: relative;
+        top: -@5px;
     }
 }
 .search {
     .input {
-        float: left;
 
-        // Mixins
+        /* Mixins */
         .border-radius-right(0);
+
+        /* Display & Box Model */
+        float: left;
     }
     .submit {
+
+        /* Mixins */
+        .border-radius-left(0);
+
+        /* Display & Box Model */
         margin: 0;
         float: left;
-
-        // Mixins
-        .border-radius-left(0);
     }
 }
 
 /*
 Form Validation
 
-Markup:
-<label class="input-label {$modifiers}">
+Markup: <label class="input-label {$modifiers}">
     Telephone
     <input class="input-s" type="tel" value="555-555-5555">
 </label>
@@ -223,8 +268,7 @@ Styleguide 5.4
 /*
 Form Messaging
 
-Markup:
-<label class="input-label">
+Markup: <label class="input-label">
     Form Bubble
     <input type="tel" placeholder="XXX-XXX-XXXX">
     <small class="input-alert {$modifiers} bubble">

@@ -1,24 +1,70 @@
 /*
 
 Tables
-------
+
+Styleguide 6.0
 
 */
 
-table	{
-	th,
-	td {
-		padding:				@half-vertical @half-side @half-vertical-bordered;
-	}
-	th {
-		padding-top:			@half-vertical-bordered;
-		border-bottom:			@border-width solid @table-border-color;
-	}
-	th + th,
-	td + td {
-		border-left:			@border-width solid @table-border-color;
-	}
-	tr + tr td {
-		border-top:				@border-width solid @table-border-color;
-	}
+/*
+
+Default Tables
+
+Simple, clean default styles. Just mark it up like a normal table.
+
+Markup:
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Some</td>
+            <td>One</td>
+            <td>English</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Joe</td>
+            <td>Sixpack</td>
+            <td>English</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Stu</td>
+            <td>Dent</td>
+            <td>Code</td>
+        </tr>
+    </tbody>
+</table>
+
+Styleguide 6.1
+
+*/
+
+table {
+    width: 100%;
+    max-width: 100%;
+
+    th,
+    td {
+        padding: @half-vertical @half-side @half-vertical-bordered;
+    }
+    th {
+        padding-top: @half-vertical-bordered;
+        border-bottom: @border-width solid @table-border-color;
+    }
+    th + th,
+    td + td {
+        border-left: @border-width solid @table-border-color;
+    }
+    tr + tr td {
+        border-top: @border-width solid @table-border-color;
+    }
 }

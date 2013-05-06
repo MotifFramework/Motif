@@ -1,37 +1,62 @@
+/*
+
+Typography
+
+The framework encourages a system of typography that decouples HTML elements, 
+type styles, and size.
+
+Header tags inherit minimal styles such as relative spacing and a default 
+typeface and color. Their size (and the size of any element, for that matter), 
+is determined by a collection of size classes. Alternate heading styles are 
+given their own classes as well. As a quick-fix solution, each typeface used 
+also has its own standalone class solely for switching fonts.
+
+The idea is to create a smart collection of typography "LEGO bricks" that make 
+it easy to, with a few class assignments in the HTML, output any combination 
+of typographic style and size.
+
+Just be careful not to get carried away in created modular classes. Having 
+dozens of classes with only one attribute each would be like having a bucket 
+full of single-studded LEGO bricks.
+
+Styleguide 2.0
+
+*/
+
 // Museo Slab
 @font-face {
-	.web-font("Museo Slab 700", museo-slab, museo-slab-700);
+    .web-font("Museo Slab 700", museo-slab, museo-slab-700);
 }
 @font-face {
-	.web-font("Museo 700", museo, Museo700-Regular-webfont);
+    .web-font("Museo 700", museo, Museo700-Regular-webfont);
 }
 
 // Source Sans Pro
 @font-face {
-	.web-font-svg("Source Sans Pro", source-sans-pro, SourceSansPro-Regular-webfont, SourceSansProRegular);
+    .web-font-svg("Source Sans Pro", source-sans-pro, SourceSansPro-Regular-webfont, SourceSansProRegular);
 }
 @font-face {
-	.web-font-svg("Source Sans Pro Bold", source-sans-pro, SourceSansPro-Bold-webfont, SourceSansProBold);
+    .web-font-svg("Source Sans Pro Bold", source-sans-pro, SourceSansPro-Bold-webfont, SourceSansProBold);
 }
 @font-face {
-	.web-font-svg("Source Sans Pro Italic", source-sans-pro, SourceSansPro-It-webfont, SourceSansProItalic);
+    .web-font-svg("Source Sans Pro Italic", source-sans-pro, SourceSansPro-It-webfont, SourceSansProItalic);
 }
 @font-face {
-	.web-font-svg("Source Sans Pro Bold Italic", source-sans-pro, SourceSansPro-BoldIt-webfont, SourceSansProBoldItalic);
+    .web-font-svg("Source Sans Pro Bold Italic", source-sans-pro, SourceSansPro-BoldIt-webfont, SourceSansProBoldItalic);
 }
 
-// Anonymous Pro
+// Source Code Pro
 @font-face {
-	.web-font-svg("Anonymous Pro Bold", anonymous-pro, Anonymous_Pro_B-webfont, AnonymousProBold);
+    .web-font-svg("Source Code Pro", source-code-pro, source-code-pro-regular, SourceCodeProRegular);
 }
 
 // Symbolset
 @font-face {
-	.web-font-svg("Symbolset", symbolset, ss-standard, SSStandardRegular);
+    .web-font-svg("Symbolset", symbolset, ss-standard, SSStandardRegular);
 }
 @font-face {
-	.web-font-svg("Symbolset Social", symbolset, ss-social-regular, SSSocialRegular);
+    .web-font-svg("Symbolset Social", symbolset, ss-social-regular, SSSocialRegular);
 }
 @font-face {
-	.web-font-svg("Symbolset Social Circle", symbolset, ss-social-circle, SSSocialCircle);
+    .web-font-svg("Symbolset Social Circle", symbolset, ss-social-circle, SSSocialCircle);
 }

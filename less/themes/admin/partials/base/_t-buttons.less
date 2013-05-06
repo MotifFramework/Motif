@@ -1,123 +1,140 @@
+
+/*
+
+Interactive Elements
+
+Styleguide 3.0
+
+*/
+
+/*
+
+Buttons
+
+Default interactive button styles. This `.button` class can be applied to `<a>`, 
+`<button>`, or `<input>` elements. Button color and style classes can be combined 
+with size classes.
+
+Markup:
+<a class="{$modifiers} button" href="#">Link Element Button</a>
+<button class="{$modifiers} button">Button Element</button>
+<input class="{$modifiers} button" type="button" value="Input Element Button">
+
+.primary - A change from the default style, meant for primary actions (e.g., form submittal)
+.danger - Indicative of destructive action
+.tiny - Smallest button size available
+.small - Small button size, but not too small
+.large - Larger button size for big callouts
+.full-width - Button expands to fill width of its container
+
+Styleguide 3.1
+
+*/
+
 .button {
-	// Variables
-	@1px:						1em * (1 / @base-text-size);
-	@2px:						1em * (2 / @base-text-size);
-	@3px:						1em * (3 / @base-text-size);
-	@gradient-top:				@white;
-	@gradient-bottom:			lighten(@light-grey, 5%);
 
-	// Shadow vars
-	@inset-shadow:				fadeout(@white, 60%);
-	@outset-shadow:				fadeout(@black, 50%);
-	@var-shadow-in:				0 @1px @1px @inset-shadow;
-	@var-shadow-out:			0 @2px @2px -@1px @outset-shadow;
+    // Variables
+    @1px: 1em * (1 / @base-text-size);
+    @2px: 1em * (2 / @base-text-size);
+    @3px: 1em * (3 / @base-text-size);
+    @gradient-top: @white;
+    @gradient-bottom: lighten(@light-grey, 5%);
 
-	// Baseline
-	width:						auto;
-	height:						auto;
-	margin:						0;
-	line-height:				normal;
-	text-align:					center;
-	text-decoration:			none;
-	position:					relative;
-	-webkit-appearance:			none;
-	-webkit-background-clip:	padding;
-	   -moz-background-clip:	padding;
-			background-clip:	padding-box;
-	outline:					0;
-	overflow:					visible;
-	cursor:						pointer;
-	vertical-align:				middle;
-	
-	// Styling Begins
-	padding:					@half-vertical @full-side;
-	border:						@1px solid @light-grey;
-	color:						@dark-grey;
-	text-shadow:				0 @1px @1px @white;
-	
-	// Mixins
-	.margin-leader();
-	.source-sans-bold();
-	.border-radius(@3px);
-	.inline-block-fallback();
-	.box-shadow-in-out(@var-shadow-in, @var-shadow-out);
-	.background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
-	
-	&:hover,
-	&:focus {
-		color:					darken(@dark-grey, 10%);
-		border-color:			@grey;
-	}
-	p & {
-		margin-top:				0;
-	}
-	&.tiny {
+    // Shadow vars
+    @inset-shadow: fadeout(@white, 60%);
+    @outset-shadow: fadeout(@black, 50%);
+    @var-shadow-in: 0 @1px @1px @inset-shadow;
+    @var-shadow-out: 0 @2px @2px -@1px @outset-shadow;
 
-		// Variables
-		@1px:					1em * (1 / @petite-text-size);
+    // Baseline
+    width: auto;
+    height: auto;
+    margin: 0;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    position: relative;
+    -webkit-appearance: none;
+    -webkit-background-clip: padding;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+    outline: 0;
+    overflow: visible;
+    cursor: pointer;
+    vertical-align: middle;
+    
+    // Styling Begins
+    padding: @half-vertical @full-side;
+    border: @1px solid @light-grey;
+    color: @dark-grey;
+    text-shadow: 0 @1px @1px @white;
+    
+    // Mixins
+    .margin-leader();
+    .source-sans-bold();
+    .border-radius(@3px);
+    .inline-block-fallback();
+    .box-shadow-in-out(@var-shadow-in, @var-shadow-out);
+    .background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
+    
+    &:hover,
+    &:focus {
+        color: darken(@dark-grey, 10%);
+        border-color: @grey;
+    }
+    p & {
+        margin-top: 0;
+    }
+    &.tiny {
 
-		// Create
-		padding:				@quarter-vertical @half-side;
-		border-width:			@1px;
-		
-		// Mixins
-		.size-for-font(@petite-text-size);
-	}
-	&.small {
+        // Variables
+        @1px: 1em * (1 / @petite-text-size);
 
-		// Variables
-		@1px:					1em * (1 / @petite-text-size);
+        // Create
+        padding: @quarter-vertical @half-side;
+        border-width: @1px;
+        
+        // Mixins
+        .size-for-font(@petite-text-size);
+    }
+    &.small {
 
-		// Create
-		border-width:			@1px;
+        // Variables
+        @1px: 1em * (1 / @petite-text-size);
 
-		// Mixins
-		.size-for-font(@petite-text-size);
-	}
-	&.large {
+        // Create
+        border-width: @1px;
 
-		// Variables
-		@1px:					1em * (1 / @primer-text-size);
+        // Mixins
+        .size-for-font(@petite-text-size);
+    }
+    &.large {
 
-		// Create
-		border-width:			@1px;
+        // Variables
+        @1px: 1em * (1 / @primer-text-size);
 
-		// Mixins
-		.size-for-font(@primer-text-size);
-	}
-	&.full-width { 
-		width:					100%;
-		padding-left:			0 !important;
-		padding-right:			0 !important;
-		text-align:				center; 
-	}
-	&.round {
+        // Create
+        border-width: @1px;
 
-		// Mixins
-		.border-radius(1000em);
-	}
-	&.blue,
-	&.primary {
+        // Mixins
+        .size-for-font(@primer-text-size);
+    }
+    &.full-width { 
+        width: 100%;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        text-align: center; 
+    }
+    &.blue,
+    &.primary {
 
-		// Mixins
-		.m-button-color(@blue);
-	}
-	&.red,
-	&.danger {
+        // Mixins
+        .m-button-color(@blue);
+    }
+    &.red,
+    &.danger {
 
-		// Mixins
-		.m-button-color(@red);
-	}
-	&.green,
-	&.success {
-
-		// Mixins
-		.m-button-color(@green);
-	}
-	&.black,
-	&.rogue {
-
-		// Mixins
-		.m-button-color(@light-black);
-	}
+        // Mixins
+        .m-button-color(@red);
+    }
 }

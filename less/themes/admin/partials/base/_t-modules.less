@@ -1,3 +1,13 @@
+/*
+
+Modules
+
+Layout modules that can be used, reused, and extended in many ways.
+
+Styleguide 4.0
+
+*/
+
 // JS Main Nav Functionality
 .js {
     .menu {
@@ -18,6 +28,29 @@
         }
     }
 }
+
+/*
+
+Nav Bar
+
+A quick navigation bar, typically good for prototyping the main menu of a site.
+
+Markup:
+<nav class="menu nav-bar">
+    <h3 id="reveal-main-nav" class="title" data-reveal="main-nav-list">
+        <b class="button-label">Menu</b>
+    </h3>
+    <ul id="main-nav-list" class="forceful nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#" class="is-current">Contact Us</a></li>
+    </ul>
+</nav>
+
+Styleguide 8.1
+
+*/
 .nav-bar {
     .title {
 
@@ -123,14 +156,32 @@
     }
 }
 
-.panel {
 
-    // Variables
-    @1px: 1em * (1 / @base-text-size);
-    @3px: 1em * (3 / @base-text-size);
-    @top-gradient: lighten(@light-grey, 18%);
-    @bottom-gradient: lighten(@light-grey, 10%);
-    @shadow: fadeout(@light-black, 85%);
+
+
+
+/*
+Panel
+
+Used to provide messaging to the user, whether it be direct or through calls to action. 
+The panel typically indicates a visual separation and implied sub-grouping of its content.
+
+Markup:
+<div class="{$modifiers} panel">
+    <h2>This is a Panel</h2>
+    <p>This is a feedback message for the user.</p>
+    <p><a href="#" class="button">User Action</a></p>
+</div>
+<div class="{$modifiers} panel">
+    <p>This is a feedback panel with no heading.</p>
+</div>
+
+.inset - Adding this class modifies the look of the panel to a more "sunken in" aesthetic
+
+Styleguide 4.1
+*/
+
+.panel {
 
     // Create
     padding: @double-vertical;
@@ -146,6 +197,41 @@
     &.thin {
         padding: @full-vertical;
     }
+}
+
+/*
+Alert Panel
+
+This variation of the standard `.panel` is used specifically for delivering 
+direct messages to the user, whether they be informative, complimentary, 
+or preventative.
+
+Markup:
+<div class="{$modifiers} alert panel">
+    <h2>This is an Alert Panel</h2>
+    <p>This is a feedback message for the user.</p>
+    <p><a href="#" class="button">User Action</a></p>
+</div>
+<div class="{$modifiers} alert panel">
+    <p>This is an alert panel with no heading.</p>
+</div>
+
+.error - 
+.success - 
+.info - 
+
+Styleguide 4.1.1
+*/
+
+.panel {
+
+    // Variables
+    @1px: 1em * (1 / @base-text-size);
+    @3px: 1em * (3 / @base-text-size);
+    @top-gradient: lighten(@light-grey, 18%);
+    @bottom-gradient: lighten(@light-grey, 10%);
+    @shadow: fadeout(@light-black, 85%);
+
     &.alert {
 
         // Create
@@ -218,6 +304,24 @@
         }
     }
 }
+
+/*
+
+Figures
+
+Great for integrating images into bodies of text, the `.figure` class is paired with the `.float-left` or `.float-right` class depending on where you would like it placed.
+
+Markup:
+<figure class="figure float-left">
+    <img src="http://placehold.it/213" alt="An image floating left" />
+</figure>
+<p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
+<p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
+
+Styleguide 7.4
+
+*/
+
 .figure {
 
     // Mixins
@@ -309,22 +413,23 @@
 
 
 /*
-
-### Breadcrumb ###
+Breadcrumb
 
 Another extension of the `.nav` module, adding a breadcrumb `.label`, 
-floating it and the ordered list and adding a `>` divider.
+floating it and the ordered list and adding a `/` divider.
 
-    <nav class="breadcrumb group">
-        <p class="label">You are here:</p>
-        <ol class="forceful nav">
-            <li><a href="#">First Level</a></li>
-            <li><a href="#">Second Level</a></li>
-            <li><a href="#">Third Level</a></li>
-            <li><strong>Fourth Level</strong></li>
-        </ol>
-    </nav>
+Markup:
+<nav class="breadcrumb group">
+    <p class="label">You are here:</p>
+    <ol class="nav">
+        <li><a href="#">First Level</a></li>
+        <li><a href="#">Second Level</a></li>
+        <li><a href="#">Third Level</a></li>
+        <li><strong>Fourth Level</strong></li>
+    </ol>
+</nav>
 
+Styleguide 4.2
 */
 
 .breadcrumb {
