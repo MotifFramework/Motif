@@ -28,7 +28,8 @@
          * this takes a simple config and starts the `loadPlugin` process 
          * for you (if it knows that elements exist on the page)
          *
-         * @param {Object} config Includes targetElems, pluginName, pluginSource, pluginOptions (Object)
+         * @param {Object} config Includes targetElems, pluginName, pluginSource, 
+         *   pluginOptions (Object)
          */
 
         initPlugin: function ( config ) {
@@ -248,7 +249,7 @@
         /**
          * Build Message
          * Builds message string with config
-         * Returns string
+         * @return {String}
          */
 
         buildMessage: function ( config ) {

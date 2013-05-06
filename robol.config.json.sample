@@ -1,102 +1,214 @@
 {
-	"scripts"	:	[
+    "scripts"   :   [
 
-		{
-			"_description"	:	"Helpers",
-			"input_dir"		:	"js/helpers",
-			"input_files"	:	[
-				"modernizr.js",
-				"viewport.js",
-				"loadScript.js"
-			],
-			"output_dir"	:	"c/js",
-			"output_file"	:	"helpers.min.js",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
+        {
+            "_description"  :   "CLIENT: Helpers",
+            "input_dir"     :   "js",
+            "input_files"   :   [
+                "themes/client/modernizr.js",
+                "helpers/viewport.js",
+                "helpers/loadScript.js"
+            ],
+            "output_dir"    :   "c/js",
+            "output_file"   :   "helpers.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-		{
-			"_description"	:	"Plugins required on every page",
-			"input_dir"		:	"js",
-			"input_files"	:	[
-				"jquery.js"
-			],
-			"output_dir"	:	"c/js",
-			"output_file"	:	"plugins.min.js",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
+        {
+            "_description"  :   "CLIENT: Libs and Plugins",
+            "input_dir"     :   "js",
+            "input_files"   :   [
+                "libs/jquery.js"
+            ],
+            "output_dir"    :   "c/js",
+            "output_file"   :   "plugins.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-		{
-			"_description"	:	"Actions performed on page load",
-			"input_dir"		:	"js",
-			"input_files"	:	[
-				"actions.js"
-			],
-			"output_dir"	:	"c/js",
-			"output_file"	:	"actions.min.js",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
+        {
+            "_description"  :   "CLIENT: Actions",
+            "input_dir"     :   "js/themes/client",
+            "input_files"   :   [
+                "actions.js"
+            ],
+            "output_dir"    :   "c/js",
+            "output_file"   :   "actions.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-		{
-			"_description"	:	"LB Reveal",
-			"input_dir"		:	"js/plugins",
-			"input_files"	:	[
-				"jquery.lb-reveal.js"
-			],
-			"output_dir"	:	"c/js",
-			"output_file"	:	"jquery.lb-reveal.min.js",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		}
+        {
+            "_description"  :   "ADMIN: Helpers",
+            "input_dir"     :   "js",
+            "input_files"   :   [
+                "themes/admin/modernizr.js",
+                "helpers/viewport.js",
+                "helpers/loadScript.js"
+            ],
+            "output_dir"    :   "c/js/admin",
+            "output_file"   :   "helpers.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-	],
+        {
+            "_description"  :   "ADMIN: Libs and Plugins",
+            "input_dir"     :   "js",
+            "input_files"   :   [
+                "libs/jquery.js",
+                "libs/dust-core-1.2.3.js"
+            ],
+            "output_dir"    :   "c/js/admin",
+            "output_file"   :   "plugins.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-	"styles"	:	[
+        {
+            "_description"  :   "ADMIN: Actions",
+            "input_dir"     :   "js/themes/admin",
+            "input_files"   :   [
+                "actions.js"
+            ],
+            "output_dir"    :   "c/js/admin",
+            "output_file"   :   "actions.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-		{
-			"_description"	:	"Global Stylesheet",
-			"input_dir"		:	"less",
-			"input_files"	:	[
-				"global.less"
-			],
-			"output_dir"	:	"c/css",
-			"output_file"	:	"global.css",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
+        {
+            "_description"  :   "LB Reveal",
+            "input_dir"     :   "js/plugins",
+            "input_files"   :   [
+                "jquery.lb-reveal.js"
+            ],
+            "output_dir"    :   "c/js",
+            "output_file"   :   "jquery.lb-reveal.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
 
-		{
-			"_description"	:	"Fixed Global Stylesheet",
-			"input_dir"		:	"less",
-			"input_files"	:	[
-				"global-fixed.less"
-			],
-			"output_dir"	:	"c/css",
-			"output_file"	:	"global-fixed.css",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		},
+        {
+            "_description"  :   "LB Validation",
+            "input_dir"     :   "js/plugins",
+            "input_files"   :   [
+                "jquery.lb-validation.js"
+            ],
+            "output_dir"    :   "c/js",
+            "output_file"   :   "jquery.lb-validation.min.js",
+            "minify"        :   true,
+            "minify_config" :   {
+                "mangle"    :   true,
+                "squeeze"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        }
 
-		{
-			"_description"	:	"Print Stylesheet",
-			"input_dir"		:	"less",
-			"input_files"	:	[
-				"print.less"
-			],
-			"output_dir"	:	"c/css",
-			"output_file"	:	"print.css",
-			"minify"		:	true,
-			"lint"			:	false,
-			"lint_config"	:	{}
-		}
+    ],
 
-	]
+    "styles"    :   [
+
+        {
+            "_description"  :   "CLIENT: Global",
+            "input_dir"     :   "less/themes/client",
+            "input_files"   :   [
+                "global.less"
+            ],
+            "output_dir"    :   "c/css",
+            "output_file"   :   "global.css",
+            "minify"        :   true,
+            "minify_config" :   {
+                "yuicompress"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
+
+        {
+            "_description"  :   "CLIENT: Global (Fixed)",
+            "input_dir"     :   "less/themes/client",
+            "input_files"   :   [
+                "global-fixed.less"
+            ],
+            "output_dir"    :   "c/css",
+            "output_file"   :   "global-fixed.css",
+            "minify"        :   true,
+            "minify_config" :   {
+                "yuicompress"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
+
+        {
+            "_description"  :   "ADMIN: Global",
+            "input_dir"     :   "less/themes/admin",
+            "input_files"   :   [
+                "global.less"
+            ],
+            "output_dir"    :   "c/css/admin",
+            "output_file"   :   "global.css",
+            "minify"        :   true,
+            "minify_config" :   {
+                "yuicompress"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        },
+
+        {
+            "_description"  :   "ADMIN: Global (Fixed)",
+            "input_dir"     :   "less/themes/admin",
+            "input_files"   :   [
+                "global-fixed.less"
+            ],
+            "output_dir"    :   "c/css/admin",
+            "output_file"   :   "global-fixed.css",
+            "minify"        :   true,
+            "minify_config" :   {
+                "yuicompress"   :   true
+            },
+            "lint"          :   false,
+            "lint_config"   :   {}
+        }
+
+    ]
 }

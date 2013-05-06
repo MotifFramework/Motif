@@ -1,0 +1,9 @@
+<ul class="unstyled vertical-nav {ulClass}">
+    {#navigation}
+        <li>
+            <a href="{url}">
+                {name}
+            </a>
+        </li>
+    {/navigation}
+</ul>
