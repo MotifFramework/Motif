@@ -31,12 +31,29 @@ Styleguide 2.2.1
 
 /*
 
+Meridian Text
+
+Markup:
+<p class="meridian-text">Meridian Text (28px)</p>
+
+Styleguide 2.2.2
+
+*/
+
+.meridian-text {
+
+    // Mixins
+    .type-size(@meridian-text-size);
+}
+
+/*
+
 Paragon Text
 
 Markup:
 <p class="paragon-text">Paragon Text (28px)</p>
 
-Styleguide 2.2.2
+Styleguide 2.2.3
 
 */
 
@@ -55,7 +72,7 @@ Primer Text
 Markup:
 <p class="primer-text">Primer Text (21px)</p>
 
-Styleguide 2.2.3
+Styleguide 2.2.4
 
 */
 
@@ -74,7 +91,7 @@ Normal Text
 Markup:
 <p class="normal-text">Normal Text (16px)</p>
 
-Styleguide 2.2.4
+Styleguide 2.2.5
 
 */
 
@@ -93,7 +110,7 @@ Petite Text
 Markup:
 <p class="petite-text">Petite Text (13px)</p>
 
-Styleguide 2.2.5
+Styleguide 2.2.6
 
 */
 
@@ -112,7 +129,7 @@ Minion Text
 Markup:
 <p class="minion-text">Minion Text (10px)</p>
 
-Styleguide 2.2.6
+Styleguide 2.2.7
 
 */
 
@@ -179,11 +196,7 @@ Styleguide 2.3.2
 .secondary-heading  {
 
     // Mixins
-    .source-sans-bold();
-
-    // Other
-    color: @grey;
-    text-transform: uppercase;
+    .proxima-nova-thin();
 }
 
 /*
@@ -204,6 +217,17 @@ body {
 
     // Other
     color: @primary-text-color;
+}
+
+a {
+    color: @primary-link-color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &.is-current {
+        color: @primary-link-hover;
+    }
 }
 
 /*

@@ -1,4 +1,3 @@
-
 /*
 
 Interactive Elements
@@ -34,6 +33,7 @@ Styleguide 3.1
 .button {
 
     // Variables
+    @base-text-size: @petite-text-size;
     @1px: 1em * (1 / @base-text-size);
     @2px: 1em * (2 / @base-text-size);
     @3px: 1em * (3 / @base-text-size);
@@ -58,24 +58,22 @@ Styleguide 3.1
     -webkit-background-clip: padding;
        -moz-background-clip: padding;
             background-clip: padding-box;
+    border: none;
     outline: 0;
     overflow: visible;
     cursor: pointer;
     vertical-align: middle;
     
     // Styling Begins
-    padding: @half-vertical @full-side;
-    border: @1px solid @light-grey;
+    padding: @half-vertical @full-vertical;
     color: @dark-grey;
-    text-shadow: 0 @1px @1px @white;
     
     // Mixins
     .margin-leader();
-    .source-sans-bold();
-    .border-radius(@3px);
+    .border-radius(@5px);
     .inline-block-fallback();
-    .box-shadow-in-out(@var-shadow-in, @var-shadow-out);
-    .background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
+    .size-for-font(@petite-text-size);
+    .proxima-nova-regular();
     
     &:hover,
     &:focus {
@@ -98,15 +96,7 @@ Styleguide 3.1
         .size-for-font(@petite-text-size);
     }
     &.small {
-
-        // Variables
-        @1px: 1em * (1 / @petite-text-size);
-
-        // Create
-        border-width: @1px;
-
-        // Mixins
-        .size-for-font(@petite-text-size);
+        padding: @quarter-vertical @half-vertical;
     }
     &.large {
 
@@ -129,12 +119,18 @@ Styleguide 3.1
     &.primary {
 
         // Mixins
-        .m-button-color(@blue);
+        .am-button-color(@blue);
+    }
+    &.green,
+    &.safe {
+
+        // Mixins
+        .am-button-color(@green);
     }
     &.red,
     &.danger {
 
         // Mixins
-        .m-button-color(@red);
+        .am-button-color(@red);
     }
 }

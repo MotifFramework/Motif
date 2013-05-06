@@ -72,8 +72,12 @@ body {
 
 .main-content {
 
+    /* Variables */
+
+    /* Mixins */
+
     /* Display & Box Model */
-    padding-top: @30px;
+    padding-top: @40px;
     padding-right: 0 !important;
     padding-left: 0 !important;
 
@@ -82,12 +86,54 @@ body {
     top: 0;
     right: 0;
     bottom: 0;
+
+    /* Other */
 }
     .content-header,
     .content-page {
         height: 100%;
         overflow: auto;
     }
+
+/**
+ * Main Content Header
+ */
+
+.content-header {
+    border-right: 1px solid @black-6;
+
+    /* Positioning */
+    position: relative;
+
+    &:before {
+
+        /* Variables */
+        @8px: 1em * (8 / @base-text-size);
+        @shadow: fadeout(@black, 75%);
+
+        /* Mixins */
+        .background-linear-gradient-horizontal(0, @shadow, 100%, transparent);
+
+        /* Display & Box Model */
+        display: block;
+        width: @8px;
+
+        /* Positioning */
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 90;
+
+        /* Other */
+        content: "";
+    }
+
+    &.gt-columns,
+    &.gd-columns {
+        padding: 0;
+    }
+}
 
 .content-page {
     padding-left: 0 !important;
@@ -143,7 +189,7 @@ body {
 
     /* Positioning */
     position: fixed;
-    top: @30px;
+    top: @40px;
     right: 0;
     z-index: 80;
 }

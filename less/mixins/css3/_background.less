@@ -75,3 +75,12 @@
     background-origin:          @background-origin;
     background-clip:            @background-origin;
 }
+.background-linear-gradient-horizontal(@stop1: 0, @color1: #AAA, @stop2: 100%, @color2: #BBB) {
+    background: @color2; /* Old browsers */
+    background: -moz-linear-gradient(left, @color1 @stop1, @color2 @stop2); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(@stop1,@color1), color-stop(@stop2,@color2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, @color1 @stop1,@color2 @stop2); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, @color1 @stop1,@color2 @stop2); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, @color1 @stop1,@color2 @stop2); /* IE10+ */
+    background: linear-gradient(to right, @color1 @stop1,@color2 @stop2); /* W3C */
+}

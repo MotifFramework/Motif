@@ -95,9 +95,6 @@ Styleguide 8.1
             text-decoration: none;
             padding: @half-vertical 4%;
             
-            // Mixins
-            .source-sans-bold();
-            
             &:hover,
             &:focus,
             &.is-current {
@@ -110,6 +107,15 @@ Styleguide 8.1
 }
 
 .vertical-nav {
+
+    /* Variables */
+    @base-text-size: @petite-text-size;
+    @5px: 1em * (5 / @base-text-size);
+    @8px: 1em * (8 / @base-text-size);
+    @10px: 1em * (10 / @base-text-size);
+    @15px: 1em * (15 / @base-text-size);
+    @20px: 1em * (20 / @base-text-size);
+
     -webkit-transform: translate3d(0%, 0, 0);
     -moz-transform: translate3d(0%, 0, 0);
     -o-transform: translate3d(0%, 0, 0);
@@ -123,22 +129,24 @@ Styleguide 8.1
     position: relative;
 
     a {
-        
-        // Mixins
-        .source-sans-bold();
 
-        color: @dark-blue;
-        padding: @quarter-vertical @half-side;
+        /* Display & Box Model */
+        padding: @20px @15px @15px;
         display: block;
+        border-bottom: 1px solid @black-6;
+
+        /* Other */
+        color: @dark-grey;
         text-decoration: none;
         
         &:hover,
-        &:focus {
-            background: fadeout(@primary-link-color, 90%);
+        &:focus,
+        &.is-current {
+            background: @dark-white;
         }
-    }
-    .is-current {
-        background: fadeout(@primary-link-color, 90%);
+        &.is-current {
+
+        }
     }
     &.off-right {
         width: 100%;
@@ -153,6 +161,76 @@ Styleguide 8.1
         -moz-transform: translate3d(-100%, 0, 0);
         -o-transform: translate3d(-100%, 0, 0);
         transform: translate3d(-100%, 0, 0);
+    }
+    .has-children {
+        &:after {
+            content: "";
+            width: 0;
+            height: 0;
+            margin-left: @5px;
+            border: solid transparent;
+            border-width: 5px 4px;
+            border-left-color: @grey;
+            .inline-block-fallback();
+            vertical-align: middle;
+        }
+    }
+}
+
+.status {
+    &:before {
+
+        /* Variables */
+        @base-text-size: @petite-text-size;
+        @5px: 1em * (5 / @base-text-size);
+        @10px: 1em * (10 / @base-text-size);
+        @inner-shadow: fadeout(@white, 65%);
+        @outer-shadow: fadeout(@black, 70%);
+
+        /* Mixins */
+        .inline-block-fallback();
+        .border-radius(1000em);
+        .box-shadow-in-out(0 3px 1px @inner-shadow, 0 1px 1px @outer-shadow);
+
+        /* Display & Box Model */
+        width: @10px;
+        height: @10px;
+        margin-right: @5px;
+        border: 1px solid @dark-grey;
+
+        /* Other */
+        content: "";
+        background: @grey;
+    }
+}
+.published {
+    &:before {
+
+        /* Mixins */
+        .background-linear-gradient(0, @light-green, 100%, @green);
+
+        /* Other */
+        border-color: darken(@green, 5%);
+    }
+}
+.pending {
+    &:before {
+
+        /* Mixins */
+        .background-linear-gradient(0, @light-yellow, 100%, @yellow);
+
+        /* Other */
+        border-color: darken(@yellow, 5%);
+    }
+}
+.unpublished {
+    &:before {
+
+        /* Mixins */
+        .background-linear-gradient(0, @light-red, 100%, @red);
+
+        /* Other */
+        border-color: darken(@red, 5%);
     }
 }
 
@@ -357,10 +435,17 @@ Styleguide 7.4
 }
     .dropdown-reveal {
 
+        /* Variables */
+        @5px: 1em * (5 / @base-text-size);
+
+        /* Mixins */
+        .border-radius-bottom(@5px);
+
         /* Display & Box Model */
         overflow: hidden;
         height: 0;
         margin-top: 0;
+        border: 1px solid @black-6;
 
         /* Positioning */
         position: absolute;
@@ -370,14 +455,37 @@ Styleguide 7.4
         > :first-child {
             margin-top: 0;
         }
+        .notifications & {
+
+            /* Variables */
+            @265px: 1em * (265 / @base-text-size);
+
+            /* Display & Box Model */
+            width: @265px;
+        }
     }
     .dropdown-list {
+
+        /* Variables */
+        @5px: 1em * (5 / @base-text-size);
+        @10px: 1em * (10 / @base-text-size);
+        @15px: 1em * (15 / @base-text-size);
+
+        /* Other */
         background: @light-grey;
 
         .list-item {
+
+            /* Display & Box Model */
             display: block;
-            padding: @half-vertical;
+            padding: @10px @15px;
+            border-bottom: 1px solid @black-6;
         }
+    }
+    .dropdown-list-button {
+        margin-top: 0;
+        display: block;
+        .border-radius-top(0);
     }
 .nav {
     li {
