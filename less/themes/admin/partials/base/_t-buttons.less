@@ -67,13 +67,14 @@ Styleguide 3.1
     // Styling Begins
     padding: @half-vertical @full-vertical;
     color: @dark-grey;
-    
+
     // Mixins
     .margin-leader();
     .border-radius(@5px);
     .inline-block-fallback();
     .size-for-font(@petite-text-size);
     .proxima-nova-regular();
+    .am-button-color(@light-grey, @dark-grey);
     
     &:hover,
     &:focus {
@@ -122,7 +123,7 @@ Styleguide 3.1
         .am-button-color(@blue);
     }
     &.green,
-    &.safe {
+    &.secondary {
 
         // Mixins
         .am-button-color(@green);

@@ -1,9 +1,9 @@
-.am-button-color(@color: @grey)	{
-	color: @white;
-    background: @color;
+.am-button-color(@background: @light-grey, @text: @white)	{
+	color: @text;
+    background: @background;
 
 	&:hover,
 	&:focus {
-		background: darken(@color, 10%);
+		background: darken(@background, 10%);
 	}
 }

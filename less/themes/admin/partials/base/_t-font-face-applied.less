@@ -95,6 +95,9 @@ Styleguide 2.1.2
 .symbolset-social-circle {
     font-family: @symbolset-social-circle;
 }
+.admin-symbols {
+    font-family: @admin-symbols;
+}
 [data-icon-position="solo"]:before,
 [data-icon-position="before"]:before,
 [data-icon-position="after"]:after,
@@ -114,7 +117,20 @@ Styleguide 2.1.2
     // Mixins
     .inline-block-fallback();
     .box-sizing(border-box);
-    .symbolset();
+    .admin-symbols();
+}
+[data-icon-position="solo"] {
+    &:before,
+    > .data-icon {
+        font-size: 0.95em;
+        line-height: 1;
+    }
+}
+.button[data-icon] {
+    &:before,
+    > .data-icon {
+        font-size: 1em;
+    }
 }
 .data-icon {
     &.data-icon-social {

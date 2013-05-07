@@ -36,7 +36,7 @@ textarea {
     width: 100%;
     max-width: @600px;
     font-size: 1em;
-    padding: @quarter-vertical @input-side-padding;
+    padding: @quarter-vertical;
     background: @white;
     border: @1px solid @input-border-color;
     outline: none;
@@ -52,7 +52,6 @@ textarea {
         z-index: 1;
 
         // Mixins
-        
         .box-shadow(0, @1px, @4px, @light-grey);
     }
 }
@@ -172,11 +171,30 @@ Styleguide 5.3.1
         .margin-leader(0.25);
     }
 }
+.input-requirement {
+
+    /* Variables */
+    @new-size: 14;
+    @8px: 1em * (8 / @new-size);
+    @10px: 1em * (10 / @new-size);
+    @font-size: 1em * (@new-size / @base-text-size);
+
+    /* Mixins */
+    .proxima-nova-regular();
+
+    /* Display & Box Model */
+    margin-left: @8px;
+    padding-left: @10px;
+    border-left: 1px solid @grey;
+
+    /* Other */
+    font-size: @font-size;
+}
 .input-desc {
 
     /* Mixins */
     .museo-slab-300();
-    .margin-leader(0);
+    .padding-leader(0.25, @minion-text-size);
 
     /* Display & Box Model */
     display: block;
@@ -212,6 +230,39 @@ legend {
         /* Positioning */
         position: relative;
         top: -@5px;
+    }
+}
+.sectioned-form {
+    counter-reset: section;
+
+    .header-legend {
+        &:before {
+
+            /* Variables */
+            @base-text-size: @paragon-text-size;
+            @6px: 1em * (6 / @base-text-size);
+            @13px: 1em * (13 / @base-text-size);
+            @30px: 1em * (30 / @base-text-size);
+
+            /* Mixins */
+            .paragon-text();
+            .proxima-nova-thin();
+            .border-radius(1000em);
+            .inline-block-fallback();
+
+            /* Display & Box Model */
+            width: @30px;
+            height: @30px;
+            margin-right: @13px;
+            padding-top: @6px;
+
+            /* Other */
+            counter-increment: section;
+            content: counter(section);
+            color: @light-black;
+            text-align: center;
+            background: @light-grey;
+        }
     }
 }
 .search {
