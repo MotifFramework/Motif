@@ -52,7 +52,7 @@ CREATE TABLE `LB_ContentCache` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentCache` (`fullURL`, `publishedData`) VALUES
-('/index', '{"template":"Reef_DefaultHome","data":[{"entityKey":"content","data":"<p>The home page content.<\\/p>"},{"entityKey":"metaTitle","data":"Home Page"},{"entityKey":"metaDescription","data":"This is the home page for the site"},{"entityKey":"tweetText","data":""},{"entityKey":"openGraphTitle","data":""},{"entityKey":"openGraphDescription","data":""},{"entityKey":"openGraphImage","data":""}]}');
+('/index', '{"template":"Home","data":[{"entityKey":"content","data":"<p>The home page content.<\\/p>"},{"entityKey":"metaTitle","data":"Home Page"},{"entityKey":"metaDescription","data":"This is the home page for the site"},{"entityKey":"tweetText","data":""},{"entityKey":"openGraphTitle","data":""},{"entityKey":"openGraphDescription","data":""},{"entityKey":"openGraphImage","data":""}]}');
 
 CREATE TABLE `LB_ContentData_Float` (
   `versionId` int(11) NOT NULL,
