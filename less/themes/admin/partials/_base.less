@@ -79,15 +79,55 @@ body {
         }
     }
         .eyebrow-button {
-            padding: @half-vertical @half-side;
             border-left: 1px solid @black-2;
 
-            /* Other */
-            color: @grey;
+            /* Positioning */
+            position: relative;
+            z-index: 95;
 
-            &:before,
-            .data-icon {
-                color: @black-3;
+
+
+            .dropdown-zone:hover &,
+            .dropdown-zone:focus &,
+            &.is-current {
+                background: @light-grey;
+
+                &:before,
+                &:after {
+                    .pseudo-clear();
+
+                    margin-left: -10px;
+                    border: solid transparent;
+                    border-width: 7px 10px;
+                    position: absolute;
+                    left: 50%;
+                }
+
+                &:before {
+                    border-top-color: @black-6;
+                    bottom: -14px;
+                }
+
+                &:after {
+                    border-top-color: @light-grey;
+                    bottom: -13px;
+                }
+                a {
+                    color: @light-black;
+                }
+            }
+
+            a {
+                display: block;
+                padding: @half-vertical @full-side;
+
+                /* Other */
+                color: @grey;
+                
+                &:before,
+                .data-icon {
+                    color: @black-3;
+                }
             }
         }
             .notification-date {
@@ -197,6 +237,9 @@ body {
 .content-page {
     // padding: @full-vertical @full-side;
 }
+    .content-page-inner {
+        padding: 0 4% @double-vertical;
+    }
 
 /**
  * Edit View

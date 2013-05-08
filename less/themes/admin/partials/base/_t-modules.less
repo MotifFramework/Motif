@@ -430,6 +430,7 @@ Styleguide 7.4
     &:hover {
         .dropdown-reveal {
             height: auto;
+            border: 1px solid @black-6;
         }
     }
 }
@@ -437,20 +438,27 @@ Styleguide 7.4
 
         /* Variables */
         @5px: 1em * (5 / @base-text-size);
+        @15px: 1em * (15 / @base-text-size);
+        @155px: 1em * (155 / @base-text-size);
+        @shadow: fadeout(@black, 90%);
 
         /* Mixins */
         .border-radius-bottom(@5px);
+        .box-shadow-raw(0 5px 10px -5px @shadow);
 
         /* Display & Box Model */
         overflow: hidden;
+        width: @155px;
         height: 0;
         margin-top: 0;
-        border: 1px solid @black-6;
 
         /* Positioning */
         position: absolute;
         top: 100%;
         right: 0;
+        z-index: 90;
+
+        /* Other */
 
         > :first-child {
             margin-top: 0;
@@ -480,6 +488,22 @@ Styleguide 7.4
             display: block;
             padding: @10px @15px;
             border-bottom: 1px solid @black-6;
+
+            /* Other */
+            color: @dark-grey;
+
+            &:hover,
+            &:focus {
+                background: @dark-white;
+            }
+        }
+        a.list-item {
+            color: @dark-grey;
+
+            // &:hover,
+            // &:focus {
+            //     color: @light-black;
+            // }
         }
     }
     .dropdown-list-button {
@@ -562,4 +586,85 @@ Styleguide 4.2
                 margin-right: @quarter-side;
             }
         }
+}
+
+.content-tree {
+
+    /* Variables */
+    @base-text-size: @petite-text-size;
+    @5px: 1em * (5 / @base-text-size);
+    @10px: 1em * (10 / @base-text-size);
+    @15px: 1em * (15 / @base-text-size);
+    @17px: 1em * (17 / @base-text-size);
+    @20px: 1em * (20 / @base-text-size);
+    @25px: 1em * (25 / @base-text-size);
+    @30px: 1em * (30 / @base-text-size);
+
+    .js & {
+        .content-tree {
+            display: none;
+
+            &.is-current {
+                display: block;
+            }
+        }
+        .directory {
+            cursor: pointer;
+        }
+    }
+    .content-tree {
+        margin: 0;
+
+        li {
+            position: relative;
+            padding-left: @30px;
+            margin-left: @5px;
+
+            &:after {
+                content: "";
+                width: @25px;
+                height: 1px;
+                display: block;
+                background: @grey;
+                position: absolute;
+                left: 0;
+                top: @20px;
+            }
+        }
+        .directory {
+            padding-left: @30px;
+            border-left: 1px solid @grey;
+        }
+        .create-new-section {
+            &:before {
+                content: "";
+                width: 1px;
+                height: 100%;
+                display: block;
+                background: @grey;
+                position: absolute;
+                left: 0;
+                bottom: @15px;
+            }
+            &:after {
+                top: auto;
+                bottom: @15px;
+            }
+        }
+    }
+    li {
+        padding-top: @10px;
+    }
+    .directory {
+        padding-top: @15px;
+        
+        &.is-current {
+            > .directory-name {
+                color: @red;
+            }
+        }
+    }
+    .button {
+        margin-top: 0;
+    }
 }

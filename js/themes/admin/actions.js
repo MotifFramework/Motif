@@ -11,52 +11,160 @@
 
     "use strict";
 
-    Admin.dust = {
-        compileTemplate: function ( template ) {
-            return dust.compile( template.output, template.name );
-        },
-        loadTemplate: function ( template ) {
-            dust.loadSource( template );
-        },
-        build: function ( template, data ) {
-            var result;
+    /**
+     * Utilities
+     * -----------------------------------------------------------------------------
+     * 
+     * General utilities that other functions might need to use
+     * 
+     * @todo 
+     */
 
-            dust.render( template, data, function dustRender( errors, output ) {
-                result = output;
+    Admin.utils = {
+
+        /**
+         * Init Plugin
+         * For maximum convenience for the most basic plugin use cases, 
+         * this takes a simple config and starts the `loadPlugin` process 
+         * for you (if it knows that elements exist on the page)
+         *
+         * @param {Object} config Includes targetElems, pluginName, pluginSource, 
+         *   pluginOptions (Object)
+         */
+
+        initPlugin: function ( config ) {
+
+                // Basic plugin config
+            var pluginConfig = {
+                    name: config.pluginName,
+                    url: config.pluginSource,
+                    options: config.pluginOptions
+                };
+
+            // If the target elements exist...
+            if ( config.targetElems.length ) {
+
+                // ...start loading the plugin
+                Admin.utils.loadPlugin( config.targetElems, pluginConfig );
+            }
+        },
+
+        /**
+         * Load Plugin
+         * If you know you want to bind a plugin right after you get a 
+         * script, this automates it for you by combinding `getScript` 
+         * and `bindPlugin`
+         */
+
+        loadPlugin: function ( target, config ) {
+
+            // Call `getScript` util, passing on plugin name, url, and creating a callback...
+            Admin.utils.getScript( config.name, config.url, function loadPluginCallback() {
+
+                // ...where we call the `bindPlugin` util, passing on the target elem, 
+                // plugin name, and options
+                Admin.utils.bindPlugin( target, config.name, config.options );
             });
-
-            return result;
         },
-        init: function ( template, data ) {
-            Admin.dust.loadTemplate( Admin.dust.compileTemplate( template ) );
 
-            return Admin.dust.build( template.name, data );
+        /**
+         * Get Script
+         * A slightly altered version of jQuery's `$.getScript` that first 
+         * checks if the plugin has been loaded
+         * 
+         * @todo Don't like that we're repeating the `typeof` conditional
+         */
+
+        getScript: function ( name, url, callback ) {
+
+            // If the plugin has not been registered...
+            if ( !$.fn[name] ) {
+
+                // Use jQuery's `$.getScript`
+                $.getScript( url, function getScriptCallback () {
+
+                    // If a callback function was provided...
+                    if ( typeof callback === "function" ) {
+
+                        // ...run it
+                        callback();
+                    }
+                });
+
+            // If the plugin *has* been registered 
+            // and a callback has been provided...
+            } else if ( typeof callback === "function" ) {
+
+                // ...run it
+                callback();
+
+            // Otherwise...
+            } else {
+
+                // ...return true
+                return true;
+            }
+        },
+
+        /**
+         * Bind Plugin
+         * Right now, a crazy simple way of initializing a plugin
+         * and passing on options
+         */
+
+        bindPlugin: function ( target, plugin, options ) {
+
+            // Ex: $("#elem").pluginName({ option: value });
+            target[plugin]( options );
         }
     };
 
-    Admin.templates = {
-        testTemplate: {
-            name: "test",
-            output: [
-                "<h1>{name}</h1>",
-                "<p>What a dope.</p>"
-            ].join("\n")
-        },
-        secondaryNav: {
-            name: "secondaryNav",
-            output: [
-                "<ul class='unstyled vertical-nav {ulClass}'>",
-                    "{#navigation}",
-                        "<li>",
-                            "<a href='{url}'>",
-                                "{name}",
-                            "</a>",
-                        "</li>",
-                    "{/navigation}",
-                "</ul>"
-            ].join("\n")
-        }
-    };
+    // Admin.dust = {
+    //     compileTemplate: function ( template ) {
+    //         return dust.compile( template.output, template.name );
+    //     },
+    //     loadTemplate: function ( template ) {
+    //         dust.loadSource( template );
+    //     },
+    //     build: function ( template, data ) {
+    //         var result;
+
+    //         dust.render( template, data, function dustRender( errors, output ) {
+    //             result = output;
+    //         });
+
+    //         return result;
+    //     },
+    //     init: function ( template, data ) {
+    //         Admin.dust.loadTemplate( Admin.dust.compileTemplate( template ) );
+
+    //         return Admin.dust.build( template.name, data );
+    //     }
+    // };
+
+    // Admin.templates = {
+    //     testTemplate: {
+    //         name: "test",
+    //         output: [
+    //             "<h1>{name}</h1>",
+    //             "<p>What a dope.</p>"
+    //         ].join("\n")
+    //     },
+    //     secondaryNav: {
+    //         name: "secondaryNav",
+    //         output: [
+    //             "<ul class='unstyled vertical-nav {ulClass}'>",
+    //                 "{#navigation}",
+    //                     "<li>",
+    //                         "<a href='{url}'>",
+    //                             "{name}",
+    //                         "</a>",
+    //                     "</li>",
+    //                 "{/navigation}",
+    //             "</ul>"
+    //         ].join("\n")
+    //     }
+    // };
 
     /**
      * AJAX Form Submission & Response
@@ -317,7 +425,7 @@
             navWrapper: $("#vertical-nav-wrapper"),
             hideClass: "off-left",
             revealClass: "off-right",
-            template: Admin.templates.secondaryNav,
+            // template: Admin.templates.secondaryNav,
             url: "/slice/admin/sample-nav.php"
         },
 
@@ -371,7 +479,7 @@
                 items;
 
             data.ulClass = config.revealClass;
-            items = Admin.dust.init( config.template, data );
+            // items = Admin.dust.init( config.template, data );
 
             // Call method to place new nav
             context.placeNav( items, config );
@@ -398,6 +506,174 @@
     };
 
     /**
+     * Off Canvas
+     * -----------------------------------------------------------------------------
+     * 
+     * Trigger the off-canvas sidebar
+     * 
+     * @todo 
+     */
+
+    Admin.offCanvas = {
+
+        /**
+         * Config
+         */
+
+        config: {
+            targetElems: $(".canvas-trigger"),
+            pluginName: "lb_reveal",
+            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
+            pluginOptions: {
+                "exclusive": "yes",
+                "activeClass": "is-active",
+                "visitedClass": "was-active"
+            }
+        },
+
+        /**
+         * Init
+         */
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} );
+
+            // Init the Plugin
+            Admin.utils.initPlugin( settings );
+        }
+    };
+
+    /**
+     * Data Icons
+     * -----------------------------------------------------------------------------
+     * 
+     * In IE8 or browsers that don't support generated content, fake the [data-icon] 
+     * pseudo element by placing `<i>` elements inline.
+     * 
+     * @todo The `.each` in `init` might need to be its own method?
+     */
+
+    Admin.dataIcons = {
+        config: {
+            ie8: $("html.lte8"),
+            dataIcon: $("[data-icon]")
+        },
+
+        /**
+         * Init
+         * Checks if it needs to generate icons, loops through each instance
+         * @param  {Object} config 
+         */
+
+        init: function ( config ) {
+            var context = Admin.dataIcons,
+                settings = $.extend( true, {}, context.config, config || {} );
+
+            // Check if Modernizr can't find generated content, or if the browser 
+            // is IE8, which is known to have issues with [data-icon] via CSS
+            if ( (!Modernizr.generatedcontent || context.config.ie8.length) && context.config.dataIcon.length ) {
+
+                // Loop through each [data-icon] instance on the page...
+                context.config.dataIcon.each( function createIcons() {
+                    var elem = $(this),
+
+                        // Build a new icon
+                        newIcon = context.buildIcon.call( elem, settings );
+
+                    // Place the new icon
+                    context.placeIcon.call( elem, newIcon, settings );
+                });
+            }
+        },
+
+        /**
+         * Build Icons
+         * Build the icon string with `<i>` and data attributes
+         * @param  {Object} config
+         * @return {String}
+         */
+
+        buildIcon: function ( config ) {
+            var elem = $(this),
+                icon = "";
+
+            icon += "<i class='data-icon ";
+            icon += elem.attr("data-icon-family");
+            icon += "' aria-hidden='true'>";
+            icon += elem.attr("data-icon");
+            icon += "</i>";
+
+            return icon;
+        },
+
+        /**
+         * Place Icon
+         * Places the icon to its parent element based on data attribute position
+         * @param  {String} icon   
+         * @param  {Object} config 
+         */
+
+        placeIcon: function ( icon, config ) {
+            var elem = $(this),
+                newIcon = $(icon),
+                iconPosition = elem.attr("data-icon-position");
+
+            // If it's "before" or "solo"...
+            if ( iconPosition === "before" || iconPosition === "solo" ) {
+
+                // ...prepend it
+                newIcon.prependTo( elem );
+
+            // If it's "after"...
+            } else if ( iconPosition === "after" ) {
+
+                // ...append it
+                newIcon.appendTo( elem );
+            }
+        }
+    };
+
+    /**
+     * Off Canvas
+     * -----------------------------------------------------------------------------
+     * 
+     * Trigger the off-canvas sidebar
+     * 
+     * @todo 
+     */
+
+    Admin.contentTree = {
+
+        /**
+         * Config
+         */
+
+        config: {
+            targetElems: $(".content-tree").find(".parent"),
+            pluginName: "lb_reveal",
+            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
+            pluginOptions: {
+                "exclusive": "yes"
+            }
+        },
+
+        /**
+         * Init
+         */
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} );
+
+            // Init the Plugin
+            Admin.utils.initPlugin( settings );
+        }
+    };
+
+    /**
      * Admin Actions Init
      * -----------------------------------------------------------------------------
      * 
@@ -407,7 +683,9 @@
      */
 
     Admin.init = function () {
-        console.log( Admin.dust.init( Admin.templates.testTemplate, { name: "Chad" } ) );
+        Admin.offCanvas.init();
+        Admin.dataIcons.init();
+        Admin.contentTree.init();
 
 
         $("form").on( "submit", function ( event ) {
@@ -416,17 +694,17 @@
             });
             event.preventDefault();
         });
-        $("#vertical-nav-wrapper").on( "click", "a", function ( event ) {
-            Admin.verticalNav.init.call( $(this) );
-            event.preventDefault();
-        });
-        $("#content-nav-back").on( "click", function ( event ) {
-            Admin.verticalNav.init.call( $(this), {
-                hideClass: "off-right",
-                revealClass: "off-left"
-            });
-            event.preventDefault();
-        });
+        // $("#vertical-nav-wrapper").on( "click", "a", function ( event ) {
+        //     Admin.verticalNav.init.call( $(this) );
+        //     event.preventDefault();
+        // });
+        // $("#content-nav-back").on( "click", function ( event ) {
+        //     Admin.verticalNav.init.call( $(this), {
+        //         hideClass: "off-right",
+        //         revealClass: "off-left"
+        //     });
+        //     event.preventDefault();
+        // });
     };
 
     Admin.init();
