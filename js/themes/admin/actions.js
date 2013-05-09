@@ -429,6 +429,10 @@
             // template: Admin.templates.secondaryNav,
             url: "/slice/admin/sample-nav.php",
             navTypeConfig: {
+                unread: "unread notification",
+                read: "notification",
+                data: "data",
+                user: "user",
                 published: "published status",
                 unpublished: "unpublished status",
                 pending: "pending status",
@@ -560,8 +564,13 @@
 
         showNav: function ( nav, config ) {
 
-            // Show it, yo
-            nav.removeClass( config.revealClass );
+            // Browser glitch where we have to wait a split second
+            // for animation to work
+            requestTimeout(function waitToShowNav() {
+
+                // Show it, yo
+                nav.removeClass( config.revealClass );
+            }, 1 );
         }
     };
 
@@ -586,6 +595,9 @@
             // Extend the settings, make sure we've got the latest
             var settings = $.extend( true, {}, this.config, config || {} ),
                 context = Admin.secondaryNavigation;
+
+            // REMOVE
+            Admin.verticalNav.init( settings );
 
             context.bindClick( settings );
         },
@@ -636,6 +648,48 @@
                 Admin.verticalNav.init.call( $(this), config.navConfig );
 
                 event.preventDefault();
+            });
+        }
+    };
+
+    /**
+     * Admin Nav
+     * -----------------------------------------------------------------------------
+     * 
+     * [Description]
+     * 
+     * @todo 
+     */
+
+    Admin.contentSearch = {
+
+        config: {
+            searchForm: $("#content-search")
+        },
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} ),
+                context = Admin.contentSearch;
+
+            context.bindSubmit( settings );
+        },
+
+        bindSubmit: function ( config ) {
+            var context = Admin.contentSearch;
+
+            config.searchForm.on("submit", function onSearchSubmit() {
+                context.onSubmit( config );
+                return false;
+            });
+        },
+
+        onSubmit: function ( config ) {
+            var searchURL = config.searchForm.attr("action");
+
+            Admin.verticalNav.init({
+                url: searchURL
             });
         }
     };
@@ -823,6 +877,7 @@
         Admin.secondaryNavigation.init();
         Admin.secondaryNavBack.init();
         Admin.contentTree.init();
+        Admin.contentSearch.init();
 
         $("form").on( "submit", function ( event ) {
             Admin.ajaxForm.init.call( $(this), {

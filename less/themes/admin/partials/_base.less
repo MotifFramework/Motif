@@ -196,14 +196,35 @@ body {
         @base-text-size: @petite-text-size;
         @10px: 1em * (10 / @base-text-size);
         @15px: 1em * (15 / @base-text-size);
+        @20px: 1em * (20 / @base-text-size);
+        @35px: 1em * (35 / @base-text-size);
 
         /* Display & Box Model */
         display: block;
-        padding: @15px @10px;
+        padding: @15px @15px @15px @35px;
+
+        /* Positioning */
+        position: relative;
 
         /* Other */
         color: @light-black;
         text-decoration: none;
+
+        &:before,
+        > .data-icon {
+
+            /* Position */
+            position: absolute;
+            top: 16px;
+            left: 15px;
+        }
+        
+        &:hover,
+        &:focus,
+        &.is-current {
+            color: @light-black;
+            background: @dark-white;
+        }
     }
     .content-search {
 

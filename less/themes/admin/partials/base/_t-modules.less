@@ -115,6 +115,7 @@ Styleguide 8.1
     @10px: 1em * (10 / @base-text-size);
     @15px: 1em * (15 / @base-text-size);
     @20px: 1em * (20 / @base-text-size);
+    @35px: 1em * (35 / @base-text-size);
 
     -webkit-transform: translate3d(0%, 0, 0);
     -moz-transform: translate3d(0%, 0, 0);
@@ -131,9 +132,12 @@ Styleguide 8.1
     a {
 
         /* Display & Box Model */
-        padding: @20px @15px @15px;
         display: block;
+        padding: @20px @15px @15px @35px;
         border-bottom: 1px solid @black-6;
+
+        /* Positioning */
+        position: relative;
 
         /* Other */
         color: @dark-grey;
@@ -164,19 +168,26 @@ Styleguide 8.1
     }
     .has-children {
         &:after {
-            content: "";
+
+            /* Mixins */
+            .inline-block-fallback();
+
+            /* Display & Box Model */
             width: 0;
             height: 0;
             margin-left: @5px;
             border: solid transparent;
             border-width: 5px 4px;
             border-left-color: @grey;
-            .inline-block-fallback();
+
+            /* Other */
+            content: "";
             vertical-align: middle;
         }
     }
 }
 
+.vertical-nav .notification,
 .status {
     &:before {
 
@@ -184,23 +195,40 @@ Styleguide 8.1
         @base-text-size: @petite-text-size;
         @5px: 1em * (5 / @base-text-size);
         @10px: 1em * (10 / @base-text-size);
-        @inner-shadow: fadeout(@white, 65%);
-        @outer-shadow: fadeout(@black, 70%);
+        @15px: 1em * (15 / @base-text-size);
+        @20px: 1em * (20 / @base-text-size);
 
         /* Mixins */
         .inline-block-fallback();
         .border-radius(1000em);
-        .box-shadow-in-out(0 3px 1px @inner-shadow, 0 1px 1px @outer-shadow);
 
         /* Display & Box Model */
         width: @10px;
         height: @10px;
-        margin-right: @5px;
-        border: 1px solid @dark-grey;
+
+        /* Positioning */
+        position: absolute;
+        left: @15px;
+        top: @20px;
 
         /* Other */
         content: "";
-        background: @grey;
+        background: @black-6;
+    }
+}
+.status {
+    &:before {
+
+        /* Variables */
+        @base-text-size: @petite-text-size;
+        @inner-shadow: fadeout(@white, 65%);
+        @outer-shadow: fadeout(@black, 70%);
+
+        /* Mixins */
+        .box-shadow-in-out(0 3px 1px @inner-shadow, 0 1px 1px @outer-shadow);
+
+        /* Display & Box Model */
+        border: 1px solid @dark-grey;
     }
 }
 .published {
@@ -231,6 +259,44 @@ Styleguide 8.1
 
         /* Other */
         border-color: darken(@red, 5%);
+    }
+}
+.vertical-nav {
+    .desc {
+        color: @grey;
+    }
+    .data,
+    .user {
+        &:before {
+
+            /* Mixins */
+            .data-icon();
+
+            /* Position */
+            position: absolute;
+            top: 20px;
+            left: 15px;
+        }
+    }
+    .data {
+        &:before {
+
+            /* Other */
+            font-size: 1em;
+            content: "\e7a0";
+        }
+    }
+    .user {
+        &:before {
+            content: "\1f464";
+        }
+    }
+    .notification {
+        &.unread {
+            &:before {
+                background: @yellow;
+            }
+        }
     }
 }
 
