@@ -423,10 +423,17 @@
 
         config: {
             navWrapper: $("#vertical-nav-wrapper"),
+            backButton: $("#content-nav-back"),
             hideClass: "off-left",
             revealClass: "off-right",
             // template: Admin.templates.secondaryNav,
-            url: "/slice/admin/sample-nav.php"
+            url: "/slice/admin/sample-nav.php",
+            navTypeConfig: {
+                published: "published status",
+                unpublished: "unpublished status",
+                pending: "pending status",
+                folder: "has-children"
+            }
         },
 
          /**
@@ -455,7 +462,7 @@
             var context = Admin.verticalNav;
 
             // CRUDE: Wait for CSS Animation
-            setTimeout( function () {
+            setTimeout(function () {
 
                 // Clear out the html
                 config.navWrapper.html("");
@@ -476,15 +483,68 @@
 
         buildNav: function ( data, config ) {
             var context = Admin.verticalNav,
-                items;
+                items = "",
+                button;
 
-            data.ulClass = config.revealClass;
+            // data.ulClass = config.revealClass;
             // items = Admin.dust.init( config.template, data );
+
+            items += "<ul class='unstyled vertical-nav petite-text mtn ";
+            items += config.revealClass;
+            items += "'>";
+
+            // Loop through each object, build new nav
+            $.each( data.nav, function navlistItems ( i, item ) {
+                items += "<li><a ";
+                items += "class='";
+                items += config.navTypeConfig[item.type];
+                items += "' ";
+                items += "href='";
+                items += item.url;
+                items += "'>";
+                items += item.label;
+                items += "</a></li>";
+            });
+
+            items += "</ul>";
 
             // Call method to place new nav
             context.placeNav( items, config );
 
+            if ( data.back ) {
+                button = context.buildBackButton( data.back, config );
+                context.placeBackButton( button, config );
+            } else {
+                context.removeBackButton( config );
+            }
+
             return items;
+        },
+
+        buildBackButton: function ( data, config ) {
+            var button = "";
+
+            button += "<a class='content-nav-back petite-text'";
+            button += "href='" + data.url + "'";
+            button += "data-icon='&#x2B05;'";
+            button += "data-icon-position='before'>";
+            button += "<b class='is-hidden'>Return to</b>";
+            button += data.label;
+            button += "<b class='is-hidden'>Menu</b>";
+            button += "</a>";
+
+            return button;
+        },
+
+        placeBackButton: function ( button, config ) {
+            var context = Admin.verticalNav;
+
+            // Append new nav in wrapper
+            config.backButton.html( button );
+        },
+
+        removeBackButton: function ( config ) {
+            config.backButton.html("");
         },
 
         placeNav: function ( nav, config ) {
@@ -502,6 +562,81 @@
 
             // Show it, yo
             nav.removeClass( config.revealClass );
+        }
+    };
+
+    /**
+     * Admin Nav
+     * -----------------------------------------------------------------------------
+     * 
+     * [Description]
+     * 
+     * @todo 
+     */
+
+    Admin.secondaryNavigation = {
+
+        config: {
+            verticalNavWrapper: $("#vertical-nav-wrapper"),
+            navConfig: {}
+        },
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} ),
+                context = Admin.secondaryNavigation;
+
+            context.bindClick( settings );
+        },
+
+        bindClick: function ( config ) {
+            config.verticalNavWrapper.on( "click", ".has-children", function ( event ) {
+                config.navConfig.url = $(this).attr("href");
+
+                Admin.verticalNav.init.call( $(this), config.navConfig );
+
+                event.preventDefault();
+            });
+        }
+    };
+
+    /**
+     * Admin Nav
+     * -----------------------------------------------------------------------------
+     * 
+     * [Description]
+     * 
+     * @todo 
+     */
+
+    Admin.secondaryNavBack = {
+
+        config: {
+            backButton: $("#content-nav-back"),
+            navConfig: {
+                hideClass: "off-right",
+                revealClass: "off-left"
+            }
+        },
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} ),
+                context = Admin.secondaryNavBack;
+
+            context.bindClick( settings );
+        },
+
+        bindClick: function ( config ) {
+            config.backButton.on( "click", "a", function ( event ) {
+                config.navConfig.url = $(this).attr("href");
+
+                Admin.verticalNav.init.call( $(this), config.navConfig );
+
+                event.preventDefault();
+            });
         }
     };
 
@@ -685,8 +820,9 @@
     Admin.init = function () {
         Admin.offCanvas.init();
         Admin.dataIcons.init();
+        Admin.secondaryNavigation.init();
+        Admin.secondaryNavBack.init();
         Admin.contentTree.init();
-
 
         $("form").on( "submit", function ( event ) {
             Admin.ajaxForm.init.call( $(this), {
@@ -694,17 +830,6 @@
             });
             event.preventDefault();
         });
-        // $("#vertical-nav-wrapper").on( "click", "a", function ( event ) {
-        //     Admin.verticalNav.init.call( $(this) );
-        //     event.preventDefault();
-        // });
-        // $("#content-nav-back").on( "click", function ( event ) {
-        //     Admin.verticalNav.init.call( $(this), {
-        //         hideClass: "off-right",
-        //         revealClass: "off-left"
-        //     });
-        //     event.preventDefault();
-        // });
     };
 
     Admin.init();
