@@ -60,6 +60,8 @@
             "input_files"   :   [
                 "themes/admin/modernizr.js",
                 "helpers/viewport.js",
+                "helpers/requestAnimFrame.js",
+                "helpers/requestTimeout.js",
                 "helpers/loadScript.js"
             ],
             "output_dir"    :   "c/js/admin",
