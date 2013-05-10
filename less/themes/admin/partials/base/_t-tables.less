@@ -51,18 +51,19 @@ Styleguide 6.1
 table {
     width: 100%;
     max-width: 100%;
+    text-align: left;
 
     th,
     td {
-        padding: @half-vertical @half-side @half-vertical-bordered;
+        padding: @half-vertical @full-side @half-vertical 0;
     }
     th {
-        padding-top: @half-vertical-bordered;
+        // padding-top: @half-vertical-bordered;
         border-bottom: @border-width solid @table-border-color;
     }
     th + th,
     td + td {
-        border-left: @border-width solid @table-border-color;
+        // border-left: @border-width solid @table-border-color;
     }
     tr + tr td {
         border-top: @border-width solid @table-border-color;

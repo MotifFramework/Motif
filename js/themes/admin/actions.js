@@ -575,6 +575,300 @@
     };
 
     /**
+     * Table Builder
+     */
+
+    Admin.buildTables = {
+        config: {
+            targetElems: $(".ajax-table"),
+            headClass: "table-head",
+            bodyClass: "table-body",
+            url: "/slice/admin/sample-table.php"
+        },
+
+        init: function ( config ) {
+            var context = Admin.buildTables,
+                settings = $.extend( true, {}, context.config, config || {} );
+
+
+            // Call the nav hiding method
+            context.getTable( settings );
+        },
+
+        getTable: function ( config ) {
+            var context = Admin.buildTables;
+
+            // Via AJAX, get JSON string of new nav
+            $.getJSON( config.url, function getNavJSON( data ) {
+                context.buildTable( data, config );
+            });
+        },
+
+        buildTable: function ( data, config ) {
+            var context = Admin.buildTables,
+                oldTotal = config.targetElems.data("totalResults"),
+                table = "",
+                tableHead,
+                tableBody;
+
+            table += "<table>";
+            table += context.buildHead( data, config );
+            table += context.buildBody( data, config );
+            table += "</table>";
+
+            if ( oldTotal !== data.pages ) {
+                Admin.buildTablePagination.init.call( config.targetElems, data.pages );
+                config.targetElems.data( "totalResults", data.pages );
+            }
+
+            // Call method to place new nav
+            context.placeTable( table, config );
+        },
+
+        buildHead: function ( data, config ) {
+            var context = Admin.buildTables,
+                headers = "";
+
+            headers += "<thead class='" + config.headClass + "'>";
+
+            // Loop through each object, build new nav
+            $.each( data.head, function tableRows ( i, column ) {
+
+                headers += "<th>";
+                headers += "<a href='" + column.url + "'>";
+                headers += column.label;
+                headers += "</a>";
+                headers += "</th>";
+
+            });
+
+            headers += "</thead>";
+
+            return headers;
+        },
+
+        buildBody: function ( data, config ) {
+            var context = Admin.buildTables,
+                rows = "";
+
+            rows += "<tbody class='" + config.bodyClass + "'>";
+
+            // Loop through each object, build new nav
+            $.each( data.rows, function tableRows ( i, row ) {
+                rows += "<tr>";
+
+                $.each( row, function tableCells ( i, cell ) {
+                    rows += "<td>";
+                    rows += cell;
+                    rows += "</td>";
+                });
+
+                rows += "</tr>";
+            });
+
+            rows += "</tbody>";
+
+            return rows;
+        },
+
+        placeTable: function ( rows, config ) {
+            var table = config.targetElems.find("table");
+
+            if ( !table.length ) {
+                table = $("<table></table>");
+
+                table.prependTo( config.targetElems );
+            }
+
+            table.html( rows );
+
+            Admin.bindTables.init({
+                targetElems: config.targetElems
+            });
+        }
+    };
+
+    Admin.buildTablePagination = {
+        config: {
+            paginationClass: "table-pagination",
+            currentClass: "is-current",
+            rowsPerPage: 2
+        },
+
+        // Private settings
+        settings: {
+            dataNamespace: "paginationTableSettings"
+        },
+
+        init: function ( total, config ) {
+            var context = Admin.buildTablePagination,
+                table = $(this),
+                newConfig = $.extend( true, {}, context.config, config || {} );
+
+            table.data( context.settings.dataNamespace, newConfig );
+
+            context.buildPages.call( table, total );
+        },
+
+        // calculatePages: function ( total ) {
+        //     var context = Admin.buildTablePagination,
+        //         table = $(this),
+        //         config = table.data( context.settings.dataNamespace ),
+        //         totalPages = Math.ceil( total / config.rowsPerPage );
+
+        //     context.buildPages.call( table, totalPages );
+        // },
+
+        buildPages: function ( totalPages ) {
+            var context = Admin.buildTablePagination,
+                table = $(this),
+                config = table.data( context.settings.dataNamespace ),
+                pagination = "<ol class='pagination nav'>",
+                i = 1;
+
+            for ( ; i <= totalPages; i += 1 ) {
+                pagination += "<li>";
+                pagination += "<a ";
+
+                if ( i === 1 ) {
+                    pagination += "class='" + config.currentClass + "' ";
+                }
+
+                pagination += "href='/slice/admin/sample-table.php?v=" + i + "'>";
+                pagination += i;
+                pagination += "</a>";
+                pagination += "</li>";
+            }
+
+            pagination += "</ol>";
+
+            context.placePagination.call( table, pagination );
+        },
+
+        placePagination: function ( pagination ) {
+            var context = Admin.buildTablePagination,
+                table = $(this),
+                config = table.data( context.settings.dataNamespace ),
+                paginationWrapper = table.find( "." + config.paginationClass );
+
+            if ( !paginationWrapper.length ) {
+                paginationWrapper = $("<div class='" + config.paginationClass + "'></div>");
+
+                paginationWrapper.appendTo( table );
+            }
+            
+            paginationWrapper.html( pagination );
+        }
+    };
+
+    /**
+     * Bind Tables
+     *
+     * Bind table headers and pagination for click events
+     * Build tables if necessary
+     */
+    
+    Admin.onLoadTables = {
+        config: {
+            targetElems: $("[data-table-load]")
+        },
+
+        init: function ( config ) {
+            if ( Admin.onLoadTables.config.targetElems.length ) {
+                Admin.onLoadTables.config.targetElems.each( function prepEachTable() {
+
+                    var table = $(this),
+                        loadTable = table.attr("data-table-load");
+
+                    Admin.buildTables.init({
+                        targetElems: table,
+                        url: loadTable
+                    });
+                });
+            }
+        }
+    };
+
+    Admin.bindTables = {
+
+        config: {
+            targetElems: $(".ajax-table"),
+            headClass: "table-head",
+            bodyClass: "table-body",
+            paginationClass: "table-pagination"
+        },
+
+        init: function ( config ) {
+            var context = Admin.bindTables,
+                settings = $.extend( true, {}, context.config, config || {} );
+
+            // If the target elements exist...
+            if ( settings.targetElems.length ) {
+
+                // ...loop through them...
+                settings.targetElems.each( function prepEachTable() {
+                    var table = $(this);
+
+                    table.data( "bindTableSettings", settings );
+                    context.prepTables( table );
+                });
+            }
+        },
+
+        prepTables: function ( table ) {
+            var context = Admin.bindTables;
+
+            context.bindHeaders( table );
+            context.bindPagination( table );
+        },
+
+        bindHeaders: function ( table ) {
+            var settings = table.data("bindTableSettings"),
+                tableHead = table.find( "." + settings.headClass );
+
+            tableHead.on( "click", "a", function ( event ) {
+                Admin.buildTables.init({
+                    targetElems: table,
+                    url: $(this).attr("href")
+                });
+                event.preventDefault();
+            });
+        },
+
+        bindPagination: function ( table ) {
+            var settings = table.data("bindTableSettings"),
+                tablePagination = table.find( "." + settings.paginationClass ),
+                paginationSettings = table.data("paginationTableSettings");
+
+            tablePagination.data("currentPage", "");
+
+            tablePagination.on( "click", "a", function tablePageClick( event ) {
+                var page = $(this),
+                    currentPage = tablePagination.data("currentPage");
+
+                if ( page.hasClass( paginationSettings.currentClass ) ) {
+                    return false;
+                }
+
+                if ( !currentPage ) {
+                    currentPage = tablePagination.find( "." + paginationSettings.currentClass );
+                }
+
+                currentPage.removeClass( paginationSettings.currentClass );
+                page.addClass( paginationSettings.currentClass );
+                tablePagination.data( "currentPage", page );
+
+                Admin.buildTables.init({
+                    targetElems: table,
+                    url: page.attr("href")
+                });
+
+                event.preventDefault();
+            });
+        }
+    };
+
+    /**
      * Admin Nav
      * -----------------------------------------------------------------------------
      * 
@@ -878,6 +1172,7 @@
         Admin.secondaryNavBack.init();
         Admin.contentTree.init();
         Admin.contentSearch.init();
+        Admin.onLoadTables.init();
 
         $("form").on( "submit", function ( event ) {
             Admin.ajaxForm.init.call( $(this), {
