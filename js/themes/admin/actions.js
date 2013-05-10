@@ -739,7 +739,8 @@
 
                 headers += "<th>";
                 headers += "<a class='" + column.sort + "' ";
-                headers += "data-table-sort='" + column.url + "'";
+                headers += "data-table-column='" + column.column + "' ";
+                headers += "data-table-direction='" + column.direction + "' ";
                 headers += "href='#'>";
                 headers += column.label;
                 headers += "</a>";
@@ -951,7 +952,8 @@
             // When a link in the header is clicked...
             tableHead.on( "click", "a", function ( event ) {
                 var sortURL = Admin.buildURL.init.call( table, {
-                    "sort": $(this).attr("data-table-sort")
+                    "column": $(this).attr("data-table-column"),
+                    "direction": $(this).attr("data-table-direction")
                 });
 
                 // ...rebuild the table based on its URL
@@ -991,7 +993,7 @@
             tablePagination.data("currentPage", "");
 
             // When a link in the pagination is clicked...
-            tablePagination.on( "click", "a", function tablePageClick( event ) {
+            tablePagination.on( "click", "a", function tablePageClick ( event ) {
                 var page = $(this),
 
                     // Retrieve the "currentPage" variable
@@ -1082,7 +1084,8 @@
 
             url += settings.url + "?";
             url += "page=" + settings.page + "&";
-            url += "sort=" + settings.sort + "&";
+            url += "column=" + settings.column + "&";
+            url += "direction=" + settings.direction + "&";
             url += "filter=" + settings.filter;
 
             console.log(url);
@@ -1093,7 +1096,8 @@
             var urlConfig = {
                 url: table.attr("data-table-url") || "",
                 page: table.attr("data-table-page") || "",
-                sort: table.attr("data-table-sort") || "",
+                column: table.attr("data-table-column") || "",
+                direction: table.attr("data-table-direction") || "",
                 filter: table.attr("data-table-filter") || ""
             };
             table.data( "urlConfig", urlConfig );
