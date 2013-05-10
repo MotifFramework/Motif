@@ -640,7 +640,9 @@
                 var table = $(this),
 
                     // Check for on-page-load attribute
-                    loadTable = table.attr("data-table-load");
+                    loadTable = table.attr("data-table-load"),
+                    tableURL = Admin.buildURL.init.call( table );
+
 
                 // If we are to load the table on load...
                 if ( loadTable ) {
@@ -648,7 +650,7 @@
                     // Call the table building method
                     Admin.buildTables.init({
                         targetElems: table,
-                        url: loadTable
+                        url: tableURL
                     });
 
                 // Otherwise...
@@ -737,7 +739,8 @@
 
                 headers += "<th>";
                 headers += "<a class='" + column.sort + "' ";
-                headers += "href='" + column.url + "'>";
+                headers += "data-table-sort='" + column.url + "'";
+                headers += "href='#'>";
                 headers += column.label;
                 headers += "</a>";
                 headers += "</th>";
@@ -851,7 +854,8 @@
                 }
 
                 // NEED TO MAKE THIS REAL CONTENT
-                pagination += "href='/slice/admin/sample-table.php?v=" + i + "'>";
+                pagination += "data-table-page='" + i + "' ";
+                pagination += "href='#'>";
                 pagination += i;
                 pagination += "</a>";
                 pagination += "</li>";
@@ -925,7 +929,12 @@
 
         // Prep Tables
         prepTables: function ( table ) {
-            var context = Admin.bindTables;
+            var context = Admin.bindTables,
+                urlConfig = table.data("urlConfig");
+
+            if ( !urlConfig ) {
+                urlConfig = Admin.buildURL.configURL( table );
+            }
 
             // Bind the headers
             context.bindHeaders( table );
@@ -941,6 +950,9 @@
 
             // When a link in the header is clicked...
             tableHead.on( "click", "a", function ( event ) {
+                var sortURL = Admin.buildURL.init.call( table, {
+                    "sort": $(this).attr("data-table-sort")
+                });
 
                 // ...rebuild the table based on its URL
                 // WOULD BE NICE TO HAVE A WAY TO CHECK 
@@ -948,7 +960,7 @@
                 // COLUMN
                 Admin.buildTables.init({
                     targetElems: table,
-                    url: $(this).attr("href")
+                    url: sortURL
                 });
 
                 // Prevent Default
@@ -978,12 +990,15 @@
             // Reset the "currentPage" variable
             tablePagination.data("currentPage", "");
 
-            // WHen a link in the pagination is clicked...
+            // When a link in the pagination is clicked...
             tablePagination.on( "click", "a", function tablePageClick( event ) {
                 var page = $(this),
 
                     // Retrieve the "currentPage" variable
-                    currentPage = tablePagination.data("currentPage");
+                    currentPage = tablePagination.data("currentPage"),
+                    pageURL = Admin.buildURL.init.call( table, {
+                        "page": page.attr("data-table-page")
+                    });
 
                 // Early return if this page is already the current one
                 if ( page.hasClass( paginationSettings.currentClass ) ) {
@@ -1009,7 +1024,7 @@
                 // Rebuild the tables based on this page change
                 Admin.buildTables.init({
                     targetElems: table,
-                    url: page.attr("href")
+                    url: pageURL
                 });
 
                 // Prevent default
@@ -1030,16 +1045,60 @@
             if ( context.config.filterGroups.length ) {
                 context.config.filterGroups.on( "click", context.config.filterTriggers, function triggerFilter ( event ) {
                     var trigger = $(this),
-                        triggerTarget = $( trigger.attr("href") );
+                        triggerTarget = $( trigger.attr("href") ),
+                        filterURL = Admin.buildURL.init.call( triggerTarget, {
+                            "filter": trigger.attr("data-table-filter")
+                        });
 
                     Admin.buildTables.init({
                         targetElems: triggerTarget,
-                        url: trigger.attr("data-table-filter")
+                        url: filterURL
                     });
 
                     event.preventDefault();
                 });
             }
+        }
+    };
+
+    Admin.buildURL = {
+        config: {},
+
+        init: function ( object ) {
+            var context = Admin.buildURL,
+                table = $(this),
+                settings = table.data("urlConfig"),
+                url = "";
+
+            if ( !settings ) {
+                settings = context.configURL( table );
+            }
+
+            if ( object ) {
+                settings = $.extend( true, {}, settings, object );
+                table.data( "urlConfig", settings );
+            }
+
+
+            url += settings.url + "?";
+            url += "page=" + settings.page + "&";
+            url += "sort=" + settings.sort + "&";
+            url += "filter=" + settings.filter;
+
+            console.log(url);
+            return url;
+        },
+
+        configURL: function ( table ) {
+            var urlConfig = {
+                url: table.attr("data-table-url") || "",
+                page: table.attr("data-table-page") || "",
+                sort: table.attr("data-table-sort") || "",
+                filter: table.attr("data-table-filter") || ""
+            };
+            table.data( "urlConfig", urlConfig );
+
+            return urlConfig;
         }
     };
 
