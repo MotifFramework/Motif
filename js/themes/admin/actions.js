@@ -887,6 +887,73 @@
 
             // Place the pagination into its wrapper
             paginationWrapper.html( pagination );
+            
+            context.bindPagination( table );
+        },
+
+        // Bind Pagination
+        bindPagination: function ( table ) {
+
+            var context = Admin.buildTablePagination,
+
+                // Retrieve Bind Table Settings
+                settings = table.data( context.settings.dataNamespace ),
+
+                // Find the pagination wrapper
+                tablePagination = table.find( "." + settings.paginationClass ),
+
+                // Access the pagination settings
+                paginationSettings = table.data("paginationTableSettings");
+
+            if ( !paginationSettings ) {
+                table.data( "paginationTableSettings", context.config );
+                paginationSettings = table.data("paginationTableSettings");
+            }
+
+            // Reset the "currentPage" variable
+            tablePagination.data("currentPage", "");
+
+            // When a link in the pagination is clicked...
+            tablePagination.on( "click", "a", function tablePageClick ( event ) {
+
+                var page = $(this),
+
+                    // Retrieve the "currentPage" variable
+                    currentPage = tablePagination.data("currentPage"),
+                    pageURL = Admin.buildURL.init.call( table, {
+                        "page": page.attr("data-table-page")
+                    });
+
+                // Early return if this page is already the current one
+                if ( page.hasClass( paginationSettings.currentClass ) ) {
+                    return false;
+                }
+
+                // If the "currentPage" setting does not yet exist...
+                if ( !currentPage ) {
+
+                    // ...just find the page with the current class
+                    currentPage = tablePagination.find( "." + paginationSettings.currentClass );
+                }
+
+                // Remove the current class from the current page
+                currentPage.removeClass( paginationSettings.currentClass );
+
+                // Add that class to the just-clicked page
+                page.addClass( paginationSettings.currentClass );
+
+                // Register this "currentPage" change in the data
+                tablePagination.data( "currentPage", page );
+
+                // Rebuild the tables based on this page change
+                Admin.buildTables.init({
+                    targetElems: table,
+                    url: pageURL
+                });
+
+                // Prevent default
+                event.preventDefault();
+            });
         }
     };
 
@@ -924,6 +991,9 @@
 
                     // Prep the tables
                     context.prepTables( table );
+
+                    // Bind the headers
+                    context.bindHeaders( table );
                 });
             }
         },
@@ -936,12 +1006,6 @@
             if ( !urlConfig ) {
                 urlConfig = Admin.buildURL.configURL( table );
             }
-
-            // Bind the headers
-            context.bindHeaders( table );
-
-            // Bind the pagination
-            context.bindPagination( table );
         },
 
         // Bind Headers
@@ -966,70 +1030,6 @@
                 });
 
                 // Prevent Default
-                event.preventDefault();
-            });
-        },
-
-        // Bind Pagination
-        bindPagination: function ( table ) {
-
-            var context = Admin.bindTables,
-
-                // Retrieve Bind Table Settings
-                settings = table.data("bindTableSettings"),
-
-                // Find the pagination wrapper
-                tablePagination = table.find( "." + settings.paginationClass ),
-
-                // Access the pagination settings
-                paginationSettings = table.data("paginationTableSettings");
-
-            if ( !paginationSettings ) {
-                table.data( "paginationTableSettings", context.config );
-                paginationSettings = table.data("paginationTableSettings");
-            }
-
-            // Reset the "currentPage" variable
-            tablePagination.data("currentPage", "");
-
-            // When a link in the pagination is clicked...
-            tablePagination.on( "click", "a", function tablePageClick ( event ) {
-                var page = $(this),
-
-                    // Retrieve the "currentPage" variable
-                    currentPage = tablePagination.data("currentPage"),
-                    pageURL = Admin.buildURL.init.call( table, {
-                        "page": page.attr("data-table-page")
-                    });
-
-                // Early return if this page is already the current one
-                if ( page.hasClass( paginationSettings.currentClass ) ) {
-                    return false;
-                }
-
-                // If the "currentPage" setting does not yet exist...
-                if ( !currentPage ) {
-
-                    // ...just find the page with the current class
-                    currentPage = tablePagination.find( "." + paginationSettings.currentClass );
-                }
-
-                // Remove the current class from the current page
-                currentPage.removeClass( paginationSettings.currentClass );
-
-                // Add that class to the just-clicked page
-                page.addClass( paginationSettings.currentClass );
-
-                // Register this "currentPage" change in the data
-                tablePagination.data( "currentPage", page );
-
-                // Rebuild the tables based on this page change
-                Admin.buildTables.init({
-                    targetElems: table,
-                    url: pageURL
-                });
-
-                // Prevent default
                 event.preventDefault();
             });
         }
