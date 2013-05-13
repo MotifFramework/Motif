@@ -243,7 +243,7 @@ body {
 
         /* Display & Box Model */
         margin: 0;
-        padding: @20px @15px @15px;
+        padding: @20px @15px @20px;
 
         /* Other */
         color: @green;
@@ -288,6 +288,7 @@ body {
 .quick-action-bar {
 
     /* Variables */
+    @10px: 1em * (10 / @base-text-size);
     @14px: 1em * (14 / @base-text-size);
     @shadow: fadeout(@black, 85%);
 
@@ -295,12 +296,16 @@ body {
     .box-shadow-raw(0 @10px @10px -@10px @shadow);
 
     /* Display & Box Model */
-    padding: @14px @full-side;
+    padding: @10px @full-side;
     border-bottom: 1px solid @black-6;
 
     /* Other */
     background: @light-grey;
 }
+    .quick-action-buttons {
+        .margin-leader(0.325, @base-text-size);
+        .margin-trailer(0.25, @base-text-size);
+    }
     .quick-action-other {
 
         /* Variables */
@@ -309,7 +314,8 @@ body {
 
         .nav {
             .primer-text();
-            .margin-leader(0.25, @base-text-size);
+            .margin-vertical(0.5, @base-text-size);
+            // .margin-trailer(0.25, @base-text-size);
 
             li {
                 margin: 0;

@@ -189,6 +189,8 @@ Styleguide 8.1
 
 .vertical-nav .notification,
 .status {
+    .inline-block-fallback();
+
     &:before {
 
         /* Variables */
@@ -205,11 +207,7 @@ Styleguide 8.1
         /* Display & Box Model */
         width: @10px;
         height: @10px;
-
-        /* Positioning */
-        position: absolute;
-        left: @15px;
-        top: @20px;
+        margin-right: @5px;
 
         /* Other */
         content: "";
@@ -262,6 +260,24 @@ Styleguide 8.1
     }
 }
 .vertical-nav {
+    .status {
+
+        /* Variables */
+        @base-text-size: @petite-text-size;
+        @5px: 1em * (5 / @base-text-size);
+        @10px: 1em * (10 / @base-text-size);
+        @15px: 1em * (15 / @base-text-size);
+        @20px: 1em * (20 / @base-text-size);
+        
+        &:before {
+
+            /* Positioning */
+            position: absolute;
+            left: @15px;
+            top: @20px;
+
+        }
+    }
     .desc {
         color: @grey;
     }
@@ -581,7 +597,7 @@ Styleguide 7.4
     li {
 
         /* Mixins */
-        .inline-block-fallback();
+        // .inline-block-fallback();
 
         /* Display & Box Model */
         margin-left: @quarter-side;
@@ -589,6 +605,9 @@ Styleguide 7.4
 
         &:first-child {
             margin-left: 0;
+        }
+        &.media-object {
+            .inline-block-fallback();
         }
     }
 }

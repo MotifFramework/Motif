@@ -911,7 +911,7 @@
             }
 
             // Reset the "currentPage" variable
-            tablePagination.data("currentPage", "");
+            tablePagination.data( "currentPage", "" );
 
             // When a link in the pagination is clicked...
             tablePagination.on( "click", "a", function tablePageClick ( event ) {
@@ -1088,7 +1088,6 @@
             url += "direction=" + settings.direction + "&";
             url += "filter=" + settings.filter;
 
-            console.log(url);
             return url;
         },
 
