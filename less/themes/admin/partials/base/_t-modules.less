@@ -779,6 +779,8 @@ Markup:
     <div class="panel">This panel was faded and expanded.</div>
 </div>
 
+@todo MORE ELEGANT SOLUTION??
+
 */
 
 .reveal-target {
@@ -786,42 +788,35 @@ Markup:
 
     &.is-current {
         .show-hidden();
+
+        /* Other */
         overflow: visible;
     }
 }
 
-.expand-target {
+.expand-target,
+.fade-in-target {
     max-height: 0;
     position: relative;
     overflow: hidden;
-
-    &.is-expanded {
+}
+    .expand-target.is-expanded,
+    .fade-in-target.is-showing {
         max-height: 999px;
     }
-    &.is-expanded,
-    &.is-visited {
+    .expand-target.is-expanded,
+    .fade-in-target.is-showing,
+    .expand-target.is-visited,
+    .fade-in-target.is-visited {
 
         // Mixins
         .transition(all, 0.65s, ease-in-out);
     }
-}
 
 .fade-in-target {
     .opacity(0);
 
-    max-height: 0;
-    position: relative;
-    overflow: hidden;
-
     &.is-showing {
         .opacity(1);
-
-        max-height: 999px;
-    }
-    &.is-showing,
-    &.is-visited {
-
-        // Mixins
-        .transition(all, 0.65s, ease-in-out);
     }
 }

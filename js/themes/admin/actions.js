@@ -737,7 +737,7 @@
             // Loop through each object, build new table columns
             $.each( data.head, function tableRows ( i, column ) {
 
-                headers += "<th>";
+                headers += "<th scope='col'>";
                 headers += "<a class='" + column.sort + "' ";
                 headers += "data-table-column='" + column.column + "' ";
                 headers += "data-table-direction='" + column.direction + "' ";

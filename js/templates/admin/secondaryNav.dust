@@ -1,9 +1,23 @@
-<ul class="unstyled vertical-nav {ulClass}">
-    {#navigation}
+<ul class="{ulClass} unstyled vertical-nav petite-text mtn">
+    {#nav}
         <li>
-            <a href="{url}">
-                {name}
+            <a class="
+             {@select key=type}
+                {@eq value='folder'}has-children{/eq}
+                {@eq value='published'}published status{/eq}
+                {@eq value='unpublished'}unpublished status{/eq}
+                {@eq value='pending'}pending status{/eq}
+                {@eq value='data'}data{/eq}
+                {@eq value='user'}user{/eq}
+                {@eq value='notification'}notification{/eq}
+             {/select}
+             " 
+             href="{url}">
+                {label}
+                {?description}
+                <small class="new-line">{description}</small>
+                {/description}
             </a>
         </li>
-    {/navigation}
+    {/nav}
 </ul>

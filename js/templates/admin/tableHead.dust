@@ -1,0 +1,14 @@
+<thead class="{headClass}">
+    <tr>
+        {#head}
+        <th scope="col">
+            <a class="{sort}"
+             data-table-column="{column}"
+             data-table-direction="{direction}"
+             href="#">
+                {label}
+            </a>
+        </th>
+        {/head}
+    </tr>
+</thead>
