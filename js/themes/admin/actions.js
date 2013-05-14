@@ -887,7 +887,7 @@
 
             // Place the pagination into its wrapper
             paginationWrapper.html( pagination );
-            
+
             context.bindPagination( table );
         },
 
@@ -1226,46 +1226,6 @@
     };
 
     /**
-     * Off Canvas
-     * -----------------------------------------------------------------------------
-     * 
-     * Trigger the off-canvas sidebar
-     * 
-     * @todo 
-     */
-
-    Admin.offCanvas = {
-
-        /**
-         * Config
-         */
-
-        config: {
-            targetElems: $(".canvas-trigger"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
-            pluginOptions: {
-                "exclusive": "yes",
-                "activeClass": "is-active",
-                "visitedClass": "was-active"
-            }
-        },
-
-        /**
-         * Init
-         */
-
-        init: function ( config ) {
-
-            // Extend the settings, make sure we've got the latest
-            var settings = $.extend( true, {}, this.config, config || {} );
-
-            // Init the Plugin
-            Admin.utils.initPlugin( settings );
-        }
-    };
-
-    /**
      * Data Icons
      * -----------------------------------------------------------------------------
      * 
@@ -1393,6 +1353,76 @@
         }
     };
 
+    Admin.lbReveal = {
+
+        /**
+         * Config
+         */
+
+        config: {
+            targetElems: $("[data-reveal]"),
+            pluginName: "lb_reveal",
+            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
+            pluginOptions: {}
+        },
+
+        /**
+         * Init
+         */
+
+        init: function ( config ) {
+
+            // Extend the settings, make sure we've got the latest
+            var settings = $.extend( true, {}, this.config, config || {} );
+
+            // Init the Plugin
+            Admin.utils.initPlugin( settings );
+        }
+    };
+
+    Admin.bindUI = {
+        init: function () {
+
+            Admin.lbReveal.init({
+                targetElems: $(".js-reveal"),
+                pluginOptions: {
+                    activeClass: "is-current"
+                }
+            });
+
+            Admin.lbReveal.init({
+                targetElems: $(".js-expand"),
+                pluginOptions: {
+                    activeClass: "is-expanded",
+                    exclusive: "yes"
+                }
+            });
+
+            Admin.lbReveal.init({
+                targetElems: $(".js-fade-in"),
+                pluginOptions: {
+                    activeClass: "is-showing"
+                }
+            });
+
+            Admin.lbReveal.init({
+                targetElems: $(".js-tabs"),
+                pluginOptions: {
+                    "exclusive": "radio"
+                }
+            });
+
+            Admin.lbReveal.init({
+                targetElems: $(".canvas-trigger"),
+                pluginOptions: {
+                    "exclusive": "yes",
+                    "activeClass": "is-active",
+                    "visitedClass": "was-active"
+                }
+            });
+        }
+    };
+
     /**
      * Admin Actions Init
      * -----------------------------------------------------------------------------
@@ -1403,7 +1433,6 @@
      */
 
     Admin.init = function () {
-        Admin.offCanvas.init();
         Admin.dataIcons.init();
         Admin.secondaryNavigation.init();
         Admin.secondaryNavBack.init();
@@ -1411,6 +1440,7 @@
         Admin.contentSearch.init();
         Admin.loadTables.init();
         Admin.filterTable.init();
+        Admin.bindUI.init();
 
         // $("form").on( "submit", function ( event ) {
         //     Admin.ajaxForm.init.call( $(this), {

@@ -369,11 +369,13 @@ Styleguide 5.5
 
     // Create
     margin: 0;
-    padding: @half-vertical;
+    padding: @full-vertical;
     background-color: @bubble-color;
     position: relative;
+    text-align: left;
 
     // Mixins
+    .normal-text();
     .border-radius(@default-radius);
     .box-shadow(0, 0, @shadow-radius, @shadow);
     .transition(opacity, 0.15s, linear);
@@ -451,6 +453,14 @@ Styleguide 5.5
             .input-alert-color(@success-color);
         }
     }
+    > :first-child {
+        margin-top: 0;
+    }
+    .bubble-close {
+        position: absolute;
+        top: @half-vertical;
+        right: @half-vertical;
+    }
 }
 
 .no-boxshadow {
@@ -462,4 +472,62 @@ Styleguide 5.5
         // Create
         border: @1px solid @grey;
     }
+}
+
+.bubble-wrapper {
+    position: relative;
+    .inline-block-fallback();
+
+    &.top-wisp {
+        &:after {
+
+            // Variables
+            @1px: 1em * (1 / @base-text-size);
+            @5px: 1em * (5 / @base-text-size);
+            @7px: 1em * (7 / @base-text-size);
+
+            @wisp-width: @5px;
+            @bubble-color: @white;
+            @shadow: fadeout(@black, 50%);
+            @shadow-radius: @7px;
+        
+            // Mixins
+            .pseudo-clear();
+            position: absolute;
+            border: @wisp-width solid transparent;
+            bottom: -10px;
+            left: 50%;
+            margin-left: -@wisp-width;
+            border-bottom-color: @bubble-color;
+        }
+    }
+}
+.js-bubble-reveal {
+    position: absolute;
+    top: 100%;
+    margin-top: 10px;
+    display: block;
+}
+.bubble-minimal {
+    width: 200px;
+
+    &.bubble-center {
+        margin-left: -100px;
+    }
+}
+.bubble-medium {
+    width: 300px;
+
+    &.bubble-center {
+        margin-left: -150px;
+    }
+}
+.bubble-right {
+    right: 0;
+}
+.bubble-center {
+    left: 50%;
+}
+.bubble-left {
+    left: 0;
 }

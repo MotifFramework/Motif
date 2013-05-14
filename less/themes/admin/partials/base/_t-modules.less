@@ -753,3 +753,74 @@ Styleguide 4.2
         margin-top: 0;
     }
 }
+
+
+/*
+
+Quick Interactive Classes
+
+Markup:
+<a class="js-reveal button" data-reveal="test-reveal" href="#test-reveal">
+    Reveal
+</a>
+<a class="js-expand primary button" data-reveal="test-expand" href="#test-expand">
+    Expand
+</a>
+<a class="js-fade-in secondary button" data-reveal="test-fade-in" href="#test-fade-in">
+    Fade and Expand
+</a>
+<div class="reveal-target" id="test-reveal">
+    <div class="panel">This panel was revealed.</div>
+</div>
+<div class="expand-target" id="test-expand">
+    <div class="panel">This panel was expanded.</div>
+</div>
+<div class="fade-in-target" id="test-fade-in">
+    <div class="panel">This panel was faded and expanded.</div>
+</div>
+
+*/
+
+.reveal-target {
+    .visually-hidden();
+
+    &.is-current {
+        .show-hidden();
+    }
+}
+
+.expand-target {
+    max-height: 0;
+    position: relative;
+    overflow: hidden;
+
+    &.is-expanded {
+        max-height: 999px;
+    }
+    &.is-expanded,
+    &.is-visited {
+
+        // Mixins
+        .transition(all, 0.65s, ease-in-out);
+    }
+}
+
+.fade-in-target {
+    .opacity(0);
+
+    max-height: 0;
+    position: relative;
+    overflow: hidden;
+
+    &.is-showing {
+        .opacity(1);
+
+        max-height: 999px;
+    }
+    &.is-showing,
+    &.is-visited {
+
+        // Mixins
+        .transition(all, 0.65s, ease-in-out);
+    }
+}
