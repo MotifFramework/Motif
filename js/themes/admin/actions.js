@@ -398,7 +398,7 @@
         removeMessage: function ( message ) {
 
             // After a few seconds, remove message
-            setTimeout(function () {
+            requestTimeout(function () {
                 message.slideUp( 150 );
             }, 8000, function () {
                 message.remove();
@@ -466,7 +466,7 @@
             var context = Admin.verticalNav;
 
             // CRUDE: Wait for CSS Animation
-            setTimeout(function () {
+            requestTimeout(function () {
 
                 // Clear out the html
                 config.navWrapper.html("");
@@ -839,11 +839,11 @@
                 table = $(this),
                 config = table.data( context.settings.dataNamespace ),
                 pagination = "<ol class='pagination nav'>",
-                i = 1;
+                i;
 
             // Loop through total number of pages
             // and create list item strings
-            for ( ; i <= totalPages; i += 1 ) {
+            for ( i = 1; i <= totalPages; i += 1 ) {
                 pagination += "<li>";
                 pagination += "<a ";
 
@@ -1383,10 +1383,27 @@
     Admin.bindUI = {
         init: function () {
 
+            // NEED TO CLEAN THIS UP, GETTING MESSY AND STRINGY
             Admin.lbReveal.init({
                 targetElems: $(".js-reveal"),
                 pluginOptions: {
-                    activeClass: "is-current"
+                    exclusive: "yes",
+                    activeClass: "is-current",
+                    onReveal: function ( trigger ) {
+                        var data = trigger.data("revealSettings"),
+                            targetID = data.revealTarget.attr("id");
+                        
+                        if ( trigger.closest(".bubble-wrapper").length ) {
+                            $(document).on("click.bubble", function ( event ) {
+                                if ( !$(event.target).is(data.revealTarget) && !$(event.target).closest("#" + targetID).length ) {
+                                    trigger.trigger("click");
+                                }
+                            });
+                        }
+                    },
+                    onHide: function ( trigger ) {
+                        $(document).off("click.bubble");
+                    }
                 }
             });
 

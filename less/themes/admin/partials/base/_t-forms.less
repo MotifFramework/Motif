@@ -413,10 +413,22 @@ Styleguide 5.5
             margin-left: -@wisp-width;
         }
     }
+    &.top-right-wisp,
+    &.top-left-wisp,
     &.top-wisp {
         &:after {
             top: -@wisp-width * 2;
             border-bottom-color: @bubble-color;
+        }
+    }
+    &.top-right-wisp {
+        &:after {
+            right: @full-side;
+        }
+    }
+    &.top-left-wisp {
+        &:after {
+            left: @full-side;
         }
     }
     &.bottom-wisp {
@@ -502,20 +514,31 @@ Styleguide 5.5
         }
     }
 }
-.js-bubble-reveal {
+.bubble.reveal-target {
     position: absolute;
     top: 100%;
     margin-top: 10px;
     display: block;
+
+    // &:after {
+    //     display: none;
+    // }
+    // &.is-current {
+    //     &:after {
+    //         display: block;
+    //     }
+    // }
 }
-.bubble-minimal {
+.bubble-minimal,
+.bubble-minimal.is-current {
     width: 200px;
 
     &.bubble-center {
         margin-left: -100px;
     }
 }
-.bubble-medium {
+.bubble-medium,
+.bubble-medium.is-current {
     width: 300px;
 
     &.bubble-center {

@@ -44,6 +44,7 @@
                         all_data = trigger_elem.data(),
                         reveal_target_id = trigger_elem.attr("data-reveal"),
                         reveal_target = $("#" + reveal_target_id),
+                        reveal_close = $("[data-reveal-close='" + reveal_target_id + "']"),
                         reveal_group_id = trigger_elem.attr("data-reveal-group"),
                         reveal_group = $("[data-reveal-group='" + reveal_group_id + "']"),
 
@@ -128,6 +129,17 @@
 
                                 // Then, reveal this current target
                                 methods.revealTarget.call($this);
+                            }
+                            return false;
+                        });
+                        reveal_close.on("click", function () {
+                            if ($this.hasClass(s.activeClass)) {
+
+                                // If it's not set to "radio", hide it
+                                if (data.exclusive !== "radio") {
+                                    methods.hideTarget.call($this);
+                                }
+
                             }
                             return false;
                         });
