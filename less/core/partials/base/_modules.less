@@ -43,9 +43,16 @@ Styleguide 1.3.1
     &, .desc {
         overflow: hidden;
     }
-    &.checkbox-item .object {
-        float: left;
-        margin-right: @quarter-side;
+    &.checkbox-item {
+        .clearfix();
+        .inline-block-fallback();
+
+        overflow: visible;
+        
+        .object {
+            float: left;
+            margin-right: @quarter-side;
+        }
     }
     .object {
         img {

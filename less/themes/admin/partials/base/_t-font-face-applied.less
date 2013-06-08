@@ -74,7 +74,7 @@ Styleguide 2.1.1
 Museo Slab 300
 
 Markup:
-<span class="museo-slab-300">This is Sample Text</span>
+<span class="museo-slab-500">This is Sample Text</span>
 
 Styleguide 2.1.2
 
@@ -82,6 +82,12 @@ Styleguide 2.1.2
 
 .museo-slab-300 {
     font-family: @museo-slab-300;
+}
+.museo-slab-500 {
+    font-family: @museo-slab-500;
+}
+.museo-slab-700 {
+    font-family: @museo-slab-700;
 }
 .source-code-pro {
     font-family: @source-code-pro;
@@ -105,7 +111,7 @@ Styleguide 2.1.2
     content: attr(data-icon);
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
-    vertical-align: text-top;
+    vertical-align: middle;
     font-size: 0.75em;
     font-style: normal;
     font-weight: normal;
@@ -113,6 +119,14 @@ Styleguide 2.1.2
     text-rendering: optimizeLegibility;
     speak: none;
     white-space: nowrap;
+
+    .large.button& {
+        line-height: .9;
+    }
+
+    // .small.button& {
+    //     line-height: 1.2;
+    // }
 
     // Mixins
     .inline-block-fallback();
@@ -201,6 +215,15 @@ strong {
 
     // Mixins
     .proxima-nova-bold();
+}
+th{
+    vertical-align:bottom;
+    a{
+        color: @dark-grey;
+        &:hover{
+            color: @light-black;
+        }
+    }
 }
 em {
     font-style: italic;

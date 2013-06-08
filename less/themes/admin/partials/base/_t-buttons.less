@@ -74,27 +74,18 @@ Styleguide 3.1
     .inline-block-fallback();
     .size-for-font(@petite-text-size);
     .proxima-nova-regular();
-    .am-button-color(@light-grey, @dark-grey);
-    
-    &:hover,
-    &:focus {
-        color: darken(@dark-grey, 10%);
-        border-color: @grey;
-    }
+    .am-button-color(@light-grey, @light-black);
+
     p & {
         margin-top: 0;
     }
     &.tiny {
 
-        // Variables
-        @1px: 1em * (1 / @petite-text-size);
-
         // Create
-        padding: @quarter-vertical @half-side;
-        border-width: @1px;
+        padding: @quarter-vertical @half-vertical;
         
         // Mixins
-        .size-for-font(@petite-text-size);
+        .size-for-font(@minion-text-size);
     }
     &.small {
         padding: @quarter-vertical @half-vertical;
@@ -133,5 +124,83 @@ Styleguide 3.1
 
         // Mixins
         .am-button-color(@red);
+    }
+    &.yellow,
+    &.warning {
+
+        // Mixins
+        .am-button-color(@yellow);
+    }
+    &.button-inverted {
+
+        // Mixins
+        .am-button-color(@black-5);
+    }
+    &.tertiary {
+
+        // Mixins
+        .am-button-color(@light-grey, @blue);
+    }
+}
+
+.icon-button{
+
+    cursor: pointer;
+
+    .am-icon-button-color(@dark-grey);
+    .am-icon-button-hover-color(@light-black);
+
+    &.blue,
+    &.primary {
+
+        // Mixins
+        .am-icon-button-color(@blue);
+    }
+    &.green,
+    &.secondary {
+
+        // Mixins
+        .am-icon-button-color(@green);
+    }
+    &.red,
+    &.danger {
+
+        // Mixins
+        .am-icon-button-color(@red);
+    }
+    &.button-inverted,
+    &.tertiary {
+
+        // Mixins
+        .am-icon-button-color(@light-grey);
+    }
+
+    &.primary-hover{
+
+        .am-icon-button-hover-color(@blue);
+    }
+
+    &.secondary-hover{
+
+        .am-icon-button-hover-color(@green);
+    }
+
+    &.danger-hover{
+
+        .am-icon-button-hover-color(@red);
+    }
+
+    &.inverse-hover{
+
+        .am-icon-button-hover-color(@white);
+    }
+    &.is-disabled {
+
+        /* Mixins */
+        .am-icon-button-color(@light-grey);
+        .am-icon-button-hover-color(@light-grey);
+
+        /* Other */
+        cursor: default;
     }
 }

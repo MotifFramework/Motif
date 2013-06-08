@@ -5,6 +5,20 @@
 	&:hover,
 	&:focus,
     &.is-current {
+        color: @text;
 		background: darken(@background, 10%);
+	}
+}
+.am-icon-button-color(@color: @light-grey)	{
+	color: @color;
+
+	.am-icon-button-hover-color(@color);
+}
+
+.am-icon-button-hover-color(@color: @light-black)	{
+	&:hover,
+	&:focus,
+    &.is-current {
+		color: @color;
 	}
 }

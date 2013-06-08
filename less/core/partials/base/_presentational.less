@@ -26,6 +26,15 @@ Styleguide 1.2.2
 .align-right {
     text-align: right;
 }
+.align-sub {
+    vertical-align: sub;
+}
+.align-middle {
+    vertical-align: middle;
+}
+.align-top {
+    vertical-align: top;
+}
 
 /*
 
@@ -101,4 +110,12 @@ Styleguide 1.2.5
 
     /* Mixins */
     .visually-hidden();
+}
+
+/*----Simple Reveal-----*/
+.simple-reveal-container{
+    .visually-hidden();
+    &.is-current{
+        .show-hidden();
+    }
 }

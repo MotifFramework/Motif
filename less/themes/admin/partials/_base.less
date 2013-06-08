@@ -26,14 +26,14 @@ Styleguide 8.0
 /**
  * Global Base Styles
  * -----------------------------------------------------------------------------
- * 
+ *
  * [Description]
- * 
- * @todo 
+ *
+ * @todo
  */
 
 body {
-    background: @light-black;
+    background: @dark-white;
 }
 .wrapper {
     width: 92%;
@@ -44,14 +44,14 @@ body {
 /**
  * Main Header
  * -----------------------------------------------------------------------------
- * 
+ *
  * [Description]
- * 
- * @todo 
+ *
+ * @todo
  */
 
 .main-header {
-    position: relative;
+    width: 100%;
     z-index: 80;
 }
     .client-logo {
@@ -65,6 +65,8 @@ body {
  */
 
 .main-eyebrow-bar {
+
+    min-height:@double-vertical;
 
     /* Other */
     background: @black-1;
@@ -117,13 +119,14 @@ body {
                 }
             }
 
-            a {
+            .eyebrow-button-trigger {
                 display: block;
                 padding: @half-vertical @full-side;
 
                 /* Other */
                 color: @grey;
-                
+                cursor: pointer;
+
                 &:before,
                 .data-icon {
                     color: @black-3;
@@ -156,7 +159,8 @@ body {
             // -webkit-text-fill-color: transparent;
         }
         &:hover,
-        &:focus {
+        &:focus,
+        &.is-current {
             color: @green;
         }
     }
@@ -165,10 +169,10 @@ body {
 /**
  * Main Content
  * -----------------------------------------------------------------------------
- * 
+ *
  * [Description]
- * 
- * @todo 
+ *
+ * @todo
  */
 
 .main-content {
@@ -176,7 +180,7 @@ body {
     z-index: 60;
 
     /* Other */
-    background: @dark-white;
+    //background: @dark-white;
 }
 
 /**
@@ -218,7 +222,7 @@ body {
             top: 16px;
             left: 15px;
         }
-        
+
         &:hover,
         &:focus,
         &.is-current {
@@ -250,6 +254,23 @@ body {
         text-transform: uppercase;
         background: @light-black;
     }
+    .content-nav-subtitle {
+
+        /* Variables */
+        // @base-text-size: @primer-text-size;
+        @15px: 1em * (15 / @base-text-size);
+        @20px: 1em * (20 / @base-text-size);
+
+        /* Display & Box Model */
+        margin: 0;
+        padding: @20px @15px @20px;
+
+        /* Other */
+        // color: @white;
+        text-transform: uppercase;
+        background: @black-6;
+        // border-bottom: 1px solid @black-5;
+    }
 
 /**
  * Content Page
@@ -265,10 +286,10 @@ body {
 /**
  * Edit View
  * -----------------------------------------------------------------------------
- * 
+ *
  * [Description]
- * 
- * @todo 
+ *
+ * @todo
  */
 
 .edit-content-footer {
@@ -317,23 +338,54 @@ body {
             .margin-vertical(0.5, @base-text-size);
             // .margin-trailer(0.25, @base-text-size);
 
-            li {
+            > li {
                 margin: 0;
+                padding: 0 @10px;
 
-                &:first-child a {
+                &:first-child {
                     padding-left: 0;
                 }
             }
                 a {
-                    padding: 0 @10px;
-                    color: @dark-grey;
+                    // padding: 0 @10px;
+                    // color: @dark-grey;
 
-                    &:hover,
-                    &:focus,
-                    &.is-current {
-                        color: @blue;
-                        color: @light-black;
-                    }
+                    // &:hover,
+                    // &:focus,
+                    // &.is-current {
+                    //     color: @blue;
+                    //     color: @light-black;
+                    // }
                 }
         }
     }
+.page-details {
+    .view-page {
+        &:before {
+            vertical-align: top;
+        }
+    }
+}
+
+/**
+ * Login
+ * -----------------------------------------------------------------------------
+ *
+ * [Description]
+ *
+ * @todo
+ */
+ .login-panel{
+
+    .margin-leader(10);
+    margin-top:2vh;
+    @media(min-height: 21em){
+
+        margin-top:20vh;
+    }
+    @media(min-height: 50em){
+
+        margin-top:30vh;
+    }
+
+ }

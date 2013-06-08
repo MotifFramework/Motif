@@ -1,0 +1,69 @@
+//Keep the styles that we need to maintain the legacy core in this file
+
+//these classes are used to indicate the sort status of the list table headers
+.sort-ASC, 
+.sort-DESC {
+	&:after {
+
+		/* Mixins */
+		.data-icon();
+		.align-middle();
+
+		display: inline-block;
+		padding-left: @quarter-side;
+		line-height: 0.75;
+	}
+}
+.table-sort{
+    cursor: pointer;
+}
+.sort-ASC{
+	&:after{
+		content: "\25B4";
+	}
+}
+.sort-DESC {
+	&:after {
+		content: "\25BE";
+	}
+}
+
+// This is for the Date Picker JS Plugin
+.ui-datepicker {
+    // margin-top: -20px;
+}
+dd.ui-widget {
+
+    /* Mixins */
+    .border-radius(@quarter-vertical);
+
+    /* Display & Box Model */
+    margin: @quarter-vertical 0 @half-vertical;
+
+    /* Other */
+    background: @dark-grey;
+}
+
+// This hides errors unless they are surrounded by an 'error' class
+
+.input-alert{
+    display: none !important;
+    
+    .info &.info,
+    .error &.error,
+    .success &.success,
+    .warning &.warning {
+        display: inline-block !important;
+    }
+}
+.hide,
+.bubble.reveal-target {
+    display: none;
+}
+.plusMinus{
+    display: inline-block;
+    min-width: @full-side;
+}
+.position-top{//This is for the tree input button on the create/edit user section
+    top: 0 !important;
+}

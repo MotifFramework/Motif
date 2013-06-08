@@ -52,8 +52,11 @@ body {
 }
 
 .main-nav {
-    height: 100%;
     padding: 0;
+    position: absolute;
+    top: @40px;
+    bottom: 0;
+    background-color: @light-black;
 }
 
 /**
@@ -77,13 +80,13 @@ body {
     /* Mixins */
 
     /* Display & Box Model */
-    padding-top: @40px;
+    // padding-top: @40px;
     padding-right: 0 !important;
     padding-left: 0 !important;
 
     /* Positioning */
     position: absolute;
-    top: 0;
+    top: @40px;
     right: 0;
     bottom: 0;
 
@@ -92,7 +95,7 @@ body {
     .content-header,
     .content-page {
         height: 100%;
-        overflow: auto;
+        overflow-y: auto;
     }
 
 /**
@@ -103,7 +106,10 @@ body {
     border-right: 1px solid @black-6;
 
     /* Positioning */
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
 
     &:before {
 
@@ -119,10 +125,10 @@ body {
         width: @8px;
 
         /* Positioning */
-        position: absolute;
-        top: 0;
+        position: fixed;
+        top: 40px;
         bottom: 0;
-        left: 0;
+        left: 100% * (1 / 9);
         z-index: 90;
 
         /* Other */
@@ -134,9 +140,20 @@ body {
         padding: 0;
     }
 }
+    .content-nav-content {
+        position: absolute;
+        top: @60px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        overflow-y: auto;
+    }
 
 .content-page {
     padding-left: 0 !important;
+
+    /* Positioning */
+    margin-left: 100% * (2 / 8);
 }
     .content-page-inner {
         padding: @full-vertical @full-side @double-vertical;
@@ -192,6 +209,15 @@ body {
     top: @40px;
     right: 0;
     z-index: 80;
+
+    .bubble-bottom-left {
+
+        /* Variables */
+        @15px: 1em * (15 / @base-text-size);
+
+        /* Positioning */
+        left: -@15px;
+    }
 }
     .quick-action-buttons {
         text-align: right;

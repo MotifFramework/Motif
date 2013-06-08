@@ -25,20 +25,33 @@ Styleguide 5.1
 input,
 textarea {
 
+    /* Variables */
+    @600px: 1em * (600 / @base-text-size);
+
+    /* Display & Box Model */
+    width: 100%;
+    max-width: @600px;
+}
+input,
+textarea,
+select {
+    color: @light-black;
+}
+input,
+textarea,
+select[multiple] {
+
     // Variables
     @1px: 1em * (1 / @base-text-size);
     @2px: 1em * (2 / @base-text-size);
     @4px: 1em * (4 / @base-text-size);
-    @600px: 1em * (600 / @base-text-size);
     @input-side-padding: 1em * (@input-padding / @base-text-size);
 
     // Create
-    width: 100%;
-    max-width: @600px;
-    font-size: 1em;
     padding: @quarter-vertical;
+    font-size: 1em;
     background: @white;
-    border: @1px solid @input-border-color;
+    border: 1px solid @input-border-color;
     outline: none;
 
     // Mixins
@@ -58,22 +71,47 @@ textarea {
 input {
     &[type="checkbox"],
     &[type="radio"] {
-        width: auto;
+
+        /* Display & Box Model */
+        width: 13px;
+        height: 13px;
+        padding: 0;
+        margin:0;
+
+        /* Positioning */
+        position: relative;
+        top: @1px * 3;
+
+        /* Other */
+        vertical-align: bottom;
 
         .lte7 {
-            width: 13px;
+            overflow: hidden;
         }
     }
 }
 textarea {
     height: @full-vertical * 4;
 }
+    .wysiwyg-editor {
+        height: @400px;
+    }
+    .mceEditor {
+        display: block;
+    }
 select {
     width: auto;
     max-width: 100%;
     font-size: 0.8125em;
+    
+    &[multiple] {
+        height: @full-vertical * 6;
+    }
 }
 
+.inline-input{
+    .inline-block-fallback();
+}
 
 /*
 
@@ -106,6 +144,9 @@ Styleguide 5.2
 .input-half {
     width: 50%;
 }
+.input-full {
+    max-width: none;
+}
 .input-xxxs {
     max-width: 1em * ( 30 / @base-text-size);
 }
@@ -123,6 +164,9 @@ Styleguide 5.2
 }
 .input-l {
     max-width: 1em * (350 / @base-text-size);
+}
+.input-full {
+    max-width: 100%;
 }
 
 
@@ -153,22 +197,28 @@ Styleguide 5.3.1
     display: block;
 
     // Mixins
-    .padding-leader(1);
+    .padding-leader(1.5);
 
     input,
     textarea,
-    select {
+    select,
+    .mceEditor {
     
         // Mixins
         .margin-vertical(0.25);
     }
-    .hint {
-        color: @grey;
+}
+.input-hint {
 
-        // Mixins
-        .body-text();
-        .margin-leader(0.25);
-    }
+    /* Mixins */
+    .body-text();
+    .margin-leader(0.25);
+
+    /* Display & Box Model */
+    display: block;
+
+    /* Other */
+    color: @grey;
 }
 .input-requirement {
 
@@ -188,11 +238,12 @@ Styleguide 5.3.1
 
     /* Other */
     font-size: @font-size;
+    font-style: italic;
 }
 .input-desc {
 
     /* Mixins */
-    .museo-slab-300();
+    .museo-slab-500();
     .padding-leader(0.25, @minion-text-size);
 
     /* Display & Box Model */
@@ -201,9 +252,20 @@ Styleguide 5.3.1
 .fieldset {
 
     /* Mixins */
-    .margin-leader(1);
-    .padding-trailer(1);
+    .margin-leader(2);
+    .padding-trailer(2);
 }
+
+    // NOT A FAN OF THIS
+    .fieldset-info {
+        + label,
+        + p,
+        + ul,
+        + div,
+        + fieldset {
+            clear: left;
+        }
+    }
 .checkbox-list {
 
     /* Mixins */
@@ -225,6 +287,9 @@ legend {
 
         /* Variables */
         @5px: 1em * (5 / @base-text-size);
+
+        /* Display & Box Model */
+        margin: 0;
 
         /* Positioning */
         position: relative;
@@ -262,27 +327,136 @@ legend {
             text-align: center;
             background: @light-grey;
         }
+        &.float-left {
+            width: auto;
+        }
     }
 }
-.search {
-    .input {
+.subfieldset {
+
+    /* Mixins */
+    .padding-vertical(1.5, @base-text-size);
+
+    /* Display & Box Model */
+    margin-left: @40px;
+
+    /* Other */
+    // border-bottom: 1px solid @light-grey;
+}
+.subfieldset-conditional {
+
+    /* Display & Box Model */
+    margin: @20px 0 0;
+    padding-left: @full-vertical;
+    padding-right: @full-vertical;
+
+    /* Positioning */
+    position: relative;
+
+    /* Other */
+    background: darken( @dark-white, 1% );
+    border-top: 1px solid @light-grey;
+    border-bottom: 1px solid @light-grey;
+
+    &:before,
+    &:after {
+
+        /* Variables */
+        @7px: 1em * (7 / @base-text-size);
 
         /* Mixins */
-        .border-radius-right(0);
+        .pseudo-clear();
+
+        /* Positioning */
+        position: absolute;
+        left: @full-side;
+
+        /* Other */
+        border: solid transparent;
+        border-width: @7px @10px;
+    }
+    &:before {
+        top: 0;
+        border-top-color: @black-6;
+    }
+    &:after {
+        top: -@1px;
+        border-top-color: @dark-white;
+    }
+    .subfieldset-conditional {
+        // margin-left: @40px;
+        border-bottom: none;
+
+        &:after {
+            top: -@1px;
+            border-top-color: darken( @dark-white, 1% );
+        }
+    }
+    > :first-child {
+        margin-top: 0;
+    }
+}
+.search-form {
+    position: relative;
+}
+    .search-input {
 
         /* Display & Box Model */
+        padding-left: @30px;
         float: left;
+
+        &.has-reset {
+            padding-right: @30px;
+        }
     }
-    .submit {
+    .search-label,
+    .search-reset {
+
+        /* Variables */
+        @7px: 1em * (7 / @base-text-size);
+
+        /* Display & Box Model */
+        padding: @5px 0 0;
+        width: @30px;
+        
+        /* Positioning */
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        /* Other */
+        // background: none;
+        // border: 0;
+        // outline: none;
+        text-align: center;
+        color: @grey;
+
+        &:hover,
+        &:focus {
+            color: @light-black;
+        }
+    }
+    .search-reset {
+        left: auto;
+        right: 0;
+        display: none;
+    }
+    .search-submit {
+
+        /* Variables */
+        @base-text-size: @petite-text-size;
+        @7px: 1em * (7 / @base-text-size);
+        @8px: 1em * (8 / @base-text-size);
 
         /* Mixins */
         .border-radius-left(0);
 
         /* Display & Box Model */
         margin: 0;
+        padding-top: @7px;
+        padding-bottom: @8px;
         float: left;
     }
-}
 
 .form-actions {
     li {
@@ -322,16 +496,26 @@ Styleguide 5.4
 */
 
 .success {
+
+    /* Variables */
+    @color: darken(@success-color, 23%);
+
+    /* Other */
+    color: @color;
+
     input,
     textarea,
     select {
-        border-color: @success-color;
+        background-color: lighten(@success-color, 43%);
+        border-color: @color;
     }
 }
 .error {
+
     input,
     textarea,
     select {
+        background-color: lighten(@error-color, 26%);
         border-color: @error-color;
     }
 }
@@ -400,6 +584,8 @@ Styleguide 5.5
             border-right-color: @bubble-color;
         }
     }
+    &.right-top-wisp,
+    &.right-bottom-wisp,
     &.right-wisp {
         &:after {
             right: -@wisp-width * 2;
@@ -421,20 +607,30 @@ Styleguide 5.5
             border-bottom-color: @bubble-color;
         }
     }
-    &.top-right-wisp {
-        &:after {
-            right: @full-side;
-        }
-    }
-    &.top-left-wisp {
-        &:after {
-            left: @full-side;
-        }
-    }
+    &.bottom-right-wisp,
+    &.bottom-left-wisp,
     &.bottom-wisp {
         &:after {
             bottom: -@wisp-width * 2;
             border-top-color: @bubble-color;
+        }
+    }
+    &.top-right-wisp,
+    &.bottom-right-wisp {
+        &:after {
+            right: @full-side;
+        }
+    }
+    &.top-left-wisp,
+    &.bottom-left-wisp {
+        &:after {
+            left: @full-side;
+        }
+    }
+    &.left-top-wisp,
+    &.right-top-wisp {
+        &:after {
+            top: @half-side;
         }
     }
     &.input-alert {
@@ -445,6 +641,7 @@ Styleguide 5.5
         .body-text();
         .box-shadow-none();
         .inline-block-fallback();
+        // .petite-text();
         
         &:after {
             left: @half-vertical;
@@ -477,18 +674,16 @@ Styleguide 5.5
 
 .no-boxshadow {
     .bubble {
-
-        // Variables
-        @1px: 1em * (1 / @base-text-size);
-    
-        // Create
-        border: @1px solid @grey;
+        border: 1px solid @grey;
     }
 }
 
 .bubble-wrapper {
-    position: relative;
+
+    /* Mixins */
     .inline-block-fallback();
+
+    position: relative;
 
     &.top-wisp {
         &:after {
@@ -497,51 +692,76 @@ Styleguide 5.5
             @1px: 1em * (1 / @base-text-size);
             @5px: 1em * (5 / @base-text-size);
             @7px: 1em * (7 / @base-text-size);
+            @10px: 1em * (10 / @base-text-size);
 
             @wisp-width: @5px;
             @bubble-color: @white;
-            @shadow: fadeout(@black, 50%);
+            @shadow: fadeout( @black, 50% );
             @shadow-radius: @7px;
         
             // Mixins
             .pseudo-clear();
-            position: absolute;
-            border: @wisp-width solid transparent;
-            bottom: -10px;
-            left: 50%;
+
+            /* Display & Box Model */
             margin-left: -@wisp-width;
+
+            /* Positioning */
+            position: absolute;
+            bottom: -@10px;
+            left: 50%;
+
+            /* Other */
+            border: @wisp-width solid transparent;
             border-bottom-color: @bubble-color;
         }
     }
 }
 .bubble.reveal-target {
-    position: absolute;
-    top: 100%;
-    margin-top: 10px;
     display: block;
+    z-index: 90;
+    position: absolute;
 }
-.bubble-minimal,
-.bubble-minimal.is-current {
-    width: 200px;
-
-    &.bubble-center {
-        margin-left: -100px;
+.bubble-minimal {
+    .am-bubble-widths( @200px );
+}
+.bubble-medium {
+    .am-bubble-widths( @300px );
+}
+.bubble-large {
+    .am-bubble-widths( @500px );
+}
+.bubble-bottom-right,
+.bubble-bottom-center,
+.bubble-bottom-left {
+    &,
+    &.is-current {
+        margin-top: @10px;
+        top: 100%;
     }
 }
-.bubble-medium,
-.bubble-medium.is-current {
-    width: 300px;
-
-    &.bubble-center {
-        margin-left: -150px;
-    }
-}
-.bubble-right {
+.bubble-bottom-right {
     right: 0;
 }
-.bubble-center {
+.bubble-bottom-center {
     left: 50%;
 }
-.bubble-left {
+.bubble-bottom-left {
     left: 0;
+}
+.bubble-left,
+.bubble-left.is-current {
+    right: 100%;
+    margin-right: @10px;
+    top: 0;
+}
+.bubble-right {
+    &,
+    &.is-current {
+        left: 100%;
+        margin-left: @10px;
+        top: 0;
+    }
+}
+.bubble .ui-datepicker {
+    margin-top: 10px;
 }

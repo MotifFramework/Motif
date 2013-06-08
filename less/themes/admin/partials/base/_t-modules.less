@@ -72,7 +72,7 @@ Styleguide 8.1
         &:hover,
         &:focus,
         &.is-current {
-                
+
             // Variables
             @base-color: darken(@dark-blue, 5%);
             @top-gradient: @base-color;
@@ -86,15 +86,15 @@ Styleguide 8.1
 
     .nav {
         margin: 0;
-        
+
         // Mixins
         background: darken(@dark-blue, 10%);
-        
+
         a {
             color: @white;
             text-decoration: none;
             padding: @half-vertical 4%;
-            
+
             &:hover,
             &:focus,
             &.is-current {
@@ -142,7 +142,7 @@ Styleguide 8.1
         /* Other */
         color: @dark-grey;
         text-decoration: none;
-        
+
         &:hover,
         &:focus,
         &.is-current {
@@ -268,7 +268,7 @@ Styleguide 8.1
         @10px: 1em * (10 / @base-text-size);
         @15px: 1em * (15 / @base-text-size);
         @20px: 1em * (20 / @base-text-size);
-        
+
         &:before {
 
             /* Positioning */
@@ -323,7 +323,7 @@ Styleguide 8.1
 /*
 Panel
 
-Used to provide messaging to the user, whether it be direct or through calls to action. 
+Used to provide messaging to the user, whether it be direct or through calls to action.
 The panel typically indicates a visual separation and implied sub-grouping of its content.
 
 Markup:
@@ -344,8 +344,9 @@ Styleguide 4.1
 .panel {
 
     // Create
-    padding: @double-vertical;
+    padding: @full-vertical;
     background-color: lighten(@light-grey, 14%);
+    background-color: @black-9;
 
     // Mixins
     .margin-leader();
@@ -353,17 +354,59 @@ Styleguide 4.1
     > :first-child {
         margin-top: 0;
     }
-    
+
     &.thin {
-        padding: @full-vertical;
+        padding: @half-vertical @full-side;
+    }
+    &.light{
+        background-color: @dark-white;
+    }
+    &.dark {
+        background-color: @light-black;
+        color: @dark-white;
+    }
+    &.grey {
+        background-color: @light-grey;
+        color: @black-2;
     }
 }
+    .panel-bordered {
+        border: 5px solid @light-grey;
+        background: none;
+        .border-radius(10px);
+    }
+    .panel-hidden {
+        border-top: 1px solid @black-6;
+        border-bottom: 1px solid @black-6;
+        position: relative;
+
+        &:before,
+        &:after {
+            .pseudo-clear();
+
+            margin-left: @full-vertical;
+            border: solid transparent;
+            border-width: 8px 10px;
+            position: absolute;
+            left: 0%;
+        }
+
+        &:before {
+            border-top-color: @black-6;
+            top: 0;
+        }
+
+        &:after {
+            border-top-color: @dark-white;
+            top: -1px;
+        }
+    }
 
 /*
 Alert Panel
 
-This variation of the standard `.panel` is used specifically for delivering 
-direct messages to the user, whether they be informative, complimentary, 
+This variation of the standard `.panel` is used specifically for delivering
+direct messages to the user, whether they be informative, complimentary,
 or preventative.
 
 Markup:
@@ -376,55 +419,116 @@ Markup:
     <p>This is an alert panel with no heading.</p>
 </div>
 
-.error - 
-.success - 
-.info - 
+.error -
+.success -
+.info -
 
 Styleguide 4.1.1
 */
 
 .panel {
-
-    // Variables
-    @1px: 1em * (1 / @base-text-size);
-    @3px: 1em * (3 / @base-text-size);
-    @top-gradient: lighten(@light-grey, 18%);
-    @bottom-gradient: lighten(@light-grey, 10%);
-    @shadow: fadeout(@light-black, 85%);
-
     &.alert {
 
-        // Create
-        padding: @double-vertical;
-        border: @border-width solid;
+        /* Mixins */
+        .inline-block-fallback();
 
-        // Mixins
-        .alert-color();
-        .border-radius(@default-radius);
-        .box-shadow(0, @1px, @3px, @shadow);
+        /* Other */
+        background: @yellow;
 
+        &,
+        & h1,
+        & h2,
+        & h3,
+        & h4,
+        & h5,
+        & h6 {
+            color: @light-black;
+        }
         &.error {
+            background: @light-red;
 
-            // Mixins
-            .alert-color(@error-color, @error-color);
+            .alert-title {
+                &:before {
+                    content: "\2421";
+                }
+            }
         }
         &.success {
+            background: @green;
 
-            // Mixins
-            .alert-color(@success-color, @success-color);
+            .alert-title {
+                &:before {
+                    content: "\2713";
+                }
+            }
         }
         &.info {
+            background: @blue;
+        }
+        a {
+            color: inherit;
+            text-decoration: underline;
 
-            // Mixins
-            .alert-color(@info-color, @info-color);
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
         }
     }
     &.inset {
-        text-shadow: 0 @1px @1px @white;
 
-        // Mixins
+        /* Variables */
+        @1px: 1em * (1 / @base-text-size);
+        @3px: 1em * (3 / @base-text-size);
+        @top-gradient: lighten(@light-grey, 18%);
+        @bottom-gradient: lighten(@light-grey, 10%);
+        @shadow: fadeout(@light-black, 85%);
+
+        /* Mixins */
         .box-shadow-inset(0, @1px, @3px, @shadow);
         .background-linear-gradient(0, @bottom-gradient, 100%, @top-gradient);
+
+        /* Other */
+        text-shadow: 0 @1px @1px @white;
+    }
+
+    &.full-width {
+        display: block;
+        width: 100%;
+    }
+    &.hide {
+        display: none;
+    }
+}
+.alert-title,
+.alert-message {
+
+    /* Display & Box Model */
+    margin-top: 0;
+}
+.alert-title {
+
+    /* Variables */
+    @base-text-size: @petite-text-size;
+    @10px: 1em * (10 / @base-text-size);
+
+    /* Display & Box Model */
+    margin-right: @10px;
+    padding-right: @10px;
+
+    /* Other */
+    border-right: 1px solid @light-black;
+
+    &:before {
+        .data-icon();
+
+        // Variables
+        @icon-padding: 1em * (5 / 12);
+
+        // Create
+        padding-right: @icon-padding;
+        font-size: 1em;
+        content: "\26A0";
     }
 }
 
@@ -491,7 +595,7 @@ Styleguide 7.4
     &.float-right {
         float: none;
     }
-    
+
     img {
         display: block;
     }
@@ -500,10 +604,10 @@ Styleguide 7.4
 /**
  * Dropdown Modules
  * -----------------------------------------------------------------------------
- * 
+ *
  * [Description]
- * 
- * @todo 
+ *
+ * @todo
  */
 
 .dropdown-zone {
@@ -521,7 +625,7 @@ Styleguide 7.4
         /* Variables */
         @5px: 1em * (5 / @base-text-size);
         @15px: 1em * (15 / @base-text-size);
-        @155px: 1em * (155 / @base-text-size);
+        @180px: 1em * (180 / @base-text-size);
         @shadow: fadeout(@black, 90%);
 
         /* Mixins */
@@ -530,7 +634,7 @@ Styleguide 7.4
 
         /* Display & Box Model */
         overflow: hidden;
-        width: @155px;
+        width: @180px;
         height: 0;
         margin-top: 0;
 
@@ -579,6 +683,14 @@ Styleguide 7.4
                 background: @dark-white;
             }
         }
+        .list-item-empty {
+            cursor: default;
+
+            &:hover,
+            &:focus {
+                background: @light-grey;
+            }
+        }
         a.list-item {
             color: @dark-grey;
 
@@ -612,6 +724,28 @@ Styleguide 7.4
     }
 }
 
+.nav.button-group {
+    li {
+        margin: 0 0 0 1px;
+
+        &:first-child {
+            margin-left: 0;
+
+            .button {
+                .border-radius-left(5px);
+            }
+        }
+
+        &:last-child {
+            .button {
+                .border-radius-right(5px);
+            }
+        }
+    }
+    .button {
+        .border-radius(0);
+    }
+}
 .nav.horizontal-list {
 
     li {
@@ -627,12 +761,31 @@ Styleguide 7.4
         }
     }
 }
+.checkbox-list {
+    .media-object {
+        display: block;
+    }
+    &.nav {
+        li {
+
+            /* Mixins */
+            .inline-block-fallback();
+
+            /* Display & Box Model */
+            margin: 0 @half-side;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+}
 
 
 /*
 Breadcrumb
 
-Another extension of the `.nav` module, adding a breadcrumb `.label`, 
+Another extension of the `.nav` module, adding a breadcrumb `.label`,
 floating it and the ordered list and adding a `/` divider.
 
 Markup:
@@ -656,7 +809,7 @@ Styleguide 4.2
 
         /* Other */
         text-transform: lowercase;
-        
+
         &:after {
             content: "/";
             margin-right: @quarter-side;
@@ -685,18 +838,18 @@ Styleguide 4.2
     @25px: 1em * (25 / @base-text-size);
     @30px: 1em * (30 / @base-text-size);
 
-    .js & {
-        .content-tree {
-            display: none;
+    // .js & {
+    //     .content-tree {
+    //         display: none;
 
-            &.is-current {
-                display: block;
-            }
-        }
-        .directory {
-            cursor: pointer;
-        }
-    }
+    //         &.is-current {
+    //             display: block;
+    //         }
+    //     }
+    //     .directory {
+    //         cursor: pointer;
+    //     }
+    // }
     .content-tree {
         margin: 0;
 
@@ -707,7 +860,7 @@ Styleguide 4.2
 
             &:after {
                 content: "";
-                width: @25px;
+                width: @15px;
                 height: 1px;
                 display: block;
                 background: @grey;
@@ -717,32 +870,54 @@ Styleguide 4.2
             }
         }
         .directory {
-            padding-left: @30px;
+            padding-left: @20px;
             border-left: 1px solid @grey;
         }
-        .create-new-section {
+        .directory:last-child {
+            border-left: none;
+
             &:before {
                 content: "";
                 width: 1px;
-                height: 100%;
+                height: @20px;
                 display: block;
                 background: @grey;
                 position: absolute;
                 left: 0;
-                bottom: @15px;
+                bottom: 100%;
+                margin-bottom: -@20px;
             }
             &:after {
-                top: auto;
-                bottom: @15px;
+                top: @20px;
+                // bottom: @15px;
             }
         }
+
+        // Legacy
+        // .create-new-section {
+        //     &:before {
+        //         content: "";
+        //         width: 1px;
+        //         height: 100%;
+        //         display: block;
+        //         background: @grey;
+        //         position: absolute;
+        //         left: 0;
+        //         bottom: 100%;
+        //         margin-bottom: -16px;
+        //     }
+        //     &:after {
+        //         top: 16px;
+        //         // bottom: @15px;
+        //     }
+        // }
     }
     li {
         padding-top: @10px;
     }
     .directory {
         padding-top: @15px;
-        
+
         &.is-current {
             > .directory-name {
                 color: @red;
@@ -752,6 +927,13 @@ Styleguide 4.2
     .button {
         margin-top: 0;
     }
+        a {
+            color: @grey;
+        }
+        .activePage,
+        .activeSection {
+            color: @red;
+        }
 }
 
 
@@ -783,16 +965,16 @@ Markup:
 
 */
 
-.reveal-target {
-    .visually-hidden();
+// .reveal-target {
+//     .visually-hidden();
 
-    &.is-current {
-        .show-hidden();
+//     &.is-current {
+//         .show-hidden();
 
-        /* Other */
-        overflow: visible;
-    }
-}
+//         /* Other */
+//         overflow: visible;
+//     }
+// }
 
 .expand-target,
 .fade-in-target {
@@ -819,4 +1001,202 @@ Markup:
     &.is-showing {
         .opacity(1);
     }
+}
+
+
+/*
+Statistics
+
+Circle based dashboard stats
+
+*/
+
+.circle {
+  .border-radius(1000em);
+}
+
+.statistic {
+
+    /* Variables */
+    @150px: 1em * (150 / @base-text-size);
+
+    /* Display & Block Model */
+    display: block;
+    min-width: @150px;
+
+    /* Positioning */
+    position: relative;
+
+    /* Other */
+    color: @grey;
+    text-align: center;
+
+    &.circle {
+        height: 0;
+        padding-top: 100%;
+    }
+}
+.stat-inner {
+
+    /* Mixins */
+    .margin-leader(-1.5, @base-text-size);
+
+    /* Display & Box Model */
+    display: block;
+    padding: 0 @quarter-vertical;
+
+    /* Positioning */
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+}
+
+.stat-outlined {
+  border: 8px solid @light-grey;
+}
+
+.stat-colored {
+  background: @green;
+  color: @white;
+
+  a& {
+    &:hover,
+    &:focus,
+    &.is-current {
+        color: @white;
+        background: @dark-green;
+    }
+  }
+}
+
+.tag {
+  padding: @quarter-vertical @half-vertical;
+  color:@white;
+
+  .inline-block-fallback();
+
+  &.blue {
+    background-color:@blue;
+  }
+  &.green {
+    background-color:@green;
+  }
+  &.red {
+    background-color:@red;
+  }
+  &.yellow {
+    background-color:@yellow;
+  }
+  &.minion-text{
+    .padding-trailer(.125);
+  }
+}
+
+.stats-bar {
+    &.forceful.nav {
+        border-top: 1px solid darken(@light-grey,5%);
+        border-bottom: 1px solid darken(@light-grey,5%);
+
+        .stat {
+            .padding-vertical(0.75, @base-text-size);
+        }
+    }
+    .stat {
+        border-left: 1px solid darken(@light-grey,5%);
+
+        &:first-child {
+            border: none;
+        }
+    }
+  .stat1{
+    .canon-text{
+      color:@dark-orange;
+    }
+
+    border-right:1px solid darken(@light-grey,5%);
+  }
+  .stat2{
+    .canon-text{
+      color:@dark-purple;
+    }
+    border-right:1px solid darken(@light-grey,5%);
+  }
+  .stat3{
+    .canon-text{
+      color:@dark-yellow;
+    }
+    border-right:1px solid darken(@light-grey,5%);
+  }
+}
+
+.bordered{
+  border-bottom:1px solid darken(@light-grey,5%);
+}
+
+.panel-reset{
+  background-color:#f2f2f2;
+}
+
+/* Simple Border */
+
+// Variables
+@border-width: @default-border-width * 1em * (1 / @base-text-size);
+
+.border-top {
+    border-top: @border-width solid @table-border-color;
+}
+.border-right {
+    border-right: @border-width solid @table-border-color;
+}
+.border-bottom {
+    border-bottom: @border-width solid @table-border-color;
+}
+.border-left {
+    border-left: @border-width solid @table-border-color;
+}
+
+/*
+
+Modal
+
+*/
+
+.boxOverlay {
+
+    /* Mixins */
+    .opacity(.5);
+
+    /* Display & Box Model */
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    /* Positioning */
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    /* Other */
+    background: @black;
+}
+.alertwindow {
+    height: 100%;
+    // background: @white;
+}
+.boxContainer {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.alertwindow-loader {
+    height: 25px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url(/resources/images/admin/dialog/ajax-loader.gif) top center no-repeat;
+}
+.alertpad {
+    overflow: auto;
 }
