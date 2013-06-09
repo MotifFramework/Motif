@@ -64,7 +64,7 @@
                 }
 
                 // store records per page value
-                $.get('/admin/ajax/recordsPerPage.html', {num:options.recordsPerPage}, function(data){});
+                $.get('/admin/ajax/baseAjax/recordsPerPage.html', {num:options.recordsPerPage}, function(data){});
 
             });
             if(options.sortable) {

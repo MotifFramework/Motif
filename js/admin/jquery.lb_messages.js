@@ -7,7 +7,7 @@
 (function($) {
     $.lb_messages = function () {
         // get the json messages
-        $.getJSON("/admin/ajax/messages.html?callback=?", "", function(data) {
+        $.getJSON("/admin/ajax/baseAjax/messages.html?callback=?", "", function(data) {
             //process response
             var typeSelector = "#" + data.type + "Message";
             var textSelector = "#" + data.type + "Text";
