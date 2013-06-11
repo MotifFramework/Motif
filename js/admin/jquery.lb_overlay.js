@@ -77,8 +77,8 @@
         );
     };
     $.fn.lb_overlay.defaultOptions = {
-        title : 'Why am I waiting?',
-        message : 'You are dealing with a very complex system.  Therefore some processing is required.  Please sit back, relax, and enjoy the view.  This will only take a second.',
+        title : 'Loading',
+        message : '',
         duration : ''
     };
 })(jQuery);
