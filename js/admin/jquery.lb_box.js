@@ -130,9 +130,9 @@
 			{
 				if(options.title != "")
 				{
-					titleHtml = "<div class='title panel thin dark mtn pal'><div class='proxima-nova-thin paragon-text'>" + closeButton + options.title + "</div></div>";
+					titleHtml = "<div class='title panel dark mtn pal'><div class='proxima-nova-thin paragon-text'>" + closeButton + options.title + "</div></div>";
 				}
-				innerHtml = "<div class='alertpad panel thin light mtn pal'>" + $html.html() + "</div>";
+				innerHtml = "<div class='alertpad panel light mtn pan'>" + $html.html() + "</div>";
 			}
 			else
 			{
@@ -162,7 +162,7 @@
 			if(options.noPad == true)
 			{
 				$(".alertpad", $interior).css("padding", "0px");
-				$interior.css("width", $(".alertpad", $interior).width()-40);
+				$interior.css("width", $(".alertpad", $interior).width());
 				$interior.css("height", $(".alertpad", $interior).height()+38);
 			}
 			
@@ -197,15 +197,15 @@
 				}
 				else
 				{
-					iframeHtml = "<iframe src='" + href + "' frameborder='0' height='" + (options.height-70) + "' width='" + (options.width-40) + "'></iframe>";
+					iframeHtml = "<iframe src='" + href + "' frameborder='0' height='" + (options.height-70) + "' width='" + (options.width) + "'></iframe>";
 				}
-				return $("<div class='alertpad panel thin light mtn pbm'></div>").html(iframeHtml);
+				return $("<div class='alertpad panel light mtn pal'></div>").html(iframeHtml);
 			}
 			else
 			{
 				if(options.message != "")
 				{
-					return $("<div class='alertpad panel thin light mtn pbm'></div>").html(options.message);
+					return $("<div class='alertpad panel light mtn pal'></div>").html(options.message);
 				}
 
 				if(options.dataSource == "")
@@ -216,7 +216,7 @@
 					}
 					else
 					{
-						return $("<div class='alertpad panel thin light mtn pbm'></div>").load(href);
+						return $("<div class='alertpad panel light mtn pal'></div>").load(href);
 					}
 				}
 				else
@@ -227,7 +227,7 @@
 					}
 					else
 					{
-						return $("<div class='alertpad panel thin light mtn pbm'></div>").load(options.dataSource);
+						return $("<div class='alertpad panel light mtn pal'></div>").load(options.dataSource);
 					}
 				}
 			}

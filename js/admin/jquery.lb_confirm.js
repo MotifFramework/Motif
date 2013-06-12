@@ -113,7 +113,7 @@
 		function LoadHtml(formTarget, title)
 		{
 			var html = "";
-			html += '<form id="contentRemovalForm" action="' + formTarget + '" method="post">';
+			html += '<form class="pal" id="contentRemovalForm" action="' + formTarget + '" method="post">';
 				html += '<div class="alert secondary-heading paragon-text">' + title + '</div>';
 				html += '<div class="bluebox panel">';
 				   html += LoadTypeHtml();
