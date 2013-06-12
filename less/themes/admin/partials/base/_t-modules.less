@@ -148,9 +148,40 @@ Styleguide 8.1
         &.is-current {
             background: @dark-white;
         }
-        &.is-current {
+        // &.is-current {
+        //     &:before,
+        //     &:after {
 
-        }
+        //         /* Mixins */
+        //         .pseudo-clear();
+
+        //         /* Display & Box Model */
+        //         margin: -9px 0 0 0;
+
+        //         /* Positioning */
+        //         position: absolute;
+        //         left: 100%;
+        //         top: 50%;
+
+        //         /* Other */
+        //         border: solid transparent;
+        //         border-width: 9px 6px;
+        //         border-left-color: @red;
+        //     }
+        //     &:before {
+
+        //         /* Other */
+        //         border-left-color: @black-6;
+        //     }
+        //     &:after {
+
+        //         /* Display & Box Model */
+        //         margin-left: -1px;
+
+        //         /* Other */
+        //         border-left-color: @dark-white;
+        //     }
+        // }
     }
     &.off-right {
         width: 100%;
@@ -612,8 +643,12 @@ Styleguide 7.4
 
 .dropdown-zone {
     position: relative;
+    z-index: 50;
 
-    &:hover {
+    .no-js &:hover,
+    .js &.is-current {
+        z-index: 90;
+
         .dropdown-reveal {
             height: auto;
             border: 1px solid @black-6;
