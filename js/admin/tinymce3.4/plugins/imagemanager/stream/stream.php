@@ -7,12 +7,9 @@
  * @copyright Copyright © 2007, Moxiecode Systems AB, All rights reserved.
  */
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/Lifeblue/Init.php");
-
-
 // Use install
 if (file_exists("../install"))
-	die('{"result":null,"id":null,"error":{"errstr":"You need to run the installer or rename/remove the \\"install\\" directory.","errfile":"","errline":null,"errcontext":"","level":"FATAL"}}');
+    die('{"result":null,"id":null,"error":{"errstr":"You need to run the installer or rename/remove the \\"install\\" directory.","errfile":"","errline":null,"errcontext":"","level":"FATAL"}}');
 
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -34,36 +31,36 @@ $type = getRequestParam("type", "", true);
 $file = getRequestParam("file", "", true);
 
 if ($package) {
-	require_once('../classes/Utils/ClientResources.php');
+    require_once('../classes/Utils/ClientResources.php');
 
-	$resources = new Moxiecode_ClientResources();
-	$resources->load('../pages/' . $theme . '/resources.xml');
+    $resources = new Moxiecode_ClientResources();
+    $resources->load('../pages/' . $theme . '/resources.xml');
 
-	if ($type) {
-		$man = new Moxiecode_ManagerEngine($type);
+    if ($type) {
+        $man = new Moxiecode_ManagerEngine($type);
 
-		require_once(MCMANAGER_ABSPATH ."CorePlugin.php");
-		require_once("../config.php");
+        require_once(MCMANAGER_ABSPATH ."CorePlugin.php");
+        require_once("../config.php");
 
-		$man->dispatchEvent("onPreInit", array($type));
-		$mcConfig = $man->getConfig();
+        $man->dispatchEvent("onPreInit", array($type));
+        $mcConfig = $man->getConfig();
 
-		// Load plugin resources
-		$plugins = explode(',', $mcConfig["general.plugins"]);
-		foreach ($plugins as $plugin)
-			$resources->load('../plugins/' . $plugin . '/resources.xml');
-	}
+        // Load plugin resources
+        $plugins = explode(',', $mcConfig["general.plugins"]);
+        foreach ($plugins as $plugin)
+            $resources->load('../plugins/' . $plugin . '/resources.xml');
+    }
 
-	$file = $resources->getFile($package, $file);
+    $file = $resources->getFile($package, $file);
 
-	header('Content-type: ' . $file->getContentType());
-	readfile($file->getPath());
+    header('Content-type: ' . $file->getContentType());
+    readfile($file->getPath());
 
-	die();
+    die();
 }
 
 if ($cmd == "")
-	die("No command.");
+    die("No command.");
 
 $chunks = explode('.', $cmd);
 
@@ -74,7 +71,7 @@ $method = $cmd = $chunks[1];
 $type = preg_replace("/[^a-z]/i", "", $type);
 
 if ($type == "")
-	die("No type set.");
+    die("No type set.");
 
 // Include Base and Core and Config.
 $man = new Moxiecode_ManagerEngine($type);
@@ -89,54 +86,54 @@ $mcConfig = $man->getConfig();
 $pluginPaths = $man->getPluginPaths();
 
 foreach ($pluginPaths as $path)
-	require_once("../". $path);
+    require_once("../". $path);
 
 
 // Dispatch onAuthenticate event
 if ($man->isAuthenticated()) {
-	if ($_SERVER["REQUEST_METHOD"] == "GET") {
-		$args = $_GET;
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $args = $_GET;
 
-		// Dispatch event before starting to stream
-		$man->dispatchEvent("onBeforeStream", array($cmd, &$args));
+        // Dispatch event before starting to stream
+        $man->dispatchEvent("onBeforeStream", array($cmd, &$args));
 
-		// Check command, do command, stream file.
-		$man->dispatchEvent("onStream", array($cmd, &$args));
+        // Check command, do command, stream file.
+        $man->dispatchEvent("onStream", array($cmd, &$args));
 
-		// Dispatch event after stream
-		$man->dispatchEvent("onAfterStream", array($cmd, &$args));
-	} else if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Dispatch event after stream
+        $man->dispatchEvent("onAfterStream", array($cmd, &$args));
+    } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-		$args = array_merge($_POST, $_GET);
-		$json = new Moxiecode_JSON();
+        $args = array_merge($_POST, $_GET);
+        $json = new Moxiecode_JSON();
 
-		// Dispatch event before starting to stream
-		$man->dispatchEvent("onBeforeUpload", array($cmd, &$args));
+        // Dispatch event before starting to stream
+        $man->dispatchEvent("onBeforeUpload", array($cmd, &$args));
 
-		// Check command, do command, stream file.
-		$result = $man->executeEvent("onUpload", array($cmd, &$args));
-		$data = $result->toArray();
+        // Check command, do command, stream file.
+        $result = $man->executeEvent("onUpload", array($cmd, &$args));
+        $data = $result->toArray();
 
-		if (isset($args["chunk"])) {
-			// Output JSON response to multiuploader
-			die('{method:\'' . $method . '\',result:' . $json->encode($data) . ',error:null,id:\'m0\'}');
-		} else {
-			// Output JSON function
-			echo '<html><body><script type="text/javascript">';
+        if (isset($args["chunk"])) {
+            // Output JSON response to multiuploader
+            die('{method:\'' . $method . '\',result:' . $json->encode($data) . ',error:null,id:\'m0\'}');
+        } else {
+            // Output JSON function
+            echo '<html><body><script type="text/javascript">';
 
-			if (isset($args["domain"]) && $args["domain"])
-				echo 'document.domain="' . $args["domain"] . '";';
+            if (isset($args["domain"]) && $args["domain"])
+                echo 'document.domain="' . $args["domain"] . '";';
 
-			echo 'parent.handleJSON({method:\'' . $method . '\',result:' . $json->encode($data) . ',error:null,id:\'m0\'});</script></body></html>';
-		}
+            echo 'parent.handleJSON({method:\'' . $method . '\',result:' . $json->encode($data) . ',error:null,id:\'m0\'});</script></body></html>';
+        }
 
-		// Dispatch event after stream
-		$man->dispatchEvent("onAfterUpload", array($cmd, &$args));
-	}
+        // Dispatch event after stream
+        $man->dispatchEvent("onAfterUpload", array($cmd, &$args));
+    }
 } else {
-	if (isset($_GET["format"]) && ($_GET["format"] == "flash"))
-		header("HTTP/1.1 405 Method Not Allowed");
+    if (isset($_GET["format"]) && ($_GET["format"] == "flash"))
+        header("HTTP/1.1 405 Method Not Allowed");
 
-	die('{"result":{login_url:"' . addslashes($mcConfig["authenticator.login_page"]) . '"},"id":null,"error":{"errstr":"Access denied by authenicator.","errfile":"","errline":null,"errcontext":"","level":"AUTH"}}');
+    die('{"result":{login_url:"' . addslashes($mcConfig["authenticator.login_page"]) . '"},"id":null,"error":{"errstr":"Access denied by authenicator.","errfile":"","errline":null,"errcontext":"","level":"AUTH"}}');
 }
 ?>
