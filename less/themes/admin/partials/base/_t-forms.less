@@ -31,6 +31,12 @@ textarea {
     /* Display & Box Model */
     width: 100%;
     max-width: @600px;
+
+    .gm-columns > &,
+    .gt-columns > &,
+    .gd-columns > & {
+        max-width: none;
+    }
 }
 input,
 textarea,
