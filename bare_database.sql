@@ -217,19 +217,18 @@ CREATE TABLE `LB_DataTypeDefinition` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeDefinition` (`dataTypeDefinitionId`, `dataTypeName`, `dataTypeDescription`, `dataTypeClass`, `status`, `dataStorageType`) VALUES
-(1, 'Input Field', 'A standard single line input field.', 'LB_ContentManagement_Presentation_DataTypes_InputField', 1, 'VC255'),
-(2, 'WYSIWYG Editor', 'A specialized editor helping create HTML markup of content.', 'LB_ContentManagement_Presentation_DataTypes_WYSIWYGEditor', 1, 'Text'),
-(3, 'File Uploader', 'Allows you to select files from your hard drive to upload for use.', 'LB_ContentManagement_Presentation_DataTypes_FileUpload', 1, 'Text'),
-(4, 'Content Picker', 'Content Picker', 'LB_ContentManagement_Presentation_DataTypes_ContentPicker', 1, 'Text'),
-(5, 'Call Out Box', 'A Generator for call out boxes.', 'LB_ContentManagement_Presentation_DataTypes_CallOutBox', 1, 'Text'),
-(6, 'Drop Down List', 'Drop Down List', 'LB_ContentManagement_Presentation_DataTypes_DropDownList', 1, 'Text'),
-(7, 'Tag Picker', 'Tag input box w/ auto fill', 'LB_ContentManagement_Presentation_DataTypes_TagPicker', 1, 'Text'),
-(8, 'Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MediaPicker', 1, 'Text'),
-(9, 'Date Time Picker', 'Use this data type to add a date time element.', 'LB_ContentManagement_Presentation_DataTypes_DateTimePicker', 1, 'Int'),
-(10, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', 'LB_ContentManagement_Presentation_DataTypes_ContentDropDownList', 1, 'Text'),
-(11, 'Text Area', 'Use this data type to create unstyled text.', 'LB_ContentManagement_Presentation_DataTypes_TextArea', 1, 'Text'),
-(12, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', 'LB_ContentManagement_Presentation_DataTypes_ContentGrid', 1, 'Text'),
-(13, 'Multiple Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', 'LB_ContentManagement_Presentation_DataTypes_MultiMediaPicker', 1, 'Text');
+(1, 'Input Field', 'A standard single line input field.', '\\Febe\\ContentManagement\\Presentation_DataTypes_InputField', 1, 'VC255'),
+(2, 'WYSIWYG Editor', 'A specialized editor helping create HTML markup of content.', '\\Febe\\ContentManagement\\Presentation_DataTypes_WYSIWYGEditor', 1, 'Text'),
+(3, 'File Uploader', 'Allows you to select files from your hard drive to upload for use.', '\\Febe\\ContentManagement\\Presentation_DataTypes_FileUpload', 0, 'Text'),
+(4, 'Content Picker', 'Content Picker', '\\Febe\\ContentManagement\\Presentation_DataTypes_ContentPicker', 1, 'Text'),
+(5, 'Drop Down List', 'Drop Down List', '\\Febe\\ContentManagement\\Presentation_DataTypes_DropDownList', 1, 'Text'),
+(6, 'Tag Picker', 'Tag input box w/ auto fill', '\\Febe\\ContentManagement\\Presentation_DataTypes_TagPicker', 1, 'Text'),
+(7, 'Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', '\\Febe\\ContentManagement\\Presentation_DataTypes_MediaPicker', 1, 'Text'),
+(8, 'Date Time Picker', 'Use this data type to add a date time element.', '\\Febe\\ContentManagement\\Presentation_DataTypes_DateTimePicker', 1, 'Int'),
+(9, 'Content Selector Drop Down', 'Use this data type to select a single piece of Content via a drop down.', '\\Febe\\ContentManagement\\Presentation_DataTypes_ContentDropDownList', 1, 'Text'),
+(10, 'Text Area', 'Use this data type to create unstyled text.', '\\Febe\\ContentManagement\\Presentation_DataTypes_TextArea', 1, 'Text'),
+(11, 'Content Selector Grid', 'Use this data type to select multiple pieces of content from a checkbox grid.', '\\Febe\\ContentManagement\\Presentation_DataTypes_ContentGrid', 1, 'Text'),
+(12, 'Multiple Media Picker', 'A entity to select media items using the TinyMCE Image Manager.', '\\Febe\\ContentManagement\\Presentation_DataTypes_MultiMediaPicker', 1, 'Text');
 
 CREATE TABLE `LB_DataTypeEntity` (
   `dataTypeEntityId` int(11) NOT NULL auto_increment,
@@ -251,16 +250,16 @@ CREATE TABLE `LB_DataTypeEntity` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_DataTypeEntity` (`dataTypeEntityId`, `contentTypeId`, `dataTypeDefinitionId`, `entityKey`, `entityName`, `entityDescription`, `required`, `validatorType`, `dataStorageType`, `contentTypeGroupId`, `entityOrder`, `status`) VALUES
-(9, 3, 1, 'postTitle', 'Post Title', 'Title for this post', 1, '', 'VC255', 4, 0, 1),
+(1, 3, 1, 'postTitle', 'Post Title', 'Title for this post', 1, '', 'VC255', 4, 0, 1),
 (2, 1, 2, 'content', 'Content', 'The content for this page.', 1, '', 'Text', 1, 0, 1),
 (3, 2, 1, 'metaTitle', 'Meta Title', 'This is the page title', 0, '', 'VC255', 2, 0, 1),
 (4, 2, 1, 'metaDescription', 'Meta Description', 'A description of the page content', 0, '', 'VC255', 2, 0, 1),
-(5, 2, 11, 'tweetText', 'Tweet Text', 'The text that will appear when the page is tweeted', 0, '', 'Text', 3, 0, 1),
+(5, 2, 10, 'tweetText', 'Tweet Text', 'The text that will appear when the page is tweeted', 0, '', 'Text', 3, 0, 1),
 (6, 2, 1, 'openGraphTitle', 'Open Graph Title', 'The title of the page that will appear in social networks', 0, '', 'VC255', 3, 0, 1),
-(7, 2, 11, 'openGraphDescription', 'Open Graph Description', 'The description of the page that will appear in social networks', 0, '', 'Text', 3, 0, 1),
-(8, 2, 8, 'openGraphImage', 'Open Graph Image', 'The image that will appear for the page when shared in social networks', 0, '', 'Text', 3, 0, 1),
-(10, 3, 9, 'postDate', 'Post Date', 'The publication date for this blog post (used for archiving, NOT for go-live visibility)', 0, '', 'Int', 4, 0, 1),
-(11, 3, 11, 'postExcerpt', 'Post Excerpt', 'The brief excerpt visible on the blog landing page', 0, '', 'Text', 4, 0, 1);
+(7, 2, 10, 'openGraphDescription', 'Open Graph Description', 'The description of the page that will appear in social networks', 0, '', 'Text', 3, 0, 1),
+(8, 2, 7, 'openGraphImage', 'Open Graph Image', 'The image that will appear for the page when shared in social networks', 0, '', 'Text', 3, 0, 1),
+(9, 3, 8, 'postDate', 'Post Date', 'The publication date for this blog post (used for archiving, NOT for go-live visibility)', 0, '', 'Int', 4, 0, 1),
+(10, 3, 10, 'postExcerpt', 'Post Excerpt', 'The brief excerpt visible on the blog landing page', 0, '', 'Text', 4, 0, 1);
 
 CREATE TABLE `LB_DataTypeEntityGroups` (
   `entityGroupId` int(11) NOT NULL auto_increment,
@@ -302,7 +301,8 @@ CREATE TABLE `LB_Modules` (
 
 INSERT INTO `LB_Modules` (`moduleId`, `moduleName`, `moduleAlias`, `moduleDescription`, `activityClass`, `adminDisplay`) VALUES
 (1, 'User Management', 'Users', 'Allows for the authorization of users, admin panel accessibility, and additional user-based functionality.', 'LB_UserManagement_Logic_User', 1),
-(2, 'Content Management', 'Content', 'Allows for the generation and rendering of generic content, admin panel accessibility, and additional content-based functionality including extendible content types.', 'LB_ContentManagement_Logic_Content', 2);
+(2, 'Content Management', 'Content', 'Allows for the generation and rendering of generic content, admin panel accessibility, and additional content-based functionality including extendible content types.', 'LB_ContentManagement_Logic_Content', 2),
+(3, 'Settings Management', 'Settings', '', 'LB_Reef_Logic_Settings', 3);
 
 CREATE TABLE `LB_ModuleSections` (
   `moduleAlias` varchar(128) NOT NULL,
@@ -314,16 +314,12 @@ CREATE TABLE `LB_ModuleSections` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ModuleSections` (`moduleAlias`, `sectionName`, `sectionLink`, `displayOrder`, `permission`) VALUES
-('Users', 'Users', '/admin/users/index.html', 0, 'Manage Users'),
+('Content', 'Content List', '/admin/content/items.html', 0, 'Create Content,Delete Content,Manage Navigation'),
+('Settings', 'System Settings', '/admin/settings/index.html', 0, 'Manage System Settings'),
+('Settings', 'Website Settings', '/admin/settings/site.html', 1, 'Manage Website Settings'),
 ('Users', 'Roles', '/admin/users/usertypes.html', 1, 'Manage Users'),
-('Content', 'All Content', '/admin/content/items.html', 0, 'Create Content,Delete Content,Manage Navigation'),
-('Content', 'Content Templates', '/admin/content/contentTypes.html', 2, 'Manage Content Types'),
-('Resources', 'Overview', '/admin/resources/index.html', 0, NULL),
-('Resources', 'Files', '/admin/resources/files.html', 1, NULL),
-('Resources', 'Images', '/admin/resources/images.html', 2, NULL),
-('Resources', 'Tags', '/admin/resources/tags.html', 3, NULL),
-('Content', 'Workflow Rules', '/admin/content/workflowRules.html', 3, 'Manage Workflow Rules'),
-('Crud', 'Overview', '/admin/crud/index.html', 0, 'Crud Overview');
+('Users', 'Users', '/admin/users/index.html', 0, 'Manage Users'),
+('Users', 'Workflow Rules', '/admin/users/workflowRules.html', 2, 'Manage Workflow Rules');
 
 CREATE TABLE `LB_Notifications` (
   `notificationId` int(11) NOT NULL auto_increment,
@@ -383,7 +379,13 @@ INSERT INTO `LB_Settings` (`settingId`, `settingName`, `settingDescription`, `se
 (21, 'LB_CONTENT_DEFAULT_TITLE', 'Load the default page title here.', 'Content', 'Website', 1),
 (22, 'LB_CONTENT_DEFAULT_DESCRIPTION', 'Load the default page description here.', 'Content', 'Website description', 1),
 (23, 'LB_CONTENT_DEFAULT_IMAGEPATH', 'Load the default image path here for Open Graph image.', 'Content', 'http://www.lifeblue.com/resources/images/fb-avatar.jpg', 1),
-(24, 'LB_CONTENT_DEFAULT_KEYWORDS', 'Load the default keywords here for SEO.', 'Content', 'website, things, stuff', 1);
+(24, 'LB_CONTENT_DEFAULT_KEYWORDS', 'Load the default keywords here for SEO.', 'Content', 'website, things, stuff', 1),
+(25, 'LB_CONTENT_OG_DEFAULT_TITLE', 'Load the default page title here.', 'Website', 'Website', 1),
+(26, 'LB_CONTENT_OG_DEFAULT_DESCRIPTION', 'Load the default page description here.', 'Website', 'Website description', 1),
+(27, 'LB_CONTENT_GOOGLEPLUS_LINK', 'Load basic Facebook SDK code by entering your app id here', 'Website', '', 1),
+(28, 'LB_CONTENT_YOUTUBE_LINK', 'Load basic Facebook SDK code by entering your app id here', 'Website', '', 1),
+(29, 'LB_CONTENT_TWITTER_USERNAME', 'Load basic Facebook SDK code by entering your app id here', 'Website', 'Lifeblue', 1),
+(30, 'LB_CONTENT_FACEBOOK_LINK', 'Load basic Facebook SDK code by entering your app id here', 'Website', 'https://www.facebook.com/mylifeblue', 1);
 
 CREATE TABLE `LB_SiteDesignOverride` (
   `fullURL` varchar(500) NOT NULL default '',
@@ -476,7 +478,9 @@ INSERT INTO `LB_UserPermissions` (`userPermissionId`, `userPermissionSet`, `user
 (31, 'Permissions', 'Manage System Settings', 'Manage system settings and information'),
 (32, 'Permissions', 'Manage Workflow Rules', 'Permission to manage system workflow rules.'),
 (33, 'Permissions', 'Delete Folders', 'Delete folders/sections in your tree structure.'),
-(34, 'Permissions', 'Crud Overview', 'Crud overview description');
+(34, 'Permissions', 'Crud Overview', 'Crud overview description'),
+(35, 'Permissions', 'Manage Website Settings', 'Manage website settings and information'),
+(36, 'Permissions', 'Manage Templates', 'Manage content templates.');
 
 CREATE TABLE `LB_Users` (
   `userId` int(11) NOT NULL auto_increment,
@@ -529,7 +533,9 @@ INSERT INTO `LB_UserToUserPermission` (`userId`, `userPermissionId`) VALUES
 (1, 31),
 (1, 32),
 (1, 33),
-(1, 34);
+(1, 34),
+(1, 35),
+(1, 36);
 
 CREATE TABLE `LB_UserTypes` (
   `userTypeId` int(11) NOT NULL auto_increment,
@@ -557,7 +563,9 @@ INSERT INTO `LB_UserTypeToUserPermission` (`userTypeId`, `userPermissionId`) VAL
 (1, 30),
 (1, 31),
 (1, 32),
-(1, 33);
+(1, 33),
+(1, 35),
+(1, 36);
 
 CREATE TABLE `LB_WorkflowPath` (
   `pathId` int(11) NOT NULL auto_increment,
