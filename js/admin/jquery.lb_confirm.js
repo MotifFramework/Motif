@@ -7,7 +7,7 @@
 	$.fn.lb_confirm = function(customOptions)
 	{
 		var $this = this;
-		
+
 		if(customOptions=="close")
 		{
 			this.each(function()
@@ -31,7 +31,7 @@
 						zindex : 1500,
 						animate : true,
 						showClose : true,
-						title : 'Wait just a second...',
+						title : 'Please confirm',
 						message : html + "<a class='closeConfirmBox'></a>",
 						closeSelector : '.closeConfirmBoxFinal',
 						Open : function()
