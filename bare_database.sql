@@ -52,7 +52,7 @@ CREATE TABLE `LB_ContentCache` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_ContentCache` (`fullURL`, `publishedData`) VALUES
-('/index', '{"template":"Home","data":[{"entityKey":"content","data":"<p>The home page content.<\\/p>"},{"entityKey":"metaTitle","data":"Home Page"},{"entityKey":"metaDescription","data":"This is the home page for the site"},{"entityKey":"tweetText","data":""},{"entityKey":"openGraphTitle","data":""},{"entityKey":"openGraphDescription","data":""},{"entityKey":"openGraphImage","data":""}]}');
+('/index', '{"template":"home","data":[{"entityKey":"content","data":"<p>The home page content.<\\/p>"},{"entityKey":"metaTitle","data":"Home Page"},{"entityKey":"metaDescription","data":"This is the home page for the site"},{"entityKey":"tweetText","data":""},{"entityKey":"openGraphTitle","data":""},{"entityKey":"openGraphDescription","data":""},{"entityKey":"openGraphImage","data":""}]}');
 
 CREATE TABLE `LB_ContentData_Float` (
   `versionId` int(11) NOT NULL,
@@ -403,8 +403,8 @@ CREATE TABLE `LB_Templates` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 INSERT INTO `LB_Templates` (`templateId`, `templateName`, `templateClass`, `status`) VALUES
-(1, 'Basic Page', 'BasicInterior', 1),
-(2, 'Home Page', 'Home', 1);
+(1, 'Basic Page', 'basicInterior', 1),
+(2, 'Home Page', 'home', 1);
 
 CREATE TABLE `LB_TrashCan` (
   `id` int(11) NOT NULL auto_increment,
