@@ -11,7 +11,7 @@
         if(customOptions == "full") {
             options = {
                 script_url : '/resources/js/admin/tinymce3.4/tiny_mce.js',
-                plugins : "lbcontrols,safari,pagebreak,style,layer,table,save,advhr,advimageutsw,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,imagemanager,filemanager",
+                plugins : "lbcontrols,safari,pagebreak,style,layer,table,save,advhr,advimageutsw,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,moxiemanager",
                 buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
                 buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,imageutsw,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
                 buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen,|,insertimage,insertfile,|,lbcontrols",
@@ -19,7 +19,10 @@
                 toolbar_align : "left",
                 statusbar_location : "bottom",
                 valid_elements : "*[*]",
-                theme : "advanced"
+                theme : "advanced",
+                relative_urls : false
+                // remove_script_host : false,
+                // document_base_url : 'http://9dc3f407a257cfd3f7ea-d14ef12e680aa00597bdffb57368cf92.r6.cf2.rackcdn.com'
             }
         } else if( customOptions == "mid" ) {
             options = {
@@ -32,7 +35,10 @@
                 toolbar_location : "top",
                 toolbar_align : "left",
                 statusbar_location : "bottom",
-                theme : "advanced"
+                theme : "advanced",
+                relative_urls : false
+                // remove_script_host : false,
+                // document_base_url : 'http://9dc3f407a257cfd3f7ea-d14ef12e680aa00597bdffb57368cf92.r6.cf2.rackcdn.com'
             }
         } else if( customOptions == "basic" ) {
             options = {
@@ -44,7 +50,10 @@
                 toolbar_location : "top",
                 toolbar_align : "left",
                 statusbar_location : "none",
-                theme : "advanced"
+                theme : "advanced",
+                relative_urls : false
+                // remove_script_host : false,
+                // document_base_url : 'http://9dc3f407a257cfd3f7ea-d14ef12e680aa00597bdffb57368cf92.r6.cf2.rackcdn.com'
             }
         }
         else {
@@ -79,5 +88,8 @@
         theme : "advanced",
         valid_elements : '*[*]',
         relative_urls : false
+        // relative_urls : false,
+        // remove_script_host : false,
+        // document_base_url : 'http://9dc3f407a257cfd3f7ea-d14ef12e680aa00597bdffb57368cf92.r6.cf2.rackcdn.com'
     }
 })(jQuery);
