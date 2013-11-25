@@ -1,0 +1,12 @@
+#mixins {
+	.grid-loop ( @int, @total ) when ( @int > 0 ) and ( @total > 4 ) {
+		&-@{int}of@{total} {
+			width: ( 100% * ( @int / @total ) );
+		}
+
+		.m-grid-loop( @int - 1, @int );
+		.m-grid-loop( @int - 1, @total );
+	}
+	.grid-loop ( 0, @total ) {}
+	.grid-loop ( @int, 4 ) {}
+}

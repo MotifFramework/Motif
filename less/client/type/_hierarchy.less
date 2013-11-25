@@ -1,0 +1,113 @@
+/*
+
+Typographic Scale
+
+The building blocks for the site's type sizes. Almost exclusively, an element's font size is assigned with one of these classes. If a new size is needed, a new class is created here so it can be used and reused elsewhere.
+
+The list of type sizes can grow or shrink, but be vigilant in keeping the number of sizes to a minimum. A nice rule of thumb is that no two sizes can one pixel in difference (forcing you to choose one over the other, giving you one class where you previously had two).
+
+Styleguide 2.2
+
+*/
+
+/*
+
+Canon Text
+
+Markup:
+<p class="canon-text">Canon Text (48px)</p>
+
+Styleguide 2.2.1
+
+*/
+
+.canon-text {
+
+    // Mixins
+    .type-size(@canon-text-size);
+}
+
+/*
+
+Paragon Text
+
+Markup:
+<p class="paragon-text">Paragon Text (28px)</p>
+
+Styleguide 2.2.2
+
+*/
+
+.paragon-text {
+
+    // Mixins
+    .type-size(@paragon-text-size);
+}
+
+/*
+
+Primer Text
+
+Markup:
+<p class="primer-text">Primer Text (21px)</p>
+
+Styleguide 2.2.3
+
+*/
+
+.primer-text {
+
+    // Mixins
+    .type-size(@primer-text-size);
+}
+
+/*
+
+Normal Text
+
+Markup:
+<p class="normal-text">Normal Text (16px)</p>
+
+Styleguide 2.2.4
+
+*/
+
+.normal-text {
+
+    // Mixins
+    .type-size(@normal-text-size);
+}
+
+/*
+
+Petite Text
+
+Markup:
+<p class="petite-text">Petite Text (13px)</p>
+
+Styleguide 2.2.5
+
+*/
+
+.petite-text {
+
+    // Mixins
+    .type-size(@petite-text-size);
+}
+
+/*
+
+Minion Text
+
+Markup:
+<p class="minion-text">Minion Text (10px)</p>
+
+Styleguide 2.2.6
+
+*/
+
+.minion-text {
+
+    // Mixins
+    .type-size(@minion-text-size);
+}

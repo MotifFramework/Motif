@@ -1,0 +1,144 @@
+/*
+
+Media Object
+
+The Media Object is an image (or media-type) to the left with (typically) 
+descriptive content to the right. The media object can be whatever size it 
+wants, the basic format will remain the same. (Text will **not** wrap.)  This 
+has any number of applications, such as a checkbox next to a label with lots 
+of text.
+
+See: [The Media Object Saves Hundreds of Lines of Code][1]
+
+  [1]: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+
+Markup:
+<div class="media-object">
+    <figure class="object mtn">
+        <img src="http://placehold.it/200" alt="Media Object" />
+    </figure>
+    <div class="desc">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas 
+        eget risus libero, id venenatis ante. Curabitur iaculis turpis vitae 
+        velit luctus in luctus mi molestie. Curabitur bibendum magna lorem. 
+        Curabitur enim lectus, scelerisque non pellentesque in, suscipit eget 
+        nibh. Pellentesque vitae nunc vel tortor rhoncus euismod. Maecenas 
+        pretium porta ultricies. Quisque feugiat sem sit amet sapien consequat 
+        non fringilla leo suscipit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas 
+        eget risus libero, id venenatis ante. Curabitur iaculis turpis vitae 
+        velit luctus in luctus mi molestie. Curabitur bibendum magna lorem. 
+        Curabitur enim lectus, scelerisque non pellentesque in, suscipit eget 
+        nibh. Pellentesque vitae nunc vel tortor rhoncus euismod. Maecenas 
+        pretium porta ultricies. Quisque feugiat sem sit amet sapien consequat 
+        non fringilla leo suscipit.</p>
+    </div>
+</div>
+
+Styleguide 1.3.1
+
+*/
+
+.media-object {
+    &,
+    &__desc {
+        overflow: hidden;
+    }
+    &--checkbox {
+        &:extend(.group all);
+
+        // Mixins
+        .inline-block-fallback();
+
+        /* Display & Box Model */
+        overflow: visible;
+
+        .media-object__figure {
+            &:extend(.float--left);
+
+            margin-right: @quarter-side;
+        }
+    }
+    &__figure img,
+    &__desc {
+        display: block;
+    }
+}
+
+// Small Screens and onward
+@media @small-screens-min {
+    .media-object {
+        &__figure {
+            max-width: 40%;
+            margin-right: @full-side;
+            float: left;
+        }
+        &__desc { 
+            & > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+// Medium Screens and onward
+@media @medium-screens-min {
+    .media-object {
+        &__figure {
+            max-width: 50%;
+        }
+    }
+}
+
+/*
+
+Figures
+
+Great for integrating images into bodies of text, the `.figure` class is paired with the `.float-left` or `.float-right` class depending on where you would like it placed.
+
+Markup:
+<figure class="figure float-left">
+    <img src="http://placehold.it/213" alt="An image floating left" />
+</figure>
+<p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
+
+Styleguide 7.4
+
+*/
+
+.figure {
+
+    // Mixins
+    .margin-leader();
+
+    &.float-left,
+    &.float-right {
+        float: none;
+    }
+    
+    img {
+        &:extend(.new-line);
+    }
+}
+@media @small-screens-min {
+    .figure {
+        max-width:              50%;
+        margin-top:             0;
+        
+        &.float-left,
+        &.float-right   {
+            padding-bottom:     @half-vertical;
+
+            // Mixins
+            // .margin-leader(1.5);
+        }
+        &.float-left    {
+            float:              left;
+            padding-right:      @double-side;
+        }
+        &.float-right   {
+            float:              right;
+            padding-left:       @double-side;
+        }
+    }
+}

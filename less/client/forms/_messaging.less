@@ -1,0 +1,156 @@
+/*
+Form Validation
+
+Markup: <label class="input-label {$modifiers}">
+    Telephone
+    <input class="input-s" type="tel" value="555-555-5555">
+</label>
+
+.error - 
+.success - 
+
+Styleguide 5.4
+*/
+
+.is-successful {
+    input,
+    textarea,
+    select {
+        border-color: @success-color;
+    }
+}
+.is-erroneous {
+    input,
+    textarea,
+    select {
+        border-color: @error-color;
+    }
+}
+
+/*
+Form Messaging
+
+Markup: <label class="input-label">
+    Form Bubble
+    <input type="tel" placeholder="XXX-XXX-XXXX">
+    <small class="input-alert {$modifiers} bubble">
+        A message pertaining to this field.
+    </small>
+</label>
+
+.info - 
+.warning - 
+.error - 
+.success - 
+
+Styleguide 5.5
+*/
+
+.bubble {
+
+    // Variables
+    @1px: 1em * (1 / @base-text-size);
+    @5px: 1em * (5 / @base-text-size);
+    @7px: 1em * (7 / @base-text-size);
+
+    @wisp-width: @5px;
+    @bubble-color: @white;
+    @shadow: fadeout(@black, 50%);
+    @shadow-radius: @7px;
+
+    // Create
+    margin: 0;
+    padding: @half-vertical;
+    background-color: @bubble-color;
+    position: relative;
+
+    // Mixins
+    .border-radius(@default-radius);
+    .box-shadow(0, 0, @shadow-radius, @shadow);
+    .transition(opacity, 0.15s, linear);
+
+    &:after {
+        position: absolute;
+        border: @wisp-width solid transparent;
+    
+        // Mixins
+        .pseudo-clear();
+    }
+    &.left-wisp,
+    &.right-wisp {
+        &:after {
+            top: 50%;
+            margin-top: -@wisp-width;
+        }
+    }
+    &.left-wisp {
+        &:after {
+            left: -@wisp-width * 2;
+            border-right-color: @bubble-color;
+        }
+    }
+    &.right-wisp {
+        &:after {
+            right: -@wisp-width * 2;
+            border-left-color: @bubble-color;
+        }
+    }
+    &.top-wisp,
+    &.bottom-wisp {
+        &:after {
+            left: 50%;
+            margin-left: -@wisp-width;
+        }
+    }
+    &.top-wisp {
+        &:after {
+            top: -@wisp-width * 2;
+            border-bottom-color: @bubble-color;
+        }
+    }
+    &.bottom-wisp {
+        &:after {
+            bottom: -@wisp-width * 2;
+            border-top-color: @bubble-color;
+        }
+    }
+    &.input-alert {
+        padding: @quarter-vertical @half-vertical;
+        color: @white;
+
+        // Mixins
+        &:extend(.body-text);
+        .box-shadow-none();
+        .inline-block-fallback();
+        
+        &:after {
+            left: @half-vertical;
+            margin-left: 0;
+            top: -@wisp-width * 2;
+            border-bottom-color: @bubble-color;
+        }
+        &.warning {
+            .input-alert-color(@warning-color);
+        }
+        &.info {
+            .input-alert-color(@info-color);
+        }
+        &.error {
+            .input-alert-color(@error-color);
+        }
+        &.success {
+            .input-alert-color(@success-color);
+        }
+    }
+}
+
+.no-boxshadow {
+    .bubble {
+
+        // Variables
+        @1px: 1em * (1 / @base-text-size);
+    
+        // Create
+        border: @1px solid @grey;
+    }
+}

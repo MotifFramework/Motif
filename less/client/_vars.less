@@ -1,0 +1,120 @@
+// 
+// Helpful Variables
+// 
+// Mostly spacing, to be honest.
+// 
+
+// Horizontal Margins
+// 
+// Take the base grid margin, divide it (if necessary), then divide 
+// the result by the `body`'s base text size. Convert to ems.
+
+@full-side: 1em * ((@base-margin / 2) / @base-text-size);
+@half-side: 1em * ((@base-margin / 4) / @base-text-size);
+@quarter-side: 1em * ((@base-margin / 8) / @base-text-size);
+@double-side: 1em * (@base-margin / @base-text-size);
+
+// Minus Border
+// 
+// Ditto, but subtract the project's default border width before 
+// dividing by the base text size.
+
+@full-side-bordered: 1em * (((@base-margin / 2) - @default-border-width) / @base-text-size);
+@half-side-bordered: 1em * (((@base-margin / 4) - @default-border-width) / @base-text-size);
+@quarter-side-bordered: 1em * (((@base-margin / 8) - @default-border-width) / @base-text-size);
+@double-side-bordered: 1em * ((@base-margin - @default-border-width) / @base-text-size);
+
+// Vertical Margins
+// 
+// Take the base vertical unit, divide it (if necessary), then divide 
+// the result by the `body`'s base text size. Convert to ems.
+
+@full-vertical: 1em * (@base-vertical / @base-text-size);
+@half-vertical: 1em * ((@base-vertical / 2) / @base-text-size);
+@quarter-vertical: 1em * ((@base-vertical / 4) / @base-text-size);
+@eighth-vertical: 1em * ((@base-vertical / 8) / @base-text-size);
+@double-vertical: 1em * ((@base-vertical * 2) / @base-text-size);
+
+// Minus Border
+// 
+// Ditto, but subtract the project's default border width before 
+// dividing by the base text size.
+
+@full-vertical-bordered: 1em * ((@base-vertical - @default-border-width) / @base-text-size);
+@half-vertical-bordered: 1em * (((@base-vertical / 2) - @default-border-width) / @base-text-size);
+@quarter-vertical-bordered: 1em * (((@base-vertical / 4) - @default-border-width) / @base-text-size);
+@double-vertical-bordered: 1em * (((@base-vertical * 2) - @default-border-width) / @base-text-size);
+
+// Misc
+
+@default-radius: 1em * (@default-border-radius / @base-text-size);
+@border-width: 1em * (@default-border-width / @base-text-size);
+@grid-width: 1em * ((((@base-column + @base-margin) * @total-columns) - @base-margin) / @base-text-size);
+@full-grid-width: 1em * (((@base-column + @base-margin) * @total-columns) / @base-text-size);
+
+
+// Media Query Vars
+
+// Breakpoint min and max values
+@mq-base-max: ( 1em * ( ( @bp-small-width - 1 ) / 16 ) );
+@mq-small-min: ( 1em * ( @bp-small-width / 16 ) );
+@mq-small-max: ( 1em * ( ( @bp-medium-width - 1 ) / 16 ) );
+@mq-medium-min: ( 1em * ( @bp-medium-width / 16 ) );
+@mq-medium-max: ( 1em * ( ( @bp-large-width - 1 ) / 16 ) );
+@mq-large-min: ( 1em * ( @bp-large-width / 16 ) );
+@mq-large-max: ( 1em * ( ( @bp-x-large-width - 1 ) / 16 ) );
+@mq-x-large-min: ( 1em * ( @bp-x-large-width / 16 ) );
+
+// `@media` responsive strings
+
+// Base
+@base-screens-max: ~"all and (max-width: @{mq-base-max})";
+
+// Small
+@small-screens-max: ~"all and (max-width: @{mq-small-max})";
+@small-screens-only: ~"all and (min-width: @{mq-small-min}) and (max-width: @{mq-small-max})";
+@small-screens-min: ~"all and (min-width: @{mq-small-min})";
+
+// Medium
+@medium-screens-max: ~"all and (max-width: @{mq-medium-max})";
+@medium-screens-only: ~"all and (min-width: @{mq-medium-min}) and (max-width: @{mq-medium-max})";
+@medium-screens-min: ~"all and (min-width: @{mq-medium-min})";
+
+// Large
+@large-screens-max: ~"all and (max-width: @{mq-large-max})";
+@large-screens-only: ~"all and (min-width: @{mq-large-min}) and (max-width: @{mq-large-max})";
+@large-screens-min: ~"all and (min-width: @{mq-large-min})";
+
+// Extra Large
+@x-large-screens-min: ~"all and (min-width: @{mq-x-large-min})";
+
+// Pixel equivalents
+@1px: ( 1em * ( 1 / @base-text-size ) );
+@2px: ( 1em * ( 2 / @base-text-size ) );
+@3px: ( 1em * ( 3 / @base-text-size ) );
+@4px: ( 1em * ( 4 / @base-text-size ) );
+@5px: ( 1em * ( 5 / @base-text-size ) );
+@6px: ( 1em * ( 6 / @base-text-size ) );
+@7px: ( 1em * ( 7 / @base-text-size ) );
+@8px: ( 1em * ( 8 / @base-text-size ) );
+@9px: ( 1em * ( 9 / @base-text-size ) );
+@10px: ( 1em * ( 10 / @base-text-size ) );
+@15px: ( 1em * ( 15 / @base-text-size ) );
+@20px: ( 1em * ( 20 / @base-text-size ) );
+@25px: ( 1em * ( 25 / @base-text-size ) );
+@30px: ( 1em * ( 30 / @base-text-size ) );
+@35px: ( 1em * ( 35 / @base-text-size ) );
+@40px: ( 1em * ( 40 / @base-text-size ) );
+@45px: ( 1em * ( 45 / @base-text-size ) );
+@50px: ( 1em * ( 50 / @base-text-size ) );
+@60px: ( 1em * ( 60 / @base-text-size ) );
+@70px: ( 1em * ( 70 / @base-text-size ) );
+@75px: ( 1em * ( 75 / @base-text-size ) );
+@80px: ( 1em * ( 80 / @base-text-size ) );
+@90px: ( 1em * ( 90 / @base-text-size ) );
+@100px: ( 1em * ( 100 / @base-text-size ) );
+@150px: ( 1em * ( 150 / @base-text-size ) );
+@175px: ( 1em * ( 175 / @base-text-size ) );
+@200px: ( 1em * ( 200 / @base-text-size ) );
+@250px: ( 1em * ( 250 / @base-text-size ) );
+@350px: ( 1em * ( 350 / @base-text-size ) );

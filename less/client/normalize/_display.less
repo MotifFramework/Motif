@@ -1,0 +1,67 @@
+/*
+
+HTML5 Display Definitions
+
+Set the appropriate `display` definitions for new HTML5 elements.
+
+The majority will be displayed `block`.
+
+*/
+
+*,
+*:before,
+*:after {
+
+    // Mixins
+    .box-sizing(border-box);
+}
+body {
+    margin: 0;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+    display: block;
+}
+
+/*
+
+Some, however, need to be `inline-block` with an IE7 fallback.
+
+*/
+
+audio,
+canvas,
+video {
+
+    // Mixins
+    .inline-block-fallback();
+}
+
+/*
+
+Audio
+
+From Normalize.css:
+
+> Prevents modern browsers from displaying `audio` without controls.
+> Remove excess height in iOS5 devices.
+
+*/
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+[hidden] {
+    display: none;
+}

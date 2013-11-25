@@ -1,0 +1,283 @@
+// Font Declarations
+@museo-slab-700:            "Museo Slab 700", Helvetica, Arial, Verdana, serif;
+@source-sans-regular:       "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+@source-sans-bold:          "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@source-sans-italic:        "Source Sans Pro Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@source-sans-bold-italic:   "Source Sans Pro Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+@source-code-pro:           "Source Code Pro", Courier, monospace;
+@symbolset:                 "Symbolset";
+@symbolset-social:          "Symbolset Social";
+@symbolset-social-circle:   "Symbolset Social Circle";
+
+@text-font:                 @source-sans-regular;
+@text-font-bold:            @source-sans-bold;
+@text-font-italic:          @source-sans-italic;
+@text-font-bold-italic:     @source-sans-bold-italic;
+@text-font-code:            @source-code-pro;
+@text-font-icons:           @symbolset;
+@primary-header-font:       @museo-slab-700;
+
+// Museo Slab
+@font-face {
+    .web-font("Museo Slab 700", museo-slab, museo-slab-700);
+}
+@font-face {
+    .web-font("Museo 700", museo, Museo700-Regular-webfont);
+}
+
+// Source Sans Pro
+@font-face {
+    .web-font-svg("Source Sans Pro", source-sans-pro, SourceSansPro-Regular-webfont, SourceSansProRegular);
+}
+@font-face {
+    .web-font-svg("Source Sans Pro Bold", source-sans-pro, SourceSansPro-Bold-webfont, SourceSansProBold);
+}
+@font-face {
+    .web-font-svg("Source Sans Pro Italic", source-sans-pro, SourceSansPro-It-webfont, SourceSansProItalic);
+}
+@font-face {
+    .web-font-svg("Source Sans Pro Bold Italic", source-sans-pro, SourceSansPro-BoldIt-webfont, SourceSansProBoldItalic);
+}
+
+// Source Code Pro
+@font-face {
+    .web-font-svg("Source Code Pro", source-code-pro, source-code-pro-regular, SourceCodeProRegular);
+}
+
+// Symbolset
+@font-face {
+    .web-font-svg("Symbolset", symbolset, ss-standard, SSStandardRegular);
+}
+@font-face {
+    .web-font-svg("Symbolset Social", symbolset, ss-social-regular, SSSocialRegular);
+}
+@font-face {
+    .web-font-svg("Symbolset Social Circle", symbolset, ss-social-circle, SSSocialCircle);
+}
+
+/* 
+
+Applied Font Faces
+
+These classes based on every typeface used on the project, including many which were 
+embedded via `@font-face` declarations.
+
+Styleguide 2.1
+
+*/
+
+/*
+
+Museo Slab 700
+
+Markup:
+<span class="museo-slab-700">This is Sample Text</span>
+
+Styleguide 2.1.1
+
+*/
+
+.museo-slab-700 {
+    font-family: @museo-slab-700;
+}
+
+/*
+
+Source Sans Regular
+
+Markup:
+<span class="source-sans-regular">This is Sample Text</span>
+
+Styleguide 2.1.2
+
+*/
+
+.source-sans-regular {
+    font-family: @source-sans-regular;
+}
+
+/*
+
+Source Sans Bold
+
+Markup:
+<span class="source-sans-bold">This is Sample Text</span>
+
+Styleguide 2.1.3
+
+*/
+
+.source-sans-bold {
+    font-family: @source-sans-bold;
+}
+
+/*
+
+Source Sans Italic
+
+Markup:
+<span class="source-sans-italic">This is Sample Text</span>
+
+Styleguide 2.1.4
+
+*/
+
+.source-sans-italic {
+    font-family: @source-sans-italic;
+}
+
+/*
+
+Source Sans Bold Italic
+
+Markup:
+<span class="source-sans-bold-italic">This is Sample Text</span>
+
+Styleguide 2.1.5
+
+*/
+
+.source-sans-bold-italic {
+    font-family: @source-sans-bold-italic;
+}
+.source-code-pro {
+    font-family: @source-code-pro;
+}
+.symbolset {
+    font-family: @symbolset;
+}
+.symbolset-social {
+    font-family: @symbolset-social;
+}
+.symbolset-social-circle {
+    font-family: @symbolset-social-circle;
+}
+[data-icon-position="solo"]:before,
+[data-icon-position="before"]:before,
+[data-icon-position="after"]:after,
+.data-icon {
+    .symbolset();
+}
+[data-icon-position="solo"]:before,
+[data-icon-position="before"]:before,
+[data-icon-position="after"]:after {
+    [data-icon-family="social"]& {
+        .symbolset-social();
+    }
+    [data-icon-family="social-circle"]& {
+        .symbolset-social-circle();
+    }
+}
+.data-icon {
+    &.data-icon-social {
+        .symbolset-social();
+    }
+    &.data-icon-social-circle {
+        .symbolset-social-circle();
+    }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.primary-heading {
+    font-family: @primary-header-font;
+    color: @primary-header-color;
+}
+
+.secondary-heading  {
+
+    // Mixins
+    .source-sans-bold();
+
+    // Other
+    color: @grey;
+    text-transform: uppercase;
+}
+
+/*
+
+Body Text
+
+A quick class to help make any element's text look like the site's default body text.
+
+Markup:
+<h1 class="body-text">I'm an H1, can you believe it?</h1>
+
+Styleguide 2.4.1
+
+*/
+
+body,
+.body-text {
+
+    // Mixins
+    .source-sans-regular();
+}
+code {
+    .source-code-pro();
+}
+dt,
+th,
+.input-label,
+strong {
+    font-weight: normal;
+
+    // Mixins
+    .source-sans-bold();
+}
+em {
+    font-style: normal;
+
+    // Mixins
+    .source-sans-italic();
+}
+strong em,
+em strong {
+    font-style: normal;
+    font-weight: normal;
+
+    // Mixins
+    .source-sans-bold-italic();
+}
+
+
+/*
+
+Forms
+
+*/
+
+input,
+textarea {
+
+    // Create
+    background: @white;
+    border: @1px solid @grey;
+
+    // Mixins
+    &:extend(.body-text);
+    .border-radius(@2px);
+    .box-shadow-inset(0, @1px, @2px, @light-grey);
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.is-current {
+        border-color: @light-black;
+
+        // Mixins
+        .box-shadow(0, @1px, @4px, @light-grey);
+    }
+}
+
+.data-icon {
+    &-social {
+        // .symbolset-social();
+    }
+    &-social-circle {
+        // .symbolset-social-circle();
+    }
+}

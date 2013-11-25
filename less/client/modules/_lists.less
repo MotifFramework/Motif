@@ -1,0 +1,556 @@
+
+
+/*
+
+Media Grid
+
+The Media Grid allows you to place a grid of photos or videos (catalog or 
+retail products, etc.) without floating them, alleviating the need to concern 
+yourself with clearing the floats should an object extend further than another.
+
+The `.object` class is applied to the list item. You then apply grid-system 
+classes to the `.object` to constrain the widths.
+
+Markup:
+<ul class="unstyled media-grid gm-row gt-row gd-row">
+    <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
+        <img src="http://placehold.it/300 alt="Media Object" />
+        <p>Here's a subtitle</p>
+    </li>
+    <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
+        <img src="http://placehold.it/300 alt="Media Object" />
+    </li>
+    <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
+        <img src="http://placehold.it/300 alt="Media Object" />
+    </li>
+    <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
+        <img src="http://placehold.it/300 alt="Media Object" />
+        <p>Look, I don't catch on the subtitle!</p>
+    </li>
+</ul>
+
+Styleguide 7.2
+
+*/
+
+.media-grid {
+    margin-top: 0;
+    padding: 0;
+    letter-spacing: -0.31em;
+    word-spacing: -0.43em;
+
+    .lte7 & {
+        letter-spacing: normal;
+    }
+    .object {
+        list-style: none outside none;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+
+        // Mixins
+        .inline-block-fallback();
+        .margin-leader();
+
+        img {
+            display: block;
+        }
+        &.gm-columns,
+        &.gt-columns,
+        &.gd-columns {
+            float: none;
+        }
+    }
+}
+
+/*
+
+Nav
+
+The basic `.nav` module simply removes bullets from lists and inlines the list 
+items, making the link `inline-block`. The idea is to give the skeleton of a 
+horizontal navigation without adding too much style (yet).
+
+Markup:
+<ul class="nav">
+    <li><a href="#">Nav Item</a></li>
+    <li><a href="#">Nav Item</a></li>
+    <li><a href="#">Nav Item</a></li>
+    <li><a href="#">Nav Item</a></li>
+</ul>
+
+Styleguide 1.3.3
+
+*/
+
+[class*="list--x"] {
+    &:extend(.list--unstyled);
+
+    li {
+        display: inline;
+    }
+        a {
+            display: inline-block;
+        }
+}
+.list--x--forceful{
+    li,
+    a {
+        display: block;
+    }
+}
+
+// Small screens and onward
+@media @small-screens-min {
+    .list--x {
+        &--forceful {
+
+            // Mixins
+            .clearfix();
+
+            li {
+                float: left;
+            }
+        }
+    }
+}
+
+
+/*
+
+Tabs
+
+The tabs module (and accompanying plugin) creates a very basic widget that 
+allows embedding and basic styling.
+
+Markup:
+<section class="tabs">
+    <ul class="forceful nav">
+        <li>
+            <a class="js-tabs is-current" data-reveal="first-tab" data-reveal-group="tabbed-widget" href="#first-tab">
+                First Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="second-tab" data-reveal-group="tabbed-widget" href="#second-tab">
+                Second Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="third-tab" data-reveal-group="tabbed-widget" href="#third-tab">
+                Third Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="fourth-tab" data-reveal-group="tabbed-widget" href="#fourth-tab">
+                Fourth Tab
+            </a>
+        </li>
+    </ul>
+    <div class="section">
+        <section id="first-tab" class="tab is-current">
+            <h3>First Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="second-tab" class="tab">
+            <h3>Second Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="third-tab" class="tab">
+            <h3>Third Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="fourth-tab" class="tab">
+            <h3>Fourth Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+    </div>
+</section>
+
+Styleguide 3.2
+
+*/
+
+.js {
+    .tabs {
+        &__section {
+            position: relative;
+        }
+        &__tab {
+            display: none;
+
+            &--is-current {
+                display: block;
+            }
+        }
+    }
+}
+
+
+/*
+
+Pagination
+
+An extension of the basic `.nav` module that simply adds padding enough for 
+pagination and makes the module `inline-block` so it can easily be aligned 
+(left, center, right).
+
+Markup:
+<ol class="pagination nav">
+    <li class="first disabled"><a href="#">Previous</a></li>
+    <li><a href="#" class="is-current">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li><a href="#">7</a></li>
+    <li><a href="#">8</a></li>
+    <li><a href="#">9</a></li>
+    <li><a href="#">10</a></li>
+    <li class="last"><a href="#">Next</a></li>
+</ol>
+
+Styleguide 1.3.5
+
+*/
+
+.pagination {
+    display: inline-block;
+
+    li {
+        &.disabled a,
+        &.disabled a:hover,
+        &.disabled a:focus {
+            cursor: default;
+        }
+    }
+        a {
+            padding: 0 0.625em;
+        }
+}
+
+
+
+/*
+
+Modules
+
+Layout modules that can be used, reused, and extended in many ways.
+
+Styleguide 4.0
+
+*/
+
+// JS Main Nav Functionality
+.js {
+    .menu {
+        .nav {
+            max-height: 0;
+            position: relative;
+            overflow: hidden;
+
+            &.is-current {
+                max-height: 999px;
+            }
+            &.is-current,
+            &.is-visited {
+
+                // Mixins
+                .transition(all, 0.65s, ease-in-out);
+            }
+        }
+    }
+}
+@media @medium-screens-min {
+    .js {
+        .menu   {
+            .nav    {
+                max-height:         999px;
+            }
+        }
+    }
+    .menu   {
+        .title  {
+            display:                            none;
+        }
+    }
+}
+
+/*
+
+Nav Bar
+
+A quick navigation bar, typically good for prototyping the main menu of a site.
+
+Markup:
+<nav class="menu nav-bar">
+    <h3 id="reveal-main-nav" class="title" data-reveal="main-nav-list">
+        <b class="button-label">Menu</b>
+    </h3>
+    <ul id="main-nav-list" class="forceful nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#" class="is-current">Contact Us</a></li>
+    </ul>
+</nav>
+
+Styleguide 8.1
+
+*/
+.nav-bar {
+    &__title {
+
+        // Variables
+        @base-color: @dark-blue;
+        @top-gradient: @base-color;
+        @bottom-gradient: darken(@base-color, 3%);
+
+        // Create
+        padding: @half-vertical 4%;
+        display: block;
+        color: @white;
+        cursor: pointer;
+
+        // Mixins
+        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+        .margin-leader();
+
+        &:hover,
+        &:focus,
+        &.is-current {
+                
+            // Variables
+            @base-color: darken(@dark-blue, 5%);
+            @top-gradient: @base-color;
+            @bottom-gradient: darken(@base-color, 5%);
+
+            // Mixins
+            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+        }
+
+    }
+
+    &__list {
+        margin: 0;
+        
+        // Mixins
+        background: darken(@dark-blue, 10%);
+        
+        a {
+            color: @white;
+            text-decoration: none;
+            padding: @half-vertical 4%;
+            
+            // Mixins
+            // .source-sans-bold();
+            
+            &:hover,
+            &:focus,
+            &.is-current {
+
+                // Mixins
+                background: darken(@dark-blue, 15%);
+            }
+        }
+    }
+}
+@media @small-screens-min {
+    .nav-bar {
+        &__list {
+            li {
+                width:          50%;
+            }
+                a {
+                    padding:    @half-vertical @full-side;
+                }
+        }
+    }
+}
+@media @medium-screens-min {
+    .nav-bar {
+
+        // Variables
+        @base-color: @dark-blue;
+        @top-gradient: @base-color;
+        @bottom-gradient: darken(@base-color, 3%);
+        @highlight-top: lighten(@purple, 10%);
+        @highlight-bottom: darken(@purple, 10%);
+
+        &__list {
+            
+            // Mixins
+            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+
+            li {
+                width: auto;
+            }
+                a {
+                    padding: @full-vertical @full-side;
+                    
+                    &:hover,
+                    &:focus,
+                    &.is-current {
+                        
+                        // Variables
+                        @base-color: darken(@dark-blue, 5%);
+                        @top-gradient: @base-color;
+                        @bottom-gradient: darken(@base-color, 5%);
+
+                        // Mixins
+                        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+                    }
+                }
+        }
+        // .sub-nav {
+        //  background:                     darken(@dark-blue, 10%);
+            
+        //  a   {
+        //      padding:                    @half-vertical @full-side;
+            
+        //      // Mixins
+        //      .source-sans-regular();
+
+        //      &:hover,
+        //      &:focus,
+        //      &.is-current    {
+        //          background:             darken(@dark-blue, 15%);
+        //      }
+        //  }
+        // }
+
+        .js & {
+            &--menu {
+                .nav-bar__title {
+                    display: none;
+                }
+                .nav-bar__list {
+                    max-height: 999px;
+                }
+            }
+        }
+    }
+}
+
+.nav--y {
+    .current {
+        a {
+            color: @primary-link-hover;
+            background: fadeout(@primary-link-color, 90%);
+        }
+    }
+    li:first-child {
+        a {
+            border: none;
+        }
+    }
+    a {
+        color: @dark-blue;
+        padding: @quarter-vertical @half-side;
+        display: block;
+        text-decoration: none;
+        
+        // Mixins
+        // .source-sans-bold();
+        
+        &:hover,
+        &:focus {
+            background: fadeout(@primary-link-color, 90%);
+        }
+    }
+    .is-current {
+        background: fadeout(@primary-link-color, 90%);
+    }
+    li ul {
+        margin: 0;
+        padding: 0 0 0 @full-side;
+    
+        li {
+            list-style: none outside none;
+        }
+    } 
+}
+
+
+/*
+Breadcrumb
+
+Another extension of the `.nav` module, adding a breadcrumb `.label`, 
+floating it and the ordered list and adding a `/` divider.
+
+Markup:
+<nav class="breadcrumb group">
+    <p class="label">You are here:</p>
+    <ol class="nav">
+        <li><a href="#">First Level</a></li>
+        <li><a href="#">Second Level</a></li>
+        <li><a href="#">Third Level</a></li>
+        <li><strong>Fourth Level</strong></li>
+    </ol>
+</nav>
+
+Styleguide 4.2
+*/
+
+.breadcrumb {
+    .label {
+        margin: 0 @half-side 0 0;
+        float: left;
+    }
+    .nav {
+        margin: 0;
+        float: left;
+        text-transform: capitalize;
+    }
+
+        li {
+            margin-right: @half-side-bordered;
+
+            &:before {
+                content: "/";
+                margin-right: @half-side-bordered;
+            }
+            &:first-child:before {
+                content: "";
+                margin: 0;
+            }
+        }
+}
+
+.tabs {
+    .nav {
+
+        // Variables
+        @current-border-width: 3;
+        @current-border-top: 1em * (@current-border-width / @base-text-size);
+        @current-padding-top: 1em * (((@base-vertical / 2) - @current-border-width) / @base-text-size);
+        @current-padding-bottom: 1em * (((@base-vertical / 2) + @default-border-width) / @base-text-size);
+
+        // Create
+        border-bottom: @border-width solid @light-grey;
+
+        a {
+            padding: @half-vertical @full-side;
+            color: @light-grey;
+            text-decoration: none;
+            background-color: @white;
+            position: relative;
+            bottom: -@border-width;
+            z-index: 30;
+
+            &:hover,
+            &:focus {
+                color: @light-black;
+            }
+        }
+        .is-current {
+            padding: @current-padding-top @full-side-bordered @current-padding-bottom;
+            color: @light-black;
+            border-left: @border-width solid @light-grey;
+            border-right: @border-width solid @light-grey;
+            border-top: @current-border-top solid @light-blue;
+            z-index: 60;
+        }
+    }
+}

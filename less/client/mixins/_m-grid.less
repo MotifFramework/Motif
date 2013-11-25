@@ -1,0 +1,124 @@
+// Set @total-width to 100% for a fluid layout
+@total-width: 960px;
+
+// Clearfix Mixin
+.clearfix() {
+    .lte7 & {
+        zoom: 1;
+    }
+    &:before,
+    &:after {
+        content: "\0020";
+        height: 0;
+        display: block;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+#mixed {
+    .row(@mar: @base-margin)    {
+
+        // Variables
+        @grid-margin: 1em * ((@mar / 2) / @base-text-size);
+
+        // Create
+        margin-left: -@grid-margin;
+        margin-right: -@grid-margin;
+
+        // Mixins
+        .clearfix();
+        //.inline-block-fallback();
+    }
+    .grid-column(@float: left)  {
+        display: inline;
+        float: @float;
+    }
+    .grid-padding(@mar: @base-margin)   {
+    
+        // Variables
+        @grid-margin: 1em * ((@mar / 2) / @base-text-size);
+    
+        // Create
+        padding-left: @grid-margin;
+        padding-right: @grid-margin;
+    }
+}
+#mixins {
+    .grid-loop ( @int, @total, @pre ) when ( @int > 0 ) and ( @total > 4 ) {
+        
+        @width: round( ( 100% * ( @int / @total ) ), 5 );
+
+        #mixins > .grid-create( @int, @total, @pre, @width );
+        #mixins > .grid-loop( @int - 1, @total, @pre );
+    }
+    .grid-loop ( 0, @total ) {}
+    .grid-loop ( @int, 4 ) {}
+}
+#mixins {
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = t ) and ( @width = 75% ) {
+        [class*="t-@{int}of@{total}"] {
+            &:extend( .gt-three-quarters );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = t ) and ( @width = 66.66667% ) {
+        [class*="t-@{int}of@{total}"] {
+            &:extend( .gt-two-thirds );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = t ) and ( @width = 50% ) {
+        [class*="t-@{int}of@{total}"] {
+            &:extend( .gt-half );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = t ) and ( @width = 33.33333% ) {
+        [class*="t-@{int}of@{total}"] {
+            &:extend( .gt-third );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = t ) and ( @width = 25% ) {
+        [class*="t-@{int}of@{total}"] {
+            &:extend( .gt-quarter );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = d ) and ( @width = 75% ) {
+        [class*="d-@{int}of@{total}"] {
+            &:extend( .gd-three-quarters );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = d ) and ( @width = 66.66667% ) {
+        [class*="d-@{int}of@{total}"] {
+            &:extend( .gd-two-thirds );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = d ) and ( @width = 50% ) {
+        [class*="d-@{int}of@{total}"] {
+            &:extend( .gd-half );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = d ) and ( @width = 33.33333% ) {
+        [class*="d-@{int}of@{total}"] {
+            &:extend( .gd-third );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when ( @pre = d ) and ( @width = 25% ) {
+        [class*="d-@{int}of@{total}"] {
+            &:extend( .gd-quarter );
+        }
+    }
+    .grid-create ( @int, @total, @pre, @width ) when not ( @width = 25% ) and not ( @width = 33.33333% ) and not ( @width = 50% ) and not ( @width = 66.66667% ) and not ( @width = 75% ) {
+        [class*="@{pre}-@{int}of@{total}"] {
+            width: @width;
+        }
+    }
+}
+#mixins {
+    .grid-all ( @int, @total, @pre ) when ( @int > 0 ) and ( @total > 4 ) {
+        #mixins > .grid-loop( @int, @total, @pre );
+        #mixins > .grid-all( @total - 2, @total - 1, @pre );
+    }
+    .grid-all ( 0, @total, @pre ) {}
+    .grid-all ( @int, 4, @pre ) {}
+}
