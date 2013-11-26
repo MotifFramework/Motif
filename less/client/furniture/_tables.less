@@ -54,18 +54,10 @@ table {
 
     th,
     td {
-        padding: @half-vertical @half-side @half-vertical-bordered;
+        padding: @half-vertical @half-side;
     }
     th {
-        padding-top: @half-vertical-bordered;
-        border-bottom: @border-width solid @table-border-color;
-    }
-    th + th,
-    td + td {
-        border-left: @border-width solid @table-border-color;
-    }
-    tr + tr td {
-        border-top: @border-width solid @table-border-color;
+        padding-top: @half-vertical;
     }
 }
 
@@ -73,11 +65,10 @@ table {
     table   {
         th,
         td {
-            padding:            @half-vertical @full-side @half-vertical-bordered;
+            padding: @half-vertical @full-side;
         }
         th {
-            padding-top:        @half-vertical-bordered;
-            border-bottom:      @border-width solid @table-border-color;
+            padding-top: @half-vertical;
         }
     }
 }

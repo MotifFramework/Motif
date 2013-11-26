@@ -106,39 +106,34 @@ Styleguide 7.4
 
 */
 
-.figure {
+.figure
+[class*="figure--"] {
 
     // Mixins
     .margin-leader();
 
-    &.float-left,
-    &.float-right {
-        float: none;
-    }
-    
     img {
-        &:extend(.new-line);
+        &:extend( .new-line );
     }
 }
 @media @small-screens-min {
+    .figure,
+    [class*="figure--"] {
+        max-width: 50%;
+        margin-top: 0;
+    }
     .figure {
-        max-width:              50%;
-        margin-top:             0;
-        
-        &.float-left,
-        &.float-right   {
-            padding-bottom:     @half-vertical;
-
-            // Mixins
-            // .margin-leader(1.5);
+        &--left,
+        &--right {
+            padding-bottom: @half-vertical;
         }
-        &.float-left    {
-            float:              left;
-            padding-right:      @double-side;
+        &--left    {
+            float: left;
+            padding-right: @double-side;
         }
-        &.float-right   {
-            float:              right;
-            padding-left:       @double-side;
+        &--right   {
+            float: right;
+            padding-left: @double-side;
         }
     }
 }

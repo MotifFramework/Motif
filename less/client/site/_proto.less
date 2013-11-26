@@ -281,3 +281,476 @@ textarea {
         // .symbolset-social-circle();
     }
 }
+
+// Buttons
+
+[class*="btn"] {
+
+    // Variables
+    @gradient-top: @white;
+    @gradient-bottom: lighten(@light-grey, 5%);
+
+    // Shadow vars
+    @inset-shadow: fadeout(@white, 60%);
+    @outset-shadow: fadeout(@black, 50%);
+    @var-shadow-in: 0 @1px @1px @inset-shadow;
+    @var-shadow-out: 0 @2px @2px -@1px @outset-shadow;
+    border: 1px solid @light-grey;
+    color: @dark-grey;
+    text-shadow: 0 @1px @1px @white;
+    
+    // Mixins
+    .source-sans-bold();
+    .border-radius(@3px);
+    .box-shadow-in-out(@var-shadow-in, @var-shadow-out);
+    .background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
+    
+    &:hover,
+    &:focus {
+        color: darken(@dark-grey, 10%);
+        border-color: @grey;
+    }
+}
+.btn {
+    &--blue,
+    &--primary {
+
+        // Mixins
+        .m-button-color(@blue);
+    }
+    &--red,
+    &--danger {
+
+        // Mixins
+        .m-button-color(@red);
+    }
+}
+
+
+
+// Modules
+
+.panel--inset {
+
+    // Variables
+    @top-gradient: lighten(@light-grey, 18%);
+    @bottom-gradient: lighten(@light-grey, 10%);
+    @shadow: fadeout(@light-black, 85%);
+
+    text-shadow: 0 @1px @1px @white;
+
+    // Mixins
+    .box-shadow-inset( 0, @1px, @3px, @shadow );
+    .background-linear-gradient( 0, @bottom-gradient, 100%, @top-gradient );
+}
+.panel--thin--inset {
+    &:extend( .panel--inset );
+}
+
+
+
+/*
+
+Nav Bar
+
+A quick navigation bar, typically good for prototyping the main menu of a site.
+
+Markup:
+<nav class="menu nav-bar">
+    <h3 id="reveal-main-nav" class="title" data-reveal="main-nav-list">
+        <b class="button-label">Menu</b>
+    </h3>
+    <ul id="main-nav-list" class="forceful nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#" class="is-current">Contact Us</a></li>
+    </ul>
+</nav>
+
+Styleguide 8.1
+
+*/
+.nav-bar {
+    &__title {
+
+        // Variables
+        @base-color: @dark-blue;
+        @top-gradient: @base-color;
+        @bottom-gradient: darken(@base-color, 3%);
+
+        // Create
+        padding: @half-vertical 4%;
+        display: block;
+        color: @white;
+        cursor: pointer;
+
+        // Mixins
+        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+        .margin-leader();
+
+        &:hover,
+        &:focus,
+        &.is-current {
+                
+            // Variables
+            @base-color: darken(@dark-blue, 5%);
+            @top-gradient: @base-color;
+            @bottom-gradient: darken(@base-color, 5%);
+
+            // Mixins
+            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+        }
+
+    }
+
+    &__list {
+        margin: 0;
+        
+        // Mixins
+        background: darken(@dark-blue, 10%);
+        
+        a {
+            color: @white;
+            text-decoration: none;
+            padding: @half-vertical 4%;
+            
+            // Mixins
+            // .source-sans-bold();
+            
+            &:hover,
+            &:focus,
+            &.is-current {
+
+                // Mixins
+                background: darken(@dark-blue, 15%);
+            }
+        }
+    }
+}
+@media @small-screens-min {
+    .nav-bar {
+        &__list {
+            li {
+                width:          50%;
+            }
+                a {
+                    padding:    @half-vertical @full-side;
+                }
+        }
+    }
+}
+@media @medium-screens-min {
+    .nav-bar {
+
+        // Variables
+        @base-color: @dark-blue;
+        @top-gradient: @base-color;
+        @bottom-gradient: darken(@base-color, 3%);
+        @highlight-top: lighten(@purple, 10%);
+        @highlight-bottom: darken(@purple, 10%);
+
+        &__list {
+            
+            // Mixins
+            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+
+            li {
+                width: auto;
+            }
+                a {
+                    padding: @full-vertical @full-side;
+                    
+                    &:hover,
+                    &:focus,
+                    &.is-current {
+                        
+                        // Variables
+                        @base-color: darken(@dark-blue, 5%);
+                        @top-gradient: @base-color;
+                        @bottom-gradient: darken(@base-color, 5%);
+
+                        // Mixins
+                        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+                    }
+                }
+        }
+        // .sub-nav {
+        //  background:                     darken(@dark-blue, 10%);
+            
+        //  a   {
+        //      padding:                    @half-vertical @full-side;
+            
+        //      // Mixins
+        //      .source-sans-regular();
+
+        //      &:hover,
+        //      &:focus,
+        //      &.is-current    {
+        //          background:             darken(@dark-blue, 15%);
+        //      }
+        //  }
+        // }
+
+        .js & {
+            &--menu {
+                .nav-bar__title {
+                    display: none;
+                }
+                .nav-bar__list {
+                    max-height: 999px;
+                }
+            }
+        }
+    }
+}
+
+.nav--vert {
+    .current {
+        a {
+            color: @primary-link-hover;
+            background: fadeout(@primary-link-color, 90%);
+        }
+    }
+    li:first-child {
+        a {
+            border: none;
+        }
+    }
+    a {
+        color: @dark-blue;
+        padding: @quarter-vertical @half-side;
+        display: block;
+        text-decoration: none;
+        
+        // Mixins
+        // .source-sans-bold();
+        
+        &:hover,
+        &:focus {
+            background: fadeout(@primary-link-color, 90%);
+        }
+    }
+    .is-current {
+        background: fadeout(@primary-link-color, 90%);
+    }
+    li ul {
+        margin: 0;
+        padding: 0 0 0 @full-side;
+    
+        li {
+            list-style: none outside none;
+        }
+    } 
+}
+
+
+.breadcrumb {
+    &__list--x {
+        text-transform: capitalize;
+    }
+        li {
+            &:before {
+                content: "/";
+                margin-right: @half-side;
+            }
+            &:first-child:before {
+                content: "";
+                margin: 0;
+            }
+        }
+}
+
+.tabs {
+    &__list--x,
+    &__list--x--forceful {
+
+        // Variables
+        @current-border-width: 3;
+        @current-border-top: 1em * (@current-border-width / @base-text-size);
+        @current-padding-top: 1em * (((@base-vertical / 2) - @current-border-width) / @base-text-size);
+        @current-padding-bottom: 1em * (((@base-vertical / 2) + @default-border-width) / @base-text-size);
+
+        // Create
+        border-bottom: @border-width solid @light-grey;
+
+        a {
+            padding: @half-vertical @full-side;
+            color: @light-grey;
+            text-decoration: none;
+            background-color: @white;
+            position: relative;
+            bottom: -@border-width;
+            z-index: 30;
+
+            &:hover,
+            &:focus {
+                color: @light-black;
+            }
+        }
+        .is-current {
+            padding: @current-padding-top @full-side-bordered @current-padding-bottom;
+            color: @light-black;
+            border-left: @border-width solid @light-grey;
+            border-right: @border-width solid @light-grey;
+            border-top: @current-border-top solid @light-blue;
+            z-index: 60;
+        }
+    }
+}
+
+// Tables
+
+table {
+    th {
+        border-bottom: @border-width solid @table-border-color;
+    }
+    th + th,
+    td + td {
+        border-left: @border-width solid @table-border-color;
+    }
+    tr + tr td {
+        border-top: @border-width solid @table-border-color;
+    }
+}
+
+@media @small-screens-min {
+    table   {
+        th {
+            border-bottom: @border-width solid @table-border-color;
+        }
+    }
+}
+
+.bubble {
+
+    // Variables
+    @wisp-width: @5px;
+    @bubble-color: @white;
+    @shadow: fadeout(@black, 50%);
+    @shadow-radius: @7px;
+
+    // Create
+    margin: 0;
+    padding: @half-vertical;
+    background-color: @bubble-color;
+    position: relative;
+
+    // Mixins
+    .border-radius(@default-radius);
+    .box-shadow(0, 0, @shadow-radius, @shadow);
+    .transition(opacity, 0.15s, linear);
+
+    &:after {
+        position: absolute;
+        border: @wisp-width solid transparent;
+    
+        // Mixins
+        .pseudo-clear();
+    }
+    &.left-wisp,
+    &.right-wisp {
+        &:after {
+            top: 50%;
+            margin-top: -@wisp-width;
+        }
+    }
+    &.left-wisp {
+        &:after {
+            left: -@wisp-width * 2;
+            border-right-color: @bubble-color;
+        }
+    }
+    &.right-wisp {
+        &:after {
+            right: -@wisp-width * 2;
+            border-left-color: @bubble-color;
+        }
+    }
+    &.top-wisp,
+    &.bottom-wisp {
+        &:after {
+            left: 50%;
+            margin-left: -@wisp-width;
+        }
+    }
+    &.top-wisp {
+        &:after {
+            top: -@wisp-width * 2;
+            border-bottom-color: @bubble-color;
+        }
+    }
+    &.bottom-wisp {
+        &:after {
+            bottom: -@wisp-width * 2;
+            border-top-color: @bubble-color;
+        }
+    }
+}
+[class*="input-alert"] {
+
+    // Variables
+    @wisp-width: @5px;
+    @bubble-color: @white;
+    @shadow: fadeout(@black, 50%);
+    @shadow-radius: @7px;
+
+    // Mixins
+    &:extend( .bubble all );
+    .box-shadow-none();
+
+    padding: @quarter-vertical @half-vertical;
+    color: @white;
+    
+    &:after {
+        left: @half-vertical;
+        margin-left: 0;
+        top: -@wisp-width * 2;
+        border-bottom-color: @bubble-color;
+    }
+}
+.input-alert {
+    &--warning {
+        .input-alert-color(@warning-color);
+    }
+    &--info {
+        .input-alert-color(@info-color);
+    }
+    &--error {
+        .input-alert-color(@error-color);
+    }
+    &--success {
+        .input-alert-color(@success-color);
+    }
+}
+
+
+.no-boxshadow {
+    .bubble {
+
+        // Variables
+        @1px: 1em * (1 / @base-text-size);
+    
+        // Create
+        border: @1px solid @grey;
+    }
+}
+.search {
+    .input {
+
+        /* Mixins */
+        .border-radius-right(0);
+
+        /* Display & Box Model */
+        float: left;
+    }
+    .submit {
+
+        /* Mixins */
+        .border-radius-left(0);
+
+        /* Display & Box Model */
+        margin: 0;
+        float: left;
+    }
+}

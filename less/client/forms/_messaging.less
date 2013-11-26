@@ -46,111 +46,21 @@ Markup: <label class="input-label">
 Styleguide 5.5
 */
 
-.bubble {
-
-    // Variables
-    @1px: 1em * (1 / @base-text-size);
-    @5px: 1em * (5 / @base-text-size);
-    @7px: 1em * (7 / @base-text-size);
-
-    @wisp-width: @5px;
-    @bubble-color: @white;
-    @shadow: fadeout(@black, 50%);
-    @shadow-radius: @7px;
-
-    // Create
-    margin: 0;
-    padding: @half-vertical;
-    background-color: @bubble-color;
-    position: relative;
-
-    // Mixins
-    .border-radius(@default-radius);
-    .box-shadow(0, 0, @shadow-radius, @shadow);
-    .transition(opacity, 0.15s, linear);
-
-    &:after {
-        position: absolute;
-        border: @wisp-width solid transparent;
+[class*="input-alert"] {
+    &:extend( .relative-container );
+    &:extend(.body-text);
     
-        // Mixins
-        .pseudo-clear();
-    }
-    &.left-wisp,
-    &.right-wisp {
-        &:after {
-            top: 50%;
-            margin-top: -@wisp-width;
-        }
-    }
-    &.left-wisp {
-        &:after {
-            left: -@wisp-width * 2;
-            border-right-color: @bubble-color;
-        }
-    }
-    &.right-wisp {
-        &:after {
-            right: -@wisp-width * 2;
-            border-left-color: @bubble-color;
-        }
-    }
-    &.top-wisp,
-    &.bottom-wisp {
-        &:after {
-            left: 50%;
-            margin-left: -@wisp-width;
-        }
-    }
-    &.top-wisp {
-        &:after {
-            top: -@wisp-width * 2;
-            border-bottom-color: @bubble-color;
-        }
-    }
-    &.bottom-wisp {
-        &:after {
-            bottom: -@wisp-width * 2;
-            border-top-color: @bubble-color;
-        }
-    }
-    &.input-alert {
-        padding: @quarter-vertical @half-vertical;
-        color: @white;
-
-        // Mixins
-        &:extend(.body-text);
-        .box-shadow-none();
-        .inline-block-fallback();
-        
-        &:after {
-            left: @half-vertical;
-            margin-left: 0;
-            top: -@wisp-width * 2;
-            border-bottom-color: @bubble-color;
-        }
-        &.warning {
-            .input-alert-color(@warning-color);
-        }
-        &.info {
-            .input-alert-color(@info-color);
-        }
-        &.error {
-            .input-alert-color(@error-color);
-        }
-        &.success {
-            .input-alert-color(@success-color);
-        }
-    }
+    display: inline-block;
+    color: @info-color;
 }
-
-.no-boxshadow {
-    .bubble {
-
-        // Variables
-        @1px: 1em * (1 / @base-text-size);
-    
-        // Create
-        border: @1px solid @grey;
+.input-alert {
+    &--warning {
+        color: @warning-color;
+    }
+    &--error {
+        color: @error-color;
+    }
+    &--success {
+        color: @success-color;
     }
 }

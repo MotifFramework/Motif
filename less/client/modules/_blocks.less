@@ -9,3 +9,76 @@
 		max-width: 1em * (1150 / @base-text-size);
 	}
 }
+
+
+
+
+/*
+
+Tabs
+
+The tabs module (and accompanying plugin) creates a very basic widget that 
+allows embedding and basic styling.
+
+Markup:
+<section class="tabs">
+    <ul class="forceful nav">
+        <li>
+            <a class="js-tabs is-current" data-reveal="first-tab" data-reveal-group="tabbed-widget" href="#first-tab">
+                First Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="second-tab" data-reveal-group="tabbed-widget" href="#second-tab">
+                Second Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="third-tab" data-reveal-group="tabbed-widget" href="#third-tab">
+                Third Tab
+            </a>
+        </li>
+        <li>
+            <a class="js-tabs" data-reveal="fourth-tab" data-reveal-group="tabbed-widget" href="#fourth-tab">
+                Fourth Tab
+            </a>
+        </li>
+    </ul>
+    <div class="section">
+        <section id="first-tab" class="tab is-current">
+            <h3>First Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="second-tab" class="tab">
+            <h3>Second Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="third-tab" class="tab">
+            <h3>Third Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+        <section id="fourth-tab" class="tab">
+            <h3>Fourth Tab</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </section>
+    </div>
+</section>
+
+Styleguide 3.2
+
+*/
+
+.js {
+    .tabs {
+        &__section {
+            position: relative;
+        }
+    }
+    .tab {
+        display: none;
+
+        &.is-current {
+            display: block;
+        }
+    }
+}

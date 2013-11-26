@@ -39,19 +39,6 @@ Styleguide 4.1
 [class*="panel--thin"] {
     padding: @full-vertical;
 }
-.panel--inset {
-
-    // Variables
-    @top-gradient: lighten(@light-grey, 18%);
-    @bottom-gradient: lighten(@light-grey, 10%);
-    @shadow: fadeout(@light-black, 85%);
-
-    text-shadow: 0 @1px @1px @white;
-
-    // Mixins
-    .box-shadow-inset( 0, @1px, @3px, @shadow );
-    .background-linear-gradient( 0, @bottom-gradient, 100%, @top-gradient );
-}
 
 /*
 Alert Panel
@@ -90,14 +77,13 @@ Styleguide 4.1.1
     }
 }
 .panel--alert {
+    background: @info-color;
+    
     &--error {
         background: @error-color;
     }
     &--success {
         background: @success-color;
-    }
-    &--info {
-        background: @info-color;
     }
 }
 

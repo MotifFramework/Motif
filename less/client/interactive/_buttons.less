@@ -31,20 +31,8 @@ Styleguide 3.1
 
 */
 
-.button {
-
-    // Variables
-    @1px: 1em * (1 / @base-text-size);
-    @2px: 1em * (2 / @base-text-size);
-    @3px: 1em * (3 / @base-text-size);
-    @gradient-top: @white;
-    @gradient-bottom: lighten(@light-grey, 5%);
-
-    // Shadow vars
-    @inset-shadow: fadeout(@white, 60%);
-    @outset-shadow: fadeout(@black, 50%);
-    @var-shadow-in: 0 @1px @1px @inset-shadow;
-    @var-shadow-out: 0 @2px @2px -@1px @outset-shadow;
+.btn,
+[class*="btn"] {
 
     // Baseline
     width: auto;
@@ -62,79 +50,41 @@ Styleguide 3.1
     overflow: visible;
     cursor: pointer;
     vertical-align: middle;
-    
-    // Styling Begins
+    display: inline-block;
+    background: @light-grey;
+    color: @light-black;
+    text-align: center; 
     padding: @half-vertical @full-side;
-    border: @1px solid @light-grey;
-    color: @dark-grey;
-    text-shadow: 0 @1px @1px @white;
     
-    // Mixins
     .margin-leader();
-    // .source-sans-bold();
-    .border-radius(@3px);
-    .inline-block-fallback();
-    .box-shadow-in-out(@var-shadow-in, @var-shadow-out);
-    .background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
     
-    &:hover,
-    &:focus {
-        color: darken(@dark-grey, 10%);
-        border-color: @grey;
-    }
-    p & {
+    p > & {
         margin-top: 0;
     }
-    &.tiny {
-
-        // Variables
-        @1px: 1em * (1 / @petite-text-size);
-
-        // Create
-        padding: @quarter-vertical @half-side;
-        border-width: @1px;
+}
+[class*="btn"]:hover,
+[class*="btn"]:focus,
+.btn--is-current {
+    background: lighten( @light-grey, 10% );
+}
+.btn {
+    &--tiny {
         
         // Mixins
         .size-for-font(@petite-text-size);
-    }
-    &.small {
-
-        // Variables
-        @1px: 1em * (1 / @petite-text-size);
 
         // Create
-        border-width: @1px;
-
-        // Mixins
+        padding: @quarter-vertical @half-side;
+    }
+    &--small {
         .size-for-font(@petite-text-size);
     }
-    &.large {
-
-        // Variables
-        @1px: 1em * (1 / @primer-text-size);
-
-        // Create
-        border-width: @1px;
-
-        // Mixins
+    &--large {
         .size-for-font(@primer-text-size);
     }
-    &.full-width { 
+    &--full-width { 
         width: 100%;
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-        text-align: center; 
-    }
-    &.blue,
-    &.primary {
-
-        // Mixins
-        .m-button-color(@blue);
-    }
-    &.red,
-    &.danger {
-
-        // Mixins
-        .m-button-color(@red);
+        padding-left: 0;
+        padding-right: 0;
     }
 }
