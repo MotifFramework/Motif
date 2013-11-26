@@ -11,6 +11,60 @@
 }
 
 
+// Animated Revealing/Hiding Block Modules
+.js {
+	.reveal__target {
+	    &:extend( .is-hidden );
+
+	    &.is-revealed {
+	        .show-hidden();
+
+	        /* Other */
+	        overflow: visible;
+	    }
+	}
+
+	.expand__target,
+	.fade__target {
+		&:extend( .relative-container );
+
+		// Display & Box Model
+	    max-height: 0;
+	    overflow: hidden;
+	}
+	    .expand__target.is-expanded,
+	    .fade__target.is-faded {
+	        max-height: 999px;
+	    }
+	    .expand-target.is-expanded,
+	    .fade__target.is-faded,
+	    .expand-target.was-expanded,
+	    .fade__target.was-faded {
+
+	        // Mixins
+	        .transition( all, 0.65s, ease-in-out );
+	    }
+
+	.fade__target {
+	    .opacity(0);
+
+	    &.is-faded {
+	        .opacity(1);
+	    }
+	}
+}
+
+// JS Main Nav Functionality
+@media @medium-screens-min {
+    .js {
+        .menu__list {
+            max-height: 999px;
+        }
+    }
+    .menu__title  {
+        display: none;
+    }
+}
 
 
 /*
@@ -19,52 +73,6 @@ Tabs
 
 The tabs module (and accompanying plugin) creates a very basic widget that 
 allows embedding and basic styling.
-
-Markup:
-<section class="tabs">
-    <ul class="forceful nav">
-        <li>
-            <a class="js-tabs is-current" data-reveal="first-tab" data-reveal-group="tabbed-widget" href="#first-tab">
-                First Tab
-            </a>
-        </li>
-        <li>
-            <a class="js-tabs" data-reveal="second-tab" data-reveal-group="tabbed-widget" href="#second-tab">
-                Second Tab
-            </a>
-        </li>
-        <li>
-            <a class="js-tabs" data-reveal="third-tab" data-reveal-group="tabbed-widget" href="#third-tab">
-                Third Tab
-            </a>
-        </li>
-        <li>
-            <a class="js-tabs" data-reveal="fourth-tab" data-reveal-group="tabbed-widget" href="#fourth-tab">
-                Fourth Tab
-            </a>
-        </li>
-    </ul>
-    <div class="section">
-        <section id="first-tab" class="tab is-current">
-            <h3>First Tab</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </section>
-        <section id="second-tab" class="tab">
-            <h3>Second Tab</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </section>
-        <section id="third-tab" class="tab">
-            <h3>Third Tab</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </section>
-        <section id="fourth-tab" class="tab">
-            <h3>Fourth Tab</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </section>
-    </div>
-</section>
-
-Styleguide 3.2
 
 */
 

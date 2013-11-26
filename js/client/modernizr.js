@@ -1,5 +1,5 @@
-/* Modernizr 2.6.1 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-boxshadow-opacity-rgba-generatedcontent-cssgradients-csstransitions-input-inputtypes-touch-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_boxsizing-css_displaytable-forms_placeholder-forms_validation
+/* Modernizr 2.7.0 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-backgroundsize-generatedcontent-csstransforms3d-csstransitions-input-inputtypes-touch-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-forms_placeholder
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.6.1',
+    var version = '2.7.0',
 
     Modernizr = {},
 
@@ -49,10 +49,10 @@ window.Modernizr = (function( window, document, undefined ) {
 
     injectElementWithStyles = function( rule, callback, nodes, testnames ) {
 
-      var style, ret, node,
+      var style, ret, node, docOverflow,
           div = document.createElement('div'),
                 body = document.body,
-                fakeBody = body ? body : document.createElement('body');
+                fakeBody = body || document.createElement('body');
 
       if ( parseInt(nodes, 10) ) {
                       while ( nodes-- ) {
@@ -67,12 +67,20 @@ window.Modernizr = (function( window, document, undefined ) {
           (body ? div : fakeBody).innerHTML += style;
       fakeBody.appendChild(div);
       if ( !body ) {
-                fakeBody.style.background = "";
+                fakeBody.style.background = '';
+                fakeBody.style.overflow = 'hidden';
+          docOverflow = docElement.style.overflow;
+          docElement.style.overflow = 'hidden';
           docElement.appendChild(fakeBody);
       }
 
       ret = callback(div, rule);
-        !body ? fakeBody.parentNode.removeChild(fakeBody) : div.parentNode.removeChild(div);
+        if ( !body ) {
+          fakeBody.parentNode.removeChild(fakeBody);
+          docElement.style.overflow = docOverflow;
+      } else {
+          div.parentNode.removeChild(div);
+      }
 
       return !!ret;
 
@@ -200,37 +208,22 @@ window.Modernizr = (function( window, document, undefined ) {
         }
 
         return bool;
-    };    tests['rgba'] = function() {
-        setCss('background-color:rgba(150,255,150,.5)');
-
-        return contains(mStyle.backgroundColor, 'rgba');
     };
-
-    tests['boxshadow'] = function() {
-        return testPropsAll('boxShadow');
+    tests['backgroundsize'] = function() {
+        return testPropsAll('backgroundSize');
     };
+    tests['csstransforms3d'] = function() {
 
+        var ret = !!testPropsAll('perspective');
 
+                        if ( ret && 'webkitPerspective' in docElement.style ) {
 
-    tests['opacity'] = function() {
-                setCssAll('opacity:.55');
-
-                    return (/^0.55$/).test(mStyle.opacity);
+                      injectElementWithStyles('@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}', function( node, rule ) {
+            ret = node.offsetLeft === 9 && node.offsetHeight === 3;
+          });
+        }
+        return ret;
     };
-
-    tests['cssgradients'] = function() {
-        var str1 = 'background-image:',
-            str2 = 'gradient(linear,left top,right bottom,from(#9f9),to(white));',
-            str3 = 'linear-gradient(left top,#9f9, white);';
-
-        setCss(
-                       (str1 + '-webkit- '.split(' ').join(str2 + str1) +
-                       prefixes.join(str3 + str1)).slice(0, -str1.length)
-        );
-
-        return contains(mStyle.backgroundImage, 'gradient');
-    };
-
 
 
     tests['csstransitions'] = function() {
@@ -242,8 +235,8 @@ window.Modernizr = (function( window, document, undefined ) {
     tests['generatedcontent'] = function() {
         var bool;
 
-        injectElementWithStyles(['#modernizr:after{content:"',smile,'";visibility:hidden}'].join(''), function( node ) {
-          bool = node.offsetHeight >= 1;
+        injectElementWithStyles(['#',mod,'{font:0/0 a}#',mod,':after{content:"',smile,'";visibility:hidden;font:3px/1 a}'].join(''), function( node ) {
+          bool = node.offsetHeight >= 3;
         });
 
         return bool;
@@ -324,7 +317,7 @@ window.Modernizr = (function( window, document, undefined ) {
 
          test = typeof test == 'function' ? test() : test;
 
-         if (enableClasses) {
+         if (typeof enableClasses !== "undefined" && enableClasses) {
            docElement.className += ' ' + (test ? '' : 'no-') + feature;
          }
          Modernizr[feature] = test;
@@ -361,17 +354,22 @@ window.Modernizr = (function( window, document, undefined ) {
     return Modernizr;
 
 })(this, this.document);
-/*! HTML5 Shiv v3.6 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed */
+/**
+* @preserve HTML5 Shiv prev3.7.1 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
+*/
 ;(function(window, document) {
 /*jshint evil:true */
+  /** version */
+  var version = '3.7.0';
+
   /** Preset options */
   var options = window.html5 || {};
 
   /** Used to skip problem elements */
   var reSkip = /^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i;
 
-  /** Not all elements can be cloned in IE (this list can be shortend) **/
-  var saveClones = /^<|^(?:a|b|button|code|div|fieldset|form|h1|h2|h3|h4|h5|h6|i|iframe|img|input|label|li|link|ol|option|p|param|q|script|select|span|strong|style|table|tbody|td|textarea|tfoot|th|thead|tr|ul)$/i;
+  /** Not all elements can be cloned in IE **/
+  var saveClones = /^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i;
 
   /** Detect whether the browser supports default html5 styles */
   var supportsHtml5Styles;
@@ -406,6 +404,7 @@ window.Modernizr = (function( window, document, undefined ) {
           );
         }());
     } catch(e) {
+      // assign a false positive if detection fails => unable to shiv
       supportsHtml5Styles = true;
       supportsUnknownElements = true;
     }
@@ -490,7 +489,7 @@ window.Modernizr = (function( window, document, undefined ) {
     //   a 403 response, will cause the tab/window to crash
     // * Script elements appended to fragments will execute when their `src`
     //   or `text` property is set
-    return node.canHaveChildren && !reSkip.test(nodeName) ? data.frag.appendChild(node) : node;
+    return node.canHaveChildren && !reSkip.test(nodeName) && !node.tagUrn ? data.frag.appendChild(node) : node;
   }
 
   /**
@@ -570,9 +569,11 @@ window.Modernizr = (function( window, document, undefined ) {
     if (html5.shivCSS && !supportsHtml5Styles && !data.hasCSS) {
       data.hasCSS = !!addStyleSheet(ownerDocument,
         // corrects block display not defined in IE6/7/8/9
-        'article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}' +
+        'article,aside,dialog,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}' +
         // adds styling not present in IE6/7/8/9
-        'mark{background:#FF0;color:#000}'
+        'mark{background:#FF0;color:#000}' +
+        // hides non-rendered elements
+        'template{display:none}'
       );
     }
     if (!supportsUnknownElements) {
@@ -599,7 +600,12 @@ window.Modernizr = (function( window, document, undefined ) {
      * @memberOf html5
      * @type Array|String
      */
-    'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup main mark meter nav output progress section summary time video',
+    'elements': options.elements || 'abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video',
+
+    /**
+     * current version of html5shiv
+     */
+    'version': version,
 
     /**
      * A flag to indicate that the HTML5 style sheet should be inserted.
@@ -847,6 +853,16 @@ window.Modernizr = (function( window, document, undefined ) {
   shivPrint(document);
 
 }(this, document));
+
+// developer.mozilla.org/en/CSS/background-size
+
+Modernizr.testStyles( '#modernizr{background-size:cover}', function( elem ) {
+  var style = window.getComputedStyle ?
+    window.getComputedStyle( elem, null )
+    : elem.currentStyle;
+    
+  Modernizr.addTest( 'bgsizecover', style.backgroundSize == 'cover' );
+});
 // developer.mozilla.org/en/CSS/box-sizing
 // github.com/Modernizr/Modernizr/issues/248
 
@@ -854,33 +870,6 @@ Modernizr.addTest("boxsizing",function(){
     return Modernizr.testAllProps("boxSizing") && (document.documentMode === undefined || document.documentMode > 7);
 });
 
-
-// display: table and table-cell test. (both are tested under one name "table-cell" )
-// By @scottjehl
-
-// all additional table display values are here: http://pastebin.com/Gk9PeVaQ though Scott has seen some IE false positives with that sort of weak detection.
-// more testing neccessary perhaps.
-
-Modernizr.addTest( "display-table",function(){
-
-  var doc   = window.document,
-      docElem = doc.documentElement,   
-      parent  = doc.createElement( "div" ),
-      child = doc.createElement( "div" ),
-      childb  = doc.createElement( "div" ),
-      ret;
-
-  parent.style.cssText = "display: table";
-  child.style.cssText = childb.style.cssText = "display: table-cell; padding: 10px";    
-
-  parent.appendChild( child );
-  parent.appendChild( childb );
-  docElem.insertBefore( parent, docElem.firstChild );
-
-  ret = child.offsetLeft < childb.offsetLeft;
-  docElem.removeChild(parent);
-  return ret; 
-});
 
 // testing for placeholder attribute in inputs and textareas
 // re-using Modernizr.input if available
@@ -892,86 +881,4 @@ Modernizr.addTest('placeholder', function(){
            );
 
 });
-// This implementation only tests support for interactive form validation.
-// To check validation for a specific type or a specific other constraint,
-// the test can be combined: 
-//    - Modernizr.inputtypes.numer && Modernizr.formvalidation (browser supports rangeOverflow, typeMismatch etc. for type=number)
-//    - Modernizr.input.required && Modernizr.formvalidation (browser supports valueMissing)
-//
-(function(document, Modernizr){
-
-
-Modernizr.formvalidationapi = false;
-Modernizr.formvalidationmessage = false;
-
-Modernizr.addTest('formvalidation', function(){
-    var form = document.createElement('form');
-    if ( !('checkValidity' in form) ) {
-        return false;
-    }
-    var body = document.body,
-
-    html = document.documentElement,
-
-    bodyFaked = false,
-
-    invaildFired = false,
-
-    input;
-
-    Modernizr.formvalidationapi = true;
-
-    // Prevent form from being submitted
-    form.onsubmit = function(e) {
-        //Opera does not validate form, if submit is prevented
-        if ( !window.opera ) {
-            e.preventDefault();
-        }
-        e.stopPropagation();
-    };
-
-    // Calling form.submit() doesn't trigger interactive validation, 
-    // use a submit button instead
-    //older opera browsers need a name attribute
-    form.innerHTML = '<input name="modTest" required><button></button>';
-
-    // FF4 doesn't trigger "invalid" event if form is not in the DOM tree
-    // Chrome throws error if invalid input is not visible when submitting 
-    form.style.position = 'absolute';
-    form.style.top = '-99999em';
-
-    // We might in <head> in which case we need to create body manually
-    if ( !body ) {
-        bodyFaked = true;
-        body = document.createElement('body');
-        //avoid crashing IE8, if background image is used
-        body.style.background = "";
-        html.appendChild(body);
-    }
-
-    body.appendChild(form);
-
-    input = form.getElementsByTagName('input')[0];	
-
-    // Record whether "invalid" event is fired
-    input.oninvalid = function(e) {
-        invaildFired = true;
-        e.preventDefault();
-        e.stopPropagation();
-    };
-
-    //Opera does not fully support the validationMessage property
-    Modernizr.formvalidationmessage = !!input.validationMessage;
-
-    // Submit form by clicking submit button
-    form.getElementsByTagName('button')[0].click();
-
-    // Don't forget to clean up
-    body.removeChild(form);
-    bodyFaked && html.removeChild(body);
-
-    return invaildFired;
-});
-
-
-})(document, window.Modernizr);;
+;

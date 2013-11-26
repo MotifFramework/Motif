@@ -1,28 +1,15 @@
-
-
-
 /*
 
-Nav
+Horizontal List
 
-The basic `.nav` module simply removes bullets from lists and inlines the list 
+The basic `.list--x` module simply removes bullets from lists and inlines the list 
 items, making the link `inline-block`. The idea is to give the skeleton of a 
 horizontal navigation without adding too much style (yet).
-
-Markup:
-<ul class="nav">
-    <li><a href="#">Nav Item</a></li>
-    <li><a href="#">Nav Item</a></li>
-    <li><a href="#">Nav Item</a></li>
-    <li><a href="#">Nav Item</a></li>
-</ul>
-
-Styleguide 1.3.3
 
 */
 
 [class*="list--x"] {
-    &:extend(.list--unstyled);
+    &:extend( .list--unstyled );
 
     li {
         display: inline;
@@ -56,27 +43,8 @@ Styleguide 1.3.3
 
 Pagination
 
-An extension of the basic `.nav` module that simply adds padding enough for 
-pagination and makes the module `inline-block` so it can easily be aligned 
-(left, center, right).
-
-Markup:
-<ol class="list--x--pgs">
-    <li><a>Previous</a></li>
-    <li><a class="is-current" href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">6</a></li>
-    <li><a href="#">7</a></li>
-    <li><a href="#">8</a></li>
-    <li><a href="#">9</a></li>
-    <li><a href="#">10</a></li>
-    <li><a href="#">Next</a></li>
-</ol>
-
-Styleguide 1.3.5
+An extension of the basic `.list--x` module that simply adds padding enough for 
+pagination.
 
 */
 
@@ -85,7 +53,7 @@ Styleguide 1.3.5
         padding: 0 0.625em;
 
         &[href] {
-            &:extend( a all );
+            &:extend( .link all );
         }
 
         &,
@@ -108,60 +76,14 @@ Styleguide 4.0
 
 */
 
-// JS Main Nav Functionality
-.js {
-    .menu {
-        .nav {
-            max-height: 0;
-            position: relative;
-            overflow: hidden;
-
-            &.is-current {
-                max-height: 999px;
-            }
-            &.is-current,
-            &.is-visited {
-
-                // Mixins
-                .transition(all, 0.65s, ease-in-out);
-            }
-        }
-    }
-}
-@media @medium-screens-min {
-    .js {
-        .menu   {
-            .nav    {
-                max-height: 999px;
-            }
-        }
-    }
-    .menu   {
-        .title  {
-            display: none;
-        }
-    }
-}
-
 
 /*
+
 Breadcrumb
 
-Another extension of the `.nav` module, adding a breadcrumb `.label`, 
+Another extension of the `.list--x` module, adding a breadcrumb `label`, 
 floating it and the ordered list and adding a `/` divider.
 
-Markup:
-<nav class="breadcrumb group">
-    <p class="label">You are here:</p>
-    <ol class="nav">
-        <li><a href="#">First Level</a></li>
-        <li><a href="#">Second Level</a></li>
-        <li><a href="#">Third Level</a></li>
-        <li><strong>Fourth Level</strong></li>
-    </ol>
-</nav>
-
-Styleguide 4.2
 */
 
 .breadcrumb {
