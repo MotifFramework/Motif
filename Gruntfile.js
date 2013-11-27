@@ -72,9 +72,9 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>admin/",
-                        src: "**/!(_*).less",
-                        dest: "<%= css_dir %>admin/",
+                        cwd: "<%= less_dir %>",
+                        src: "admin/!(_*).less",
+                        dest: "<%= css_dir %>",
                         ext: ".css"
                     }
                 ]
@@ -83,9 +83,9 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>client/",
-                        src: "**/!(_*).less",
-                        dest: "<%= css_dir %>client/",
+                        cwd: "<%= less_dir %>",
+                        src: "client/!(_*).less",
+                        dest: "<%= css_dir %>",
                         ext: ".css"
                     }
                 ]
@@ -98,9 +98,9 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>client/",
-                        src: "**/!(_*).less",
-                        dest: "<%= css_dir %>client/",
+                        cwd: "<%= less_dir %>",
+                        src: "client/!(_*).less",
+                        dest: "<%= css_dir %>",
                         ext: ".css"
                     }
                 ]
@@ -108,21 +108,18 @@ module.exports = function(grunt) {
         },
         webfont: {
             icons: {
-                src: '<%= image_dir %>icons/*.svg',
-                dest: '<%= font_dir %><%= pkg.name %>-icons/',
+                src: "<%= font_dir %>icons/svg/*.svg",
+                dest: '<%= compiled_dir %>fonts/client/icons/',
+                destCss: "<%= less_dir %>client/type/",
                 options: {
-                    font: '<%= pkg.name %>-icons',
+                    font: 'icons',
+                    types: "eot,woff,ttf,svg",
                     hashes: false,
-                    relativeFontPath: "/resources/fonts/<%= pkg.name %>-icons/"
-                }
-            },
-            symbolset: {
-                src: '<%= font_dir %>symbolset-icons/*.svg',
-                dest: '<%= font_dir %>symbolset-font/',
-                options: {
-                    font: 'symbolset',
-                    hashes: false,
-                    relativeFontPath: "/resources/fonts/symbolset-font/"
+                    relativeFontPath: "/resources/fonts/icons/",
+                    template: "<%= font_dir %>icons/template/template.css",
+                    stylesheet: "less",
+                    destHtml: "<%= font_dir %>icons/",
+                    embed: true
                 }
             }
         },
@@ -146,9 +143,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-jquery-builder");
 
     // Default task(s).
-    grunt.registerTask('default', ['less:development', 'jquery', 'concat:client', 'webfont',]);
-    grunt.registerTask('build', ['less:production', 'webfont', 'concat:client', 'uglify:client']);
+    grunt.registerTask('default', ['less:development', 'concat:client']);
+    grunt.registerTask('init', ['webfont', 'less:development', 'jquery', 'concat:client']);
+    grunt.registerTask('build', ['webfont', 'less:production', 'concat:client', 'uglify:client']);
     grunt.registerTask('fonts', ['webfont']);
     grunt.registerTask('jq', ['jquery']);
+    grunt.registerTask('js', ['concat:client', 'uglify:client']);
 
 };
