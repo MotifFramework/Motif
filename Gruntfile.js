@@ -4,13 +4,22 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        // Build jQuery versions
         jquery: {
+
+            // Client
             client: {
+
+                // Options
                 options: {
                     prefix: "jquery-",
                     minify: false
                 },
+
+                // Output directory
                 output: "<%= js_dir %>libs",
+
+                // Versions
                 versions: {
                     "2.0.3": [ "deprecated" ],
                     "1.8.3": [ "deprecated" ]
@@ -20,6 +29,8 @@ module.exports = function(grunt) {
 
         // Concatenate JS files
         concat: {
+
+            // Client
             client: {
                 files: {
 
@@ -44,27 +55,41 @@ module.exports = function(grunt) {
                         "<%= js_client_dir %>actions.js"
                     ],
 
-                    // Build Global JS for IE
+                    // Build Validation plugin
                     "<%= js_c_client_dir %>jquery.lb-validation.min.js": [
                         "<%= js_dir %>plugins/jquery.lb-validation.js"
                     ]
                 }
             }
         },
+
+        // Compress JS
         uglify: {
+
+            // Client
             client: {
                 files: [{
                     expand: true,
+
+                    // Current Working Directory
                     cwd: '<%= js_c_client_dir %>',
+
+                    // Source Files
                     src: '*.js',
+
+                    // Destination (Same as CWD)
                     dest: '<%= js_c_client_dir %>'
                 }]
             }
         },
+
+        // Build LESS
         less: {
             options: {
                 paths: ["docroot/resources/less"]
             },
+
+            // Admin
             admin: {
                 options: {
                     report: "min"
@@ -79,6 +104,8 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+
+            // Development Build
             development: {
                 files: [
                     {
@@ -90,6 +117,8 @@ module.exports = function(grunt) {
                     }
                 ]
             },
+
+            // Production Build
             production: {
                 options: {
                     yuicompress: true,
@@ -106,10 +135,20 @@ module.exports = function(grunt) {
                 ]
             }
         },
+
+        // Build Icons Webfont
         webfont: {
+
+            // Icons
             icons: {
+
+                // Source SVGs
                 src: "<%= font_dir %>icons/svg/*.svg",
+
+                // Destination Folder
                 dest: '<%= compiled_dir %>fonts/client/icons/',
+
+                // Destination CSS
                 destCss: "<%= less_dir %>client/type/",
                 options: {
                     font: 'icons',
@@ -123,6 +162,8 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        // Other Vars
         resources_dir: "../docroot/resources/",
         compiled_dir: "<%= resources_dir %>c/",
         css_dir: "<%= compiled_dir %>css/",
@@ -135,19 +176,29 @@ module.exports = function(grunt) {
         less_dir: "<%= resources_dir %>less/"
     });
 
-    // Load the plugin that provides the "uglify" task.
+    // Load the plugins that provide the tasks.
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-webfont');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks("grunt-jquery-builder");
 
-    // Default task(s).
+    // Default task.
     grunt.registerTask('default', ['less:development', 'concat:client']);
+
+    // Run on Init
     grunt.registerTask('init', ['webfont', 'less:development', 'jquery', 'concat:client']);
+
+    // Production Build
     grunt.registerTask('build', ['webfont', 'less:production', 'concat:client', 'uglify:client']);
+
+    // Compile Webfonts
     grunt.registerTask('fonts', ['webfont']);
+
+    // Build jQuery Versions
     grunt.registerTask('jq', ['jquery']);
+
+    // Compile and Minify JS
     grunt.registerTask('js', ['concat:client', 'uglify:client']);
 
 };
