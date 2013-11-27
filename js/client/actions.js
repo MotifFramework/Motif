@@ -379,7 +379,7 @@
         config: {
             forms: $("[data-validation='true']"),
             pluginName: "lb_validation",
-            pluginSource: "/resources/c/js/jquery.lb-validation.min.js",
+            pluginSource: "/resources/c/js/client/jquery.lb-validation.min.js",
             ajaxSubmit: true,
             ajaxConfig: {}
         },
@@ -463,30 +463,17 @@
         }
     };
 
-    /**
-     * Off Canvas
-     * -----------------------------------------------------------------------------
-     * 
-     * Trigger the off-canvas sidebar
-     * 
-     * @todo 
-     */
-
-    Client.offCanvas = {
+    Client.lbReveal = {
 
         /**
          * Config
          */
 
         config: {
-            targetElems: $(".canvas-trigger"),
+            targetElems: $("[data-reveal]"),
             pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
-            pluginOptions: {
-                "exclusive": "yes",
-                "activeClass": "is-active",
-                "visitedClass": "was-active"
-            }
+            pluginSource: "/resources/c/js/client/jquery.lb-reveal.min.js",
+            pluginOptions: {}
         },
 
         /**
@@ -503,59 +490,51 @@
         }
     };
 
-    /**
-     * Tabbed Widget
-     * -----------------------------------------------------------------------------
-     * 
-     * Use `lb_reveal` plugin to create a basic tabbed widget
-     * 
-     * @todo 
-     */
 
-    Client.tabbedWidget = {
-        config: {
-            targetElems: $("[data-reveal-group='tabbed-widget']"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
-            pluginOptions: {
-                "trigger": "click",
-                "exclusive": "radio"
-            }
-        },
+    Client.bindUI = {
+        init: function () {
+            Client.lbReveal.init({
+                targetElems: $(".js-tabs"),
+                pluginOptions: {
+                    exclusive: "radio",
+                    activeClass: "is-current"
+                }
+            });
 
-        init: function ( config ) {
+            Client.lbReveal.init({
+                targetElems: $(".canvas-trigger"),
+                pluginOptions: {
+                    "exclusive": "yes",
+                    "activeClass": "is-active",
+                    "visitedClass": "was-active"
+                }
+            });
 
-            // Extend the settings, make sure we've got the latest
-            var settings = $.extend( true, {}, this.config, config || {} );
+            Client.lbReveal.init({
+                targetElems: $(".js-reveal"),
+                pluginOptions: {
+                    exclusive: "yes",
+                    activeClass: "is-revealed",
+                    visitedClass: "was-revealed"
+                }
+            });
 
-            // Init the Plugin
-            Client.utils.initPlugin( settings );
-        }
-    };
+            Client.lbReveal.init({
+                targetElems: $(".js-expand"),
+                pluginOptions: {
+                    activeClass: "is-expanded",
+                    visitedClass: "was-expanded",
+                    exclusive: "yes"
+                }
+            });
 
-    /**
-     * Mobile Menu Dropdown
-     * -----------------------------------------------------------------------------
-     * 
-     * Use `lb_reveal` plugin to create a basic mobile menu dropdown
-     * 
-     * @todo 
-     */
-
-    Client.mobileMenu = {
-        config: {
-            targetElems: $("#reveal-main-nav"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js"
-        },
-
-        init: function ( config ) {
-
-            // Extend the settings, make sure we've got the latest
-            var settings = $.extend( true, {}, this.config, config || {} );
-
-            // Init the Plugin
-            Client.utils.initPlugin( settings );
+            Client.lbReveal.init({
+                targetElems: $(".js-fade"),
+                pluginOptions: {
+                    activeClass: "is-faded",
+                    visitedClass: "was-faded"
+                }
+            });
         }
     };
 
@@ -660,9 +639,7 @@
 
     Client.init = function () {
         Client.validateForms.init();
-        Client.tabbedWidget.init();
-        Client.offCanvas.init();
-        Client.mobileMenu.init();
+        Client.bindUI.init();
         Client.dataIcons.init();
     };
 
