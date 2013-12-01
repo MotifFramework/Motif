@@ -1,0 +1,96 @@
+/**
+ * Wrapper
+ */
+.wrapper {
+	width: 92%;
+	margin-left: auto;
+	margin-right: auto;
+}
+@media @x-large-screens-min {
+	.wrapper {
+		width: 80%;
+		max-width: 1em * (1150 / @base-text-size);
+	}
+}
+
+
+// Animated Revealing/Hiding Block Modules
+.js {
+	.reveal__target {
+	    &:extend( .is-hidden );
+
+	    &.is-revealed {
+
+	    	&:extend( .isnt-hidden );
+
+	        /* Pretty */
+	        overflow: visible;
+	    }
+	}
+
+	.expand__target,
+	.fade__target {
+		&:extend( .relative-container );
+
+		// Display & Box Model
+	    max-height: 0;
+	    overflow: hidden;
+	}
+	    .expand__target.is-expanded,
+	    .fade__target.is-faded {
+	        max-height: 999px;
+	    }
+	    .expand__target.is-expanded,
+	    .fade__target.is-faded,
+	    .expand__target.was-expanded,
+	    .fade__target.was-faded {
+
+	        // Mixins
+	        .transition( all, 0.65s, ease-in-out );
+	    }
+
+	.fade__target {
+	    .opacity(0);
+
+	    &.is-faded {
+	        .opacity(1);
+	    }
+	}
+}
+
+// JS Main Nav Functionality
+@media @medium-screens-min {
+    .js {
+        .menu__list {
+            max-height: 999px;
+        }
+    }
+    .menu__title  {
+        display: none;
+    }
+}
+
+
+/*
+
+Tabs
+
+The tabs module (and accompanying plugin) creates a very basic widget that 
+allows embedding and basic styling.
+
+*/
+
+.js {
+    .tabs {
+        &__section {
+            position: relative;
+        }
+    }
+    .tab {
+        display: none;
+
+        &.is-current {
+            display: block;
+        }
+    }
+}

@@ -1,0 +1,38 @@
+/*
+
+Tables
+
+*/
+
+/*
+
+Default Tables
+
+Simple, clean default styles. Just mark it up like a normal table.
+
+*/
+
+table {
+    width: 100%;
+    max-width: 100%;
+
+    th,
+    td {
+        padding: @half-vertical @half-side;
+    }
+    th {
+        padding-top: @half-vertical;
+    }
+}
+
+@media @small-screens-min {
+    table   {
+        th,
+        td {
+            padding: @half-vertical @full-side;
+        }
+        th {
+            padding-top: @half-vertical;
+        }
+    }
+}

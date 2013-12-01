@@ -1,0 +1,109 @@
+/*
+
+Media Object
+
+The Media Object is an image (or media-type) to the left with (typically) 
+descriptive content to the right. The media object can be whatever size it 
+wants, the basic format will remain the same. (Text will **not** wrap.)  This 
+has any number of applications, such as a checkbox next to a label with lots 
+of text.
+
+See: [The Media Object Saves Hundreds of Lines of Code][1]
+
+  [1]: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
+
+*/
+
+.media-object {
+    &,
+    &__desc {
+        overflow: hidden;
+    }
+    &--checkbox {
+
+        // Extends
+        &:extend( .group all );
+
+        /* Display & Box Model */
+        display: inline-block;
+        overflow: visible;
+
+        .media-object__figure {
+
+            // Extends
+            &:extend( .float--left );
+
+            /* Display & Box Model */
+            margin-right: @quarter-side;
+        }
+    }
+    &__figure img,
+    &__desc {
+        &:extend( .new-line );
+    }
+}
+
+// Small Screens and onward
+@media @small-screens-min {
+    .media-object {
+        &__figure {
+            max-width: 40%;
+            margin-right: @full-side;
+            float: left;
+        }
+        &__desc { 
+            & > :first-child {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+// Medium Screens and onward
+@media @medium-screens-min {
+    .media-object {
+        &__figure {
+            max-width: 50%;
+        }
+    }
+}
+
+/*
+
+Figures
+
+Great for integrating images into bodies of text, the `.figure` class is paired with the `.float-left` or `.float-right` class depending on where you would like it placed.
+
+*/
+
+.figure
+[class*="figure--"] {
+
+    // Mixins
+    .margin-leader();
+
+    img {
+        &:extend( .new-line );
+    }
+}
+@media @small-screens-min {
+    .figure,
+    [class*="figure--"] {
+        max-width: 50%;
+        margin-top: 0;
+    }
+    .figure {
+        &--left,
+        &--right {
+            padding-bottom: @half-vertical;
+        }
+        &--left    {
+            float: left;
+            padding-right: @double-side;
+        }
+        &--right   {
+            float: right;
+            padding-left: @double-side;
+        }
+    }
+}

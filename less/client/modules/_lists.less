@@ -1,0 +1,91 @@
+/*
+
+Horizontal List
+
+The basic `.list--x` module simply removes bullets from lists and inlines the list 
+items, making the link `inline-block`. The idea is to give the skeleton of a 
+horizontal navigation without adding too much style (yet).
+
+*/
+
+[class*="list--x"] {
+    &:extend( .list--unstyled );
+
+    li {
+        display: inline;
+    }
+        a {
+            display: inline-block;
+        }
+}
+[class*="list--x--forceful"] {
+    li,
+    a {
+        display: block;
+    }
+}
+
+// Small screens and onward
+@media @small-screens-min {
+    [class*="list--x--forceful"] {
+
+        // Mixins
+        .clearfix();
+
+        li {
+            float: left;
+        }
+    }
+}
+
+
+/*
+
+Pagination
+
+An extension of the basic `.list--x` module that simply adds padding enough for 
+pagination.
+
+*/
+
+.list--x--pgs {
+    a {
+        padding: 0 0.625em;
+
+        &[href] {
+            &:extend( .link all );
+        }
+
+        &,
+        &:hover,
+        &:focus {
+            color: inherit;
+        }
+    }
+}
+
+
+/*
+
+Breadcrumb
+
+Another extension of the `.list--x` module, adding a breadcrumb `label` 
+and floating it and the ordered list.
+
+*/
+
+.breadcrumb {
+    .margin-leader();
+
+    &__label {
+        margin: 0 @half-side 0 0;
+        float: left;
+    }
+    &__list--x {
+        margin: 0;
+        float: left;
+    }
+        li {
+            margin-right: @half-side;
+        }
+}

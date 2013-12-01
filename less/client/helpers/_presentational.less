@@ -1,0 +1,99 @@
+/*
+
+Text Align
+
+Simple classes to adjust your text alignment. They can be added to individual elements or on wrapping elements (an outer `div`, perhaps) to adjust the alignment of all the child elements.
+
+*/
+
+
+.align {
+    &--left {
+        text-align: left;
+    }
+    &--center {
+        text-align: center;
+    }
+    &--right {
+        text-align: right;
+    }
+    &--sub {
+        vertical-align: sub;
+    }
+    &--middle {
+        vertical-align: middle;
+    }
+    &--top {
+        vertical-align: top;
+    }
+}
+
+/*
+
+Floats
+
+Next, we have classes for floating elements.
+
+*/
+
+.float {
+    &--left {
+        float: left;
+    }
+    &--center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    &--right {
+        float: right;
+    }
+    &--none {
+        float: none;
+    }
+}
+.clear {
+    clear: both;
+}
+
+/*
+
+"New Line"
+
+Turns an `inline` or `inline-block` element into a `block` one. Like magic, 
+turns whatever it touches into block.
+
+*/
+
+.new-line {
+    display: block;
+}
+.group {
+
+    /* Mixins */
+    .clearfix();
+}
+
+/*
+
+"Is Hidden"
+
+Visually hides content in a way that leaves it accessible to screen readers. 
+Like more magic, makes the visible invisible.
+
+*/
+
+.is-hidden {
+
+    /* Mixins */
+    .visually-hidden();
+}
+
+.isnt-hidden {
+
+    /* Mixins */
+    .show-hidden();
+}
+
+.relative-container {
+    position: relative;
+}

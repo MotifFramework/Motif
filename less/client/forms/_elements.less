@@ -1,0 +1,98 @@
+/*
+
+Forms
+
+*/
+
+/*
+
+Basic Themed Elements
+
+Style `input`s/`textarea`s and set them to `width: 100%` to adapt to the width of their wrapper. (Great for grids.)
+
+*/
+
+input,
+textarea {
+
+    // Variables
+    @input-side-padding: ( 1em * ( @input-padding / @base-text-size ) );
+
+    // Create
+    width: 100%;
+    font-size: 1em;
+    padding: @quarter-vertical @input-side-padding;
+    outline: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.is-current {
+        z-index: 1;        
+    }
+}
+input {
+    &[type="checkbox"],
+    &[type="radio"] {
+        width: auto;
+
+        .lte7 & {
+            width: 13px;
+        }
+    }
+}
+textarea {
+    height: @full-vertical * 4;
+}
+select {
+    width: auto;
+    max-width: 100%;
+    font-size: 0.8125em;
+}
+
+.input-label {
+
+    input,
+    textarea,
+    select {
+    
+        // Mixins
+        .margin-vertical(0.25);
+    }
+}
+
+/*
+
+Useful Input Widths
+
+Useful widths for form inputs, both fixed- and fluid-width.
+
+*/
+
+.input--eighth {
+    width: 12.5%;
+}
+.input--quarter {
+    width: 25%;
+}
+.input--half {
+    width: 50%;
+}
+.input--xxxs {
+    max-width: @30px;
+}
+.input--xxs {
+    max-width: @50px;
+}
+.input--xs {
+    max-width: @100px;
+}
+.input--s {
+    max-width: @175px;
+}
+.input--m {
+    max-width: @250px;
+}
+.input--l {
+    max-width: @350px;
+}

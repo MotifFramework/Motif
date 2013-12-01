@@ -1,0 +1,11 @@
+.text-shadow(
+			@shadow-x: 0, 
+			@shadow-y: 0, 
+			@shadow-rad: 10px, 
+			@shadow-color: #CCC
+	)								{
+    
+    text-shadow: @shadow-x 2@shadow-y @shadow-rad  @shadow-color;
+    filter: dropshadow(color=@shadow-color, offx=@shadow-x, offy=@shadow-y);
+    
+}

@@ -1,0 +1,60 @@
+/*
+
+Panel
+
+Used to provide messaging to the user, whether it be direct or through calls to action. 
+The panel typically indicates a visual separation and implied sub-grouping of its content.
+
+*/
+
+.panel,
+[class*="panel-"] {
+
+    // Mixins
+    .margin-leader();
+
+    // Create
+    padding: @double-vertical;
+    background-color: lighten( @light-grey, 14% );
+
+    > :first-child {
+        margin-top: 0;
+    }
+}
+[class*="panel--thin"] {
+    padding: @full-vertical;
+}
+
+/*
+
+Alert Panel
+
+This variation of the standard `.panel` is used specifically for delivering 
+direct messages to the user, whether they be informative, complimentary, 
+or preventative.
+
+*/
+
+[class*="panel--alert"] {
+    color: @white;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: inherit;
+    }
+}
+.panel--alert {
+    background: @info-color;
+    
+    &--error {
+        background: @error-color;
+    }
+    &--success {
+        background: @success-color;
+    }
+}
+

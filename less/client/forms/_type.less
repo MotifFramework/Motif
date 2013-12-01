@@ -1,0 +1,67 @@
+/*
+
+Input Label
+
+*/
+
+/*
+
+Input Label with Hint
+
+*/
+
+.input {
+    &-label,
+    &-hint,
+    &-desc {
+        display: block;
+    }
+    &-hint,
+    &-desc {
+        &:extend( .body-text );
+    }
+    &-label {
+
+        // Mixins
+        .padding-leader( 1 );
+    }
+    &-hint {
+        color: @grey;
+
+        // Mixins
+        .margin-leader( 0.25 );
+    }
+    &-desc {
+        .margin-leader( 0 );
+    }
+}
+.fieldset {
+
+    // Mixins
+    .margin-leader( 1 );
+    .padding-trailer( 1 );
+}
+.checkbox-list {
+
+    // Mixins
+    .margin-leader( 0.5 );
+}
+legend + .checkbox-list {
+
+    // Mixins
+    .margin-leader( 0 );
+}
+legend {
+    .input-label {
+
+        // Mixins
+        .padding-trailer( 0.25 );
+    }
+
+    + .input-desc {
+
+        /* Positioning */
+        position: relative;
+        top: -@5px;
+    }
+}

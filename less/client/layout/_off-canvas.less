@@ -1,0 +1,61 @@
+@media @small-screens-max {
+    /*
+
+    Off-Canvas Trigger (Mobile Only)
+
+    */
+
+    .js {
+        .off-canvas {
+            overflow: hidden;
+
+            &.is-active {
+                .canvas__primary {
+                    margin-right: -110%;
+                }
+                .canvas__secondary {
+                    margin-left: 0;
+                }
+            }
+            &.is-active,
+            &.was-active {
+                .canvas__primary,
+                .canvas__secondary {
+
+                    // Mixins
+                    .transition( all, 0.15s, linear );
+                }
+            }
+        }
+            .canvas__primary,
+            .canvas__secondary {
+
+                // Extends
+                &:extend( .relative-container );
+
+                width: 100%;
+            }
+            .canvas__primary {
+
+                // Extends
+                &:extend( .float--right );
+
+                /* Display & Box Model */
+                margin-left: 0;
+
+                /* Positioning */
+                z-index: 1;
+            }
+            .canvas__secondary {
+
+                // Extends
+                &:extend( .float--left );
+
+                /* Display & Box Model */
+                margin-left: -100%;
+
+                /* Positioning */
+                z-index: 2;
+            }
+    }
+}
