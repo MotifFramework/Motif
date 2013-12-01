@@ -1,0 +1,64 @@
+// Media Query Equations
+@mq-mobile-min: ( 1em * (@mq-mobile-width / 16) );
+@mq-mobile-max: ( 1em * ((@mq-tablet-width - 1) / 16) );
+@mq-tablet-min: ( 1em * (@mq-tablet-width / 16) );
+@mq-tablet-max: ( 1em * ((@mq-desktop-width - 1) / 16) );
+@mq-desktop-min: ( 1em * (@mq-desktop-width / 16) );
+@mq-desktop-max: ( 1em * ((@mq-widescreen-width - 1) / 16) );
+@mq-widescreen-min: ( 1em * (@mq-widescreen-width / 16) );
+
+// Variables & Mixins. You'll want to keep these.
+@import "_config.less";
+@import "mixins/_mixins.less";
+
+// Base
+@import "core/partials/_base.less";
+@import "partials/_base.less";
+
+// Print
+@media print {
+	@import "partials/_print.less";
+}
+
+// Responsive Breakpoints
+
+// Mobile Only
+@media only screen and (max-width: @mq-mobile-max) {
+	@import "core/partials/_mobile-only.less";
+	@import "partials/_mobile-only.less";
+}
+/* Mobile Here*/
+// Mobile
+@media only screen and (min-width: @mq-mobile-min) {
+	@import "core/partials/_mobile.less";
+	@import "partials/_mobile.less";
+}
+
+// Tablet Only
+@media only screen and (min-width: @mq-tablet-min) and (max-width: @mq-tablet-max) {
+	@import "partials/_tablet-only.less";
+}
+
+// Tablet
+@media only screen and (min-width: @mq-tablet-min) {
+	@import "core/partials/_tablet.less";
+	@import "partials/_tablet.less";
+}
+
+// Desktop Only
+@media only screen and (min-width: @mq-desktop-min) and (max-width: @mq-desktop-max) {
+	@import "partials/_desktop-only.less";
+}
+
+// Desktop
+@media only screen and (min-width: @mq-desktop-min) {
+	@import "core/partials/_desktop.less";
+	@import "partials/_desktop.less";
+}
+
+// Large Screen
+@media only screen and (min-width: @mq-widescreen-min) {
+	@import "partials/_widescreen.less";
+}
+
+@import "_legacy.less";

@@ -1,0 +1,30 @@
+// Variables & Mixins. You'll want to keep these.
+@import "_config.less";
+@import "mixins/_mixins.less";
+
+@import "core/partials/_base.less";
+@import "partials/_base.less";
+@import "core/partials/_mobile.less";
+@import "partials/_mobile.less";
+@import "partials/_tablet-only.less";
+@import "partials/_desktop-only.less";
+@import "core/partials/_desktop.less";
+@import "partials/_desktop.less";
+
+html,
+body {
+    min-width: 992px;
+}
+.wrapper {
+    width: 92%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@import "_legacy.less";
+
+// Print
+@media print {
+    @import "partials/_print.less";
+}
