@@ -1,15 +1,7 @@
 /*
+
 Form Validation
 
-Markup: <label class="input-label {$modifiers}">
-    Telephone
-    <input class="input-s" type="tel" value="555-555-5555">
-</label>
-
-.error - 
-.success - 
-
-Styleguide 5.4
 */
 
 .is-successful {
@@ -28,29 +20,21 @@ Styleguide 5.4
 }
 
 /*
+
 Form Messaging
 
-Markup: <label class="input-label">
-    Form Bubble
-    <input type="tel" placeholder="XXX-XXX-XXXX">
-    <small class="input-alert {$modifiers} bubble">
-        A message pertaining to this field.
-    </small>
-</label>
-
-.info - 
-.warning - 
-.error - 
-.success - 
-
-Styleguide 5.5
 */
 
 [class*="input-alert"] {
+
+    // Extends
     &:extend( .relative-container );
-    &:extend(.body-text);
+    &:extend( .body-text );
     
+    /* Display & Box Model */
     display: inline-block;
+
+    /* Pretty */
     color: @info-color;
 }
 .input-alert {

@@ -1,3 +1,6 @@
+/**
+ * Wrapper
+ */
 .wrapper {
 	width: 92%;
 	margin-left: auto;
@@ -17,9 +20,10 @@
 	    &:extend( .is-hidden );
 
 	    &.is-revealed {
-	        .show-hidden();
 
-	        /* Other */
+	    	&:extend( .isnt-hidden );
+
+	        /* Pretty */
 	        overflow: visible;
 	    }
 	}

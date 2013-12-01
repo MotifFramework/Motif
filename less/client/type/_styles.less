@@ -6,18 +6,11 @@ h5,
 h6,
 .primary-heading {
     font-weight: normal;
-    // font-family: @primary-header-font;
-    // color: @primary-header-color;
 }
 
 /*
 
 Secondary Heading
-
-Markup:
-<h2 class="secondary-heading">Secondary Heading</h2>
-
-Styleguide 2.3.2
 
 */
 
@@ -29,21 +22,13 @@ Styleguide 2.3.2
 
 Body Text
 
-Markup:
-<p>This is a paragraph of text. Some of the text may be <em>emphasised</em> and some it might even be <strong>strongly emphasised</strong>. Occasionally <q>quoted text</q> may be found within a paragraph ... and of course <a href="#">a link</a> may appear at any point in the text. The average paragraph contains five or six sentences although some may contain as little or one or two while others carry on for anything up to ten sentences and beyond.</p>
-
-Styleguide 2.4
-
 */
 
 body,
 .body-text {
 
-    // Mixins
-    &:extend(.normal-text);
-
-    // Other
-    // color: @primary-text-color;
+    // Extends
+    &:extend( .normal-text );
 }
 
 .list--unstyled {

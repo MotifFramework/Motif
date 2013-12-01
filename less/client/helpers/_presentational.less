@@ -4,17 +4,6 @@ Text Align
 
 Simple classes to adjust your text alignment. They can be added to individual elements or on wrapping elements (an outer `div`, perhaps) to adjust the alignment of all the child elements.
 
-The default styling:
-
-Markup:
-<p class="{$modifiers}">Aligned Text</p>
-
-.align-left - Usually the same as the site default
-.align-center - Center aligns text as well as any non-block child elements
-.align-right - Aligns things to the right
-
-Styleguide 1.2.2
-
 */
 
 
@@ -45,17 +34,6 @@ Floats
 
 Next, we have classes for floating elements.
 
-Without floating:
-
-Markup:
-<div class="panel {$modifiers} gt-third gd-third">A Floating Panel</div>
-
-.float-left - Floats the element to the left
-.float-center - Doesn't actually float, but rather sets margins to `auto`. *Requires a set width!*
-.float-right - Floats the element to the right
-
-Styleguide 1.2.3
-
 */
 
 .float {
@@ -84,11 +62,6 @@ Styleguide 1.2.3
 Turns an `inline` or `inline-block` element into a `block` one. Like magic, 
 turns whatever it touches into block.
 
-Markup:
-This is text with a <span class="new-line">span tag</span> nested inline
-
-Styleguide 1.2.4
-
 */
 
 .new-line {
@@ -107,17 +80,18 @@ Styleguide 1.2.4
 Visually hides content in a way that leaves it accessible to screen readers. 
 Like more magic, makes the visible invisible.
 
-Markup:
-Now you see me<span class="is-hidden">, now you don't.</span>
-
-Styleguide 1.2.5
-
 */
 
 .is-hidden {
 
     /* Mixins */
     .visually-hidden();
+}
+
+.isnt-hidden {
+
+    /* Mixins */
+    .show-hidden();
 }
 
 .relative-container {

@@ -3,8 +3,6 @@
 
 Interactive Elements
 
-Styleguide 3.0
-
 */
 
 /*
@@ -14,18 +12,6 @@ Buttons
 Default interactive button styles. This `.button` class can be applied to `<a>`, 
 `<button>`, or `<input>` elements. Button color and style classes can be combined 
 with size classes.
-
-Markup:
-<a class="{$modifiers} button" href="#">Link Element Button</a>
-<button class="{$modifiers} button">Button Element</button>
-<input class="{$modifiers} button" type="button" value="Input Element Button">
-
-.primary - A change from the default style, meant for primary actions (e.g., form submittal)
-.danger - Indicative of destructive action
-.tiny - Smallest button size available
-.small - Small button size, but not too small
-.large - Larger button size for big callouts
-.full-width - Button expands to fill width of its container
 
 Styleguide 3.1
 
@@ -71,15 +57,18 @@ Styleguide 3.1
     &--tiny {
         
         // Mixins
+        // @TODO: Extend?
         .size-for-font(@petite-text-size);
 
         // Create
         padding: @quarter-vertical @half-side;
     }
     &--small {
+        // @TODO: Extend?
         .size-for-font(@petite-text-size);
     }
     &--large {
+        // @TODO: Extend?
         .size-for-font(@primer-text-size);
     }
     &--full-width { 

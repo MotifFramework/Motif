@@ -101,10 +101,6 @@
             }
         }
 
-        // Opera as of 12 on Windows needs word-spacing.
-        // The ".opera-only" selector is used to prevent
-        // actual prefocus styling and is not required 
-        // in markup.
         .opera-only :-o-prefocus,
         &--flex {
             word-spacing: -0.43em;
@@ -173,26 +169,6 @@
         The `.object` class is applied to the list item. You then apply grid-system 
         classes to the `.object` to constrain the widths.
 
-        Markup:
-        <ul class="unstyled media-grid gm-row gt-row gd-row">
-            <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
-                <img src="http://placehold.it/300 alt="Media Object" />
-                <p>Here's a subtitle</p>
-            </li>
-            <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
-                <img src="http://placehold.it/300 alt="Media Object" />
-            </li>
-            <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
-                <img src="http://placehold.it/300 alt="Media Object" />
-            </li>
-            <li class="gm-columns gm-half gt-columns gt-third gd-columns gd-third object">
-                <img src="http://placehold.it/300 alt="Media Object" />
-                <p>Look, I don't catch on the subtitle!</p>
-            </li>
-        </ul>
-
-        Styleguide 7.2
-
         */
         &--flex {
             letter-spacing: -0.31em;
@@ -207,11 +183,6 @@
                 text-rendering: auto;
             }
         }
-
-        // Opera as of 12 on Windows needs word-spacing.
-        // The ".opera-only" selector is used to prevent
-        // actual prefocus styling and is not required 
-        // in markup.
         .opera-only :-o-prefocus,
         &--flex {
             word-spacing: -0.43em;

@@ -1,36 +1,21 @@
-
-
-
 /*
+
 Panel
 
 Used to provide messaging to the user, whether it be direct or through calls to action. 
 The panel typically indicates a visual separation and implied sub-grouping of its content.
 
-Markup:
-<div class="{$modifiers} panel">
-    <h2>This is a Panel</h2>
-    <p>This is a feedback message for the user.</p>
-    <p><a href="#" class="button">User Action</a></p>
-</div>
-<div class="{$modifiers} panel">
-    <p>This is a feedback panel with no heading.</p>
-</div>
-
-.inset - Adding this class modifies the look of the panel to a more "sunken in" aesthetic
-
-Styleguide 4.1
 */
 
 .panel,
 [class*="panel-"] {
 
+    // Mixins
+    .margin-leader();
+
     // Create
     padding: @double-vertical;
     background-color: lighten(@light-grey, 14%);
-
-    // Mixins
-    .margin-leader();
 
     > :first-child {
         margin-top: 0;
@@ -41,27 +26,13 @@ Styleguide 4.1
 }
 
 /*
+
 Alert Panel
 
 This variation of the standard `.panel` is used specifically for delivering 
 direct messages to the user, whether they be informative, complimentary, 
 or preventative.
 
-Markup:
-<div class="{$modifiers} alert panel">
-    <h2>This is an Alert Panel</h2>
-    <p>This is a feedback message for the user.</p>
-    <p><a href="#" class="button">User Action</a></p>
-</div>
-<div class="{$modifiers} alert panel">
-    <p>This is an alert panel with no heading.</p>
-</div>
-
-.error - 
-.success - 
-.info - 
-
-Styleguide 4.1.1
 */
 
 [class*="panel--alert"] {

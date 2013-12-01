@@ -1,24 +1,13 @@
 /*
+
 Input Label
 
-Markup: <label class="input-label">
-    Input Label
-    <input class="input-l" type="email" placeholder="Ex: name@email.com">
-</label>
-
-Styleguide 5.3
 */
 
 /*
+
 Input Label with Hint
 
-Markup: <label class="input-label">
-    Input Label
-    <input class="input-l" type="email" placeholder="Ex: name@email.com">
-    <small class="hint">This is a hint.</small>
-</label>
-
-Styleguide 5.3.1
 */
 
 .input {
@@ -29,50 +18,47 @@ Styleguide 5.3.1
     }
     &-hint,
     &-desc {
-        &:extend(.body-text);
+        &:extend( .body-text );
     }
     &-label {
 
         // Mixins
-        .padding-leader(1);
+        .padding-leader( 1 );
     }
     &-hint {
         color: @grey;
 
         // Mixins
-        .margin-leader(0.25);
+        .margin-leader( 0.25 );
     }
     &-desc {
-        .margin-leader(0);
+        .margin-leader( 0 );
     }
 }
 .fieldset {
 
-    /* Mixins */
-    .margin-leader(1);
-    .padding-trailer(1);
+    // Mixins
+    .margin-leader( 1 );
+    .padding-trailer( 1 );
 }
 .checkbox-list {
 
-    /* Mixins */
-    .margin-leader(0.5);
+    // Mixins
+    .margin-leader( 0.5 );
 }
 legend + .checkbox-list {
 
-    /* Mixins */
-    .margin-leader(0);
+    // Mixins
+    .margin-leader( 0 );
 }
 legend {
     .input-label {
 
-        /* Mixins */
-        .padding-trailer(0.25);
+        // Mixins
+        .padding-trailer( 0.25 );
     }
 
     + .input-desc {
-
-        /* Variables */
-        @5px: 1em * (5 / @base-text-size);
 
         /* Positioning */
         position: relative;
