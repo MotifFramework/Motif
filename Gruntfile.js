@@ -60,6 +60,19 @@ module.exports = function(grunt) {
                         "<%= r_js %>plugins/jquery.lb-validation.js"
                     ]
                 }
+            },
+
+            // Client
+            admin: {
+                files: {
+
+                    // Build Helpers
+                    "<%= c_js %>helpers.admin.js": [
+                        "<%= r_js_admin %>modernizr.js",
+                        "<%= r_js %>helpers/viewport.js",
+                        "<%= r_js %>helpers/loadScript.js"
+                    ]
+                }
             }
         },
 
@@ -67,7 +80,7 @@ module.exports = function(grunt) {
         uglify: {
 
             // Client
-            client: {
+            js: {
                 files: [{
                     expand: true,
 
@@ -174,6 +187,29 @@ module.exports = function(grunt) {
                     destHtml: "<%= r_fonts %><%= pkg.name %>-icons/",
                     embed: true
                 }
+            },
+
+            // Icons
+            adminIcons: {
+
+                // Source SVGs
+                src: "<%= r_fonts %>admin-icons/svg/*.svg",
+
+                // Destination Folder
+                dest: '<%= c_fonts %>admin-icons/',
+
+                // Destination CSS
+                destCss: "<%= c_less %>",
+                options: {
+                    font: 'admin-icons',
+                    types: "eot,woff,ttf,svg",
+                    hashes: false,
+                    relativeFontPath: "<%= c_fonts %>admin-icons/",
+                    template: "<%= r_fonts %>admin-icons/template/template.css",
+                    stylesheet: "less",
+                    destHtml: "<%= r_fonts %>admin-icons/",
+                    embed: true
+                }
             }
         },
 
@@ -213,10 +249,13 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['less:development', 'concat:client']);
 
     // Run on Init
-    grunt.registerTask('init', ['webfont', 'less:development', 'jquery', 'concat:client']);
+    grunt.registerTask('init', ['webfont:clientIcons', 'less:development', 'jquery', 'concat:client']);
 
     // Production Build
-    grunt.registerTask('build', ['webfont', 'less:production', 'concat:client', 'uglify:client']);
+    grunt.registerTask('build', ['webfont:clientIcons', 'less:production', 'concat:client', 'uglify']);
+
+    // Admin Build
+    grunt.registerTask('admin', ['webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Compile Webfonts
     grunt.registerTask('fonts', ['webfont']);
@@ -225,6 +264,6 @@ module.exports = function(grunt) {
     grunt.registerTask('jq', ['jquery']);
 
     // Compile and Minify JS
-    grunt.registerTask('js', ['concat:client', 'uglify:client']);
+    grunt.registerTask('js', ['concat:client', 'uglify']);
 
 };
