@@ -17,7 +17,7 @@ module.exports = function(grunt) {
                 },
 
                 // Output directory
-                output: "<%= js_dir %>libs",
+                output: "<%= r_js %>libs",
 
                 // Versions
                 versions: {
@@ -35,29 +35,29 @@ module.exports = function(grunt) {
                 files: {
 
                     // Build Helpers
-                    "<%= js_c_client_dir %>helpers.min.js": [
-                        "<%= js_client_dir %>modernizr.js",
-                        "<%= js_dir %>helpers/viewport.js",
-                        "<%= js_dir %>helpers/loadScript.js"
+                    "<%= c_js %>helpers.<%= pkg.name %>.js": [
+                        "<%= r_js_client %>modernizr.js",
+                        "<%= r_js %>helpers/viewport.js",
+                        "<%= r_js %>helpers/loadScript.js"
                     ],
 
                     // Build Global JS
-                    "<%= js_c_client_dir %>global.min.js": [
-                        "<%= js_dir %>libs/jquery-2.0.3.js",
-                        "<%= js_dir %>plugins/jquery.lb-reveal.js",
-                        "<%= js_client_dir %>actions.js"
+                    "<%= c_js %><%= pkg.name %>.js": [
+                        "<%= r_js %>libs/jquery-2.0.3.js",
+                        "<%= r_js %>plugins/jquery.lb-reveal.js",
+                        "<%= r_js_client %>actions.js"
                     ],
 
                     // Build Global JS for IE
-                    "<%= js_c_client_dir %>global-ie8.min.js": [
-                        "<%= js_dir %>libs/jquery-1.8.3.js",
-                        "<%= js_dir %>plugins/jquery.lb-reveal.js",
-                        "<%= js_client_dir %>actions.js"
+                    "<%= c_js %><%= pkg.name %>-ie8.js": [
+                        "<%= r_js %>libs/jquery-1.8.3.js",
+                        "<%= r_js %>plugins/jquery.lb-reveal.js",
+                        "<%= r_js_client %>actions.js"
                     ],
 
                     // Build Validation plugin
-                    "<%= js_c_client_dir %>jquery.lb-validation.min.js": [
-                        "<%= js_dir %>plugins/jquery.lb-validation.js"
+                    "<%= c_js %>jquery.lb-validation.min.js": [
+                        "<%= r_js %>plugins/jquery.lb-validation.js"
                     ]
                 }
             }
@@ -72,13 +72,13 @@ module.exports = function(grunt) {
                     expand: true,
 
                     // Current Working Directory
-                    cwd: '<%= js_c_client_dir %>',
+                    cwd: '<%= c_js %>',
 
                     // Source Files
                     src: '*.js',
 
                     // Destination (Same as CWD)
-                    dest: '<%= js_c_client_dir %>'
+                    dest: '<%= c_js %>'
                 }]
             }
         },
@@ -97,10 +97,12 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>",
+                        cwd: "<%= r_less %>",
                         src: "admin/!(_*).less",
-                        dest: "<%= css_dir %>",
-                        ext: ".css"
+                        dest: "<%= c_css %>",
+                        rename: function( dest, src ) {
+                            return dest + "admin.css";
+                        }
                     }
                 ]
             },
@@ -110,10 +112,16 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>",
+                        cwd: "<%= r_less %>",
                         src: "client/!(_*).less",
-                        dest: "<%= css_dir %>",
-                        ext: ".css"
+                        dest: "<%= c_css %>",
+                        rename: function( dest, src ) {
+                            var source = src.substr( src.indexOf("/") + 1 );
+
+                            source = source.replace( "global", "<%= project %>" );
+
+                            return dest + source.substr( 0, source.indexOf(".") ) + ".css";
+                        }
                     }
                 ]
             },
@@ -127,10 +135,16 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= less_dir %>",
+                        cwd: "<%= r_less %>",
                         src: "client/!(_*).less",
-                        dest: "<%= css_dir %>",
-                        ext: ".css"
+                        dest: "<%= c_css %>",
+                        rename: function( dest, src ) {
+                            var source = src.substr( src.indexOf("/") + 1 );
+
+                            source = source.replace( "global", "<%= project %>" );
+
+                            return dest + source.substr( 0, source.indexOf(".") ) + ".css";
+                        }
                     }
                 ]
             }
@@ -140,40 +154,52 @@ module.exports = function(grunt) {
         webfont: {
 
             // Icons
-            icons: {
+            clientIcons: {
 
                 // Source SVGs
-                src: "<%= font_dir %>icons/svg/*.svg",
+                src: "<%= r_fonts %><%= pkg.name %>-icons/svg/*.svg",
 
                 // Destination Folder
-                dest: '<%= compiled_dir %>fonts/client/icons/',
+                dest: '<%= c_fonts %><%= pkg.name %>-icons/',
 
                 // Destination CSS
-                destCss: "<%= less_dir %>client/type/",
+                destCss: "<%= c_less %>",
                 options: {
-                    font: 'icons',
+                    font: '<%= pkg.name %>-icons',
                     types: "eot,woff,ttf,svg",
                     hashes: false,
-                    relativeFontPath: "/resources/fonts/icons/",
-                    template: "<%= font_dir %>icons/template/template.css",
+                    relativeFontPath: "<%= c_fonts %><%= pkg.name %>-icons/",
+                    template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
-                    destHtml: "<%= font_dir %>icons/",
+                    destHtml: "<%= r_fonts %><%= pkg.name %>-icons/",
                     embed: true
                 }
             }
         },
 
         // Other Vars
-        resources_dir: "../docroot/resources/",
-        compiled_dir: "<%= resources_dir %>c/",
-        css_dir: "<%= compiled_dir %>css/",
-        image_dir: "<%= resources_dir %>images/",
-        font_dir: "<%= resources_dir %>fonts/",
-        js_dir: "<%= resources_dir %>js/",
-        js_c_dir: "<%= compiled_dir %>js/",
-        js_client_dir: "<%= js_dir %>client/",
-        js_c_client_dir: "<%= js_c_dir %>client/",
-        less_dir: "<%= resources_dir %>less/"
+        project: "<%= pkg.name %>",
+        resources: "../docroot/resources/",
+        compiled: "<%= resources %>c/",
+
+        c_less: "<%= compiled %>less/",
+        c_css: "<%= compiled %>css/",
+        c_fonts: "<%= compiled %>fonts/",
+        c_js: "<%= compiled %>js/",
+
+        r_less: "<%= resources %>less/",
+        r_less_client: "<%= r_less %>client/",
+        r_less_admin: "<%= r_less %>admin/",
+
+        r_fonts: "<%= resources %>fonts/",
+
+        r_js: "<%= resources %>js/",
+        r_js_client: "<%= r_js %>client/",
+        r_js_admin: "<%= r_js %>admin/",
+
+        r_images: "<%= resources %>images/",
+        r_images_client: "<%= r_images %>client/",
+        r_images_admin: "<%= r_images %>admin/"
     });
 
     // Load the plugins that provide the tasks.
