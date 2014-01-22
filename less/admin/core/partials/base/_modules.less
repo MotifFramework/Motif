@@ -225,14 +225,19 @@ Styleguide 3.2
 
 .js {
     .tabs {
+        [data-reveal] {
+            cursor: pointer;
+        }
         .section {
             position: relative;
         }
         .tab {
-            display: none;
-
+            position: relative;
+            overflow: hidden;
+            max-height: 0;
+            .transition(max-height 0.5s);
             &.is-current {
-                display: block;
+                max-height: 999px;
             }
         }
     }
