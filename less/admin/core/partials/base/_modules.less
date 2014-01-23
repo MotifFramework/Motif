@@ -239,10 +239,26 @@ Styleguide 3.2
                 max-height: 9999px;
             }
         }
-    }
-    &.admin {
-        .tab {
-            .transition(max-height 0.5s);
+        &.admin {
+            .tab-reveal {
+                &:after {
+                    // variables
+                    @10px: 1em * (10 / @petite-text-size);
+                    content: "\25BE";
+                    display: inline-block;
+                    padding-left: @10px;
+                    font-family: @symbolset;
+                    .size-for-font(@petite-text-size);
+                }
+                &.is-current {
+                    &:after {
+                        content: "\25B4";
+                    }
+                }
+            }
+            .tab {
+                .transition(max-height 0.5s);
+            }
         }
     }
 }
