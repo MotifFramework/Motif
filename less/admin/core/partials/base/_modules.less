@@ -235,10 +235,14 @@ Styleguide 3.2
             position: relative;
             overflow: hidden;
             max-height: 0;
-            .transition(max-height 0.5s);
             &.is-current {
-                max-height: 999px;
+                max-height: 9999px;
             }
+        }
+    }
+    &.admin {
+        .tab {
+            .transition(max-height 0.5s);
         }
     }
 }
