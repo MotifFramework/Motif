@@ -471,8 +471,8 @@
 
         config: {
             targetElems: $("[data-reveal]"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/client/jquery.lb-reveal.min.js",
+            pluginName: "reveal",
+            pluginSource: "/resources/c/js/client/reveal.min.js",
             pluginOptions: {}
         },
 
@@ -496,7 +496,7 @@
             Client.lbReveal.init({
                 targetElems: $(".js-tabs"),
                 pluginOptions: {
-                    exclusive: "radio",
+                    type: "radio",
                     activeClass: "is-current"
                 }
             });
@@ -504,7 +504,7 @@
             Client.lbReveal.init({
                 targetElems: $(".canvas-trigger"),
                 pluginOptions: {
-                    "exclusive": "yes",
+                    "type": "exclusive",
                     "activeClass": "is-active",
                     "visitedClass": "was-active"
                 }
@@ -513,7 +513,7 @@
             Client.lbReveal.init({
                 targetElems: $(".js-reveal"),
                 pluginOptions: {
-                    exclusive: "yes",
+                    type: "exclusive",
                     activeClass: "is-revealed",
                     visitedClass: "was-revealed"
                 }
@@ -524,7 +524,7 @@
                 pluginOptions: {
                     activeClass: "is-expanded",
                     visitedClass: "was-expanded",
-                    exclusive: "yes"
+                    type: "exclusive"
                 }
             });
 
