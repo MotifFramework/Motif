@@ -277,10 +277,40 @@ module.exports = function(grunt) {
             }
         },
 
+        "string-replace": {
+            development: {
+                files: {
+                    "<%= r_less_client %>global.less": ["<%= r_less_client %>global.less"],
+                    "<%= views %>foundation.view": ["<%= views %>foundation.view"],
+                    "<%= views %>base/foundation.view": ["<%= views %>base/foundation.view"]
+                },
+                options: {
+                    replacements: [{
+                        pattern: /lb-core/gi,
+                        replacement: '<%= pkg.name %>'
+                    }]
+                }
+            }
+        },
+
+        copy: {
+            icons: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: "<%= r_fonts %>lb-core-icons/",
+                        src: "**",
+                        dest: "<%= r_fonts %><%= pkg.name %>-icons/"
+                    }
+                ]
+            }
+        },
+
         // Other Vars
         project: "<%= pkg.name %>",
         docroot: "../docroot/",
-        resources: "../docroot/resources/",
+        views: "<%= docroot %>views/",
+        resources: "<%= docroot %>resources/",
         compiled: "<%= resources %>c/",
 
         c_less: "<%= compiled %>less/",
@@ -309,13 +339,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks("grunt-jquery-builder");
+    grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
     grunt.registerTask('default', ['less:devGlobal', 'less:devGlobalFixed', 'concat:client']);
 
     // Run on Init
-    grunt.registerTask('init', ['webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client']);
+    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client']);
     grunt.registerTask('refresh', ['webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Production Build
