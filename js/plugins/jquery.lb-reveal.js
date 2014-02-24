@@ -15,11 +15,7 @@
             "activeClass": "is-current",
             "visitedClass": "is-visited",
 
-            "hoverIntent": {
-                "sensitivity": 10,
-                "interval": 50,
-                "timeout": 0
-            },
+            "hoverIntent": null,
 
             // On Init
             "onInit": null,
@@ -65,42 +61,71 @@
                     // Add settings to data object
                     $this.data("revealSettings", data);
 
-                    // If onInit callback...
-                    if (typeof s.onInit == "function") {
-                        s.onInit($this, $(this));
-                    }
-
                     // On Hover...
                     if (s.trigger === "hover") {
 
-                        // If the Hover Intent plugin is available...
-                        if ($.fn.hoverIntent && s.hoverIntent) {
+                        if (data.exclusive !== "radio") {
 
-                            // ...use it!
-                            $this.hoverIntent({
-                                sensitivity: s.hoverIntent.sensitivity,
-                                interval: s.hoverIntent.interval,
-                                over: function () {
-                                    methods.revealTarget.call($this);
-                                },
-                                timeout: s.hoverIntent.timeout,
-                                out: function () {
-                                    methods.hideTarget.call($this);
-                                }
-                            });
+                            // If the Hover Intent plugin is available...
+                            if ($.fn.hoverIntent && s.hoverIntent) {
 
-                        // Otherwise...
+                                // ...use it!
+                                $this.hoverIntent({
+                                    sensitivity: s.hoverIntent.sensitivity,
+                                    interval: s.hoverIntent.interval,
+                                    over: function () {
+                                        methods.revealTarget.call($this);
+                                    },
+                                    timeout: s.hoverIntent.timeout,
+                                    out: function () {
+                                        methods.hideTarget.call($this);
+                                    }
+                                });
+
+                            // Otherwise...
+                            } else {
+
+                                // ...bind on `mouseenter` and `mouseleave`
+                                $this.on({
+                                    mouseenter: function () {
+                                        methods.revealTarget.call($this);
+                                    },
+                                    mouseleave: function () {
+                                        methods.hideTarget.call($this);
+                                    }
+                                });
+                            }
                         } else {
 
-                            // ...bind on `mouseenter` and `mouseleave`
-                            $this.on({
-                                mouseenter: function () {
-                                    methods.revealTarget.call($this);
-                                },
-                                mouseleave: function () {
-                                    methods.hideTarget.call($this);
-                                }
-                            });
+                            // If the Hover Intent plugin is available...
+                            if ($.fn.hoverIntent && s.hoverIntent) {
+
+                                // ...use it!
+                                $this.hoverIntent({
+                                    sensitivity: s.hoverIntent.sensitivity,
+                                    interval: s.hoverIntent.interval,
+                                    over: function () {
+                                        methods.revealTarget.call($this);
+                                    },
+                                    timeout: s.hoverIntent.timeout
+                                });
+
+                            // Otherwise...
+                            } else {
+
+                                // ...bind on `mouseenter`
+                                $this.on({
+                                    mouseenter: function () {
+
+                                        // ...cycle through the group and hide all the others
+                                        reveal_group.each(function () {
+                                            methods.hideTarget.call($(this));
+                                        });
+                                        methods.revealTarget.call($this);
+                                    }
+                                });
+                            }
+
                         }
 
                     // On Click...
@@ -144,6 +169,11 @@
                             return false;
                         });
                     }
+
+                    // If onInit callback...
+                    if (typeof s.onInit == "function") {
+                        s.onInit($this, $(this));
+                    }
                 });
             },
 
@@ -155,6 +185,10 @@
                 $this.addClass(o.activeClass);
                 o.revealTarget.addClass(o.activeClass);
 
+                o.revealGroup.each(function () {
+                    $(this).data( "currentReveal", $this );
+                });
+
                 if (typeof o.onReveal == "function") {
                     o.onReveal.call($this, $(this));
                 }
@@ -165,24 +199,31 @@
                 var $this = $(this),
                     o = $this.data("revealSettings");
 
-                // Add visited class
-                if (!$this.hasClass(o.visitedClass)) {
-                    $this.addClass(o.visitedClass);
-                }
+                if ( $this.hasClass( o.activeClass ) || o.revealTarget.hasClass( o.activeClass ) ) {
 
-                // Remove Active Class
-                $this.removeClass(o.activeClass);
+                    // Add visited class
+                    if ( !$this.hasClass( o.visitedClass ) ) {
+                        $this.addClass( o.visitedClass );
+                    }
 
-                // Add visited class
-                if (!o.revealTarget.hasClass(o.visitedClass)) {
-                    o.revealTarget.addClass(o.visitedClass);
-                }
+                    // Remove Active Class
+                    $this.removeClass( o.activeClass );
 
-                // Remove Active Class
-                o.revealTarget.removeClass(o.activeClass);
+                    // Add visited class
+                    if ( !o.revealTarget.hasClass( o.visitedClass ) ) {
+                        o.revealTarget.addClass( o.visitedClass );
+                    }
 
-                if (typeof o.onHide == "function") {
-                    o.onHide.call($this, $(this));
+                    // Remove Active Class
+                    o.revealTarget.removeClass( o.activeClass );
+
+                    o.revealGroup.each(function () {
+                        $(this).data( "lastReveal", $this );
+                    });
+
+                    if ( typeof o.onHide == "function" ) {
+                        o.onHide.call( $this, $(this) );
+                    }
                 }
             }
         };

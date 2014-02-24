@@ -44,7 +44,15 @@
 				"elem": elem,
 				"targets": [],
 				"for": [],
+				"hide": [],
 				"current": false
+			};
+		},
+
+		"newReferenceGroup": function () {
+			return {
+				"type": this.options.type,
+				"triggers": []
 			};
 		},
 
@@ -54,6 +62,7 @@
 			this.bindTrigger.call( this );
 			this.bindTargets.call( this );
 			this.initTrigger.call( this );
+			// this.initCurrent.call( this );
 			// this.gatherGroup.call( this );
 			// this.gatherTargets.call( this );
 
@@ -63,8 +72,8 @@
 		"createReference": function () {
 			if ( !window.Reveal ) {
 				window.Reveal = {
-					"triggers": [],
-					"groups": []
+					"triggers": {},
+					"groups": {}
 				};
 			}
 		},
@@ -100,68 +109,84 @@
 
 			"processTrigger": function () {
 				var reference = window.Reveal,
-					referenceObject = this.group ? reference[ this.group ][ this.identity ] : reference[ this.identity ];
+					referenceObject = reference.triggers[ this.identity ];
 
-				if ( this.options.type === "radio" && referenceObject.current === true ) {
-					return;
+				if ( referenceObject.current === true ) {
+					if ( this.options.type === "radio" ) {
+						return;
+					} else {
+						this.unpublish.call( this );
+					}
+				} else {
+					this.publish.call( this );
 				}
-
-				console.log( this.group );
-
-				if ( this.group ) {
-					this.processGroup.call( this );
-				}
-
-				// if ( referenceObject.current === false ) {
-				// 	this.show.call( this );
-				// }
 			},
 
-				"processGroup": function () {
-					var self = this,
-						reference = window.Reveal,
-						referenceGroup = reference[ this.group ],
+				"publish": function () {
+					var oldCurrents,
+						key;
 
-						// get old current, turn it off
-						oldCurrents = this.getCurrent( referenceGroup );
+					if ( this.group ) {
+						oldCurrents = this.getCurrent.call( this, window.Reveal.groups[ this.group ].triggers );
 
-					for ( var key in oldCurrents ) {
-						$document.trigger("reveal/" + key + "/hide");
+						for ( key in oldCurrents ) {
+							$document.trigger("reveal/" + oldCurrents[ key ] + "/hide");
+						}
 					}
 
 					// turn new current on
 					$document.trigger("reveal/" + this.identity + "/show");
 				},
 
+				"unpublish": function () {
+					$document.trigger("reveal/" + this.identity + "/hide");
+				},
+
 		"bindTargets": function () {
 			var self = this;
 
 			$document.on("reveal/" + self.identity + "/show", function onRevealShow () {
-				// alert("in");
 				self.makeCurrent.call( self );
 				self.showTrigger.call( self );
 				self.showTargets.call( self );
+				self.showFors.call( self );
 			});
 			$document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
 				self.unmakeCurrent.call( self );
 				self.hideTrigger.call( self );
 				self.hideTargets.call( self );
+				self.hideFors.call( self );
 			});
 		},
 
+		"initCurrent": function () {
+			if ( this.$elem.attr("data-reveal-current") === "true" ) {
+				this.makeCurrent.call( this );
+				this.publish.call( this );
+			}
+		},
+
 		"makeCurrent": function () {
-			
+			this.updateReference.call( this, {
+				"current": true
+			});
+		},
+
+		"unmakeCurrent": function () {
+			this.updateReference.call( this, {
+				"current": false
+			});
 		},
 
 		"getCurrent": function ( group ) {
-			var currents = [],
-				i = 0;
+			var reference = window.Reveal.triggers,
+				currents = [];
 
-			for ( i in group ) {
-				if ( group[ i ].current ) {
-					currents.push( group[ i ] );
+			$.each( reference, function ( i, v ) {
+				if ( reference[ i ].current ) {
+					currents.push( i );
 				}
-			}
+			});
 
 			return currents;
 		},
@@ -171,6 +196,7 @@
 				"targets": this.gatherTargets.call( this ),
 				"for": this.gatherForTriggers.call( this )
 			});
+			this.initCurrent.call( this );
 		},
 
 		"gatherTargets": function () {
@@ -199,14 +225,25 @@
 		},
 
 		"gatherForTriggers": function () {
-			var allFors = $("[data-reveal-for='" + this.identity + "']"),
+			var self = this,
+				allFors = $("[data-reveal-for='" + this.identity + "']"),
 				fors = [];
 
 			$.each( allFors, function eachFor ( i, v ) {
-				fors.push( allFors[i] );
+				self.bindFors.call( self, allFors[ i ] );
+				fors.push( allFors[ i ] );
 			});
 
 			return fors;	
+		},
+
+		"bindFors": function ( forTrigger ) {
+			var self = this;
+
+			$( forTrigger ).on( "click", function () {
+				self.$elem.trigger("click");
+				return false;
+			});
 		},
 
 		"gatherGroup": function () {
@@ -226,11 +263,19 @@
 			"showTargets": function () {
 				// alert("show targets");
 				var self = this,
-					reference = window.Reveal,
-					targets = this.group ? reference[ this.group ][ this.identity ].targets : reference[ this.identity ].targets;
+					targets = self.reference.targets;
 
 				$.each( targets, function hideEachTarget () {
 					self.show.call( self, this );
+				});
+			},
+
+			"showFors": function () {
+				var self = this,
+					fors = self.reference.for;
+
+				$.each( fors, function showEachFor () {
+					self.show.call( self, $( this ) );
 				});
 			},
 
@@ -249,11 +294,19 @@
 
 			"hideTargets": function () {
 				var self = this,
-					reference = window.Reveal,
-					targets = this.group ? reference[ this.group ][ this.identity ].targets : reference[ this.identity ].targets;
+					targets = self.reference.targets;
 
 				$.each( targets, function hideEachTarget () {
 					self.hide.call( self, this );
+				});
+			},
+
+			"hideFors": function () {
+				var self = this,
+					fors = self.reference.for;
+
+				$.each( fors, function hideEachFor () {
+					self.hide.call( self, $( this ) );
 				});
 			},
 
@@ -267,17 +320,6 @@
 				reference = window.Reveal,
 				referenceGroup = self.group ? reference.groups[ self.group ] : false,
 				referenceTrigger = reference.triggers[ self.identity ];
-				// referenceGroup = reference[ self.group ] || false,
-				// referenceGroupTrigger = referenceGroup[ self.identity ] || false,
-				// referenceTrigger = reference[ self.identity ] || false;
-
-			// if this.group
-				// find reference group
-					// find identity in group
-
-
-			// This updates the reference with the current
-			// trigger
 
 			// If it is part of a group
 			if ( self.group ) {
@@ -285,78 +327,31 @@
 				// if Group exists
 				if ( referenceGroup ) {
 
-					// If 
-					if ( !referenceGroup[ self.identity ] ) {
-						referenceGroup[ self.identity ] = 0;
+					if ( $.inArray( self.identity, referenceGroup.triggers ) === -1 ) {
+						referenceGroup.triggers.push( self.identity );
 					}
+				} else {
+					reference.groups[ self.group ] = self.newReferenceGroup.call( self );
+					reference.groups[ self.group ].triggers.push( self.identity );
 				}
 			}
 
-			// First, find if it's part of a group
-			if ( this.group ) {
+			if ( referenceTrigger ) {
 
-				// If it is, find if the group is already
-				// registered
-				if ( referenceGroup ) {
+				// If it is, extend the current trigger
+				// object with the updates
+				$.extend( true, referenceTrigger, updates );
 
-					// If it is, check if the current trigger
-					// is also registered
-					if ( referenceGroupTrigger ) {
-
-						// If so, extend the current trigger object
-						// with the updates
-						$.extend( true, referenceGroupTrigger, updates );
-
-					// If it is not, register the current trigger
-					} else {
-						reference[ this.group ][ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
-					}
-
-				// If the group does not yet exist in the
-				// reference, create it, and add this trigger
-				// as an entry
-				} else {
-					reference[ this.group ] = {};
-					reference[ this.group ][ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
-				}
-
-				this.reference = reference[ this.group ][ this.identity ];
-
-			// If the trigger is not part of a group
+			// If the trigger does not yet exist in
+			// the reference, create it
 			} else {
 
-				// Check if the trigger is already registered
-				if ( referenceTrigger ) {
-
-					// If it is, extend the current trigger
-					// object with the updates
-					$.extend( true, referenceTrigger, updates );
-
-				// If the trigger does not yet exist in
-				// the reference, create it
-				} else {
-
-					// Then make sure the updates are applied
-					reference[ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
-				}
-
-				this.reference = reference[ this.identity ];
+				// Then make sure the updates are applied
+				reference.triggers[ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
 			}
-		},
 
-		"setCurrent": function () {
-			var referenceObject = this.group ? window.Reveal[ this.group ][ this.identity ] : window.Reveal[ this.identity ];
+			this.reference = reference.triggers[ this.identity ];
 
-			referenceObject.current = true;
-
-			$document.trigger("reveal/" + this.identity + "/show");
-		},
-
-		"checkReference": function ( updates ) {
-		},
-
-		"referenceTargets": function () {
-			
 		}
 	};
 
@@ -450,38 +445,7 @@ On initialization, go to each reveal
 
 
 
-
-window: {
-	Reveal: {
-		"triggers": {
-			"GROUP": {
-				"TRIGGER": {
-					"elem": $object,
-					"targets": [
-						"TARGET",
-						"TARGET",
-						"TARGET"
-					],
-					"for": [
-						$object
-					],
-					"current": true
-				},
-				"TRIGGER": {
-					"elem": $object,
-					"targets": [
-						"TARGET",
-						"TARGET",
-						"TARGET"
-					],
-					"for": null,
-					"current": false
-				},
-				"type": exclusive
-			}
-		}
-	}
-}
+data-reveal-hide=""
 
 
 window: {

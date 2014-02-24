@@ -471,8 +471,8 @@
 
         config: {
             targetElems: $("[data-reveal]"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/plugins/jquery.lb-reveal.min.js",
+            pluginName: "reveal",
+            pluginSource: "/resources/c/js/reveal.min.js",
             pluginOptions: {}
         },
 
