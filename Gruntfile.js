@@ -44,14 +44,16 @@ module.exports = function(grunt) {
                     // Build Global JS
                     "<%= c_js %><%= pkg.name %>.js": [
                         "<%= r_js %>libs/jquery-2.0.3.js",
-                        "<%= r_js %>plugins/jquery.lb-reveal.js",
+                        "<%= r_js_client %>class/reveal.js",
+                        // "<%= r_js %>plugins/jquery.lb-reveal.js",
                         "<%= r_js_client %>actions.js"
                     ],
 
                     // Build Global JS for IE
                     "<%= c_js %><%= pkg.name %>-ie8.js": [
                         "<%= r_js %>libs/jquery-1.8.3.js",
-                        "<%= r_js %>plugins/jquery.lb-reveal.js",
+                        "<%= r_js_client %>class/reveal.js",
+                        // "<%= r_js %>plugins/jquery.lb-reveal.js",
                         "<%= r_js_client %>actions.js"
                     ],
 
