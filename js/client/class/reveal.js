@@ -126,7 +126,7 @@
 					var oldCurrents,
 						key;
 
-					if ( this.group ) {
+					if ( this.group && this.options.type !== "default" ) {
 						oldCurrents = this.getCurrent.call( this, window.Reveal.groups[ this.group ].triggers );
 
 						for ( key in oldCurrents ) {
