@@ -284,7 +284,7 @@ module.exports = function(grunt) {
                 files: {
                     "<%= r_less_client %>global.less": ["<%= r_less_client %>global.less"],
                     "<%= views %>foundation.view": ["<%= views %>foundation.view"],
-                    "<%= views %>base/foundation.view": ["<%= views %>base/foundation.view"]
+                    "<%= views %>bases/foundation.view": ["<%= views %>bases/foundation.view"]
                 },
                 options: {
                     replacements: [{
@@ -349,7 +349,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['less:devGlobal', 'less:devGlobalFixed', 'concat:client']);
 
     // Run on Init
-    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client']);
+    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
     grunt.registerTask('refresh', ['webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Production Build
