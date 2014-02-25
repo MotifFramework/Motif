@@ -108,10 +108,7 @@
 		},
 
 			"processTrigger": function () {
-				var reference = window.Reveal,
-					referenceObject = reference.triggers[ this.identity ];
-
-				if ( referenceObject.current === true ) {
+				if ( this.reference.current === true ) {
 					if ( this.options.type === "radio" ) {
 						return;
 					} else {
@@ -126,6 +123,7 @@
 					var oldCurrents,
 						key;
 
+					// @TODO: Move this up to processTrigger()?
 					if ( this.group && this.options.type !== "default" ) {
 						oldCurrents = this.getCurrent.call( this, window.Reveal.groups[ this.group ].triggers );
 
@@ -194,7 +192,8 @@
 		"initTrigger": function () {
 			this.updateReference.call( this, {
 				"targets": this.gatherTargets.call( this ),
-				"for": this.gatherForTriggers.call( this )
+				"for": this.gatherForTriggers.call( this ),
+				"hide": this.gatherHideTriggers.call( this )
 			});
 			this.initCurrent.call( this );
 		},
@@ -237,14 +236,38 @@
 			return fors;	
 		},
 
-		"bindFors": function ( forTrigger ) {
-			var self = this;
+			"bindFors": function ( forTrigger ) {
+				var self = this;
 
-			$( forTrigger ).on( "click", function () {
-				self.$elem.trigger("click");
-				return false;
+				$( forTrigger ).on( "click", function () {
+					self.$elem.trigger("click");
+					return false;
+				});
+			},
+
+		"gatherHideTriggers": function () {
+			var self = this,
+				allHides = $("[data-reveal-hide='" + this.identity + "']"),
+				hides = [];
+
+			$.each( allHides, function eachFor ( i, v ) {
+				self.bindHides.call( self, allHides[ i ] );
+				hides.push( allHides[ i ] );
 			});
+
+			return hides;	
 		},
+
+			"bindHides": function ( hideTrigger ) {
+				var self = this;
+
+				$( hideTrigger ).on( "click", function () {
+					if ( self.reference.current && self.options.type !== "radio" ) {
+						self.$elem.trigger("click");
+					}
+					return false;
+				});
+			},
 
 		"gatherGroup": function () {
 			var groupID = this.$elem.data("reveal-group");
@@ -370,84 +393,6 @@
 } ) );
 
 /*
-
-On initialization, go to each reveal
-	- bind callbacks to global document event emitter
-		- On init
-		- on show
-		- on hide
-	- check the exclusivity
-	- find the reveal's target(s)
-		- if the target exists on the page
-			- push that to an array
-		- if it does not exist on the page
-			- push that to a limbo array
-		- return that array
-	- check if reveal is part of a group
-		- if it is
-			- check the global reference to see if the group has been documented
-				- if it has
-					- make sure this reveal is in the group
-						- if it's not
-							- add this reveal to the group
-				- if it has not
-					- create a new group in the reference
-			- add each found reveal as a part of that group
-			- for the current reveal, add the target array and limbo array
-		- if it is not
-			- add the reveal id to the object
-			- add the target array and limbo array
-	- bind interactive events
-		- switch
-			- hover
-			- hover w/ hoverIntent
-			- click
-	
-	Emit event HIDE WHEN:
-	- if is current && exclu«sivity !== radio
-
-	Emit event SHOW WHEN:
-	- is not current
-
-	Emit NOTHING when:
-	- is current && exclusivity === radio
-
-	GROUP DYNAMICS:
-	- if EXCLUSIVE or RADIO:
-		- reference group
-			- find all NOT new current
-				- current = false
-				- emit reveal/:id/hide
-			- find new current
-				- current = true
-				- emit reveal/:id/show
-	- otherwise show regular
-
-	- on hide:
-		- get trigger
-			- remove current class
-			- ?? Add hidden class??
-			- if used to be current
-				- add visited class
-		- get targets
-			- each
-				- remove current class
-				- ?? Add hidden class??
-				- if used to be current
-					- add visited class
-	- on show:
-		- get trigger
-			- add current class
-		- get targets
-			- each
-				- add current class
-
-
-
-
-data-reveal-hide=""
-
-
 window: {
 	Reveal: {
 		"triggers": {
@@ -486,15 +431,6 @@ window: {
 			}
 		}
 	}
-}
-
-It's about the triggers
-	trigger is what holds the current state
-	group exclusivity is based on trigger, purely
-	if two triggers share the same 
-
-Tabbed group example {
-	
 }
 
 */
