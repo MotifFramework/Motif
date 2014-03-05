@@ -471,8 +471,8 @@
 
         config: {
             targetElems: $("[data-reveal]"),
-            pluginName: "lb_reveal",
-            pluginSource: "/resources/c/js/jquery.lb-reveal.min.js",
+            pluginName: "reveal",
+            pluginSource: "/resources/c/js/reveal.min.js",
             pluginOptions: {}
         },
 
@@ -496,15 +496,15 @@
             Client.lbReveal.init({
                 targetElems: $(".js-tabs"),
                 pluginOptions: {
-                    exclusive: "radio",
-                    activeClass: "is-current"
+                    "type": "radio",
+                    "activeClass": "is-current"
                 }
             });
 
             Client.lbReveal.init({
                 targetElems: $(".canvas-trigger"),
                 pluginOptions: {
-                    "exclusive": "yes",
+                    "type": "exclusive",
                     "activeClass": "is-active",
                     "visitedClass": "was-active"
                 }
@@ -513,26 +513,26 @@
             Client.lbReveal.init({
                 targetElems: $(".js-reveal"),
                 pluginOptions: {
-                    exclusive: "yes",
-                    activeClass: "is-revealed",
-                    visitedClass: "was-revealed"
+                    "type": "exclusive",
+                    "activeClass": "is-revealed",
+                    "visitedClass": "was-revealed"
                 }
             });
 
             Client.lbReveal.init({
                 targetElems: $(".js-expand"),
                 pluginOptions: {
-                    activeClass: "is-expanded",
-                    visitedClass: "was-expanded",
-                    exclusive: "yes"
+                    "activeClass": "is-expanded",
+                    "visitedClass": "was-expanded",
+                    "type": "exclusive"
                 }
             });
 
             Client.lbReveal.init({
                 targetElems: $(".js-fade"),
                 pluginOptions: {
-                    activeClass: "is-faded",
-                    visitedClass: "was-faded"
+                    "activeClass": "is-faded",
+                    "visitedClass": "was-faded"
                 }
             });
         }

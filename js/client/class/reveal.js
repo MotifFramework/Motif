@@ -5,10 +5,9 @@
 	var Reveal = function ( elem, userOptions ) {
 			
 			// Init Vars
-			$document = $( document );
 			this.$elem = $( elem );
             this.elem = this.$elem[0];
-            this.identity = this.$elem.attr("id");
+            this.identity = this.$elem.attr("id") || "reveal-target-" + Reveal.counter;
             this.group = this.$elem.attr("data-reveal-group") || false;
             this.reference = false;
             this.config = userOptions;
@@ -16,6 +15,8 @@
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
 		},
 		$document = $( document );
+
+	Reveal.counter = 0;
 
 	Reveal.prototype = {
 		"defaults": {
@@ -35,6 +36,8 @@
 
 			// Callbacks
 			"onInit": null,
+			"beforeShow": null,
+			"beforeHide": null,
 			"onShow": null,
 			"onHide": null
 		},
@@ -62,9 +65,10 @@
 			this.bindTrigger.call( this );
 			this.bindTargets.call( this );
 			this.initTrigger.call( this );
-			// this.initCurrent.call( this );
-			// this.gatherGroup.call( this );
-			// this.gatherTargets.call( this );
+
+			Reveal.counter += 1;
+
+			$document.trigger("reveal/" + this.identity + "/init");
 
 			return this;
 		},
@@ -81,19 +85,29 @@
 		"bindCallbacks": function () {
 			var self = this;
 
-			if ( typeof this.options.onInit == "function" ) {
-				$document.on("reveal/" + this.identity + "/init", function onRevealInit () {
-					this.options.onInit.call( this );
+			if ( typeof self.options.onInit == "function" ) {
+				$document.on("reveal/" + self.identity + "/init", function onRevealInit () {
+					self.options.onInit.call( self, self.$elem );
 				});
 			}
-			if ( typeof this.options.onShow == "function" ) {
-				$document.on("reveal/" + this.identity + "/show", function onRevealShow () {
-					this.options.onShow.call( this );
+			if ( typeof self.options.beforeShow == "function" ) {
+				$document.on("reveal/" + self.identity + "/before/show", function onRevealShow () {
+					self.options.beforeShow.call( self, self.$elem );
 				});
 			}
-			if ( typeof this.options.onHide == "function" ) {
-				$document.on("reveal/" + this.identity + "/hide", function onRevealHide () {
-					this.options.onHide.call( this );
+			if ( typeof self.options.onShow == "function" ) {
+				$document.on("reveal/" + self.identity + "/after/show", function onRevealShow () {
+					self.options.onShow.call( self, self.$elem );
+				});
+			}
+			if ( typeof self.options.beforeHide == "function" ) {
+				$document.on("reveal/" + self.identity + "/before/hide", function onRevealHide () {
+					self.options.beforeHide.call( self, self.$elem );
+				});
+			}
+			if ( typeof self.options.onHide == "function" ) {
+				$document.on("reveal/" + self.identity + "/after/hide", function onRevealHide () {
+					self.options.onHide.call( self, self.$elem );
 				});
 			}
 		},
@@ -144,16 +158,30 @@
 			var self = this;
 
 			$document.on("reveal/" + self.identity + "/show", function onRevealShow () {
+
+				// Trigger beforeShow
+				$document.trigger("reveal/" + self.identity + "/before/show");
+
 				self.makeCurrent.call( self );
 				self.showTrigger.call( self );
 				self.showTargets.call( self );
 				self.showFors.call( self );
+
+				// Trigger onShow
+				$document.trigger("reveal/" + self.identity + "/after/show");
 			});
 			$document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
+
+				// Trigger onHide
+				$document.trigger("reveal/" + self.identity + "/before/hide");
+
 				self.unmakeCurrent.call( self );
 				self.hideTrigger.call( self );
 				self.hideTargets.call( self );
 				self.hideFors.call( self );
+
+				// Trigger onHide
+				$document.trigger("reveal/" + self.identity + "/after/hide");
 			});
 		},
 
@@ -284,7 +312,6 @@
 		},
 
 			"showTargets": function () {
-				// alert("show targets");
 				var self = this,
 					targets = self.reference.targets;
 
@@ -303,7 +330,6 @@
 			},
 
 			"showTrigger": function () {
-				// alert("showtrigger");
 				this.show.call( this, this.$elem );
 			},
 
@@ -393,6 +419,9 @@
 } ) );
 
 /*
+
+Model of what the Reveal Reference will look like:
+
 window: {
 	Reveal: {
 		"triggers": {
