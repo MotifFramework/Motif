@@ -336,7 +336,7 @@
 		"hide": function ( elem ) {
 			elem.removeClass( this.options.activeClass );
 
-			if ( elem.hasClass( this.options.visitedClass ) ) {
+			if ( !elem.hasClass( this.options.visitedClass ) ) {
 				elem.addClass( this.options.visitedClass );
 			}
 		},

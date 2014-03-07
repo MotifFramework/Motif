@@ -6,6 +6,14 @@ The building blocks for the site's type sizes. Almost exclusively, an element's 
 
 The list of type sizes can grow or shrink, but be vigilant in keeping the number of sizes to a minimum. A nice rule of thumb is that no two sizes can one pixel in difference (forcing you to choose one over the other, giving you one class where you previously had two).
 
+@pattern: Typographic Scale
+<p class="canon-text">Canon Text (48px)</p>
+<p class="paragon-text">Paragon Text (28px)</p>
+<p class="primer-text">Primer Text (21px)</p>
+<p class="normal-text">Normal Text (16px)</p>
+<p class="petite-text">Petite Text (13px)</p>
+<p class="minion-text">Minion Text (10px)</p>
+
 */
 
 /*
@@ -38,7 +46,7 @@ Primer Text
 
 */
 
-.primer-text {
+[class*="primer-text"] {
 
     // Mixins
     .type-size(@primer-text-size);
@@ -50,7 +58,7 @@ Normal Text
 
 */
 
-.normal-text {
+[class*="normal-text"] {
 
     // Mixins
     .type-size(@normal-text-size);
@@ -62,7 +70,7 @@ Petite Text
 
 */
 
-.petite-text {
+[class*="petite-text"] {
 
     // Mixins
     .type-size(@petite-text-size);
@@ -74,8 +82,15 @@ Minion Text
 
 */
 
-.minion-text {
+[class*="minion-text"] {
 
     // Mixins
     .type-size(@minion-text-size);
+}
+
+.primer-text--long,
+.normal-text--long,
+.petite-text--long,
+.minion-text--long {
+    line-height: 1.5;
 }

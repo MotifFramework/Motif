@@ -355,39 +355,39 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
     }
 
-    &__list {
+    &__list--x--forceful {
         margin: 0;
         
         // Mixins
         background: darken(@dark-blue, 10%);
+    }
+    &__link {
+        color: @white;
+        text-decoration: none;
+        padding: @half-vertical 4%;
         
-        a {
+        // Mixins
+        // .source-sans-bold();
+        
+        &:hover,
+        &:focus,
+        &.is-current {
             color: @white;
-            text-decoration: none;
-            padding: @half-vertical 4%;
-            
-            // Mixins
-            // .source-sans-bold();
-            
-            &:hover,
-            &:focus,
-            &.is-current {
 
-                // Mixins
-                background: darken(@dark-blue, 15%);
-            }
+            // Mixins
+            background: darken(@dark-blue, 15%);
         }
     }
 }
 @media @small-screens-min {
     .nav-bar {
-        &__list {
-            li {
+        &__list--x--forceful {
+            > li {
                 width: 50%;
             }
-                a {
-                    padding: @half-vertical @full-side;
-                }
+        }
+        &__link {
+            padding: @half-vertical @full-side;
         }
     }
 }
@@ -401,30 +401,31 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         @highlight-top: lighten(@purple, 10%);
         @highlight-bottom: darken(@purple, 10%);
 
-        &__list {
+        &__list--x--forceful {
             
             // Mixins
             .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
 
-            li {
+            > li {
                 width: auto;
             }
-                a {
-                    padding: @full-vertical @full-side;
-                    
-                    &:hover,
-                    &:focus,
-                    &.is-current {
-                        
-                        // Variables
-                        @base-color: darken(@dark-blue, 5%);
-                        @top-gradient: @base-color;
-                        @bottom-gradient: darken(@base-color, 5%);
+        }
 
-                        // Mixins
-                        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
-                    }
-                }
+        &__link {
+            padding: @full-vertical @full-side;
+            
+            &:hover,
+            &:focus,
+            &.is-current {
+                
+                // Variables
+                @base-color: darken(@dark-blue, 5%);
+                @top-gradient: @base-color;
+                @bottom-gradient: darken(@base-color, 5%);
+
+                // Mixins
+                .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+            }
         }
         // .sub-nav {
         //  background:                     darken(@dark-blue, 10%);
@@ -448,7 +449,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
                 .nav-bar__title {
                     display: none;
                 }
-                .nav-bar__list {
+                .nav-bar__list--x--forceful {
                     max-height: 999px;
                 }
             }

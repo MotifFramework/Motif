@@ -41,6 +41,36 @@ horizontal navigation without adding too much style (yet).
 
 /*
 
+@pattern: Link List
+<ul class="link-list--x">
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+</ul>
+
+*/
+
+[class*="link-list--x"] {
+    a {
+        margin-right: @30px;
+    }
+
+    li:last-child {
+        a {
+            margin-right: 0;
+        }
+    }
+}
+
+
+/*
+
 Pagination
 
 An extension of the basic `.list--x` module that simply adds padding enough for 
