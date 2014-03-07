@@ -415,6 +415,7 @@
 	LB.apps.Reveal = Reveal;
 
 }( jQuery, window, document, window.LB = window.LB || {
+	"utils": {},
 	"apps": {}
 } ) );
 

@@ -271,7 +271,7 @@
 
                     // Variables
                     firstError = $this
-                        .find("." + data.classes.errorClass + "." + data.classes.messageClass)
+                        .find("." + data.classes.messageClass + "--" + data.classes.errorClass)
                         .first()
                         .prev()
                         .offset();
@@ -342,7 +342,7 @@
 
                     if (!verdict) {
                         legend.addClass(data.classes.errorClass);
-                        parentUL.after('<b class="bubble ' + data.classes.errorClass + ' ' + data.classes.messageClass + '">' + data.messages[inputType] + '</b>');
+                        parentUL.after('<b class="' + data.classes.messageClass + '--' + data.classes.errorClass + '">' + data.messages[inputType] + '</b>');
                     } else {
                         if (verdict === true) {
                             currentLabel.addClass(data.classes.successClass);
@@ -353,7 +353,7 @@
 
                     if (!verdict) {
                         parentLabel.addClass(data.classes.errorClass);
-                        currentInput.after('<b class="bubble ' + data.classes.errorClass + ' ' + data.classes.messageClass + '">' + data.messages[inputType] + '</b>');
+                        currentInput.after('<b class="' + data.classes.messageClass + '--' + data.classes.errorClass + '">' + data.messages[inputType] + '</b>');
                     } else {
                         if ($.trim(currentInput.val()) !== "") {
                             parentLabel.addClass(data.classes.successClass);
@@ -389,7 +389,7 @@
                     // REMEMBER TO ADD "IF VERDICT"
                     legend.removeClass(data.classes.errorClass);
                     currentLabel.removeClass(data.classes.successClass);
-                    parentUL.next('.' + data.classes.errorClass + '.' + data.classes.messageClass).remove();
+                    parentUL.next('.' + data.classes.messageClass + '--' + data.classes.errorClass).remove();
                 } else {
 
                     // Variables
@@ -397,7 +397,7 @@
 
                     // Actions
                     parentLabel.removeClass(data.classes.successClass).removeClass(data.classes.errorClass);
-                    currentInput.next('.' + data.classes.errorClass + '.' + data.classes.messageClass).remove();
+                    currentInput.next('.' + data.classes.messageClass + '--' + data.classes.errorClass).remove();
                 }
             }
         };
