@@ -282,6 +282,7 @@ module.exports = function(grunt) {
                 files: {
                     "<%= r_less_client %>global.less": ["<%= r_less_client %>global.less"],
                     "npm-shrinkwrap.json": ["npm-shrinkwrap.json"],
+                    "<%= docs %>patterns.php": ["<%= docs %>patterns.php"],
                     "<%= views %>bases/foundation.view": ["<%= views %>bases/foundation.view"]
                 },
                 options: {
@@ -309,6 +310,7 @@ module.exports = function(grunt) {
         // Other Vars
         project: "<%= pkg.name %>",
         docroot: "../docroot/",
+        docs: "<%= docroot %>docs/",
         views: "<%= docroot %>views/",
         resources: "<%= docroot %>resources/",
         compiled: "<%= resources %>c/",
@@ -348,6 +350,8 @@ module.exports = function(grunt) {
 
     // Run on Init
     grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
+
+    // Run when you want to refresh everything
     grunt.registerTask('refresh', ['webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Production Build
