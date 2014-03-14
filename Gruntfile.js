@@ -131,82 +131,65 @@ module.exports = function(grunt) {
             },
 
             // Development Build
-            devGlobal: {
+            developmentGlobal: {
                 options: {
-                    sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>.css.map',
-                    sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
-                    sourceMapURL: "<%= project %>.css.map"
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: "<%= r_less %>",
-                        src: "client/global.less",
-                        dest: "<%= c_css %>",
-                        rename: function( dest, src ) {
-                            var source = src.substr( src.indexOf("/") + 1 );
-
-                            source = source.replace( "global", "<%= project %>" );
-
-                            return dest + source.substr( 0, source.lastIndexOf(".") ) + ".css";
-                        }
-                    }
-                ]
-            },
-
-            devGlobalFixed: {
-                options: {
-                    sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>-fixed.css.map',
-                    sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
-                    sourceMapURL: "<%= project %>-fixed.css.map"
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: "<%= r_less %>",
-                        src: "client/global-fixed.less",
-                        dest: "<%= c_css %>",
-                        rename: function( dest, src ) {
-                            var source = src.substr( src.indexOf("/") + 1 );
-
-                            source = source.replace( "global", "<%= project %>" );
-
-                            return dest + source.substr( 0, source.lastIndexOf(".") ) + ".css";
-                        }
-                    }
-                ]
-            },
-
-            // Production Build
-            production: {
-                options: {
+                    paths: ["<%= r_less_client"],
                     sourceMap: true,
                     sourceMapFilename: '<%= c_css %><%= project %>.css.map',
                     sourceMapRootpath: "../../",
                     sourceMapBasepath: "<%= resources %>",
                     sourceMapURL: "<%= project %>.css.map",
-                    yuicompress: true,
-                    report: "min"
+                    cleancss: false
                 },
-                files: [
-                    {
-                        expand: true,
-                        cwd: "<%= r_less %>",
-                        src: "client/!(_*).less",
-                        dest: "<%= c_css %>",
-                        rename: function( dest, src ) {
-                            var source = src.substr( src.indexOf("/") + 1 );
+                files: {
+                    "<%= c_css %><%= project %>.css": "<%= r_less_client %>global.less"
+                }
+            },
+            developmentGlobalFixed: {
+                options: {
+                    paths: ["<%= r_less_client"],
+                    sourceMap: true,
+                    sourceMapFilename: '<%= c_css %><%= project %>-fixed.css.map',
+                    sourceMapRootpath: "../../",
+                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapURL: "<%= project %>-fixed.css.map",
+                    cleancss: false
+                },
+                files: {
+                    "<%= c_css %><%= project %>-fixed.css": "<%= r_less_client %>global-fixed.less"
+                }
+            },
 
-                            source = source.replace( "global", "<%= project %>" );
-
-                            return dest + source.substr( 0, source.indexOf(".") ) + ".css";
-                        }
-                    }
-                ]
+            // Production Build
+            productionGlobal: {
+                options: {
+                    paths: ["<%= r_less_client"],
+                    sourceMap: true,
+                    sourceMapFilename: '<%= c_css %><%= project %>.css.map',
+                    sourceMapRootpath: "../../",
+                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapURL: "<%= project %>.css.map",
+                    cleancss: true,
+                    report: "gzip"
+                },
+                files: {
+                    "<%= c_css %><%= project %>.css": "<%= r_less_client %>global.less"
+                }
+            },
+            productionGlobalFixed: {
+                options: {
+                    paths: ["<%= r_less_client"],
+                    sourceMap: true,
+                    sourceMapFilename: '<%= c_css %><%= project %>-fixed.css.map',
+                    sourceMapRootpath: "../../",
+                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapURL: "<%= project %>-fixed.css.map",
+                    cleancss: true,
+                    report: "gzip"
+                },
+                files: {
+                    "<%= c_css %><%= project %>-fixed.css": "<%= r_less_client %>global-fixed.less"
+                }
             }
         },
 
@@ -280,7 +263,7 @@ module.exports = function(grunt) {
                     livereload: false
                 },
                 files: ['<%= r_less_client %>**/*.less'],
-                tasks: ['less:devGlobal']
+                tasks: ['less:developmentGlobal']
             },
             css: {
                 files: ['<%= c_css %>**/*.css']
@@ -356,16 +339,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task.
-    grunt.registerTask('default', ['less:devGlobal', 'less:devGlobalFixed', 'concat:client']);
+    grunt.registerTask('default', ['less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
 
     // Run on Init
-    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
+    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:devGlobal', 'less:devGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
+    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
 
     // Production Build
-    grunt.registerTask('build', ['webfont:clientIcons', 'less:production', 'concat:client', 'uglify']);
+    grunt.registerTask('build', ['webfont:clientIcons', 'less:productionGlobal', 'less:productionGlobalFixed', 'concat:client', 'uglify']);
 
     // Admin Build
     grunt.registerTask('admin', ['webfont:adminIcons', 'less:admin', 'concat:admin']);
@@ -374,7 +357,7 @@ module.exports = function(grunt) {
     grunt.registerTask('fonts', ['webfont']);
 
     // Compile Dev LESS Files
-    grunt.registerTask('lesscss', ['less:devGlobal', 'less:devGlobalFixed']);
+    grunt.registerTask('lesscss', ['less:developmentGlobal', 'less:developmentGlobalFixed']);
 
     // Build jQuery Versions
     grunt.registerTask('jq', ['jquery']);
