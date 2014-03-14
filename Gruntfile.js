@@ -267,6 +267,10 @@ module.exports = function(grunt) {
             html: {
                 files: ['<%= docroot %>**/*.view']
             },
+            grunt: {
+                files: ['Gruntfile.js'],
+                tasks: ['refresh']
+            },
             js: {
                 files: ['<%= r_js_client %>**/*.js'],
                 tasks: ['js']
