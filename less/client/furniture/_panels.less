@@ -18,7 +18,8 @@ The panel typically indicates a visual separation and implied sub-grouping of it
 */
 
 .panel,
-[class*="panel-"] {
+[class*="panel-"],
+[class*="-panel"] {
 
     // Mixins
     .margin-leader();
@@ -44,12 +45,12 @@ direct messages to the user, whether they be informative, complimentary,
 or preventative.
 
 @pattern: Alert Panels
-<div class="panel--alert">
+<div class="alert-panel">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel--alert">
+<div class="alert-panel">
     <p>This is an alert panel with no heading.</p>
 </div>
 
@@ -58,12 +59,12 @@ or preventative.
 /*
 
 @pattern: Error Alert Panels
-<div class="panel--alert--error">
+<div class="alert-panel--error">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel--alert--error">
+<div class="alert-panel--error">
     <p>This is an alert panel with no heading.</p>
 </div>
 
@@ -72,18 +73,18 @@ or preventative.
 /*
 
 @pattern: Success Alert Panels
-<div class="panel--alert--success">
+<div class="alert-panel--success">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel--alert--success">
+<div class="alert-panel--success">
     <p>This is an alert panel with no heading.</p>
 </div>
 
 */
 
-[class*="panel--alert"] {
+[class*="alert-panel"] {
     color: @white;
 
     h1,
@@ -95,7 +96,7 @@ or preventative.
         color: inherit;
     }
 }
-.panel--alert {
+.alert-panel {
     background: @info-color;
     
     &--error {
