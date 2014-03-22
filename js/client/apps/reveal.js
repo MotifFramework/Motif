@@ -1,11 +1,16 @@
+/**
+ * Reveal: Show and hide things with class(es)
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+
 (function ( $, window, document, LB, undefined ) {
 
-	"use strict";
+    "use strict";
 
-	var Reveal = function ( elem, userOptions ) {
-			
-			// Init Vars
-			this.$elem = $( elem );
+    var Reveal = function ( elem, userOptions ) {
+            
+            // Init Vars
+            this.$elem = $( elem );
             this.elem = this.$elem[0];
             this.identity = this.$elem.attr("id") || "reveal-target-" + Reveal.counter;
             this.group = this.$elem.attr("data-reveal-group") || false;
@@ -13,454 +18,617 @@
             this.config = userOptions;
             this.metadata = this.$elem.data("reveal-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
-		},
-		$document = $( document );
-
-	Reveal.counter = 0;
-
-	Reveal.prototype = {
-		"defaults": {
-			"trigger": "click",
-			"type": "default",
-
-			// Classes
-			"activeClass": "is-current",
-			"visitedClass": "is-visited",
-
-			// Hover Intent
-			"hoverIntent": {
-			    "sensitivity": 10,
-			    "interval": 50,
-			    "timeout": 0
-			},
-
-			// Callbacks
-			"onInit": null,
-			"beforeShow": null,
-			"beforeHide": null,
-			"onShow": null,
-			"onHide": null
-		},
-
-		"newReferenceTarget": function ( elem ) {
-			return {
-				"elem": elem,
-				"targets": [],
-				"for": [],
-				"hide": [],
-				"current": false
-			};
-		},
-
-		"newReferenceGroup": function () {
-			return {
-				"type": this.options.type,
-				"triggers": []
-			};
-		},
-
-		"init": function () {
-			this.createReference.call( this );
-			this.bindCallbacks.call( this );
-			this.bindTrigger.call( this );
-			this.bindTargets.call( this );
-			this.initTrigger.call( this );
-
-			Reveal.counter += 1;
-
-			$document.trigger("reveal/" + this.identity + "/init");
-
-			return this;
-		},
-
-		"createReference": function () {
-			if ( !window.Reveal ) {
-				window.Reveal = {
-					"triggers": {},
-					"groups": {}
-				};
-			}
-		},
-
-		"bindCallbacks": function () {
-			var self = this;
-
-			if ( typeof self.options.onInit == "function" ) {
-				$document.on("reveal/" + self.identity + "/init", function onRevealInit () {
-					self.options.onInit.call( self, self.$elem );
-				});
-			}
-			if ( typeof self.options.beforeShow == "function" ) {
-				$document.on("reveal/" + self.identity + "/before/show", function onRevealShow () {
-					self.options.beforeShow.call( self, self.$elem );
-				});
-			}
-			if ( typeof self.options.onShow == "function" ) {
-				$document.on("reveal/" + self.identity + "/after/show", function onRevealShow () {
-					self.options.onShow.call( self, self.$elem );
-				});
-			}
-			if ( typeof self.options.beforeHide == "function" ) {
-				$document.on("reveal/" + self.identity + "/before/hide", function onRevealHide () {
-					self.options.beforeHide.call( self, self.$elem );
-				});
-			}
-			if ( typeof self.options.onHide == "function" ) {
-				$document.on("reveal/" + self.identity + "/after/hide", function onRevealHide () {
-					self.options.onHide.call( self, self.$elem );
-				});
-			}
-		},
-
-		"bindTrigger": function () {
-			var self = this;
-
-			this.$elem.on( "click", function () {
-				self.processTrigger.call( self );
-				return false;
-			});
-		},
-
-			"processTrigger": function () {
-				if ( this.reference.current === true ) {
-					if ( this.options.type === "radio" ) {
-						return;
-					} else {
-						this.unpublish.call( this );
-					}
-				} else {
-					this.publish.call( this );
-				}
-			},
-
-				"publish": function () {
-					var oldCurrents,
-						key;
-
-					// @TODO: Move this up to processTrigger()?
-					if ( this.group && this.options.type !== "default" ) {
-						oldCurrents = this.getCurrent.call( this, window.Reveal.groups[ this.group ].triggers );
-
-						for ( key in oldCurrents ) {
-							$document.trigger("reveal/" + oldCurrents[ key ] + "/hide");
-						}
-					}
-
-					// turn new current on
-					$document.trigger("reveal/" + this.identity + "/show");
-				},
-
-				"unpublish": function () {
-					$document.trigger("reveal/" + this.identity + "/hide");
-				},
-
-		"bindTargets": function () {
-			var self = this;
-
-			$document.on("reveal/" + self.identity + "/show", function onRevealShow () {
-
-				// Trigger beforeShow
-				$document.trigger("reveal/" + self.identity + "/before/show");
-
-				self.makeCurrent.call( self );
-				self.showTrigger.call( self );
-				self.showTargets.call( self );
-				self.showFors.call( self );
-
-				// Trigger onShow
-				$document.trigger("reveal/" + self.identity + "/after/show");
-			});
-			$document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
-
-				// Trigger onHide
-				$document.trigger("reveal/" + self.identity + "/before/hide");
-
-				self.unmakeCurrent.call( self );
-				self.hideTrigger.call( self );
-				self.hideTargets.call( self );
-				self.hideFors.call( self );
-
-				// Trigger onHide
-				$document.trigger("reveal/" + self.identity + "/after/hide");
-			});
-		},
-
-		"initCurrent": function () {
-			if ( this.$elem.attr("data-reveal-current") === "true" ) {
-				this.makeCurrent.call( this );
-				this.publish.call( this );
-			}
-		},
-
-		"makeCurrent": function () {
-			this.updateReference.call( this, {
-				"current": true
-			});
-		},
-
-		"unmakeCurrent": function () {
-			this.updateReference.call( this, {
-				"current": false
-			});
-		},
-
-		"getCurrent": function ( group ) {
-			var reference = window.Reveal.triggers,
-				currents = [];
-
-			$.each( reference, function ( i, v ) {
-				if ( reference[ i ].current ) {
-					currents.push( i );
-				}
-			});
-
-			return currents;
-		},
-
-		"initTrigger": function () {
-			this.updateReference.call( this, {
-				"targets": this.gatherTargets.call( this ),
-				"for": this.gatherForTriggers.call( this ),
-				"hide": this.gatherHideTriggers.call( this )
-			});
-			this.initCurrent.call( this );
-		},
-
-		"gatherTargets": function () {
-			var targetStrings = this.$elem.data("reveal").split(" "),
-				targets = [];
-
-			$.each( targetStrings, function eachTarget ( i, v ) {
-				var target = $( "#" + targetStrings[i] );
-
-				if ( !target.length ) {
-					target = function () {
-						var elem = $( "#" + targetStrings[i] );
-
-						if ( elem.length ) {
-							return elem;
-						} else {
-							return false;
-						}
-					};
-				}
-
-				targets.push( target );
-			});
-
-			return targets;
-		},
-
-		"gatherForTriggers": function () {
-			var self = this,
-				allFors = $("[data-reveal-for='" + this.identity + "']"),
-				fors = [];
-
-			$.each( allFors, function eachFor ( i, v ) {
-				self.bindFors.call( self, allFors[ i ] );
-				fors.push( allFors[ i ] );
-			});
-
-			return fors;	
-		},
-
-			"bindFors": function ( forTrigger ) {
-				var self = this;
-
-				$( forTrigger ).on( "click", function () {
-					self.$elem.trigger("click");
-					return false;
-				});
-			},
-
-		"gatherHideTriggers": function () {
-			var self = this,
-				allHides = $("[data-reveal-hide='" + this.identity + "']"),
-				hides = [];
-
-			$.each( allHides, function eachFor ( i, v ) {
-				self.bindHides.call( self, allHides[ i ] );
-				hides.push( allHides[ i ] );
-			});
-
-			return hides;	
-		},
-
-			"bindHides": function ( hideTrigger ) {
-				var self = this;
-
-				$( hideTrigger ).on( "click", function () {
-					if ( self.reference.current && self.options.type !== "radio" ) {
-						self.$elem.trigger("click");
-					}
-					return false;
-				});
-			},
-
-		"gatherGroup": function () {
-			var groupID = this.$elem.data("reveal-group");
-
-			if ( groupID ) {
-				this.$group = $("[data-reveal-group='" + groupID + "']");
-			} else {
-				this.$group = false;
-			}
-		},
-
-		"show": function ( elem ) {
-			elem.addClass( this.options.activeClass );
-		},
-
-			"showTargets": function () {
-				var self = this,
-					targets = self.reference.targets;
-
-				$.each( targets, function hideEachTarget () {
-					self.show.call( self, this );
-				});
-			},
-
-			"showFors": function () {
-				var self = this,
-					fors = self.reference.for;
-
-				$.each( fors, function showEachFor () {
-					self.show.call( self, $( this ) );
-				});
-			},
-
-			"showTrigger": function () {
-				this.show.call( this, this.$elem );
-			},
-
-		"hide": function ( elem ) {
-			elem.removeClass( this.options.activeClass );
-
-			if ( !elem.hasClass( this.options.visitedClass ) ) {
-				elem.addClass( this.options.visitedClass );
-			}
-		},
-
-			"hideTargets": function () {
-				var self = this,
-					targets = self.reference.targets;
-
-				$.each( targets, function hideEachTarget () {
-					self.hide.call( self, this );
-				});
-			},
-
-			"hideFors": function () {
-				var self = this,
-					fors = self.reference.for;
-
-				$.each( fors, function hideEachFor () {
-					self.hide.call( self, $( this ) );
-				});
-			},
-
-			"hideTrigger": function () {
-				this.hide.call( this, this.$elem );
-			},
-
-		"updateReference": function ( config ) {
-			var self = this,
-				updates = config || {},
-				reference = window.Reveal,
-				referenceGroup = self.group ? reference.groups[ self.group ] : false,
-				referenceTrigger = reference.triggers[ self.identity ];
-
-			// If it is part of a group
-			if ( self.group ) {
-
-				// if Group exists
-				if ( referenceGroup ) {
-
-					if ( $.inArray( self.identity, referenceGroup.triggers ) === -1 ) {
-						referenceGroup.triggers.push( self.identity );
-					}
-				} else {
-					reference.groups[ self.group ] = self.newReferenceGroup.call( self );
-					reference.groups[ self.group ].triggers.push( self.identity );
-				}
-			}
-
-			if ( referenceTrigger ) {
-
-				// If it is, extend the current trigger
-				// object with the updates
-				$.extend( true, referenceTrigger, updates );
-
-			// If the trigger does not yet exist in
-			// the reference, create it
-			} else {
-
-				// Then make sure the updates are applied
-				reference.triggers[ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
-			}
-
-			this.reference = reference.triggers[ this.identity ];
-
-		}
-	};
-
-	Reveal.defaults = Reveal.prototype.defaults;
-
-	$.fn.reveal = function ( userOptions ) {
-		return this.each( function ( index, elem ) {
-			new Reveal( this, userOptions ).init();
-		});
-	};
-
-	LB.apps.Reveal = Reveal;
+        },
+        $document = $( document );
+
+    Reveal.counter = 0;
+
+    Reveal.prototype = {
+        "defaults": {
+            "trigger": "click",
+            "type": "default",
+            "target": "data-reveal",
+
+            // Classes
+            "activeClass": "is-current",
+            "visitedClass": "is-visited",
+
+            // Hover Intent
+            "hoverIntent": null,
+
+            // Callbacks
+            "onInit": null,
+            "beforeShow": null,
+            "beforeHide": null,
+            "onShow": null,
+            "onHide": null
+        },
+
+        "newReferenceTarget": function ( elem ) {
+            return {
+                "elem": elem,
+                "targets": [],
+                "for": [],
+                "hide": [],
+                "current": false
+            };
+        },
+
+        "newReferenceGroup": function () {
+            return {
+                "type": this.options.type,
+                "triggers": []
+            };
+        },
+
+        // Initialize
+        "init": function () {
+
+            // Create window.Reveal reference table
+            this.createReference.call( this );
+
+            // Bind optional callbacks
+            this.bindCallbacks.call( this );
+
+            // Bind this reveal trigger
+            this.bindTrigger.call( this );
+
+            // Make sure trigger targets are listening
+            this.bindTargets.call( this );
+
+            // Initialize this trigger
+            this.initTrigger.call( this );
+
+            // Update the reveal counter, which we use
+            // for naming in the reference table
+            Reveal.counter += 1;
+
+            // Finally, trigger this reveal as initialized
+            // for any listening callbacks
+            $document.trigger("reveal/" + this.identity + "/init");
+
+            return this;
+        },
+
+        "createReference": function () {
+
+            // If the reference table doesn't exist...
+            if ( !window.Reveal ) {
+
+                // Create it
+                window.Reveal = {
+                    "triggers": {},
+                    "groups": {},
+                    "queue": []
+                };
+            }
+        },
+
+        "bindCallbacks": function () {
+            var self = this;
+
+            // Check if any of the callbacks are actual
+            // functions, then have the document watch
+            // for their triggers
+            if ( typeof self.options.onInit == "function" ) {
+                $document.on("reveal/" + self.identity + "/init", function onRevealInit () {
+                    self.options.onInit.call( self, self.$elem );
+                });
+            }
+            if ( typeof self.options.beforeShow == "function" ) {
+                $document.on("reveal/" + self.identity + "/before/show", function onRevealShow () {
+                    self.options.beforeShow.call( self, self.$elem );
+                });
+            }
+            if ( typeof self.options.onShow == "function" ) {
+                $document.on("reveal/" + self.identity + "/after/show", function onRevealShow () {
+                    self.options.onShow.call( self, self.$elem );
+                });
+            }
+            if ( typeof self.options.beforeHide == "function" ) {
+                $document.on("reveal/" + self.identity + "/before/hide", function onRevealHide () {
+                    self.options.beforeHide.call( self, self.$elem );
+                });
+            }
+            if ( typeof self.options.onHide == "function" ) {
+                $document.on("reveal/" + self.identity + "/after/hide", function onRevealHide () {
+                    self.options.onHide.call( self, self.$elem );
+                });
+            }
+        },
+
+        "bindTrigger": function () {
+            var self = this;
+
+            // If we have a click trigger...
+            if ( self.options.trigger === "click" ) {
+
+                // Bind this trigger on click
+                self.$elem.on( "click", function () {
+
+                    // ...to process the trigger
+                    self.processTrigger.call( self );
+                    return false;
+                });
+
+            // Otherwise, if it's a hover trigger...
+            } else if ( self.options.trigger === "hover" ) {
+
+                // If the Hover Intent plugin is available...
+                if ( $.fn.hoverIntent && self.options.hoverIntent ) {
+
+                    // ...use it!
+                    self.$elem.hoverIntent({
+                        sensitivity: self.options.hoverIntent.sensitivity,
+                        interval: self.options.hoverIntent.interval,
+                        over: function onRevealOver () {
+                            self.processTrigger.call( self );
+                        },
+                        timeout: self.options.hoverIntent.timeout,
+                        out: function onRevealOut () {
+                            self.processTrigger.call( self );
+                        }
+                    });
+
+                // Otherwise...
+                } else {
+
+                    // ... Do a simple bind...
+                    self.$elem.on({
+                        mouseenter: function onRevealOver () {
+                            self.processTrigger.call( self );
+                        },
+                        mouseleave: function onRevealOut () {
+                            self.processTrigger.call( self );
+                        }
+                    });
+                }
+            }
+        },
+
+            "processTrigger": function () {
+
+                // If this trigger is already current...
+                if ( this.reference.current === true ) {
+
+                    // Check if it's a radio
+                    if ( this.options.type === "radio" ) {
+
+                        // If it is, let's ignore and bail
+                        return;
+
+                    // If it's NOT a radio...
+                    } else {
+
+                        // ...we should unpublish
+                        this.unpublish.call( this );
+                    }
+
+                // If it's NOT current
+                } else {
+
+                    // ...let's publish and make it current
+                    this.publish.call( this );
+                }
+            },
+
+                "publish": function () {
+                    var self = this,
+                        oldCurrents,
+                        key;
+
+                    // If this is part of a group and it's either 
+                    // exclusive or radio...
+                    // @TODO: Move this up to processTrigger()?
+                    if ( self.group && self.options.type !== "default" ) {
+
+                        // Get the "old" current elements
+                        oldCurrents = self.getCurrent.call( self, window.Reveal.groups[ self.group ].triggers );
+
+                        // Go through each "old" current
+                        for ( key in oldCurrents ) {
+
+                            // Trigger a hide event for each of them.
+                            // We don't want them no more.
+                            self.unpublish.call( self, oldCurrents[ key ] );
+                        }
+                    }
+
+                    // Turn new current on
+                    $document.trigger("reveal/" + this.identity + "/show");
+                },
+
+                "unpublish": function ( val ) {
+
+                    // If a value was passed, use it,
+                    // otherwise, use the identity value
+                    var identity = val || this.identity;
+
+                    // Trigger hide on this identity
+                    $document.trigger("reveal/" + identity + "/hide");
+                },
+
+        "bindTargets": function () {
+            var self = this;
+
+            // When this identity has triggered to show...
+            $document.on("reveal/" + self.identity + "/show", function onRevealShow () {
+
+                // Trigger beforeShow
+                $document.trigger("reveal/" + self.identity + "/before/show");
+
+                // Make this trigger current in the reference
+                self.makeCurrent.call( self );
+
+                // Show this trigger visually
+                self.showTrigger.call( self );
+
+                // Show the targets visually
+                self.showTargets.call( self );
+
+                // Show the Fors visually
+                self.showFors.call( self );
+
+                // Trigger onShow
+                $document.trigger("reveal/" + self.identity + "/after/show");
+            });
+
+            // When this identity has triggered hide...
+            // @TODO: Break this out separately from trigger show
+            $document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
+
+                // Trigger onHide
+                $document.trigger("reveal/" + self.identity + "/before/hide");
+
+                // Make this trigger no longer current in the reference
+                self.unmakeCurrent.call( self );
+
+                // Visually hide the trigger
+                self.hideTrigger.call( self );
+
+                // Visually hide the targets
+                self.hideTargets.call( self );
+
+                // Visually hide the Fors
+                self.hideFors.call( self );
+
+                // Trigger onHide
+                $document.trigger("reveal/" + self.identity + "/after/hide");
+            });
+        },
+
+        "initCurrent": function () {
+
+            // This element has the current attribute set to true...
+            if ( this.$elem.attr("data-reveal-current") === "true" ) {
+
+                if ( this.group ) {
+                    window.Reveal.queue.push( this.identity );
+                } else {
+
+                    // Make it Current
+                    this.makeCurrent.call( this );
+
+                    // Then publish
+                    this.publish.call( this );
+                }
+            }
+        },
+
+        "executeQueue": function () {
+            var queue = window.Reveal.queue;
+
+            if ( queue.length ) {
+                $.each( queue, function ( i, v ) {
+                    $document.trigger("reveal/" + queue[ i ] + "/show");
+                });
+            }
+        },
+
+        "makeCurrent": function () {
+
+            // Update the reference to make current true
+            this.updateReference.call( this, {
+                "current": true
+            });
+        },
+
+        "unmakeCurrent": function () {
+
+            // Update the reference to make current false
+            this.updateReference.call( this, {
+                "current": false
+            });
+        },
+
+        "getCurrent": function ( group ) {
+            var reference = window.Reveal.triggers,
+                currents = [];
+
+            $.each( group, function ( i, v ) {
+                if ( reference[ group[ i ] ].current ) {
+                    currents.push( group[ i ] );
+                }
+            });
+
+            return currents;
+        },
+
+        "initTrigger": function () {
+            var self = this;
+            
+            this.updateReference.call( this, {
+                "targets": this.gatherTargets.call( this ),
+                "for": this.gatherForTriggers.call( this ),
+                "hide": this.gatherHideTriggers.call( this )
+            });
+            // console.log(JSON.stringify(window.Reveal.groups));
+            self.initCurrent.call( self );
+        },
+
+        "gatherTargets": function () {
+            var targetStrings,
+                targets;
+
+            if ( typeof this.options.target === "function" ) {
+                targets = this.options.target.call( this );
+            } else {
+                targetStrings = this.$elem.attr( this.options.target ).split(" ");
+                targets = [];
+
+                $.each( targetStrings, function eachTarget ( i, v ) {
+                    var target = $( "#" + targetStrings[i] );
+
+                    if ( !target.length ) {
+                        target = function () {
+                            var elem = $( "#" + targetStrings[i] );
+
+                            if ( elem.length ) {
+                                return elem;
+                            } else {
+                                return false;
+                            }
+                        };
+                    }
+
+                    targets.push( target );
+                });
+
+            }
+
+            return targets;
+        },
+
+        "gatherForTriggers": function () {
+            var self = this,
+                allFors = $("[data-reveal-for='" + this.identity + "']"),
+                fors = [];
+
+            $.each( allFors, function eachFor ( i, v ) {
+                self.bindFors.call( self, allFors[ i ] );
+                fors.push( allFors[ i ] );
+            });
+
+            return fors;    
+        },
+
+            "bindFors": function ( forTrigger ) {
+                var self = this;
+
+                $( forTrigger ).on( "click", function () {
+                    self.$elem.trigger("click");
+                    return false;
+                });
+            },
+
+        "gatherHideTriggers": function () {
+            var self = this,
+                allHides = $("[data-reveal-hide='" + this.identity + "']"),
+                hides = [];
+
+            $.each( allHides, function eachFor ( i, v ) {
+                self.bindHides.call( self, allHides[ i ] );
+                hides.push( allHides[ i ] );
+            });
+
+            return hides;   
+        },
+
+            "bindHides": function ( hideTrigger ) {
+                var self = this;
+
+                $( hideTrigger ).on( "click", function () {
+                    if ( self.reference.current && self.options.type !== "radio" ) {
+                        self.$elem.trigger("click");
+                    }
+                    return false;
+                });
+            },
+
+        "gatherGroup": function () {
+            var groupID = this.$elem.data("reveal-group");
+
+            if ( groupID ) {
+                this.$group = $("[data-reveal-group='" + groupID + "']");
+            } else {
+                this.$group = false;
+            }
+        },
+
+        "show": function ( elem ) {
+            elem.addClass( this.options.activeClass );
+        },
+
+            "showTargets": function () {
+                var self = this,
+                    targets = self.reference.targets;
+
+                $.each( targets, function hideEachTarget () {
+                    self.show.call( self, this );
+                });
+            },
+
+            "showFors": function () {
+                var self = this,
+                    fors = self.reference.for;
+
+                $.each( fors, function showEachFor () {
+                    self.show.call( self, $( this ) );
+                });
+            },
+
+            "showTrigger": function () {
+                this.show.call( this, this.$elem );
+            },
+
+        "hide": function ( elem ) {
+            elem.removeClass( this.options.activeClass );
+
+            if ( !elem.hasClass( this.options.visitedClass ) ) {
+                elem.addClass( this.options.visitedClass );
+            }
+        },
+
+            "hideTargets": function () {
+                var self = this,
+                    targets = self.reference.targets;
+
+                $.each( targets, function hideEachTarget () {
+                    self.hide.call( self, this );
+                });
+            },
+
+            "hideFors": function () {
+                var self = this,
+                    fors = self.reference.for;
+
+                $.each( fors, function hideEachFor () {
+                    self.hide.call( self, $( this ) );
+                });
+            },
+
+            "hideTrigger": function () {
+                this.hide.call( this, this.$elem );
+            },
+
+        "updateReference": function ( config ) {
+            var self = this,
+                updates = config || {},
+                reference = window.Reveal,
+                referenceGroup = self.group ? reference.groups[ self.group ] : false,
+                referenceTrigger = reference.triggers[ self.identity ];
+
+            // If it is part of a group
+            // @TODO: Break out group and trigger reference builder
+            if ( self.group ) {
+
+                // if Group exists
+                if ( referenceGroup ) {
+
+                    if ( $.inArray( self.identity, referenceGroup.triggers ) === -1 ) {
+                        referenceGroup.triggers.push( self.identity );
+                    }
+                } else {
+                    reference.groups[ self.group ] = self.newReferenceGroup.call( self );
+                    reference.groups[ self.group ].triggers.push( self.identity );
+                }
+            }
+
+            if ( referenceTrigger ) {
+
+                // If it is, extend the current trigger
+                // object with the updates
+                $.extend( true, referenceTrigger, updates );
+
+            // If the trigger does not yet exist in
+            // the reference, create it
+            } else {
+
+                // Then make sure the updates are applied
+                reference.triggers[ this.identity ] = $.extend( true, {}, this.newReferenceTarget.call( this, this.$elem ), updates );
+            }
+
+            this.reference = reference.triggers[ this.identity ];
+
+            return this.reference;
+
+        }
+    };
+
+    Reveal.defaults = Reveal.prototype.defaults;
+
+    LB.apps.Reveal = Reveal;
+
+    $.fn["reveal"] = function( userOptions ) {
+        var self = this,
+            args = Array.prototype.slice.call( arguments, 1 );
+
+        if ( self.length ) {
+            return self.each( function ( index, elem ) {
+                var instance = $.data( this, "reveal" );
+                if ( instance ) {
+                    instance[ userOptions ].apply( instance, args );
+                } else {
+                    instance = $.data( this, "reveal", new Reveal( this, userOptions ).init() );
+                }
+                if ( self.length - 1 === index ) {
+                    instance.executeQueue.call( self );
+                }
+            });
+        }
+    };
+
 
 }( jQuery, window, document, window.LB = window.LB || {
-	"utils": {},
-	"apps": {}
+    "utils": {},
+    "apps": {}
 } ) );
+
+// $.createPlugin("reveal", window.LB.apps.Reveal);
+
 
 /*
 
 Model of what the Reveal Reference will look like:
 
 window: {
-	Reveal: {
-		"triggers": {
-			"TRIGGER": {
-				"elem": $object,
-				"targets": [
-					"TARGET",
-					"TARGET",
-					"TARGET"
-				],
-				"for": [
-					$object
-				],
-				"current": true
-			},
-			"TRIGGER": {
-				"elem": $object,
-				"targets": [
-					"TARGET",
-					"TARGET",
-					"TARGET"
-				],
-				"for": null,
-				"current": false
-			}
-		},
-		"groups": {
-			"GROUPNAME": {
-				"type": exclusive,
-				"triggers": [
-					"TRIGGER",
-					"TRIGGER",
-					"TRIGGER",
-					"TRIGGER"
-				]
-			}
-		}
-	}
+    Reveal: {
+        "triggers": {
+            "TRIGGER": {
+                "elem": $object,
+                "targets": [
+                    "TARGET",
+                    "TARGET",
+                    "TARGET"
+                ],
+                "for": [
+                    $object
+                ],
+                "current": true
+            },
+            "TRIGGER": {
+                "elem": $object,
+                "targets": [
+                    "TARGET",
+                    "TARGET",
+                    "TARGET"
+                ],
+                "for": null,
+                "current": false
+            }
+        },
+        "groups": {
+            "GROUPNAME": {
+                "type": exclusive,
+                "triggers": [
+                    "TRIGGER",
+                    "TRIGGER",
+                    "TRIGGER",
+                    "TRIGGER"
+                ]
+            }
+        }
+    }
 }
 
 */
