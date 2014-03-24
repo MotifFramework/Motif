@@ -1,11 +1,12 @@
 .transition (   @range: all, 
 				@time: 0.2s, 
-				@ease: ease-in-out) 
+				@ease: ease-in-out,
+				@delay: 0s) 
 {
-	-webkit-transition: @range @time @ease;
-	-moz-transition:    @range @time @ease;
-	-o-transition:      @range @time @ease;
-	transition:         @range @time @ease;
+	-webkit-transition: @range @time @ease @delay;
+	-moz-transition:    @range @time @ease @delay;
+	-o-transition:      @range @time @ease @delay;
+	transition:         @range @time @ease @delay;
 }
 .transition-two (	@range-1:	all, 
 					@time-1:	0.2s, 

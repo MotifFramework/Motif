@@ -13,11 +13,13 @@
         },
         $document = $( document );
 
-    PLUGIN.counter = 0;
-
     PLUGIN.prototype = {
         "defaults": {
             
+        },
+
+        "initVars": function () {
+            // Init Vars
         },
 
         "init": function () {
@@ -31,15 +33,11 @@
 
     PLUGIN.defaults = PLUGIN.prototype.defaults;
 
-    $.fn.PLUGIN = function ( userOptions ) {
-        return this.each( function ( index, elem ) {
-            new PLUGIN( this, userOptions ).init();
-        });
-    };
-
     LB.apps.PLUGIN = PLUGIN;
 
 }( jQuery, window, document, window.LB = window.LB || {
     "utils": {},
     "apps": {}
 } ) );
+
+$.createPlugin( "PLUGIN", window.LB.apps.PLUGIN );

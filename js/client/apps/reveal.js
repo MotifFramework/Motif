@@ -23,6 +23,8 @@
 
     Reveal.counter = 0;
 
+    Reveal.animationFrame = typeof requestTimeout === "function";
+
     Reveal.prototype = {
         "defaults": {
             "trigger": "click",
@@ -362,7 +364,6 @@
                 "for": this.gatherForTriggers.call( this ),
                 "hide": this.gatherHideTriggers.call( this )
             });
-            // console.log(JSON.stringify(window.Reveal.groups));
             self.initCurrent.call( self );
         },
 
@@ -455,8 +456,28 @@
             }
         },
 
+        "addClass": function ( elem, userClass ) {
+            if ( Reveal.animationFrame ) {
+                requestTimeout(function addRevealClass () {
+                    elem.addClass( userClass );
+                }, 0);
+            } else {
+                elem.addClass( userClass );
+            }
+        },
+
+        "removeClass": function ( elem, userClass ) {
+            if ( Reveal.animationFrame ) {
+                requestTimeout(function removeRevealClass () {
+                    elem.removeClass( userClass );
+                }, 0);
+            } else {
+                elem.removeClass( userClass );
+            }
+        },
+
         "show": function ( elem ) {
-            elem.addClass( this.options.activeClass );
+            this.addClass( elem, this.options.activeClass );
         },
 
             "showTargets": function () {
@@ -482,10 +503,10 @@
             },
 
         "hide": function ( elem ) {
-            elem.removeClass( this.options.activeClass );
+            this.removeClass( elem, this.options.activeClass );
 
             if ( !elem.hasClass( this.options.visitedClass ) ) {
-                elem.addClass( this.options.visitedClass );
+                this.addClass( elem, this.options.visitedClass );
             }
         },
 
@@ -584,8 +605,6 @@
     "apps": {}
 } ) );
 
-// $.createPlugin("reveal", window.LB.apps.Reveal);
-
 
 /*
 
@@ -627,7 +646,8 @@ window: {
                     "TRIGGER"
                 ]
             }
-        }
+        },
+        queue: []
     }
 }
 

@@ -110,6 +110,23 @@
         }
     };
 
+    $.createPlugin = function ( name, object ) {
+        $.fn[ name ] = function( userOptions ) {
+            var args = Array.prototype.slice.call( arguments, 1 );
+
+            if ( this.length ) {
+                return this.each( function () {
+                    var instance = $.data( this, name );
+                    if ( instance ) {
+                        instance[ userOptions ].apply( instance, args );
+                    } else {
+                        instance = $.data( this, name, new object( this, userOptions ).init() );
+                    }
+                });
+            }
+        };
+    };
+
     /**
      * Plugin Wrapper
      * A jQuery "plugin" to call other plugins via the
@@ -117,25 +134,25 @@
      */
 
     $.fn.plugin = function ( name, url, options ) {
-        return this.each( function ( index, elem ) {
-            var scriptUrl,
-                userOptions;
+        var scriptUrl,
+            userOptions;
 
-            if ( typeof url === "object" ) {
-                scriptUrl = "/resources/c/js/" + name + ".min.js";
-                userOptions = url;
-            } else {
-                scriptUrl = url;
-                userOptions = options || {};
-            }
+        if ( typeof url === "object" ) {
+            scriptUrl = "/resources/c/js/" + name + ".min.js";
+            userOptions = url;
+        } else {
+            scriptUrl = url;
+            userOptions = options || {};
+        }
 
-            LB.utils.plugins.initPlugin({
-                targetElems: $( this ),
-                pluginName: name,
-                pluginSource: scriptUrl,
-                pluginOptions: userOptions
-            });
+        LB.utils.plugins.initPlugin({
+            targetElems: $( this ),
+            pluginName: name,
+            pluginSource: scriptUrl,
+            pluginOptions: userOptions
         });
+
+        return this;
     };
 
 }( jQuery, window.LB = window.LB || {
