@@ -6,9 +6,18 @@ Forms
 
 /*
 
-Basic Themed Elements
+Basic Form Elements
 
-Style `input`s/`textarea`s and set them to `width: 100%` to adapt to the width of their wrapper. (Great for grids.)
+Inputs and textareas are set to `width: 100%` to adapt to the width of their 
+wrapper. (Great for grids.) Select boxes are set to the width of their content,
+maxing out at `100%`.
+
+Almost all the form elements in Jacques are best used inside a `label`.
+
+    <label>
+        Text Field
+        <input type="text" name="text" required>
+    </label>
 
 */
 
@@ -50,6 +59,33 @@ select {
     font-size: 0.8125em;
 }
 
+
+/*
+
+Input Label Elements
+
+Child form elements of the `.input-label` class are given a little bit of 
+spacing to separate them from the label text. (See also `.input-label` in the
+form `_type.less` file.)
+
+@pattern: Input Label Elements
+<label class="input-label">
+    Text Field
+    <input type="text" name="text" placeholder="Placeholder text" required>
+</label>
+<label class="input-label">
+    Textarea
+    <textarea placeholder="Placeholder text"></textarea>
+</label>
+<label class="input-label">
+    Select
+    <select>
+        <option>Placeholder text</option>
+    </select>
+</label>
+
+*/
+
 .input-label {
 
     input,
@@ -63,9 +99,16 @@ select {
 
 /*
 
-Useful Input Widths
+Input Widths
 
-Useful widths for form inputs, both fixed- and fluid-width.
+While you are encouraged to use the responsive grid system in conjunction with 
+your form styles, sometimes it's useful to have form field widths that are 
+simply consistent across viewports. These are those.
+
+    <label class="input-label">
+        Text Field
+        <input class="input--xs" type="text" name="text" required>
+    </label>
 
 */
 

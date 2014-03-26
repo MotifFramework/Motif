@@ -1,8 +1,29 @@
-// Variables & Mixins. You'll want to keep these.
+/**
+ * Jacques
+ * A responsive front-end framework that supports *you*
+ * Version 3.0: "Musclehead"
+ * http://getjacques.com
+ */
+
+/**
+ * Global Stylesheet
+ * The site's main (and perhaps only) stylesheet. All supporting stylesheet 
+ * files are imported into and compiled from here.
+ */
+
+// Config File
+// Breakpoint, color, typographic, and other settings.
 @import "_config.less";
+
+// Variables & Mixins
+// You'll want to keep these.
 @import "_vars.less";
 @import "mixins/_mixins.less";
 
+/**
+ * Normalize
+ * Using the Normalize.css (FIND LINK) with only minor modification.
+ */
 @import "normalize/_display.less";
 @import "normalize/_type.less";
 @import "normalize/_links.less";
@@ -10,9 +31,11 @@
 @import "normalize/_forms.less";
 @import "normalize/_tables.less";
 
+// Helper Classes
 @import "helpers/_spacing.less";
 @import "helpers/_presentational.less";
 
+// Reusable Modules
 @import "modules/_lists.less";
 @import "modules/_media.less";
 @import "modules/_ratios.less";
@@ -37,13 +60,15 @@
 @import "layout/_grid.less";
 @import "layout/_off-canvas.less";
 
-// Tables
+// Furniture
 @import "furniture/_tables.less";
 @import "furniture/_panels.less";
 @import "furniture/_wysiwyg.less";
 
 
-// Responsive Breakpoints
+/**
+ * Responsive Breakpoints
+ */
 
 /**
  * Base

@@ -320,6 +320,32 @@ Nav Bar
 
 A quick navigation bar, typically good for prototyping the main menu of a site.
 
+@pattern: Nav Bar
+<nav class="nav-bar--menu" role="navigation">
+    <h3 class="nav-bar__title pre-icon--rows js-expand"
+     id="reveal-main-nav"
+     data-reveal="main-nav-list">
+        <b class="button-label">Main Menu</b>
+    </h3>
+    <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">
+        <li>
+            <a class="nav-bar__link is-current" href="#">
+                Current Nav Link
+            </a>
+        </li>
+        <li>
+            <a class="nav-bar__link" href="#">
+                Nav Link
+            </a>
+        </li>
+        <li>
+            <a class="nav-bar__link" href="#">
+                Nav Link
+            </a>
+        </li>
+    </ul>
+</nav>
+
 */
 
 .nav-bar {
@@ -461,6 +487,39 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 /*
 
 Vertical Nav
+
+@pattern: Vertical Nav
+<ul class="list--unstyled nav--vert">
+    <li>
+        <a href="#">Nav Link</a>
+    </li>
+    <li>
+        <a href="#" class="is-current">Current Nav Link</a>
+        <ul>
+            <li>
+                <a href="#">Nav Link</a>
+            </li>
+            <li>
+                <a href="#">Nav Link</a>
+            </li>
+            <li>
+                <a href="#" class="is-current">Current Nav Link</a>
+            </li>
+            <li>
+                <a href="#">Nav Link</a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="#">Nav Link</a>
+    </li>
+    <li>
+        <a href="#">Nav Link</a>
+    </li>
+    <li>
+        <a href="#">Nav Link</a>
+    </li>
+</ul>
 
 */
 

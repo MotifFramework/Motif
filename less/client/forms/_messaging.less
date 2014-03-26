@@ -4,6 +4,20 @@ Form Validation
 
 */
 
+/*
+
+Input States
+
+A couple of classes added to inputs (typically by a JS Validation plugin) that
+alter the child elements to convey states of success and error.
+
+    <label class="input-label is-erroneous">
+        Text Field
+        <input type="text" name="text" required>
+    </label>
+
+*/
+
 .is-successful {
     input,
     textarea,
@@ -22,6 +36,16 @@ Form Validation
 /*
 
 Form Messaging
+
+Within labels, there are input alerts that apply to individual fields.
+
+    <label class="input-label is-erroneous">
+        Text Field
+        <input type="text" name="text" required>
+        <strong class="input-alert--error">
+            This field is required.
+        </strong>
+    </label>
 
 */
 

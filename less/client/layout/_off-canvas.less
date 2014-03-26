@@ -1,20 +1,38 @@
 @media @small-screens-max {
     /*
 
-    Off-Canvas Trigger (Mobile Only)
+    Off-Canvas Trigger (Small Screens Only)
+
+    The Off-Canvas Trigger is a simple way of pushing a column of content
+    off-canvas and sliding it on upon trigger. In this case, the `is-active` 
+    class is placed on the `.off-canvas` wrapping element so that it can 
+    adjust both child elements.
+
+    @TODO: Adjust for IE9?
+    @TODO: Show better example w/ Reveal plugin
+
+        <div class="off-canvas">
+            <div class="canvas__primary">
+                ...
+            </div>
+            <div class="canvas__secondary">
+                ...
+            </div>
+        </div>
 
     */
 
     .js {
         .off-canvas {
             overflow: hidden;
+            position: relative;
 
             &.is-active {
                 .canvas__primary {
-                    margin-right: -110%;
+                    .translate3d( 0, 0, 0 );
                 }
                 .canvas__secondary {
-                    margin-left: 0;
+                    .translate3d( -100%, 0, 0 );
                 }
             }
             &.is-active,
@@ -23,7 +41,7 @@
                 .canvas__secondary {
 
                     // Mixins
-                    .transition( all, 0.15s, linear );
+                    .transition( all, 0.15s, @easeOutCubic );
                 }
             }
         }
@@ -37,24 +55,26 @@
             }
             .canvas__primary {
 
-                // Extends
-                &:extend( .float--right );
+                // Mixins
+                .translate3d( 100%, 0, 0 );
 
                 /* Display & Box Model */
-                margin-left: 0;
+                margin-left: -110%;
 
                 /* Positioning */
+                float: left;
                 z-index: 1;
             }
             .canvas__secondary {
 
-                // Extends
-                &:extend( .float--left );
+                // Mixins
+                .translate3d( 0, 0, 0 );
 
                 /* Display & Box Model */
-                margin-left: -100%;
+                margin-right: -100%;
 
                 /* Positioning */
+                float: right;
                 z-index: 2;
             }
     }

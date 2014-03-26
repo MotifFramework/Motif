@@ -4,7 +4,7 @@ Horizontal List
 
 The basic `.list--x` module simply removes bullets from lists and inlines the list 
 items, making the link `inline-block`. The idea is to give the skeleton of a 
-horizontal navigation without adding too much style (yet).
+horizontal list/navigation without adding too much style (yet).
 
 */
 
@@ -18,6 +18,17 @@ horizontal navigation without adding too much style (yet).
             display: inline-block;
         }
 }
+
+/*
+
+Horizontal List (Forceful)
+
+Rather than making the list `inline-block`, it floats the list elements 
+(except on the smallest screen sizes, where it remains vertical). More precise
+than the default Horizontal List.
+
+*/
+
 [class*="list--x--forceful"] {
     li,
     a {
@@ -40,6 +51,16 @@ horizontal navigation without adding too much style (yet).
 
 
 /*
+
+Link List
+
+A basic extension of the Horizontal List, this adds some margin to the links in
+the list for a more pleasant looking list of links.
+
+**Note:** Because we are using the `[class*=""]` attribute selector, using the 
+`.link-list--x` class takes advantage of the `list--x` module we declared 
+earlier, as well as the Forceful variation (`.link-list--x--forceful`) 
+without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
 @pattern: Link List
 <ul class="link-list--x">
@@ -73,8 +94,8 @@ horizontal navigation without adding too much style (yet).
 
 Pagination
 
-An extension of the basic `.list--x` module that simply adds padding enough for 
-pagination.
+An extension of the basic `.list--x` module that simply adds enough padding on
+the links for pagination.
 
 */
 
@@ -105,6 +126,11 @@ and floating it and the ordered list.
 */
 
 .breadcrumb {
+
+    // Extends
+    &:extend( .group );
+
+    // Mixins
     .margin-leader();
 
     &__label {

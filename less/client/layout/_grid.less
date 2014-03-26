@@ -1,3 +1,91 @@
+/*
+
+Responsive Grid
+
+The default responsive grid in Jacques is built with a few rules in mind:
+
+1. Each row of columns must be wrapped in a row element
+2. There's no need to specify if a column is first or last
+
+With that in mind, there is a basic syntax to learn for what classes to use.
+Our breakpoints are classified as:
+
+- Base
+- Small
+- Medium
+- Large
+- Extra Large
+
+Our default responsive grid system only uses 3 grids to cover all of our bases:
+
+- `grid, small` covers Base and Small viewports, but cuts off at Medium
+- `grid, medium` covers only Medium
+- `grid, large` starts at Large and covers Extra Large as well (there is no max
+cutoff value for `grid, large`)
+
+Understanding that, the syntax should be easy to understand. In these examples,
+we will talk about `grid, small`:
+
+- **Rows**: `.gs-row` (Grid, Small, Row)
+- **Columns**: `.gcs` (Grid, Column, Small)
+- **Column Width**: `.gs-half` (Grid, Small, Half-Width)
+
+    <div class="gs-row">
+        <div class="gcs gs-half">...</div>
+        <div class="gcs gs-half">...</div>
+    </div>
+
+However, to be slightly more succinct, you can use the condensed column syntax:
+
+- **Columns (Condensed)**: `.gcs-half` (Grid, Column, Small, Half-Width)
+
+    <div class="gs-row">
+        <div class="gcs-half">...</div>
+        <div class="gcs-half">...</div>
+    </div>
+
+In brief, the way the grid works is that `.gcs` floats the element to the left
+(by default), and adds padding to both the left and the right. `-half` gives
+it a width of `50%`. The combined padding of the two columns bumped up against 
+each other form the full "gutter". The `.gs-row` then clears the floats and has
+a *negative* margin on both the left and the right that pops the columns out to
+the sides the exact width of their paddings, meaning the column content lines 
+up with the site boundaries on the left and right without the need to specify 
+"first" or "last" column classes.
+
+To use this responsively, then, you just add the classes by breakpoint:
+
+    <div class="gs-row gm-row gl-row">
+        <div class="gcs-half gcm-third gcl-quarter">
+            ...
+        </div>
+        <div class="gcs-half gcm-two-thirds gcl-three-quarters">
+            ...
+        </div>
+    </div>
+
+By default, the column breakdown of each grid breakpoint:
+
+- `grid, small`: 4 columns
+- `grid, medium`: 9 columns
+- `grid, large`: 12 columns
+
+For the larger grids, the classes follow the numbers closely...
+
+    - `.gcl-10of12
+    - `.gcm-4of9`
+
+...in just about every combination (based on their total column number), but 
+all of the grids also have a few "fuzzy" shortcuts as well:
+
+    - `half`
+    - `third`
+    - `quarter`
+    - `three-quarters`
+    - `two-thirds`
+
+*/
+
 /**
  * Mobile Grid
  */
@@ -235,10 +323,12 @@ Media Grid
 
 The Media Grid allows you to place a grid of photos or videos (catalog or 
 retail products, etc.) without floating them, alleviating the need to concern 
-yourself with clearing the floats should an object extend further than another.
+yourself with clearing the floats with rows should an object extend further 
+than another. Also, because they are not floating, it allows you to align 
+the entire group center, making sure any "orphaned" grid entries are centered.
 
-The `.object` class is applied to the list item. You then apply grid-system 
-classes to the `.object` to constrain the widths.
+The syntax is simply the same as the regular responsive grid system, except
+the row class has a `--flex` modifier.
 
 */
 

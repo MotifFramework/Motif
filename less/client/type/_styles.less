@@ -1,6 +1,32 @@
 /*
 
+Font Classes
+
+Each font family and weight used in the site is given its own LEGO-block class
+to enable quick use and modularity.
+
+*/
+
+// Samples:
+
+// .museo-slab-300 {
+//     font-family: @museo-slab-300;
+// }
+// .proxima-nova-regular {
+//     font-family: @proxima-nova-regular;
+// }
+
+/*
+
 Heading Styles
+
+In Jacques, typography is broken into pieces that separate skin from structure.
+In this case, that means the font sizing (structure) is separate from the 
+styling (skin) -- which includes font family, color, etc.
+
+Heading styles are some of the type skins, and we start out with 
+`.primary-heading` (which is also the `h`-tag default) and 
+`.secondary-heading`. Add as necessary.
 
 @pattern: Primary Heading
 <h1 class="primary-heading">Primary Heading</h1>
@@ -34,6 +60,8 @@ Secondary Heading
 
 Body Text
 
+Another type style, but this mimicks the default body text of the site.
+
 @pattern: Body Text
 <p>This is a paragraph of text. Some of the text may be <em>emphasised</em> and some it might even be <strong>strongly emphasised</strong>. Occasionally <q>quoted text</q> may be found within a paragraph &hellip;and of course <a href="#">a link</a> may appear at any point in the text. The average paragraph contains five or six sentences although some may contain as little or one or two while others carry on for anything up to ten sentences and beyond.</p>
 
@@ -46,6 +74,50 @@ body,
     &:extend( .normal-text--long );
 }
 
+/*
+
+Unstyled List
+
+A basic stripping of list styles.
+
+*/
+
 .list--unstyled {
     .unstyled-list();
+}
+
+/*
+
+Blockquote
+
+A basic blockquote.
+
+@pattern: Blockquote
+<figure class="blockquote">
+	<blockquote>
+		At last we will reveal ourselves to the the Jedi. At last we will have 
+		our revenge.
+	</blockquote>
+	<figcaption class="blockquote__cite">Darth Maul</figcaption>
+</figure>
+
+*/
+
+.blockquote {
+	padding-left: @full-side;
+	border-left: 3px solid @blue;
+
+	blockquote {
+		padding: 0;
+	}
+
+	&__cite {
+		display: block;
+		margin-top: @quarter-vertical;
+		color: @dark-grey;
+
+		&:before {
+			content: "- ";
+		}
+	}
 }
