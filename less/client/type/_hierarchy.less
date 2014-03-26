@@ -12,12 +12,12 @@ pixel in difference (forcing you to choose one over the other, giving you one
 class where you previously had two).
 
 @pattern: Typographic Scale
-<p class="canon-text">Canon Text (48px)</p>
-<p class="paragon-text">Paragon Text (28px)</p>
-<p class="primer-text">Primer Text (21px)</p>
-<p class="normal-text">Normal Text (16px)</p>
-<p class="petite-text">Petite Text (13px)</p>
-<p class="minion-text">Minion Text (10px)</p>
+<p class="canon-text">Canon Text (38px)</p>
+<p class="paragon-text">Paragon Text (30px)</p>
+<p class="primer-text">Primer Text (24px)</p>
+<p class="tertia-text">Tertia Text (18px)</p>
+<p class="normal-text">Normal Text (14px)</p>
+<p class="petite-text">Petite Text (12px)</p>
 
 */
 
@@ -59,6 +59,18 @@ Primer Text
 
 /*
 
+Tertia Text
+
+*/
+
+[class*="tertia-text"] {
+
+    // Mixins
+    .type-size(@tertia-text-size);
+}
+
+/*
+
 Normal Text
 
 */
@@ -83,18 +95,6 @@ Petite Text
 
 /*
 
-Minion Text
-
-*/
-
-[class*="minion-text"] {
-
-    // Mixins
-    .type-size(@minion-text-size);
-}
-
-/*
-
 Long Modifiers
 
 The smaller type sizes are given the `--long` modifier, allowing you to use
@@ -109,8 +109,8 @@ each type size with varying line heights.
 */
 
 .primer-text--long,
+.tertia-text--long,
 .normal-text--long,
-.petite-text--long,
-.minion-text--long {
+.petite-text--long {
     line-height: 1.5;
 }
