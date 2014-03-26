@@ -17,23 +17,23 @@
     // Mixins
 	font-family: "<%= fontBaseName %>";
     vertical-align: middle;
-    font-size: 0.75em;
+    font-size: 1em;
     white-space: nowrap;
 	display: inline-block;
 	font-weight: normal;
 	font-style: normal;
 	speak: none;
-	text-decoration: inherit;
+	text-decoration: none;
 	text-transform: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 [class*="pre-icon--"]:before {
-	padding-right: 0.417em;
+	padding-right: 0.357em;
 }
 [class*="post-icon--"]:after {
-	padding-left: 0.417em;
+	padding-left: 0.357em;
 }
 <% } %>
 <% if (iconsStyles) { %>
