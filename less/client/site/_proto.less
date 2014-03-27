@@ -10,6 +10,19 @@ Config
 @grey-1: @grey;
 @grey-2: #cfcbca;
 @grey-3: #f7f7f9;
+@grey-4: #ddd;
+
+@blue-1: @blue;
+@blue-2: #00a4d8;
+@blue-3: #eaf7ff;
+
+@green-1: @green;
+@green-2: #72bc44;
+@green-3: #f4faf2;
+
+@red-1: @red;
+@red-2: #e63c4d;
+@red-3: #f6e1df;
 
 // Font Declarations
 @lato-light: "Lato Light", @stack-sans-serif;
@@ -135,6 +148,19 @@ strong {
 //     .source-sans-bold-italic();
 // }
 
+/*
+
+Blockquote
+
+*/
+
+.blockquote {
+    padding-left: @full-side;
+    font-size: 128%;
+    color: @grey;
+    border-left: 7px solid @grey-4;
+}
+
 
 /*
 
@@ -163,6 +189,11 @@ textarea {
         // Mixins
         .box-shadow(0, @1px, @4px, @light-grey);
     }
+}
+
+a,
+.link {
+    &:extend( .lato-bold );
 }
 
 /*
@@ -207,23 +238,95 @@ Buttons
 
 Panels
 
+@pattern: Panels Alt
+<div class="panel--alt">
+    <h3>This is a Panel</h3>
+    <p>This is a <a href="#">feedback message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="panel--alt">
+    <p>This is a feedback panel with no heading.</p>
+</div>
+
 */
 
-.panel--inset {
+/*
 
-    // Variables
-    @top-gradient: lighten(@light-grey, 18%);
-    @bottom-gradient: lighten(@light-grey, 10%);
-    @shadow: fadeout(@light-black, 85%);
+Panels
 
-    text-shadow: 0 @1px @1px @white;
+@pattern: Panels Inverse
+<div class="panel--inverse">
+    <h3>This is a Panel</h3>
+    <p>This is a <a href="#">feedback message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="panel--inverse">
+    <p>This is a feedback panel with no heading.</p>
+</div>
 
-    // Mixins
-    .box-shadow-inset( 0, @1px, @3px, @shadow );
-    .background-linear-gradient( 0, @bottom-gradient, 100%, @top-gradient );
+*/
+
+.panel,
+[class*="panel-"],
+[class*="-panel"] {
+    .border-radius( @3px );
+
+    color: @light-black;
+    border: 1px solid @grey-2;
+    background-color: @grey-3;
 }
-.panel--thin--inset {
-    &:extend( .panel--inset );
+
+.panel--alt {
+    background-color: @white;
+}
+.panel--inverse {
+    color: @white;
+    background-color: @blue;
+    border-color: @blue;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: inherit;
+    }
+
+    a {
+        &,
+        &:hover,
+        &:focus {
+            color: inherit;
+        }
+        &:hover,
+        &:focus {
+            color: @grey-2;
+        }
+    }
+
+    .btn {
+        &,
+        &:hover,
+        &:focus {
+            color: @light-black;
+        }
+    }
+}
+
+.alert-panel {
+    &--info {
+        border-color: @blue-2;
+        background-color: @blue-3;
+    }
+    &--error {
+        border-color: @red-2;
+        background-color: @red-3;
+    }
+    &--success {
+        border-color: @green-2;
+        background-color: @green-3;
+    }
 }
 
 
@@ -515,23 +618,23 @@ Tabs
     &__list--x,
     &__list--x--forceful {
 
-        // Variables
-        @current-border-width: 3;
-        @current-border-top: 1em * (@current-border-width / @base-text-size);
-        @current-padding-top: 1em * (((@base-vertical / 2) - @current-border-width) / @base-text-size);
-        @current-padding-bottom: 1em * (((@base-vertical / 2) + @default-border-width) / @base-text-size);
-
-        // Create
-        border-bottom: @border-width solid @light-grey;
+        border-bottom: 1px solid @grey-4;
 
         a {
+
+            /* Extends .lato-bold */
+            &:extend( .lato-bold );
+
+            // Mixins
+            .border-radius-top( @3px );
+
             padding: @half-vertical @full-side;
-            color: @light-grey;
+            color: @grey-2;
             text-decoration: none;
-            background-color: @white;
             position: relative;
-            bottom: -@border-width;
+            bottom: -1px;
             z-index: 30;
+            border: 1px solid transparent;
 
             &:hover,
             &:focus {
@@ -539,11 +642,10 @@ Tabs
             }
         }
         .is-current {
-            padding: @current-padding-top @full-side-bordered @current-padding-bottom;
             color: @light-black;
-            border-left: @border-width solid @light-grey;
-            border-right: @border-width solid @light-grey;
-            border-top: @current-border-top solid @light-blue;
+            background-color: @white;
+            border-color: @grey-2;
+            border-bottom-color: transparent;
             z-index: 60;
         }
     }
@@ -565,14 +667,18 @@ td[data-th]:before {
 }
 @media @medium-screens-min {
     th {
-        border-bottom: @border-width solid @table-border-color;
+        border-bottom: @border-width solid @grey-4;
     }
     th + th,
     td + td {
-        border-left: @border-width solid @table-border-color;
+        border-left: @border-width solid @grey-4;
     }
     tr + tr td {
-        border-top: @border-width solid @table-border-color;
+        border-top: @border-width solid @grey-4;
+    }
+    tbody tr:nth-child( odd ),
+    table > tr:nth-child( odd ) {
+        background: @grey-3;
     }
 }
 

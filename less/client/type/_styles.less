@@ -39,7 +39,7 @@ h3,
 h4,
 h5,
 h6 {
-	margin-top: 1.75em;
+    margin-top: 1.75em;
 }
 
 h1,
@@ -104,30 +104,27 @@ A basic blockquote.
 
 @pattern: Blockquote
 <figure class="blockquote">
-	<blockquote>
-		At last we will reveal ourselves to the the Jedi. At last we will have 
-		our revenge.
-	</blockquote>
-	<figcaption class="blockquote__cite">Darth Maul</figcaption>
+    <blockquote>
+        At last we will reveal ourselves to the the Jedi. At last we will have 
+        our revenge.
+    </blockquote>
+    <figcaption class="blockquote__cite">Darth Maul</figcaption>
 </figure>
 
 */
 
 .blockquote {
-	padding-left: @full-side;
-	border-left: 3px solid @blue;
+    padding-left: @full-side;
 
-	blockquote {
-		padding: 0;
-	}
+    blockquote {
+        padding: 0;
+    }
 
-	&__cite {
-		display: block;
-		margin-top: @quarter-vertical;
-		color: @dark-grey;
+    &__cite {
+        display: block;
 
-		&:before {
-			content: "- ";
-		}
-	}
+        &:before {
+            content: "\2014";
+        }
+    }
 }

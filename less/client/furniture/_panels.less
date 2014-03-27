@@ -26,15 +26,24 @@ sub-grouping of its content.
     .margin-leader();
 
     // Create
-    padding: @double-vertical;
+    padding: @full-vertical;
     background-color: lighten( @light-grey, 14% );
 
     > :first-child {
         margin-top: 0;
     }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: inherit;
+    }
 }
 [class*="panel--thin"] {
-    padding: @full-vertical;
+    padding: @half-vertical;
 }
 
 /*
@@ -45,13 +54,13 @@ This variation of the standard `.panel` is used specifically for delivering
 direct messages to the user, whether they be informative, complimentary, 
 or preventative.
 
-@pattern: Alert Panels
-<div class="alert-panel">
+@pattern: Info Alert Panels
+<div class="alert-panel--info">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="alert-panel">
+<div class="alert-panel--info">
     <p>This is an alert panel with no heading.</p>
 </div>
 
@@ -87,15 +96,6 @@ or preventative.
 
 [class*="alert-panel"] {
     color: @white;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: inherit;
-    }
 }
 .alert-panel {
     background: @info-color;
