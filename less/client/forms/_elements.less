@@ -51,7 +51,13 @@ input {
     }
 }
 textarea {
-    height: @full-vertical * 4;
+
+    // Vars
+    // Why 117px? To match the height of two vertical single-line inputs
+    @117px: ( 1em * ( 117 / @base-text-size ) );
+
+    /* Display & Box Model */
+    height: @117px;
 }
 select {
     width: auto;
