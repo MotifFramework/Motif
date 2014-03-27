@@ -555,7 +555,15 @@ Tables
 
 */
 
-table {
+td[data-th]:before {
+
+    /* Extends .lato-bold */
+    &:extend( .lato-bold );
+
+    /* Pretty */
+    font-weight: normal;
+}
+@media @medium-screens-min {
     th {
         border-bottom: @border-width solid @table-border-color;
     }
@@ -565,14 +573,6 @@ table {
     }
     tr + tr td {
         border-top: @border-width solid @table-border-color;
-    }
-}
-
-@media @small-screens-min {
-    table   {
-        th {
-            border-bottom: @border-width solid @table-border-color;
-        }
     }
 }
 
