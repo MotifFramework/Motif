@@ -1,0 +1,20 @@
+.basics__nav {
+	&.is-sticky {
+		position: fixed;
+		top: 0;
+	}
+	&.isnt-sticky {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+}
+.basics__wrapper {
+	position: relative;
+
+	&.is-sticky {
+		.basics__sections {
+			float: right;
+		}
+	}
+}

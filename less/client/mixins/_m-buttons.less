@@ -1,9 +1,16 @@
-.m-button-color(@color: @grey)	{
-	color:					@color;
+.m-button-color(@background, @border, @color: @white )  {
+    
+    background-color: @background;
+    border-color: @border;
 
-	&:hover,
-	&:focus {
-		color:				darken(@color, 10%);
-		border-color:		darken(@color, 10%);
-	}
+    &,
+    &:hover,
+    &:focus {
+        color: @color;
+    }
+    &:hover,
+    &:focus {
+        background-color: darken(@background, 15%);
+        border-color: darken(@border, 15%);
+    }
 }

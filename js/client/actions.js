@@ -23,6 +23,7 @@
     var App = function () {
         this.initReveals();
         this.initForms();
+        this.initScrollEvents();
     };
 
     App.prototype.initReveals = function () {
@@ -59,6 +60,10 @@
             "forms": $("[data-validation='true']"),
             "ajaxSubmit": false
         });
+    };
+
+    App.prototype.initScrollEvents = function () {
+        $("#basics__nav").plugin("scrollEvents");
     };
 
     new App();

@@ -4,24 +4,18 @@ Config
 
 */
 
-// Font Declarations
-@museo-slab-700: "Museo Slab 700", Helvetica, Arial, Verdana, serif;
-@source-sans-regular: "Source Sans Pro", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
-@source-sans-bold: "Source Sans Pro Bold", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@source-sans-italic: "Source Sans Pro Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@source-sans-bold-italic: "Source Sans Pro Bold Italic", Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-@source-code-pro: "Source Code Pro", Courier, monospace;
-@symbolset: "Symbolset";
-@symbolset-social: "Symbolset Social";
-@symbolset-social-circle: "Symbolset Social Circle";
+// Color Variables
 
-@text-font: @source-sans-regular;
-@text-font-bold: @source-sans-bold;
-@text-font-italic: @source-sans-italic;
-@text-font-bold-italic: @source-sans-bold-italic;
-@text-font-code: @source-code-pro;
-@text-font-icons: @symbolset;
-@primary-header-font: @museo-slab-700;
+// Greys
+@grey-1: @grey;
+@grey-2: #cfcbca;
+@grey-3: #f7f7f9;
+
+// Font Declarations
+@lato-light: "Lato Light", @stack-sans-serif;
+@lato-regular: "Lato Regular", @stack-sans-serif;
+@lato-bold: "Lato Bold", @stack-sans-serif;
+@lato-black: "Lato Black", @stack-sans-serif;
 
 
 /*
@@ -30,42 +24,18 @@ Font Faces
 
 */
 
-// Museo Slab
+// Lato
 @font-face {
-    .web-font("Museo Slab 700", museo-slab, museo-slab-700);
+    .web-font("Lato Light", lato, LatoLatinLight-Regular);
 }
 @font-face {
-    .web-font("Museo 700", museo, Museo700-Regular-webfont);
-}
-
-// Source Sans Pro
-@font-face {
-    .web-font-svg("Source Sans Pro", source-sans-pro, SourceSansPro-Regular-webfont, SourceSansProRegular);
+    .web-font("Lato Regular", lato, LatoLatin-Regular);
 }
 @font-face {
-    .web-font-svg("Source Sans Pro Bold", source-sans-pro, SourceSansPro-Bold-webfont, SourceSansProBold);
+    .web-font("Lato Bold", lato, LatoLatin-Bold);
 }
 @font-face {
-    .web-font-svg("Source Sans Pro Italic", source-sans-pro, SourceSansPro-It-webfont, SourceSansProItalic);
-}
-@font-face {
-    .web-font-svg("Source Sans Pro Bold Italic", source-sans-pro, SourceSansPro-BoldIt-webfont, SourceSansProBoldItalic);
-}
-
-// Source Code Pro
-@font-face {
-    .web-font-svg("Source Code Pro", source-code-pro, source-code-pro-regular, SourceCodeProRegular);
-}
-
-// Symbolset
-@font-face {
-    .web-font-svg("Symbolset", symbolset, ss-standard, SSStandardRegular);
-}
-@font-face {
-    .web-font-svg("Symbolset Social", symbolset, ss-social-regular, SSSocialRegular);
-}
-@font-face {
-    .web-font-svg("Symbolset Social Circle", symbolset, ss-social-circle, SSSocialCircle);
+    .web-font("Lato Black", lato, LatoLatinBlack-Regular);
 }
 
 /* 
@@ -77,64 +47,17 @@ embedded via `@font-face` declarations.
 
 */
 
-.museo-slab-700 {
-    font-family: @museo-slab-700;
+.lato-light {
+    font-family: @lato-light;
 }
-.source-sans-regular {
-    font-family: @source-sans-regular;
+.lato-regular {
+    font-family: @lato-regular;
 }
-.source-sans-bold {
-    font-family: @source-sans-bold;
+.lato-bold {
+    font-family: @lato-bold;
 }
-.source-sans-italic {
-    font-family: @source-sans-italic;
-}
-.source-sans-bold-italic {
-    font-family: @source-sans-bold-italic;
-}
-.source-code-pro {
-    font-family: @source-code-pro;
-}
-.symbolset {
-    font-family: @symbolset;
-}
-.symbolset-social {
-    font-family: @symbolset-social;
-}
-.symbolset-social-circle {
-    font-family: @symbolset-social-circle;
-}
-
-/*
-
-Icons
-
-*/
-
-[data-icon-position="solo"]:before,
-[data-icon-position="before"]:before,
-[data-icon-position="after"]:after,
-.data-icon {
-    .symbolset();
-}
-[data-icon-position="solo"]:before,
-[data-icon-position="before"]:before,
-[data-icon-position="after"]:after {
-    [data-icon-family="social"]& {
-        .symbolset-social();
-    }
-    [data-icon-family="social-circle"]& {
-        .symbolset-social-circle();
-    }
-}
-
-.data-icon {
-    &-social {
-        .symbolset-social();
-    }
-    &-social-circle {
-        .symbolset-social-circle();
-    }
+.lato-black {
+    font-family: @lato-black;
 }
 
 /*
@@ -150,16 +73,26 @@ h4,
 h5,
 h6,
 .primary-heading {
-    font-family: @primary-header-font;
+    &:extend( .lato-bold );
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.primary-heading,
+.secondary-heading {
     color: @primary-header-color;
 }
 
 .secondary-heading  {
+    &:extend( .lato-light );
+}
+.tertiary-heading  {
+    &:extend( .lato-black );
 
-    // Mixins
-    .source-sans-bold();
-
-    // Other
     color: @grey;
     text-transform: uppercase;
 }
@@ -174,36 +107,33 @@ A quick class to help make any element's text look like the site's default body 
 
 body,
 .body-text {
-
-    // Mixins
-    .source-sans-regular();
+    &:extend( .lato-regular );
 }
-code {
-    .source-code-pro();
-}
+// code {
+//     .source-code-pro();
+// }
 dt,
 th,
 .input-label,
 strong {
+    &:extend( .lato-bold );
+
     font-weight: normal;
-
-    // Mixins
-    .source-sans-bold();
 }
-em {
-    font-style: normal;
+// em {
+//     font-style: normal;
 
-    // Mixins
-    .source-sans-italic();
-}
-strong em,
-em strong {
-    font-style: normal;
-    font-weight: normal;
+//     // Mixins
+//     .source-sans-italic();
+// }
+// strong em,
+// em strong {
+//     font-style: normal;
+//     font-weight: normal;
 
-    // Mixins
-    .source-sans-bold-italic();
-}
+//     // Mixins
+//     .source-sans-bold-italic();
+// }
 
 
 /*
@@ -220,7 +150,7 @@ textarea {
     border: @1px solid @grey;
 
     // Mixins
-    &:extend(.body-text);
+    &:extend( .body-text );
     .border-radius(@2px);
     .box-shadow-inset(0, @1px, @2px, @light-grey);
 
@@ -242,44 +172,33 @@ Buttons
 */
 
 [class*="btn"] {
+    &:extend( .lato-bold );
 
-    // Variables
-    @gradient-top: @white;
-    @gradient-bottom: lighten(@light-grey, 5%);
-
-    // Shadow vars
-    @inset-shadow: fadeout(@white, 60%);
-    @outset-shadow: fadeout(@black, 50%);
-    @var-shadow-in: 0 @1px @1px @inset-shadow;
-    @var-shadow-out: 0 @2px @2px -@1px @outset-shadow;
-    border: 1px solid @light-grey;
-    color: @dark-grey;
-    text-shadow: 0 @1px @1px @white;
-    
     // Mixins
-    .source-sans-bold();
-    .border-radius(@3px);
-    .box-shadow-in-out(@var-shadow-in, @var-shadow-out);
-    .background-linear-gradient(0, @gradient-top, 100%, @gradient-bottom);
-    
+    .border-radius( @3px );
+
+    background-color: @grey-3;
+    border: 1px solid @grey-2;
+
+    &,
     &:hover,
     &:focus {
-        color: darken(@dark-grey, 10%);
-        border-color: @grey;
+        color: @light-black;
+    }
+    &:hover,
+    &:focus {
+        background-color: darken(@grey-3, 5%);
+        border-color: @grey-1;
     }
 }
 .btn {
     &--blue,
     &--primary {
-
-        // Mixins
-        .m-button-color(@blue);
+        .m-button-color( @blue, @dark-blue );
     }
     &--red,
     &--danger {
-
-        // Mixins
-        .m-button-color(@red);
+        .m-button-color( @red, @dark-red );
     }
 }
 
