@@ -1,0 +1,32 @@
+.main-footer {
+	margin: @double-vertical 0 0;
+	padding: @full-vertical 0 @double-vertical;
+	background: @grey-3;
+	border-top: 1px solid @grey-2;
+}
+
+@media @small-screens-max {
+	.main-header {
+		.banner__title {
+			margin-top: @12px;
+		}
+		.nav-bar {
+			&--menu {
+				// position: absolute;
+				// top: 0;
+				// right: 0;
+				// left: 0;
+				// z-index: 99;
+			}
+			&__title {
+				float: right;
+			}
+			&__list {
+				clear: both;
+				.wrapper {
+					width: 100%;
+				}
+			}
+		}
+	}
+}

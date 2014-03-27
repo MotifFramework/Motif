@@ -15,6 +15,7 @@ Config
 @blue-1: @blue;
 @blue-2: #00a4d8;
 @blue-3: #eaf7ff;
+@blue-4: #024f82;
 
 @green-1: @green;
 @green-2: #72bc44;
@@ -171,24 +172,33 @@ Forms
 input,
 textarea {
 
-    // Create
+    // Vars
+    @inner-shadow: fadeout(@black, 95%);
+
+    padding: @half-vertical @full-side;
     background: @white;
-    border: @1px solid @grey;
+    border: @1px solid @grey-4;
 
     // Mixins
     &:extend( .body-text );
-    .border-radius(@2px);
-    .box-shadow-inset(0, @1px, @2px, @light-grey);
+    .border-radius( @3px );
+    .box-shadow-inset(0, @3px, @3px, @inner-shadow);
 
     &:hover,
     &:focus,
     &:active,
     &.is-current {
-        border-color: @light-black;
-
-        // Mixins
-        .box-shadow(0, @1px, @4px, @light-grey);
+        border-color: @dark-grey;
     }
+}
+textarea {
+
+    // Vars
+    // Why 147px? To match the height of two vertical single-line inputs
+    @147px: ( 1em * ( 147 / @base-text-size ) );
+
+    /* Display & Box Model */
+    height: @147px;
 }
 
 a,
@@ -329,6 +339,18 @@ Panels
     }
 }
 
+/*
+
+Figures
+
+*/
+
+.figure figcaption,
+.figcaption {
+    &:extend( [class*="petite-text"] );
+    padding: @quarter-vertical @full-side;
+}
+
 
 /*
 
@@ -373,49 +395,25 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 .nav-bar {
     &__title {
 
-        // Variables
-        @base-color: @dark-blue;
-        @top-gradient: @base-color;
-        @bottom-gradient: darken(@base-color, 3%);
-
         // Create
+        margin: 0;
         padding: @half-vertical 4%;
-        display: block;
+        display: inline-block;
         color: @white;
+        background: @blue-1;
         cursor: pointer;
-
-        // Mixins
-        .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
-        .margin-leader();
 
         &:hover,
         &:focus,
-        &.is-current {
-                
-            // Variables
-            @base-color: darken(@dark-blue, 5%);
-            @top-gradient: @base-color;
-            @bottom-gradient: darken(@base-color, 5%);
-
-            // Mixins
-            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
+        &.is-expanded {
+            background: @blue-4;
         }
 
-    }
-
-    &__list--x--forceful {
-        margin: 0;
-        
-        // Mixins
-        background: darken(@dark-blue, 10%);
     }
     &__link {
         color: @white;
         text-decoration: none;
         padding: @half-vertical 4%;
-        
-        // Mixins
-        // .source-sans-bold();
         
         &:hover,
         &:focus,
@@ -423,17 +421,33 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
             color: @white;
 
             // Mixins
-            background: darken(@dark-blue, 15%);
+            background: @blue-4;
         }
     }
 }
+[class*="nav-bar__list"] {
+    margin: 0;
+    
+    // Mixins
+    background: @blue-1;
+
+    ul {
+        margin: 0;
+    }
+}
 @media @small-screens-min {
-    .nav-bar {
-        &__list--x--forceful {
-            > li {
-                width: 50%;
+
+    [class*="nav-bar__list"] {
+        > li,
+        [class*="list--x"] > li {
+            width: 50%;
+
+            &:nth-child( odd ) {
+                clear: both;
             }
         }
+    }
+    .nav-bar {
         &__link {
             padding: @half-vertical @full-side;
         }
@@ -442,64 +456,32 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 @media @medium-screens-min {
     .nav-bar {
 
-        // Variables
-        @base-color: @dark-blue;
-        @top-gradient: @base-color;
-        @bottom-gradient: darken(@base-color, 3%);
-        @highlight-top: lighten(@purple, 10%);
-        @highlight-bottom: darken(@purple, 10%);
-
-        &__list--x--forceful {
-            
-            // Mixins
-            .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
-
-            > li {
-                width: auto;
-            }
-        }
-
         &__link {
             padding: @full-vertical @full-side;
-            
-            &:hover,
-            &:focus,
-            &.is-current {
-                
-                // Variables
-                @base-color: darken(@dark-blue, 5%);
-                @top-gradient: @base-color;
-                @bottom-gradient: darken(@base-color, 5%);
-
-                // Mixins
-                .background-linear-gradient(0, @top-gradient, 100%, @bottom-gradient);
-            }
         }
-        // .sub-nav {
-        //  background:                     darken(@dark-blue, 10%);
-            
-        //  a   {
-        //      padding:                    @half-vertical @full-side;
-            
-        //      // Mixins
-        //      .source-sans-regular();
-
-        //      &:hover,
-        //      &:focus,
-        //      &.is-current    {
-        //          background:             darken(@dark-blue, 15%);
-        //      }
-        //  }
-        // }
 
         .js & {
             &--menu {
                 .nav-bar__title {
                     display: none;
                 }
-                .nav-bar__list--x--forceful {
+                [class*="nav-bar__list"] {
                     max-height: 999px;
                 }
+            }
+        }
+    }
+
+    [class*="nav-bar__list"] {
+
+        background: @blue-1;
+
+        > li,
+        [class*="list--x"] > li {
+            width: auto;
+
+            &:nth-child( odd ) {
+                clear: none;
             }
         }
     }
@@ -511,7 +493,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 Vertical Nav
 
 @pattern: Vertical Nav
-<ul class="list--unstyled nav--vert">
+<ul class="nav--vert">
     <li>
         <a href="#">Nav Link</a>
     </li>
@@ -546,33 +528,19 @@ Vertical Nav
 */
 
 .nav--vert {
-    .current {
-        a {
-            color: @primary-link-hover;
-            background: fadeout(@primary-link-color, 90%);
-        }
-    }
-    li:first-child {
-        a {
-            border: none;
-        }
+    ul& {
+        &:extend( .list--unstyled );
     }
     a {
-        color: @dark-blue;
-        padding: @quarter-vertical @half-side;
+        color: @blue-4;
+        padding: @quarter-vertical @full-side;
         display: block;
         text-decoration: none;
-        
-        // Mixins
-        // .source-sans-bold();
-        
-        &:hover,
-        &:focus {
-            background: fadeout(@primary-link-color, 90%);
-        }
     }
+    a:hover,
+    a:focus,
     .is-current {
-        background: fadeout(@primary-link-color, 90%);
+        background-color: @blue-3;
     }
     li ul {
         margin: 0;
