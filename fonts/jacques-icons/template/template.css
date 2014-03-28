@@ -42,7 +42,7 @@
 .pre-icon--<%= glyphs[glyphIdx] %>:before,
 .icon--<%= glyphs[glyphIdx] %>:before,
 .post-icon--<%= glyphs[glyphIdx] %>:after {
-	content: "\<%= (61696+glyphIdx).toString(16) %>";
+	content: "\<%= codepoints[glyphIdx] %>";
 }
 <% } %>
 <% } %>
