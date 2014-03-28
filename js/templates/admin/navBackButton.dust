@@ -1,8 +1,0 @@
-<a class="content-nav-back petite-text"
- href="{url}"
- data-icon="&#x2B05;"
- data-icon-position="before">
-    <b class="is-hidden">Return to</b> 
-    {label}
-    <b class="is-hidden">Menu</b>
-</a>

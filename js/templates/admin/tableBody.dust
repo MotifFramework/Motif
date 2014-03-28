@@ -1,9 +1,0 @@
-<tbody class="{bodyClass}">
-    {#rows}
-    <tr>
-        <td>
-            {.}
-        </td>
-    </tr>
-    {/rows}
-</tbody>

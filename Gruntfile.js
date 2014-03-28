@@ -76,19 +76,6 @@ module.exports = function(grunt) {
                         "<%= r_js %>plugins/jquery.lb-validation.js"
                     ]
                 }
-            },
-
-            // Client
-            admin: {
-                files: {
-
-                    // Build Helpers
-                    "<%= c_js %>helpers.admin.js": [
-                        "<%= r_js_admin %>modernizr.js",
-                        "<%= r_js %>helpers/viewport.js",
-                        "<%= r_js %>helpers/loadScript.js"
-                    ]
-                }
             }
         },
 
@@ -116,28 +103,6 @@ module.exports = function(grunt) {
         less: {
             options: {
                 paths: ["docroot/resources/less"]
-            },
-
-            // Admin
-            admin: {
-                options: {
-                    report: "min"
-                },
-                files: [
-                    {
-                        expand: true,
-                        cwd: "<%= r_less %>",
-                        src: "admin/!(_*).less",
-                        dest: "<%= c_css %>",
-                        rename: function( dest, src ) {
-                            var source = src.substr( src.indexOf("/") + 1 );
-
-                            source = source.replace( "global", "admin" );
-
-                            return dest + source.substr( 0, source.indexOf(".") ) + ".css";
-                        }
-                    }
-                ]
             },
 
             // Development Build
@@ -225,75 +190,15 @@ module.exports = function(grunt) {
                     template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
                     destHtml: "<%= c_fonts %><%= pkg.name %>-icons/",
-                    startCodepoint: 0xF108
+                    startCodepoint: 0xF101
                 }
-            }
-        },
-
-        watch: {
-            options: {
-                livereload: 35729
-            },
-            html: {
-                files: ['<%= docroot %>**/*.view']
-            },
-            grunt: {
-                files: ['Gruntfile.js'],
-                tasks: ['refresh']
-            },
-            js: {
-                files: ['<%= r_js_client %>**/*.js'],
-                tasks: ['js']
-            },
-            less: {
-                options: {
-                    livereload: false
-                },
-                files: ['<%= r_less_client %>**/*.less'],
-                tasks: ['less:developmentGlobal']
-            },
-            css: {
-                files: ['<%= c_css %>**/*.css']
-            }
-        },
-
-        "string-replace": {
-            development: {
-                files: {
-                    "<%= r_less_client %>global.less": ["<%= r_less_client %>global.less"],
-                    "npm-shrinkwrap.json": ["npm-shrinkwrap.json"],
-                    "<%= docs %>patterns.php": ["<%= docs %>patterns.php"],
-                    "<%= views %>bases/foundation.view": ["<%= views %>bases/foundation.view"]
-                },
-                options: {
-                    replacements: [{
-                        pattern: /motif/gi,
-                        replacement: '<%= pkg.name %>'
-                    }]
-                }
-            }
-        },
-
-        copy: {
-            icons: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: "<%= r_fonts %>motif-icons/",
-                        src: "**",
-                        dest: "<%= r_fonts %><%= pkg.name %>-icons/"
-                    }
-                ]
             }
         },
 
         // Other Vars
         project: "<%= pkg.name %>",
-        docroot: "../docroot/",
-        docs: "<%= docroot %>docs/",
-        views: "<%= docroot %>views/",
-        resources: "<%= docroot %>resources/",
-        compiled: "<%= resources %>c/",
+        resources: "",
+        compiled: "<%= resources %>dist/",
 
         c_less: "<%= compiled %>less/",
         c_css: "<%= compiled %>css/",
@@ -302,17 +207,11 @@ module.exports = function(grunt) {
 
         r_less: "<%= resources %>less/",
         r_less_client: "<%= r_less %>client/",
-        r_less_admin: "<%= r_less %>admin/",
 
         r_fonts: "<%= resources %>fonts/",
 
         r_js: "<%= resources %>js/",
-        r_js_client: "<%= r_js %>client/",
-        r_js_admin: "<%= r_js %>admin/",
-
-        r_images: "<%= resources %>images/",
-        r_images_client: "<%= r_images %>client/",
-        r_images_admin: "<%= r_images %>admin/"
+        r_js_client: "<%= r_js %>client/"
     });
 
     // Load the plugins that provide the tasks.
@@ -321,24 +220,16 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks("grunt-jquery-builder");
-    grunt.loadNpmTasks('grunt-string-replace');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+
 
     // Default task.
     grunt.registerTask('default', ['less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
 
-    // Run on Init
-    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'less:admin', 'concat:admin']);
-
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'less:admin', 'concat:admin']);
+    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client']);
 
     // Production Build
     grunt.registerTask('build', ['webfont:clientIcons', 'less:productionGlobal', 'less:productionGlobalFixed', 'concat:client', 'uglify']);
-
-    // Admin Build
-    grunt.registerTask('admin', ['less:admin', 'concat:admin']);
 
     // Compile Webfonts
     grunt.registerTask('fonts', ['webfont']);
@@ -349,7 +240,7 @@ module.exports = function(grunt) {
     // Build jQuery Versions
     grunt.registerTask('jq', ['jquery']);
 
-    // Compile and Minify JS
+    // Compile JS
     grunt.registerTask('js', ['concat:client']);
 
 };

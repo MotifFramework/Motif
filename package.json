@@ -1,17 +1,17 @@
 {
   "name": "motif",
-  "version": "1.0.0",
-  "description": "The website for the Motif front-end framework",
+  "version": "3.0.0",
+  "description": "The Motif framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lifeblue/lb_core.git"
+    "url": "https://github.com/MotifFramework/Motif.git"
   },
   "author": "Lifeblue",
-  "license": "BSD",
+  "license": "MIT Open Source",
   "gitHead": "cce044bb9b91bffe6cddd736bc925a22b58fbcd8",
   "dependencies": {
     "grunt": "~0.4.0",
