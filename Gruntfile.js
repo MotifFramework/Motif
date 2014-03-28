@@ -225,6 +225,7 @@ module.exports = function(grunt) {
                     template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
                     destHtml: "<%= c_fonts %><%= pkg.name %>-icons/",
+                    startCodepoint: 0xE400,
                     embed: true
                 }
             },
