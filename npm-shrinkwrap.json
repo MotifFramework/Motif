@@ -1,6 +1,6 @@
 {
-  "name": "jacques",
-  "version": "3.0.0",
+  "name": "motif",
+  "version": "1.0.0",
   "dependencies": {
     "grunt": {
       "version": "0.4.2",

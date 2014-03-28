@@ -1,7 +1,7 @@
 {
-  "name": "jacques",
-  "version": "3.0.0",
-  "description": "The Jacques front-end framework",
+  "name": "motif",
+  "version": "1.0.0",
+  "description": "The website for the Motif front-end framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

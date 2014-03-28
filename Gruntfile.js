@@ -267,7 +267,7 @@ module.exports = function(grunt) {
                 },
                 options: {
                     replacements: [{
-                        pattern: /lb-core/gi,
+                        pattern: /motif/gi,
                         replacement: '<%= pkg.name %>'
                     }]
                 }
@@ -279,7 +279,7 @@ module.exports = function(grunt) {
                 files: [
                     {
                         expand: true,
-                        cwd: "<%= r_fonts %>lb-core-icons/",
+                        cwd: "<%= r_fonts %>motif-icons/",
                         src: "**",
                         dest: "<%= r_fonts %><%= pkg.name %>-icons/"
                     }
