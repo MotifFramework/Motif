@@ -1,0 +1,27 @@
+{
+  "name": "motif",
+  "version": "1.0.0",
+  "description": "The website for the Motif front-end framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lifeblue/lb_core.git"
+  },
+  "author": "Lifeblue",
+  "license": "BSD",
+  "gitHead": "cce044bb9b91bffe6cddd736bc925a22b58fbcd8",
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-less": "~0.8.3",
+    "grunt-webfont": "~0.3.x",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-copy": "~0.5.x",
+    "grunt-string-replace": "~0.2.7",
+    "grunt-jquery-builder": "~0.1.1",
+    "grunt-contrib-watch": "~0.5.3"
+  }
+}
