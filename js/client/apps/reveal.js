@@ -44,7 +44,7 @@
             return {
                 "elem": elem,
                 "targets": [],
-                "for": [],
+                "fors": [],
                 "hide": [],
                 "current": false
             };
@@ -366,7 +366,7 @@
             
             this.updateReference.call( this, {
                 "targets": this.gatherTargets.call( this ),
-                "for": this.gatherForTriggers.call( this ),
+                "fors": this.gatherForTriggers.call( this ),
                 "hide": this.gatherHideTriggers.call( this )
             });
             self.initCurrent.call( self );
@@ -496,7 +496,7 @@
 
             "showFors": function () {
                 var self = this,
-                    fors = self.reference.for;
+                    fors = self.reference.fors;
 
                 $.each( fors, function showEachFor () {
                     self.show.call( self, $( this ) );
@@ -526,7 +526,7 @@
 
             "hideFors": function () {
                 var self = this,
-                    fors = self.reference.for;
+                    fors = self.reference.fors;
 
                 $.each( fors, function hideEachFor () {
                     self.hide.call( self, $( this ) );
