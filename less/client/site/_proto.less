@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+
 /*
 
 Config
@@ -26,6 +28,7 @@ Config
 @red-3: #f6e1df;
 
 // Font Declarations
+@lato: "Lato", @stack-sans-serif;
 @lato-light: "Lato Light", @stack-sans-serif;
 @lato-regular: "Lato Regular", @stack-sans-serif;
 @lato-bold: "Lato Bold", @stack-sans-serif;
@@ -39,18 +42,18 @@ Font Faces
 */
 
 // Lato
-@font-face {
-    .web-font("Lato Light", lato, LatoLatinLight-Regular);
-}
-@font-face {
-    .web-font("Lato Regular", lato, LatoLatin-Regular);
-}
-@font-face {
-    .web-font("Lato Bold", lato, LatoLatin-Bold);
-}
-@font-face {
-    .web-font("Lato Black", lato, LatoLatinBlack-Regular);
-}
+// @font-face {
+//     .web-font("Lato Light", lato, LatoLatinLight-Regular);
+// }
+// @font-face {
+//     .web-font("Lato Regular", lato, LatoLatin-Regular);
+// }
+// @font-face {
+//     .web-font("Lato Bold", lato, LatoLatin-Bold);
+// }
+// @font-face {
+//     .web-font("Lato Black", lato, LatoLatinBlack-Regular);
+// }
 
 /* 
 
@@ -62,16 +65,24 @@ embedded via `@font-face` declarations.
 */
 
 .lato-light {
-    font-family: @lato-light;
+    font-family: @lato;
+    font-weight: 300;
+    // font-family: @lato-light;
 }
 .lato-regular {
-    font-family: @lato-regular;
+    font-family: @lato;
+    font-weight: 400;
+    // font-family: @lato-regular;
 }
 .lato-bold {
-    font-family: @lato-bold;
+    font-family: @lato;
+    font-weight: 700;
+    // font-family: @lato-bold;
 }
 .lato-black {
-    font-family: @lato-black;
+    font-family: @lato;
+    font-weight: 900;
+    // font-family: @lato-black;
 }
 
 /*
