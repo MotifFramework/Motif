@@ -2,14 +2,11 @@
 
     "use strict";
 
-    var PLUGIN = function ( elem, userOptions ) {
+    var PLUGIN = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
-            this.config = userOptions;
-            this.metadata = this.$elem.data("PLUGIN-options");
-            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         },
         $document = $( document );
 
@@ -18,16 +15,20 @@
             
         },
 
-        "initVars": function () {
-            // Init Vars
-        },
-
-        "init": function () {
+        "init": function ( userOptions ) {
             if ( !this.$elem.length ) {
                 return;
             }
 
+            this.initVars.call( this );
+
             return this;
+        },
+
+        "initVars": function ( userOptions ) {
+            this.config = userOptions;
+            this.metadata = this.$elem.data("PLUGIN-options");
+            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         }
     };
 

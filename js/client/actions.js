@@ -64,6 +64,11 @@
 
     App.prototype.initScrollEvents = function () {
         $("#basics__nav").plugin("scrollEvents");
+
+        $(".js-scrolling").on("click", function () {
+            $( $(this).attr("href") ).plugin("lb_scrolling");
+            return false;
+        });
     };
 
     new App();

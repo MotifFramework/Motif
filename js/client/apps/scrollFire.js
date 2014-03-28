@@ -2,14 +2,11 @@
 
     "use strict";
 
-    var ScrollFire = function ( elem, userOptions ) {
+    var ScrollFire = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
-            this.config = userOptions;
-            this.metadata = this.$elem.data("scrollfire-options");
-            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         };
 
     ScrollFire.prototype = {
@@ -19,17 +16,20 @@
             "events": []
         },
 
-        "initVars": function () {
+        "initVars": function ( userOptions ) {
+            this.config = userOptions;
+            this.metadata = this.$elem.data("scrollfire-options");
+            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
             this.$window = this.options.window;
             this.oldPosition = this.$window.scrollTop();
         },
 
-        "init": function () {
+        "init": function ( userOptions ) {
             if ( !this.$elem.length ) {
                 return;
             }
 
-            this.initVars.call( this );
+            this.initVars.call( this, userOptions );
             this.bind.call( this );
 
             return this;
@@ -38,13 +38,19 @@
         "bind": function () {
             var self = this;
 
-            self.$window.on( "scroll.scrollfire resize.scrollfire", function onScrollFireChange () {
+            self.$window.on( "scroll.scrollfire", function onScrollFireChange () {
                 self.testEvents.call( self );
+            }).on( "resize.scrollfire", function onScrollFireResize () {
+                self.refresh.call( self );
             });
 
-            if ( self.oldPosition > 0 ) {
-                self.oldPosition = 0;
-                self.$window.trigger("scroll.scrollfire");
+            self.refresh.call( self );
+        },
+
+        "refresh": function () {
+            if ( this.oldPosition > 0 ) {
+                this.oldPosition = 0;
+                this.$window.trigger("scroll.scrollfire");
             }
         },
 
@@ -56,7 +62,7 @@
 
             self.currentPosition = self.$window.scrollTop();
 
-            for ( i = events.length - 1; i >= 0; i -= 1 ) {
+            for ( i = 0; i < events.length; i += 1 ) {
                 triggerPosition = self.triggerType.call( self, events[ i ] );
                 
                 if ( ( typeof events[ i ].fired === "undefined" || !events[ i ].fired ) || events[ i ].repeat ) {
@@ -81,15 +87,7 @@
              ||
              ( triggerPosition >= this.currentPosition && triggerPosition <= this.oldPosition )
             ) {
-
-                // console.log("triggerPosition");
-                // console.log(triggerPosition);
-                // console.log("this.currentPosition");
-                // console.log(this.currentPosition);
-                // console.log("this.oldPosition");
-                // console.log(this.oldPosition);
                 this.triggerEvent.call( this, eventNum );
-
             }
         },
 

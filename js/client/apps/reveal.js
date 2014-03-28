@@ -7,17 +7,11 @@
 
     "use strict";
 
-    var Reveal = function ( elem, userOptions ) {
+    var Reveal = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
-            this.identity = this.$elem.attr("id") || "reveal-target-" + Reveal.counter;
-            this.group = this.$elem.attr("data-reveal-group") || false;
-            this.reference = false;
-            this.config = userOptions;
-            this.metadata = this.$elem.data("reveal-options");
-            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         },
         $document = $( document );
 
@@ -64,7 +58,8 @@
         },
 
         // Initialize
-        "init": function () {
+        "init": function ( userOptions ) {
+            this.initVars.call( this, userOptions );
 
             // Create window.Reveal reference table
             this.createReference.call( this );
@@ -90,6 +85,16 @@
             $document.trigger("reveal/" + this.identity + "/init");
 
             return this;
+        },
+
+        "initVars": function ( userOptions ) {
+            
+            this.identity = this.$elem.attr("id") || "reveal-target-" + Reveal.counter;
+            this.group = this.$elem.attr("data-reveal-group") || false;
+            this.reference = false;
+            this.config = userOptions;
+            this.metadata = this.$elem.data("reveal-options");
+            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         },
 
         "createReference": function () {
@@ -582,15 +587,29 @@
 
     $.fn["reveal"] = function( userOptions ) {
         var self = this,
-            args = Array.prototype.slice.call( arguments, 1 );
+            args;
 
         if ( self.length ) {
             return self.each( function ( index, elem ) {
                 var instance = $.data( this, "reveal" );
                 if ( instance ) {
-                    instance[ userOptions ].apply( instance, args );
+                    if ( typeof userOptions === 'undefined' || typeof userOptions === 'object' ) {
+                        instance.init( userOptions );
+                    } else if ( typeof arg === 'string' && typeof instance[arg] === 'function' ) {
+
+                        // copy arguments & remove function name
+                        args = Array.prototype.slice.call( arguments, 1 );
+
+                        // call the method
+                        return instance[ userOptions ].apply( instance, args );
+
+                    } else {
+
+                        console.log( "Reveal: Method " + arg + " does not exist on jQuery." );
+
+                    }
                 } else {
-                    instance = $.data( this, "reveal", new Reveal( this, userOptions ).init() );
+                    instance = $.data( this, "reveal", new Reveal( this ).init( userOptions ) );
                 }
                 if ( self.length - 1 === index ) {
                     instance.executeQueue.call( self );
