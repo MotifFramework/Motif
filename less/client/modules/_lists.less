@@ -11,10 +11,12 @@ horizontal list/navigation without adding too much style (yet).
 [class*="list--x"] {
     &:extend( .list--unstyled );
 
-    li,
-    a {
-        display: inline-block;
+    li {
+        display: inline;
     }
+        a {
+            display: inline-block;
+        }
 }
 
 /*

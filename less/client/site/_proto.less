@@ -1,3 +1,4 @@
+// Importing Lato font via Google Fonts
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
 
 /*
@@ -29,10 +30,13 @@ Config
 
 // Font Declarations
 @lato: "Lato", @stack-sans-serif;
-@lato-light: "Lato Light", @stack-sans-serif;
-@lato-regular: "Lato Regular", @stack-sans-serif;
-@lato-bold: "Lato Bold", @stack-sans-serif;
-@lato-black: "Lato Black", @stack-sans-serif;
+
+// This is how you'd import the Lato font straight from the folder:
+
+// @lato-light: "Lato Light", @stack-sans-serif;
+// @lato-regular: "Lato Regular", @stack-sans-serif;
+// @lato-bold: "Lato Bold", @stack-sans-serif;
+// @lato-black: "Lato Black", @stack-sans-serif;
 
 
 /*
@@ -40,6 +44,8 @@ Config
 Font Faces
 
 */
+
+// This is how you'd import the Lato font straight from the folder:
 
 // Lato
 // @font-face {
@@ -64,26 +70,39 @@ embedded via `@font-face` declarations.
 
 */
 
-.lato-light {
-    font-family: @lato;
-    font-weight: 300;
-    // font-family: @lato-light;
-}
-.lato-regular {
-    font-family: @lato;
-    font-weight: 400;
-    // font-family: @lato-regular;
-}
-.lato-bold {
-    font-family: @lato;
-    font-weight: 700;
-    // font-family: @lato-bold;
-}
+.lato-light,
+.lato-regular,
+.lato-bold,
 .lato-black {
     font-family: @lato;
-    font-weight: 900;
-    // font-family: @lato-black;
 }
+.lato-light {
+    font-weight: 300;
+}
+.lato-regular {
+    font-weight: 400;
+}
+.lato-bold {
+    font-weight: 700;
+}
+.lato-black {
+    font-weight: 900;
+}
+
+// This is how you'd import the Lato font straight from the folder:
+
+// .lato-light {
+//     font-family: @lato-light;
+// }
+// .lato-regular {
+//     font-family: @lato-regular;
+// }
+// .lato-bold {
+//     font-family: @lato-bold;
+// }
+// .lato-black {
+//     font-family: @lato-black;
+// }
 
 /*
 
