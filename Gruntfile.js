@@ -221,11 +221,11 @@ module.exports = function(grunt) {
                     font: '<%= pkg.name %>-icons',
                     types: "eot,woff,ttf,svg",
                     hashes: false,
-                    relativeFontPath: "<%= c_fonts %><%= pkg.name %>-icons/",
+                    relativeFontPath: "../fonts/<%= pkg.name %>-icons/",
                     template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
                     destHtml: "<%= c_fonts %><%= pkg.name %>-icons/",
-                    startCodepoint: 0xF001,
+                    startCodepoint: 0xE400,
                     embed: true
                 }
             }
