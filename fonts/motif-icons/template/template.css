@@ -1,0 +1,51 @@
+<% if (fontfaceStyles) { %>
+@font-face {
+	font-family:"<%= fontBaseName %>";
+	<% if (fontSrc1) { %>
+	src: <%= fontSrc1 %>;
+	<% }%>
+	src: <%= fontSrc2 %>;
+	font-weight:normal;
+	font-style:normal;
+}
+<% } %>
+<% if (baseStyles) { %>
+[class*="pre-icon--"]:before,
+[class*="icon--"]:before,
+[class*="post-icon--"]:after {
+	font-family: "<%= fontBaseName %>";
+}
+[class*="pre-icon--"]:before,
+[class*="icon--"]:before,
+[class*="post-icon--"]:after {
+	/*font-family: "<%= fontBaseName %>";*/
+    vertical-align: middle;
+    font-size: 1;
+	display: inline-block;
+	font-weight: normal;
+	font-style: normal;
+    /*white-space: nowrap;*/
+	speak: none;
+	text-decoration: none;
+	text-transform: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+[class*="pre-icon--"]:before {
+	padding-right: 0.357em;
+}
+[class*="post-icon--"]:after {
+	padding-left: 0.357em;
+}
+<% } %>
+<% if (iconsStyles) { %>
+/* Icons */
+<% for (var glyphIdx = 0; glyphIdx < glyphs.length; glyphIdx++) { %>
+.pre-icon--<%= glyphs[glyphIdx] %>:before,
+.icon--<%= glyphs[glyphIdx] %>:before,
+.post-icon--<%= glyphs[glyphIdx] %>:after {
+	content: "\<%= codepoints[glyphIdx] %>";
+}
+<% } %>
+<% } %>
