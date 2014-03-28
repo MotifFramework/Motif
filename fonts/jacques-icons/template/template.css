@@ -10,9 +10,7 @@
 }
 <% } %>
 <% if (baseStyles) { %>
-[class*="pre-icon--"]:before,
-[class*="icon--"]:before,
-[class*="post-icon--"]:after {
+[class*="pre-icon--"]:before  {
     font-family: "<%= fontBaseName %>";
 }
 [class*="pre-icon--"]:before,
