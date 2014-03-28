@@ -20,7 +20,7 @@
 [class*="post-icon--"]:after {
 	/*font-family: "<%= fontBaseName %>";*/
     vertical-align: middle;
-    font-size: 100%;
+    font-size: 1;
 	display: inline-block;
 	font-weight: normal;
 	font-style: normal;
