@@ -63,6 +63,11 @@ module.exports = function(grunt) {
                         "<%= r_js_client %>apps/ajaxForm.js",
                         "<%= r_js_client %>apps/validateForms.js",
                         "<%= r_js_client %>apps/reveal.js",
+                        "<%= r_js_client %>apps/scrollFire.js",
+                        "<%= r_js_client %>apps/StickySide.js",
+                        "<%= r_js_client %>apps/ScrollPatrol.js",
+                        "<%= r_js_client %>apps/scrollEvents.js",
+                        "<%= r_js %>plugins/jquery.lb-scrolling.js",
                         "<%= r_js_client %>actions.js"
                     ],
 
