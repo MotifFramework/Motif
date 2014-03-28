@@ -225,30 +225,7 @@ module.exports = function(grunt) {
                     template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
                     destHtml: "<%= c_fonts %><%= pkg.name %>-icons/",
-                    startCodepoint: 0xE400,
-                    embed: true
-                }
-            },
-
-            // Icons
-            adminIcons: {
-
-                // Source SVGs
-                src: "<%= r_fonts %>admin-icons/svg/*.svg",
-
-                // Destination Folder
-                dest: '<%= c_fonts %>admin-icons/',
-
-                // Destination CSS
-                destCss: "<%= c_less %>",
-                options: {
-                    font: 'admin-icons',
-                    types: "eot,woff,ttf,svg",
-                    hashes: false,
-                    relativeFontPath: "<%= c_fonts %>admin-icons/",
-                    template: "<%= r_fonts %>admin-icons/template/template.css",
-                    stylesheet: "less",
-                    destHtml: "<%= c_fonts %>admin-icons/",
+                    startCodepoint: 0xF001,
                     embed: true
                 }
             }
@@ -353,16 +330,16 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
 
     // Run on Init
-    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
+    grunt.registerTask('init', ['copy', 'string-replace', 'webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'less:admin', 'concat:admin']);
 
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'webfont:adminIcons', 'less:admin', 'concat:admin']);
+    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client', 'less:admin', 'concat:admin']);
 
     // Production Build
     grunt.registerTask('build', ['webfont:clientIcons', 'less:productionGlobal', 'less:productionGlobalFixed', 'concat:client', 'uglify']);
 
     // Admin Build
-    grunt.registerTask('admin', ['webfont:adminIcons', 'less:admin', 'concat:admin']);
+    grunt.registerTask('admin', ['less:admin', 'concat:admin']);
 
     // Compile Webfonts
     grunt.registerTask('fonts', ['webfont']);
