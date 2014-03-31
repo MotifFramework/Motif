@@ -7,7 +7,7 @@
  * @todo 
  */
 
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -53,13 +53,8 @@
     };
 
     App.prototype.initForms = function () {
-        LB.apps.validateForms.init({
-            "forms": $("[data-validation='ajax']")
-        });
-        LB.apps.validateForms.init({
-            "forms": $("[data-validation='true']"),
-            "ajaxSubmit": false
-        });
+        $("[data-validation='ajax']").plugin("ajaxSubmission");
+        $("[data-validation='true']").plugin("lb_validation");
     };
 
     App.prototype.initScrollEvents = function () {
@@ -73,7 +68,7 @@
 
     new App();
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
