@@ -139,10 +139,125 @@
         },
 
         "bindInputs": function () {
-            this.$elem.on( "change", this.$fields, function onInputChange () {
-                $( this ).trigger("motif/gauntlet/" + )
+            var self = this;
+
+            self.$elem.on( "gauntlet.change", self.$fields, function onInputChange () {
+                this.getVerdict();
+                this.errorReport();
             });
+
+            self.$elem.on( "submit", function onFormSubmit () {
+                return self.submitForm.call( self );
+            });
+        },
+        "getVerdict": function () {
+            
+        },
+        "submitForm": function () {
+            
+        },
+        "validate": function ( input ) {
+            var inputValue = input.val(),
+                inputType = input.attr("type"),
+                inputName = input.attr("name"),
+                inputPattern = input.attr("pattern"),
+                verdict = true;
+
+            // If it's not disabled...
+            if ( input.prop("disabled") !== true ) {
+                if ( $.trim( inputValue ) === "" && !! input.attr("required") ) {
+                    verdict = false;
+                } else {
+                    // If "pattern" is defined...
+                    if ( !!inputPattern ) {
+
+                        verdict = this.validatePattern( inputPattern, inputValue );
+
+                        // Create filter out of pattern
+                        filter = new RegExp(inputPattern);
+
+                        // If pattern isn't matched...
+                        if (!filter.test(currentValue)) {
+
+                            // It failed
+                            verdict = false;
+
+                        // If it's matched but is also a confirmation input...
+                        } else if (!!confirmingInput) {
+
+                            // If it doesn't match the input it confirms...
+                            if (currentValue !== confirmedInput.val()) {
+
+                                // It failed
+                                verdict = false;
+                            }
+                        }
+
+                    // If it's confirming another input...
+                    } else if (!!confirmingInput) {
+
+                        // If the values don't match...
+                        if (currentValue !== confirmedInput.val()) {
+
+                            // It failed
+                            verdict = false;
+                        }
+
+                    // If it's a checkbox or radio...
+                    } else if (inputType === "checkbox" || inputType === "radio") {
+
+                        if (!!currentInput.attr("required")) {
+                            checkboxGroup = $this.find("input[name='" + inputName + "']");
+                            hasChecked = false;
+
+                            // Run through the checkbox group
+                            checkboxGroup.each(function () {
+
+                                // If any are checked, pass on to variable
+                                if ($(this).is(":checked")) {
+                                    hasChecked = true;
+                                }
+                            });
+
+                            // If none were checked...
+                            if (hasChecked === false) {
+
+                                // It failed
+                                verdict = false;
+                            }
+                        }
+
+                    // If it's not a textarea, select, checkbox or radio, but it matches our types array...
+                    } else if (!!inputType && !!formSettings.types[inputType]) {
+
+                        // Find the filter in our filter types array
+                        filter = formSettings.types[inputType];
+
+                        // If it doesn't match the pattern...
+                        if (!filter.test(currentValue)) {
+
+                            // If failed
+                            verdict = false;
+                        }
+                    }
+                }
+            }
         }
+            "validatePattern": function ( pattern, value ) {
+                var filter = new RegExp( pattern );
+
+                if ( !filter.test( value ) ) {
+                    return false;
+                } else {
+                    return true;
+                }
+            },
+            "validateConfirm": function () {
+                
+            },
+            "validateRadio": function () {
+                
+            }
     };
 
     PLUGIN.defaults = PLUGIN.prototype.defaults;
