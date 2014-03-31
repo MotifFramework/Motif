@@ -195,6 +195,34 @@ module.exports = function(grunt) {
             }
         },
 
+        watch: {
+            options: {
+                livereload: 35729
+            },
+            grunt: {
+                files: ['Gruntfile.js'],
+                tasks: ['refresh']
+            },
+            js: {
+                files: ['<%= r_js %>**/*.js'],
+                tasks: ['js']
+            },
+            less: {
+                options: {
+                    livereload: false
+                },
+                files: ['<%= r_less_client %>**/*.less'],
+                tasks: ['less:developmentGlobal']
+            },
+            css: {
+                files: ['<%= c_css %>**/*.css']
+            },
+            fonts: {
+                files: ['<%= r_fonts %>**/*.svg'],
+                tasks: ['refresh']
+            }
+        },
+
         // Other Vars
         project: "<%= pkg.name %>",
         resources: "",
@@ -220,6 +248,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks("grunt-jquery-builder");
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     // Default task.

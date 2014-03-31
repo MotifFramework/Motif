@@ -1,7 +1,7 @@
 {
   "name": "motif",
   "version": "3.0.0",
-  "description": "The Motif framework",
+  "description": "Motif: a responsive front-end framework that supports you",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,8 +19,6 @@
     "grunt-webfont": "~0.3.x",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-copy": "~0.5.x",
-    "grunt-string-replace": "~0.2.7",
     "grunt-jquery-builder": "~0.1.1",
     "grunt-contrib-watch": "~0.5.3"
   }
