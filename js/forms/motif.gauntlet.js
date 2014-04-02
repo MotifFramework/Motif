@@ -18,10 +18,13 @@
 
     Gauntlet.prototype = {
         "defaults": {
-            "classes": {
-                "error": "",
-                "success": "",
-                "warning": ""
+            "alertClasses": {
+                "error": "input-alert--error",
+                "success": "input-alert--success"
+            },
+            "labelClasses": {
+                "error": "is-erroneous",
+                "success": "is-successful"
             },
 
             "check": [],
@@ -44,6 +47,9 @@
             "textarea",
             "select"
         ],
+
+        "passed": [],
+        "failed": [],
 
         "init": function ( userOptions ) {
             if ( !this.$elem.length ) {
@@ -127,9 +133,10 @@
         "bindInputs": function () {
             var self = this;
 
-            self.$elem.on( "gauntlet.change", self.$fields, function onInputChange () {
-                this.getVerdict( $( this ) );
-                // this.errorReport();
+            self.$elem.on( "change", self.$fields, function onInputChange () {
+                self.getVerdict.call( self, $( this ) );
+                self.errorReport.call( self, self.passed, self.failed );
+                self.resetVerdicts.call( self );
             });
 
             self.$elem.on( "submit", function onFormSubmit () {
@@ -137,25 +144,122 @@
             });
         },
         "getVerdict": function ( input ) {
-            this.error = this.validate( input );
+            return this.sortResult( this.validate( input ) );
+        },
+
+            "sortResult": function ( input ) {
+                if ( input.passes ) {
+                    this.passed.push( input );
+                } else {
+                    this.failed.push( input );
+                }
+
+                return [ this.passed, this.failed ];
+            },
+            "errorReport": function ( passed, failed ) {
+                if ( typeof this.options.errorReport === "function" ) {
+                    this.options.errorReport.call( this, passed, failed );
+                } else {
+                    this.passedGauntlet( passed );
+                    this.failedGauntlet( failed );
+                }
+            },
+            "passedGauntlet": function ( passed ) {
+                var self = this;
+
+                if ( passed.length ) {
+                    for (var i = passed.length - 1; i >= 0; i--) {
+                        self.inputSuccess.call( self, passed[i] );
+                    }
+                }
+            },
+            "failedGauntlet": function ( failed ) {
+                var self = this;
+
+                if ( failed.length ) {
+                    for (var i = failed.length - 1; i >= 0; i--) {
+                        self.inputError.call( self, failed[i] );
+                    }
+                }
+            },
+            "inputError": function ( input ) {
+                input.$elem.closest("label")
+                    .removeClass( this.options.labelClasses.success )
+                    .addClass( this.options.labelClasses.error );
+
+                this.addMessage.call( this, input );
+            },
+                "addMessage": function ( input ) {
+                    var currentMessage = input.$elem.next( "." + this.options.alertClasses.error );
+
+                    if ( !currentMessage.length ) {
+                        input.$elem.after("<strong class='" + this.options.alertClasses.error + "'>" + input.errorMessage + "</strong>");
+                    }
+                },
+            "inputSuccess": function ( input ) {
+                var inputLabel = input.$elem.closest("label");
+
+                inputLabel.removeClass( this.options.labelClasses.error );
+
+                if ( !!input.val ) {
+                    inputLabel.addClass( this.options.labelClasses.success );
+                } else {
+                    inputLabel.removeClass( this.options.labelClasses.success );
+                }
+
+                this.removeMessage.call( this, input );
+            },
+                "removeMessage": function ( input ) {
+                    input.$elem.next( "." + this.options.alertClasses.error ).remove();
+                },
+            "resetVerdicts": function () {
+                this.passed = [];
+                this.failed = [];
+            },
+        "checkAllFields": function () {
+            var self = this,
+                submit = true;
+
+            self.$elem.find( self.$fields ).each( function eachField () {
+                self.getVerdict.call( self, $( this ) );
+                self.errorReport.call( self, self.passed, self.failed );
+            });
+
+            if ( self.failed.length ) {
+                submit = false;
+            }
+
+            self.resetVerdicts.call( self );
+
+            return submit;
         },
         "submitForm": function () {
-            
+            return this.checkAllFields();
         },
         "validate": function ( input ) {
-            var verdict = input.gauntletInstance({
+            var instance = $.data( input[ 0 ], "gauntletInput" ),
+                verdict;
+
+            if ( !instance ) {
+                input.gauntletInput({
                     "messages": this.options.messages,
                     "patterns": this.options.patterns
                 });
+                instance = $.data( input[ 0 ], "gauntletInput" );
+            } else {
+                input.gauntletInput("validateInput");
+            }
 
-            return verdict;
+            return instance;
         }
     };
 
     GauntletInput.prototype = {
         "init": function ( userOptions ) {
             this.initVars( userOptions );
-            return this.validateInput();
+            this.getTests();
+            this.validateInput();
+            return this;
         },
         "defaults": {
             "messages": {
@@ -186,18 +290,33 @@
             this.type = this.getType( this.$elem );
             this.disabled = this.$elem.prop("disabled");
             this.required = this.$elem.attr("required");
-            this.val = this.$elem.val();
+            this.confirm = this.$elem.attr("data-gauntlet-confirm");
+            if ( !!this.confirm ) {
+                this.$confirms = $( "#" + this.confirm );
+
+            }
             this.pattern = this.$elem.attr("pattern") || this.options.patterns[ this.type ] || false;
             this.tests = [];
-            this.errorMessage = this.$elem.attr("data-error") || this.options.messages[ this.type ];
+            this.errorMessage = this.$elem.attr("data-error");
+
+            if ( !this.errorMessage ) {
+                if ( !!this.confirm ) {
+                    this.errorMessage = this.options.messages[ this.type + "Confirm" ];
+                } else {
+                    this.errorMessage = this.options.messages[ this.type ];
+                }
+            }
+        },
+        "updateValue": function () {
+            return this.val = this.$elem.val();
         },
         "getType": function ( elem ) {
             var inputType = elem.attr("type");
 
             if ( !inputType || inputType === "select-one" ) {
-                if (currentInput.is("select")) {
+                if (elem.is("select")) {
                     inputType = "select";
-                } else if (currentInput.is("textarea")) {
+                } else if (elem.is("textarea")) {
                     inputType = "textarea";
                 } else {
                     inputType = "text";
@@ -207,53 +326,97 @@
             return inputType;
         },
         "getTests": function () {
-            
-            if ( this.disabled !== true ) {
-                tests.push("emptyTest");
-
-                if ( !!this.pattern ) {
-                    tests.push("patternTest");
-                }
-                if ( !!this.confirms ) {
-                    tests.push("confirmTest");
-                }
-                if ( this.type === "checkbox" || this.type === "radio" ) {
-                    tests.push("checkboxTest");
-                }
+            if ( !!this.pattern ) {
+                this.tests.push("patternTest");
+            }
+            if ( !!this.confirm ) {
+                this.tests.push("confirmTest");
+            }
+            if ( this.type === "checkbox" || this.type === "radio" ) {
+                this.tests.push("checkboxTest");
             }
         },
         "validateInput": function () {
-            var results = [],
+            var self = this,
+                results = [],
                 i;
 
-            for ( i = this.tests.length - 1; i >= 0; i -= 1 ) {
-                results.push( this[ this.tests[ i ] ].call() );
+            // Make sure we have the latest val
+            self.updateValue.call( self );
+
+            // If the input is not disabled...
+            if ( this.disabled !== true ) {
+
+                // If it's empty
+                if ( $.trim( self.val ) === "" ) {
+
+                    // If it's required...
+                    if ( !!self.required ) {
+
+                        // ...it fails
+                        self.passes = false;
+
+                    // If it's not required
+                    } else {
+
+                        // ...it passes
+                        self.passes = true;
+                    }
+
+                // If there *is* a value...
+                } else {
+
+                    // Loop through the tests
+                    for ( i = self.tests.length - 1; i >= 0; i -= 1 ) {
+
+                        // Push the results to an array
+                        results.push( self[ self.tests[ i ] ].call( self ) );
+                    }
+
+                    // If any of the tests failed...
+                    if ( results.indexOf( false ) !== -1 ) {
+
+                        // ...it fails
+                        self.passes = false;
+
+                    // If they all passed...
+                    } else {
+
+                        // ...it passed
+                        self.passes = true;
+                    }
+                }
             }
 
-            if ( results.indexOf( false ) !== -1 ) {
+            return self.passes;
+        },
+
+        "requiredTest": function () {
+            if ( !!this.required ) {
                 return false;
             }
 
             return true;
         },
-        "emptyTest": function () {
-            if ( $.trim( this.val ) === "" && !!this.required ) {
+
+        "confirmTest": function () {
+            if ( this.val !== this.$confirms.val() ) {
+
+                // It failed
                 return false;
             }
 
             return true;
         },
-        "patternTest": function ( pattern, value ) {
-            var filter = new RegExp( pattern );
 
-            if ( !filter.test( value ) ) {
+        "patternTest": function () {
+            var filter = new RegExp( this.pattern );
+
+            if ( !filter.test( this.val ) ) {
                 return false;
             }
             
             return true;
-        },
-        "runTests": function () {
-            
         }
     };
 
@@ -270,18 +433,3 @@
 
 $.createPlugin( "gauntlet", window.Motif.apps.Gauntlet );
 $.createPlugin( "gauntletInput", window.Motif.apps.GauntletInput );
-
-
-
-/*
-
-validate
-
-get each field
-call the GauntletInput plugin ($("thisinput").gauntletInput())
-it creates a new gauntletinput OR extends the current one.
-if it's a new input, tell me what tests need to run on this guy
-if it's old BUT has chagned (meaning new userOptions), redo the assessment
-validateInput is a GauntletInput method that runs said tests
-
-*/
