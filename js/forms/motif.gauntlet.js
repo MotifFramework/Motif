@@ -2,7 +2,13 @@
 
     "use strict";
 
-    var PLUGIN = function ( elem ) {
+    var Gauntlet = function ( elem ) {
+            
+            // Init Vars
+            this.$elem = $( elem );
+            this.elem = this.$elem[0];
+        },
+        GauntletInput = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
@@ -10,32 +16,12 @@
         },
         $document = $( document );
 
-    PLUGIN.prototype = {
+    Gauntlet.prototype = {
         "defaults": {
             "classes": {
                 "error": "",
                 "success": "",
                 "warning": ""
-            },
-            "messages": {
-                "email": "A valid email address is required.",
-                "emailConfirm": "Check that your email addresses match.",
-                "text": "This field is required.",
-                "totals": "Check that your totals don't exceed the limit",
-                "tel": "Make sure you've entered a valid phone number.",
-                "search": "Please input a search term.",
-                "number": "Enter a valid number.",
-                "error": "There was an error.",
-                "password": "Your password must match the criteria.",
-                "passwordConfirm": "Be sure that your passwords match.",
-                "radio": "Please choose one of the options above.",
-                "checkbox": "This field is required.",
-                "select": "Select an option."
-            },
-            "patterns": {
-                "email": /^([a-zA-Z0-9._%+\-])+@([a-zA-Z0-9_.\-])+\.([a-zA-Z])+([a-zA-Z])+/,
-                "tel": /^((([0-9]{1})*[\- .(]*([0-9]{3})[\- .)]*[0-9]{3}[\- .]*[0-9]{4})+)*$/,
-                "number": /^[0-9]*/
             },
 
             "check": [],
@@ -74,7 +60,7 @@
 
         "initVars": function ( userOptions ) {
             this.config = userOptions;
-            this.metadata = this.$elem.data("PLUGIN-options");
+            this.metadata = this.$elem.data("gauntlet-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
             this.updateInputList();
 
@@ -142,131 +128,160 @@
             var self = this;
 
             self.$elem.on( "gauntlet.change", self.$fields, function onInputChange () {
-                this.getVerdict();
-                this.errorReport();
+                this.getVerdict( $( this ) );
+                // this.errorReport();
             });
 
             self.$elem.on( "submit", function onFormSubmit () {
                 return self.submitForm.call( self );
             });
         },
-        "getVerdict": function () {
-            
+        "getVerdict": function ( input ) {
+            this.error = this.validate( input );
         },
         "submitForm": function () {
             
         },
         "validate": function ( input ) {
-            var inputValue = input.val(),
-                inputType = input.attr("type"),
-                inputName = input.attr("name"),
-                inputPattern = input.attr("pattern"),
-                verdict = true;
+            var verdict = input.gauntletInstance({
+                    "messages": this.options.messages,
+                    "patterns": this.options.patterns
+                });
 
-            // If it's not disabled...
-            if ( input.prop("disabled") !== true ) {
-                if ( $.trim( inputValue ) === "" && !! input.attr("required") ) {
-                    verdict = false;
-                } else {
-                    // If "pattern" is defined...
-                    if ( !!inputPattern ) {
-
-                        verdict = this.validatePattern( inputPattern, inputValue );
-
-                        // Create filter out of pattern
-                        filter = new RegExp(inputPattern);
-
-                        // If pattern isn't matched...
-                        if (!filter.test(currentValue)) {
-
-                            // It failed
-                            verdict = false;
-
-                        // If it's matched but is also a confirmation input...
-                        } else if (!!confirmingInput) {
-
-                            // If it doesn't match the input it confirms...
-                            if (currentValue !== confirmedInput.val()) {
-
-                                // It failed
-                                verdict = false;
-                            }
-                        }
-
-                    // If it's confirming another input...
-                    } else if (!!confirmingInput) {
-
-                        // If the values don't match...
-                        if (currentValue !== confirmedInput.val()) {
-
-                            // It failed
-                            verdict = false;
-                        }
-
-                    // If it's a checkbox or radio...
-                    } else if (inputType === "checkbox" || inputType === "radio") {
-
-                        if (!!currentInput.attr("required")) {
-                            checkboxGroup = $this.find("input[name='" + inputName + "']");
-                            hasChecked = false;
-
-                            // Run through the checkbox group
-                            checkboxGroup.each(function () {
-
-                                // If any are checked, pass on to variable
-                                if ($(this).is(":checked")) {
-                                    hasChecked = true;
-                                }
-                            });
-
-                            // If none were checked...
-                            if (hasChecked === false) {
-
-                                // It failed
-                                verdict = false;
-                            }
-                        }
-
-                    // If it's not a textarea, select, checkbox or radio, but it matches our types array...
-                    } else if (!!inputType && !!formSettings.types[inputType]) {
-
-                        // Find the filter in our filter types array
-                        filter = formSettings.types[inputType];
-
-                        // If it doesn't match the pattern...
-                        if (!filter.test(currentValue)) {
-
-                            // If failed
-                            verdict = false;
-                        }
-                    }
-                }
-            }
+            return verdict;
         }
-            "validatePattern": function ( pattern, value ) {
-                var filter = new RegExp( pattern );
-
-                if ( !filter.test( value ) ) {
-                    return false;
-                } else {
-                    return true;
-                }
-            },
-            "validateConfirm": function () {
-                
-            },
-            "validateRadio": function () {
-                
-            }
     };
 
-    PLUGIN.defaults = PLUGIN.prototype.defaults;
+    GauntletInput.prototype = {
+        "init": function ( userOptions ) {
+            this.initVars( userOptions );
+            return this.validateInput();
+        },
+        "defaults": {
+            "messages": {
+                "email": "A valid email address is required.",
+                "emailConfirm": "Check that your email addresses match.",
+                "text": "This field is required.",
+                "totals": "Check that your totals don't exceed the limit",
+                "tel": "Make sure you've entered a valid phone number.",
+                "search": "Please input a search term.",
+                "number": "Enter a valid number.",
+                "error": "There was an error.",
+                "password": "Your password must match the criteria.",
+                "passwordConfirm": "Be sure that your passwords match.",
+                "radio": "Please choose one of the options above.",
+                "checkbox": "This field is required.",
+                "select": "Select an option."
+            },
+            "patterns": {
+                "email": /^([a-zA-Z0-9._%+\-])+@([a-zA-Z0-9_.\-])+\.([a-zA-Z])+([a-zA-Z])+/,
+                "tel": /^((([0-9]{1})*[\- .(]*([0-9]{3})[\- .)]*[0-9]{3}[\- .]*[0-9]{4})+)*$/,
+                "number": /^[0-9]*/
+            }
+        },
+        "initVars": function ( userOptions ) {
+            this.config = userOptions;
+            this.metadata = this.$elem.data("gauntlet-input-options");
+            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
+            this.type = this.getType( this.$elem );
+            this.disabled = this.$elem.prop("disabled");
+            this.required = this.$elem.attr("required");
+            this.val = this.$elem.val();
+            this.pattern = this.$elem.attr("pattern") || this.options.patterns[ this.type ] || false;
+            this.tests = [];
+            this.errorMessage = this.$elem.attr("data-error") || this.options.messages[ this.type ];
+        },
+        "getType": function ( elem ) {
+            var inputType = elem.attr("type");
 
-    Motif.apps.PLUGIN = PLUGIN;
+            if ( !inputType || inputType === "select-one" ) {
+                if (currentInput.is("select")) {
+                    inputType = "select";
+                } else if (currentInput.is("textarea")) {
+                    inputType = "textarea";
+                } else {
+                    inputType = "text";
+                }
+            }
+
+            return inputType;
+        },
+        "getTests": function () {
+            
+            if ( this.disabled !== true ) {
+                tests.push("emptyTest");
+
+                if ( !!this.pattern ) {
+                    tests.push("patternTest");
+                }
+                if ( !!this.confirms ) {
+                    tests.push("confirmTest");
+                }
+                if ( this.type === "checkbox" || this.type === "radio" ) {
+                    tests.push("checkboxTest");
+                }
+            }
+        },
+        "validateInput": function () {
+            var results = [],
+                i;
+
+            for ( i = this.tests.length - 1; i >= 0; i -= 1 ) {
+                results.push( this[ this.tests[ i ] ].call() );
+            }
+
+            if ( results.indexOf( false ) !== -1 ) {
+                return false;
+            }
+
+            return true;
+        },
+        "emptyTest": function () {
+            if ( $.trim( this.val ) === "" && !!this.required ) {
+                return false;
+            }
+
+            return true;
+        },
+        "patternTest": function ( pattern, value ) {
+            var filter = new RegExp( pattern );
+
+            if ( !filter.test( value ) ) {
+                return false;
+            }
+            
+            return true;
+        },
+        "runTests": function () {
+            
+        }
+    };
+
+    Gauntlet.defaults = Gauntlet.prototype.defaults;
+    GauntletInput.defaults = GauntletInput.prototype.defaults;
+
+    Motif.apps.Gauntlet = Gauntlet;
+    Motif.apps.GauntletInput = GauntletInput;
 
 }( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "PLUGIN", window.Motif.apps.PLUGIN );
+$.createPlugin( "gauntlet", window.Motif.apps.Gauntlet );
+$.createPlugin( "gauntletInput", window.Motif.apps.GauntletInput );
+
+
+
+/*
+
+validate
+
+get each field
+call the GauntletInput plugin ($("thisinput").gauntletInput())
+it creates a new gauntletinput OR extends the current one.
+if it's a new input, tell me what tests need to run on this guy
+if it's old BUT has chagned (meaning new userOptions), redo the assessment
+validateInput is a GauntletInput method that runs said tests
+
+*/
