@@ -1,4 +1,4 @@
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -20,7 +20,7 @@
                 return;
             }
 
-            this.initVars.call( this );
+            this.initVars( userOptions );
 
             return this;
         },
@@ -34,11 +34,11 @@
 
     PLUGIN.defaults = PLUGIN.prototype.defaults;
 
-    LB.apps.PLUGIN = PLUGIN;
+    Motif.apps.PLUGIN = PLUGIN;
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "PLUGIN", window.LB.apps.PLUGIN );
+$.createPlugin( "PLUGIN", window.Motif.apps.PLUGIN );

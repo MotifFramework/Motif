@@ -1,3 +1,5 @@
+// Slightly modified version of https://gist.github.com/niftylettuce/3620903
+
 function loadScript(url, callback, leave) {
 
 	"use strict";

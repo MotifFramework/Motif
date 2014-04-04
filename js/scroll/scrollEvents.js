@@ -37,7 +37,7 @@
         },
 
         "initStickyNav": function () {
-            this.$sticky.plugin("stickySide", {
+            this.$sticky.plugin("sidekick", {
                 "minWidth": this.minWidth,
                 "window": this.$window
             });

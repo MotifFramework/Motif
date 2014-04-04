@@ -19,7 +19,6 @@
     "grunt-webfont": "~0.3.x",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "~0.2.7",
-    "grunt-jquery-builder": "~0.1.1",
     "grunt-contrib-watch": "~0.5.3"
   }
 }
