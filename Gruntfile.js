@@ -4,29 +4,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // Build jQuery versions
-        jquery: {
-
-            // Client
-            client: {
-
-                // Options
-                options: {
-                    prefix: "jquery-",
-                    minify: false
-                },
-
-                // Output directory
-                output: "<%= r_js %>libs",
-
-                // Versions
-                versions: {
-                    "2.0.3": [ "deprecated" ],
-                    "1.8.3": [ "deprecated" ]
-                }
-            }
-        },
-
         // Concatenate JS files
         concat: {
 
@@ -36,44 +13,30 @@ module.exports = function(grunt) {
 
                     // Build Helpers
                     "<%= c_js %>helpers.<%= pkg.name %>.js": [
-                        "<%= r_js_client %>modernizr.js",
+                        "<%= r_js %>vendor/modernizr.js",
                         "<%= r_js %>helpers/viewport.js",
-                        "<%= r_js %>helpers/loadScript.js"
+                        "<%= r_js %>helpers/requestAnimFrame.js",
+                        "<%= r_js %>utils/motif.utils.load-script.js"
                     ],
 
                     // Build Global JS
                     "<%= c_js %><%= pkg.name %>.js": [
-                        "<%= r_js %>libs/jquery-2.0.3.js",
-                        "<%= r_js_client %>utils/utils.js",
-                        "<%= r_js_client %>apps/ajaxForm.js",
-                        "<%= r_js_client %>apps/validateForms.js",
-                        "<%= r_js_client %>apps/reveal.js",
-                        "<%= r_js_client %>apps/scrollFire.js",
-                        "<%= r_js_client %>apps/StickySide.js",
-                        "<%= r_js_client %>apps/ScrollPatrol.js",
-                        "<%= r_js_client %>apps/scrollEvents.js",
-                        "<%= r_js %>plugins/jquery.lb-scrolling.js",
+                        "<%= r_js %>vendor/jquery-2.1.0.js",
+                        "<%= r_js_client %>utils/motif.utils.plugins.js",
+                        "<%= r_js_client %>ui/motif.reveal.js",
+                        "<%= r_js_client %>forms/motif.gauntlet.js",
+                        "<%= r_js_client %>forms/motif.ajax-submission.js",
                         "<%= r_js_client %>actions.js"
                     ],
 
                     // Build Global JS for IE
                     "<%= c_js %><%= pkg.name %>-ie8.js": [
-                        "<%= r_js %>libs/jquery-1.8.3.js",
-                        "<%= r_js_client %>utils/utils.js",
-                        "<%= r_js_client %>apps/ajaxForm.js",
-                        "<%= r_js_client %>apps/validateForms.js",
-                        "<%= r_js_client %>apps/reveal.js",
-                        "<%= r_js_client %>apps/scrollFire.js",
-                        "<%= r_js_client %>apps/StickySide.js",
-                        "<%= r_js_client %>apps/ScrollPatrol.js",
-                        "<%= r_js_client %>apps/scrollEvents.js",
-                        "<%= r_js %>plugins/jquery.lb-scrolling.js",
+                        "<%= r_js %>vendor/jquery-1.11.0.js",
+                        "<%= r_js_client %>utils/motif.utils.plugins.js",
+                        "<%= r_js_client %>ui/motif.reveal.js",
+                        "<%= r_js_client %>forms/motif.gauntlet.js",
+                        "<%= r_js_client %>forms/motif.ajax-submission.js",
                         "<%= r_js_client %>actions.js"
-                    ],
-
-                    // Build Validation plugin
-                    "<%= c_js %>jquery.lb-validation.min.js": [
-                        "<%= r_js %>plugins/jquery.lb-validation.js"
                     ]
                 }
             }
@@ -219,14 +182,13 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-webfont');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks("grunt-jquery-builder");
 
 
     // Default task.
     grunt.registerTask('default', ['less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
 
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'jquery', 'concat:client']);
+    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
 
     // Production Build
     grunt.registerTask('build', ['webfont:clientIcons', 'less:productionGlobal', 'less:productionGlobalFixed', 'concat:client', 'uglify']);
@@ -236,9 +198,6 @@ module.exports = function(grunt) {
 
     // Compile Dev LESS Files
     grunt.registerTask('lesscss', ['less:developmentGlobal', 'less:developmentGlobalFixed']);
-
-    // Build jQuery Versions
-    grunt.registerTask('jq', ['jquery']);
 
     // Compile JS
     grunt.registerTask('js', ['concat:client']);

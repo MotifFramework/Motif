@@ -20,7 +20,7 @@
                 return;
             }
 
-            this.initVars.call( this );
+            this.initVars( userOptions );
 
             return this;
         },

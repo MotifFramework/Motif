@@ -1,3 +1,8 @@
+/**
+ * Gauntlet: Validating forms by Motif
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";
@@ -24,14 +29,20 @@
             },
             "labelClasses": {
                 "error": "is-erroneous",
-                "success": "is-successful"
+                "success": "is-successful",
+                "disabled": "is-disabled"
             },
+
+            "messages": {},
+            "patterns": {},
 
             "check": [],
             "ignore": [],
 
             "errorReport": null,
-            "ajaxSubmit": null
+            "ajaxSubmit": null,
+            "scrollToError": true,
+            "addTest": []
         },
 
         "fields": [
@@ -58,6 +69,7 @@
 
             this.initVars( userOptions );
             this.prepForm();
+            this.bindErrorHandling();
             this.gatherInputs();
             this.bindInputs();
 
@@ -68,6 +80,7 @@
             this.config = userOptions;
             this.metadata = this.$elem.data("gauntlet-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
+            this.checkboxes = {};
             this.updateInputList();
 
         },
@@ -140,8 +153,19 @@
             });
 
             self.$elem.on( "submit", function onFormSubmit () {
+                self.disableSubmit.call( self );
                 return self.submitForm.call( self );
             });
+        },
+        "disableSubmit": function ( form ) {
+            var thisForm = form || this.$elem;
+            
+            thisForm.find("[type='submit']").prop("disabled", true).addClass( this.options.labelClasses.disabled );
+        },
+        "enableSubmit": function ( form ) {
+            var thisForm = form || this.$elem;
+            
+            thisForm.find("[type='submit']").prop("disabled", false).removeClass( this.options.labelClasses.disabled );
         },
         "getVerdict": function ( input ) {
             return this.sortResult( this.validate( input ) );
@@ -169,52 +193,113 @@
 
                 if ( passed.length ) {
                     for (var i = passed.length - 1; i >= 0; i--) {
-                        self.inputSuccess.call( self, passed[i] );
+                        $document.trigger( "gauntlet/success", [ passed[ i ] ] );
                     }
                 }
             },
             "failedGauntlet": function ( failed ) {
-                var self = this;
+                var self = this,
+                    i;
 
                 if ( failed.length ) {
-                    for (var i = failed.length - 1; i >= 0; i--) {
-                        self.inputError.call( self, failed[i] );
+                    for ( i = failed.length - 1; i >= 0; i -= 1 ) {
+                        $document.trigger( "gauntlet/fail", [ failed[ i ] ] );
+
+                        if ( i === 0 ) {
+                            $document.trigger( "gauntlet/fail/first", [ failed[ i ] ] );
+                        }
                     }
                 }
             },
-            "inputError": function ( input ) {
-                input.$elem.closest("label")
-                    .removeClass( this.options.labelClasses.success )
-                    .addClass( this.options.labelClasses.error );
+            "bindErrorHandling": function () {
+                var self = this;
 
-                this.addMessage.call( this, input );
+                $document.on( "gauntlet/fail", function onGauntletFail ( event, input ) {
+                    self.inputError.call( self, input );
+                });
+                $document.on( "gauntlet/success", function onGauntletSuccess ( event, input ) {
+                    self.inputSuccess.call( self, input );
+                });
+                $document.on( "ajax/complete", function onAjaxComplete ( event, form ) {
+                    self.enableSubmit.call( self, form );
+                });
+
+                if ( self.options.scrollToError ) {
+                    $document.on( "gauntlet/fail/first", function onGauntletFirstFail ( event, input ) {
+                        self.scrollToError.call( self, input );
+                    });
+                }
             },
-                "addMessage": function ( input ) {
-                    var currentMessage = input.$elem.next( "." + this.options.alertClasses.error );
+            "scrollToError": function ( input ) {
+                $("html, body").animate({
+                    scrollTop: input.$elem.offset().top - 50
+                }, 500);
+            },
+            "inputError": function ( input ) {
+                if ( input.type === "checkbox" || input.type === "radio" ) {
+                    this.checkboxError( input );
+                } else {
+                    input.$elem.closest("label")
+                        .removeClass( this.options.labelClasses.success )
+                        .addClass( this.options.labelClasses.error );
+
+                    this.addMessage( input );
+                }
+            },
+                "checkboxError": function ( input ) {
+                    var checkboxList = input.$elem.closest("ul", this.$elem),
+                        checkboxLabel = input.$elem.closest("label") || $("label[for='" + input.$elem.attr("id") + "']");
+
+                    if ( checkboxList.length ) {
+                        this.addMessage( input, checkboxList );
+                    } else {
+                        this.addMessage( input, checkboxLabel );
+                    }
+                },
+                "addMessage": function ( input, addAfter ) {
+                    var elem = addAfter || input.$elem,
+                        currentMessage = elem.next( "." + this.options.alertClasses.error );
 
                     if ( !currentMessage.length ) {
-                        input.$elem.after("<strong class='" + this.options.alertClasses.error + "'>" + input.errorMessage + "</strong>");
+                        elem.after("<strong class='" + this.options.alertClasses.error + "'>" + input.errorMessage + "</strong>");
                     }
                 },
             "inputSuccess": function ( input ) {
-                var inputLabel = input.$elem.closest("label");
-
-                inputLabel.removeClass( this.options.labelClasses.error );
-
-                if ( !!input.val ) {
-                    inputLabel.addClass( this.options.labelClasses.success );
+                if ( input.type === "checkbox" || input.type === "radio" ) {
+                    this.checkboxSuccess( input );
                 } else {
-                    inputLabel.removeClass( this.options.labelClasses.success );
-                }
+                    var inputLabel = input.$elem.closest("label");
 
-                this.removeMessage.call( this, input );
+                    inputLabel.removeClass( this.options.labelClasses.error );
+
+                    if ( !!input.val ) {
+                        inputLabel.addClass( this.options.labelClasses.success );
+                    } else {
+                        inputLabel.removeClass( this.options.labelClasses.success );
+                    }
+
+                    this.removeMessage.call( this, input );
+                }
             },
-                "removeMessage": function ( input ) {
-                    input.$elem.next( "." + this.options.alertClasses.error ).remove();
+                "checkboxSuccess": function ( input ) {
+                    var checkboxList = input.$elem.closest("ul", this.$elem),
+                        checkboxLabel = input.$elem.closest("label") || $("label[for='" + input.$elem.attr("id") + "']");
+
+                    if ( checkboxList.length ) {
+                        this.removeMessage( input, checkboxList );
+                    } else {
+                        this.removeMessage( input, checkboxLabel );
+                    }
+                },
+                "removeMessage": function ( input, addAfter ) {
+                    var elem = addAfter || input.$elem;
+                    
+                    elem.next( "." + this.options.alertClasses.error ).remove();
                 },
             "resetVerdicts": function () {
                 this.passed = [];
                 this.failed = [];
+                this.checkboxes = {};
             },
         "checkAllFields": function () {
             var self = this,
@@ -222,8 +307,8 @@
 
             self.$elem.find( self.$fields ).each( function eachField () {
                 self.getVerdict.call( self, $( this ) );
-                self.errorReport.call( self, self.passed, self.failed );
             });
+            self.errorReport.call( self, self.passed, self.failed );
 
             if ( self.failed.length ) {
                 submit = false;
@@ -234,17 +319,25 @@
             return submit;
         },
         "submitForm": function () {
-            return this.checkAllFields();
+            var verdict = this.checkAllFields();
+
+            if ( verdict && typeof this.options.ajaxSubmit === "function" ) {
+                this.options.ajaxSubmit();
+                return false;
+            } else if ( !verdict ) {
+                this.enableSubmit();
+            }
+            return verdict;
         },
         "validate": function ( input ) {
-            var instance = $.data( input[ 0 ], "gauntletInput" ),
-                verdict;
+            var instance = $.data( input[ 0 ], "gauntletInput" );
 
             if ( !instance ) {
                 input.gauntletInput({
                     "messages": this.options.messages,
-                    "patterns": this.options.patterns
-                });
+                    "patterns": this.options.patterns,
+                    "addTest": this.options.addTest
+                }, this);
                 instance = $.data( input[ 0 ], "gauntletInput" );
             } else {
                 input.gauntletInput("validateInput");
@@ -255,8 +348,8 @@
     };
 
     GauntletInput.prototype = {
-        "init": function ( userOptions ) {
-            this.initVars( userOptions );
+        "init": function ( userOptions, gauntlet ) {
+            this.initVars( userOptions, gauntlet );
             this.getTests();
             this.validateInput();
             return this;
@@ -274,7 +367,7 @@
                 "password": "Your password must match the criteria.",
                 "passwordConfirm": "Be sure that your passwords match.",
                 "radio": "Please choose one of the options above.",
-                "checkbox": "This field is required.",
+                "checkbox": "Please check at least one option.",
                 "select": "Select an option."
             },
             "patterns": {
@@ -283,28 +376,34 @@
                 "number": /^[0-9]*/
             }
         },
-        "initVars": function ( userOptions ) {
+        "initVars": function ( userOptions, gauntlet ) {
+
+            // Extends default options
             this.config = userOptions;
             this.metadata = this.$elem.data("gauntlet-input-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
+
+            // Get important input variables
             this.type = this.getType( this.$elem );
             this.disabled = this.$elem.prop("disabled");
             this.required = this.$elem.attr("required");
             this.confirm = this.$elem.attr("data-gauntlet-confirm");
-            if ( !!this.confirm ) {
-                this.$confirms = $( "#" + this.confirm );
 
+            if ( !!this.confirm ) {
+                this.$confirms = $( "#" + this.confirm )
+            } else if ( $("[data-gauntlet-confirm='" + this.$elem.attr("id") + "']").length ) {
+                this.$confirmedBy = $("[data-gauntlet-confirm='" + this.$elem.attr("id") + "']");
             }
+
+            this.gauntlet = gauntlet || $.data( this.$elem.closest("form")[ 0 ], "gauntlet" );
+            this.$form = this.gauntlet.$elem || this.$elem.closest("form");
+            this.name = this.$elem.attr("name");
             this.pattern = this.$elem.attr("pattern") || this.options.patterns[ this.type ] || false;
             this.tests = [];
             this.errorMessage = this.$elem.attr("data-error");
 
             if ( !this.errorMessage ) {
-                if ( !!this.confirm ) {
-                    this.errorMessage = this.options.messages[ this.type + "Confirm" ];
-                } else {
-                    this.errorMessage = this.options.messages[ this.type ];
-                }
+                this.errorMessage = !!this.confirm ? this.options.messages[ this.type + "Confirm" ] : this.options.messages[ this.type ];
             }
         },
         "updateValue": function () {
@@ -326,15 +425,34 @@
             return inputType;
         },
         "getTests": function () {
-            if ( !!this.pattern ) {
-                this.tests.push("patternTest");
+            var self = this,
+                i;
+
+            if ( !!self.pattern ) {
+                self.tests.push("patternTest");
             }
-            if ( !!this.confirm ) {
-                this.tests.push("confirmTest");
+            if ( !!self.confirm ) {
+                self.tests.push("confirmTest");
             }
-            if ( this.type === "checkbox" || this.type === "radio" ) {
-                this.tests.push("checkboxTest");
+            if ( self.type === "checkbox" || self.type === "radio" ) {
+                self.tests.push("checkboxTest");
             }
+            if ( self.gauntlet.options.addTest.length ) {
+                for ( i = self.gauntlet.options.addTest.length - 1; i >= 0; i -= 1 ) {
+                    self.runUserTest.call( self, self.gauntlet.options.addTest[ i ] );
+                }
+            }
+
+            return self.tests;
+        },
+        "runUserTest": function ( userTest ) {
+            var runTest = userTest.condition.call( this, this.$elem );
+
+            if ( runTest ) {
+                this.tests.push( userTest.test );
+            }
+
+            return runTest;
         },
         "validateInput": function () {
             var self = this,
@@ -351,17 +469,7 @@
                 if ( $.trim( self.val ) === "" ) {
 
                     // If it's required...
-                    if ( !!self.required ) {
-
-                        // ...it fails
-                        self.passes = false;
-
-                    // If it's not required
-                    } else {
-
-                        // ...it passes
-                        self.passes = true;
-                    }
+                    self.passes = !!self.required ? false : true;
 
                 // If there *is* a value...
                 } else {
@@ -369,22 +477,17 @@
                     // Loop through the tests
                     for ( i = self.tests.length - 1; i >= 0; i -= 1 ) {
 
-                        // Push the results to an array
-                        results.push( self[ self.tests[ i ] ].call( self ) );
+                        if ( typeof self.tests[ i ] === "function" ) {
+                            results.push( self.tests[ i ].call( self, self.$elem ) );
+                        } else {
+
+                            // Push the results to an array
+                            results.push( self[ self.tests[ i ] ].call( self ) );
+                        }
                     }
 
                     // If any of the tests failed...
-                    if ( results.indexOf( false ) !== -1 ) {
-
-                        // ...it fails
-                        self.passes = false;
-
-                    // If they all passed...
-                    } else {
-
-                        // ...it passed
-                        self.passes = true;
-                    }
+                    self.passes = results.indexOf( false ) !== -1 ? false : true;
                 }
             }
 
@@ -392,30 +495,39 @@
         },
 
         "requiredTest": function () {
-            if ( !!this.required ) {
-                return false;
-            }
-
-            return true;
+            return !!this.required ? false : true;
         },
 
         "confirmTest": function () {
-            if ( this.val !== this.$confirms.val() ) {
-
-                // It failed
-                return false;
-            }
-
-            return true;
+            return this.val !== this.$confirms.val() ? false : true;
         },
 
         "patternTest": function () {
             var filter = new RegExp( this.pattern );
 
-            if ( !filter.test( this.val ) ) {
-                return false;
+            return !filter.test( this.val ) ? false : true;
+        },
+
+        "checkboxTest": function () {
+            var checkboxGroup,
+                checked;
+
+            if ( !!this.required ) {
+                if ( this.gauntlet.checkboxes[ this.name ] ) {
+                    return true;
+                }
+
+                checkboxGroup = this.$form.find("input[name='" + this.name + "']");
+                checked = checkboxGroup.filter(":checked").length ? true : false;
+
+                this.gauntlet.checkboxes[ this.name ] = {
+                    "elems": checkboxGroup,
+                    "verdict": checked
+                };
+
+                return checked;
             }
-            
+
             return true;
         }
     };

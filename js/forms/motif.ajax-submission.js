@@ -1,3 +1,8 @@
+/**
+ * Ajax Submission by Motif
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";
@@ -21,8 +26,7 @@
             "feedbackMessage": "append",
             "clearForm": true,
             "scrollElem": null,
-            "callback": null,
-            "pluginOptions": {}
+            "callback": null
         },
 
         "init": function ( userOptions ) {
@@ -30,7 +34,7 @@
                 return;
             }
 
-            this.initVars( userOptions );
+            this.initVars();
             this.initValidation();
 
             return this;
@@ -70,6 +74,11 @@
                 // If unsuccessful...
                 .fail( function ajaxError ( data ) {
                     self.ajaxCallback.call( self, data, true );
+                })
+
+                // Always
+                .always( function ajaxAlways ( data ) {
+                    $document.trigger("ajax/complete", [ self.$elem ]);
                 });
         },
             "ajaxCallback": function ( data, error ) {
@@ -183,8 +192,6 @@
 
                 this.goToMessage( $message );
             }
-
-            return $message;
         },
 
         /**
@@ -211,26 +218,19 @@
 
             // After a few seconds, remove message
             setTimeout(function () {
-                message.slideUp( 150 );
-            }, 8000, function () {
-
-                // @TODO: detach and save instead?
-                message.remove();
-            });
+                message.slideUp( 150, function onSlideUpComplete () {
+                    message.remove();
+                });
+            }, 8000);
         },
-
         "initValidation": function () {
-            this.$elem.plugin( "lb_validation", this.extendValidationOptions() );
-        },
-        
-        "extendValidationOptions": function () {
             var self = this;
 
-            self.options.pluginOptions.ajaxSubmit = function () {
-                self.submitForm.call( self );
+            self.$elem.plugin("gauntlet", {
+                "ajaxSubmit": function () {
+                    self.submitForm.call( self );
+                }
             });
-
-            return self.options.pluginOptions;
         }
     };
 

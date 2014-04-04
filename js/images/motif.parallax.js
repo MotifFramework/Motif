@@ -1,9 +1,9 @@
-/* LB Parallax Plugin, v. 0.1 (6/21/12) */
+/* Motif Parallax Plugin, v. 0.1 (6/21/12) */
 (function($) {
 	var _v	=	{
 
 			// System Variables
-			"pluginName"	:	"lb_parallax",
+			"pluginName"	:	"parallax",
 			"horizontal"	:	"50%",
 			"adjustment"	:	0,
 			"inertia"		:	0.1,

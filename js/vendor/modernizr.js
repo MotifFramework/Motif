@@ -1,5 +1,5 @@
-/* Modernizr 2.7.0 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-backgroundsize-generatedcontent-csstransforms3d-csstransitions-input-inputtypes-touch-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-forms_placeholder
+/* Modernizr 2.7.1 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-backgroundsize-opacity-generatedcontent-csstransforms-csstransforms3d-csstransitions-input-inputtypes-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-forms_placeholder
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.7.0',
+    var version = '2.7.1',
 
     Modernizr = {},
 
@@ -196,22 +196,22 @@ window.Modernizr = (function( window, document, undefined ) {
           props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
           return testDOMProps(props, prefixed, elem);
         }
-    }    tests['touch'] = function() {
-        var bool;
-
-        if(('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-          bool = true;
-        } else {
-          injectElementWithStyles(['@media (',prefixes.join('touch-enabled),('),mod,')','{#modernizr{top:9px;position:absolute}}'].join(''), function( node ) {
-            bool = node.offsetTop === 9;
-          });
-        }
-
-        return bool;
-    };
-    tests['backgroundsize'] = function() {
+    }    tests['backgroundsize'] = function() {
         return testPropsAll('backgroundSize');
     };
+
+
+
+    tests['opacity'] = function() {
+                setCssAll('opacity:.55');
+
+                    return (/^0.55$/).test(mStyle.opacity);
+    };
+    tests['csstransforms'] = function() {
+        return !!testPropsAll('transform');
+    };
+
+
     tests['csstransforms3d'] = function() {
 
         var ret = !!testPropsAll('perspective');

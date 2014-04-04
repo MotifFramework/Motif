@@ -1,4 +1,4 @@
-(function ( $, LB, undefined ) {
+(function ( $, Motif, undefined ) {
 
     "use strict";
 
@@ -11,7 +11,7 @@
      * @todo 
      */
 
-    LB.utils.plugins = {
+    Motif.utils.plugins = {
 
         /**
          * Init Plugin
@@ -36,7 +36,7 @@
             if ( config.targetElems.length ) {
 
                 // ...start loading the plugin
-                LB.utils.plugins.loadPlugin( config.targetElems, pluginConfig );
+                Motif.utils.plugins.loadPlugin( config.targetElems, pluginConfig );
             }
         },
 
@@ -50,11 +50,11 @@
         loadPlugin: function ( target, config ) {
 
             // Call `getScript` util, passing on plugin name, url, and creating a callback...
-            LB.utils.plugins.getScript( config.name, config.url, function loadPluginCallback() {
+            Motif.utils.plugins.getScript( config.name, config.url, function loadPluginCallback() {
 
                 // ...where we call the `bindPlugin` util, passing on the target elem, 
                 // plugin name, and options
-                LB.utils.plugins.bindPlugin( target, config.name, config.options );
+                Motif.utils.plugins.bindPlugin( target, config.name, config.options );
             });
         },
 
@@ -110,6 +110,8 @@
         }
     };
 
+    // With help from:
+    // https://github.com/jquery-boilerplate/jquery-boilerplate/wiki/Another-extending-jQuery-boilerplate
     $.createPlugin = function ( name, object ) {
         $.fn[ name ] = function( userOptions ) {
             var args;
@@ -152,14 +154,14 @@
             userOptions;
 
         if ( typeof url === "object" ) {
-            scriptUrl = "/resources/c/js/" + name + ".min.js";
+            scriptUrl =  name + ".min.js";
             userOptions = url;
         } else {
             scriptUrl = url;
             userOptions = options || {};
         }
 
-        LB.utils.plugins.initPlugin({
+        Motif.utils.plugins.initPlugin({
             targetElems: $( this ),
             pluginName: name,
             pluginSource: scriptUrl,
@@ -169,7 +171,7 @@
         return this;
     };
 
-}( jQuery, window.LB = window.LB || {
+}( jQuery, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );

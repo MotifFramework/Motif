@@ -1,9 +1,9 @@
-/* LB Scroller Plugin, v. 0.1 (7/2/12) */
+/* Motif Side-Scroller Plugin, v. 0.1 (7/2/12) */
 (function($) {
 	var _v	=	{
 
 			// System Variables
-			"pluginName"		:	"lb_scroller",
+			"pluginName"		:	"sideScroller",
 
 			// Classes
 			"maskClass"			:	"scroller-mask",

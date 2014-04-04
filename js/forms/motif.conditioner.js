@@ -1,5 +1,5 @@
 /**
- * jQuery Conditioner
+ * Conditioner by Motif
  * Conditionally enable and disable form elements.
  * 
  * @version 0.3 (01/02/13)
@@ -25,7 +25,7 @@
 	var vars	=	{
 
 			// System Variables
-			"pluginName"	:	"lb_conditioner",
+			"pluginName"	:	"conditioner",
 
 			// Automatically group radios/checkboxes
 			"autoGroup"		:	true, // Does nothing right now

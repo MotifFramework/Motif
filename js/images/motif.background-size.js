@@ -1,5 +1,5 @@
 /**
- * LB Background Size
+ * Motif Background Size
  *
  * Mimics the `background-size: cover` CSS property. Great for IE8 fallbacks.
  *
@@ -17,7 +17,7 @@
     var defaults = {
 
             // System Variables
-            "pluginName": "lb_backgroundSize",
+            "pluginName": "backgroundSize",
 
             // Classes
             "loadedClass": "fake-bg-is-ready",

@@ -1,9 +1,9 @@
-/* LB Scrolling Plugin, v. 0.1 (1/23/12) */
+/* Motif Transport Plugin, v. 0.1 (1/23/12) */
 (function($) {
 	var _v	=	{
 
 			// System Variables
-			"pluginName"	:	"lb_scrolling",
+			"pluginName"	:	"transport",
 			"speed"			:	350,
 			"offset"		:	20,
 			"onInit"		:	function () {}

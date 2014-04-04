@@ -1,29 +1,14 @@
 /**
- * Client Actions
- * =============================================================================
- * 
- * Creating the `Client` namespace so that it can be publically accessed
- * 
- * @todo 
+ * Sample actions execution file
  */
 
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
-    /**
-     * Client Actions Init
-     * -----------------------------------------------------------------------------
-     * 
-     * [Description]
-     * 
-     * @todo 
-     */
-
     var App = function () {
         this.initReveals();
         this.initForms();
-        this.initScrollEvents();
     };
 
     App.prototype.initReveals = function () {
@@ -54,16 +39,7 @@
 
     App.prototype.initForms = function () {
         $("[data-validation='ajax']").plugin("ajaxSubmission");
-        $("[data-validation='true']").plugin("lb_validation");
-    };
-
-    App.prototype.initScrollEvents = function () {
-        $("#basics__nav").plugin("scrollEvents");
-
-        $(".js-scrolling").on("click", function () {
-            $( $(this).attr("href") ).plugin("lb_scrolling");
-            return false;
-        });
+        $("[data-validation='true']").plugin("gauntlet");
     };
 
     new App();

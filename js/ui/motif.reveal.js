@@ -1,9 +1,9 @@
 /**
- * Reveal: Show and hide things with class(es)
+ * Reveal by Motif: Show and hide things with class(es)
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
 
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -583,7 +583,7 @@
 
     Reveal.defaults = Reveal.prototype.defaults;
 
-    LB.apps.Reveal = Reveal;
+    Motif.apps.Reveal = Reveal;
 
     $.fn["reveal"] = function( userOptions ) {
         var self = this,
@@ -619,7 +619,7 @@
     };
 
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
