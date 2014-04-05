@@ -1,4 +1,4 @@
-/**
+/*!
  * Conditioner by Motif v0.3.0 (2013-01-02)
  * Conditionally enable and disable form elements.
  * http://getmotif.com

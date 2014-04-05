@@ -1,63 +1,97 @@
 module.exports = function(grunt) {
 
     // Project configuration.
+
+    // Build = Local development
+    // Dist = Motif distribution packages
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // Concatenate JS files
-        concat: {
+        // Folder Vars
+        project: "<%= pkg.name %>",
+        sourceDir: "",
+        distDir: "<%= sourceDir %>dist/",
+        buildDir: "<%= sourceDir %>build/",
 
-            // Client
-            client: {
+        dist: {
+            css: "<%= distDir %>css/",
+            fonts: "<%= distDir %>fonts/",
+            js: "<%= distDir %>js/",
+        },
+
+        build: {
+            less: "<%= buildDir %>less/",
+            css: "<%= buildDir %>css/",
+            fonts: "<%= buildDir %>fonts/",
+            js: "<%= buildDir %>js/",
+        },
+
+        source: {
+            less: "<%= sourceDir %>less/",
+            js: "<%= sourceDir %>js/",
+            fonts: "<%= sourceDir %>fonts/",
+        },
+
+        // Tasks
+
+        // Concat and Compress JS
+        uglify: {
+            build: {
+                options: {
+                    mangle: false,
+                    beautify: true,
+                    preserveComments: "all"
+                },
                 files: {
 
                     // Build Helpers
-                    "<%= c_js %>helpers.<%= pkg.name %>.js": [
-                        "<%= r_js %>vendor/modernizr.js",
-                        "<%= r_js %>helpers/viewport.js",
-                        "<%= r_js %>helpers/requestAnimFrame.js",
-                        "<%= r_js %>utils/motif.utils.load-script.js"
+                    "<%= build.js %>helpers.<%= pkg.name %>.js": [
+                        "<%= source.js %>vendor/modernizr.js",
+                        "<%= source.js %>vendor/viewport.js",
+                        "<%= source.js %>utils/motif.utils.load-script.js"
                     ],
 
                     // Build Global JS
-                    "<%= c_js %><%= pkg.name %>.js": [
-                        "<%= r_js %>vendor/jquery-2.1.0.js",
-                        "<%= r_js_client %>utils/motif.utils.plugins.js",
-                        "<%= r_js_client %>ui/motif.reveal.js",
-                        "<%= r_js_client %>forms/motif.gauntlet.js",
-                        "<%= r_js_client %>forms/motif.ajax-submission.js",
-                        "<%= r_js_client %>actions.js"
+                    "<%= build.js %><%= pkg.name %>.js": [
+                        "<%= source.js %>vendor/jquery-2.1.0.js",
+                        "<%= source.js %>utils/motif.utils.plugins.js",
+                        "<%= source.js %>forms/motif.gauntlet.js",
+                        "<%= source.js %>forms/motif.ajax-submission.js",
+                        "<%= source.js %>ui/motif.reveal.js",
+                        "<%= source.js %>actions.js"
                     ],
 
                     // Build Global JS for IE
-                    "<%= c_js %><%= pkg.name %>-ie8.js": [
-                        "<%= r_js %>vendor/jquery-1.11.0.js",
-                        "<%= r_js_client %>utils/motif.utils.plugins.js",
-                        "<%= r_js_client %>ui/motif.reveal.js",
-                        "<%= r_js_client %>forms/motif.gauntlet.js",
-                        "<%= r_js_client %>forms/motif.ajax-submission.js",
-                        "<%= r_js_client %>actions.js"
+                    "<%= build.js %><%= pkg.name %>-ie8.js": [
+                        "<%= source.js %>vendor/jquery-1.11.0.js",
+                        "<%= source.js %>utils/motif.utils.plugins.js",
+                        "<%= source.js %>forms/motif.gauntlet.js",
+                        "<%= source.js %>forms/motif.ajax-submission.js",
+                        "<%= source.js %>ui/motif.reveal.js",
+                        "<%= source.js %>actions.js"
                     ]
                 }
-            }
-        },
-
-        // Compress JS
-        uglify: {
-
-            // Client
-            js: {
+            },
+            dist: {
+                options: {
+                    preserveComments: "some"
+                },
                 files: [{
                     expand: true,
 
                     // Current Working Directory
-                    cwd: '<%= c_js %>',
+                    cwd: '<%= source.js %>',
 
                     // Source Files
-                    src: '*.js',
+                    src: ['**/*.js', "!**/vendor/*.js", "!*.js"],
 
-                    // Destination (Same as CWD)
-                    dest: '<%= c_js %>'
+                    // Destination
+                    dest: '<%= dist.js %>',
+
+                    rename: function ( destBase, destPath ) {
+                        return destBase + destPath.replace('.js', '.min.js');
+                    }
                 }]
             }
         },
@@ -65,68 +99,68 @@ module.exports = function(grunt) {
         // Build LESS
         less: {
             options: {
-                paths: ["docroot/resources/less"]
+                paths: ["<%= source.less %>"]
             },
 
             // Development Build
-            developmentGlobal: {
+            globalBuild: {
                 options: {
-                    paths: ["<%= r_less_client"],
+                    paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>.css.map',
+                    sourceMapFilename: '<%= build.css %><%= project %>.css.map',
                     sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>.css.map",
                     cleancss: false
                 },
                 files: {
-                    "<%= c_css %><%= project %>.css": "<%= r_less_client %>global.less"
+                    "<%= build.css %><%= project %>.css": "<%= source.less %>global.less"
                 }
             },
-            developmentGlobalFixed: {
+            globalFixedBuild: {
                 options: {
-                    paths: ["<%= r_less_client"],
+                    paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>-fixed.css.map',
+                    sourceMapFilename: '<%= build.css %><%= project %>-fixed.css.map',
                     sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>-fixed.css.map",
                     cleancss: false
                 },
                 files: {
-                    "<%= c_css %><%= project %>-fixed.css": "<%= r_less_client %>global-fixed.less"
+                    "<%= build.css %><%= project %>-fixed.css": "<%= source.less %>global-fixed.less"
                 }
             },
 
             // Production Build
-            productionGlobal: {
+            globalDist: {
                 options: {
-                    paths: ["<%= r_less_client"],
+                    paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>.css.map',
+                    sourceMapFilename: '<%= dist.css %><%= project %>.css.map',
                     sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>.css.map",
                     cleancss: true,
                     report: "gzip"
                 },
                 files: {
-                    "<%= c_css %><%= project %>.css": "<%= r_less_client %>global.less"
+                    "<%= dist.css %><%= project %>.min.css": "<%= source.less %>global.less"
                 }
             },
-            productionGlobalFixed: {
+            globalFixedDist: {
                 options: {
-                    paths: ["<%= r_less_client"],
+                    paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= c_css %><%= project %>-fixed.css.map',
+                    sourceMapFilename: '<%= dist.css %><%= project %>-fixed.css.map',
                     sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= resources %>",
+                    sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>-fixed.css.map",
                     cleancss: true,
                     report: "gzip"
                 },
                 files: {
-                    "<%= c_css %><%= project %>-fixed.css": "<%= r_less_client %>global-fixed.less"
+                    "<%= dist.css %><%= project %>-fixed.min.css": "<%= source.less %>global-fixed.less"
                 }
             }
         },
@@ -135,24 +169,45 @@ module.exports = function(grunt) {
         webfont: {
 
             // Icons
-            clientIcons: {
+            iconsBuild: {
 
                 // Source SVGs
-                src: "<%= r_fonts %><%= pkg.name %>-icons/svg/*.svg",
+                src: "<%= source.fonts %><%= pkg.name %>-icons/svg/*.svg",
 
                 // Destination Folder
-                dest: '<%= c_fonts %><%= pkg.name %>-icons/',
+                dest: '<%= build.fonts %><%= pkg.name %>-icons/',
 
                 // Destination CSS
-                destCss: "<%= c_less %>",
+                destCss: "<%= source.less %>type/",
                 options: {
                     font: '<%= pkg.name %>-icons',
                     types: "eot,woff,ttf,svg",
                     hashes: false,
                     relativeFontPath: "../fonts/<%= pkg.name %>-icons/",
-                    template: "<%= r_fonts %><%= pkg.name %>-icons/template/template.css",
+                    template: "<%= source.fonts %><%= pkg.name %>-icons/template/template.css",
                     stylesheet: "less",
-                    destHtml: "<%= c_fonts %><%= pkg.name %>-icons/",
+                    destHtml: "<%= build.fonts %><%= pkg.name %>-icons/",
+                    startCodepoint: 0xF101
+                }
+            },
+            iconsDist: {
+
+                // Source SVGs
+                src: "<%= source.fonts %><%= pkg.name %>-icons/svg/*.svg",
+
+                // Destination Folder
+                dest: '<%= dist.fonts %><%= pkg.name %>-icons/',
+
+                // Destination CSS
+                destCss: "<%= source.less %>type/",
+                options: {
+                    font: '<%= pkg.name %>-icons',
+                    types: "eot,woff,ttf,svg",
+                    hashes: false,
+                    relativeFontPath: "../fonts/<%= pkg.name %>-icons/",
+                    template: "<%= source.fonts %><%= pkg.name %>-icons/template/template.css",
+                    stylesheet: "less",
+                    destHtml: "<%= dist.fonts %><%= pkg.name %>-icons/",
                     startCodepoint: 0xF101
                 }
             }
@@ -163,46 +218,28 @@ module.exports = function(grunt) {
                 livereload: 35729
             },
             grunt: {
-                files: ['Gruntfile.js'],
-                tasks: ['refresh']
+                files: ["Gruntfile.js"],
+                tasks: ["refresh"]
             },
             js: {
-                files: ['<%= r_js %>**/*.js'],
-                tasks: ['js']
+                files: ["<%= source.js %>**/*.js"],
+                tasks: ["js"]
             },
             less: {
                 options: {
                     livereload: false
                 },
-                files: ['<%= r_less_client %>**/*.less'],
-                tasks: ['less:developmentGlobal']
+                files: ["<%= source.less %>**/*.less"],
+                tasks: ["less:globalBuild"]
             },
             css: {
-                files: ['<%= c_css %>**/*.css']
+                files: ["<%= dist.css %>**/*.css", "<%= build.css %>**/*.css"]
             },
             fonts: {
-                files: ['<%= r_fonts %>**/*.svg'],
-                tasks: ['refresh']
+                files: ["<%= source.fonts %>**/*.svg"],
+                tasks: ["refresh"]
             }
-        },
-
-        // Other Vars
-        project: "<%= pkg.name %>",
-        resources: "",
-        compiled: "<%= resources %>dist/",
-
-        c_less: "<%= compiled %>less/",
-        c_css: "<%= compiled %>css/",
-        c_fonts: "<%= compiled %>fonts/",
-        c_js: "<%= compiled %>js/",
-
-        r_less: "<%= resources %>less/",
-        r_less_client: "<%= r_less %>client/",
-
-        r_fonts: "<%= resources %>fonts/",
-
-        r_js: "<%= resources %>js/",
-        r_js_client: "<%= r_js %>client/"
+        }
     });
 
     // Load the plugins that provide the tasks.
@@ -212,23 +249,23 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-
-    // Default task.
-    grunt.registerTask('default', ['less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
+    // Default task, compiles LESS and JS into "build" folder
+    grunt.registerTask('default', ['less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
 
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:clientIcons', 'less:developmentGlobal', 'less:developmentGlobalFixed', 'concat:client']);
+    grunt.registerTask('refresh', ['webfont:iconsBuild', 'less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
+    grunt.registerTask('build', ['webfont:iconsBuild', 'less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
 
-    // Production Build
-    grunt.registerTask('build', ['webfont:clientIcons', 'less:productionGlobal', 'less:productionGlobalFixed', 'concat:client', 'uglify']);
+    // Distribution Build
+    grunt.registerTask('dist', ['webfont:iconsDist', 'less:globalDist', 'less:globalFixedDist', 'uglify:dist']);
 
-    // Compile Webfonts
-    grunt.registerTask('fonts', ['webfont']);
+    // Compile Dev Webfonts
+    grunt.registerTask('fonts', ['webfont:iconsBuild']);
 
     // Compile Dev LESS Files
-    grunt.registerTask('lesscss', ['less:developmentGlobal', 'less:developmentGlobalFixed']);
+    grunt.registerTask('less-build', ['less:globalBuild', 'less:globalFixedBuild']);
 
-    // Compile JS
-    grunt.registerTask('js', ['concat:client']);
+    // Compile Dev JS
+    grunt.registerTask('js', ['uglify:build']);
 
 };
