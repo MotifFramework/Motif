@@ -19,7 +19,7 @@
 
 	/* Pretty */
 	font-family: "<%= fontBaseName %>";
-    font-size: 1;
+    font-size: 1em;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: none;
@@ -30,6 +30,11 @@
     white-space: nowrap;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+.lte8 [class*="pre-icon--"]:before,
+.lte8 [class*="icon--"]:before,
+.lte8 [class*="post-icon--"]:after {
+	font-size: 1;
 }
 [class*="pre-icon--"]:before {
 	padding-right: 0.357em;

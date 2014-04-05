@@ -132,15 +132,19 @@ module.exports = function(grunt) {
                 }
             },
 
-            // Production Build
+            // Distribution Build
             globalDist: {
+                files: {
+                    "<%= dist.css %><%= project %>.css": "<%= source.less %>global.less"
+                }
+            },
+            globalFixedDist: {
+                files: {
+                    "<%= dist.css %><%= project %>-fixed.css": "<%= source.less %>global-fixed.less"
+                }
+            },
+            globalDistMin: {
                 options: {
-                    paths: ["<%= source.less %>"],
-                    sourceMap: true,
-                    sourceMapFilename: '<%= dist.css %><%= project %>.css.map',
-                    sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= sourceDir %>",
-                    sourceMapURL: "<%= project %>.css.map",
                     cleancss: true,
                     report: "gzip"
                 },
@@ -148,14 +152,8 @@ module.exports = function(grunt) {
                     "<%= dist.css %><%= project %>.min.css": "<%= source.less %>global.less"
                 }
             },
-            globalFixedDist: {
+            globalFixedDistMin: {
                 options: {
-                    paths: ["<%= source.less %>"],
-                    sourceMap: true,
-                    sourceMapFilename: '<%= dist.css %><%= project %>-fixed.css.map',
-                    sourceMapRootpath: "../../",
-                    sourceMapBasepath: "<%= sourceDir %>",
-                    sourceMapURL: "<%= project %>-fixed.css.map",
                     cleancss: true,
                     report: "gzip"
                 },
@@ -257,7 +255,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['webfont:iconsBuild', 'less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
 
     // Distribution Build
-    grunt.registerTask('dist', ['webfont:iconsDist', 'less:globalDist', 'less:globalFixedDist', 'uglify:dist']);
+    grunt.registerTask('dist', ['webfont:iconsDist', 'less:globalDist', 'less:globalFixedDist', 'less:globalDistMin', 'less:globalFixedDistMin', 'uglify:dist']);
 
     // Compile Dev Webfonts
     grunt.registerTask('fonts', ['webfont:iconsBuild']);
