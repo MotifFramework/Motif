@@ -7,13 +7,16 @@ times, as when using a WYSIWYG editor, when some styles need to be baked in.
 Here, we specify a `.wysiwyg` class that wraps around that content, and 
 hardcode some of those styles
 
-	<div class="wysiwyg">
-		[WYSIWYG Content]
-	</div>
+    <div class="wysiwyg">
+        [WYSIWYG Content]
+    </div>
 
 */
 
 .wysiwyg {
+    h1 {
+        margin-top: 0;
+    }
     h2,
     h3,
     h4,
@@ -23,28 +26,28 @@ hardcode some of those styles
     }
 }
 .wysiwyg {
-	h1,
-	.canon-text {
-		&:extend( .canon-text );
-	}
-	h2,
-	.paragon-text {
-		&:extend( .paragon-text );
-	}
-	h3,
-	.primer-text {
-		&:extend( .primer-text );
-	}
-	h4,
-	.normal-text {
-		&:extend( .normal-text );
-	}
-	h5,
-	.petite-text {
-		&:extend( .petite-text );
-	}
-	h6,
-	.minion-text {
-		&:extend( .minion-text );
-	}
+    h1,
+    .canon-text {
+        &:extend( .canon-text );
+    }
+    h2,
+    .paragon-text {
+        &:extend( .paragon-text );
+    }
+    h3,
+    .primer-text {
+        &:extend( .primer-text );
+    }
+    h4,
+    .normal-text {
+        &:extend( .normal-text );
+    }
+    h5,
+    .petite-text {
+        &:extend( .petite-text );
+    }
+    h6,
+    .minion-text {
+        &:extend( .minion-text );
+    }
 }
