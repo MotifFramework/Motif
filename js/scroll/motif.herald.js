@@ -1,3 +1,10 @@
+/*!
+ * Motif Herald v0.2.0
+ * Fire off events depending on scroll position.
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 (function ( $, window, document, LB, undefined ) {
 
     "use strict";

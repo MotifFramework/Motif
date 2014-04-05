@@ -1,23 +1,11 @@
 /**
- * Conditioner by Motif
+ * Conditioner by Motif v0.3.0 (2013-01-02)
  * Conditionally enable and disable form elements.
+ * http://getmotif.com
  * 
- * @version 0.3 (01/02/13)
- * @author Jonathan Pacheco (jonathan@lifeblue.com)
- * 
- * Copyright 2013 Lifeblue
- * 
- * TODO:
- * 1. Work on more complex logic.
- *     - Allow one conditional to affect multiple targets.
- *     - What if one conditional enables another element, but a third element
- *       disables the first conditional? Does the second element become
- *       disabled as well?
- * 2. Implement usage of the conditional group and auto-grouping.
- * 3. Cleanup code and commenting.
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-
-(function ($) {
+(function ( $ ) {
 
 	"use strict";
 

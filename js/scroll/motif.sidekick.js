@@ -1,8 +1,15 @@
+/*!
+ * Motif Sidekick v0.1.0
+ * A basic sticky sidebar built on Motif Herald
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 (function ( $, window, document, LB, undefined ) {
 
     "use strict";
 
-    var StickySide = function ( elem ) {
+    var Sidekick = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
@@ -10,9 +17,9 @@
         },
         $document = $( document );
 
-    StickySide.counter = 0;
+    Sidekick.counter = 0;
 
-    StickySide.prototype = {
+    Sidekick.prototype = {
         "defaults": {
             "context": false,
             "stickyClass": "is-sticky",
@@ -32,15 +39,15 @@
             this.initVars.call( this, userOptions );
             this.bindEvents.call( this );
             this.buildEvents.call( this );
-            this.initScrollFire.call( this );
-            StickySide.counter += 1;
+            this.initHerald.call( this );
+            Sidekick.counter += 1;
 
             return this;
         },
 
             "initVars": function ( userOptions ) {
                 this.config = userOptions;
-                this.metadata = this.$elem.data("sticky-side-options");
+                this.metadata = this.$elem.data("sidekick-options");
                 this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
 
                 if ( this.options.context ) {
@@ -49,19 +56,19 @@
                     this.$context = this.$elem.parent();
                 }
 
-                this.identity = this.$elem.attr("id") || "sticky-side-" + StickySide.counter;
+                this.identity = this.$elem.attr("id") || "sidekick-" + Sidekick.counter;
                 this.$window = this.options.window;
-                this.scrollFireEvents = [];
+                this.heraldEvents = [];
             },
 
             "bindEvents": function () {
                 var self = this;
 
-                $document.on("sticky-side/" + self.identity + "/top", function onStickyTop ( event, dir ) {
+                $document.on("sidekick/" + self.identity + "/top", function onStickyTop ( event, dir ) {
                     self.topEvent.call( self, dir );
                 });
 
-                $document.on("sticky-side/" + self.identity + "/bottom", function onStickyBottom ( event, dir ) {
+                $document.on("sidekick/" + self.identity + "/bottom", function onStickyBottom ( event, dir ) {
                     self.bottomEvent.call( self, dir );
                 });
             },
@@ -73,7 +80,7 @@
                             return self.getTopPosition.call( self );
                         },
                         "event": function ( dir ) {
-                            $document.trigger( "sticky-side/" + self.identity + "/top", [ dir ] );
+                            $document.trigger( "sidekick/" + self.identity + "/top", [ dir ] );
                         },
                         "repeat": true
                     },
@@ -82,14 +89,14 @@
                             return self.getBottomPosition.call( self );
                         },
                         "event": function ( dir ) {
-                            $document.trigger( "sticky-side/" + self.identity + "/bottom", [ dir ] );
+                            $document.trigger( "sidekick/" + self.identity + "/bottom", [ dir ] );
                         },
                         "repeat": true
                     };
 
-                self.scrollFireEvents.push( topObject, bottomObject );
+                self.heraldEvents.push( topObject, bottomObject );
 
-                return self.scrollFireEvents;
+                return self.heraldEvents;
             },
 
                 "getTopPosition": function () {
@@ -156,23 +163,23 @@
                         this.$elem.removeAttr("style").removeClass( this.options.stickyClass ).addClass( this.options.stuckClass );
                     },
 
-            "initScrollFire": function () {
+            "initHerald": function () {
                 var self = this;
 
-                self.$context.plugin("scrollFire", {
+                self.$context.plugin("herald", {
                     "window": this.$window,
-                    "events": self.scrollFireEvents
+                    "events": self.heraldEvents
                 });
             }
     };
 
-    StickySide.defaults = StickySide.prototype.defaults;
+    Sidekick.defaults = Sidekick.prototype.defaults;
 
-    LB.apps.StickySide = StickySide;
+    LB.apps.Sidekick = Sidekick;
 
 }( jQuery, window, document, window.LB = window.LB || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "stickySide", window.LB.apps.StickySide );
+$.createPlugin( "sidekick", window.LB.apps.Sidekick );

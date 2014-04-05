@@ -1,5 +1,10 @@
-// Slightly modified version of https://gist.github.com/niftylettuce/3620903
-
+/*!
+ * Motif Load Script v1.0.0
+ * Slightly modified version of https://gist.github.com/niftylettuce/3620903
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 function loadScript(url, callback, leave) {
 
 	"use strict";

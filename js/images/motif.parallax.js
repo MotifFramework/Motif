@@ -1,5 +1,10 @@
-/* Motif Parallax Plugin, v. 0.1 (6/21/12) */
-(function($) {
+/*!
+ * Motif Parallax Plugin v0.1.0 (2012-06-21)
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+(function ( $ ) {
 	var _v	=	{
 
 			// System Variables

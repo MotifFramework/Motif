@@ -1,28 +1,30 @@
+/*!
+ * Motif Plugin Utilities v0.2.0
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 (function ( $, Motif, undefined ) {
 
     "use strict";
 
     /**
-     * Utilities
-     * -----------------------------------------------------------------------------
-     * 
-     * General utilities that other functions might need to use
-     * 
-     * @todo 
+     * @module Motif
+     * @submodule utils
+     * @class plugins
+     * @static
      */
 
     Motif.utils.plugins = {
 
         /**
-         * Init Plugin
          * For maximum convenience for the most basic plugin use cases, 
          * this takes a simple config and starts the `loadPlugin` process 
          * for you (if it knows that elements exist on the page)
          *
-         * @param {Object} config Includes targetElems, pluginName, pluginSource, 
-         *   pluginOptions (Object)
+         * @method initPlugin
+         * @param config {Object} Includes targetElems, pluginName, pluginSource, pluginOptions (Object)
          */
-
         initPlugin: function ( config ) {
 
                 // Basic plugin config
@@ -32,67 +34,59 @@
                     options: config.pluginOptions
                 };
 
-            // If the target elements exist...
             if ( config.targetElems.length ) {
 
-                // ...start loading the plugin
-                Motif.utils.plugins.loadPlugin( config.targetElems, pluginConfig );
+                // Start loading the plugin
+                this.loadPlugin( config.targetElems, pluginConfig );
             }
         },
 
         /**
-         * Load Plugin
          * If you know you want to bind a plugin right after you get a 
          * script, this automates it for you by combinding `getScript` 
          * and `bindPlugin`
+         * 
+         * @method loadPlugin
+         * @param target {Object} Target element (jQuery object)
+         * @param config {Object} Includes plugin name, URL, and options
          */
-
         loadPlugin: function ( target, config ) {
 
             // Call `getScript` util, passing on plugin name, url, and creating a callback...
-            Motif.utils.plugins.getScript( config.name, config.url, function loadPluginCallback() {
+            this.getScript( config.name, config.url, function loadPluginCallback() {
 
                 // ...where we call the `bindPlugin` util, passing on the target elem, 
                 // plugin name, and options
-                Motif.utils.plugins.bindPlugin( target, config.name, config.options );
+                this.bindPlugin( target, config.name, config.options );
             });
         },
 
         /**
-         * Get Script
          * A slightly altered version of jQuery's `$.getScript` that first 
          * checks if the plugin has been loaded
          * 
-         * @todo Don't like that we're repeating the `typeof` conditional
+         * @method getScript
+         * @param name {String} The name of the plugin we're calling
+         * @param url {String} Path to the plugin, if it's external
+         * @param [callback] {Function} Callback function
+         * @return {Boolean}
          */
-
         getScript: function ( name, url, callback ) {
+            var runCallback = typeof callback === "function" ? true : false;
 
             // If the plugin has not been registered...
-            if ( !$.fn[name] ) {
-
-                // Use jQuery's `$.getScript`
-                loadScript( url, function getScriptCallback () {
-
-                    // If a callback function was provided...
-                    if ( typeof callback === "function" ) {
-
-                        // ...run it
+            if ( !$.fn[ name ] ) {
+                $.getScript( url, function getScriptCallback () {
+                    if ( runCallback ) {
                         callback();
                     }
                 });
 
             // If the plugin *has* been registered 
-            // and a callback has been provided...
-            } else if ( typeof callback === "function" ) {
-
-                // ...run it
+            // and a callback has been provided, run it
+            } else if ( runCallback ) {
                 callback();
-
-            // Otherwise...
             } else {
-
-                // ...return true
                 return true;
             }
         },
@@ -101,8 +95,12 @@
          * Bind Plugin
          * Right now, a crazy simple way of initializing a plugin
          * and passing on options
+         * 
+         * @method bindPlugin
+         * @param target {Object}
+         * @param plugin {String}
+         * @param options {Object}
          */
-
         bindPlugin: function ( target, plugin, options ) {
 
             // Ex: $("#elem").pluginName({ option: value });
@@ -110,30 +108,43 @@
         }
     };
 
-    // With help from:
-    // https://github.com/jquery-boilerplate/jquery-boilerplate/wiki/Another-extending-jQuery-boilerplate
-    $.createPlugin = function ( name, object ) {
+    /**
+     * With help from: https://github.com/jquery-boilerplate/jquery-boilerplate/wiki/Another-extending-jQuery-boilerplate
+     * @module jQuery
+     * @submodule fn
+     * @method createPlugin
+     * @param name {String}
+     * @param object {Object}
+     */
+    $.fn.createPlugin = function ( name, object ) {
+
+        // Extend jQuery's `.fn` with our `name` param
         $.fn[ name ] = function( userOptions ) {
             var args;
 
             if ( this.length ) {
-                return this.each( function () {
-                    var instance = $.data( this, name );
-                    if ( instance ) {
-                        if ( typeof userOptions === 'undefined' || typeof userOptions === 'object' ) {
-                            instance.init( userOptions );
-                        } else if ( typeof arg === 'string' && typeof instance[arg] === 'function' ) {
+                return this.each( function eachThis () {
 
-                            // copy arguments & remove function name
+                    // Check if this plugin already has an instance on this
+                    var instance = $.data( this, name );
+
+                    if ( instance ) {
+
+                        // If there are user options or no user options, call `init`
+                        if ( typeof userOptions === "undefined" || typeof userOptions === "object" ) {
+                            instance.init( userOptions );
+
+                        // Check if `userOptions` is a function of our instance
+                        } else if ( typeof userOptions === "string" && typeof instance[ userOptions ] === "function" ) {
+
+                            // Copy arguments & remove function name
                             args = Array.prototype.slice.call( arguments, 1 );
 
-                            // call the method
                             return instance[ userOptions ].apply( instance, args );
 
+                        // Otherwise, log error
                         } else {
-
-                            console.log( name + ": Method " + arg + " does not exist on jQuery." );
-
+                            console.log( name + ": Method " + userOptions + " does not exist on jQuery." );
                         }
                     } else {
                         instance = $.data( this, name, new object( this ).init( userOptions ) );
@@ -144,9 +155,12 @@
     };
 
     /**
-     * Plugin Wrapper
-     * A jQuery "plugin" to call other plugins via the
-     * `initPlugin` utility.
+     * A jQuery "plugin" to call other plugins via the `initPlugin` utility.
+     * 
+     * @method plugin
+     * @param name {String} The name of the plugin you want to grab
+     * @param [url] {String} The url of the plugin's file
+     * @param [options] {Object} Plugin options
      */
 
     $.fn.plugin = function ( name, url, options ) {

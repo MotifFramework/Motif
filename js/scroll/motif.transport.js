@@ -1,5 +1,10 @@
-/* Motif Transport Plugin, v. 0.1 (1/23/12) */
-(function($) {
+/*!
+ * Motif Transport Plugin v0.1.0 (2012-01-23)
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+(function ( $ ) {
 	var _v	=	{
 
 			// System Variables

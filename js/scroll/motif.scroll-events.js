@@ -1,3 +1,11 @@
+/*!
+ * Motif Scroll Events v0.1.0
+ * A sample of how to utilize Motif Sidekick and Scroll Patrol
+ * to make a sticky side nav
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 (function ( $, window, document, LB, undefined ) {
 
     "use strict";

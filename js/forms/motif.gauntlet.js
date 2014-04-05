@@ -1,8 +1,10 @@
-/**
- * Gauntlet: Validating forms by Motif
+/*!
+ * Motif Gauntlet v1.0.0 (2014-04-04)
+ * Trials and tribulations to validate your forms
+ * http://getmotif.com
+ * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";

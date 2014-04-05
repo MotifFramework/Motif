@@ -1,8 +1,10 @@
-/**
- * Reveal by Motif: Show and hide things with class(es)
+/*!
+ * Motif Reveal v2.0.0
+ * Show and hide things with class(es)
+ * http://getmotif.com
+ * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";

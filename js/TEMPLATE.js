@@ -1,3 +1,9 @@
+/*!
+ * PLUGIN v0.1.0
+ * http://URL.com
+ * 
+ * @author AUTHOR <EMAIL>
+ */
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";
@@ -7,6 +13,8 @@
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
+
+            return this;
         },
         $document = $( document );
 

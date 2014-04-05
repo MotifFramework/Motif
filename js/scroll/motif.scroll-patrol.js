@@ -1,3 +1,10 @@
+/*!
+ * Motif Scroll Patrol v0.1.0
+ * A basic navigation scroll "spy" built on Motif Herald
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
 (function ( $, window, document, LB, undefined ) {
 
     "use strict";

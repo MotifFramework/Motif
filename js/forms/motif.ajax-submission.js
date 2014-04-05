@@ -1,21 +1,40 @@
-/**
- * Ajax Submission by Motif
+/*!
+ * Motif Ajax Submission v0.2.0
+ * http://getmotif.com
+ * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-
 (function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
+    /**
+     * @class AjaxSubmission
+     * @constructor
+     * @param elem {Object}
+     */
     var AjaxSubmission = function ( elem ) {
-            
-            // Init Vars
+
+            /**
+             * @property $elem
+             * @type Object
+             */
             this.$elem = $( elem );
+
+            /**
+             * @property elem
+             * @type Object
+             */
             this.elem = this.$elem[0];
         },
         $document = $( document );
 
     AjaxSubmission.prototype = {
+
+        /**
+         * @property defaults
+         * @type Object
+         */
         "defaults": {
             "errorClass": "is-erroneous",
             "successClass": "is-successful",
@@ -29,32 +48,69 @@
             "callback": null
         },
 
+        /**
+         * @method init
+         * @param [userOptions] {Object}
+         * @return {Object}
+         */
         "init": function ( userOptions ) {
             if ( !this.$elem.length ) {
                 return;
             }
 
-            this.initVars();
+            this.initVars( userOptions );
             this.initValidation();
 
             return this;
         },
 
+        /**
+         * @method initVars
+         * @param [userOptions] {Object}
+         */
         "initVars": function ( userOptions ) {
+
+            /**
+             * @property config
+             * @type Object
+             */
             this.config = userOptions;
+
+            /**
+             * @property metadata
+             * @type Object
+             */
             this.metadata = this.$elem.data("ajax-submission-options");
+
+            /**
+             * @property options
+             * @type Object
+             */
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
+
+            /**
+             * @property error
+             * @type Boolean
+             */
             this.error = false;
+
+            /**
+             * @property method
+             * @type String
+             */
             this.method = this.$elem.attr("method") || "post";
+
+            /**
+             * @property action
+             * @type String
+             */
             this.action = this.$elem.attr("action");
         },
 
         /**
-         * On Submit
-         * Makes AJAX call, passing on config `afterSubmit` 
-         * both on success and error
+         * Makes AJAX call, executing `ajaxCallback` afterwards.
+         * @method submitForm
          */
-
         "submitForm": function () {
             var self = this;
 
@@ -81,27 +137,33 @@
                     $document.trigger("ajax/complete", [ self.$elem ]);
                 });
         },
-            "ajaxCallback": function ( data, error ) {
-
-                // If there was an error...
-                if ( error ) {
-
-                    // ...set `error` to be true...
-                    this.error = true;
-                }
-
-                // ...then call the after-submission method
-                this.afterSubmit();
-
-                return data;
-            },
 
         /**
-         * After Submit
-         * Gets built response, calls to reset form 
-         * and place message, runs callback (if there)
+         * @method ajaxCallback
+         * @param data {Object}
+         * @param [error] {Boolean}
+         * @return {Object}
          */
+        "ajaxCallback": function ( data, error ) {
 
+            // If there was an error...
+            if ( error ) {
+
+                // ...set `error` to be true...
+                this.error = true;
+            }
+
+            // ...then call the after-submission method
+            this.afterSubmit();
+
+            return data;
+        },
+
+        /**
+         * Gets HTML response, calls to reset form and place message, 
+         * runs callback (if there).
+         * @method afterSubmit
+         */
         "afterSubmit": function () {
             var message = this.options.feedbackMessage ? this.buildMessage() : false;
 
@@ -124,11 +186,10 @@
         },
 
         /**
-         * Build Message
-         * Builds message string with config
-         * @return {String}
+         * Builds message string using our configuration.
+         * @method buildMessage
+         * @return {String} The HTML message to be placed in response
          */
-
         "buildMessage": function () {
             var message = '<p class="';
 
@@ -143,11 +204,10 @@
         },
 
         /**
-         * Reset Form
-         * Resets form and removes success 
-         * class from fields
+         * Resets form and removes success class from fields
+         * @method resetForm
+         * @return {Boolean}
          */
-
         "resetForm": function () {
             if ( this.options.clearForm ) {
 
@@ -164,11 +224,11 @@
         },
 
         /**
-         * Place Message
-         * Depending on where specified in config, 
-         * places message
+         * Depending on where specified in config, places message
+         * @method placeMessage
+         * @param message {String} The HTML for the response message
+         * @return {Object}
          */
-
         "placeMessage": function ( message ) {
             var $message;
 
@@ -192,13 +252,15 @@
 
                 this.goToMessage( $message );
             }
+
+            return $message;
         },
 
         /**
-         * Go To Message
          * Right now, crudely animates to placed message
+         * @method goToMessage
+         * @param message {Object} The jQuery object of the response message
          */
-
         "goToMessage": function ( message ) {
             var scrollElem = this.options.scrollElem || $("html, body");
 
@@ -209,20 +271,25 @@
         },
 
         /**
-         * Remove Message
-         * Right now, crudely removes message 
-         * after timeout
+         * Right now, crudely removes message after timeout
+         * @method removeMessage
+         * @param message {Object} The jQuery object of the response message
          */
-
         "removeMessage": function ( message ) {
 
             // After a few seconds, remove message
-            setTimeout(function () {
+            setTimeout( function removeAjaxMessage () {
                 message.slideUp( 150, function onSlideUpComplete () {
                     message.remove();
                 });
             }, 8000);
         },
+
+        /**
+         * Initializes the form validation (in this case, Gauntlet),
+         * and passes on our `submitForm` method as a parameter.
+         * @method initValidation
+         */
         "initValidation": function () {
             var self = this;
 

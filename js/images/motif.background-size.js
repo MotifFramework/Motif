@@ -1,12 +1,9 @@
-/**
- * Motif Background Size
- *
+/*!
+ * Motif Background Size v0.1.0 (2013-06-07)
  * Mimics the `background-size: cover` CSS property. Great for IE8 fallbacks.
+ * http://getmotif.com
  *
- * @version 0.1 (06/07/13)
- * @author  Jonathan Pacheco (jonathan@lifeblue.com)
- *
- * Copyright 2013 Lifeblue
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
 
 (function ( $, window, undefined ) {

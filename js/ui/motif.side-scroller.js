@@ -1,5 +1,10 @@
-/* Motif Side-Scroller Plugin, v. 0.1 (7/2/12) */
-(function($) {
+/*!
+ * Motif Side-Scroller v0.1.0 (2012-07-02)
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ */
+(function ( $ ) {
 	var _v	=	{
 
 			// System Variables
