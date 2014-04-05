@@ -1,5 +1,6 @@
 /*!
  * PLUGIN v0.1.0
+ * A starter template for creating a jQuery plugin using Motif.
  * http://URL.com
  * 
  * @author AUTHOR <EMAIL>
