@@ -268,8 +268,7 @@ Turns an `inline` or `inline-block` element into a `block` one.
 
 #### "Is Hidden"
 
-Visually hides content in a way that leaves it accessible to screen readers. 
-Like more magic, makes the visible invisible.
+Visually hides content in a way that leaves it accessible to screen readers. Like more magic, makes the visible invisible.
 
 ```html
 <p>
@@ -295,9 +294,7 @@ Classes            | Description
 
 #### Horizontal List
 
-The basic `.list--x` module simply removes bullets from lists and inlines the list 
-items, making the link `inline-block`. The idea is to give the skeleton of a 
-horizontal list/navigation without adding too much style (yet).
+The basic `.list--x` module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal list/navigation without adding too much style (yet).
 
 ```html
 <ul class="list--x">
@@ -315,9 +312,7 @@ horizontal list/navigation without adding too much style (yet).
 
 #### Horizontal List (Forceful)
 
-Rather than making the list `inline-block`, it floats the list elements 
-(except on the smallest screen sizes, where it remains vertical). More precise
-than the default Horizontal List.
+Rather than making the list `inline-block`, it floats the list elements (except on the smallest screen sizes, where it remains vertical). More precise than the default Horizontal List.
 
 ```html
 <ul class="list--x--forceful">
@@ -335,8 +330,7 @@ than the default Horizontal List.
 
 #### Link List
 
-A basic extension of the Horizontal List, this adds some margin to the links in
-the list for a more pleasant looking list of links.
+A basic extension of the Horizontal List, this adds some margin to the links in the list for a more pleasant looking list of links.
 
 ```html
 <ul class="link-list--x">
@@ -352,15 +346,11 @@ the list for a more pleasant looking list of links.
 </ul>
 ```
 
-**Note:** Because we are using the `[class*=""]` attribute selector, using the 
-`.link-list--x` class takes advantage of the `list--x` module we declared 
-earlier, as well as the Forceful variation (`.link-list--x--forceful`) 
-without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
+**Note:** Because we are using the `[class*=""]` attribute selector, using the `.link-list--x` class takes advantage of the `list--x` module we declared earlier, as well as the Forceful variation (`.link-list--x--forceful`) without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
 #### Pagination
 
-An extension of the basic `.list--x` module that simply adds enough padding on
-the links for pagination.
+An extension of the basic `.list--x` module that simply adds enough padding on the links for pagination.
 
 ```html
 <ul class="list--x--pgs">
@@ -378,8 +368,7 @@ the links for pagination.
 
 #### Breadcrumb
 
-Another extension of the `.list--x` module, adding a breadcrumb `label` 
-and floating it and the ordered list.
+Another extension of the `.list--x` module, adding a breadcrumb `label` and floating it and the ordered list.
 
 ```html
 <nav class="breadcrumb" role="navigation">
@@ -941,8 +930,7 @@ The default responsive grid in Motif is built with a few rules in mind:
 1. Each row of columns must be wrapped in a row element
 2. There's no need to specify if a column is first or last
 
-With that in mind, there is a basic syntax to learn for what classes to use.
-Our breakpoints are classified as:
+With that in mind, there is a basic syntax to learn for what classes to use. Our breakpoints are classified as:
 
 - Base
 - Small
@@ -954,11 +942,9 @@ Our default responsive grid system only uses 3 grids to cover all of our bases:
 
 - `grid, small` covers Base and Small viewports, but cuts off at Medium
 - `grid, medium` covers only Medium
-- `grid, large` starts at Large and covers Extra Large as well (there is no max
-cutoff value for `grid, large`)
+- `grid, large` starts at Large and covers Extra Large as well (there is no max cutoff value for `grid, large`)
 
-Understanding that, the syntax should be easy to understand. In these examples,
-we will talk about `grid, small`:
+Understanding that, the syntax should be easy to understand. In these examples, we will talk about `grid, small`:
 
 - **Rows**: `.gs-row` (Grid, Small, Row)
 - **Columns**: `.gcs` (Grid, Column, Small)

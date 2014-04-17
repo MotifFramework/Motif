@@ -1,6 +1,7 @@
 # Motif Gauntlet
+## Trials and tribulations to validate your forms
 
-A form validation plugin that depends on HTML5 syntax.
+Gauntlet is a form validation plugin that depends on HTML5 syntax.
 
 ```javascript
 $("form").gauntlet();
