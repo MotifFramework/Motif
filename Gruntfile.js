@@ -228,7 +228,7 @@ module.exports = function(grunt) {
                     livereload: false
                 },
                 files: ["<%= source.less %>**/*.less"],
-                tasks: ["less:globalBuild"]
+                tasks: ["less-build"]
             },
             css: {
                 files: ["<%= dist.css %>**/*.css", "<%= build.css %>**/*.css"]

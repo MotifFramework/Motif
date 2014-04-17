@@ -14,12 +14,16 @@
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
+
+            return this;
         },
         GauntletInput = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
+
+            return this;
         },
         $document = $( document );
 
@@ -94,15 +98,6 @@
                     this.removeFromInputList();
                 }
             },
-            "inputIsInList": function ( input ) {
-                var position = this.fields.indexOf( input );
-
-                if ( position === -1 ) {
-                    return false;
-                } else {
-                    return position;
-                }
-            },
             "addToInputList": function () {
                 var position = false,
                     i;
@@ -135,9 +130,37 @@
 
                 return this.fields;
             },
+            "inputIsInList": function ( input ) {
+                var position = this.fields.indexOf( input );
+
+                if ( position === -1 ) {
+                    return false;
+                } else {
+                    return position;
+                }
+            },
 
         "prepForm": function () {
             this.$elem.attr( "novalidate", true );
+        },
+        "bindErrorHandling": function () {
+            var self = this;
+
+            $document.on( "gauntlet/fail", function onGauntletFail ( event, input ) {
+                self.inputError.call( self, input );
+            });
+            $document.on( "gauntlet/success", function onGauntletSuccess ( event, input ) {
+                self.inputSuccess.call( self, input );
+            });
+            $document.on( "ajax/complete", function onAjaxComplete ( event, form ) {
+                self.enableSubmit.call( self, form );
+            });
+
+            if ( self.options.scrollToError ) {
+                $document.on( "gauntlet/fail/first", function onGauntletFirstFail ( event, input ) {
+                    self.scrollToError.call( self, input );
+                });
+            }
         },
 
         "gatherInputs": function () {
@@ -158,16 +181,6 @@
                 self.disableSubmit.call( self );
                 return self.submitForm.call( self );
             });
-        },
-        "disableSubmit": function ( form ) {
-            var thisForm = form || this.$elem;
-            
-            thisForm.find("[type='submit']").prop("disabled", true).addClass( this.options.labelClasses.disabled );
-        },
-        "enableSubmit": function ( form ) {
-            var thisForm = form || this.$elem;
-            
-            thisForm.find("[type='submit']").prop("disabled", false).removeClass( this.options.labelClasses.disabled );
         },
         "getVerdict": function ( input ) {
             return this.sortResult( this.validate( input ) );
@@ -213,25 +226,16 @@
                     }
                 }
             },
-            "bindErrorHandling": function () {
-                var self = this;
-
-                $document.on( "gauntlet/fail", function onGauntletFail ( event, input ) {
-                    self.inputError.call( self, input );
-                });
-                $document.on( "gauntlet/success", function onGauntletSuccess ( event, input ) {
-                    self.inputSuccess.call( self, input );
-                });
-                $document.on( "ajax/complete", function onAjaxComplete ( event, form ) {
-                    self.enableSubmit.call( self, form );
-                });
-
-                if ( self.options.scrollToError ) {
-                    $document.on( "gauntlet/fail/first", function onGauntletFirstFail ( event, input ) {
-                        self.scrollToError.call( self, input );
-                    });
-                }
-            },
+        "disableSubmit": function ( form ) {
+            var thisForm = form || this.$elem;
+            
+            thisForm.find("[type='submit']").prop("disabled", true).addClass( this.options.labelClasses.disabled );
+        },
+        "enableSubmit": function ( form ) {
+            var thisForm = form || this.$elem;
+            
+            thisForm.find("[type='submit']").prop("disabled", false).removeClass( this.options.labelClasses.disabled );
+        },
             "scrollToError": function ( input ) {
                 $("html, body").animate({
                     scrollTop: input.$elem.offset().top - 50
