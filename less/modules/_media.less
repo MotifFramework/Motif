@@ -101,12 +101,13 @@ like it placed.
 
 */
 
-.figure
+.figure,
 [class*="figure--"] {
 
     // Mixins
     .margin-leader();
 
+    > a,
     img {
         &:extend( .new-line );
     }

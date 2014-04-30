@@ -51,13 +51,14 @@
          * @param config {Object} Includes plugin name, URL, and options
          */
         loadPlugin: function ( target, config ) {
+            var self = this;
 
             // Call `getScript` util, passing on plugin name, url, and creating a callback...
-            this.getScript( config.name, config.url, function loadPluginCallback() {
+            self.getScript( config.name, config.url, function loadPluginCallback() {
 
                 // ...where we call the `bindPlugin` util, passing on the target elem, 
                 // plugin name, and options
-                this.bindPlugin( target, config.name, config.options );
+                self.bindPlugin.call( self, target, config.name, config.options );
             });
         },
 
@@ -116,7 +117,7 @@
      * @param name {String}
      * @param object {Object}
      */
-    $.fn.createPlugin = function ( name, object ) {
+    $.createPlugin = function ( name, object ) {
 
         // Extend jQuery's `.fn` with our `name` param
         $.fn[ name ] = function( userOptions ) {

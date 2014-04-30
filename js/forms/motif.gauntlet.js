@@ -131,7 +131,7 @@
                 return this.fields;
             },
             "inputIsInList": function ( input ) {
-                var position = this.fields.indexOf( input );
+                var position = $.inArray( input, this.fields );
 
                 if ( position === -1 ) {
                     return false;
@@ -549,5 +549,5 @@
     "apps": {}
 } ) );
 
-$.createPlugin( "gauntlet", window.Motif.apps.Gauntlet );
-$.createPlugin( "gauntletInput", window.Motif.apps.GauntletInput );
+jQuery.createPlugin( "gauntlet", window.Motif.apps.Gauntlet );
+jQuery.createPlugin( "gauntletInput", window.Motif.apps.GauntletInput );

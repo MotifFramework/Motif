@@ -9,6 +9,8 @@
     "use strict";
 
     /**
+     * @module Motif
+     * @submodule apps
      * @class AjaxSubmission
      * @constructor
      * @param elem {Object}
