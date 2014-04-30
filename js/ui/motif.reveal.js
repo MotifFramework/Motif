@@ -1,5 +1,5 @@
 /*!
- * Motif Reveal v2.0.0
+ * Motif Reveal v2.0.1
  * Show and hide things with class(es)
  * http://getmotif.com
  * 
@@ -19,7 +19,7 @@
 
     Reveal.counter = 0;
 
-    Reveal.animationFrame = typeof requestTimeout === "function";
+    Reveal.animationFrame = typeof window.requestAnimFrame === "function" ? true : false;
 
     Reveal.prototype = {
         "defaults": {
@@ -310,17 +310,20 @@
 
             // This element has the current attribute set to true...
             if ( this.$elem.attr("data-reveal-current") === "true" ) {
+                this.setCurrent();
+            }
+        },
 
-                if ( this.group ) {
-                    window.Reveal.queue.push( this.identity );
-                } else {
+        "setCurrent": function () {
+            if ( this.group ) {
+                window.Reveal.queue.push( this.identity );
+            } else {
 
-                    // Make it Current
-                    this.makeCurrent.call( this );
+                // Make it Current
+                this.makeCurrent();
 
-                    // Then publish
-                    this.publish.call( this );
-                }
+                // Then publish
+                this.publish();
             }
         },
 
@@ -332,6 +335,10 @@
                     $document.trigger("reveal/" + queue[ i ] + "/show");
                 });
             }
+
+            // Clear queue
+            window.Reveal.queue = [];
+            $document.trigger("reveal/queue/done");
         },
 
         "makeCurrent": function () {
@@ -456,18 +463,14 @@
         "gatherGroup": function () {
             var groupID = this.$elem.data("reveal-group");
 
-            if ( groupID ) {
-                this.$group = $("[data-reveal-group='" + groupID + "']");
-            } else {
-                this.$group = false;
-            }
+            this.$group = groupID ? $("[data-reveal-group='" + groupID + "']") : false;
         },
 
         "addClass": function ( elem, userClass ) {
             if ( Reveal.animationFrame ) {
-                requestTimeout(function addRevealClass () {
+                requestAnimFrame( function () {
                     elem.addClass( userClass );
-                }, 0);
+                });
             } else {
                 elem.addClass( userClass );
             }
@@ -475,9 +478,9 @@
 
         "removeClass": function ( elem, userClass ) {
             if ( Reveal.animationFrame ) {
-                requestTimeout(function removeRevealClass () {
+                requestAnimFrame( function () {
                     elem.removeClass( userClass );
-                }, 0);
+                });
             } else {
                 elem.removeClass( userClass );
             }

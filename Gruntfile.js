@@ -41,7 +41,8 @@ module.exports = function(grunt) {
                 options: {
                     mangle: false,
                     beautify: true,
-                    preserveComments: "all"
+                    preserveComments: "all",
+                    sourceMap: true
                 },
                 files: {
 
@@ -55,10 +56,13 @@ module.exports = function(grunt) {
                     // Build Global JS
                     "<%= build.js %><%= pkg.name %>.js": [
                         "<%= source.js %>vendor/jquery-2.1.0.js",
+                        "<%= source.js %>vendor/requestAnimFrame.js",
                         "<%= source.js %>utils/motif.utils.plugins.js",
                         "<%= source.js %>forms/motif.gauntlet.js",
                         "<%= source.js %>forms/motif.ajax-submission.js",
                         "<%= source.js %>ui/motif.reveal.js",
+                        "<%= source.js %>ui/motif.tabs.js",
+                        "<%= source.js %>vendor/holder.js",
                         "<%= source.js %>actions.js"
                     ],
 
@@ -69,13 +73,17 @@ module.exports = function(grunt) {
                         "<%= source.js %>forms/motif.gauntlet.js",
                         "<%= source.js %>forms/motif.ajax-submission.js",
                         "<%= source.js %>ui/motif.reveal.js",
+                        "<%= source.js %>ui/motif.tabs.js",
+                        "<%= source.js %>vendor/holder.js",
                         "<%= source.js %>actions.js"
                     ]
                 }
             },
             dist: {
                 options: {
-                    preserveComments: "some"
+                    preserveComments: "some",
+                    report: "gzip",
+                    compress: true
                 },
                 files: [{
                     expand: true,

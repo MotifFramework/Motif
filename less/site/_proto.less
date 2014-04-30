@@ -373,10 +373,22 @@ Figures
 
 */
 
+.figure,
+[class*="figure--"] {
+    > a {
+        padding: @quarter-vertical;
+        border: 1px solid @light-grey;
+
+        &:hover,
+        &:focus {
+            border-color: @light-blue;
+        }
+    }
+}
 .figure figcaption,
 .figcaption {
     &:extend( [class*="petite-text"] );
-    padding: @quarter-vertical @full-side;
+    padding: @half-vertical @full-side;
 }
 
 
@@ -611,10 +623,13 @@ Tabs
 */
 
 .tabs {
+    .margin-leader();
+
     &__list--x,
     &__list--x--forceful {
 
         border-bottom: 1px solid @grey-4;
+        margin-bottom: @full-vertical;
 
         a {
 
@@ -643,6 +658,19 @@ Tabs
             border-color: @grey-2;
             border-bottom-color: transparent;
             z-index: 60;
+        }
+    }
+
+    .js.csstransitions & {
+        &__section {
+
+            // Mixins
+            .transition( height, 0.3s, @easeOutCubic );
+        }
+    }
+    .tab {
+        > :first-child {
+            margin-top: 0;
         }
     }
 }

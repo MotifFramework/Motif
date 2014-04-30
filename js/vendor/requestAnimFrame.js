@@ -14,6 +14,7 @@ window.requestAnimFrame = (function () {
 
 /**
  * Behaves the same as setTimeout except uses requestAnimationFrame() where possible for better performance
+ * https://gist.github.com/joelambert/1002116
  * @param {function} fn The callback function
  * @param {int} delay The delay in milliseconds
  */
@@ -58,6 +59,7 @@ window.clearRequestTimeout = function ( handle ) {
 
 /**
  * Behaves the same as setInterval except uses requestAnimationFrame() where possible for better performance
+ * https://gist.github.com/joelambert/1002116
  * @param {function} fn The callback function
  * @param {int} delay The delay in milliseconds
  */

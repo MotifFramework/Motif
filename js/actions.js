@@ -7,14 +7,13 @@
     "use strict";
 
     var App = function () {
-        this.initReveals();
+        this.initUI();
         this.initForms();
     };
 
-    App.prototype.initReveals = function () {
-        $(".js-tabs").plugin("reveal", {
-            "type": "radio",
-            "activeClass": "is-current"
+    App.prototype.initUI = function () {
+        $(".js-tabs").plugin("tabs", {
+            "cssTransition": Modernizr.csstransitions
         });
         $(".canvas-trigger").plugin("reveal", {
             "type": "exclusive",

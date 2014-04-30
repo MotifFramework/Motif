@@ -1,24 +1,8 @@
-.transition (   @range: all, 
-				@time: 0.2s, 
-				@ease: ease-in-out,
-				@delay: 0s) 
-{
-	-webkit-transition: @range @time @ease @delay;
-	-moz-transition:    @range @time @ease @delay;
-	-o-transition:      @range @time @ease @delay;
-	transition:         @range @time @ease @delay;
-}
-.transition-two (	@range-1:	all, 
-					@time-1:	0.2s, 
-					@ease-1:	ease-in-out,
-					@range-2:	all, 
-					@time-2:	0.2s, 
-					@ease-2:	ease-in-out	) 
-{
-	-webkit-transition: @range-1 @time-1 @ease-1,  @range-2 @time-2 @ease-2;
-	-moz-transition:    @range-1 @time-1 @ease-1,  @range-2 @time-2 @ease-2;
-	-o-transition:      @range-1 @time-1 @ease-1,  @range-2 @time-2 @ease-2;
-	transition:         @range-1 @time-1 @ease-1,  @range-2 @time-2 @ease-2;
+.transition ( ... ) {
+	-webkit-transition: @arguments;
+	-moz-transition:    @arguments;
+	-o-transition:      @arguments;
+	transition:         @arguments;
 }
 
 
