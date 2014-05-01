@@ -109,56 +109,80 @@ all of the grids also have a few "fuzzy" shortcuts as well:
                 float: left;
             }
         }
-        &--flex {
-            letter-spacing: -0.31em;
-            text-rendering: optimizespeed;
-
-            > [class*="gcs"] {
-                float: none;
-                display: inline-block;
-                letter-spacing: normal;
-                word-spacing: normal;
-                vertical-align: top;
-                text-rendering: auto;
-            }
-        }
-
-        // Opera as of 12 on Windows needs word-spacing.
-        // The ".opera-only" selector is used to prevent
-        // actual prefocus styling and is not required 
-        // in markup.
-        .opera-only :-o-prefocus,
-        &--flex {
-            word-spacing: -0.43em;
-        }
     }
+
     [class*="gcs"] {
         #mixed > .grid-column();
         #mixed > .grid-padding( @mobile-margin );
     }
     .gs-quarter,
-    [class*="s-quarter"] {
+    .gcs-quarter {
         width: 25%;
     }
     .gs-third,
-    [class*="s-third"] {
+    .gcs-third {
         width: round( ( 100% / 3 ), 5 );
     }
     .gs-half,
-    [class*="s-half"] {
+    .gcs-half {
         width: 50%;
     }
     .gs-two-thirds,
-    [class*="s-two-thirds"] {
+    .gcs-two-thirds {
         width: round( ( ( 100% / 3 ) * 2 ), 5 );
     }
     .gs-three-quarters,
-    [class*="s-three-quarters"] {
+    .gcs-three-quarters {
         width: 75%;
     }
     .gs-full,
-    [class*="s-full"] {
+    .gcs-full {
         width: 100%;
+    }
+    .gs-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+        .gs-row--flex > [class*="gcs"] {
+            float: none;
+            display: inline-block;
+            letter-spacing: normal;
+            word-spacing: normal;
+            vertical-align: top;
+            text-rendering: auto;
+        }
+
+    // Opera as of 12 on Windows needs word-spacing.
+    // The ".opera-only" selector is used to prevent
+    // actual prefocus styling and is not required 
+    // in markup.
+    .opera-only :-o-prefocus,
+    .gs-row--flex {
+        word-spacing: -0.43em;
+    }
+
+    // Shortcuts/Aliases
+    .gs {
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="gs-row"] all );
+            &:extend( .gs-row--flex );
+
+            > * {
+                &:extend( [class*="gcs"] );
+                &:extend( .gs-row--flex > [class*="gcs"] );
+            }
+        }
+        &-quarters > * {
+            &:extend( .gs-quarter );
+        }
+        &-thirds > * {
+            &:extend( .gs-third );
+        }
+        &-halves > * {
+            &:extend( .gs-half );
+        }
     }
 }
 
@@ -185,24 +209,6 @@ all of the grids also have a few "fuzzy" shortcuts as well:
                 float: left;
             }
         }
-        &--flex {
-            letter-spacing: -0.31em;
-            text-rendering: optimizespeed;
-
-            > [class*="gcm"] {
-                float: none;
-                display: inline-block;
-                letter-spacing: normal;
-                word-spacing: normal;
-                vertical-align: top;
-                text-rendering: auto;
-            }
-        }
-
-        .opera-only :-o-prefocus,
-        &--flex {
-            word-spacing: -0.43em;
-        }
     }
 
     [class*="gcm"] {
@@ -210,30 +216,73 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         #mixed > .grid-padding( @tablet-margin );
     }
     .gm-quarter,
-    [class*="m-quarter"] {
+    .gcm-quarter {
         width: 25%;
     }
     .gm-third,
-    [class*="m-third"] {
+    .gcm-third {
         width: round( ( 100% / 3 ), 5 );
     }
     .gm-half,
-    [class*="m-half"] {
+    .gcm-half {
         width: 50%;
     }
     .gm-two-thirds,
-    [class*="m-two-thirds"] {
+    .gcm-two-thirds {
         width: round( ( ( 100% / 3 ) * 2 ), 5 );
     }
     .gm-three-quarters,
-    [class*="m-three-quarters"] {
+    .gcm-three-quarters {
         width: 75%;
     }
     .gm-full,
-    [class*="m-full"] {
+    .gcm-full {
         width: 100%;
     }
     #mixins > .grid-all( ( @tablet-total-cols - 1 ), @tablet-total-cols, m );
+    
+    .gm-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+
+        .gm-row--flex > [class*="gcm"] {
+            float: none;
+            display: inline-block;
+            letter-spacing: normal;
+            word-spacing: normal;
+            vertical-align: top;
+            text-rendering: auto;
+        }
+
+    .opera-only :-o-prefocus,
+    .gm-row--flex {
+        word-spacing: -0.43em;
+    }
+
+    // Shortcuts/Aliases
+    .gm {
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="gm-row"] all );
+            &:extend( .gm-row--flex );
+
+            > * {
+                &:extend( [class*="gcm"] );
+                &:extend( .gm-row--flex > [class*="gcm"] );
+            }
+        }
+        &-quarters > * {
+            &:extend( .gm-quarter );
+        }
+        &-thirds > * {
+            &:extend( .gm-third );
+        }
+        &-halves > * {
+            &:extend( .gm-half );
+        }
+    }
 }
 
 /**
@@ -315,6 +364,37 @@ all of the grids also have a few "fuzzy" shortcuts as well:
                 float: left;
             }
         }
+    }
+
+    [class*="gcl"] {
+        #mixed > .grid-column();
+        #mixed > .grid-padding( @base-margin );
+    }
+    .gl-quarter,
+    .gcl-quarter {
+        width: 25%;
+    }
+    .gl-third,
+    .gcl-third {
+        width: round( ( 100% / 3 ), 5 );
+    }
+    .gl-half,
+    .gcl-half {
+        width: 50%;
+    }
+    .gl-two-thirds,
+    .gcl-two-thirds {
+        width: round( ( ( 100% / 3 ) * 2 ), 5 );
+    }
+    .gl-three-quarters,
+    .gcl-three-quarters {
+        width: 75%;
+    }
+    .gl-full,
+    .gcl-full {
+        width: 100%;
+    }
+    #mixins > .grid-all( ( @total-columns - 1 ), @total-columns, l );
 
 
 /*
@@ -378,53 +458,44 @@ the row class has a `--flex` modifier.
 
 */
 
-        &--flex {
-            letter-spacing: -0.31em;
-            text-rendering: optimizespeed;
+    .gl-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+        .gl-row--flex > [class*="gcl"] {
+            float: none;
+            display: inline-block;
+            letter-spacing: normal;
+            word-spacing: normal;
+            vertical-align: top;
+            text-rendering: auto;
+        }
+    .opera-only :-o-prefocus,
+    .gl-row--flex {
+        word-spacing: -0.43em;
+    }
 
-            > [class*="gcl"] {
-                float: none;
-                display: inline-block;
-                letter-spacing: normal;
-                word-spacing: normal;
-                vertical-align: top;
-                text-rendering: auto;
+    // Shortcuts/Aliases
+    .gl {
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="gl-row"] all );
+            &:extend( .gl-row--flex );
+
+            > * {
+                &:extend( [class*="gcl"] );
+                &:extend( .gl-row--flex > [class*="gcl"] );
             }
         }
-        .opera-only :-o-prefocus,
-        &--flex {
-            word-spacing: -0.43em;
+        &-quarters > * {
+            &:extend( .gl-quarter );
+        }
+        &-thirds > * {
+            &:extend( .gl-third );
+        }
+        &-halves > * {
+            &:extend( .gl-half );
         }
     }
-
-    [class*="gcl"] {
-        #mixed > .grid-column();
-        #mixed > .grid-padding( @base-margin );
-    }
-    .gl-quarter,
-    [class*="l-quarter"] {
-        width: 25%;
-    }
-    .gl-third,
-    [class*="l-third"] {
-        width: round( ( 100% / 3 ), 5 );
-    }
-    .gl-half,
-    [class*="l-half"] {
-        width: 50%;
-    }
-    .gl-two-thirds,
-    [class*="l-two-thirds"] {
-        width: round( ( ( 100% / 3 ) * 2 ), 5 );
-    }
-    .gl-three-quarters,
-    [class*="l-three-quarters"] {
-        width: 75%;
-    }
-    .gl-full,
-    [class*="l-full"] {
-        width: 100%;
-    }
-    #mixins > .grid-all( ( @total-columns - 1 ), @total-columns, l );
-
 }
