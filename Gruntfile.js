@@ -178,6 +178,7 @@ module.exports = function(grunt) {
                 // Destination CSS
                 destCss: "<%= source.less %>type/",
                 options: {
+                    engine: "node",
                     font: '<%= pkg.name %>-icons',
                     types: "eot,woff,ttf,svg",
                     hashes: false,
@@ -199,6 +200,7 @@ module.exports = function(grunt) {
                 // Destination CSS
                 destCss: "<%= source.less %>type/",
                 options: {
+                    engine: "node",
                     font: '<%= pkg.name %>-icons',
                     types: "eot,woff,ttf,svg",
                     hashes: false,
