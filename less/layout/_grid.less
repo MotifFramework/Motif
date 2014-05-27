@@ -86,6 +86,59 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 
 */
 
+// Aliases for all breakpoints
+.g-halves,
+.g-thirds,
+.g-quarters {
+    // Mixins
+    #mixed > .row( @mobile-margin );
+
+    /* Pretty */
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+        
+    ul& {
+        padding-left: 0;
+        list-style: none outside none;
+    }
+    
+    > * {
+        // Mixins
+        #mixed > .grid-column();
+        #mixed > .grid-padding( @mobile-margin );
+
+        /* Display & Box Model */
+        display: inline-block;
+
+        /* Positioning */
+        float: none;
+
+        /* Pretty */
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+}
+.g-halves > * {
+    width: 50%;
+}
+.g-thirds > * {
+    width: round( ( 100% / 3 ), 5 );
+}
+.g-quarters > * {
+    width: 25%;
+}
+
+// Opera as of 12 on Windows needs word-spacing.
+// The ".opera-only" selector is used to prevent
+// actual prefocus styling and is not required 
+// in markup.
+.opera-only :-o-prefocus,
+.g-thirds {
+    word-spacing: -0.43em;
+}
+
 /**
  * Mobile Grid
  */
@@ -291,37 +344,37 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 
 /*
 
-@pattern: Desktop Grid
-<div class="gl-row">
-    <div class="gcl-quarter">
+````desktop-grid
+<div class="gl-quarters">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-third">
+<div class="gl-thirds">
+    <div>
         <div class="block">Third</div>
     </div>
-    <div class="gcl-third">
+    <div>
         <div class="block">Third</div>
     </div>
-    <div class="gcl-third">
+    <div>
         <div class="block">Third</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-half">
+<div class="gl-halves">
+    <div>
         <div class="block">Half</div>
     </div>
-    <div class="gcl-half">
+    <div>
         <div class="block">Half</div>
     </div>
 </div>
@@ -341,6 +394,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         <div class="block">Quarter</div>
     </div>
 </div>
+````
 
 */
 
@@ -410,51 +464,48 @@ the entire group center, making sure any "orphaned" grid entries are centered.
 The syntax is simply the same as the regular responsive grid system, except
 the row class has a `--flex` modifier.
 
-*/
-
-/*
-
-@pattern: Media Grid
-<ul class="gs-row--flex gm-row--flex gl-row--flex">
-    <li class="gcs-half gcm-third gcl-third">
+````media-grid
+<ul class="gs-halves gm-thirds gl-quarters">
+    <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
             <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
+    <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
+    <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
             <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
+    <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+    <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
 </ul>
+````
 
 */
 

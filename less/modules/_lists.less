@@ -62,7 +62,7 @@ the list for a more pleasant looking list of links.
 earlier, as well as the Forceful variation (`.link-list--x--forceful`) 
 without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
-@pattern: Link List
+````link-list
 <ul class="link-list--x">
     <li>
         <a href="#">Basic Link</a>
@@ -74,6 +74,7 @@ without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
         <a href="#">Basic Link</a>
     </li>
 </ul>
+````
 
 */
 
@@ -122,6 +123,22 @@ Breadcrumb
 
 Another extension of the `.list--x` module, adding a breadcrumb `label` 
 and floating it and the ordered list.
+
+````breadcrumb
+<nav class="breadcrumb" role="navigation">
+    <ol class="breadcrumb__list--x">
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a>Breadcrumb Link</a>
+        </li>
+    </ol>
+</nav>
+````
 
 */
 

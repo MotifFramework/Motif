@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function ( grunt ) {
 
     // Project configuration.
 
@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     // Dist = Motif distribution packages
 
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON("package.json"),
 
         // Folder Vars
         project: "<%= pkg.name %>",
@@ -89,16 +89,16 @@ module.exports = function(grunt) {
                     expand: true,
 
                     // Current Working Directory
-                    cwd: '<%= source.js %>',
+                    cwd: "<%= source.js %>",
 
                     // Source Files
-                    src: ['**/*.js', "!**/vendor/*.js", "!*.js"],
+                    src: ["**/*.js", "!**/vendor/*.js", "!*.js"],
 
                     // Destination
-                    dest: '<%= dist.js %>',
+                    dest: "<%= dist.js %>",
 
                     rename: function ( destBase, destPath ) {
-                        return destBase + destPath.replace('.js', '.min.js');
+                        return destBase + destPath.replace(".js", ".min.js");
                     }
                 }]
             }
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
                 options: {
                     paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= build.css %><%= project %>.css.map',
+                    sourceMapFilename: "<%= build.css %><%= project %>.css.map",
                     sourceMapRootpath: "../../",
                     sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>.css.map",
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
                 options: {
                     paths: ["<%= source.less %>"],
                     sourceMap: true,
-                    sourceMapFilename: '<%= build.css %><%= project %>-fixed.css.map',
+                    sourceMapFilename: "<%= build.css %><%= project %>-fixed.css.map",
                     sourceMapRootpath: "../../",
                     sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>-fixed.css.map",
@@ -181,12 +181,13 @@ module.exports = function(grunt) {
                 src: "<%= source.fonts %><%= pkg.name %>-icons/svg/*.svg",
 
                 // Destination Folder
-                dest: '<%= build.fonts %><%= pkg.name %>-icons/',
+                dest: "<%= build.fonts %><%= pkg.name %>-icons/",
 
                 // Destination CSS
                 destCss: "<%= source.less %>type/",
                 options: {
-                    font: '<%= pkg.name %>-icons',
+                    engine: "node",
+                    font: "<%= pkg.name %>-icons",
                     types: "eot,woff,ttf,svg",
                     hashes: false,
                     relativeFontPath: "../fonts/<%= pkg.name %>-icons/",
@@ -202,12 +203,13 @@ module.exports = function(grunt) {
                 src: "<%= source.fonts %><%= pkg.name %>-icons/svg/*.svg",
 
                 // Destination Folder
-                dest: '<%= dist.fonts %><%= pkg.name %>-icons/',
+                dest: "<%= dist.fonts %><%= pkg.name %>-icons/",
 
                 // Destination CSS
                 destCss: "<%= source.less %>type/",
                 options: {
-                    font: '<%= pkg.name %>-icons',
+                    engine: "node",
+                    font: "<%= pkg.name %>-icons",
                     types: "eot,woff,ttf,svg",
                     hashes: false,
                     relativeFontPath: "../fonts/<%= pkg.name %>-icons/",
@@ -249,29 +251,29 @@ module.exports = function(grunt) {
     });
 
     // Load the plugins that provide the tasks.
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-webfont');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks("grunt-contrib-less");
+    grunt.loadNpmTasks("grunt-webfont");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-concat");
+    grunt.loadNpmTasks("grunt-contrib-watch");
 
     // Default task, compiles LESS and JS into "build" folder
-    grunt.registerTask('default', ['less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
+    grunt.registerTask("default", ["less:globalBuild", "less:globalFixedBuild", "uglify:build"]);
 
     // Run when you want to refresh everything
-    grunt.registerTask('refresh', ['webfont:iconsBuild', 'less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
-    grunt.registerTask('build', ['webfont:iconsBuild', 'less:globalBuild', 'less:globalFixedBuild', 'uglify:build']);
+    grunt.registerTask("refresh", ["webfont:iconsBuild", "less:globalBuild", "less:globalFixedBuild", "uglify:build"]);
+    grunt.registerTask("build", ["webfont:iconsBuild", "less:globalBuild", "less:globalFixedBuild", "uglify:build"]);
 
     // Distribution Build
-    grunt.registerTask('dist', ['webfont:iconsDist', 'less:globalDist', 'less:globalFixedDist', 'less:globalDistMin', 'less:globalFixedDistMin', 'uglify:dist']);
+    grunt.registerTask("dist", ["webfont:iconsDist", "less:globalDist", "less:globalFixedDist", "less:globalDistMin", "less:globalFixedDistMin", "uglify:dist"]);
 
     // Compile Dev Webfonts
-    grunt.registerTask('fonts', ['webfont:iconsBuild']);
+    grunt.registerTask("fonts", ["webfont:iconsBuild"]);
 
     // Compile Dev LESS Files
-    grunt.registerTask('less-build', ['less:globalBuild', 'less:globalFixedBuild']);
+    grunt.registerTask("less-build", ["less:globalBuild", "less:globalFixedBuild"]);
 
     // Compile Dev JS
-    grunt.registerTask('js', ['uglify:build']);
+    grunt.registerTask("js", ["uglify:build"]);
 
 };
