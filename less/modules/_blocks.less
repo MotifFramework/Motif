@@ -164,50 +164,46 @@ Tabs
 The tabs module (and accompanying plugin) creates a very basic widget that 
 allows embedding and basic styling.
 
-@pattern: Tabs
-<section class="tabs">
+````tabs
+<section class="tabs js-tabs">
     <nav role="navigation">
-        <ul class="tabs__list--x mtn">
+        <ul>
             <li>
-                <a class="js-tabs tabs__list-item"
-                 data-reveal="first-tab"
-                 data-reveal-current="true"
-                 data-reveal-group="tabbed-widget"
-                 href="#first-tab">
+                <a href="#first-tab">
                     First Tab
                 </a>
             </li>
             <li>
-                <a class="js-tabs tabs__list-item"
-                 data-reveal="second-tab"
-                 data-reveal-group="tabbed-widget"
-                 href="#second-tab">
+                <a href="#second-tab">
                     Second Tab
                 </a>
             </li>
         </ul>
     </nav>
-    <div class="tabs__section">
-        <section class="tab" id="first-tab">
+    <div>
+        <section id="first-tab">
             <h3>First Tab</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </section>
-        <section class="tab" id="second-tab">
+        <section id="second-tab">
             <h3>Second Tab</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </section>
     </div>
 </section>
+````
 
 */
 
 .js {
     .tabs {
+        > nav + *,
         &__section {
             position: relative;
             overflow: hidden;
         }
     }
+    .tabs > nav + * > *,
     .tab {
         display: none;
 

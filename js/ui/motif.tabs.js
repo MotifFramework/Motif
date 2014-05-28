@@ -131,7 +131,7 @@
              * @property $tabs
              * @type Object
              */
-            this.$tabs = this.$elem.find( this.options.tabsGroup );
+            this.$tabs = this.$elem.find( this.options.tabsGroup ).length ? this.$elem.find( this.options.tabsGroup ) : this.$elem.find("nav + *");
 
             /**
              * @property group

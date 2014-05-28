@@ -153,29 +153,13 @@ body,
 .body-text {
     &:extend( .lato-regular );
 }
-// code {
-//     .source-code-pro();
-// }
+
 dt,
 th,
 .input-label,
 strong {
     font-weight: 700;
 }
-// em {
-//     font-style: normal;
-
-//     // Mixins
-//     .source-sans-italic();
-// }
-// strong em,
-// em strong {
-//     font-style: normal;
-//     font-weight: normal;
-
-//     // Mixins
-//     .source-sans-bold-italic();
-// }
 
 /*
 
@@ -276,7 +260,7 @@ Buttons
 
 Panels
 
-@pattern: Panels Alt
+````panels-alt
 <div class="panel--alt">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -285,14 +269,9 @@ Panels
 <div class="panel--alt">
     <p>This is a feedback panel with no heading.</p>
 </div>
+````
 
-*/
-
-/*
-
-Panels
-
-@pattern: Panels Inverse
+````panels-inverse
 <div class="panel--inverse">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -301,6 +280,7 @@ Panels
 <div class="panel--inverse">
     <p>This is a feedback panel with no heading.</p>
 </div>
+````
 
 */
 
@@ -404,7 +384,7 @@ Nav Bar
 
 A quick navigation bar, typically good for prototyping the main menu of a site.
 
-@pattern: Nav Bar
+````nav-bar
 <nav class="nav-bar--menu" role="navigation">
     <h3 class="nav-bar__title pre-icon--rows js-expand"
      id="reveal-main-nav"
@@ -429,6 +409,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         </li>
     </ul>
 </nav>
+````
 
 */
 
@@ -532,7 +513,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 Vertical Nav
 
-@pattern: Vertical Nav
+````vertical-nav
 <ul class="nav--vert">
     <li>
         <a href="#">Nav Link</a>
@@ -564,6 +545,7 @@ Vertical Nav
         <a href="#">Nav Link</a>
     </li>
 </ul>
+````
 
 */
 
@@ -625,6 +607,10 @@ Tabs
 .tabs {
     .margin-leader();
 
+    nav > ul {
+        &:extend( [class*="list--x"] all );
+    }
+    nav > ul,
     &__list--x,
     &__list--x--forceful {
 
@@ -662,12 +648,14 @@ Tabs
     }
 
     .js.csstransitions & {
+        > nav + *,
         &__section {
 
             // Mixins
             .transition( height, 0.3s, @easeOutCubic );
         }
     }
+    > nav + * > *,
     .tab {
         > :first-child {
             margin-top: 0;
