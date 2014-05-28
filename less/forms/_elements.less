@@ -140,3 +140,87 @@ simply consistent across viewports. These are those.
 .input--l {
     max-width: @350px;
 }
+
+/*
+
+Form Modules
+
+````attached-icon-input
+<label class="attached-icon--pre">
+    <b class="attached-icon__before icon--search">
+        <b class="is-hidden">Search</b>
+    </b>
+    <input class="attached-icon__input" type="email" id="attached-icon__input" required>
+</label>
+````
+
+````attached-icon-submit
+<form class="attached-icon--post">
+    <label class="is-hidden" for="attached-icon__input">Search</label>
+    <input class="attached-icon__input" type="email" id="attached-icon__input" required>
+    <button type="submit" class="btn--primary attached-icon__after icon--search"></button>
+</form>
+````
+
+*/
+
+
+[class*="attached-icon--"] {
+    position: relative;
+    display: block;
+}
+.attached-icon__input {
+    // Mixins
+    .margin-trailer(0.5);
+
+    /* Positioning */
+    position: relative;
+    z-index: 30;
+}
+.attached-icon--pre,
+.attached-icon--both {
+    .attached-icon__input {
+        padding-left: @55px;
+    }
+}
+.attached-icon--post,
+.attached-icon--both {
+    .attached-icon__input {
+        padding-right: @55px;
+    }
+}
+.attached-icon__before,
+.attached-icon__after {
+    width: @45px;
+    margin: 0;
+    padding: @half-vertical;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    // bottom: 0;
+    z-index: 50;
+}
+.attached-icon__before {
+
+    // Vars
+    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
+
+    // Mixins
+    .border-radius-left( @radius );
+    .border-radius-right( 0 );
+
+    /* Positioning */
+    left: 0;
+}
+.attached-icon__after {
+
+    // Vars
+    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
+
+    // Mixins
+    .border-radius-right( @radius );
+    .border-radius-left( 0 );
+
+    /* Positioning */
+    right: 0;
+}

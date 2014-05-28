@@ -225,10 +225,15 @@ Buttons
 */
 
 [class*="btn"] {
+
+    // Vars
+    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
+    
+    // Extends
     &:extend( .lato-bold );
 
     // Mixins
-    .border-radius( @3px );
+    .border-radius( @radius );
 
     background-color: @grey-3;
     border: 1px solid @grey-2;
@@ -814,31 +819,5 @@ Input Alerts
     
         // Create
         border: @1px solid @grey;
-    }
-}
-
-/*
-
-Form Modules
-
-*/
-
-.search {
-    .input {
-
-        /* Mixins */
-        .border-radius-right(0);
-
-        /* Display & Box Model */
-        float: left;
-    }
-    .submit {
-
-        /* Mixins */
-        .border-radius-left(0);
-
-        /* Display & Box Model */
-        margin: 0;
-        float: left;
     }
 }
