@@ -58,7 +58,7 @@
 
                 // ...where we call the `bindPlugin` util, passing on the target elem, 
                 // plugin name, and options
-                self.bindPlugin( target, config.name, config.options );
+                self.bindPlugin.call( self, target, config.name, config.options );
             });
         },
 
