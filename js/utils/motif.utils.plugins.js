@@ -112,7 +112,6 @@
     /**
      * With help from: https://github.com/jquery-boilerplate/jquery-boilerplate/wiki/Another-extending-jQuery-boilerplate
      * @module jQuery
-     * @submodule fn
      * @method createPlugin
      * @param name {String}
      * @param object {Object}

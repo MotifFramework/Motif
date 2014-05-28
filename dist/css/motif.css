@@ -546,7 +546,10 @@ Turns an `inline` or `inline-block` element into a `block` one.
 .new-line,
 .media-object__figure img,
 .media-object__desc,
-.figure [class*="figure--"] img,
+.figure > a,
+[class*="figure--"] > a,
+.figure img,
+[class*="figure--"] img,
 [class*="ratio"]:before,
 .input-label,
 .input-hint,
@@ -922,7 +925,8 @@ like it placed.
 </figure>
 
 */
-.figure [class*="figure--"] {
+.figure,
+[class*="figure--"] {
   margin-top: 1.4285714285714286em;
 }
 @media all and (min-width: 30em) {
@@ -1091,10 +1095,10 @@ accompanied by CSS3 animations.
 .js .fade__target.is-faded,
 .js .expand__target.was-expanded,
 .js .fade__target.was-faded {
-  -webkit-transition: all 0.65s ease-in-out 0s;
-  -moz-transition: all 0.65s ease-in-out 0s;
-  -o-transition: all 0.65s ease-in-out 0s;
-  transition: all 0.65s ease-in-out 0s;
+  -webkit-transition: all 0.65s ease-in-out;
+  -moz-transition: all 0.65s ease-in-out;
+  -o-transition: all 0.65s ease-in-out;
+  transition: all 0.65s ease-in-out;
 }
 .js .fade__target {
   opacity: 0;
@@ -1103,6 +1107,12 @@ accompanied by CSS3 animations.
 .js .fade__target.is-faded {
   opacity: 1;
   filter: alpha(opacity=100);
+}
+.no-transition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
 /*
 
@@ -1176,6 +1186,7 @@ allows embedding and basic styling.
 */
 .js .tabs__section {
   position: relative;
+  overflow: hidden;
 }
 .js .tab {
   display: none;
@@ -2750,10 +2761,10 @@ the row class has a `--flex` modifier.
   .js .off-canvas.was-active .canvas__primary,
   .js .off-canvas.is-active .canvas__secondary,
   .js .off-canvas.was-active .canvas__secondary {
-    -webkit-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    -moz-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    -o-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
-    transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+    -webkit-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -moz-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+    -o-transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition: all 0.15s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .js .canvas__primary,
   .js .canvas__secondary {
@@ -3470,9 +3481,20 @@ Panels
 Figures
 
 */
+.figure > a,
+[class*="figure--"] > a {
+  padding: 0.35714285714285715em;
+  border: 1px solid #cfcdcd;
+}
+.figure > a:hover,
+[class*="figure--"] > a:hover,
+.figure > a:focus,
+[class*="figure--"] > a:focus {
+  border-color: #3d9ddc;
+}
 .figure figcaption,
 .figcaption {
-  padding: 0.35714285714285715em 1.2857142857142858em;
+  padding: 0.7142857142857143em 1.2857142857142858em;
 }
 /*
 
@@ -3655,9 +3677,13 @@ Breadcrumb
 Tabs
 
 */
+.tabs {
+  margin-top: 1.4285714285714286em;
+}
 .tabs__list--x,
 .tabs__list--x--forceful {
   border-bottom: 1px solid #dddddd;
+  margin-bottom: 1.4285714285714286em;
 }
 .tabs__list--x a,
 .tabs__list--x--forceful a {
@@ -3691,6 +3717,15 @@ Tabs
   border-color: #cfcbca;
   border-bottom-color: transparent;
   z-index: 60;
+}
+.js.csstransitions .tabs__section {
+  -webkit-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -moz-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.tabs .tab > :first-child {
+  margin-top: 0;
 }
 /*
 
@@ -3736,10 +3771,10 @@ Messaging
   -moz-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
   -o-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5);
-  -webkit-transition: opacity 0.15s linear 0s;
-  -moz-transition: opacity 0.15s linear 0s;
-  -o-transition: opacity 0.15s linear 0s;
-  transition: opacity 0.15s linear 0s;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
 }
 .bubble:after,
 [class*="input-alert"]:after {

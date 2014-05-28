@@ -1,0 +1,36 @@
+{
+  "name": "motif",
+  "version": "3.2.0",
+  "homepage": "http://getmotif.com",
+  "description": "A responsive front-end framework to tell your story.",
+  "main": [
+    "less/global.less",
+    "js/actions.js",
+    "dist/css/motif.css",
+    "dist/fonts/motif-icons/motif-icons.ttf",
+    "dist/fonts/motif-icons/motif-icons.eot",
+    "dist/fonts/motif-icons/motif-icons.svg",
+    "dist/fonts/motif-icons/motif-icons.woff"
+  ],
+  "keywords": [
+    "css",
+    "js",
+    "jquery",
+    "less",
+    "responsive",
+    "front-end",
+    "framework",
+    "web",
+    "brand",
+    "prototype"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "test",
+    "tests"
+  ]
+}
