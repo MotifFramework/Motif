@@ -544,6 +544,8 @@ Turns an `inline` or `inline-block` element into a `block` one.
 
 */
 .new-line,
+.media-object > *,
+.media-object > :first-child img,
 .media-object__figure img,
 .media-object__desc,
 .figure > a,
@@ -560,10 +562,6 @@ Turns an `inline` or `inline-block` element into a `block` one.
 .breadcrumb,
 .media-object--checkbox {
   /* Mixins */
-}
-.lte7 .group,
-.lte7 .media-object--checkbox {
-  zoom: 1;
 }
 .group:before,
 .group:after,
@@ -743,10 +741,12 @@ items, making the link `inline-block`. The idea is to give the skeleton of a
 horizontal list/navigation without adding too much style (yet).
 
 */
-[class*="list--x"] li {
+[class*="list--x"] li,
+.tabs nav > ul li {
   display: inline;
 }
-[class*="list--x"] a {
+[class*="list--x"] a,
+.tabs nav > ul a {
   display: inline-block;
 }
 /*
@@ -763,9 +763,6 @@ than the default Horizontal List.
   display: block;
 }
 @media all and (min-width: 30em) {
-  .lte7 [class*="list--x--forceful"] {
-    zoom: 1;
-  }
   [class*="list--x--forceful"]:before,
   [class*="list--x--forceful"]:after {
     content: "\0020";
@@ -792,7 +789,7 @@ the list for a more pleasant looking list of links.
 earlier, as well as the Forceful variation (`.link-list--x--forceful`) 
 without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
-@pattern: Link List
+````link-list
 <ul class="link-list--x">
     <li>
         <a href="#">Basic Link</a>
@@ -804,6 +801,7 @@ without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
         <a href="#">Basic Link</a>
     </li>
 </ul>
+````
 
 */
 [class*="link-list--x"] a {
@@ -835,6 +833,22 @@ Breadcrumb
 Another extension of the `.list--x` module, adding a breadcrumb `label` 
 and floating it and the ordered list.
 
+````breadcrumb
+<nav class="breadcrumb" role="navigation">
+    <ol class="breadcrumb__list--x">
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a>Breadcrumb Link</a>
+        </li>
+    </ol>
+</nav>
+````
+
 */
 .breadcrumb {
   margin-top: 1.4285714285714286em;
@@ -865,18 +879,20 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
   [1]: http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/
 
 
-@pattern: Media Object
+````media-object
 <div class="media-object">
-    <div class="media-object__figure">
+    <figure>
         <img src="http://placehold.it/213" alt="A media object image">
-    </div>
-    <div class="media-object__desc">
+    </figure>
+    <div>
         <p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
     </div>
 </div>
+````
 
 */
 .media-object,
+.media-object > *,
 .media-object__desc {
   overflow: hidden;
 }
@@ -885,22 +901,26 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
   display: inline-block;
   overflow: visible;
 }
+.media-object--checkbox > :first-child,
 .media-object--checkbox .media-object__figure {
   /* Display & Box Model */
   margin-right: 0.32142857142857145em;
 }
 @media all and (min-width: 30em) {
+  .media-object > :first-child,
   .media-object__figure {
     max-width: 40%;
     margin-top: 0;
     margin-right: 1.2857142857142858em;
     float: left;
   }
+  .media-object > * > :first-child,
   .media-object__desc > :first-child {
     margin-top: 0;
   }
 }
 @media all and (min-width: 48em) {
+  .media-object > :first-child,
   .media-object__figure {
     max-width: 50%;
   }
@@ -913,16 +933,18 @@ Great for integrating images into bodies of text, the `.figure` class is
 modified by the `--left` and `--right` keywords depending on where you would 
 like it placed.
 
-@pattern: Plain Media
+````plain-media
 <figure class="figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo">
 </figure>
+````
 
-@pattern: Captioned Media
+````captioned-media
 <figure class="figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo with a caption">
     <figcaption class="figcaption">This caption enhances the photo above. It should only be a brief sentence or two long.</figcaption>
 </figure>
+````
 
 */
 .figure,
@@ -1148,49 +1170,46 @@ Tabs
 The tabs module (and accompanying plugin) creates a very basic widget that 
 allows embedding and basic styling.
 
-@pattern: Tabs
-<section class="tabs">
+````tabs
+<section class="tabs js-tabs">
     <nav role="navigation">
-        <ul class="tabs__list--x mtn">
+        <ul>
             <li>
-                <a class="js-tabs tabs__list-item"
-                 data-reveal="first-tab"
-                 data-reveal-current="true"
-                 data-reveal-group="tabbed-widget"
-                 href="#first-tab">
+                <a href="#first-tab">
                     First Tab
                 </a>
             </li>
             <li>
-                <a class="js-tabs tabs__list-item"
-                 data-reveal="second-tab"
-                 data-reveal-group="tabbed-widget"
-                 href="#second-tab">
+                <a href="#second-tab">
                     Second Tab
                 </a>
             </li>
         </ul>
     </nav>
-    <div class="tabs__section">
-        <section class="tab" id="first-tab">
+    <div>
+        <section id="first-tab">
             <h3>First Tab</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </section>
-        <section class="tab" id="second-tab">
+        <section id="second-tab">
             <h3>Second Tab</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </section>
     </div>
 </section>
+````
 
 */
+.js .tabs > nav + *,
 .js .tabs__section {
   position: relative;
   overflow: hidden;
 }
+.js .tabs > nav + * > *,
 .js .tab {
   display: none;
 }
+.js .tabs > nav + * > *.is-current,
 .js .tab.is-current {
   display: block;
 }
@@ -1224,8 +1243,9 @@ Heading styles are some of the type skins, and we start out with
 `.primary-heading` (which is also the `h`-tag default) and 
 `.secondary-heading`. Add as necessary.
 
-@pattern: Primary Heading
+````primary-heading
 <h1 class="primary-heading">Primary Heading</h1>
+````
 
 */
 h1,
@@ -1249,8 +1269,9 @@ h6,
 
 Secondary Heading
 
-@pattern: Secondary Heading
+````secondary-heading
 <h2 class="secondary-heading">Secondary Heading</h2>
+````
 
 */
 /*
@@ -1259,8 +1280,9 @@ Body Text
 
 Another type style, but this mimicks the default body text of the site.
 
-@pattern: Body Text
+````body-text
 <p>This is a paragraph of text. Some of the text may be <em>emphasised</em> and some it might even be <strong>strongly emphasised</strong>. Occasionally <q>quoted text</q> may be found within a paragraph &hellip;and of course <a href="#">a link</a> may appear at any point in the text. The average paragraph contains five or six sentences although some may contain as little or one or two while others carry on for anything up to ten sentences and beyond.</p>
+````
 
 */
 /*
@@ -1272,7 +1294,8 @@ A basic stripping of list styles.
 */
 .list--unstyled,
 [class*="list--x"],
-ul.nav--vert {
+ul.nav--vert,
+.tabs nav > ul {
   padding-left: 0;
   list-style: none outside none;
 }
@@ -1282,7 +1305,7 @@ Blockquote
 
 A basic blockquote.
 
-@pattern: Blockquote
+````blockquote
 <figure class="blockquote">
     <blockquote>
         At last we will reveal ourselves to the the Jedi. At last we will have 
@@ -1290,6 +1313,7 @@ A basic blockquote.
     </blockquote>
     <figcaption class="blockquote__cite">Darth Maul</figcaption>
 </figure>
+````
 
 */
 .blockquote {
@@ -1317,13 +1341,14 @@ number of sizes to a minimum. A nice rule of thumb is that no two sizes can one
 pixel in difference (forcing you to choose one over the other, giving you one 
 class where you previously had two).
 
-@pattern: Typographic Scale
+````typographic-scale
 <p class="canon-text">Canon Text (38px)</p>
 <p class="paragon-text">Paragon Text (30px)</p>
 <p class="primer-text">Primer Text (24px)</p>
 <p class="tertia-text">Tertia Text (18px)</p>
 <p class="normal-text">Normal Text (14px)</p>
 <p class="petite-text">Petite Text (12px)</p>
+````
 
 */
 /*
@@ -1644,10 +1669,11 @@ Default interactive button styles. This `.btn` class can be applied to `<a>`,
 `<button>`, or `<input>` elements. Button color and style classes can be combined 
 with size classes, much like the type modules.
 
-@pattern: Buttons
+````buttons
 <a class="btn" href="#">Default</a>
 <a class="btn--primary" href="#">Primary</a>
 <a class="btn--danger" href="#">Danger</a>
+````
 
 */
 .btn,
@@ -1684,26 +1710,29 @@ p > [class*="btn"] {
 }
 /*
 
-@pattern: Tiny Buttons
+````tiny-buttons
 <a class="btn--tiny" href="#">Tiny Button</a>
 <a class="btn--tiny btn--primary" href="#">Tiny Button Primary</a>
 <a class="btn--tiny btn--danger" href="#">Tiny Button Danger</a>
+````
 
 */
 /*
 
-@pattern: Small Buttons
+````small-buttons
 <a class="btn--small" href="#">Small Button</a>
 <a class="btn--small btn--primary" href="#">Small Button Primary</a>
 <a class="btn--small btn--danger" href="#">Small Button Danger</a>
+````
 
 */
 /*
 
-@pattern: Large Buttons
+````large-buttons
 <a class="btn--large" href="#">Large Button</a>
 <a class="btn--large btn--primary" href="#">Large Button Primary</a>
 <a class="btn--large btn--danger" href="#">Large Button Danger</a>
+````
 
 */
 .btn--tiny {
@@ -1822,7 +1851,7 @@ Child form elements of the `.input-label` class are given a little bit of
 spacing to separate them from the label text. (See also `.input-label` in the
 form `_type.less` file.)
 
-@pattern: Input Label Elements
+````input-label-elements
 <label class="input-label">
     Text Field
     <input type="text" name="text" placeholder="Placeholder text" required>
@@ -1837,6 +1866,7 @@ form `_type.less` file.)
         <option>Placeholder text</option>
     </select>
 </label>
+````
 
 */
 .input-label input,
@@ -2141,28 +2171,101 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     - `two-thirds`
 
 */
+.g-halves,
+.g-thirds,
+.g-quarters {
+  margin-left: -0.8571428571428571em;
+  margin-right: -0.8571428571428571em;
+  /* Pretty */
+  letter-spacing: -0.31em;
+  text-rendering: optimizespeed;
+}
+.g-halves:before,
+.g-thirds:before,
+.g-quarters:before,
+.g-halves:after,
+.g-thirds:after,
+.g-quarters:after {
+  content: "\0020";
+  height: 0;
+  display: block;
+  overflow: hidden;
+}
+.g-halves:after,
+.g-thirds:after,
+.g-quarters:after {
+  clear: both;
+}
+ul.g-halves,
+ul.g-thirds,
+ul.g-quarters {
+  padding-left: 0;
+  list-style: none outside none;
+}
+.g-halves > *,
+.g-thirds > *,
+.g-quarters > * {
+  display: inline;
+  float: left;
+  padding-left: 0.8571428571428571em;
+  padding-right: 0.8571428571428571em;
+  /* Display & Box Model */
+  display: inline-block;
+  /* Positioning */
+  float: none;
+  /* Pretty */
+  letter-spacing: normal;
+  word-spacing: normal;
+  vertical-align: top;
+  text-rendering: auto;
+}
+.g-halves > * {
+  width: 50%;
+}
+.g-thirds > * {
+  width: 33.33333%;
+}
+.g-quarters > * {
+  width: 25%;
+}
+.opera-only :-o-prefocus,
+.g-thirds {
+  word-spacing: -0.43em;
+}
 /**
  * Mobile Grid
  */
 @media all and (max-width: 47.9375em) {
-  [class*="gs-row"] {
+  [class*="gs-row"],
+  .gs-quarters,
+  .gs-thirds,
+  .gs-halves {
     margin-left: -0.8571428571428571em;
     margin-right: -0.8571428571428571em;
   }
-  .lte7 [class*="gs-row"] {
-    zoom: 1;
-  }
   [class*="gs-row"]:before,
-  [class*="gs-row"]:after {
+  [class*="gs-row"]:after,
+  .gs-quarters:before,
+  .gs-quarters:after,
+  .gs-thirds:before,
+  .gs-thirds:after,
+  .gs-halves:before,
+  .gs-halves:after {
     content: "\0020";
     height: 0;
     display: block;
     overflow: hidden;
   }
-  [class*="gs-row"]:after {
+  [class*="gs-row"]:after,
+  .gs-quarters:after,
+  .gs-thirds:after,
+  .gs-halves:after {
     clear: both;
   }
-  ul[class*="gs-row"] {
+  ul[class*="gs-row"],
+  ul.gs-quarters,
+  ul.gs-thirds,
+  ul.gs-halves {
     padding-left: 0;
     list-style: none outside none;
   }
@@ -2172,11 +2275,53 @@ all of the grids also have a few "fuzzy" shortcuts as well:
   .gs-row--ltr > [class*="gcs"] {
     float: left;
   }
-  .gs-row--flex {
+  [class*="gcs"],
+  .gs-quarters > *,
+  .gs-thirds > *,
+  .gs-halves > * {
+    display: inline;
+    float: left;
+    padding-left: 0.8571428571428571em;
+    padding-right: 0.8571428571428571em;
+  }
+  .gs-quarter,
+  .gcs-quarter,
+  .gs-quarters > * {
+    width: 25%;
+  }
+  .gs-third,
+  .gcs-third,
+  .gs-thirds > * {
+    width: 33.33333%;
+  }
+  .gs-half,
+  .gcs-half,
+  .gs-halves > * {
+    width: 50%;
+  }
+  .gs-two-thirds,
+  .gcs-two-thirds {
+    width: 66.66667%;
+  }
+  .gs-three-quarters,
+  .gcs-three-quarters {
+    width: 75%;
+  }
+  .gs-full,
+  .gcs-full {
+    width: 100%;
+  }
+  .gs-row--flex,
+  .gs-quarters,
+  .gs-thirds,
+  .gs-halves {
     letter-spacing: -0.31em;
     text-rendering: optimizespeed;
   }
-  .gs-row--flex > [class*="gcs"] {
+  .gs-row--flex > [class*="gcs"],
+  .gs-quarters > *,
+  .gs-thirds > *,
+  .gs-halves > * {
     float: none;
     display: inline-block;
     letter-spacing: normal;
@@ -2184,63 +2329,48 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     vertical-align: top;
     text-rendering: auto;
   }
-  .gs-row .opera-only :-o-prefocus,
-  .gs-row--flex {
+  .opera-only :-o-prefocus,
+  .gs-row--flex,
+  .gs-quarters,
+  .gs-thirds,
+  .gs-halves {
     word-spacing: -0.43em;
-  }
-  [class*="gcs"] {
-    display: inline;
-    float: left;
-    padding-left: 0.8571428571428571em;
-    padding-right: 0.8571428571428571em;
-  }
-  .gs-quarter,
-  [class*="s-quarter"] {
-    width: 25%;
-  }
-  .gs-third,
-  [class*="s-third"] {
-    width: 33.33333%;
-  }
-  .gs-half,
-  [class*="s-half"] {
-    width: 50%;
-  }
-  .gs-two-thirds,
-  [class*="s-two-thirds"] {
-    width: 66.66667%;
-  }
-  .gs-three-quarters,
-  [class*="s-three-quarters"] {
-    width: 75%;
-  }
-  .gs-full,
-  [class*="s-full"] {
-    width: 100%;
   }
 }
 /**
  * Tablet Grid
  */
 @media all and (min-width: 48em) and (max-width: 61.9375em) {
-  [class*="gm-row"] {
+  [class*="gm-row"],
+  .gm-quarters,
+  .gm-thirds,
+  .gm-halves {
     margin-left: -1.1428571428571428em;
     margin-right: -1.1428571428571428em;
   }
-  .lte7 [class*="gm-row"] {
-    zoom: 1;
-  }
   [class*="gm-row"]:before,
-  [class*="gm-row"]:after {
+  [class*="gm-row"]:after,
+  .gm-quarters:before,
+  .gm-quarters:after,
+  .gm-thirds:before,
+  .gm-thirds:after,
+  .gm-halves:before,
+  .gm-halves:after {
     content: "\0020";
     height: 0;
     display: block;
     overflow: hidden;
   }
-  [class*="gm-row"]:after {
+  [class*="gm-row"]:after,
+  .gm-quarters:after,
+  .gm-thirds:after,
+  .gm-halves:after {
     clear: both;
   }
-  ul[class*="gm-row"] {
+  ul[class*="gm-row"],
+  ul.gm-quarters,
+  ul.gm-thirds,
+  ul.gm-halves {
     padding-left: 0;
     list-style: none outside none;
   }
@@ -2250,58 +2380,48 @@ all of the grids also have a few "fuzzy" shortcuts as well:
   .gm-row--ltr > [class*="gcm"] {
     float: left;
   }
-  .gm-row--flex {
-    letter-spacing: -0.31em;
-    text-rendering: optimizespeed;
-  }
-  .gm-row--flex > [class*="gcm"] {
-    float: none;
-    display: inline-block;
-    letter-spacing: normal;
-    word-spacing: normal;
-    vertical-align: top;
-    text-rendering: auto;
-  }
-  .gm-row .opera-only :-o-prefocus,
-  .gm-row--flex {
-    word-spacing: -0.43em;
-  }
-  [class*="gcm"] {
+  [class*="gcm"],
+  .gm-quarters > *,
+  .gm-thirds > *,
+  .gm-halves > * {
     display: inline;
     float: left;
     padding-left: 1.1428571428571428em;
     padding-right: 1.1428571428571428em;
   }
   .gm-quarter,
-  [class*="m-quarter"],
-  [class*="m-2of8"] {
+  .gcm-quarter,
+  [class*="m-2of8"],
+  .gm-quarters > * {
     width: 25%;
   }
   .gm-third,
-  [class*="m-third"],
+  .gcm-third,
   [class*="m-3of9"],
-  [class*="m-2of6"] {
+  [class*="m-2of6"],
+  .gm-thirds > * {
     width: 33.33333%;
   }
   .gm-half,
-  [class*="m-half"],
+  .gcm-half,
   [class*="m-4of8"],
-  [class*="m-3of6"] {
+  [class*="m-3of6"],
+  .gm-halves > * {
     width: 50%;
   }
   .gm-two-thirds,
-  [class*="m-two-thirds"],
+  .gcm-two-thirds,
   [class*="m-6of9"],
   [class*="m-4of6"] {
     width: 66.66667%;
   }
   .gm-three-quarters,
-  [class*="m-three-quarters"],
+  .gcm-three-quarters,
   [class*="m-6of8"] {
     width: 75%;
   }
   .gm-full,
-  [class*="m-full"] {
+  .gcm-full {
     width: 100%;
   }
   [class*="m-8of9"] {
@@ -2370,43 +2490,68 @@ all of the grids also have a few "fuzzy" shortcuts as well:
   [class*="m-1of5"] {
     width: 20%;
   }
+  .gm-row--flex,
+  .gm-quarters,
+  .gm-thirds,
+  .gm-halves {
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+  }
+  .gm-row--flex > [class*="gcm"],
+  .gm-quarters > *,
+  .gm-thirds > *,
+  .gm-halves > * {
+    float: none;
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+  }
+  .opera-only :-o-prefocus,
+  .gm-row--flex,
+  .gm-quarters,
+  .gm-thirds,
+  .gm-halves {
+    word-spacing: -0.43em;
+  }
 }
 /**
  * Desktop Grid
  */
 /*
 
-@pattern: Desktop Grid
-<div class="gl-row">
-    <div class="gcl-quarter">
+````desktop-grid
+<div class="gl-quarters">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
-    <div class="gcl-quarter">
+    <div>
         <div class="block">Quarter</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-third">
+<div class="gl-thirds">
+    <div>
         <div class="block">Third</div>
     </div>
-    <div class="gcl-third">
+    <div>
         <div class="block">Third</div>
     </div>
-    <div class="gcl-third">
+    <div>
         <div class="block">Third</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-half">
+<div class="gl-halves">
+    <div>
         <div class="block">Half</div>
     </div>
-    <div class="gcl-half">
+    <div>
         <div class="block">Half</div>
     </div>
 </div>
@@ -2426,90 +2571,42 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         <div class="block">Quarter</div>
     </div>
 </div>
+````
 
 */
 @media all and (min-width: 62em) {
-  [class*="gl-row"] {
+  [class*="gl-row"],
+  .gl-quarters,
+  .gl-thirds,
+  .gl-halves {
     margin-left: -1.2857142857142858em;
     margin-right: -1.2857142857142858em;
   }
-  .lte7 [class*="gl-row"] {
-    zoom: 1;
-  }
   [class*="gl-row"]:before,
-  [class*="gl-row"]:after {
+  [class*="gl-row"]:after,
+  .gl-quarters:before,
+  .gl-quarters:after,
+  .gl-thirds:before,
+  .gl-thirds:after,
+  .gl-halves:before,
+  .gl-halves:after {
     content: "\0020";
     height: 0;
     display: block;
     overflow: hidden;
   }
-  [class*="gl-row"]:after {
+  [class*="gl-row"]:after,
+  .gl-quarters:after,
+  .gl-thirds:after,
+  .gl-halves:after {
     clear: both;
   }
-  ul[class*="gl-row"] {
+  ul[class*="gl-row"],
+  ul.gl-quarters,
+  ul.gl-thirds,
+  ul.gl-halves {
     padding-left: 0;
     list-style: none outside none;
-  }
-  .gl-row {
-    /*
-
-Media Grid
-
-The Media Grid allows you to place a grid of photos or videos (catalog or 
-retail products, etc.) without floating them, alleviating the need to concern 
-yourself with clearing the floats with rows should an object extend further 
-than another. Also, because they are not floating, it allows you to align 
-the entire group center, making sure any "orphaned" grid entries are centered.
-
-The syntax is simply the same as the regular responsive grid system, except
-the row class has a `--flex` modifier.
-
-*/
-    /*
-
-@pattern: Media Grid
-<ul class="gs-row--flex gm-row--flex gl-row--flex">
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-</ul>
-
-*/
   }
   .gl-row--rtl > [class*="gcl"] {
     float: right;
@@ -2517,64 +2614,54 @@ the row class has a `--flex` modifier.
   .gl-row--ltr > [class*="gcl"] {
     float: left;
   }
-  .gl-row--flex {
-    letter-spacing: -0.31em;
-    text-rendering: optimizespeed;
-  }
-  .gl-row--flex > [class*="gcl"] {
-    float: none;
-    display: inline-block;
-    letter-spacing: normal;
-    word-spacing: normal;
-    vertical-align: top;
-    text-rendering: auto;
-  }
-  .gl-row .opera-only :-o-prefocus,
-  .gl-row--flex {
-    word-spacing: -0.43em;
-  }
-  [class*="gcl"] {
+  [class*="gcl"],
+  .gl-quarters > *,
+  .gl-thirds > *,
+  .gl-halves > * {
     display: inline;
     float: left;
     padding-left: 1.2857142857142858em;
     padding-right: 1.2857142857142858em;
   }
   .gl-quarter,
-  [class*="l-quarter"],
+  .gcl-quarter,
   [class*="l-3of12"],
-  [class*="l-2of8"] {
+  [class*="l-2of8"],
+  .gl-quarters > * {
     width: 25%;
   }
   .gl-third,
-  [class*="l-third"],
+  .gcl-third,
   [class*="l-4of12"],
   [class*="l-3of9"],
-  [class*="l-2of6"] {
+  [class*="l-2of6"],
+  .gl-thirds > * {
     width: 33.33333%;
   }
   .gl-half,
-  [class*="l-half"],
+  .gcl-half,
   [class*="l-6of12"],
   [class*="l-5of10"],
   [class*="l-4of8"],
-  [class*="l-3of6"] {
+  [class*="l-3of6"],
+  .gl-halves > * {
     width: 50%;
   }
   .gl-two-thirds,
-  [class*="l-two-thirds"],
+  .gcl-two-thirds,
   [class*="l-8of12"],
   [class*="l-6of9"],
   [class*="l-4of6"] {
     width: 66.66667%;
   }
   .gl-three-quarters,
-  [class*="l-three-quarters"],
+  .gcl-three-quarters,
   [class*="l-9of12"],
   [class*="l-6of8"] {
     width: 75%;
   }
   .gl-full,
-  [class*="l-full"] {
+  .gcl-full {
     width: 100%;
   }
   [class*="l-11of12"] {
@@ -2715,6 +2802,88 @@ the row class has a `--flex` modifier.
   [class*="l-1of5"] {
     width: 20%;
   }
+  /*
+
+Media Grid
+
+The Media Grid allows you to place a grid of photos or videos (catalog or 
+retail products, etc.) without floating them, alleviating the need to concern 
+yourself with clearing the floats with rows should an object extend further 
+than another. Also, because they are not floating, it allows you to align 
+the entire group center, making sure any "orphaned" grid entries are centered.
+
+The syntax is simply the same as the regular responsive grid system, except
+the row class has a `--flex` modifier.
+
+````media-grid
+<ul class="gs-halves gm-thirds gl-quarters">
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+    <li>
+        <figure class="figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+</ul>
+````
+
+*/
+  .gl-row--flex,
+  .gl-quarters,
+  .gl-thirds,
+  .gl-halves {
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+  }
+  .gl-row--flex > [class*="gcl"],
+  .gl-quarters > *,
+  .gl-thirds > *,
+  .gl-halves > * {
+    float: none;
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+  }
+  .opera-only :-o-prefocus,
+  .gl-row--flex,
+  .gl-quarters,
+  .gl-thirds,
+  .gl-halves {
+    word-spacing: -0.43em;
+  }
 }
 @media all and (max-width: 47.9375em) {
   /*
@@ -2810,7 +2979,7 @@ Undoes table to more of a definition list on smaller viewports.
 
 See: http://codepen.io/aarongustafson/pen/ucJGv
 
-@pattern: Tables
+````tables
 <table>
     <thead>
         <tr>
@@ -2841,6 +3010,7 @@ See: http://codepen.io/aarongustafson/pen/ucJGv
         </tr>
     </tbody>
 </table>
+````
 
 */
 table {
@@ -2900,7 +3070,7 @@ Used to provide messaging to the user, whether it be direct or through calls to
 action. The panel typically indicates a visual separation and implied 
 sub-grouping of its content.
 
-@pattern: Panels
+```panels
 <div class="panel">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -2909,6 +3079,7 @@ sub-grouping of its content.
 <div class="panel">
     <p>This is a feedback panel with no heading.</p>
 </div>
+````
 
 */
 .panel,
@@ -2954,7 +3125,7 @@ This variation of the standard `.panel` is used specifically for delivering
 direct messages to the user, whether they be informative, complimentary, 
 or preventative.
 
-@pattern: Info Alert Panels
+````info-alert-panels
 <div class="alert-panel--info">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
@@ -2963,11 +3134,12 @@ or preventative.
 <div class="alert-panel--info">
     <p>This is an alert panel with no heading.</p>
 </div>
+````
 
 */
 /*
 
-@pattern: Error Alert Panels
+````error-alert-panels
 <div class="alert-panel--error">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
@@ -2976,11 +3148,12 @@ or preventative.
 <div class="alert-panel--error">
     <p>This is an alert panel with no heading.</p>
 </div>
+````
 
 */
 /*
 
-@pattern: Success Alert Panels
+````success-alert-panels
 <div class="alert-panel--success">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
@@ -2989,6 +3162,7 @@ or preventative.
 <div class="alert-panel--success">
     <p>This is an alert panel with no heading.</p>
 </div>
+````
 
 */
 [class*="alert-panel"] {
@@ -3210,6 +3384,7 @@ body,
 a,
 .link,
 [class*="btn"],
+.tabs nav > ul a,
 .tabs__list--x a,
 .tabs__list--x--forceful a,
 .list--x--pgs a[href],
@@ -3245,6 +3420,7 @@ h6,
 a,
 .link,
 [class*="btn"],
+.tabs nav > ul a,
 .tabs__list--x a,
 .tabs__list--x--forceful a,
 .list--x--pgs a[href] {
@@ -3397,7 +3573,7 @@ Buttons
 
 Panels
 
-@pattern: Panels Alt
+````panels-alt
 <div class="panel--alt">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -3406,13 +3582,9 @@ Panels
 <div class="panel--alt">
     <p>This is a feedback panel with no heading.</p>
 </div>
+````
 
-*/
-/*
-
-Panels
-
-@pattern: Panels Inverse
+````panels-inverse
 <div class="panel--inverse">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -3421,6 +3593,7 @@ Panels
 <div class="panel--inverse">
     <p>This is a feedback panel with no heading.</p>
 </div>
+````
 
 */
 .panel,
@@ -3507,7 +3680,7 @@ Nav Bar
 
 A quick navigation bar, typically good for prototyping the main menu of a site.
 
-@pattern: Nav Bar
+````nav-bar
 <nav class="nav-bar--menu" role="navigation">
     <h3 class="nav-bar__title pre-icon--rows js-expand"
      id="reveal-main-nav"
@@ -3532,6 +3705,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         </li>
     </ul>
 </nav>
+````
 
 */
 .nav-bar__title {
@@ -3567,11 +3741,13 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 }
 @media all and (min-width: 30em) {
   [class*="nav-bar__list"] > li,
-  [class*="nav-bar__list"] [class*="list--x"] > li {
+  [class*="nav-bar__list"] [class*="list--x"] > li,
+  [class*="nav-bar__list"] .tabs nav > ul > li {
     width: 50%;
   }
   [class*="nav-bar__list"] > li:nth-child( odd ),
-  [class*="nav-bar__list"] [class*="list--x"] > li:nth-child( odd ) {
+  [class*="nav-bar__list"] [class*="list--x"] > li:nth-child( odd ),
+  [class*="nav-bar__list"] .tabs nav > ul > li:nth-child( odd ) {
     clear: both;
   }
   .nav-bar__link {
@@ -3592,11 +3768,13 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
     background: #1f75ae;
   }
   [class*="nav-bar__list"] > li,
-  [class*="nav-bar__list"] [class*="list--x"] > li {
+  [class*="nav-bar__list"] [class*="list--x"] > li,
+  [class*="nav-bar__list"] .tabs nav > ul > li {
     width: auto;
   }
   [class*="nav-bar__list"] > li:nth-child( odd ),
-  [class*="nav-bar__list"] [class*="list--x"] > li:nth-child( odd ) {
+  [class*="nav-bar__list"] [class*="list--x"] > li:nth-child( odd ),
+  [class*="nav-bar__list"] .tabs nav > ul > li:nth-child( odd ) {
     clear: none;
   }
 }
@@ -3604,7 +3782,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 Vertical Nav
 
-@pattern: Vertical Nav
+````vertical-nav
 <ul class="nav--vert">
     <li>
         <a href="#">Nav Link</a>
@@ -3636,6 +3814,7 @@ Vertical Nav
         <a href="#">Nav Link</a>
     </li>
 </ul>
+````
 
 */
 .nav--vert a {
@@ -3680,11 +3859,13 @@ Tabs
 .tabs {
   margin-top: 1.4285714285714286em;
 }
+.tabs nav > ul,
 .tabs__list--x,
 .tabs__list--x--forceful {
   border-bottom: 1px solid #dddddd;
   margin-bottom: 1.4285714285714286em;
 }
+.tabs nav > ul a,
 .tabs__list--x a,
 .tabs__list--x--forceful a {
   /* Extends .lato-bold */
@@ -3704,12 +3885,15 @@ Tabs
   z-index: 30;
   border: 1px solid transparent;
 }
+.tabs nav > ul a:hover,
 .tabs__list--x a:hover,
 .tabs__list--x--forceful a:hover,
+.tabs nav > ul a:focus,
 .tabs__list--x a:focus,
 .tabs__list--x--forceful a:focus {
   color: #262626;
 }
+.tabs nav > ul .is-current,
 .tabs__list--x .is-current,
 .tabs__list--x--forceful .is-current {
   color: #262626;
@@ -3718,12 +3902,14 @@ Tabs
   border-bottom-color: transparent;
   z-index: 60;
 }
+.js.csstransitions .tabs > nav + *,
 .js.csstransitions .tabs__section {
   -webkit-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   -moz-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   -o-transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: height 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
+.tabs > nav + * > * > :first-child,
 .tabs .tab > :first-child {
   margin-top: 0;
 }
