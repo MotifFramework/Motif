@@ -162,3 +162,37 @@ and floating it and the ordered list.
             margin-right: @half-side;
         }
 }
+
+/*
+
+Button List
+
+````button-list
+<ul class="button-list--x">
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary is-current" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+</ul>
+````
+
+*/
+
+[class*="button-list--x"] {
+    &:extend( .group );
+
+    li,
+    a {
+        display: block;
+    }
+
+    li {
+        float: left;
+    }
+
+}

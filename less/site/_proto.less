@@ -240,11 +240,13 @@ Buttons
 
     &,
     &:hover,
-    &:focus {
+    &:focus,
+    &.is-current {
         color: @light-black;
     }
     &:hover,
-    &:focus {
+    &:focus,
+    &.is-current {
         background-color: darken(@grey-3, 5%);
         border-color: @grey-1;
     }
@@ -602,6 +604,32 @@ Breadcrumb
         }
 }
 
+/*
+
+Button List
+
+*/
+
+[class*="button-list--x"] {
+
+    li {
+        &:not(:first-child) a {
+            .border-radius-left( 0 );
+        }
+
+        &:not(:last-child) a {
+            .border-radius-right( 0 );
+        }
+    }
+    a {
+        border-left-width: 0;
+    }
+    li:first-child a {
+        border-left-width: 1px;
+    }
+
+}
+
 
 /*
 
@@ -820,4 +848,35 @@ Input Alerts
         // Create
         border: @1px solid @grey;
     }
+}
+
+.attached-icon__before,
+.attached-icon__after {
+
+    &,
+    button&,
+    input& {
+        padding-top: @half-vertical;
+        padding-bottom: @half-vertical;
+    }
+    
+    line-height: 1.5;
+}
+.attached-icon__before {
+
+    // Vars
+    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
+
+    // Mixins
+    .border-radius-left( @radius );
+    .border-radius-right( 0 );
+}
+.attached-icon__after {
+
+    // Vars
+    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
+
+    // Mixins
+    .border-radius-right( @radius );
+    .border-radius-left( 0 );
 }

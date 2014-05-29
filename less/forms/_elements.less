@@ -180,7 +180,7 @@ Form Modules
 .attached-icon--pre,
 .attached-icon--both {
     .attached-icon__input {
-        padding-left: @55px;
+        padding-left: @45px;
     }
 }
 .attached-icon--post,
@@ -192,35 +192,27 @@ Form Modules
 .attached-icon__before,
 .attached-icon__after {
     width: @45px;
+    // height: 100%;
     margin: 0;
-    padding: @half-vertical;
+    padding: @5px 0;
     text-align: center;
+    color: @grey;
     position: absolute;
     top: 0;
-    // bottom: 0;
     z-index: 50;
+    line-height: normal;
+
+    &:before {
+        display: block;
+    }
+    button&,
+    input& {
+        padding: @3px 0;
+    }
 }
 .attached-icon__before {
-
-    // Vars
-    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
-
-    // Mixins
-    .border-radius-left( @radius );
-    .border-radius-right( 0 );
-
-    /* Positioning */
     left: 0;
 }
 .attached-icon__after {
-
-    // Vars
-    @radius: ( 1em * ( @default-border-radius / @base-text-size ) );
-
-    // Mixins
-    .border-radius-right( @radius );
-    .border-radius-left( 0 );
-
-    /* Positioning */
     right: 0;
 }
