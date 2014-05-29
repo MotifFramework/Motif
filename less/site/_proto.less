@@ -292,7 +292,7 @@ Panels
 .panel,
 [class*="panel-"],
 [class*="-panel"] {
-    .border-radius( @3px );
+    .border-radius( @default-radius );
 
     color: @light-black;
     border: 1px solid @grey-2;
@@ -654,7 +654,7 @@ Tabs
             &:extend( .lato-bold );
 
             // Mixins
-            .border-radius-top( @3px );
+            .border-radius-top( @default-radius );
 
             padding: @half-vertical @full-side;
             color: @grey-2;
@@ -839,12 +839,7 @@ Input Alerts
 
 .no-boxshadow {
     .bubble {
-
-        // Variables
-        @1px: 1em * (1 / @base-text-size);
-    
-        // Create
-        border: @1px solid @grey;
+        border: 1px solid @grey;
     }
 }
 
