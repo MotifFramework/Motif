@@ -51,11 +51,12 @@ with size classes, much like the type modules.
     p > & {
         margin-top: 0;
     }
-}
-[class*="btn"]:hover,
-[class*="btn"]:focus,
-.btn--is-current {
-    background: lighten( @light-grey, 10% );
+    
+    &:hover,
+    &:focus,
+    &.is-current {
+        background: lighten( @light-grey, 10% );
+    }
 }
 
 /*

@@ -5,11 +5,13 @@
 
     &,
     &:hover,
-    &:focus {
+    &:focus,
+    &.is-current {
         color: @color;
     }
     &:hover,
-    &:focus {
+    &:focus,
+    &.is-current {
         background-color: darken(@background, 15%);
         border-color: darken(@border, 15%);
     }

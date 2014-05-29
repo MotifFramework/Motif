@@ -140,3 +140,63 @@ simply consistent across viewports. These are those.
 .input--l {
     max-width: @350px;
 }
+
+/*
+
+Form Modules
+
+````attached-label-before
+<label class="attached-label">
+    <small class="label">$</small>
+    <input type="num" id="attached-label-before" required>
+</label>
+````
+
+````attached-label-after
+<label class="attached-label">
+    <input type="text" id="attached-label-after" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-before-and-after
+<label class="attached-label">
+    <small class="label">www.</small>
+    <input type="text" id="attached-label" placeholder="domain" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-submit
+<form class="attached-label">
+    <label class="is-hidden" for="attached-label-submit">Search</label>
+    <input type="search" id="attached-label-submit" required>
+    <div>
+        <button type="submit" class="btn--primary icon--search">
+            <b class="is-hidden">Submit</b>
+        </button>
+    </div>
+</form>
+````
+
+*/
+
+.attached-label {
+    display: table;
+    overflow: hidden;
+
+    > * {
+        margin-top: 0;
+        display: table-cell;
+        vertical-align: middle;
+
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+
+    [class*="btn"] {
+        display: block;
+        width: 100%;
+    }
+}
