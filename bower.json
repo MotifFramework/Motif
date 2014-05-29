@@ -3,6 +3,9 @@
   "version": "3.2.0",
   "homepage": "http://getmotif.com",
   "description": "A responsive front-end framework to tell your story.",
+  "authors": [
+    "Lifeblue <motif@lifeblue.com>"
+  ],
   "main": [
     "less/global.less",
     "js/actions.js",
