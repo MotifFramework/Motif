@@ -55,14 +55,16 @@ module.exports = function ( grunt ) {
 
                     // Build Global JS
                     "<%= build.js %><%= pkg.name %>.js": [
-                        "<%= source.js %>vendor/jquery-2.1.0.js",
-                        "<%= source.js %>vendor/requestAnimFrame.js",
-                        "<%= source.js %>utils/motif.utils.plugins.js",
-                        "<%= source.js %>forms/motif.gauntlet.js",
-                        "<%= source.js %>forms/motif.ajax-submission.js",
-                        "<%= source.js %>ui/motif.reveal.js",
-                        "<%= source.js %>ui/motif.tabs.js",
-                        "<%= source.js %>vendor/holder.js",
+                        // "<%= source.js %>vendor/jquery-2.1.0.js",
+                        // "<%= source.js %>vendor/requestAnimFrame.js",
+                        // "<%= source.js %>utils/motif.utils.plugins.js",
+                        "<%= source.js %>utils/motif.utils.js",
+                        "<%= source.js %>images/motif.bg.temp.js",
+                        // "<%= source.js %>forms/motif.gauntlet.js",
+                        // "<%= source.js %>forms/motif.ajax-submission.js",
+                        // "<%= source.js %>ui/motif.reveal.js",
+                        // "<%= source.js %>ui/motif.tabs.js",
+                        // "<%= source.js %>vendor/holder.js",
                         "<%= source.js %>actions.js"
                     ],
 

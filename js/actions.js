@@ -2,7 +2,7 @@
  * Sample actions execution file
  */
 
-(function ( $, window, document, Motif, undefined ) {
+(function ( window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -12,38 +12,39 @@
     };
 
     App.prototype.initUI = function () {
-        $(".js-tabs").plugin("tabs", {
-            "cssTransition": Modernizr.csstransitions
-        });
-        $(".canvas-trigger").plugin("reveal", {
-            "type": "exclusive",
-            "activeClass": "is-active",
-            "visitedClass": "was-active"
-        });
-        $(".js-reveal").plugin("reveal", {
-            "type": "exclusive",
-            "activeClass": "is-revealed",
-            "visitedClass": "was-revealed"
-        });
-        $(".js-fade").plugin("reveal", {
-            "activeClass": "is-faded",
-            "visitedClass": "was-faded"
-        });
-        $(".js-expand").plugin("reveal", {
-            "type": "exclusive",
-            "activeClass": "is-expanded",
-            "visitedClass": "was-expanded"
-        });
+        var bgs = new Motif.apps.BackgroundCover("[data-img]");
+        // $(".js-tabs").plugin("tabs", {
+        //     "cssTransition": Modernizr.csstransitions
+        // });
+        // $(".canvas-trigger").plugin("reveal", {
+        //     "type": "exclusive",
+        //     "activeClass": "is-active",
+        //     "visitedClass": "was-active"
+        // });
+        // $(".js-reveal").plugin("reveal", {
+        //     "type": "exclusive",
+        //     "activeClass": "is-revealed",
+        //     "visitedClass": "was-revealed"
+        // });
+        // $(".js-fade").plugin("reveal", {
+        //     "activeClass": "is-faded",
+        //     "visitedClass": "was-faded"
+        // });
+        // $(".js-expand").plugin("reveal", {
+        //     "type": "exclusive",
+        //     "activeClass": "is-expanded",
+        //     "visitedClass": "was-expanded"
+        // });
     };
 
     App.prototype.initForms = function () {
-        $("[data-validation='ajax']").plugin("ajaxSubmission");
-        $("[data-validation='true']").plugin("gauntlet");
+        // $("[data-validation='ajax']").plugin("ajaxSubmission");
+        // $("[data-validation='true']").plugin("gauntlet");
     };
 
     new App();
 
-}( jQuery, window, document, window.Motif = window.Motif || {
+}( window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );

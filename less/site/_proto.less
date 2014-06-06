@@ -61,11 +61,11 @@ Font Faces
 //     .web-font("Lato Black", lato, LatoLatinBlack-Regular);
 // }
 
-/* 
+/*
 
 Applied Font Faces
 
-These classes based on every typeface used on the project, including many which were 
+These classes based on every typeface used on the project, including many which were
 embedded via `@font-face` declarations.
 
 */
@@ -226,7 +226,7 @@ Buttons
 */
 
 [class*="btn"] {
-    
+
     // Extends
     &:extend( .lato-bold );
 
@@ -440,7 +440,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         color: @white;
         text-decoration: none;
         padding: @half-vertical 4%;
-        
+
         &:hover,
         &:focus,
         &.is-current {
@@ -453,7 +453,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 }
 [class*="nav-bar__list"] {
     margin: 0;
-    
+
     // Mixins
     background: @blue-1;
 
@@ -572,11 +572,11 @@ Vertical Nav
     li ul {
         margin: 0;
         padding: 0 0 0 @full-side;
-    
+
         li {
             list-style: none outside none;
         }
-    } 
+    }
 }
 
 
@@ -750,7 +750,7 @@ Messaging
     &:after {
         position: absolute;
         border: @wisp-width solid transparent;
-    
+
         // Mixins
         .pseudo-clear();
     }
@@ -814,7 +814,7 @@ Input Alerts
 
     padding: @quarter-vertical @half-vertical;
     color: @white;
-    
+
     &:after {
         left: @half-vertical;
         margin-left: 0;
@@ -892,3 +892,39 @@ Form Modules
         border-right: none;
     }
 }
+
+[data-img] {
+    /* background-image, etc. */
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 300px;
+}
+.fake-bg-wrapper {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: -1;
+}
+.fake-bg-is-ready.fake-bg-wrapper {
+    top: 0;
+    bottom: 0;
+}
+    .fake-bg-image {
+        max-width: none;
+
+        .fake-bg-is-ready & {
+            position: absolute;
+            top: auto;
+            bottom: 0;
+        }
+    }
+    .fake-bg-top-offset .fake-bg-image {
+        width: 100%;
+        height: auto;
+    }
+    .fake-bg-left-offset .fake-bg-image {
+        width: auto;
+        height: 100%;
+    }
