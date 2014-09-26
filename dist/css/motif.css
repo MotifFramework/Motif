@@ -544,6 +544,7 @@ Turns an `inline` or `inline-block` element into a `block` one.
 
 */
 .new-line,
+.media-object,
 .media-object > *,
 .media-object > :first-child img,
 .media-object__figure img,
@@ -863,6 +864,36 @@ and floating it and the ordered list.
 }
 .breadcrumb li {
   margin-right: 0.6428571428571429em;
+}
+/*
+
+Button List
+
+````button-list
+<ul class="button-list--x">
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary is-current" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+</ul>
+````
+
+*/
+[class*="button-list--x"] {
+  margin-top: 0;
+  overflow: hidden;
+}
+[class*="button-list--x"] li,
+[class*="button-list--x"] a {
+  display: block;
+}
+[class*="button-list--x"] li {
+  float: left;
 }
 /*
 
@@ -1361,7 +1392,7 @@ Canon Text
 .wysiwyg .canon-text {
   font-size: 38px;
   font-size: 2.375rem;
-  line-height: 1.0526315789473684;
+  line-height: 1.1842105263157894;
 }
 /*
 
@@ -1373,7 +1404,7 @@ Paragon Text
 .wysiwyg .paragon-text {
   font-size: 30px;
   font-size: 1.875rem;
-  line-height: 1;
+  line-height: 1.1666666666666667;
 }
 /*
 
@@ -1383,7 +1414,7 @@ Primer Text
 [class*="primer-text"] {
   font-size: 24px;
   font-size: 1.5rem;
-  line-height: 1.0416666666666667;
+  line-height: 1.25;
 }
 /*
 
@@ -1393,7 +1424,7 @@ Tertia Text
 [class*="tertia-text"] {
   font-size: 18px;
   font-size: 1.125rem;
-  line-height: 1.1111111111111112;
+  line-height: 1.3888888888888888;
 }
 /*
 
@@ -1466,6 +1497,7 @@ textarea {
   font-size: 1em;
   font-weight: normal;
   font-style: normal;
+  line-height: 1;
   text-decoration: none;
   text-rendering: optimizeLegibility;
   text-transform: none;
@@ -1703,9 +1735,12 @@ p > .btn,
 p > [class*="btn"] {
   margin-top: 0;
 }
+.btn:hover,
 [class*="btn"]:hover,
+.btn:focus,
 [class*="btn"]:focus,
-.btn--is-current {
+.btn.is-current,
+[class*="btn"].is-current {
   background: #e8e7e7;
 }
 /*
@@ -1915,6 +1950,61 @@ simply consistent across viewports. These are those.
 }
 .input--l {
   max-width: 25em;
+}
+/*
+
+Form Modules
+
+````attached-label-before
+<label class="attached-label">
+    <small class="label">$</small>
+    <input type="num" id="attached-label-before" required>
+</label>
+````
+
+````attached-label-after
+<label class="attached-label">
+    <input type="text" id="attached-label-after" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-before-and-after
+<label class="attached-label">
+    <small class="label">www.</small>
+    <input type="text" id="attached-label" placeholder="domain" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-submit
+<form class="attached-label">
+    <label class="is-hidden" for="attached-label-submit">Search</label>
+    <input type="search" id="attached-label-submit" required>
+    <div>
+        <button type="submit" class="btn--primary icon--search">
+            <b class="is-hidden">Submit</b>
+        </button>
+    </div>
+</form>
+````
+
+*/
+.attached-label {
+  display: table;
+  overflow: hidden;
+}
+.attached-label > * {
+  margin-top: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+.attached-label > * > :first-child {
+  margin-top: 0;
+}
+.attached-label [class*="btn"] {
+  display: block;
+  width: 100%;
 }
 /*
 
@@ -3482,7 +3572,8 @@ input,
 textarea {
   padding: 0.7142857142857143em 1.2857142857142858em;
   background: #ffffff;
-  border: 0.07142857142857142em solid #dddddd;
+  border: 1px solid #dddddd;
+  line-height: normal;
   -webkit-border-radius: 0.21428571428571427em;
   -moz-border-radius: 0.21428571428571427em;
   -o-border-radius: 0.21428571428571427em;
@@ -3504,7 +3595,7 @@ textarea.is-current {
 }
 textarea {
   /* Display & Box Model */
-  height: 10.5em;
+  min-height: 10.5em;
 }
 /*
 
@@ -3521,11 +3612,13 @@ Buttons
 }
 [class*="btn"],
 [class*="btn"]:hover,
-[class*="btn"]:focus {
+[class*="btn"]:focus,
+[class*="btn"].is-current {
   color: #262626;
 }
 [class*="btn"]:hover,
-[class*="btn"]:focus {
+[class*="btn"]:focus,
+[class*="btn"].is-current {
   background-color: #e8e8ee;
   border-color: #a9a6a7;
 }
@@ -3539,13 +3632,17 @@ Buttons
 .btn--blue:hover,
 .btn--primary:hover,
 .btn--blue:focus,
-.btn--primary:focus {
+.btn--primary:focus,
+.btn--blue.is-current,
+.btn--primary.is-current {
   color: #ffffff;
 }
 .btn--blue:hover,
 .btn--primary:hover,
 .btn--blue:focus,
-.btn--primary:focus {
+.btn--primary:focus,
+.btn--blue.is-current,
+.btn--primary.is-current {
   background-color: #13496d;
   border-color: #081e2c;
 }
@@ -3559,13 +3656,17 @@ Buttons
 .btn--red:hover,
 .btn--danger:hover,
 .btn--red:focus,
-.btn--danger:focus {
+.btn--danger:focus,
+.btn--red.is-current,
+.btn--danger.is-current {
   color: #ffffff;
 }
 .btn--red:hover,
 .btn--danger:hover,
 .btn--red:focus,
-.btn--danger:focus {
+.btn--danger:focus,
+.btn--red.is-current,
+.btn--danger.is-current {
   background-color: #bd1829;
   border-color: #79101a;
 }
@@ -3853,6 +3954,37 @@ Breadcrumb
 }
 /*
 
+Button List
+
+*/
+[class*="button-list--x"] li:not(:first-child) a {
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  -moz-border-radius-topleft: 0;
+  -o-border-bottom-left-radius: 0;
+  -o-border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+[class*="button-list--x"] li:not(:last-child) a {
+  -webkit-border-bottom-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+  -moz-border-radius-bottomright: 0;
+  -moz-border-radius-topright: 0;
+  -o-border-bottom-right-radius: 0;
+  -o-border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+[class*="button-list--x"] a {
+  border-left-width: 0;
+}
+[class*="button-list--x"] li:first-child a {
+  border-left-width: 1px;
+}
+/*
+
 Tabs
 
 */
@@ -4052,37 +4184,48 @@ Input Alerts
 }
 .no-boxshadow .bubble,
 .no-boxshadow [class*="input-alert"] {
-  border: 0.07142857142857142em solid #a9a6a7;
+  border: 1px solid #a9a6a7;
 }
 /*
 
 Form Modules
 
 */
-.search .input {
-  /* Mixins */
-  -webkit-border-bottom-right-radius: 0;
-  -webkit-border-top-right-radius: 0;
-  -moz-border-radius-bottomright: 0;
-  -moz-border-radius-topright: 0;
-  -o-border-bottom-right-radius: 0;
-  -o-border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  /* Display & Box Model */
-  float: left;
+.attached-label {
+  -webkit-border-radius: 0.21428571428571427em;
+  -moz-border-radius: 0.21428571428571427em;
+  -o-border-radius: 0.21428571428571427em;
+  border-radius: 0.21428571428571427em;
+  /* Pretty */
+  border: 1px solid #dddddd;
 }
-.search .submit {
-  /* Mixins */
-  -webkit-border-bottom-left-radius: 0;
-  -webkit-border-top-left-radius: 0;
-  -moz-border-radius-bottomleft: 0;
-  -moz-border-radius-topleft: 0;
-  -o-border-bottom-left-radius: 0;
-  -o-border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  /* Display & Box Model */
-  margin: 0;
-  float: left;
+.attached-label:hover,
+.attached-label:focus,
+.attached-label:active,
+.attached-label.is-current {
+  border-color: #837f81;
+}
+.attached-label .label {
+  text-align: center;
+  padding: 0 1.2857142857142858em;
+  background-color: #f7f7f9;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+}
+.attached-label .label:first-child,
+.attached-label .label + input {
+  border-left: none;
+}
+.attached-label input,
+.attached-label [class*="btn"] {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  /* Pretty */
+  border: none;
+}
+.attached-label input + .label,
+.attached-label .label:last-child {
+  border-right: none;
 }
