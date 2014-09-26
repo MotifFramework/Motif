@@ -5,82 +5,259 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, Motif, undefined ) {
 
     "use strict";
 
-    var ScrollFire = function ( elem ) {
+    /**
+     * @module Motif
+     * @submodule apps
+     * @class Herald
+     * @constructor
+     * @param elem {object}
+     */
+    var Herald = function ( elem ) {
             
-            // Init Vars
-            this.$elem = $( elem );
-            this.elem = this.$elem[0];
+            /**
+             * Set element variables
+             * @property {object} $window - The jQuery object of the windowed element
+             * @property {object} window - The vanilla DOM object of the windowed element
+             */
+            this.$window = $( elem );
+            this.window = this.$window[0];
+
+            return this;
         };
 
-    ScrollFire.prototype = {
+    Herald.counter = 0;
+    Herald.prototype = {
+
+        /**
+         * Define the default configuration options
+         * @property {object} defaults
+         */
         "defaults": {
-            "window": $( window ),
-            "onInit": null,
             "events": []
         },
 
-        "initVars": function ( userOptions ) {
-            this.config = userOptions;
-            this.metadata = this.$elem.data("scrollfire-options");
-            this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
-            this.$window = this.options.window;
-            this.oldPosition = this.$window.scrollTop();
-        },
+        /**
+         * The entrypoint of the plugin that sets events into motion
+         * @method init
+         * @param {object} [userOptions]
+         */
+        "init": function init(userOptions) {
 
-        "init": function ( userOptions ) {
-            if ( !this.$elem.length ) {
-                return;
-            }
+            /**
+             * First, initialize our variables/properties
+             */
+            this.initVars(userOptions);
 
-            this.initVars.call( this, userOptions );
-            this.bind.call( this );
+            /**
+             * Bind the scroll events
+             */
+            this.bind();
+
+            /**
+             * Increment the Herald counter
+             */
+            Herald.counter += 1;
 
             return this;
         },
 
-        "bind": function () {
+        /**
+         * Build out useful properties for our plugin
+         * @method initVars
+         * @param {object} [userOptions]
+         */
+        "initVars": function initVars(userOptions) {
+            this.config = userOptions;
+            this.options = $.extend( true, {}, this.defaults, this.config );
+            this.oldPosition = this.$window.scrollTop();
+
+            /**
+             * Sort our events by trigger position
+             */
+            this.options.events = this.sortEvents();
+            this.identity = "herald-" + Herald.counter;
+        },
+
+        /**
+         * Bind the scroll and resize events
+         * @method bind
+         */
+        "bind": function bind() {
             var self = this;
 
-            self.$window.on( "scroll.scrollfire", function onScrollFireChange () {
-                self.testEvents.call( self );
-            }).on( "resize.scrollfire", function onScrollFireResize () {
+            /**
+             * Bind a namespaced scroll to the window to test the provided
+             * array of Herald events
+             */
+            self.$window.on( "scroll." + self.identity, function onHeraldChange () {
+                self.testAllEvents.call( self );
+            });
+
+            /**
+             * Bind a namespaced resize so that we can recalculate
+             * our firing positions based on the refreshed layout
+             */
+            self.$window.on( "resize." + self.identity, function onHeraldResize () {
                 self.refresh.call( self );
             });
 
+            /**
+             * Go ahead and refresh now to begin with
+             */
             self.refresh.call( self );
         },
 
-        "refresh": function () {
+        /**
+         * Suspend Herald's bound actions
+         * @method suspend
+         */
+        "suspend": function suspend() {
+            this.$window.off( "scroll." + this.identity);
+            this.$window.off( "resize." + this.identity);
+        },
+
+        /**
+         * Alias to bind the scroll and resize events
+         * (primarily used after suspending)
+         * @method resume
+         */
+        "resume": function resume() {
+            this.bind();
+        },
+
+        /**
+         * Refresh the `oldPosition`
+         * 
+         * This addresses the need to re-check events when the browser
+         * is resized and new elements come into view, as well as
+         * accommodating for when a page is refreshed and the scroll 
+         * position is reset to somewhere lower on the page.
+         * 
+         * @method refresh
+         */
+        "refresh": function refresh() {
+            /**
+             * If the `oldPosition` (in this case, the initial position
+             * since we only use this on init) is *not* the top of the
+             * page...
+             */
             if ( this.oldPosition > 0 ) {
+
+                /**
+                 * Pretend like the `oldPosition` *is* the very top of
+                 * the page. This mimics the user scrolling down to the
+                 * current position.
+                 */
                 this.oldPosition = 0;
-                this.$window.trigger("scroll.scrollfire");
+
+                /**
+                 * Re-trigger the scroll event
+                 * @todo Just call `testAllEvents()`?
+                 */
+                this.$window.trigger("scroll.herald");
             }
         },
 
-        "testEvents": function () {
+        /**
+         * Test the actual Herald events to see if they should be fired
+         * @method testAllEvents
+         */
+        "testAllEvents": function testAllEvents() {
             var self = this,
                 events = self.options.events,
-                triggerPosition,
+                eventsLength = events.length,
+                direction = "",
                 i;
 
-            self.currentPosition = self.$window.scrollTop();
+            /**
+             * Set your current position as your window's
+             * scroll position
+             */
+            this.currentPosition = this.$window.scrollTop();
 
-            for ( i = 0; i < events.length; i += 1 ) {
-                triggerPosition = self.triggerType.call( self, events[ i ] );
-                
-                if ( ( typeof events[ i ].fired === "undefined" || !events[ i ].fired ) || events[ i ].repeat ) {
-                    self.testTrigger.call( self, triggerPosition, i );
+            /**
+             * What direction are we moving in?
+             */
+            direction = this.getDirection();
+
+            /**
+             * Loop through the events array
+             */
+            
+            /**
+             * If we're moving down, analyze the array
+             * from top to bottom
+             */
+            if ( direction === "down" ) {
+                for ( i = 0; i < eventsLength; i += 1 ) {
+                    this.testEvent( events[i], i, direction );
+                }
+
+            /**
+             * If we're moving up, analyze the array
+             * from bottom to top
+             */
+            } else if ( direction === "up" ) {
+                for ( i = eventsLength - 1; i >= 0; i -= 1 ) {
+                    this.testEvent( events[i], i, direction );
                 }
             }
 
-            self.oldPosition = self.currentPosition;
+            /**
+             * When we're done with events, the new `oldPosition`
+             * is the current position
+             */
+            this.oldPosition = this.currentPosition;
         },
 
-        "triggerType": function ( thisEvent ) {
+        /**
+         * Test whether the individual event should be fired
+         * @method testEvent
+         * @param {object} thisEvent - The current Herald event in the array
+         * @param {number} eventNum - The object's position in the array
+         * @param {string} direction - What direction we are moving
+         */
+        "testEvent": function testEvent(thisEvent, eventNum, direction) {
+            var isTriggered = false,
+                triggerPosition;
+
+            /**
+             * Make sure the event either has not been fired or is
+             * set to repeat
+             */
+            if ( ( typeof thisEvent.fired === "undefined" || !thisEvent.fired ) || thisEvent.repeat ) {
+
+                /**
+                 * Get the trigger position by checking if it's a
+                 * function or a value
+                 */
+                triggerPosition = this.triggerType( thisEvent );
+
+                /**
+                 * Is the event triggered?
+                 */
+                isTriggered = this.testTrigger( triggerPosition );
+
+                /**
+                 * If the event has triggered, launch the event
+                 */
+                if ( isTriggered ) {
+                    this.triggerEvent( eventNum, direction );
+                }
+            }
+        },
+
+        /**
+         * Check if the trigger is a function or a value
+         * @method triggerType
+         * @param {(number|function)} thisEvent
+         * @returns {number}
+         */
+        "triggerType": function triggerType(thisEvent) {
             if ( typeof thisEvent.trigger === "function" ) {
                 return thisEvent.trigger.call( this );
             } else {
@@ -88,31 +265,67 @@
             }
         },
 
-        "testTrigger": function ( triggerPosition, eventNum ) {
+        /**
+         * Test the trigger position in relation to the current position
+         * @method testTrigger
+         * @param {number} triggerPosition
+         * @return {boolean}
+         */
+        "testTrigger": function testTrigger(triggerPosition) {
+            /**
+             * If the trigger position is above than the current position but
+             * below than the old position, it means we passed it going down
+             *
+             * If the trigger is below the current position but above the old
+             * position, it means we passed it going up
+             */
             if (
              ( triggerPosition <= this.currentPosition && triggerPosition >= this.oldPosition )
              ||
              ( triggerPosition >= this.currentPosition && triggerPosition <= this.oldPosition )
             ) {
-                this.triggerEvent.call( this, eventNum );
+                return true;
             }
+            return false;
         },
 
-        "triggerEvent": function ( eventNum ) {
+        /**
+         * Execute the event once the trigger is met
+         * @method triggerEvent
+         * @param {number} eventNum - Our place in the events array
+         * @param {string} direction - What direction we are moving
+         */
+        "triggerEvent": function triggerEvent(eventNum, direction) {
             var events = this.options.events,
                 thisEvent = events[ eventNum ];
 
-            thisEvent.event( this.getDirection.call( this ) );
+            /**
+             * Call the event and pass on the direction we were moving
+             */
+            thisEvent.event.call( this, direction );
 
-            // Extend the object to reflect that the event has been fired
+            /**
+             * Extend the object to reflect that the event has been fired
+             */
             thisEvent.fired = true;
-            
+
+            /**
+             * If the event is not repeatable, remove the event
+             * from the array
+             */
             if ( !thisEvent.repeat ) {
                 events.splice( eventNum, 1 );
             }
         },
 
-        "getDirection": function ( old, current ) {
+        /**
+         * Determine the direction we've been scrolling
+         * @method getDirection
+         * @param {number} old - The previous scroll position
+         * @param {number} current - The new, current scroll position
+         * @return {string} direction - Either "up" or "down"
+         */
+        "getDirection": function getDirection(old, current) {
             var oldPosition = old || this.oldPosition,
                 currentPosition = current || this.currentPosition,
                 direction;
@@ -124,18 +337,151 @@
             }
 
             return direction;
+        },
+
+        /**
+         * Sort the order of our events array by position
+         * on the page
+         * @method sortEvents
+         * @return {array} Herald.options.events
+         */
+        "sortEvents": function sortEvents() {
+            this.options.events.sort( this.compareTriggers );
+            return this.options.events;
+        },
+
+        /**
+         * Function to help sort the array by comparing the
+         * trigger attribute of the object
+         * @method compareTriggers
+         * @param ({number|function}) a - The first object to compare
+         * @param ({number|function}) b - The second object to compare
+         * @return {boolean}
+         */
+        "compareTriggers": function compareTriggers(a, b) {
+            /**
+             * Get the trigger value on the page of both events
+             */
+            var aTrigger = this.triggerType( a ),
+                bTrigger = this.triggerType( b );
+
+            if ( aTrigger < bTrigger ) {
+                return -1;
+            }
+            if ( aTrigger > bTrigger ) {
+                return 1;
+            }
+            return 0;
+        },
+
+        /**
+         * Method to add more events to this instance of Herald,
+         * rather than overriding it
+         * @method addToHerald
+         * @param {object} userOptions
+         */
+        "addToHerald": function addToHerald( userOptions ) {
+            if ( userOptions.events && userOptions.events.length ) {
+                /**
+                 * Let's supplement our events with the new ones
+                 * we've gotten
+                 */
+                this.options.events = this.supplementEvents( userOptions.events );
+
+                /**
+                 * Then let's re-sort the events
+                 */
+                this.options.events = this.sortEvents();
+
+                /**
+                 * Then refresh to catch any new triggers we
+                 * may have passed
+                 */
+                self.refresh.call( self );
+            }
+        },
+
+        /**
+         * Add new events to the current events array
+         * @method supplementEvents
+         * @param {array} newEvents
+         * @param {array} [oldEvents]
+         * @return {array} events
+         */
+        "supplementEvents": function supplementEvents( newEvents, oldEvents ) {
+            var events = oldEvents || this.options.events;
+
+            return events.concat( newEvents );
         }
 
     };
 
-    ScrollFire.defaults = ScrollFire.prototype.defaults;
+    Herald.defaults = Herald.prototype.defaults;
 
-    LB.apps.ScrollFire = ScrollFire;
-    
+    Motif.apps.Herald = Herald;
 
-}( jQuery, window, document, window.LB = window.LB || {
+    /**
+     * Extending jQuery's `fn`
+     */
+    $.fn.herald = function( userOptions ) {
+        var args;
+
+        /**
+         * Does the referenced object exist?
+         */
+        if ( this.length ) {
+            return this.each( function eachThis () {
+
+                /**
+                 * Check if this plugin already has an instance on this
+                 */
+                var instance = $.data( this, "herald" );
+
+                if ( instance ) {
+
+                    /**
+                     * If there are no user options, call `init`
+                     */
+                    if ( typeof userOptions === "undefined" ) {
+                        instance.init();
+
+                    /**
+                     * If we are passing options, we want to add them to our current ones
+                     */
+                    } else if ( typeof userOptions === "object" ) {
+                        instance.addToHerald( userOptions );
+
+                    /**
+                     * Check if `userOptions` is a function of our instance
+                     */
+                    } else if ( typeof userOptions === "string" && typeof instance[ userOptions ] === "function" ) {
+
+                        /**
+                         * Copy arguments & remove function name
+                         */
+                        args = Array.prototype.slice.call( arguments, 1 );
+
+                        return instance[ userOptions ].apply( instance, args );
+
+                    /**
+                     * Otherwise, log error
+                     */
+                    } else {
+                        console.log( "Herald: Method " + userOptions + " does not exist on jQuery." );
+                    }
+
+                /**
+                 * If there's no instance, create a new one
+                 * and initialize the plugin
+                 */
+                } else {
+                    instance = $.data( this, "herald", new Herald( this ).init( userOptions ) );
+                }
+            });
+        }
+    };
+
+}( jQuery, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
-
-$.createPlugin("scrollFire", window.LB.apps.ScrollFire);

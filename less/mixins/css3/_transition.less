@@ -4,6 +4,12 @@
 	-o-transition:      @arguments;
 	transition:         @arguments;
 }
+.transitionPrefixed( ... ) {
+	-webkit-transition: e("-webkit-@{arguments}");
+	-moz-transition:    e("-moz-@{arguments}");
+	-o-transition:      e("-o-@{arguments}");
+	transition:         @arguments;
+}
 
 
 .transition-property (@tp: all) 

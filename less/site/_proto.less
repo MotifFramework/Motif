@@ -928,3 +928,235 @@ Form Modules
         width: auto;
         height: 100%;
     }
+
+
+
+// Vars
+@modal-timing: 0.5s;
+.no-scroll {
+    overflow: hidden;
+}
+.js {
+    [class*="modal--"] {
+
+        // When the modal is revealed or transitioning, bring it to the front
+        &.is-revealed,
+        &.is-transitioning {
+            z-index: 95;
+        }
+    }
+
+    .modal--box {
+        .transition(opacity, @modal-timing, @easeOutCubic);
+
+        // Display & Box Model
+        overflow: hidden;
+
+        .modal-content {
+
+            // Display & Box Model
+            width: 90%;
+            height: 90%;
+            max-height: 90%;
+
+            // Positioning
+            position: absolute;
+            top: 5%;
+            left: 5%;
+
+            // Pretty
+            overflow-x: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+
+            // Mixins
+            .scale( 0.5 );
+
+            // Pretty
+            -webkit-transition: -webkit-transform @modal-timing @easeOutCubic, opacity @modal-timing @easeOutCubic;
+            -moz-transition: -moz-transform @modal-timing @easeOutCubic, opacity @modal-timing @easeOutCubic;
+            -o-transition: -o-transform @modal-timing @easeOutCubic, opacity @modal-timing @easeOutCubic;
+            transition: transform @modal-timing @easeOutCubic, opacity @modal-timing @easeOutCubic;
+        }
+
+        // When the modal is revealed, bring it to the top/front
+        &.is-revealed .modal-content {
+
+            // Mixins
+            .scale( 1 );
+        }
+    }
+    .modal--full-page {
+
+        // Pretty
+        overflow-x: auto;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        // When the modal is revealed, bring it to the top/front
+        &.is-revealed .modal-content {
+
+            // Mixins
+            .translate3d(0, 0, 0);
+        }
+
+        // When the modal is transitioning out,
+        // still keep it up front and visible
+        &.is-transitioning {
+
+            // Pretty
+            opacity: 1;
+            overflow: hidden;
+        }
+        .modal-content {
+
+            // Mixins
+            .translate3d(0, 100%, 0);
+            .transitionPrefixed( transform, @modal-timing, @easeOutCubic);
+            .border-radius(0);
+
+            // Display & Box Model
+            min-height: 100%;
+        }
+    }
+
+    [class*="modal--"],
+    .modal-bg {
+
+        // Display & Box Model
+        display: block;
+        margin: 0;
+
+        // Positioning
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: -100;
+
+        // Pretty
+        opacity: 0;
+
+        &.is-revealed {
+            opacity: 1;
+        }
+
+        // Fallback for browsers that can't properly
+        // hide these things with transforms, or 
+        // transition them in
+        .no-csstransitions&,
+        .no-csstransforms3d& {
+            display: none;
+
+            &.is-revealed {
+                display: block;
+            }
+        }
+    }
+
+    .modal {
+        // Modal BG overlay
+        &-bg {
+
+            // Mixins
+            .transition( opacity, @modal-timing, @easeOutCubic );
+
+            // Pretty
+            background: fadeout(@white, 30%);
+            z-index: -110;
+
+            // Fallback for non-RGBA browsers
+            .no-rgba& {
+
+                // Mixins
+                .opacity(0.7);
+
+                // Pretty
+                background: @white;
+            }
+            &.is-revealed,
+            &.is-transitioning {
+                z-index: 90;
+            }
+        }
+
+        // Actual Modal Content
+        // Make it look like a full-page panel
+        &-content {
+
+            // Extends
+            &:extend( [class*="panel-"] );
+
+            // Display & Box Model
+            margin: 0;
+        }
+
+        // Modal Close
+        &-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+    }
+}
+
+@media @medium-screens-min {
+    .js {
+        .modal--full-page {
+            .modal-content {
+                width: 80%;
+                margin: 0 auto;
+            }
+        }
+        .modal--box {
+            .modal-content {
+
+                // Mixins
+                .transform( translate(0, -50%); scale(0.5) );
+
+                // Display & Box Model
+                width: auto;
+                max-width: 60%;
+                height: auto;
+                min-height: 0;
+                max-height: 80%;
+                margin: 0;
+
+                // Positioning
+                position: absolute;
+                top: 50%;
+                left: 20%;
+
+                .no-csstransforms& {
+                    top: 10%;
+                }
+
+            }
+                &.is-revealed .modal-content {
+                    .transform( translate(0, -50%); scale(1) );
+                }
+        }
+        .modal-content {
+            &.is-revealed {
+                .transform( translate(0, -50%); scale(1) );
+            }
+        }
+        .modal-bg {
+            &.is-transitioning {
+                .transition-timing-function( @easeInQuad );
+            }
+        }
+    }
+}
+
+@media @medium-screens-min {
+    .js {
+        .modal--full-page {
+            .modal-content {
+                width: 60%;
+                max-width: @600px;
+            }
+        }
+    }
+}

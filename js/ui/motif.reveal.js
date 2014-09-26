@@ -36,8 +36,7 @@
 
             // Callbacks
             "onInit": null,
-            "beforeShow": null,
-            "beforeHide": null,
+            "beforeReveal": null,
             "onShow": null,
             "onHide": null
         },
@@ -110,7 +109,10 @@
                     "groups": {},
                     "queue": []
                 };
+
+                return window.Reveal;
             }
+            return;
         },
 
         "bindCallbacks": function () {
@@ -124,19 +126,9 @@
                     self.options.onInit.call( self, self.$elem );
                 });
             }
-            if ( typeof self.options.beforeShow == "function" ) {
-                $document.on("reveal/" + self.identity + "/before/show", function onRevealShow () {
-                    self.options.beforeShow.call( self, self.$elem );
-                });
-            }
             if ( typeof self.options.onShow == "function" ) {
                 $document.on("reveal/" + self.identity + "/after/show", function onRevealShow () {
                     self.options.onShow.call( self, self.$elem );
-                });
-            }
-            if ( typeof self.options.beforeHide == "function" ) {
-                $document.on("reveal/" + self.identity + "/before/hide", function onRevealHide () {
-                    self.options.beforeHide.call( self, self.$elem );
                 });
             }
             if ( typeof self.options.onHide == "function" ) {
@@ -147,21 +139,30 @@
         },
 
         "bindTrigger": function () {
-            var self = this;
-
-            // If we have a click trigger...
-            if ( self.options.trigger === "click" ) {
+            switch ( this.options.trigger ) {
+                case "click":
+                    this.bindClick();
+                    break;
+                case "hover":
+                    this.bindHover();
+                    break;
+            }
+        },
+            "bindClick": function () {
+                var self = this;
 
                 // Bind this trigger on click
                 self.$elem.on( "click", function () {
+                    // HERE
 
                     // ...to process the trigger
-                    self.processTrigger.call( self );
+                    self.processBeforeTrigger.call( self );
                     return false;
                 });
+            },
 
-            // Otherwise, if it's a hover trigger...
-            } else if ( self.options.trigger === "hover" ) {
+            "bindHover": function  () {
+                var self = this;
 
                 // If the Hover Intent plugin is available...
                 if ( $.fn.hoverIntent && self.options.hoverIntent ) {
@@ -171,11 +172,11 @@
                         sensitivity: self.options.hoverIntent.sensitivity,
                         interval: self.options.hoverIntent.interval,
                         over: function onRevealOver () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         },
                         timeout: self.options.hoverIntent.timeout,
                         out: function onRevealOut () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         }
                     });
 
@@ -185,18 +186,16 @@
                     // ... Do a simple bind...
                     self.$elem.on({
                         mouseenter: function onRevealOver () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         },
                         mouseleave: function onRevealOut () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         }
                     });
                 }
-            }
-        },
+            },
 
-            "processTrigger": function () {
-
+            "getAction": function () {
                 // If this trigger is already current...
                 if ( this.reference.current === true ) {
 
@@ -204,20 +203,48 @@
                     if ( this.options.type === "radio" ) {
 
                         // If it is, let's ignore and bail
-                        return;
+                        return false;
 
                     // If it's NOT a radio...
                     } else {
 
-                        // ...we should unpublish
-                        this.unpublish.call( this );
+                        // ...we should hide
+                        return "hide";
                     }
 
                 // If it's NOT current
                 } else {
 
-                    // ...let's publish and make it current
+                    // ...let's show
+                    return "show";
+                }
+            },
+
+            "processBeforeTrigger": function () {
+                var self = this,
+                    action = self.getAction.call( self );
+
+                if ( !action ) {
+                    return;
+                }
+                if ( typeof this.options.beforeReveal === "function" ) {
+                    this.promiseBeforeTrigger( this.options.beforeReveal, action )
+                        .done( function () {
+                            self.processTrigger.call( self, action );
+                        })
+                        .fail( function () {
+                            return false;
+                        });
+                } else {
+                    this.processTrigger( action );
+                }
+            },
+
+            "processTrigger": function ( action ) {
+                if ( action === "show" ) {
                     this.publish.call( this );
+                } else if ( action === "hide" ) {
+                    this.unpublish.call( this );
                 }
             },
 
@@ -263,48 +290,64 @@
             // When this identity has triggered to show...
             $document.on("reveal/" + self.identity + "/show", function onRevealShow () {
 
-                // Trigger beforeShow
-                $document.trigger("reveal/" + self.identity + "/before/show");
-
-                // Make this trigger current in the reference
-                self.makeCurrent.call( self );
-
-                // Show this trigger visually
-                self.showTrigger.call( self );
-
-                // Show the targets visually
-                self.showTargets.call( self );
-
-                // Show the Fors visually
-                self.showFors.call( self );
-
-                // Trigger onShow
-                $document.trigger("reveal/" + self.identity + "/after/show");
+                // ...launch the Show sequence
+                self.showSequence.call( self );
             });
 
-            // When this identity has triggered hide...
-            // @TODO: Break this out separately from trigger show
+            // When this identity has triggered to hide...
             $document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
 
-                // Trigger onHide
-                $document.trigger("reveal/" + self.identity + "/before/hide");
-
-                // Make this trigger no longer current in the reference
-                self.unmakeCurrent.call( self );
-
-                // Visually hide the trigger
-                self.hideTrigger.call( self );
-
-                // Visually hide the targets
-                self.hideTargets.call( self );
-
-                // Visually hide the Fors
-                self.hideFors.call( self );
-
-                // Trigger onHide
-                $document.trigger("reveal/" + self.identity + "/after/hide");
+                // ...launch the Hide sequence
+                self.hideSequence.call( self );
             });
         },
+
+            "promiseBeforeTrigger": function ( fn, action ) {
+                var deferred = new $.Deferred();
+
+                fn.call( this, this.$elem, action, deferred );
+
+                return deferred.promise();
+            },
+
+            "showSequence": function () {
+                $document.trigger("reveal/" + this.identity + "/before/show");
+
+                // Make this trigger current in the reference
+                this.makeCurrent();
+
+                // Show this trigger visually
+                this.showTrigger();
+
+                // Show the targets visually
+                this.showTargets();
+
+                // Show the Fors visually
+                this.showFors();
+
+                // Trigger onShow
+                $document.trigger("reveal/" + this.identity + "/after/show");
+            },
+            "hideSequence": function () {
+
+                // Trigger onHide
+                $document.trigger("reveal/" + this.identity + "/before/hide");
+
+                // Make this trigger no longer current in the reference
+                this.unmakeCurrent();
+
+                // Visually hide the trigger
+                this.hideTrigger();
+
+                // Visually hide the targets
+                this.hideTargets();
+
+                // Visually hide the Fors
+                this.hideFors();
+
+                // Trigger onHide
+                $document.trigger("reveal/" + this.identity + "/after/hide");
+            },
 
         "initCurrent": function () {
 
@@ -386,7 +429,7 @@
                 targets;
 
             if ( typeof this.options.target === "function" ) {
-                targets = this.options.target.call( this );
+                targets = this.options.target;
             } else {
                 targetStrings = this.$elem.attr( this.options.target ).split(" ");
                 targets = [];
@@ -451,7 +494,6 @@
 
             "bindHides": function ( hideTrigger ) {
                 var self = this;
-
                 $( hideTrigger ).on( "click", function () {
                     if ( self.reference.current && self.options.type !== "radio" ) {
                         self.$elem.trigger("click");
@@ -492,7 +534,7 @@
 
             "showTargets": function () {
                 var self = this,
-                    targets = self.reference.targets;
+                    targets = typeof self.reference.targets === "function" ? self.reference.targets.call( self ) : self.reference.targets;
 
                 $.each( targets, function hideEachTarget () {
                     self.show.call( self, this );
@@ -522,7 +564,7 @@
 
             "hideTargets": function () {
                 var self = this,
-                    targets = self.reference.targets;
+                    targets = typeof self.reference.targets === "function" ? self.reference.targets.call( self ) : self.reference.targets;
 
                 $.each( targets, function hideEachTarget () {
                     self.hide.call( self, this );

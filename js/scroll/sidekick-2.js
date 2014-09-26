@@ -5,7 +5,7 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -27,9 +27,9 @@
             "topOffset": null,
             "bottomOffset": null,
             "keepWidth": true,
+            // @todo Can this be called minWindowWidth?
             "minWidth": false,
-            "window": $( window ),
-            "useParentWidth": false
+            "window": $( window )
         },
 
         "init": function ( userOptions ) {
@@ -39,6 +39,7 @@
 
             this.initVars.call( this, userOptions );
             this.bindEvents.call( this );
+            // @todo Consider moving inside initVars
             this.buildEvents.call( this );
             this.initHerald.call( this );
             Sidekick.counter += 1;
@@ -65,12 +66,12 @@
             "bindEvents": function () {
                 var self = this;
 
-                $document.on("sidekick/" + self.identity + "/top", function onStickyTop ( event, dir, herald ) {
-                    self.topEvent.call( self, dir, herald );
+                $document.on("sidekick/" + self.identity + "/top", function onStickyTop ( event, dir ) {
+                    self.topEvent.call( self, dir );
                 });
 
-                $document.on("sidekick/" + self.identity + "/bottom", function onStickyBottom ( event, dir, herald ) {
-                    self.bottomEvent.call( self, dir, herald );
+                $document.on("sidekick/" + self.identity + "/bottom", function onStickyBottom ( event, dir ) {
+                    self.bottomEvent.call( self, dir );
                 });
             },
 
@@ -81,7 +82,7 @@
                             return self.getTopPosition.call( self );
                         },
                         "event": function ( dir ) {
-                            $document.trigger( "sidekick/" + self.identity + "/top", [ dir, this ] );
+                            $document.trigger( "sidekick/" + self.identity + "/top", [ dir ] );
                         },
                         "repeat": true
                     },
@@ -90,7 +91,7 @@
                             return self.getBottomPosition.call( self );
                         },
                         "event": function ( dir ) {
-                            $document.trigger( "sidekick/" + self.identity + "/bottom", [ dir, this ] );
+                            $document.trigger( "sidekick/" + self.identity + "/bottom", [ dir ] );
                         },
                         "repeat": true
                     };
@@ -100,6 +101,9 @@
                 return self.heraldEvents;
             },
 
+                /**
+                 * @todo Add possibility of passing Number typeof offset as well
+                 */
                 "getTopPosition": function () {
                     if ( typeof this.options.topOffset === "function" ) {
                         return this.options.topOffset.call( this );
@@ -108,14 +112,13 @@
                     }
                 },
 
-                "topEvent": function ( dir, herald ) {
+                "topEvent": function ( dir ) {
 
-                    var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false,
-                        leftOffset = this.$elem.offset().left;
+                    var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false;
 
-                    if ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) {
+                    if ( !this.options.minWidth || ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) ) {
                         if ( dir === "down" ) {
-                            this.stick.call( this, sideWidth, leftOffset, this.options.useParentWidth );
+                            this.stick.call( this, sideWidth );
                         } else if ( dir === "up" ) {
                             this.unstick.call( this );
                         }
@@ -132,18 +135,13 @@
                     }
                 },
 
-                "bottomEvent": function ( dir, herald ) {
+                "bottomEvent": function ( dir ) {
 
-                    var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false,
-                        leftOffset = this.$elem.offset().left,
-                        topIsTriggered;
+                    var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false;
 
-                    if ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) {
+                    if ( !this.options.minWidth || ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) ) {
                         if ( dir === "up" ) {
-                            topIsTriggered = herald.testTrigger.call( herald, this.getTopPosition() );
-                            if ( !topIsTriggered ) {
-                                this.stick.call( this, sideWidth, leftOffset, this.options.useParentWidth );
-                            }
+                            this.stick.call( this, sideWidth );
                         } else if ( dir === "down" ) {
                             this.stuck.call( this );
                         }
@@ -152,18 +150,10 @@
                     }
                 },
 
-                    "stick": function ( sideWidth, leftOffset, useParentWidth ) {
+                    "stick": function ( sideWidth ) {
                         if ( sideWidth ) {
                             this.$elem.outerWidth( sideWidth );
                         }
-
-                        if ( useParentWidth ) {
-                            this.$elem.outerWidth( this.$elem.parent().innerWidth() );
-                        }
-
-                        this.$elem.css({
-                            left: leftOffset
-                        });
 
                         this.$context.addClass( this.options.stickyClass );
                         this.$elem.removeClass( this.options.stuckClass ).addClass( this.options.stickyClass );
@@ -175,11 +165,7 @@
                     },
 
                     "stuck": function () {
-                        this.$elem.removeClass( this.options.stickyClass ).addClass( this.options.stuckClass );
-
-                        if ( !this.options.useParentWidth ) {
-                            this.$elem.removeAttr("style");
-                        }
+                        this.$elem.removeAttr("style").removeClass( this.options.stickyClass ).addClass( this.options.stuckClass );
                     },
 
             "initHerald": function () {
@@ -193,11 +179,11 @@
 
     Sidekick.defaults = Sidekick.prototype.defaults;
 
-    LB.apps.Sidekick = Sidekick;
+    Motif.apps.Sidekick = Sidekick;
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "sidekick", window.LB.apps.Sidekick );
+$.createPlugin( "sidekick", window.Motif.apps.Sidekick );

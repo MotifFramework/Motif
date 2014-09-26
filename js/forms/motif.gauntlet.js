@@ -9,17 +9,41 @@
 
     "use strict";
 
+
+    /**
+     * @module Motif
+     * @submodule apps
+     * @class Gauntlet
+     * @constructor
+     * @param {object} elem - The element that contains validating fields
+     */
     var Gauntlet = function ( elem ) {
             
-            // Init Vars
+            /**
+             * Set key properties for our main element
+             * @property {object} $elem
+             * @property {object} elem
+             */
             this.$elem = $( elem );
             this.elem = this.$elem[0];
 
             return this;
         },
+
+        /**
+         * @module Motif
+         * @submodule apps
+         * @class GauntletInput
+         * @constructor
+         * @param {object} elem - Specific form field to validate
+         */
         GauntletInput = function ( elem ) {
             
-            // Init Vars
+            /**
+             * Set key properties for our form element
+             * @property {object} $elem
+             * @property {object} elem
+             */
             this.$elem = $( elem );
             this.elem = this.$elem[0];
 
@@ -28,6 +52,11 @@
         $document = $( document );
 
     Gauntlet.prototype = {
+
+        /**
+         * Define the default configuration options
+         * @property {object} defaults
+         */
         "defaults": {
             "alertClasses": {
                 "error": "input-alert--error",
@@ -51,6 +80,10 @@
             "addTest": []
         },
 
+        /**
+         * Form fields to check
+         * @property {array} fields
+         */
         "fields": [
             "input[type='text']",
             "input[type='email']",
@@ -68,6 +101,10 @@
         "passed": [],
         "failed": [],
 
+        /**
+         * The entrypoint of the plugin that sets events into motion
+         * @param  {object} [userOptions]
+         */
         "init": function ( userOptions ) {
             if ( !this.$elem.length ) {
                 return;
@@ -88,8 +125,11 @@
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
             this.checkboxes = {};
             this.updateInputList();
-
         },
+
+            /**
+             * @todo create a fields array for this instance alone
+             */
             "updateInputList": function () {
                 if ( this.options.check.length ) {
                     this.addToInputList();
@@ -98,47 +138,47 @@
                     this.removeFromInputList();
                 }
             },
-            "addToInputList": function () {
-                var position = false,
-                    i;
-                
-                for ( i = this.options.check.length - 1; i >= 0; i -= 1 ) {
-                    var thisInput = this.options.check[ i ];
-
-                    position = this.inputIsInList( thisInput );
+                "addToInputList": function () {
+                    var position = false,
+                        i;
                     
-                    if ( !position ) {
-                        this.fields.push( thisInput );
+                    for ( i = this.options.check.length - 1; i >= 0; i -= 1 ) {
+                        var thisInput = this.options.check[ i ];
+
+                        position = this.inputIsInList( thisInput );
+                        
+                        if ( !position ) {
+                            this.fields.push( thisInput );
+                        }
                     }
-                }
 
-                return this.fields;
-            },
-            "removeFromInputList": function () {
-                var position = false,
-                    i;
-                
-                for ( i = this.options.ignore.length - 1; i >= 0; i -= 1 ) {
-                    var thisInput = this.options.ignore[ i ];
-
-                    position = this.inputIsInList( thisInput );
+                    return this.fields;
+                },
+                "removeFromInputList": function () {
+                    var position = false,
+                        i;
                     
-                    if ( position ) {
-                        this.fields.splice( position, 1 );
+                    for ( i = this.options.ignore.length - 1; i >= 0; i -= 1 ) {
+                        var thisInput = this.options.ignore[ i ];
+
+                        position = this.inputIsInList( thisInput );
+                        
+                        if ( position ) {
+                            this.fields.splice( position, 1 );
+                        }
                     }
-                }
 
-                return this.fields;
-            },
-            "inputIsInList": function ( input ) {
-                var position = $.inArray( input, this.fields );
+                    return this.fields;
+                },
+                    "inputIsInList": function ( input ) {
+                        var position = $.inArray( input, this.fields );
 
-                if ( position === -1 ) {
-                    return false;
-                } else {
-                    return position;
-                }
-            },
+                        if ( position === -1 ) {
+                            return false;
+                        } else {
+                            return position;
+                        }
+                    },
 
         "prepForm": function () {
             this.$elem.attr( "novalidate", true );
@@ -365,6 +405,7 @@
                 "email": "A valid email address is required.",
                 "emailConfirm": "Check that your email addresses match.",
                 "text": "This field is required.",
+                "textarea": "This field is required.",
                 "totals": "Check that your totals don't exceed the limit",
                 "tel": "Make sure you've entered a valid phone number.",
                 "search": "Please input a search term.",
@@ -396,7 +437,7 @@
             this.confirm = this.$elem.attr("data-gauntlet-confirm");
 
             if ( !!this.confirm ) {
-                this.$confirms = $( "#" + this.confirm )
+                this.$confirms = $( "#" + this.confirm );
             } else if ( $("[data-gauntlet-confirm='" + this.$elem.attr("id") + "']").length ) {
                 this.$confirmedBy = $("[data-gauntlet-confirm='" + this.$elem.attr("id") + "']");
             }
@@ -409,6 +450,9 @@
             this.errorMessage = this.$elem.attr("data-error");
 
             if ( !this.errorMessage ) {
+                /**
+                 * Need default message if it's not found on table
+                 */
                 this.errorMessage = !!this.confirm ? this.options.messages[ this.type + "Confirm" ] : this.options.messages[ this.type ];
             }
         },

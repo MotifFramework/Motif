@@ -1,9 +1,10 @@
-.transform (@value: scale(1)) 
+.transform (...) 
 {
-    -webkit-transform : @value;
-    -moz-transform    : @value;
-    -o-transform      : @value;
-    transform         : @value;
+    -webkit-transform : @arguments;
+    -moz-transform    : @arguments;
+    -o-transform      : @arguments;
+    -ms-transform     : @arguments;
+    transform         : @arguments;
 }
 .skew (@angle-x: 35deg, @angle-y: 0) 
 {

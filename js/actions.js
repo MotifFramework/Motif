@@ -13,9 +13,13 @@
 
     App.prototype.initUI = function () {
         var bgs = new Motif.apps.BackgroundCover("[data-img]");
-        // $(".js-tabs").plugin("tabs", {
-        //     "cssTransition": Modernizr.csstransitions
-        // });
+        $("[data-lazy-img]").plugin("lazyImage");
+        $(".js-modal__full").plugin("modal", {
+            "modalClass": "modal--full-page"
+        });
+        $(".js-modal__box").plugin("modal", {
+            "modalClass": "modal--box"
+        });
         // $(".canvas-trigger").plugin("reveal", {
         //     "type": "exclusive",
         //     "activeClass": "is-active",

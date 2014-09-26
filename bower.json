@@ -35,5 +35,8 @@
     "build",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "qunit": "~1.14.0"
+  }
 }

@@ -1,5 +1,5 @@
-/* Modernizr 2.7.1 (Custom Build) | MIT & BSD
- * Build: http://modernizr.com/download/#-backgroundsize-opacity-generatedcontent-csstransforms-csstransforms3d-csstransitions-input-inputtypes-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-forms_placeholder
+/* Modernizr 2.8.2 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-backgroundsize-opacity-rgba-generatedcontent-csstransforms-csstransforms3d-csstransitions-input-inputtypes-printshiv-cssclasses-addtest-teststyles-testprop-testallprops-prefixes-domprefixes-css_backgroundsizecover-css_boxsizing-forms_placeholder
  */
 ;
 
@@ -7,7 +7,7 @@
 
 window.Modernizr = (function( window, document, undefined ) {
 
-    var version = '2.7.1',
+    var version = '2.8.2',
 
     Modernizr = {},
 
@@ -196,7 +196,17 @@ window.Modernizr = (function( window, document, undefined ) {
           props = (prop + ' ' + (domPrefixes).join(ucProp + ' ') + ucProp).split(' ');
           return testDOMProps(props, prefixed, elem);
         }
-    }    tests['backgroundsize'] = function() {
+    }
+
+
+
+    tests['rgba'] = function() {
+        setCss('background-color:rgba(150,255,150,.5)');
+
+        return contains(mStyle.backgroundColor, 'rgba');
+    };
+
+    tests['backgroundsize'] = function() {
         return testPropsAll('backgroundSize');
     };
 
