@@ -187,6 +187,7 @@ module.exports = function ( grunt ) {
                 destCss: "<%= source.less %>type/",
                 options: {
                     engine: "node",
+                    autoHint: false,
                     font: "<%= pkg.name %>-icons",
                     types: "eot,woff,ttf,svg",
                     hashes: false,
@@ -209,6 +210,7 @@ module.exports = function ( grunt ) {
                 destCss: "<%= source.less %>type/",
                 options: {
                     engine: "node",
+                    autoHint: false,
                     font: "<%= pkg.name %>-icons",
                     types: "eot,woff,ttf,svg",
                     hashes: false,

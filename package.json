@@ -1,6 +1,6 @@
 {
   "name": "motif",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Motif: a responsive front-end framework that supports you",
   "main": "index.js",
   "scripts": {

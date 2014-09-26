@@ -5,7 +5,7 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -36,7 +36,7 @@
             this.initVars.call( this, userOptions );
             this.getTargets.call( this );
             this.bindLinks.call( this );
-            this.initScrollFire.call( this );
+            this.initHerald.call( this );
 
             return this;
         },
@@ -48,7 +48,7 @@
                 this.$window = this.options.window;
                 this.$links = this.$elem.find("a");
                 this.targets = [];
-                this.scrollFireEvents = [];
+                this.heraldEvents = [];
             },
 
             "getTargets": function () {
@@ -112,9 +112,9 @@
                             "repeat": true
                         };
 
-                    self.scrollFireEvents.push( topObject, bottomObject );
+                    self.heraldEvents.push( topObject, bottomObject );
 
-                    return self.scrollFireEvents;
+                    return self.heraldEvents;
                 },
 
                 "getTopPosition": function ( target ) {
@@ -165,23 +165,23 @@
                     }
                 },
 
-            "initScrollFire": function () {
+            "initHerald": function () {
                 var self = this;
 
-                self.$elem.plugin("scrollFire", {
+                self.$elem.plugin("herald", {
                     "window": this.$window,
-                    "events": self.scrollFireEvents
+                    "events": self.heraldEvents
                 });
             }
     };
 
     ScrollPatrol.defaults = ScrollPatrol.prototype.defaults;
 
-    LB.apps.ScrollPatrol = ScrollPatrol;
+    Motif.apps.ScrollPatrol = ScrollPatrol;
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "scrollPatrol", window.LB.apps.ScrollPatrol );
+$.createPlugin( "scrollPatrol", window.Motif.apps.ScrollPatrol );

@@ -1,22 +1,22 @@
 /*!
- * Motif Herald v0.2.0
+ * Motif Herald v0.2.1
  * Fire off events depending on scroll position.
  * http://getmotif.com
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
-    var ScrollFire = function ( elem ) {
+    var Herald = function ( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
         };
 
-    ScrollFire.prototype = {
+    Herald.prototype = {
         "defaults": {
             "window": $( window ),
             "onInit": null,
@@ -25,7 +25,7 @@
 
         "initVars": function ( userOptions ) {
             this.config = userOptions;
-            this.metadata = this.$elem.data("scrollfire-options");
+            this.metadata = this.$elem.data("herald-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
             this.$window = this.options.window;
             this.oldPosition = this.$window.scrollTop();
@@ -45,9 +45,9 @@
         "bind": function () {
             var self = this;
 
-            self.$window.on( "scroll.scrollfire", function onScrollFireChange () {
+            self.$window.on( "scroll.herald", function onHeraldChange () {
                 self.testEvents.call( self );
-            }).on( "resize.scrollfire", function onScrollFireResize () {
+            }).on( "resize.herald", function onHeraldResize () {
                 self.refresh.call( self );
             });
 
@@ -57,7 +57,7 @@
         "refresh": function () {
             if ( this.oldPosition > 0 ) {
                 this.oldPosition = 0;
-                this.$window.trigger("scroll.scrollfire");
+                this.$window.trigger("scroll.herald");
             }
         },
 
@@ -65,6 +65,7 @@
             var self = this,
                 events = self.options.events,
                 triggerPosition,
+                isTriggered = false,
                 i;
 
             self.currentPosition = self.$window.scrollTop();
@@ -73,7 +74,11 @@
                 triggerPosition = self.triggerType.call( self, events[ i ] );
                 
                 if ( ( typeof events[ i ].fired === "undefined" || !events[ i ].fired ) || events[ i ].repeat ) {
-                    self.testTrigger.call( self, triggerPosition, i );
+                    isTriggered = self.testTrigger.call( self, triggerPosition, i );
+
+                    if ( isTriggered ) {
+                        self.triggerEvent.call( self, i );
+                    }
                 }
             }
 
@@ -88,21 +93,22 @@
             }
         },
 
-        "testTrigger": function ( triggerPosition, eventNum ) {
+        "testTrigger": function ( triggerPosition ) {
             if (
              ( triggerPosition <= this.currentPosition && triggerPosition >= this.oldPosition )
              ||
              ( triggerPosition >= this.currentPosition && triggerPosition <= this.oldPosition )
             ) {
-                this.triggerEvent.call( this, eventNum );
+                return true;
             }
+            return false;
         },
 
         "triggerEvent": function ( eventNum ) {
             var events = this.options.events,
                 thisEvent = events[ eventNum ];
 
-            thisEvent.event( this.getDirection.call( this ) );
+            thisEvent.event.call( this, this.getDirection.call( this ) );
 
             // Extend the object to reflect that the event has been fired
             thisEvent.fired = true;
@@ -128,14 +134,14 @@
 
     };
 
-    ScrollFire.defaults = ScrollFire.prototype.defaults;
+    Herald.defaults = Herald.prototype.defaults;
 
-    LB.apps.ScrollFire = ScrollFire;
+    Motif.apps.Herald = Herald;
     
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin("scrollFire", window.LB.apps.ScrollFire);
+$.createPlugin("herald", window.Motif.apps.Herald);

@@ -6,7 +6,7 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -62,11 +62,11 @@
 
     ScrollEvents.defaults = ScrollEvents.prototype.defaults;
 
-    LB.apps.ScrollEvents = ScrollEvents;
+    Motif.apps.ScrollEvents = ScrollEvents;
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "scrollEvents", window.LB.apps.ScrollEvents );
+$.createPlugin( "scrollEvents", window.Motif.apps.ScrollEvents );

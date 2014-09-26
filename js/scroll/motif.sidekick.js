@@ -5,7 +5,7 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, window, document, LB, undefined ) {
+(function ( $, window, document, Motif, undefined ) {
 
     "use strict";
 
@@ -175,11 +175,11 @@
 
     Sidekick.defaults = Sidekick.prototype.defaults;
 
-    LB.apps.Sidekick = Sidekick;
+    Motif.apps.Sidekick = Sidekick;
 
-}( jQuery, window, document, window.LB = window.LB || {
+}( jQuery, window, document, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
 
-$.createPlugin( "sidekick", window.LB.apps.Sidekick );
+$.createPlugin( "sidekick", window.Motif.apps.Sidekick );
