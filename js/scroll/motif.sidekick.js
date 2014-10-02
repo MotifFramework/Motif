@@ -111,7 +111,7 @@
 
                     var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false;
 
-                    if ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) {
+                    if ( !this.options.minWidth || (this.options.minWidth && this.$window.width() >= this.options.minWidth) ) {
                         if ( dir === "down" ) {
                             this.stick.call( this, sideWidth );
                         } else if ( dir === "up" ) {
@@ -134,7 +134,7 @@
 
                     var sideWidth = this.options.keepWidth ? this.$elem.outerWidth() : false;
 
-                    if ( this.options.minWidth && this.$window.width() >= this.options.minWidth ) {
+                    if ( !this.options.minWidth || (this.options.minWidth && this.$window.width() >= this.options.minWidth) ) {
                         if ( dir === "up" ) {
                             this.stick.call( this, sideWidth );
                         } else if ( dir === "down" ) {
@@ -170,6 +170,7 @@
                     "window": this.$window,
                     "events": self.heraldEvents
                 });
+                console.log(self.heraldEvents);
             }
     };
 
