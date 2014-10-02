@@ -141,6 +141,45 @@ simply consistent across viewports. These are those.
     max-width: @350px;
 }
 
+
+
+/*
+
+Checkbox/Radio Label
+
+````checkbox-label
+<label class="checkbox-label">
+    <input type="checkbox">
+    This is a checkbox label
+</label>
+````
+
+````radio-label
+<label class="radio-label">
+    <input type="radio">
+    This is a radio label
+</label>
+````
+
+*/
+
+.checkbox-label,
+.radio-label {
+    &:extend(.relative-container);
+    &:extend(.new-line);
+
+    padding-left: @25px;
+
+    input {
+        &[type="checkbox"],
+        &[type="radio"] {
+            margin: @4px 0 0;
+            position: absolute;
+            left: 0;
+        }
+    }
+}
+
 /*
 
 Form Modules

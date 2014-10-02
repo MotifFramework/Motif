@@ -212,3 +212,45 @@ allows embedding and basic styling.
         }
     }
 }
+
+/**
+ * Sticky Sidebar
+ */
+@media @medium-screens-min {
+    .sticky__sidebar {
+        min-height: 20px;
+
+        &.is-sticky {
+            position: fixed;
+            top: 0;
+        }
+        &.was-sticky {
+            position: absolute;
+            bottom: 0;
+
+            .sticky--right & {
+                right: 0;
+            }
+            .sticky--left & {
+                left: 0;
+            }
+        }
+    }
+    [class*="sticky--"] {
+        position: relative;
+    }
+    .sticky--left {
+        &.is-sticky {
+            .sticky__main {
+                float: right;
+            }
+        }
+    }
+    .sticky--right {
+        &.is-sticky {
+            .sticky__main {
+                float: left;
+            }
+        }
+    }
+}
