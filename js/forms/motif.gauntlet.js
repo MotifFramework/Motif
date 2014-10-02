@@ -328,7 +328,7 @@
             var verdict = this.checkAllFields();
 
             if ( verdict && typeof this.options.ajaxSubmit === "function" ) {
-                this.options.ajaxSubmit();
+                this.options.ajaxSubmit.call( this );
                 return false;
             } else if ( !verdict ) {
                 this.enableSubmit();
