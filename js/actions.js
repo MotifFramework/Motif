@@ -9,6 +9,7 @@
     var App = function () {
         this.initUI();
         this.initForms();
+        this.initScroll();
     };
 
     App.prototype.initUI = function () {
@@ -44,6 +45,32 @@
     App.prototype.initForms = function () {
         // $("[data-validation='ajax']").plugin("ajaxSubmission");
         // $("[data-validation='true']").plugin("gauntlet");
+    };
+
+    App.prototype.initScroll = function () {
+        $(window).herald({
+            "events": [
+                {
+                    "trigger": 400,
+                    "event": function ( dir ) {
+                        alert("in");
+                    },
+                    "repeat": true,
+                    "suspended": true
+                }
+            ]
+        });
+        $(window).herald({
+            "events": [
+                {
+                    "trigger": 1000,
+                    "event": function ( dir ) {
+                        this.resumeEvents("herald-0");
+                    },
+                    "repeat": false
+                }
+            ]
+        });
     };
 
     new App();

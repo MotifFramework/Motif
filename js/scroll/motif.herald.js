@@ -5,7 +5,7 @@
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
-(function ( $, Motif, undefined ) {
+(function ($, Motif, undefined) {
 
     "use strict";
 
@@ -16,7 +16,7 @@
      * @constructor
      * @param elem {object}
      */
-    var Herald = function ( elem ) {
+    var Herald = function(elem) {
             
             /**
              * Set element variables
@@ -57,11 +57,6 @@
              */
             this.bind();
 
-            /**
-             * Increment the Herald counter
-             */
-            Herald.counter += 1;
-
             return this;
         },
 
@@ -72,14 +67,15 @@
          */
         "initVars": function initVars(userOptions) {
             this.config = userOptions;
+            this.identity = this.config.group || "herald-" + Herald.counter;
+            this.config.events = this.nameEvents( this.config.events );
             this.options = $.extend( true, {}, this.defaults, this.config );
             this.oldPosition = this.$window.scrollTop();
 
             /**
-             * Sort our events by trigger position
+             * Name our events, then sort them by trigger position
              */
             this.options.events = this.sortEvents();
-            this.identity = "herald-" + Herald.counter;
         },
 
         /**
@@ -118,6 +114,22 @@
         "suspend": function suspend() {
             this.$window.off( "scroll." + this.identity);
             this.$window.off( "resize." + this.identity);
+            this.suspendEvents();
+        },
+
+        "suspendEvents": function suspendEvents(name) {
+            var self = this,
+                identity = name || self.identity,
+                suspendedEvents = [];
+
+            $.each(self.options.events, function eachEvent(i, v) {
+                if ( v.name && v.name === identity ) {
+                    v.suspended = true;
+                    suspendedEvents = suspendedEvents.concat( self.options.events.slice(i, i + 1) );
+                }
+            });
+
+            return suspendedEvents;
         },
 
         /**
@@ -127,6 +139,22 @@
          */
         "resume": function resume() {
             this.bind();
+            this.resumeEvents();
+        },
+
+        "resumeEvents": function resumeEvents(name) {
+            var self = this,
+                identity = name || self.identity,
+                resumedEvents = [];
+
+            $.each(self.options.events, function eachEvent(i, v) {
+                if ( v.name && v.name === identity ) {
+                    v.suspended = false;
+                    resumedEvents = resumedEvents.concat( self.options.events.slice(i, i + 1) );
+                }
+            });
+
+            return resumedEvents;
         },
 
         /**
@@ -224,6 +252,10 @@
         "testEvent": function testEvent(thisEvent, eventNum, direction) {
             var isTriggered = false,
                 triggerPosition;
+
+            if ( thisEvent.suspended ) {
+                return;
+            }
 
             /**
              * Make sure the event either has not been fired or is
@@ -339,6 +371,16 @@
             return direction;
         },
 
+        "nameEvents": function nameEvents(events) {
+            var self = this;
+
+            $.each(events, function eachEvent(i, v) {
+                v.name = self.identity;
+            });
+
+            return events;
+        },
+
         /**
          * Sort the order of our events array by position
          * on the page
@@ -346,8 +388,13 @@
          * @return {array} Herald.options.events
          */
         "sortEvents": function sortEvents() {
-            this.options.events.sort( this.compareTriggers );
-            return this.options.events;
+            var self = this;
+
+            self.options.events.sort(function sorting(a, b) {
+                return self.compareTriggers.call(self, a, b);
+            });
+
+            return self.options.events;
         },
 
         /**
@@ -382,6 +429,8 @@
          */
         "addToHerald": function addToHerald( userOptions ) {
             if ( userOptions.events && userOptions.events.length ) {
+                this.identity = userOptions.group || "herald-" + Herald.counter;
+                userOptions.events = this.nameEvents( userOptions.events );
                 /**
                  * Let's supplement our events with the new ones
                  * we've gotten
@@ -397,7 +446,7 @@
                  * Then refresh to catch any new triggers we
                  * may have passed
                  */
-                self.refresh.call( self );
+                this.refresh();
             }
         },
 
@@ -424,18 +473,21 @@
      * Extending jQuery's `fn`
      */
     $.fn.herald = function( userOptions ) {
-        var args;
+        var self = this,
+            args;
 
         /**
          * Does the referenced object exist?
          */
-        if ( this.length ) {
-            return this.each( function eachThis () {
+        if ( self.length ) {
+            return self.each( function eachThis (index, elem) {
 
                 /**
                  * Check if this plugin already has an instance on this
                  */
                 var instance = $.data( this, "herald" );
+
+                console.log(instance);
 
                 if ( instance ) {
 
@@ -476,6 +528,14 @@
                  */
                 } else {
                     instance = $.data( this, "herald", new Herald( this ).init( userOptions ) );
+                }
+
+                /**
+                 * If this is the last one of this group,
+                 * increment the Herald counter
+                 */
+                if ( self.length - 1 === index ) {
+                    Herald.counter += 1;
                 }
             });
         }
