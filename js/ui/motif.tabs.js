@@ -342,8 +342,8 @@
          * @method animateTabs
          */
         "animateTabs": function ( instance ) {
-            var currentTab = instance.reference.targets[ 0 ],
-                currentTabHeight = currentTab.outerHeight();
+            var currentTab = instance.reference.targets.call( instance ),
+                currentTabHeight = currentTab[0].outerHeight();
 
             if ( this.options.cssTransition ) {
                 this.animateTabsCss( currentTabHeight );
@@ -361,7 +361,7 @@
             if ( self.$tabs.outerHeight() !== currentTabHeight ) {
                 if ( Tabs.animationFrame ) {
                     requestAnimFrame( function setTabsHeight () {
-                        self.$tabs.outerHeight( currentTabHeight )
+                        self.$tabs.outerHeight( currentTabHeight );
                     });
                 } else {
                     self.$tabs.outerHeight( currentTabHeight );

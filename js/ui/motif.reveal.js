@@ -570,7 +570,6 @@
                     targets.push( target );
                 });
             }
-
             return targets;
         },
 
