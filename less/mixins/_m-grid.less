@@ -131,7 +131,8 @@
         }
     }
     .grid-create ( @int, @total, @pre, @width ) when not ( @width = 25% ) and not ( @width = 33.33333% ) and not ( @width = 50% ) and not ( @width = 66.66667% ) and not ( @width = 75% ) {
-        [class*="@{pre}-@{int}of@{total}"] {
+        @size: "@{pre}-@{int}of@{total}";
+        [class*="@{pre}-@{int}of@{total}"] when (@@size) {
             width: @width;
         }
     }
@@ -144,3 +145,106 @@
     .grid-all ( 0, @total, @pre ) {}
     .grid-all ( @int, 4, @pre ) {}
 }
+
+@l-11of12: false;
+@l-10of12: false;
+@l-9of12: false;
+@l-8of12: false;
+@l-7of12: false;
+@l-6of12: false;
+@l-5of12: false;
+@l-4of12: false;
+@l-3of12: false;
+@l-2of12: true;
+@l-1of12: false;
+
+@l-10of11: false;
+@l-9of11: false;
+@l-8of11: false;
+@l-7of11: false;
+@l-6of11: false;
+@l-5of11: false;
+@l-4of11: false;
+@l-3of11: false;
+@l-2of11: false;
+@l-1of11: true;
+
+@l-9of10: false;
+@l-8of10: false;
+@l-7of10: false;
+@l-6of10: false;
+@l-5of10: false;
+@l-4of10: false;
+@l-3of10: false;
+@l-2of10: false;
+@l-1of10: true;
+
+@l-8of9: false;
+@l-7of9: false;
+@l-6of9: false;
+@l-5of9: false;
+@l-4of9: false;
+@l-3of9: false;
+@l-2of9: false;
+@l-1of9: false;
+
+@l-7of8: false;
+@l-6of8: false;
+@l-5of8: false;
+@l-4of8: false;
+@l-3of8: false;
+@l-2of8: false;
+@l-1of8: false;
+
+@l-6of7: false;
+@l-5of7: false;
+@l-4of7: false;
+@l-3of7: false;
+@l-2of7: false;
+@l-1of7: false;
+
+@l-5of6: false;
+@l-4of6: false;
+@l-3of6: false;
+@l-2of6: false;
+@l-1of6: false;
+
+@l-4of5: false;
+@l-3of5: false;
+@l-2of5: false;
+@l-1of5: false;
+
+@m-8of9: false;
+@m-7of9: false;
+@m-6of9: false;
+@m-5of9: false;
+@m-4of9: true;
+@m-3of9: false;
+@m-2of9: false;
+@m-1of9: false;
+
+@m-7of8: false;
+@m-6of8: false;
+@m-5of8: false;
+@m-4of8: false;
+@m-3of8: false;
+@m-2of8: false;
+@m-1of8: false;
+
+@m-6of7: false;
+@m-5of7: false;
+@m-4of7: false;
+@m-3of7: false;
+@m-2of7: false;
+@m-1of7: false;
+
+@m-5of6: false;
+@m-4of6: false;
+@m-3of6: false;
+@m-2of6: false;
+@m-1of6: false;
+
+@m-4of5: false;
+@m-3of5: false;
+@m-2of5: false;
+@m-1of5: false;
