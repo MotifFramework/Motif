@@ -41,6 +41,10 @@
         $("[data-validation='true']").plugin("gauntlet");
     };
 
+    App.prototype.initShowoff = function () {
+        $('.showoff').showoff();
+    };
+
     new App();
 
 }( jQuery, window, document, window.Motif = window.Motif || {
