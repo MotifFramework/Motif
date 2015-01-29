@@ -9,6 +9,7 @@
     var App = function () {
         this.initUI();
         this.initForms();
+        this.initShowoff();
     };
 
     App.prototype.initUI = function () {

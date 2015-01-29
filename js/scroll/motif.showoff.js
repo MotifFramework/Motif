@@ -22,8 +22,19 @@
             "onInit": null,
         },
 
-        init: function () {
-            console.log("hello from Showoff");
+        "initVars" : function ( userOptions ) {
+            
+        },
+
+        "init": function ( userOptions ) {
+            if ( !this.$elem.length ) {
+                return;
+            }
+
+            this.initVars.call( this, userOptions );
+            // this.bind.call( this );
+
+            return this;
         }
     };
 
@@ -38,3 +49,27 @@
 } ) );
 
 $.createPlugin("showoff", window.Motif.apps.Showoff);
+
+/*
+
+## Features:
+    - No Options Passed $('a').showoff(); || $('li').showoff();
+        - Looks for any <a href="#someanchor" || data-target="someanchor"> & then trys to match it with an ID somewhere on the page
+        - Smart enough to remove the '#' from eiter attr mentioned above
+    - Can accept a single string as a target to be scrolled to
+    - 
+
+    - Later... Integrate with Greensock to do animations
+
+## Callbacks
+    - Oninit
+    - Onscroll
+    - BeforeScroll
+    - AfterScroll
+
+## Options
+    - Animation Time : integer
+    - Easing type : string
+    - GreenSock: {}
+
+*/

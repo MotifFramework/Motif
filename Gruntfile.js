@@ -62,6 +62,7 @@ module.exports = function ( grunt ) {
                         "<%= source.js %>forms/motif.ajax-submission.js",
                         "<%= source.js %>ui/motif.reveal.js",
                         "<%= source.js %>ui/motif.tabs.js",
+                        "<%= source.js %>scroll/motif.showoff.js",
                         "<%= source.js %>vendor/holder.js",
                         "<%= source.js %>actions.js"
                     ],
