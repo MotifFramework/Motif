@@ -19,7 +19,10 @@
     Showoff.prototype = {
         "defaults": {
             "window": $( window ),
-            "onInit": null,
+            "duration": 500,
+            "easing": "ease",
+            "target": null,
+            "greensock": null
         },
 
         "initVars" : function ( userOptions ) {
@@ -32,14 +35,12 @@
             }
 
             this.initVars.call( this, userOptions );
-            // this.bind.call( this );
 
             return this;
-        }
+        },
     };
 
     Showoff.defaults = Showoff.prototype.defaults;
-
     Motif.apps.Showoff = Showoff;
     
 
@@ -57,8 +58,9 @@ $.createPlugin("showoff", window.Motif.apps.Showoff);
         - Looks for any <a href="#someanchor" || data-target="someanchor"> & then trys to match it with an ID somewhere on the page
         - Smart enough to remove the '#' from eiter attr mentioned above
     - Can accept a single string as a target to be scrolled to
-    - 
+    - Can accept an config object
 
+    - Later... Can have certain defaults over written for all instances?
     - Later... Integrate with Greensock to do animations
 
 ## Callbacks
@@ -68,8 +70,9 @@ $.createPlugin("showoff", window.Motif.apps.Showoff);
     - AfterScroll
 
 ## Options
-    - Animation Time : integer
+    - Animation duration : integer
     - Easing type : string
+    - Target: string
     - GreenSock: {}
 
 */
