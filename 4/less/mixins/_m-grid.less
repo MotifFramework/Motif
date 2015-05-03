@@ -1,0 +1,530 @@
+@grid-array-base:
+    5 of 6,
+    4 of 6,
+    3 of 6,
+    2 of 6,
+    1 of 6,
+    4 of 5,
+    3 of 5,
+    2 of 5,
+    1 of 5;
+
+@grid-array-small:
+    5 of 6,
+    4 of 6,
+    3 of 6,
+    2 of 6,
+    1 of 6,
+    4 of 5,
+    3 of 5,
+    2 of 5,
+    1 of 5;
+
+@grid-array-medium:
+    8 of 9,
+    7 of 9,
+    6 of 9,
+    5 of 9,
+    4 of 9,
+    3 of 9,
+    2 of 9,
+    1 of 9,
+    7 of 8,
+    6 of 8,
+    5 of 8,
+    4 of 8,
+    3 of 8,
+    2 of 8,
+    1 of 8,
+    6 of 7,
+    5 of 7,
+    4 of 7,
+    3 of 7,
+    2 of 7,
+    1 of 7,
+    5 of 6,
+    4 of 6,
+    3 of 6,
+    2 of 6,
+    1 of 6,
+    4 of 5,
+    3 of 5,
+    2 of 5,
+    1 of 5;
+
+@grid-array-large:
+    11 of 12,
+    10 of 12,
+    9 of 12,
+    8 of 12,
+    7 of 12,
+    6 of 12,
+    5 of 12,
+    4 of 12,
+    3 of 12,
+    2 of 12,
+    1 of 12,
+    10 of 11,
+    9 of 11,
+    8 of 11,
+    7 of 11,
+    6 of 11,
+    5 of 11,
+    4 of 11,
+    3 of 11,
+    2 of 11,
+    1 of 11,
+    9 of 10,
+    8 of 10,
+    7 of 10,
+    6 of 10,
+    5 of 10,
+    4 of 10,
+    3 of 10,
+    2 of 10,
+    1 of 10,
+    8 of 9,
+    7 of 9,
+    6 of 9,
+    5 of 9,
+    4 of 9,
+    3 of 9,
+    2 of 9,
+    1 of 9,
+    7 of 8,
+    6 of 8,
+    5 of 8,
+    4 of 8,
+    3 of 8,
+    2 of 8,
+    1 of 8,
+    6 of 7,
+    5 of 7,
+    4 of 7,
+    3 of 7,
+    2 of 7,
+    1 of 7,
+    5 of 6,
+    4 of 6,
+    3 of 6,
+    2 of 6,
+    1 of 6,
+    4 of 5,
+    3 of 5,
+    2 of 5,
+    1 of 5;
+
+@grid-aliases:
+    three-quarters 75%,
+    half 50%,
+    quarter 25%,
+    two-thirds 66.66667%,
+    third 33.33333%,
+    four-fifths 80%,
+    three-fifths 60%,
+    two-fifths 40%,
+    fifth 20%;
+
+
+// Clearfix Mixin
+.m-clearfix() {
+    &:before,
+    &:after {
+        content: "\0020";
+        height: 0;
+        display: block;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/**
+ * Our highest level grid mixins for rows and columns
+ */
+
+ #m-grid{
+     .init( @name, @prefix, @margin ) {
+         @prefix-with-col: ~"@{grid-prefix}@{col-prefix}@{prefix}";
+         @prefix-no-col: ~"@{grid-prefix}@{prefix}";
+
+         /**
+          * Grid Rows
+          */
+         [class*="@{prefix-no-col}-row"],
+         .@{prefix-no-col}-quarters,
+         .@{prefix-no-col}-thirds,
+         .@{prefix-no-col}-halves {
+             #m-grid > .row( @margin );
+
+             ul& {
+                 padding-left: 0;
+                 list-style: none outside none;
+             }
+         }
+         .@{prefix-no-col}-row {
+             &--rtl > [class*="@{prefix-with-col}"] {
+                 float: right;
+             }
+             &--ltr > [class*="@{prefix-with-col}"] {
+                 float: left;
+             }
+         }
+
+         /**
+          * Grid Columns
+          */
+         [class*="@{prefix-with-col}"],
+         .@{prefix-no-col}-quarters > *,
+         .@{prefix-no-col}-thirds > *,
+         .@{prefix-no-col}-halves > * {
+             #m-grid > .column-base( @margin );
+         }
+
+         #m-grid > .columns( @name, @prefix );
+
+         .@{prefix-no-col}-full {
+             width: 100%;
+         }
+
+         /**
+          * Flex-Grid
+          */
+         .@{prefix-no-col}-row--flex,
+         .@{prefix-no-col}-quarters,
+         .@{prefix-no-col}-thirds,
+         .@{prefix-no-col}-halves {
+             letter-spacing: -0.31em;
+             text-rendering: optimizespeed;
+         }
+             .@{prefix-no-col}-row--flex > [class*="@{prefix-with-col}"],
+             .@{prefix-no-col}-quarters > *,
+             .@{prefix-no-col}-thirds > *,
+             .@{prefix-no-col}-halves > * {
+                 float: none;
+                 display: inline-block;
+                 letter-spacing: normal;
+                 word-spacing: normal;
+                 vertical-align: top;
+                 text-rendering: auto;
+             }
+
+         // Opera as of 12 on Windows needs word-spacing.
+         // The ".opera-only" selector is used to prevent
+         // actual prefocus styling and is not required 
+         // in markup.
+         .opera-only :-o-prefocus,
+         .@{prefix-no-col}-row--flex {
+             word-spacing: -0.43em;
+         }
+
+         /**
+          * Shortcuts & Aliases
+          */
+         .@{prefix-no-col} {
+             &-quarters > * {
+                 width: 25%;
+             }
+             &-thirds > * {
+                 width: round( 100% / 3, 5 );
+             }
+             &-halves > * {
+                 width: 50%;
+             }
+         }
+     }
+ }
+
+#m-grid {
+    .columns( @name, @prefix ) {
+
+        // Vars
+        @array-name: ~"grid-array-@{name}";
+        @array: @@array-name;
+        @margin-name: ~"@{name}-margin";
+        @margin: @@margin-name;
+
+        // Mixins
+        #m-grid > .column-loop( length( @array ), @array, @prefix @margin );
+        #m-grid > .convenience-columns(length( @grid-aliases), @array, @prefix @margin );
+    }
+}
+#m-grid {
+    .row(@mar: @base-margin) {
+        #m-grid > .row-spacing(@mar);
+        .m-clearfix();
+    }
+    .column-base(@mar: @base-margin, @float: left) {
+
+        // Mixins
+        #m-grid > .column-spacing(@mar);
+
+        /* Positioning */
+        float: @float;
+    }
+}
+
+
+#m-grid {
+
+    /**
+     * Looping through the columns array when we are
+     * provided with a convenience name and value
+     *
+     * The goal is to compile a full selector string
+     * with the convenience name (`three-quarters`)
+     * and any other grid column permutations that
+     * match the value (`9of12`)
+     *
+     * Params: index, column array, convenience name/val, prefix/margin
+     */
+    .column-loop( @i, @arr, @convenience, @details ) when (@i > 0) {
+
+        // Vars
+        @item: extract(@array, @i);
+        @part: extract(@item, 1);
+        @whole: extract(@item, 3);
+        @column-val: round(100% * (@part / @whole), 5);
+        @convenience-name: extract(@convenience, 1);
+        @convenience-val: extract(@convenience, 2);
+        @prefix: extract(@details, 1);
+        @margin: extract(@details, 2);
+        @selectors: ~"@{convenience-name}";
+
+        /**
+         * When this permutation matches our convenience value,
+         * append our permutation to the selectors string
+         */
+        & when ( @column-val = @convenience-val ) {
+
+            /* Vars */
+            @selectors: ~"@{convenience-name}, .@{grid-prefix}@{col-prefix}@{prefix}-@{part}of@{whole}";
+
+            /* Mixins */
+            #m-grid > .column-loop( (@i - 1), @arr, @selectors @convenience-val, @details );
+
+        }
+
+        /**
+         * If our permutation doesn't match our convenience
+         * name, move on
+         */
+        & when not ( @column-val = @convenience-val ) {
+            #m-grid > .column-loop( (@i - 1), @arr, @selectors @convenience-val, @details );
+        }
+    }
+
+    /**
+     * When we've reached the end of the columns array
+     * and we have a string of selectors including our
+     * convenience name, create that column
+     * 
+     * Params: index, column array, convenience name/val, prefix/margin
+     */
+    .column-loop( @i, @arr, @convenience, @details ) when (@i = 0) {
+
+        // Vars
+        @convenience-name: extract(@convenience, 1);
+        @convenience-val: extract(@convenience, 2);
+
+        // Mixins
+        #m-grid > .create-column( @convenience-name, @convenience-val, @details);
+    }
+
+    /**
+     * Initializing the column loop. We want to check
+     * convenience names as well as a make a "non-convenience"
+     * loop. Column combos that don't match a convenience
+     * a created a slightly different way.
+     */
+    .column-loop( @i, @arr, @details ) when (@i > 0) {
+
+        // Vars
+        @item: extract(@arr, @i);
+        @part: extract(@item, 1);
+        @whole: extract(@item, 3);
+        @width: round(100% * (@part / @whole), 5);
+
+        // Mixins
+        #m-grid > .non-convenience-loop( length( @grid-aliases ), @part @whole @width, @details );
+        #m-grid > .column-loop( @i - 1, @arr, @details );
+    }
+}
+
+#m-grid {
+    .non-convenience-loop( @i, @measurements, @details ) when (@i > 0) {
+
+        // Vars
+        @width: extract(@measurements, 3);
+        @convenience-val: extract(extract(@grid-aliases, @i), 2);
+
+        /**
+         * When we do not match the convenience value,
+         * move on
+         */
+        & when not ( @width = @convenience-val ) {
+            #m-grid > .non-convenience-loop( (@i - 1), @measurements, @details );
+        }
+    }
+
+    /**
+     * If we've made it to the end and didn't match any
+     * convenience values, this column is ready to be created
+     */
+    .non-convenience-loop( @i, @measurements, @details ) when (@i = 0) {
+        #m-grid > .create-column( @measurements, @details );
+    }
+}
+
+/**
+ * Nailing down grid gutters based on preferences
+ */
+#m-grid {
+    .v-gutter-rem(@mar, true) {
+        @gutter-rem: unit( (unit(@mar) / unit(@html-text-size)), rem );
+    }
+    .v-gutter-rem(@mar) {
+        @gutter-rem: unit( ((unit(@mar) / 2) / unit(@html-text-size)), rem );
+    }
+    .v-gutter-perc(@mar, true) {
+        @gutter-perc: (100% * (unit(@mar) / unit(@fixed-width)));
+    }
+    .v-gutter-perc(@mar) {
+        @gutter-perc: (100% * ((unit(@mar) / 2) / unit(@fixed-width)));
+    }
+    .column-spacing(@mar: @base-margin) when (@no-calc = true) {
+
+        // Mixins
+        #m-grid > .v-gutter-rem( @mar );
+        #m-grid > .v-gutter-perc( @mar );
+
+        /* Display & Box Model */
+        margin-left: @gutter-perc;
+        margin-right: @gutter-perc;
+        margin-left: @gutter-rem;
+        margin-right: @gutter-rem;
+    }
+    .column-spacing(@mar: @base-margin) when not (@no-calc = true) {
+
+        // Mixins
+        #m-grid > .v-gutter-rem( @mar );
+
+        /* Display & Box Model */
+        margin-left: @gutter-rem;
+        margin-right: @gutter-rem;
+    }
+    .row-spacing(@mar: @base-margin) when (@no-calc = true) {
+
+        // Mixins
+        #m-grid > .v-gutter-rem( @mar );
+        #m-grid > .v-gutter-perc( @mar );
+
+        /* Display & Box Model */
+        margin-left: -@gutter-perc;
+        margin-right: -@gutter-perc;
+        margin-left: -@gutter-rem;
+        margin-right: -@gutter-rem;
+    }
+    .row-spacing(@mar: @base-margin) when not (@no-calc = true) {
+
+        // Mixins
+        #m-grid > .v-gutter-rem( @mar );
+
+        /* Display & Box Model */
+        margin-left: -@gutter-rem;
+        margin-right: -@gutter-rem;
+    }
+}
+
+/**
+ * Grid widths generated by loops
+ */
+
+#m-grid {
+    .create-column( @selectors, @width, @details ) when ( ispercentage(@width) ) {
+
+        // Vars
+        @prefix: extract(@details, 1);
+        @margin: extract(@details, 2);
+        @no-col-selectors: replace(~"@{selectors}", ~"\.@{grid-prefix}@{col-prefix}@{prefix}", ~".@{grid-prefix}@{prefix}", "gi");
+
+        // Mixins
+        #m-grid > .v-gutter-rem(@margin, true);
+
+        /**
+         * Column widths (w/ margins)
+         */
+        @{selectors} {
+            & when (@no-calc = true) {
+
+                // Mixins
+                #m-grid > .v-gutter-perc(@margin, true);
+
+                /* Display & Box Model */
+                width: (@width - @gutter-perc);
+            }
+
+            /* Display & Box Model */
+            width: calc(~"@{width} - @{gutter-rem}");
+        }
+
+        /**
+         * Column widths (w/out margins)
+         */
+        @{no-col-selectors} {
+            width: @width;
+        }
+    }
+    .create-column( @measurements, @details ) when ( isnumber( extract(@measurements, 1) ) ) {
+
+        // Vars
+        @part: extract(@measurements, 1);
+        @whole: extract(@measurements, 2);
+        @width: extract(@measurements, 3);
+        @prefix: extract(@details, 1);
+        @margin: extract(@details, 2);
+
+        // Mixins
+        #m-grid > .v-gutter-rem(@margin, true);
+
+        /**
+         * Column widths (w/ margins)
+         */
+        .@{grid-prefix}@{col-prefix}@{prefix}-@{part}of@{whole} {
+            & when (@no-calc = true) {
+
+                // Mixins
+                #m-grid > .v-gutter-perc(@margin, true);
+
+                /* Display & Box Model */
+                width: (@width - @gutter-perc);
+            }
+
+            /* Display & Box Model */
+            width: calc(~"@{width} - @{gutter-rem}");
+        }
+
+        /**
+         * Column widths (w/out margins)
+         */
+        .@{grid-prefix}@{prefix}-@{part}of@{whole} {
+            width: @width;
+        }
+    }
+}
+#m-grid {
+    .convenience-columns( @i, @arr, @details ) when (@i > 0) {
+
+        // Vars
+        @alias-name: extract(extract(@grid-aliases, @i), 1);
+        @alias-val: extract(extract(@grid-aliases, @i), 2);
+        @prefix: extract(@details, 1);
+        @grid-alias-name: ~".@{grid-prefix}@{col-prefix}@{prefix}-@{alias-name}";
+
+        // Mixins
+        #m-grid > .column-loop( length( @arr ), @array, @grid-alias-name @alias-val, @details );
+        #m-grid > .convenience-columns( (@i - 1), @arr, @details );
+    }
+}
+

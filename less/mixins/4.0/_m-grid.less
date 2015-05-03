@@ -1,0 +1,44 @@
+#m-grid {
+    .column-spacing(@mar: @base-margin) when (@no-calc = true) {
+
+        // Vars
+        @gutter-perc: (100% * ((@mar / 2) / @fixed-width));
+        @gutter-rem: unit( (unit(@mar) / @html-text-size), rem );
+
+        /* Display & Box Model */
+        margin-left: @gutter-perc;
+        margin-right: @gutter-perc;
+        margin-left: @gutter-rem;
+        margin-right: @gutter-rem;
+    }
+    .column-spacing(@mar: @base-margin) {
+
+        // Vars
+        @gutter-rem: unit( (unit(@mar) / @html-text-size), rem );
+
+        /* Display & Box Model */
+        margin-left: @gutter-rem;
+        margin-right: @gutter-rem;
+    }
+    .row-spacing(@mar: @base-margin) when (@no-calc = true) {
+
+        // Vars
+        @gutter-perc: (100% * ((@mar / 2) / 960));
+        @gutter-rem: unit( (unit(@mar) / @html-text-size), rem );
+
+        /* Display & Box Model */
+        margin-left: -@gutter-perc;
+        margin-right: -@gutter-perc;
+        margin-left: -@gutter-rem;
+        margin-right: -@gutter-rem;
+    }
+    .row-spacing(@mar: @base-margin) {
+
+        // Vars
+        @gutter-rem: unit( (unit(@mar) / @html-text-size), rem );
+
+        /* Display & Box Model */
+        margin-left: -@gutter-rem;
+        margin-right: -@gutter-rem;
+    }
+}

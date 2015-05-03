@@ -1,0 +1,13 @@
+#m-proto( @rules ) {
+    & when ( @proto = true ) {
+        @rules();
+    }
+}
+
+#m-center-vertical() {
+    #m-transform > .translateY( -50% );
+
+    position: absolute;
+    top: 50%;
+
+}

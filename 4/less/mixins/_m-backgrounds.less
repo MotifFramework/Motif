@@ -1,0 +1,54 @@
+.m-linear-gradient( @to: right; @rest... ) {
+    background-image: linear-gradient(to @to, @rest);
+}
+#m-gradient {
+    .to-right( @arg; ... ) when ( length(@arg) = 1 ) and ( iscolor(@arg) ) {
+        #m-gradient > .even-stops( right, @arguments );
+    }
+    .to-right( @arg; ... ) when ( ispercentage(extract(@arg, 2)) ) {
+        .m-linear-gradient( right, @arguments );
+    }
+    .to-left( @arg; ... ) when ( length(@arg) = 1 ) and ( iscolor(@arg) ) {
+        #m-gradient > .even-stops( left, @arguments );
+    }
+    .to-left( @arg; ... ) when ( ispercentage(extract(@arg, 2)) ) {
+        .m-linear-gradient( left, @arguments );
+    }
+    .to-top( @arg; ... ) when ( length(@arg) = 1 ) and ( iscolor(@arg) ) {
+        #m-gradient > .even-stops( top, @arguments );
+    }
+    .to-top( @arg; ... ) when ( ispercentage(extract(@arg, 2)) ) {
+        .m-linear-gradient( top, @arguments );
+    }
+    .to-bottom( @arg; ... ) when ( length(@arg) = 1 ) and ( iscolor(@arg) ) {
+        #m-gradient > .even-stops( bottom, @arguments );
+    }
+    .to-bottom( @arg; ... ) when ( ispercentage(extract(@arg, 2)) ) {
+        .m-linear-gradient( bottom, @arguments );
+    }
+}
+#m-gradient {
+    // Evenly distributed stops
+    .even-stops( @dir, @colors, @perc, @list, @i ) when ( @i > length(@colors) ) {
+        .m-linear-gradient( @dir, @list );
+    }
+    .even-stops( @dir, @colors, @perc, @list, @i ) when ( @i > 1 ) and ( @i < length(@colors) + 1 ) {
+        @this-color: extract(@colors, @i);
+        @this-perc: @perc * (@i - 1);
+        @new-list: @list, @this-color @this-perc;
+
+        #m-gradient > .even-stops( @dir, @colors, @perc, @new-list, @i + 1 );
+    }
+    .even-stops( @dir, @colors, @perc, @i ) when ( @i = 1 ) {
+        @this-color: extract(@colors, 1);
+        @this-perc: 0%;
+        @new-list: @this-color @this-perc;
+
+        #m-gradient > .even-stops( @dir, @colors, @perc, @new-list, @i + 1 );
+    }
+    .even-stops( @dir, @colors ) {
+        @perc: (100% / (length(@colors) - 1) );
+
+        #m-gradient > .even-stops( @dir, @colors, @perc, 1 );
+    }
+}

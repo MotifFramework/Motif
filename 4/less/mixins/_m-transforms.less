@@ -1,0 +1,133 @@
+.m-transform( @property, @rest... ) {
+    & when
+        ( @safari-8 = true ),
+        ( @safari-7 = true ),
+        ( @safari-6 = true ), 
+        ( @ios-safari-8 = true ),
+        ( @ios-safari-7 = true ),
+        ( @ios-safari-6 = true ), 
+        ( @ios-safari-5 = true ), 
+        ( @chrome-old = true ), 
+        ( @android-4 = true ), 
+        ( @android-2 = true ) {
+        -webkit-@{property}: @rest;
+    }
+    
+    & when
+        ( @ff-old = true ) {
+        -moz-@{property}: @rest;
+    }
+    
+    & when
+        ( @ie-9 = true ) {
+        -ms-@{property}: @rest;
+    }
+    & when
+        ( @opera-old = true ) {
+        -o-@{property}: @rest;
+    }
+    transform: @rest;
+}
+.m-transform3d( @property, @rest... ) {
+    & when
+        ( @safari-8 = true ),
+        ( @safari-7 = true ),
+        ( @safari-6 = true ), 
+        ( @ios-safari-8 = true ),
+        ( @ios-safari-7 = true ),
+        ( @ios-safari-6 = true ), 
+        ( @ios-safari-5 = true ), 
+        ( @chrome-old = true ), 
+        ( @android-4 = true ), 
+        ( @android-2 = true ) {
+        -webkit-@{property}: @rest;
+    }
+    
+    & when
+        ( @ff-old = true ) {
+        -moz-@{property}: @rest;
+    }
+
+    & when
+        ( @opera-old = true ) {
+        -o-@{property}: @rest;
+    }
+    transform: @rest;
+}
+#m-transform {
+    .none() {
+        .m-transform( transform, none );
+    }
+    .transform( @arguments ) {
+        .m-transform( transform, @arguments );
+    }
+    .skew( @angle-x: 35deg, @angle-y: 0deg ) {
+        .m-transform( transform, skew(@angle-x, @angle-y) );
+    }
+    .skewX( @angle-x: 35deg, @angle-y: 0deg ) {
+        .m-transform( transform, skewX(@angle-x) );
+    }
+    .skewY( @angle-y: 0deg ) {
+        .m-transform( transform, skewY(@angle-y) );
+    }
+    .scale( @scale: 1 ) {
+        .m-transform( transform, scale(@scale) );
+    }
+    .rotate( @scale ) {
+        .m-transform( transform, rotate(@angle) );
+    }
+    .origin( @arguments ) {
+        .m-transform( transform-origin, @arguments );
+    }
+    .translate( @x, @y ) {
+        .m-transform( transform, translate(@x, @y) );
+    }
+    .translateX( @x ) {
+        .m-transform( transform, translateX(@x) );
+    }
+    .translateY( @y ) {
+        .m-transform( transform, translateY(@y) );
+    }
+}
+#m-transform {
+    .translate3d( @x: 0, @y: 0, @z: 0 ) {
+        & when ( @ie-9 = true ) and ( @z = 0 ) {
+            // Todo: negate other browsers to only get IE
+            #m-transform > .translate( @x, @y );
+        }
+        .m-transform3d( transform, translate3d( @x, @y, @z ) );
+    }
+    .translateZ( @y ) {
+        .m-transform3d( transform, translateZ(@z) );
+    }
+    .scale3d( @x: 1, @y: 1, @z: 1 ) {
+        .m-transform3d( transform, scale( @x, @y, @z ) );
+    }
+    .scaleX( @scaleX: 1 ) {
+        .m-transform3d( transform, scaleX(@scaleX) );
+    }
+    .scaleY( @scaleY: 1 ) {
+        .m-transform3d( transform, scaleY(@scaleY) );
+    }
+    .scaleZ( @scaleZ: 1 ) {
+        .m-transform3d( transform, scaleZ(@scaleZ) );
+    }
+    .rotate3d( @x: 1, @y: 1, @z: 1, @deg ) {
+        .m-transform3d( transform, rotate3d( @@x, @y, @z, @deg ) );
+    }
+    .rotateX( @angleX ) {
+        .m-transform3d( transform, rotateX(@angleX) );
+    }
+    .rotateY( @angleY ) {
+        .m-transform3d( transform, rotateY(@angleY) );
+    }
+    .rotateZ( @angleZ ) {
+        .m-transform3d( transform, rotateZ(@angleZ) );
+    }
+    .perspective( @perspective ) {
+        .m-transform3d( transform, perspective(@perspective) );
+    }
+    .backface( @vis: hidden ) {
+        .m-transform3d( backface-visibility, perspective(@vis) );
+    }
+}
