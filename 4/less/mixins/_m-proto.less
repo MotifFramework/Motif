@@ -9,5 +9,26 @@
 
     position: absolute;
     top: 50%;
+}
+#m-center-horizontal( @width, @absolute ) when ( @absolute = true ) {
+    position: absolute;
+    left: 50%;
 
+    width: @width;
+    margin-left: ( @width / -2 );
+}
+#m-center-horizontal( @absolute ) when ( @absolute = true ) {
+    #m-transform > .translateX( -50% );
+
+    position: absolute;
+    left: 50%;
+}
+#m-center-horizontal( @width ) {
+    width: @width;
+    margin-left: auto;
+    margin-right: auto;
+}
+#m-center-horizontal() {
+    margin-left: auto;
+    margin-right: auto;
 }
