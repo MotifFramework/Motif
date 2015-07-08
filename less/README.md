@@ -424,7 +424,7 @@ Great for integrating images into bodies of text, the `.figure` class is modifie
 </figure>
 
 <!-- Figure floating right -->
-<figure class="figure--right>
+<figure class="figure--right">
     <img src="http://placehold.it/300x200" alt="A photo floating left">
 </figure>
 
