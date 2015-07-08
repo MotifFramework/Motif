@@ -9,22 +9,21 @@
 
     "use strict";
 
-    var PLUGIN = function ( elem ) {
+    var PLUGIN = function PLUGIN( elem ) {
             
             // Init Vars
             this.$elem = $( elem );
             this.elem = this.$elem[0];
 
             return this;
-        },
-        $document = $( document );
+        };
 
     PLUGIN.prototype = {
         "defaults": {
             
         },
 
-        "init": function ( userOptions ) {
+        "init": function init( userOptions ) {
             if ( !this.$elem.length ) {
                 return;
             }
@@ -34,7 +33,7 @@
             return this;
         },
 
-        "initVars": function ( userOptions ) {
+        "initVars": function initVars( userOptions ) {
             this.config = userOptions;
             this.metadata = this.$elem.data("PLUGIN-options");
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );

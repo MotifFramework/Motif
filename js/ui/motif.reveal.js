@@ -1,6 +1,19 @@
 /*!
- * Motif Reveal v2.0.1
+ * Motif Reveal v2.2.0
  * Show and hide things with class(es)
+ *
+ * Reveal accepts single or multiple IDs of target elements and, on click or 
+ * hover, adds and removes classes from those target elements as well as the 
+ * triggering element. It can group "reveals" so that you can dictate whether 
+ * multiple targets can be active at the same time.
+ *
+ * Reveal keeps track of all these triggers and targets and states by creating
+ * a "reference" in a `window.Reveal` object. You can see a model of that
+ * reference at the bottom of this file. This allows us to be able to track
+ * and manipulate these reveals outside of this plugin. In future development,
+ * we will also be able to guarantee that targets of multiple reveals and 
+ * groups will retain their appropriate state.
+ * 
  * http://getmotif.com
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
@@ -36,12 +49,17 @@
 
             // Callbacks
             "onInit": null,
-            "beforeShow": null,
-            "beforeHide": null,
+            "beforeReveal": null,
             "onShow": null,
-            "onHide": null
+            "onHide": null,
+            "returns": false
         },
 
+        /**
+         * Create a new target for the reference
+         * @param  {object} elem
+         * @return {object}
+         */
         "newReferenceTarget": function ( elem ) {
             return {
                 "elem": elem,
@@ -52,6 +70,10 @@
             };
         },
 
+        /**
+         * Create a new group for the reference
+         * @return {object}
+         */
         "newReferenceGroup": function () {
             return {
                 "type": this.options.type,
@@ -59,7 +81,11 @@
             };
         },
 
-        // Initialize
+        /**
+         * Initialize the instance
+         * @param  {object} userOptions
+         * @return {object}
+         */
         "init": function ( userOptions ) {
             this.initVars.call( this, userOptions );
 
@@ -89,8 +115,11 @@
             return this;
         },
 
+        /**
+         * Initialize the variables
+         * @param  {object} userOptions
+         */
         "initVars": function ( userOptions ) {
-            
             this.identity = this.$elem.attr("id") || "reveal-target-" + Reveal.counter;
             this.group = this.$elem.attr("data-reveal-group") || false;
             this.reference = false;
@@ -99,6 +128,9 @@
             this.options = $.extend( true, {}, this.defaults, this.config, this.metadata );
         },
 
+        /**
+         * Create the Reveal reference in the window
+         */
         "createReference": function () {
 
             // If the reference table doesn't exist...
@@ -113,6 +145,10 @@
             }
         },
 
+        /**
+         * Subscribe to Reveal events if the user has
+         * passed any callbacks
+         */
         "bindCallbacks": function () {
             var self = this;
 
@@ -124,19 +160,9 @@
                     self.options.onInit.call( self, self.$elem );
                 });
             }
-            if ( typeof self.options.beforeShow == "function" ) {
-                $document.on("reveal/" + self.identity + "/before/show", function onRevealShow () {
-                    self.options.beforeShow.call( self, self.$elem );
-                });
-            }
             if ( typeof self.options.onShow == "function" ) {
                 $document.on("reveal/" + self.identity + "/after/show", function onRevealShow () {
                     self.options.onShow.call( self, self.$elem );
-                });
-            }
-            if ( typeof self.options.beforeHide == "function" ) {
-                $document.on("reveal/" + self.identity + "/before/hide", function onRevealHide () {
-                    self.options.beforeHide.call( self, self.$elem );
                 });
             }
             if ( typeof self.options.onHide == "function" ) {
@@ -146,6 +172,10 @@
             }
         },
 
+        /**
+         * Bind the user-specified trigger (click or hover)
+         * to process on activation
+         */
         "bindTrigger": function () {
             var self = this;
 
@@ -154,10 +184,13 @@
 
                 // Bind this trigger on click
                 self.$elem.on( "click", function () {
+                    // HERE
 
                     // ...to process the trigger
-                    self.processTrigger.call( self );
-                    return false;
+                    self.processBeforeTrigger.call( self );
+
+                    // ...and return based on the user's preference
+                    return self.options.returns;
                 });
 
             // Otherwise, if it's a hover trigger...
@@ -171,11 +204,11 @@
                         sensitivity: self.options.hoverIntent.sensitivity,
                         interval: self.options.hoverIntent.interval,
                         over: function onRevealOver () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         },
                         timeout: self.options.hoverIntent.timeout,
                         out: function onRevealOut () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         }
                     });
 
@@ -185,18 +218,22 @@
                     // ... Do a simple bind...
                     self.$elem.on({
                         mouseenter: function onRevealOver () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         },
                         mouseleave: function onRevealOut () {
-                            self.processTrigger.call( self );
+                            self.processBeforeTrigger.call( self );
                         }
                     });
                 }
             }
         },
 
-            "processTrigger": function () {
-
+            /**
+             * Determine what kind of action we are
+             * about to take
+             * @return {boolean|string}
+             */
+            "getAction": function () {
                 // If this trigger is already current...
                 if ( this.reference.current === true ) {
 
@@ -204,26 +241,74 @@
                     if ( this.options.type === "radio" ) {
 
                         // If it is, let's ignore and bail
-                        return;
+                        return false;
 
                     // If it's NOT a radio...
                     } else {
 
-                        // ...we should unpublish
-                        this.unpublish.call( this );
+                        // ...we should hide
+                        return "hide";
                     }
 
                 // If it's NOT current
                 } else {
 
-                    // ...let's publish and make it current
-                    this.publish.call( this );
+                    // ...let's show
+                    return "show";
                 }
             },
 
+            /**
+             * Set a promise if user has specified a `beforeReveal` check
+             */
+            "processBeforeTrigger": function () {
+                var self = this,
+                    action = self.getAction.call( self );
+
+                /**
+                 * Bail early if the trigger results in no action
+                 */
+                if ( !action ) {
+                    return;
+                }
+                if ( typeof this.options.beforeReveal === "function" ) {
+
+                    /**
+                     * Set a promise before triggering the reveal
+                     */
+                    this.promiseBeforeTrigger( this.options.beforeReveal, action )
+                        .done( function () {
+                            self.processTrigger.call( self, action );
+                        })
+                        .fail( function () {
+                            return false;
+                        });
+                } else {
+                    /**
+                     * Otherwise process the trigger right away
+                     */
+                    this.processTrigger( action );
+                }
+            },
+
+            /**
+             * Determine whether to publish or unpublish
+             * @param  {string} action - Either "show" or "hide"
+             */
+            "processTrigger": function ( action ) {
+                if ( action === "show" ) {
+                    this.publish.call( this );
+                } else if ( action === "hide" ) {
+                    this.unpublish.call( this );
+                }
+            },
+
+                /**
+                 * "Publish" a reveal while unpublishing old ones
+                 */
                 "publish": function () {
                     var self = this,
-                        oldCurrents,
+                        oldCurrents = [],
                         key;
 
                     // If this is part of a group and it's either 
@@ -234,19 +319,24 @@
                         // Get the "old" current elements
                         oldCurrents = self.getCurrent.call( self, window.Reveal.groups[ self.group ].triggers );
 
+
                         // Go through each "old" current
-                        for ( key in oldCurrents ) {
+                        $.each( oldCurrents, function ( index, value ) {
 
                             // Trigger a hide event for each of them.
                             // We don't want them no more.
-                            self.unpublish.call( self, oldCurrents[ key ] );
-                        }
+                            self.unpublish.call( self, value );
+                        });
                     }
 
                     // Turn new current on
                     $document.trigger("reveal/" + this.identity + "/show");
                 },
 
+                /**
+                 * Unpublish the reveal
+                 * @param  {string} val
+                 */
                 "unpublish": function ( val ) {
 
                     // If a value was passed, use it,
@@ -257,55 +347,91 @@
                     $document.trigger("reveal/" + identity + "/hide");
                 },
 
+        /**
+         * Bind the internal custom show/hide events
+         */
         "bindTargets": function () {
             var self = this;
 
             // When this identity has triggered to show...
             $document.on("reveal/" + self.identity + "/show", function onRevealShow () {
 
-                // Trigger beforeShow
-                $document.trigger("reveal/" + self.identity + "/before/show");
-
-                // Make this trigger current in the reference
-                self.makeCurrent.call( self );
-
-                // Show this trigger visually
-                self.showTrigger.call( self );
-
-                // Show the targets visually
-                self.showTargets.call( self );
-
-                // Show the Fors visually
-                self.showFors.call( self );
-
-                // Trigger onShow
-                $document.trigger("reveal/" + self.identity + "/after/show");
+                // ...launch the Show sequence
+                self.showSequence.call( self );
             });
 
-            // When this identity has triggered hide...
-            // @TODO: Break this out separately from trigger show
+            // When this identity has triggered to hide...
             $document.on("reveal/" + self.identity + "/hide", function onRevealHide () {
 
-                // Trigger onHide
-                $document.trigger("reveal/" + self.identity + "/before/hide");
-
-                // Make this trigger no longer current in the reference
-                self.unmakeCurrent.call( self );
-
-                // Visually hide the trigger
-                self.hideTrigger.call( self );
-
-                // Visually hide the targets
-                self.hideTargets.call( self );
-
-                // Visually hide the Fors
-                self.hideFors.call( self );
-
-                // Trigger onHide
-                $document.trigger("reveal/" + self.identity + "/after/hide");
+                // ...launch the Hide sequence
+                self.hideSequence.call( self );
             });
         },
 
+            /**
+             * Create the Promise object, call the user's function,
+             * passing on the Promise, then return that Promise
+             * @param  {function} fn
+             * @param  {string}   action
+             * @return {object}
+             */
+            "promiseBeforeTrigger": function ( fn, action ) {
+                var deferred = new $.Deferred();
+
+                fn.call( this, this.$elem, action, deferred );
+
+                return deferred.promise();
+            },
+
+            /**
+             * Sequence of the events to "show" our target
+             */
+            "showSequence": function () {
+                $document.trigger("reveal/" + this.identity + "/before/show");
+
+                // Make this trigger current in the reference
+                this.makeCurrent();
+
+                // Show this trigger visually
+                this.showTrigger();
+
+                // Show the targets visually
+                this.showTargets();
+
+                // Show the Fors visually
+                this.showFors();
+
+                // Trigger onShow
+                $document.trigger("reveal/" + this.identity + "/after/show");
+            },
+
+            /**
+             * Sequence of events to "hide" our target
+             */
+            "hideSequence": function () {
+
+                // Trigger onHide
+                $document.trigger("reveal/" + this.identity + "/before/hide");
+
+                // Make this trigger no longer current in the reference
+                this.unmakeCurrent();
+
+                // Visually hide the trigger
+                this.hideTrigger();
+
+                // Visually hide the targets
+                this.hideTargets();
+
+                // Visually hide the Fors
+                this.hideFors();
+
+                // Trigger onHide
+                $document.trigger("reveal/" + this.identity + "/after/hide");
+            },
+
+        /**
+         * Sets this reveal as "current" on init
+         */
         "initCurrent": function () {
 
             // This element has the current attribute set to true...
@@ -314,6 +440,12 @@
             }
         },
 
+        /**
+         * Reveals the current element, unless it's part of a
+         * group. Then it pushes it into a queue until all of
+         * the group has been accounted for, so that they can
+         * listen
+         */
         "setCurrent": function () {
             if ( this.group ) {
                 window.Reveal.queue.push( this.identity );
@@ -327,9 +459,16 @@
             }
         },
 
+        /**
+         * Execute the queue for this reveal group
+         */
         "executeQueue": function () {
             var queue = window.Reveal.queue;
 
+            /**
+             * If there's anything in the queue, loop through it
+             * and trigger a show for each one
+             */
             if ( queue.length ) {
                 $.each( queue, function ( i, v ) {
                     $document.trigger("reveal/" + queue[ i ] + "/show");
@@ -338,29 +477,42 @@
 
             // Clear queue
             window.Reveal.queue = [];
+
             $document.trigger("reveal/queue/done");
         },
 
+        /**
+         * Update the reference to make current true
+         */
         "makeCurrent": function () {
-
-            // Update the reference to make current true
             this.updateReference.call( this, {
                 "current": true
             });
         },
 
+        /**
+         * Update the reference to make current false
+         */
         "unmakeCurrent": function () {
-
-            // Update the reference to make current false
             this.updateReference.call( this, {
                 "current": false
             });
         },
 
+        /**
+         * Get the "current" out of this Reveal group
+         * @param  {array} group
+         * @return {array}
+         */
         "getCurrent": function ( group ) {
             var reference = window.Reveal.triggers,
                 currents = [];
 
+            /**
+             * In this group, if the reference has any
+             * of these triggers as true, push it into
+             * the currents gorup
+             */
             $.each( group, function ( i, v ) {
                 if ( reference[ group[ i ] ].current ) {
                     currents.push( group[ i ] );
@@ -370,9 +522,16 @@
             return currents;
         },
 
+        /**
+         * Initialize this new trigger
+         */
         "initTrigger": function () {
             var self = this;
             
+            /**
+             * Create a new reference for this trigger
+             * and check if it is "current"
+             */
             this.updateReference.call( this, {
                 "targets": this.gatherTargets.call( this ),
                 "fors": this.gatherForTriggers.call( this ),
@@ -385,8 +544,10 @@
             var targetStrings,
                 targets;
 
-            if ( typeof this.options.target === "function" ) {
-                targets = this.options.target.call( this );
+            if ( this.options.target.constructor === Array && this.options.target.length ) {
+                targets = this.options.target;
+            } else if ( typeof this.options.target === "function" ) {
+                targets = this.options.target;
             } else {
                 targetStrings = this.$elem.attr( this.options.target ).split(" ");
                 targets = [];
@@ -408,7 +569,6 @@
 
                     targets.push( target );
                 });
-
             }
 
             return targets;
@@ -451,7 +611,6 @@
 
             "bindHides": function ( hideTrigger ) {
                 var self = this;
-
                 $( hideTrigger ).on( "click", function () {
                     if ( self.reference.current && self.options.type !== "radio" ) {
                         self.$elem.trigger("click");
@@ -492,7 +651,7 @@
 
             "showTargets": function () {
                 var self = this,
-                    targets = self.reference.targets;
+                    targets = typeof self.reference.targets === "function" ? self.reference.targets.call( self ) : self.reference.targets;
 
                 $.each( targets, function hideEachTarget () {
                     self.show.call( self, this );
@@ -522,7 +681,7 @@
 
             "hideTargets": function () {
                 var self = this,
-                    targets = self.reference.targets;
+                    targets = typeof self.reference.targets === "function" ? self.reference.targets.call( self ) : self.reference.targets;
 
                 $.each( targets, function hideEachTarget () {
                     self.hide.call( self, this );
@@ -590,33 +749,42 @@
 
     Motif.apps.Reveal = Reveal;
 
-    $.fn["reveal"] = function( userOptions ) {
+    $.fn.reveal = function( userOptions ) {
         var self = this,
-            args;
+            args = arguments,
+            elemLength = this.length;
 
-        if ( self.length ) {
-            return self.each( function ( index, elem ) {
+        if ( elemLength ) {
+            return this.each( function ( index ) {
+
+                // Check if this plugin already has an instance on this
                 var instance = $.data( this, "reveal" );
+
                 if ( instance ) {
+
+                    // If there are user options or no user options, call `init`
                     if ( typeof userOptions === 'undefined' || typeof userOptions === 'object' ) {
                         instance.init( userOptions );
-                    } else if ( typeof arg === 'string' && typeof instance[arg] === 'function' ) {
 
-                        // copy arguments & remove function name
-                        args = Array.prototype.slice.call( arguments, 1 );
+                    // Check if `userOptions` is a function of our instance
+                    } else if ( typeof userOptions === "string" && typeof instance[ userOptions ] === "function" ) {
 
-                        // call the method
+                        // Copy arguments & remove function name
+                        args = Array.prototype.slice.call( args, 1 );
+
                         return instance[ userOptions ].apply( instance, args );
 
+                    // Otherwise, log error
                     } else {
 
                         console.log( "Reveal: Method " + arg + " does not exist on jQuery." );
-
                     }
                 } else {
-                    instance = $.data( this, "reveal", new Reveal( this ).init( userOptions ) );
+                    args = Array.prototype.slice.call( args );
+                    instance = $.data( this, "reveal", new Reveal( this ) );
+                    instance.init.apply( instance, args );
                 }
-                if ( self.length - 1 === index ) {
+                if ( elemLength - 1 === index ) {
                     instance.executeQueue.call( self );
                 }
             });
