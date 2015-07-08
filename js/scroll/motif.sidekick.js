@@ -166,8 +166,7 @@
             "initHerald": function () {
                 var self = this;
 
-                self.$context.plugin("herald", {
-                    "window": this.$window,
+                self.$window.plugin("herald", {
                     "events": self.heraldEvents
                 });
             }

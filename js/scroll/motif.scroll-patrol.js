@@ -168,8 +168,7 @@
             "initHerald": function () {
                 var self = this;
 
-                self.$elem.plugin("herald", {
-                    "window": this.$window,
+                self.$window.plugin("herald", {
                     "events": self.heraldEvents
                 });
             }

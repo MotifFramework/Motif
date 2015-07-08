@@ -33,6 +33,60 @@ module.exports = function ( grunt ) {
             fonts: "<%= sourceDir %>fonts/",
         },
 
+        scripts: {
+            groups: {
+                helpers: [
+                    "<%= source.js %>vendor/modernizr.js",
+                    "<%= source.js %>vendor/viewport.js",
+                    "<%= source.js %>utils/motif.utils.load-script.js"
+                ],
+                main: [
+                    "<%= source.js %>vendor/jquery-2.1.4.js",
+                    "<%= source.js %>vendor/requestAnimFrame.js",
+                    "<%= source.js %>utils/motif.utils.plugins.js",
+                    "<%= source.js %>forms/motif.gauntlet.js",
+                    "<%= source.js %>forms/motif.ajax-submission.js",
+                    "<%= source.js %>ui/motif.reveal.js",
+                    "<%= source.js %>ui/motif.tabs.js",
+                    "<%= source.js %>vendor/holder.js",
+                    "<%= source.js %>actions.js"
+                ],
+                ie8: [
+                    "<%= source.js %>vendor/jquery-1.11.3.js",
+                    "<%= source.js %>utils/motif.utils.plugins.js",
+                    "<%= source.js %>forms/motif.gauntlet.js",
+                    "<%= source.js %>forms/motif.ajax-submission.js",
+                    "<%= source.js %>ui/motif.reveal.js",
+                    "<%= source.js %>ui/motif.tabs.js",
+                    "<%= source.js %>vendor/holder.js",
+                    "<%= source.js %>actions.js"
+                ]
+            },
+            config: {
+                build: {
+                    // Build Helper JS
+                    "<%= build.js %>helpers.<%= pkg.name %>.js": "<%= scripts.groups.helpers %>",
+
+                    // Build Global JS
+                    "<%= build.js %><%= pkg.name %>.js": "<%= scripts.groups.main %>",
+
+                    // Build Global JS (IE8)
+                    "<%= build.js %><%= pkg.name %>-ie8.js": "<%= scripts.groups.ie8 %>"
+                },
+                dist: {
+
+                    // Dist Helper JS
+                    "<%= dist.js %><%= pkg.name %>.js": "<%= scripts.groups.helpers %>",
+
+                    // Dist Global JS
+                    "<%= dist.js %><%= pkg.name %>.js": "<%= scripts.groups.main %>",
+
+                    // Dist Global JS (IE8)
+                    "<%= dist.js %><%= pkg.name %>-ie8.js": "<%= scripts.groups.ie8 %>"
+                }
+            }
+        },
+
         // Tasks
 
         // Concat and Compress JS
@@ -42,45 +96,26 @@ module.exports = function ( grunt ) {
                     mangle: false,
                     beautify: true,
                     preserveComments: "all",
-                    sourceMap: true
+                    sourceMap: true,
+                    report: "gzip",
+                    compress: false
                 },
-                files: {
-
-                    // Build Helpers
-                    "<%= build.js %>helpers.<%= pkg.name %>.js": [
-                        "<%= source.js %>vendor/modernizr.js",
-                        "<%= source.js %>vendor/viewport.js",
-                        "<%= source.js %>utils/motif.utils.load-script.js"
-                    ],
-
-                    // Build Global JS
-                    "<%= build.js %><%= pkg.name %>.js": [
-                        "<%= source.js %>vendor/jquery-2.1.0.js",
-                        "<%= source.js %>vendor/requestAnimFrame.js",
-                        "<%= source.js %>utils/motif.utils.plugins.js",
-                        "<%= source.js %>forms/motif.gauntlet.js",
-                        "<%= source.js %>forms/motif.ajax-submission.js",
-                        "<%= source.js %>ui/motif.reveal.js",
-                        "<%= source.js %>ui/motif.tabs.js",
-                        "<%= source.js %>vendor/holder.js",
-                        "<%= source.js %>actions.js"
-                    ],
-
-                    // Build Global JS for IE
-                    "<%= build.js %><%= pkg.name %>-ie8.js": [
-                        "<%= source.js %>vendor/jquery-1.11.0.js",
-                        "<%= source.js %>utils/motif.utils.plugins.js",
-                        "<%= source.js %>forms/motif.gauntlet.js",
-                        "<%= source.js %>forms/motif.ajax-submission.js",
-                        "<%= source.js %>ui/motif.reveal.js",
-                        "<%= source.js %>ui/motif.tabs.js",
-                        "<%= source.js %>vendor/holder.js",
-                        "<%= source.js %>actions.js"
-                    ]
-                }
+                files: "<%= scripts.config.build %>"
             },
             dist: {
                 options: {
+                    mangle: true,
+                    beautify: false,
+                    sourceMap: false,
+                    report: "gzip",
+                    compress: true
+                },
+                files: "<%= scripts.config.dist %>"
+            },
+            motifDist: {
+                options: {
+                    mangle: true,
+                    beautify: false,
                     preserveComments: "some",
                     report: "gzip",
                     compress: true
@@ -119,7 +154,8 @@ module.exports = function ( grunt ) {
                     sourceMapRootpath: "../../",
                     sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>.css.map",
-                    cleancss: false
+                    cleancss: false,
+                    report: "gzip"
                 },
                 files: {
                     "<%= build.css %><%= project %>.css": "<%= source.less %>global.less"
@@ -133,7 +169,8 @@ module.exports = function ( grunt ) {
                     sourceMapRootpath: "../../",
                     sourceMapBasepath: "<%= sourceDir %>",
                     sourceMapURL: "<%= project %>-fixed.css.map",
-                    cleancss: false
+                    cleancss: false,
+                    report: "gzip"
                 },
                 files: {
                     "<%= build.css %><%= project %>-fixed.css": "<%= source.less %>global-fixed.less"
@@ -142,31 +179,23 @@ module.exports = function ( grunt ) {
 
             // Distribution Build
             globalDist: {
+                options: {
+                    compress: true,
+                    cleancss: true,
+                    report: "gzip"
+                },
                 files: {
                     "<%= dist.css %><%= project %>.css": "<%= source.less %>global.less"
                 }
             },
             globalFixedDist: {
+                options: {
+                    compress: true,
+                    cleancss: true,
+                    report: "gzip"
+                },
                 files: {
                     "<%= dist.css %><%= project %>-fixed.css": "<%= source.less %>global-fixed.less"
-                }
-            },
-            globalDistMin: {
-                options: {
-                    cleancss: true,
-                    report: "gzip"
-                },
-                files: {
-                    "<%= dist.css %><%= project %>.min.css": "<%= source.less %>global.less"
-                }
-            },
-            globalFixedDistMin: {
-                options: {
-                    cleancss: true,
-                    report: "gzip"
-                },
-                files: {
-                    "<%= dist.css %><%= project %>-fixed.min.css": "<%= source.less %>global-fixed.less"
                 }
             }
         },
@@ -256,7 +285,6 @@ module.exports = function ( grunt ) {
     grunt.loadNpmTasks("grunt-contrib-less");
     grunt.loadNpmTasks("grunt-webfont");
     grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-watch");
 
     // Default task, compiles LESS and JS into "build" folder
@@ -267,7 +295,7 @@ module.exports = function ( grunt ) {
     grunt.registerTask("build", ["webfont:iconsBuild", "less:globalBuild", "less:globalFixedBuild", "uglify:build"]);
 
     // Distribution Build
-    grunt.registerTask("dist", ["webfont:iconsDist", "less:globalDist", "less:globalFixedDist", "less:globalDistMin", "less:globalFixedDistMin", "uglify:dist"]);
+    grunt.registerTask("dist", ["webfont:iconsDist", "less:globalDist", "less:globalFixedDist", "less:globalDist", "less:globalFixedDist", "uglify:dist"]);
 
     // Compile Dev Webfonts
     grunt.registerTask("fonts", ["webfont:iconsBuild"]);
