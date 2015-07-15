@@ -1,0 +1,132 @@
+/* ==========================================================================
+   MQ Base
+   ========================================================================== */
+
+/* Slider Defaults
+   ========================================================================== */
+
+    .slider--defaults {
+        position: relative;
+
+        .flex-direction-nav {
+            padding: 0;
+            list-style-type: none;
+
+            a {
+                
+                /* Mixins */
+                .size-for-font( @inch-text-size );
+            }
+
+            a:before {
+
+                /* Extends */
+                &:extend( [class*="icon--"]:before );
+
+                position: absolute;
+                top: 0;
+            }
+        }
+
+        .flex-prev,
+        .flex-next {
+
+            /* Mixins */
+            .translate( 0, -50% );
+
+            position: absolute;
+            top: 50%;
+
+            &.flex-disabled {
+                display: none;
+            }
+        }
+
+
+        .flex-prev {
+            right: 100%;
+
+            &:before {
+                right: inherit;
+                
+                /* Extends */
+                &:extend( .icon--nav-left:before );
+            }
+        }
+
+
+        .flex-next {
+            left: 100%;
+
+            &:before {
+                left: inherit;
+                
+                /* Extends */
+                &:extend( .icon--nav-right:before );
+            }
+        }
+    }
+
+/* ==========================================================================
+   MQ Small Screens Only
+   ========================================================================== */
+
+@media @small-screens-max {
+
+
+    /* Slider Defaults
+       ========================================================================== */
+    
+        .slider--defaults {
+
+            // Accomidate for negative margins in our grid system
+            .flex-viewport {
+                #mixed > .row( @mobile-margin );
+            }
+        }
+}
+
+
+/* ==========================================================================
+   MQ Medium Only
+   ========================================================================== */
+
+@media @medium-screens-only {
+    
+    /* Slider Defaults
+       ========================================================================== */
+        
+        .slider--defaults {
+
+            // Accomidate for negative margins in our grid system
+            .flex-viewport {
+                #mixed > .row( @tablet-margin );
+            }
+        }
+
+}
+
+
+/* ==========================================================================
+   MQ Large
+   ========================================================================== */
+
+@media @large-screens-min {
+
+    /* Slider Defaults
+       ========================================================================== */
+        
+        .slider--defaults {
+
+            // Accomidate for negative margins in our grid system
+            .flex-viewport {
+                #mixed > .row( @base-margin );
+            }
+        }
+
+    /* Action Slider
+       ========================================================================== */
+    
+}
+
+
