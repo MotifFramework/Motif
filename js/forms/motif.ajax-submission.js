@@ -166,7 +166,7 @@
          * runs callback (if there).
          * @method afterSubmit
          */
-        "afterSubmit": function () {
+        "afterSubmit": function ( data, error ) {
             var message = this.options.feedbackMessage ? this.buildMessage() : false;
 
             // If there was no error...
