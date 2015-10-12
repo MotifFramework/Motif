@@ -156,7 +156,7 @@
             }
 
             // ...then call the after-submission method
-            this.afterSubmit();
+            this.afterSubmit( data, error );
 
             return data;
         },
@@ -183,7 +183,7 @@
             if ( typeof this.options.callback === "function" ) {
 
                 // ...call it, passing on this form as context
-                this.options.callback();
+                this.options.callback( this.$elem, data, error );
             }
         },
 
