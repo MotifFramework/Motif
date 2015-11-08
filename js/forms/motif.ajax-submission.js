@@ -156,7 +156,7 @@
             }
 
             // ...then call the after-submission method
-            this.afterSubmit();
+            this.afterSubmit( data, error );
 
             return data;
         },
@@ -166,7 +166,7 @@
          * runs callback (if there).
          * @method afterSubmit
          */
-        "afterSubmit": function () {
+        "afterSubmit": function ( data, error ) {
             var message = this.options.feedbackMessage ? this.buildMessage() : false;
 
             // If there was no error...
@@ -183,7 +183,7 @@
             if ( typeof this.options.callback === "function" ) {
 
                 // ...call it, passing on this form as context
-                this.options.callback();
+                this.options.callback( this.$elem, data, error );
             }
         },
 
