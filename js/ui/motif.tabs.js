@@ -1,5 +1,5 @@
 /*!
- * Motif Tabs v0.2.0 (2014-04-30)
+ * Motif Tabs v0.2.1 (2015-10-29)
  * Requires Motif Reveal
  * http://getmotif.com
  * 
@@ -212,7 +212,7 @@
             var self = this;
 
             self.options.revealOptions.target = function () {
-                return self.gatherTargets.call( this );
+                return self.gatherTargets.call( self, this );
             };
             self.options.revealOptions.onInit = function () {
                 self.prepTabs.call( self, this );
@@ -241,10 +241,10 @@
          * @method gatherTargets
          * @return {Array}
          */
-        "gatherTargets": function () {
+        "gatherTargets": function ( instance ) {
             var targets = [];
 
-            targets.push( $( this.$elem.attr("href") ) );
+            targets.push( $( instance.$elem.attr("href") ) );
 
             return targets;
         },
@@ -342,7 +342,7 @@
          * @method animateTabs
          */
         "animateTabs": function ( instance ) {
-            var currentTab = instance.reference.targets[ 0 ],
+            var currentTab = instance.reference.targets.call( this, instance )[ 0 ],
                 currentTabHeight = currentTab.outerHeight();
 
             if ( this.options.cssTransition ) {
