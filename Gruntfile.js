@@ -29,8 +29,6 @@ module.exports = function ( grunt ) {
         "webfont:iconsDist",
         "less:globalDist",
         "less:globalFixedDist",
-        "less:globalDist",
-        "less:globalFixedDist",
         "uglify:dist"
     ]);
 
