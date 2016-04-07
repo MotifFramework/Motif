@@ -19,6 +19,9 @@
     "grunt-contrib-less": "~1.0.x",
     "grunt-contrib-uglify": "~0.9.x",
     "grunt-contrib-watch": "~0.6.x",
+    "grunt-node-version": "^1.0.2",
+    "grunt-svgmin": "^3.1.2",
+    "grunt-svgstore": "^1.0.0",
     "grunt-webfont": "~0.4.x",
     "load-grunt-config": "^0.19.1"
   }

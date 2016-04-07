@@ -391,9 +391,10 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 ````nav-bar
 <nav class="nav-bar--menu" role="navigation">
-    <h3 class="nav-bar__title pre-icon--rows js-expand"
+    <h3 class="nav-bar__title js-expand"
      id="reveal-main-nav"
      data-reveal="main-nav-list">
+        <svg class="icon"><use xlink:href="#rows"></svg>
         <b class="button-label">Main Menu</b>
     </h3>
     <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">
