@@ -12,13 +12,13 @@ module.exports = function ( grunt ) {
 
     // Run when you want to refresh everything
     grunt.registerTask("refresh", [
-        "webfont:iconsBuild",
+        "svgstore:build",
         "less:globalBuild",
         "less:globalFixedBuild",
         "uglify:build"
     ]);
     grunt.registerTask("build", [
-        "webfont:iconsBuild",
+        "svgstore:build",
         "less:globalBuild",
         "less:globalFixedBuild",
         "uglify:build"
@@ -26,7 +26,8 @@ module.exports = function ( grunt ) {
 
     // Distribution Build
     grunt.registerTask("dist", [
-        "webfont:iconsDist",
+        "svgmin:dist",
+        "svgstore:dist",
         "less:globalDist",
         "less:globalFixedDist",
         "uglify:dist"
@@ -34,7 +35,7 @@ module.exports = function ( grunt ) {
 
     // Compile Dev Webfonts
     grunt.registerTask("fonts", [
-        "webfont:iconsBuild"
+        "svgstore:build"
     ]);
 
     // Compile Dev LESS Files
