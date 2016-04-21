@@ -14,10 +14,13 @@
   "license": "MIT Open Source",
   "gitHead": "cce044bb9b91bffe6cddd736bc925a22b58fbcd8",
   "dependencies": {
-    "require-dir" : "0.3.x",
-    "gulp": "3.9.x",
-    "gulp-less": "3.0.x",
-    "gulp-sourcemaps": "2.0.0-alpha",
-    "gulp-clean-css" : "2.0.6"
+    "grunt": "~0.4.x",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-less": "~1.0.x",
+    "grunt-contrib-uglify": "~0.9.x",
+    "grunt-contrib-watch": "~0.6.x",
+    "grunt-svgmin": "^3.1.2",
+    "grunt-svgstore": "^1.0.0",
+    "load-grunt-config": "^0.19.1"
   }
 }
