@@ -1,0 +1,142 @@
+/*
+
+Input Label
+
+The `.input-label` class should be added to form labels that want a little 
+extra styling for the label text.
+
+(You may need to do some fancy things with hidden or altered labels, which is
+why these styles aren't added to the `label` element by default.)
+
+    <label class="input-label">
+        Text Field
+        <input type="text" name="text" required>
+    </label>
+
+There are also input descriptions, which go directly underneath the label text,
+and input hints that typically go underneath the input field.
+
+    <label class="input-label">
+        Text Field
+        
+        <small class="input-desc">
+            This is a small description of the field.
+        </small>
+        
+        <input type="text" name="text" required>
+        
+        <strong class="input-hint">
+            This is an important hint.
+        </strong>
+    </label>
+
+*/
+
+.input {
+    &-label,
+    &-hint,
+    &-desc {
+        @extend .new-line;
+    }
+    &-hint,
+    &-desc {
+        @extend .body-text;
+    }
+    &-label {
+
+        // Mixins
+        @include padding-leader( 1 );
+    }
+    &-hint {
+        color: $grey;
+
+        // Mixins
+        @include margin-leader( 0.25 );
+    }
+    &-desc {
+        @include margin-leader( 0 );
+    }
+}
+
+/*
+
+Fieldset
+
+A simple class to add to fieldsets that want a little more spacing.
+
+*/
+
+.fieldset {
+
+    // Mixins
+    @include margin-leader( 1 );
+    @include padding-trailer( 1 );
+}
+
+/*
+
+Checkbox List
+
+Lists of radio or checkbox inputs should typically be just that: lists. In 
+Motif, you're encouraged to mark up your input lists as semantically as 
+possible, meaning a fieldset, with a legend, and a list of inputs:
+
+    <fieldset>
+        <legend>
+            <b class="input-label">This is a question for a radio list?</b>
+        </legend>
+
+        <ul class="checkbox-list">
+            <li>
+                <label class="media-object">
+                    <input class="media-object__figure"
+                     type="radio"
+                     name="radioList"
+                     value="Yes">
+
+                    <b class="media-object__desc">
+                        Yes
+                    </b>
+                </label>
+            </li>
+            <li>
+                <label class="media-object">
+                    <input class="media-object__figure"
+                     type="radio"
+                     name="radioList"
+                     value="No">
+
+                    <b class="media-object__desc">
+                        No
+                    </b>
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+*/
+
+.checkbox-list {
+
+    // Mixins
+    @include margin-leader( 0.5 );
+}
+legend + .checkbox-list {
+
+    // Mixins
+    @include margin-leader( 0 );
+}
+legend {
+    .input-label {
+
+        // Mixins
+        @include padding-trailer( 0.25 );
+    }
+
+    + .input-desc {
+
+        /* Positioning */
+        position: relative;
+        top: px(-5);
+    }
+}

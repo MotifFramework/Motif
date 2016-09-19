@@ -1,0 +1,22 @@
+/*
+
+Font Declarations
+
+Using the `.web-font` and `.web-font-svg` mixins, declare webfonts using the 
+"bulletproof" `@font-face` syntax.
+
+See: (http://www.fontspring.com/blog/further-hardening-of-the-bulletproof-syntax/)
+
+*/
+
+// Samples:
+
+// Font Declaration w/out SVG
+// @font-face {
+//     @include web-font("NAME", font-family, font-family-file);
+// }
+
+// Font Declaration w/ SVG
+// @font-face {
+//     @include web-font-svg("NAME", font-family, font-family-file, FontFamilySVG);
+// }

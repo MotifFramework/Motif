@@ -1,0 +1,88 @@
+// 
+// Type Mixins
+// -----------------------------------------------------------------------------
+// 
+// Functions for sizing and embedding type
+// 
+
+// Size For Font
+// Convert type size into rems, with a pixel fallback.
+
+@mixin size-for-font($font-size, $fallback: false)
+{
+    @if $fallback {
+        font-size: #{$font-size}px;
+    }
+    font-size: px($font-size);
+}
+
+// Vertical Rhythm
+// Calculate the minimum multiple of rhythm units needed to contain the font-size.
+// Optionally, you can specify a custom line-height (sans unit).
+
+
+@mixin lines-for-font-size($font-size, $round) {
+    $unit: $base-vertical;
+
+    @if type-of($round) == number {
+        line-height: $round / $font-size;
+    } @else if $round == quarter {
+        $unit: $base-vertical / 4;
+        $ceil: ceil($font-size / $unit);
+        line-height: ($ceil * $unit) / $font-size;
+    } @else if $round == half {
+        $unit: $base-vertical / 2;
+        $ceil: ceil($font-size / $unit);
+        line-height: ($ceil * $unit) / $font-size;
+    } @else {
+        $ceil: ceil($font-size / $unit);
+        line-height: ($ceil * $unit) / $font-size;
+    }
+}
+
+
+// Type Size
+// Combine the font sizing mixin with the line-height one. Package deal.
+
+@mixin type-size($font-size, $round: $round-to-nearest)
+{
+
+    // Mixins
+    @include size-for-font($font-size);
+    @include lines-for-font-size($font-size, $round);
+}
+
+
+// Lists
+
+@mixin unstyled-list()
+{
+    padding-left:           0;
+    list-style:             none outside none;
+}
+
+
+// Webfonts
+// Mixins to generate `@font-face` code, with and sans SVG.
+
+@mixin web-font($name: "Web Font", $folder: folder, $filename: webfont)
+{
+    font-family:    "${name}";
+    src:            url("/resources/fonts/${folder}/${filename}.eot");
+    src:            url("/resources/fonts/${folder}/${filename}.eot?#iefix") format('embedded-opentype'),
+                    url("/resources/fonts/${folder}/${filename}.woff") format('woff'),
+                    url("/resources/fonts/${folder}/${filename}.ttf") format('truetype');
+    font-weight:    normal;
+    font-style:     normal;
+}
+@mixin web-font-svg($name: "Web Font", $folder: folder, $filename: webfont, $svg-name: WebFont)
+{
+    font-family:    "${name}";
+    src:            url("/resources/fonts/${folder}/${filename}.eot");
+    src:            url("/resources/fonts/${folder}/${filename}.eot?#iefix") format('embedded-opentype'),
+                    url("/resources/fonts/${folder}/${filename}.woff") format('woff'),
+                    url("/resources/fonts/${folder}/${filename}.ttf") format('truetype'),
+                    url("/resources/fonts/${folder}/${filename}.svg#${svg-name}") format('svg');
+    font-weight:    normal;
+    font-style:     normal;
+}

@@ -1,0 +1,202 @@
+/*
+
+Forms
+
+*/
+
+/*
+
+Basic Form Elements
+
+Inputs and textareas are set to `width: 100%` to adapt to the width of their 
+wrapper. (Great for grids.) Select boxes are set to the width of their content,
+maxing out at `100%`.
+
+Almost all the form elements in Motif are best used inside a `label`.
+
+    <label>
+        Text Field
+        <input type="text" name="text" required>
+    </label>
+
+*/
+
+input,
+textarea {
+
+    // Variables
+    $input-side-padding: ( 1em * ( $input-padding / $base-text-size ) );
+
+    // Create
+    width: 100%;
+    font-size: 1em;
+    padding: $quarter-vertical $input-side-padding;
+    outline: none;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.is-current {
+        z-index: 1;        
+    }
+}
+input {
+    &[type="checkbox"],
+    &[type="radio"] {
+        width: auto;
+
+        .lte7 & {
+            width: 13px;
+        }
+    }
+}
+textarea {
+    height: $full-vertical * 4;
+}
+select {
+    width: auto;
+    max-width: 100%;
+    font-size: 0.8125em;
+}
+
+
+/*
+
+Input Label Elements
+
+Child form elements of the `.input-label` class are given a little bit of 
+spacing to separate them from the label text. (See also `.input-label` in the
+form `_type.less` file.)
+
+````input-label-elements
+<label class="input-label">
+    Text Field
+    <input type="text" name="text" placeholder="Placeholder text" required>
+</label>
+<label class="input-label">
+    Textarea
+    <textarea placeholder="Placeholder text"></textarea>
+</label>
+<label class="input-label">
+    Select
+    <select>
+        <option>Placeholder text</option>
+    </select>
+</label>
+````
+
+*/
+
+.input-label {
+
+    input,
+    textarea,
+    select {
+    
+        // Mixins
+        @include margin-vertical(0.5);
+    }
+}
+
+/*
+
+Input Widths
+
+While you are encouraged to use the responsive grid system in conjunction with 
+your form styles, sometimes it's useful to have form field widths that are 
+simply consistent across viewports. These are those.
+
+    <label class="input-label">
+        Text Field
+        <input class="input--xs" type="text" name="text" required>
+    </label>
+
+*/
+
+.input--eighth {
+    width: 12.5%;
+}
+.input--quarter {
+    width: 25%;
+}
+.input--half {
+    width: 50%;
+}
+.input--xxxs {
+    max-width: px(30);
+}
+.input--xxs {
+    max-width: px(50);
+}
+.input--xs {
+    max-width: px(100);
+}
+.input--s {
+    max-width: px(175);
+}
+.input--m {
+    max-width: px(250);
+}
+.input--l {
+    max-width: px(350);
+}
+
+/*
+
+Form Modules
+
+````attached-label-before
+<label class="attached-label">
+    <small class="label">$</small>
+    <input type="num" id="attached-label-before" required>
+</label>
+````
+
+````attached-label-after
+<label class="attached-label">
+    <input type="text" id="attached-label-after" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-before-and-after
+<label class="attached-label">
+    <small class="label">www.</small>
+    <input type="text" id="attached-label" placeholder="domain" required>
+    <small class="label">.com</small>
+</label>
+````
+
+````attached-label-submit
+<form class="attached-label">
+    <label class="is-hidden" for="attached-label-submit">Search</label>
+    <input type="search" id="attached-label-submit" required>
+    <div>
+        <button type="submit" class="btn--primary icon--search">
+            <b class="is-hidden">Submit</b>
+        </button>
+    </div>
+</form>
+````
+
+*/
+
+.attached-label {
+    display: table;
+    overflow: hidden;
+
+    > * {
+        margin-top: 0;
+        display: table-cell;
+        vertical-align: middle;
+
+        > :first-child {
+            margin-top: 0;
+        }
+    }
+
+    [class*="btn"] {
+        display: block;
+        width: 100%;
+    }
+}

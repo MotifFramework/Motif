@@ -11,10 +11,10 @@ contained in the "site width". By default, caps off at `1150px`.
 	margin-left: auto;
 	margin-right: auto;
 }
-@media @x-large-screens-min {
+@include mq(wide) {
 	.wrapper {
 		width: 80%;
-		max-width: px(1150);
+		max-width: 1em * (1150 / $base-text-size);
 	}
 }
 
@@ -47,11 +47,11 @@ accompanied by CSS3 animations.
     */
 
 	.reveal__target {
-	    &:extend( .is-hidden );
+	    @extend .is-hidden;
 
 	    &.is-revealed {
 
-	    	&:extend( .isnt-hidden );
+	    	@extend .isnt-hidden;
 
 	        /* Pretty */
 	        overflow: visible;
@@ -78,7 +78,7 @@ accompanied by CSS3 animations.
 
 	.expand__target,
 	.fade__target {
-		&:extend( .relative-container );
+		@extend .relative-container;
 
 		// Display & Box Model
 	    max-height: 0;
@@ -93,8 +93,7 @@ accompanied by CSS3 animations.
 	    .expand__target.was-expanded,
 	    .fade__target.was-faded {
 
-	        // Mixins
-	        .transition( all, 0.65s, ease-in-out );
+	        transition: all 0.65s ease-in-out;
 	    }
 
     /*
@@ -114,17 +113,17 @@ accompanied by CSS3 animations.
     */
 
 	.fade__target {
-	    .opacity(0);
+	    opacity: 0;
 
 	    &.is-faded {
-	        .opacity(1);
+	        opacity: 1;
 	    }
 	}
 }
 
 
 .no-transition {
-    .transition( none ) !important;
+    transition: none !important;
 }
 
 /*
@@ -146,7 +145,7 @@ Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
     </nav>
 
 */
-@media @medium-screens-min {
+@include mq(medium) {
     .js {
         .menu__list {
             max-height: 999px;

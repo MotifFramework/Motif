@@ -1,0 +1,194 @@
+$lyt-keywords: (
+    fifth: 20%,
+    quarter: 25%,
+    third: (100% / 3),
+    two-fifths: 40%,
+    half: 50%,
+    three-fifths: 60%,
+    two-thirds: ((100% / 3) * 2),
+    three-quarters: 75%,
+    four-fifths: 80%,
+);
+$lyt-aliases: (
+    fifths: fifth,
+    quarters: quarter,
+    thirds: third,
+    halves: half
+);
+
+// Clearfix Mixin
+@mixin clearfix {
+    &:before,
+    &:after {
+        content: "\0020";
+        height: 0;
+        display: block;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
+@function lyt-spacing($spacing: $base-margin) {
+    @return px($spacing) / 2;
+}
+@mixin lyt-row($mar: $base-margin) {
+    $lyt-margin: lyt-spacing($mar);
+
+    @include clearfix();
+
+    margin-left: -$lyt-margin;
+    margin-right: -$lyt-margin;
+    
+}
+@mixin lyt-col-auto($float: left) {
+    display: inline;
+    float: $float;
+}
+@mixin lyt-col-padding($pad: $base-margin) {
+    $lyt-padding: lyt-spacing($pad);
+
+    padding-left: -$lyt-padding;
+    padding-right: -$lyt-padding;
+}
+@function lyt-width($target, $container) {
+    @return ($target / $container) * 100%;
+}
+@function lyt-width-has-keyword($width) {
+    $has-keyword: false;
+
+    @each $keyword, $val in $lyt-keywords {
+        @if $width == $val {
+            $has-keyword: $keyword;
+        }
+    }
+
+    @return $has-keyword;
+}
+@mixin lyt-generate-keywords($abbr) {
+    @each $keyword, $width in $lyt-keywords {
+        [class*="#{$abbr}-#{$keyword}"] {
+            width: $width;
+        }
+    }
+}
+@mixin lyt-generate-aliases($abbr) {
+    @each $alias, $keyword in $lyt-aliases {
+        .g#{$abbr}-#{$alias} {
+            @extend [class*="g#{$abbr}-row"];
+            @extend .g#{$abbr}-row--flex;
+
+            > * {
+                @extend [class*="gc#{$abbr}"];
+                @extend %lyt-row-flex-child-#{$abbr};
+                @extend [class*="#{$abbr}-#{$keyword}"];
+            }
+        }
+    }
+}
+@mixin lyt-generate-columns($total, $abbr, $gutter) {
+    [class*="gc#{$abbr}"] {
+        @include lyt-col-auto;
+        @include lyt-col-padding($gutter);
+    }
+    @include lyt-generate-column-variants($total, $abbr);
+}
+@mixin lyt-generate-column-variants($total, $abbr) {
+    @while $total > 0 {
+        $n: $total - 1;
+        @while $n > 0 {
+            $width: lyt-width($n, $total);
+
+            [class*="#{$abbr}-#{$n}of#{$total}"] {
+                $has-keyword: lyt-width-has-keyword($width);
+                @if $has-keyword {
+                    @extend [class*="#{$abbr}-#{$has-keyword}"];
+                } @else {
+                    width: $width;
+                }
+            }
+            $n: $n - 1;
+        }
+        $total: $total - 1;
+    }
+}
+@mixin lyt-generate-rows($abbr, $gutter) {
+    [class*="g#{$abbr}-row"] {
+        @include lyt-row($gutter);
+        
+        selector-unify("ul", &) {
+            padding-left: 0;
+            list-style: none outside none;
+        }
+    }
+    .g#{$abbr}-row {
+        &--rtl {
+            > [class*="gc#{$abbr}"] {
+                float: right;
+            }
+        }
+        &--ltr {
+            > [class*="gc#{$abbr}"] {
+                float: left;
+            }
+        }
+    }
+    .g#{$abbr}-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+    %lyt-row-flex-child-#{$abbr} {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+    .g#{$abbr}-row--flex > [class*="gc#{$abbr}"] {
+        @extend %lyt-row-flex-child-#{$abbr};
+    }
+
+    // Opera as of 12 on Windows needs word-spacing.
+    // The ".opera-only" selector is used to prevent
+    // actual prefocus styling and is not required 
+    // in markup.
+    .opera-only :-o-prefocus,
+    .g#{$abbr}-row--flex {
+        word-spacing: -0.43em;
+    }
+}
+@mixin lyt-generate($columns, $abbr, $gutter) {
+    @include lyt-generate-rows($abbr, $gutter);
+    @include lyt-generate-keywords($abbr);
+    @include lyt-generate-columns($columns, $abbr, $gutter);
+    @include lyt-generate-aliases($abbr);
+}
+@mixin lyt-create {
+    @each $label, $bp in $bps {
+        $columns: map-get($bp, columns);
+        $abbr: map-get($bp, abbr);
+        $gutter: map-get($bp, gutter);
+        $min-width: map-get($bp, min-width);
+        $max-width: map-get($bp, max-width);
+
+        @if $min-width {
+            @if $max-width {
+                @include mq($label, only) {
+                    @include lyt-generate($columns, $abbr, $gutter);
+                }
+            } @else {
+                @include mq($label) {
+                    @include lyt-generate($columns, $abbr, $gutter);
+                }
+            }
+        } @else if $max-width {
+            @include mq($label, max) {
+                @include lyt-generate($columns, $abbr, $gutter);
+            }
+        } @else {
+            @include lyt-generate($columns, $abbr, $gutter);
+        }
+    }
+}
+

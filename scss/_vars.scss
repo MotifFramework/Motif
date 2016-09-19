@@ -1,0 +1,197 @@
+// 
+// Helpful Variables
+// 
+// Mostly spacing, to be honest.
+// 
+
+// Horizontal Margins
+// 
+// Take the base grid margin, divide it (if necessary), then divide 
+// the result by the `body`'s base text size. Convert to ems.
+
+$full-side: 1em * (($base-margin / 2) / $base-text-size);
+$half-side: 1em * (($base-margin / 4) / $base-text-size);
+$quarter-side: 1em * (($base-margin / 8) / $base-text-size);
+$double-side: 1em * ($base-margin / $base-text-size);
+
+// Minus Border
+// 
+// Ditto, but subtract the project's default border width before 
+// dividing by the base text size.
+
+$full-side-bordered: 1em * ((($base-margin / 2) - $default-border-width) / $base-text-size);
+$half-side-bordered: 1em * ((($base-margin / 4) - $default-border-width) / $base-text-size);
+$quarter-side-bordered: 1em * ((($base-margin / 8) - $default-border-width) / $base-text-size);
+$double-side-bordered: 1em * (($base-margin - $default-border-width) / $base-text-size);
+
+// Vertical Margins
+// 
+// Take the base vertical unit, divide it (if necessary), then divide 
+// the result by the `body`'s base text size. Convert to ems.
+
+$full-vertical: 1em * ($base-vertical / $base-text-size);
+$half-vertical: 1em * (($base-vertical / 2) / $base-text-size);
+$quarter-vertical: 1em * (($base-vertical / 4) / $base-text-size);
+$eighth-vertical: 1em * (($base-vertical / 8) / $base-text-size);
+$double-vertical: 1em * (($base-vertical * 2) / $base-text-size);
+
+// Minus Border
+// 
+// Ditto, but subtract the project's default border width before 
+// dividing by the base text size.
+
+$full-vertical-bordered: 1em * (($base-vertical - $default-border-width) / $base-text-size);
+$half-vertical-bordered: 1em * ((($base-vertical / 2) - $default-border-width) / $base-text-size);
+$quarter-vertical-bordered: 1em * ((($base-vertical / 4) - $default-border-width) / $base-text-size);
+$double-vertical-bordered: 1em * ((($base-vertical * 2) - $default-border-width) / $base-text-size);
+
+// Misc
+
+$default-radius: 1em * ($default-border-radius / $base-text-size);
+$border-width: 1em * ($default-border-width / $base-text-size);
+$grid-width: 1em * (((($base-column + $base-margin) * $total-columns) - $base-margin) / $base-text-size);
+$full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $base-text-size);
+
+
+// Media Query Vars
+
+// Breakpoint min and max values
+// $mq-base-max: ( 1em * ( ( $bp-small-width - 1 ) / 16 ) );
+// $mq-small-min: ( 1em * ( $bp-small-width / 16 ) );
+// $mq-small-max: ( 1em * ( ( $bp-medium-width - 1 ) / 16 ) );
+// $mq-medium-min: ( 1em * ( $bp-medium-width / 16 ) );
+// $mq-medium-max: ( 1em * ( ( $bp-large-width - 1 ) / 16 ) );
+// $mq-large-min: ( 1em * ( $bp-large-width / 16 ) );
+// $mq-large-max: ( 1em * ( ( $bp-x-large-width - 1 ) / 16 ) );
+// $mq-x-large-min: ( 1em * ( $bp-x-large-width / 16 ) );
+
+// `@media` responsive strings
+
+// Base
+
+@mixin mq($media, $limit: false) {
+    $bp: map-get($bps, $media);
+
+    @if $bp {
+        $min: map-get($bp, min-width);
+        $min-width: if($min, px($min), null);
+        $max: map-get($bp, max-width);
+        $max-width: if($max, px($max), null);
+
+        @if ($limit == max && $max-width) {
+            @media all and (max-width: #{$max-width}) {
+                @content;
+            }
+        } @else if ($limit == only && $max-width && $min-width) {
+            @media all and (min-width: #{$min-width}) and (max-width: #{$max-width}) {
+                @content;
+            }
+        } @else if $min-width {
+            @media all and (min-width: #{$min-width}) {
+                @content;
+            }
+        } @else {
+            @content;
+        }
+    }
+}
+
+@function bp($media, $limit: false) {
+    $bp: map-get($bps, $media);
+
+    @if $bp {
+        $min: map-get($bp, min-width);
+        $min-width: if($min, px($min), null);
+        $max: map-get($bp, max-width);
+        $max-width: if($max, px($max), null);
+
+        @if ($limit == max && $max-width) {
+            @return all and (max-width: #{$max-width})
+        } @else if ($limit == only && $max-width && $min-width) {
+            @return all and (min-width: #{$min-width}) and (max-width: #{$max-width})
+        } @else if $min-width {
+            @return all and (min-width: #{$min-width})
+        }
+    }
+}
+// $base-screens-max: "all and (max-width: #{mq-base-max})";
+
+// // Small
+// $small-screens-max: "all and (max-width: #{mq-small-max})";
+// $small-screens-only: "all and (min-width: #{mq-small-min}) and (max-width: #{mq-small-max})";
+// $small-screens-min: "all and (min-width: #{mq-small-min})";
+
+// // Medium
+// $medium-screens-max: "all and (max-width: #{mq-medium-max})";
+// $medium-screens-only: "all and (min-width: #{mq-medium-min}) and (max-width: #{mq-medium-max})";
+// $medium-screens-min: "all and (min-width: #{mq-medium-min})";
+
+// // Large
+// $large-screens-max: "all and (max-width: #{mq-large-max})";
+// $large-screens-only: "all and (min-width: #{mq-large-min}) and (max-width: #{mq-large-max})";
+// $large-screens-min: "all and (min-width: #{mq-large-min})";
+
+// // Extra Large
+// $x-large-screens-min: "all and (min-width: #{mq-x-large-min})";
+
+// Pixel equivalents
+@function calc-rem($px) {
+    @return ($px / 16);
+}
+@function px($val) {
+    @return calc-rem($val) * 1rem;
+}
+
+
+//============================================================
+//
+// easing
+//
+// Thanks to Robert Penner for his sterling work on easing,
+// and to Matthew Lein for converting these functions into
+// approximated cubic-bezier functions. Respect.
+//
+// $see http://robertpenner.com/
+// $see http://matthewlein.com/ceaser/
+//
+//============================================================
+
+// Cubic
+$easeInCubic    : cubic-bezier(0.550, 0.055, 0.675, 0.190);
+$easeOutCubic   : cubic-bezier(0.215, 0.610, 0.355, 1.000);
+$easeInOutCubic : cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+// Circ
+$easeInCirc     : cubic-bezier(0.600, 0.040, 0.980, 0.335);
+$easeOutCirc    : cubic-bezier(0.075, 0.820, 0.165, 1.000);
+$easeInOutCirc  : cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+// Expo
+$easeInExpo     : cubic-bezier(0.950, 0.050, 0.795, 0.035);
+$easeOutExpo    : cubic-bezier(0.190, 1.000, 0.220, 1.000);
+$easeInOutExpo  : cubic-bezier(1.000, 0.000, 0.000, 1.000);
+
+// Quad
+$easeInQuad     : cubic-bezier(0.550, 0.085, 0.680, 0.530);
+$easeOutQuad    : cubic-bezier(0.250, 0.460, 0.450, 0.940);
+$easeInOutQuad  : cubic-bezier(0.455, 0.030, 0.515, 0.955);
+
+// Quart
+$easeInQuart    : cubic-bezier(0.895, 0.030, 0.685, 0.220);
+$easeOutQuart   : cubic-bezier(0.165, 0.840, 0.440, 1.000);
+$easeInOutQuart : cubic-bezier(0.770, 0.000, 0.175, 1.000);
+
+// Quint
+$easeInQuint    : cubic-bezier(0.755, 0.050, 0.855, 0.060);
+$easeOutQuint   : cubic-bezier(0.230, 1.000, 0.320, 1.000);
+$easeInOutQuint : cubic-bezier(0.860, 0.000, 0.070, 1.000);
+
+// Sine
+$easeInSine     : cubic-bezier(0.470, 0.000, 0.745, 0.715);
+$easeOutSine    : cubic-bezier(0.390, 0.575, 0.565, 1.000);
+$easeInOutSine  : cubic-bezier(0.445, 0.050, 0.550, 0.950);
+
+// Back
+$easeInBack     : cubic-bezier(0.600, -0.280, 0.735, 0.045);
+$easeOutBack    : cubic-bezier(0.175,  0.885, 0.320, 1.275);
+$easeInOutBack  : cubic-bezier(0.680, -0.550, 0.265, 1.550);

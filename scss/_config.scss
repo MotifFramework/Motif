@@ -1,0 +1,180 @@
+$bps: (
+    base: (
+        max-width: 479,
+        abbr: b,
+        gutter: 24,
+        columns: 5
+    ),
+    small: (
+        min-width: 480,
+        max-width: 767,
+        abbr: s,
+        gutter: 24,
+        columns: 6
+    ),
+    medium: (
+        min-width: 768,
+        max-width: 991,
+        abbr: m,
+        gutter: 32,
+        columns: 8
+    ),
+    large: (
+        min-width: 992,
+        max-width: 1239,
+        abbr: l,
+        gutter: 36,
+        columns: 12
+    ),
+    wide: (
+        min-width: 1240,
+        abbr: w,
+        gutter: 36,
+        columns: 12
+    )
+);
+
+// Grid Variables
+$base-column: 47;
+$base-margin: 36;
+$total-columns: 12;
+
+// Tablet Grid
+$tablet-column: 50;
+$tablet-margin: 32;
+$tablet-total-cols: 9;
+
+// Mobile Grid
+$mobile-column: 136;
+$mobile-margin: 24;
+$mobile-total-cols: 4;
+
+// Responsive Breakpoints
+$bp-small-width: 480;
+$bp-medium-width: 768;
+$bp-large-width: 992;
+$bp-x-large-width: 1240;
+
+// Typographic Scale
+// $inch-text-size: --;
+$canon-text-size: 38;
+$paragon-text-size: 30;
+$primer-text-size: 24;
+$tertia-text-size: 18;
+$normal-text-size: 14;
+$petite-text-size: 12;
+$minion-text-size: 10;
+
+// Baseline Typography
+$base-text-size: $normal-text-size;
+
+// For line-height in .type-size mixin
+$round-to-nearest: quarter;
+
+// Vertical Rhythm
+$base-vertical: 20;
+
+// Border Variables
+$default-border-width: 1;
+$default-border-radius: 3;
+
+// Color Variables
+
+// Blacks
+$black: #000;
+$light-black: lighten( $black, 15% );
+
+// Greys
+$grey: #a9a6a7;
+$dark-grey: darken($grey, 15%);
+$light-grey: lighten($grey, 15%);
+
+// Blues
+$blue: #1f75ae;
+$dark-blue: darken($blue, 15%);
+$light-blue: lighten($blue, 15%);
+
+// Greens
+$green: #72bc44;
+$dark-green: darken($green, 15%);
+$light-green: lighten($green, 15%);
+
+// Yellows
+$yellow: #fcb040;
+$dark-yellow: darken($yellow, 15%);
+$light-yellow: lighten($yellow, 15%);
+
+// Oranges
+$orange: #f79433;
+$dark-orange: darken($orange, 15%);
+$light-orange: lighten($orange, 15%);
+
+// Reds
+$red: #e63c4d;
+$dark-red: darken($red, 15%);
+$light-red: lighten($red, 15%);
+
+// Pinks
+$pink: #f37b83;
+$dark-pink: darken($pink, 15%);
+$light-pink: lighten($pink, 15%);
+
+// Purples
+$purple: #a05ea5;
+$dark-purple: darken($purple, 15%);
+$light-purple: lighten($purple, 15%);
+
+// Whites
+$white: #fff;
+$dark-white: darken($white, 15%);
+
+// Brands
+$facebook-blue: #3b5998;
+$twitter-blue: #00a0d1;
+// End Color Variables
+
+// Form Variables
+$input-border: $default-border-width;
+$input-padding: 4;
+$input-background-color: $white;
+$input-border-color: $light-grey;
+$label-required-color: $blue;
+
+// Table Variables
+$table-border-color: $light-grey;
+
+// Typographic Variables
+$primary-text-color: $light-black;
+$secondary-text-color: $dark-grey;
+$inverse-text-color: $white;
+$button-color: $inverse-text-color;
+
+// Font Declarations
+$stack-serif: "Times New Roman", Times, Georgia, serif;
+$stack-sans-serif: Helvetica, Arial, "Arial Unicode", "Lucida Sans Unicode", sans-serif;
+$stack-slab-serif: "Courier New", Courier, serif;
+$stack-mono: Courier, monospace;
+$stack-icons: "icons";
+
+// Ex:
+// $source-sans-regular: "Source Sans Pro", $stack-sans-serif;
+
+// Header Variables
+$primary-header-color: $blue;
+$secondary-header-color: $blue;
+$header-highlight-color: $light-blue;
+$inverse-header-color: $light-blue;
+
+// Link Variables
+$primary-link-color: $blue;
+$primary-link-hover: $dark-blue;
+
+// Form Variables
+$active-color: $blue;
+$warning-color: $dark-yellow;
+$success-color: $green;
+$error-color: $red;
+$info-color: $dark-blue;
+
+// Sprite Variables
+$sprite-grid: 50px;

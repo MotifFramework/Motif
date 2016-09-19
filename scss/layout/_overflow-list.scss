@@ -1,0 +1,29 @@
+.overflow-list {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+}
+.overflow-list__item {
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    position: relative;
+}
+@include mq(medium) {
+    .overflow-list--until-medium {
+        overflow: visible;
+        white-space: normal;
+    }
+};
+@include mq(large) {
+    .overflow-list--until-large {
+        overflow: visible;
+        white-space: normal;
+    }
+};
+@include mq(wide) {
+    .overflow-list--until-x-large {
+        overflow: visible;
+        white-space: normal;
+    }
+};

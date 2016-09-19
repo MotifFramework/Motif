@@ -1,0 +1,114 @@
+/*
+
+Panel
+
+Used to provide messaging to the user, whether it be direct or through calls to 
+action. The panel typically indicates a visual separation and implied 
+sub-grouping of its content.
+
+```panels
+<div class="panel">
+    <h3>This is a Panel</h3>
+    <p>This is a <a href="#">feedback message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="panel">
+    <p>This is a feedback panel with no heading.</p>
+</div>
+````
+
+*/
+
+.panel,
+[class*="panel-"],
+[class*="-panel"] {
+
+    // Mixins
+    @include margin-leader();
+
+    // Create
+    padding: $full-vertical;
+    background-color: lighten( $light-grey, 14% );
+
+    > :first-child {
+        margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: inherit;
+    }
+}
+[class*="panel--thin"] {
+    padding: $half-vertical;
+}
+
+/*
+
+Alert Panel
+
+This variation of the standard `.panel` is used specifically for delivering 
+direct messages to the user, whether they be informative, complimentary, 
+or preventative.
+
+````info-alert-panels
+<div class="alert-panel--info">
+    <h3>This is a Panel</h3>
+    <p>This is an <a href="#">alert message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="alert-panel--info">
+    <p>This is an alert panel with no heading.</p>
+</div>
+````
+
+*/
+
+/*
+
+````error-alert-panels
+<div class="alert-panel--error">
+    <h3>This is a Panel</h3>
+    <p>This is an <a href="#">alert message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="alert-panel--error">
+    <p>This is an alert panel with no heading.</p>
+</div>
+````
+
+*/
+
+/*
+
+````success-alert-panels
+<div class="alert-panel--success">
+    <h3>This is a Panel</h3>
+    <p>This is an <a href="#">alert message</a> for the user.</p>
+    <p><a href="#" class="btn">User Action</a></p>
+</div>
+<div class="alert-panel--success">
+    <p>This is an alert panel with no heading.</p>
+</div>
+````
+
+*/
+
+[class*="alert-panel"] {
+    color: $white;
+}
+.alert-panel {
+    background: $info-color;
+    
+    &--error {
+        background: $error-color;
+    }
+    &--success {
+        background: $success-color;
+    }
+}
+

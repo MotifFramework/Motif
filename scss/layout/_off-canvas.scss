@@ -1,0 +1,398 @@
+/*
+
+Off-Canvas Trigger (Small Screens Only)
+
+The Off-Canvas Trigger is a simple way of pushing a column of content
+off-canvas and sliding it on upon trigger. In this case, the `is-active` 
+class is placed on the `.off-canvas` wrapping element so that it can 
+adjust both child elements.
+
+$TODO: Adjust for IE9?
+$TODO: Show better example w/ Reveal plugin
+
+    <div class="off-canvas--left">
+        <div class="canvas__primary">
+            ...
+        </div>
+        <div class="canvas__secondary">
+            ...
+        </div>
+    </div>
+
+*/
+
+.js {
+    [class*="off-canvas--"] {
+
+        /* Positioning */
+        position: relative;
+
+        /* Display & Box Model */
+        overflow: hidden;
+
+        &.is-active {
+            > .canvas__primary {
+                transform: translate3d( 0, 0, 0 );
+            }
+        }
+        &.is-active,
+        &.was-active {
+            > .canvas__primary,
+            > .canvas__secondary {
+                transition: all 0.15s $easeOutCubic;
+            }
+        }
+    }
+    .canvas__secondary {
+        transform: translate3d( 0, 0, 0 );
+    }
+    .off-canvas {
+        &--left,
+        &--right {
+            > .canvas {
+                &__primary,
+                &__secondary {
+                    min-height: 100vh;
+                }
+                &__secondary {
+                    height: 100vh;
+                    overflow: hidden;
+                    overflow-y: auto;
+                }
+            }
+            &.is-active {
+                &,
+                > .canvas_primary {
+                    height: 100vh;
+                    overflow: hidden;
+                }
+            }
+        }
+        &--right {
+            &.is-active {
+                > .canvas__secondary {
+                    transform: translate3d( -100%, 0, 0 );
+                }
+            }
+            > .canvas__primary {
+
+                // Mixins
+                transform: translate3d( 100%, 0, 0 );
+
+                /* Positioning */
+                float: left;
+
+                /* Display & Box Model */
+                margin-left: -100%;
+            }
+            > .canvas__secondary {
+
+                // Mixins
+                transform: translate3d( 0, 0, 0 );
+
+                /* Positioning */
+                float: right;
+
+                /* Display & Box Model */
+                margin-right: -100%;
+            }
+        }
+        &--left {
+            &.is-active {
+                > .canvas__secondary {
+                    transform: translate3d( 100%, 0, 0 );
+                }
+            }
+            > .canvas__primary {
+
+                // Mixins
+                transform: translate3d( -100%, 0, 0 );
+
+                /* Positioning */
+                float: right;
+
+                /* Display & Box Model */
+                margin-right: -100%;
+            }
+            > .canvas__secondary {
+
+                // Mixins
+                transform: translate3d( 0, 0, 0 );
+
+                /* Positioning */
+                float: left;
+
+                /* Display & Box Model */
+                margin-left: -100%;
+            }
+        }
+    }
+    .off-canvas {
+        &--top,
+        &--bottom {
+
+            /* Positioning */
+            position: relative;
+
+            /* Display & Box Model */
+            min-height: 100vh;
+
+            &.is-active {
+                height: 100vh;
+                overflow: hidden;
+
+                > .canvas__primary {
+
+                    /* Positioning */
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    left: 0;
+
+                    /* Display & Box Model */
+                    height: 100vh;
+                    overflow: hidden;
+                }
+                > .canvas__secondary {
+
+                    // Mixins
+                    transform: translate3d(0, 0, 0);
+
+                    /* Display & Box Model */
+                    overflow: auto;
+                }
+            }
+            > .canvas__secondary {
+
+                /* Positioning */
+                position: absolute;
+                left: 0;
+                right: 0;
+
+                /* Display & Box Model */
+                width: 100%;
+                height: 80vh;
+                overflow: hidden;
+            }
+        }
+        &--top {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d(0, 80vh, 0);
+                }
+            }
+            > .canvas__secondary {
+
+                // Mixins
+                transform: translate3d(0, -100%, 0);
+
+                /* Positioning */
+                top: 0;
+            }
+        }
+        &--bottom {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d(0, -80vh, 0);
+                }
+            }
+            > .canvas__secondary {
+
+                // Mixins
+                transform: translate3d(0, 100%, 0);
+
+                /* Positioning */
+                bottom: 0;
+            }
+        }
+    }
+        .canvas__primary,
+        .canvas__secondary {
+
+            // Extends
+            @extend .relative-container;
+
+            /* Display & Box Model */
+            width: 100%;
+        }
+        .canvas__primary {
+            z-index: 1;
+
+        }
+        .canvas__secondary {
+            z-index: 2;
+        }
+}
+
+@include mq(medium) {
+    .js [class*="off-canvas--"] {
+        &.is-active,
+        &.was-active {
+            > .canvas__primary,
+            > .canvas__secondary {
+
+                // Mixins
+                transition: all 0.25s $easeOutCubic;
+            }
+        }
+    }
+    .js .off-canvas {
+        &--right,
+        &--left {
+            > .canvas__secondary {
+                width: 70%;
+            }
+        }
+    }
+    .js .off-canvas {
+        &--right {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d( 30%, 0, 0 );
+                }
+            }
+            > .canvas__secondary {
+                margin-right: -70%;
+            }
+        }
+        &--left {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d( -30%, 0, 0 );
+                }
+            }
+            > .canvas__secondary {
+                margin-left: -70%;
+            }
+        }
+    }
+}
+@include mq(large) {
+    
+    .js .off-canvas {
+        &--right,
+        &--left {
+            > .canvas__secondary {
+                width: 60%;
+            }
+        }
+    }
+    .js .off-canvas {
+        &--right {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d( 40%, 0, 0 );
+                }
+            }
+            > .canvas__secondary {
+                margin-right: -60%;
+            }
+        }
+        &--left {
+            &.is-active {
+                > .canvas__primary {
+                    transform: translate3d( -40%, 0, 0 );
+                }
+            }
+            > .canvas__secondary {
+                margin-left: -60%;
+            }
+        }
+    }
+}
+
+.js [class*="slide-canvas--"] {
+
+    // Mixins
+    transition: all 0.25s $easeOutCubic;
+
+    /* Positioning */
+    position: fixed;
+    z-index: 110;
+
+    /* Display & Box Model */
+    overflow: auto;
+    overflow-x: hidden;
+
+    &.is-revealed {
+        transform: translate3d( 0, 0, 0 );
+    }
+}
+.js .slide-canvas {
+    &--left,
+    &--right {
+
+        /* Positioning */
+        top: 0;
+        bottom: 0;
+
+        /* Display & Box Model */
+        width: 80%;
+
+        @include mq(medium) {
+            width: 33%;
+        }
+
+        @include mq(large) {
+            width: 25%;
+        }
+
+        @include mq(wide) {
+            width: 20%;
+        }
+    }
+    &--left {
+
+        // Mixins
+        transform: translate3d( -100%, 0, 0 );
+
+        /* Positioning */
+        left: 0;
+    }
+    &--right {
+
+        // Mixins
+        transform: translate3d( 100%, 0, 0 );
+
+        /* Positioning */
+        right: 0;
+    }
+    &--top,
+    &--bottom {
+
+        /* Positioning */
+        left: 0;
+        right: 0;
+
+        /* Display & Box Model */
+        height: 90%;
+
+        @include mq(medium) {
+            height: 33%;
+        }
+
+        @include mq(large) {
+            height: 25%;
+        }
+
+        @include mq(wide) {
+            height: 20%;
+        }
+    }
+    &--top {
+
+        // Mixins
+        transform: translate3d( 0, -100%, 0 );
+
+        /* Positioning */
+        top: 0;
+    }
+    &--bottom {
+
+        // Mixins
+        transform: translate3d( 0, 100%, 0 );
+
+        /* Positioning */
+        bottom: 0;
+    }
+}
