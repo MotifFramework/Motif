@@ -1,0 +1,20 @@
+/*
+
+Usage:
+
+```
+<svg class="icon"><use xlink:href="#icon-name"></svg>
+```
+
+*/
+.icon {
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    vertical-align: text-bottom;
+    fill: currentColor;
+
+    .no-svg & {
+        display: none;
+    }
+}
