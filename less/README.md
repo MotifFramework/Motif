@@ -163,7 +163,7 @@ Motif uses its own set of Less mixing, some that fill in browser vendor prefixes
 The `_vars.less` file houses a slew of useful Less variables. These are different than those found in the configuration file in that they're not really meant to be altered, just placed somewhere readily accessible for every partial. These include some spacing variables...
 
 ```less
-@full-vertical: 1em * (@base-vertical / @base-text-size);
+@full-vertical: 1rem * (@base-vertical / @root-text-size);
 ```
 
 ...our media query variables...
@@ -176,9 +176,9 @@ The `_vars.less` file houses a slew of useful Less variables. These are differen
 
 
 ```less
-@10px: ( 1em * ( 10 / @base-text-size ) );
-@15px: ( 1em * ( 15 / @base-text-size ) );
-@20px: ( 1em * ( 20 / @base-text-size ) );
+@10px: ( 1rem * ( 10 / @root-text-size ) );
+@15px: ( 1rem * ( 15 / @root-text-size ) );
+@20px: ( 1rem * ( 20 / @root-text-size ) );
 ```
 
 ...and even some great easing variables handy in CSS3 transitions (hat top to [Robert Penner](http://robertpenner.com/)):
