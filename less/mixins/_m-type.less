@@ -8,8 +8,8 @@
 // Size For Font
 // Convert type size into rems, with a pixel fallback.
 
-.size-for-font(@font-size)  {
-    @rem: @font-size / 16;
+.size-for-font(@font-size)	{
+    @rem: @font-size / @root-text-size;
     @px: @font-size;
     font-size: ~"@{px}px";
     font-size: ~"@{rem}rem";

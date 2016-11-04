@@ -1,6 +1,6 @@
 {
   "name": "motif",
-  "version": "3.3.0",
+  "version": "3.6.1",
   "description": "Motif: a responsive front-end framework that supports you",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,9 @@
     "grunt-contrib-uglify": "~0.9.x",
     "grunt-contrib-watch": "~0.6.x",
     "grunt-sass": "^1.2.1",
-    "grunt-webfont": "~0.4.x",
-    "load-grunt-config": "^0.19.1",
-    "node-sass": "^3.10.0"
+    "node-sass": "^3.10.0",
+    "grunt-svgmin": "^3.1.2",
+    "grunt-svgstore": "^1.0.0",
+    "load-grunt-config": "^0.19.1"
   }
 }

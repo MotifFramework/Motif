@@ -205,12 +205,8 @@ textarea {
     }
 }
 textarea {
-
-    // Vars
-    // Why 147px? To match the height of two vertical single-line inputs
-    @147px: ( 1em * ( 147 / @base-text-size ) );
-
     /* Display & Box Model */
+    // Why 147px? To match the height of two vertical single-line inputs
     min-height: @147px;
 }
 
@@ -391,9 +387,10 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 ````nav-bar
 <nav class="nav-bar--menu" role="navigation">
-    <h3 class="nav-bar__title pre-icon--rows js-expand"
+    <h3 class="nav-bar__title js-expand"
      id="reveal-main-nav"
      data-reveal="main-nav-list">
+        <svg class="icon"><use xlink:href="#rows"></svg>
         <b class="button-label">Main Menu</b>
     </h3>
     <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">

@@ -5,46 +5,83 @@ module.exports = function (grunt) {
 
   // Default task, compiles LESS and JS into "build" folder
   grunt.registerTask('default', [
+    'svgstore:build',
     'sass:globalBuild',
     'sass:globalFixedBuild',
+    'less:globalBuild',
+    'less:globalFixedBuild',
     'uglify:build'
   ])
 
   // Run when you want to refresh everything
   grunt.registerTask('refresh', [
-    'webfont:iconsBuild',
+    'svgstore:build',
     'sass:globalBuild',
     'sass:globalFixedBuild',
+    'less:globalBuild',
+    'less:globalFixedBuild',
     'uglify:build'
   ])
   grunt.registerTask('build', [
-    'webfont:iconsBuild',
+    'svgstore:build',
     'sass:globalBuild',
     'sass:globalFixedBuild',
+    'less:globalBuild',
+    'less:globalFixedBuild',
     'uglify:build'
   ])
 
   // Distribution Build
   grunt.registerTask('dist', [
-    'webfont:iconsDist',
+    'svgmin:dist',
+    'svgstore:dist',
     'sass:globalDist',
     'sass:globalFixedDist',
+    'less:globalDist',
+    'less:globalFixedDist',
     'uglify:dist'
   ])
 
-  // Compile Dev Webfonts
-  grunt.registerTask('fonts', [
-    'webfont:iconsBuild'
-  ])
-
-  // Compile Dev LESS Files
+  // Compile Dev Sass Files
   grunt.registerTask('sass-build', [
     'sass:globalBuild',
     'sass:globalFixedBuild'
+  ])
+  grunt.registerTask('sass-dist', [
+    'sass:globalDist',
+    'sass:globalFixedDist'
+  ])
+
+  // Compile Dev Icons
+  grunt.registerTask('icons', [
+    'svgstore:build'
+  ])
+  grunt.registerTask('icons-build', [
+    'svgstore:build'
+  ])
+  grunt.registerTask('icons-dist', [
+    'svgmin:dist',
+    'svgstore:dist'
+  ])
+
+  // Compile Dev LESS Files
+  grunt.registerTask('less-build', [
+    'less:globalBuild',
+    'less:globalFixedBuild'
+  ])
+  grunt.registerTask('less-dist', [
+    'less:globalDist',
+    'less:globalFixedDist'
   ])
 
   // Compile Dev JS
   grunt.registerTask('js', [
     'uglify:build'
+  ])
+  grunt.registerTask('js-build', [
+    'uglify:build'
+  ])
+  grunt.registerTask('js-dist', [
+    'uglify:dist'
   ])
 }

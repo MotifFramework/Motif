@@ -136,7 +136,7 @@ $full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $bas
 
 // Pixel equivalents
 @function calc-rem($px) {
-    @return ($px / 16);
+    @return ($px / $root-text-size);
 }
 @function px($val) {
     @return calc-rem($val) * 1rem;

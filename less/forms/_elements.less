@@ -25,7 +25,7 @@ input,
 textarea {
 
     // Variables
-    @input-side-padding: ( 1em * ( @input-padding / @base-text-size ) );
+    @input-side-padding: ( 1rem * ( @input-padding / @root-text-size ) );
 
     // Create
     width: 100%;
@@ -172,7 +172,8 @@ Form Modules
     <label class="is-hidden" for="attached-label-submit">Search</label>
     <input type="search" id="attached-label-submit" required>
     <div>
-        <button type="submit" class="btn--primary icon--search">
+        <button type="submit" class="btn--primary">
+            <svg class="icon"><use xlink:href="#search"></svg>
             <b class="is-hidden">Submit</b>
         </button>
     </div>

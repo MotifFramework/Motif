@@ -7,15 +7,15 @@ contained in the "site width". By default, caps off at `1150px`.
 
 */
 .wrapper {
-	width: 92%;
-	margin-left: auto;
-	margin-right: auto;
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
 }
 @media @x-large-screens-min {
-	.wrapper {
-		width: 80%;
-		max-width: px(1150);
-	}
+    .wrapper {
+        width: 80%;
+        max-width: @1150px;
+    }
 }
 
 /*
@@ -46,17 +46,17 @@ accompanied by CSS3 animations.
 
     */
 
-	.reveal__target {
-	    &:extend( .is-hidden );
+    .reveal__target {
+        &:extend( .is-hidden );
 
-	    &.is-revealed {
+        &.is-revealed {
 
-	    	&:extend( .isnt-hidden );
+            &:extend( .isnt-hidden );
 
-	        /* Pretty */
-	        overflow: visible;
-	    }
-	}
+            /* Pretty */
+            overflow: visible;
+        }
+    }
 
     /*
     
@@ -76,26 +76,26 @@ accompanied by CSS3 animations.
 
     */
 
-	.expand__target,
-	.fade__target {
-		&:extend( .relative-container );
+    .expand__target,
+    .fade__target {
+        &:extend( .relative-container );
 
-		// Display & Box Model
-	    max-height: 0;
-	    overflow: hidden;
-	}
-	    .expand__target.is-expanded,
-	    .fade__target.is-faded {
-	        max-height: 999px;
-	    }
-	    .expand__target.is-expanded,
-	    .fade__target.is-faded,
-	    .expand__target.was-expanded,
-	    .fade__target.was-faded {
+        // Display & Box Model
+        max-height: 0;
+        overflow: hidden;
+    }
+        .expand__target.is-expanded,
+        .fade__target.is-faded {
+            max-height: 999px;
+        }
+        .expand__target.is-expanded,
+        .fade__target.is-faded,
+        .expand__target.was-expanded,
+        .fade__target.was-faded {
 
-	        // Mixins
-	        .transition( all, 0.65s, ease-in-out );
-	    }
+            // Mixins
+            .transition( all, 0.65s, ease-in-out );
+        }
 
     /*
     
@@ -113,13 +113,13 @@ accompanied by CSS3 animations.
 
     */
 
-	.fade__target {
-	    .opacity(0);
+    .fade__target {
+        .opacity(0);
 
-	    &.is-faded {
-	        .opacity(1);
-	    }
-	}
+        &.is-faded {
+            .opacity(1);
+        }
+    }
 }
 
 
@@ -137,7 +137,8 @@ the expandable Nav (on smaller screens) is no longer hidden, and that the
 Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
 
     <nav class="nav-bar--menu" role="navigation">
-        <h3 class="nav-bar__title pre-icon--rows js-expand" id="reveal-main-nav">
+        <h3 class="nav-bar__title js-expand" id="reveal-main-nav">
+            <svg class="icon"><use xlink:href="#rows"></svg>
             Main Menu
         </h3>
         <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">
