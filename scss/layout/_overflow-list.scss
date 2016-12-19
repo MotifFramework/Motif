@@ -9,19 +9,19 @@
     vertical-align: top;
     position: relative;
 }
-@include mq(medium) {
+@include breakpoint(medium) {
     .overflow-list--until-medium {
         overflow: visible;
         white-space: normal;
     }
 };
-@include mq(large) {
+@include breakpoint(large) {
     .overflow-list--until-large {
         overflow: visible;
         white-space: normal;
     }
 };
-@include mq(wide) {
+@include breakpoint(wide) {
     .overflow-list--until-x-large {
         overflow: visible;
         white-space: normal;

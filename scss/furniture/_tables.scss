@@ -63,7 +63,7 @@ th {
     padding-top: $half-vertical;
 }
 
-@include mq(small, max) {
+@include breakpoint(small, max) {
     table {
         display: block;
         width: 100%;
@@ -100,7 +100,7 @@ th {
     }
 }
 
-@include mq(medium) {
+@include breakpoint(medium) {
     th,
     td {
         padding: $half-vertical $full-side;

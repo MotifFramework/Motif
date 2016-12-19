@@ -87,7 +87,7 @@ Like more magic, makes the visible invisible.
     @include visually-hidden();
 }
 
-@include mq(small, max) {
+@include breakpoint(small, max) {
     .is-hidden-small {
 
         // Mixins
@@ -96,7 +96,7 @@ Like more magic, makes the visible invisible.
     }
 }
 
-@include mq(medium, only) {
+@include breakpoint(medium, only) {
     .is-hidden-medium {
 
         // Mixins
@@ -105,7 +105,7 @@ Like more magic, makes the visible invisible.
     }
 }
 
-@include mq(large) {
+@include breakpoint(large) {
     .is-hidden-large {
 
         // Mixins

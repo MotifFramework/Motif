@@ -78,77 +78,77 @@
 // /**
 //  * Base Only
 //  */
-// @media #{bp(base, max)} {
+// @media #{query(base, max)} {
 //     @import "site/_base-only";
 // }
 
 /**
  * Base & Small Only
  */
-@media #{bp(small, max)} {
+@media #{query(small, max)} {
     @import "site/_small-max";
 }
 
 // /**
 //  * Small Only
 //  */
-// @media #{bp(small, only)} {
+// @media #{query(small, only)} {
 //     @import "site/_small-only";
 // }
 
 /**
  * Small
  */
-@media #{bp(small)} {
+@media #{query(small)} {
     @import "site/_small";
 }
 
 // /**
 //  * Base, Small, & Medium Only
 //  */
-// @media #{bp(medium, max)} {
+// @media #{query(medium, max)} {
 //     @import "site/_medium-max";
 // }
 
 /**
  * Medium Only
  */
-@media #{bp(medium, only)} {
+@media #{query(medium, only)} {
     @import "site/_medium-only";
 }
 
 /**
  * Medium
  */
-@media #{bp(medium)} {
+@media #{query(medium)} {
     @import "site/_medium";
 }
 
 // /**
 //  * Base, Small, Medium, & Large Only
 //  */
-// @media #{bp(large, max)} {
+// @media #{query(large, max)} {
 //     @import "site/_large-max";
 // }
 
 // /**
 //  * Large Only
 //  */
-// @media #{bp(large, only)} {
+// @media #{query(large, only)} {
 //     @import "site/_large-only";
 // }
 
 /**
  * Large
  */
-@media #{bp(large)} {
+@media #{query(large)} {
     @import "site/_large";
 }
 
 /**
  * Extra Large
  */
-@media #{bp(wide)} {
+@media #{query(wide)} {
     @import "site/_x-large";
 }
 

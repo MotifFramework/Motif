@@ -11,7 +11,7 @@ contained in the "site width". By default, caps off at `1150px`.
 	margin-left: auto;
 	margin-right: auto;
 }
-@include mq(wide) {
+@include breakpoint(wide) {
 	.wrapper {
 		width: 80%;
 		max-width: 1em * (1150 / $base-text-size);
@@ -145,7 +145,7 @@ Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
     </nav>
 
 */
-@include mq(medium) {
+@include breakpoint(medium) {
     .js {
         .menu__list {
             max-height: 999px;

@@ -50,7 +50,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
             @extend .float--left;
 
             /* Display & Box Model */
-            margin-right: $quarter-side;
+            margin-right: h-rhythm(0.25);
         }
     }
     > *,
@@ -62,13 +62,13 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 }
 
 // Small Screens and onward
-@include mq(small) {
+@include breakpoint(small) {
     .media-object {
         > :first-child,
         &__figure {
             max-width: 40%;
             margin-top: 0;
-            margin-right: $full-side;
+            margin-right: h-rhythm(1);
             float: left;
         }
         > *,
@@ -81,7 +81,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 }
 
 // Medium Screens and onward
-@include mq(medium) {
+@include breakpoint(medium) {
     .media-object {
         > :first-child,
         &__figure {
@@ -124,7 +124,7 @@ like it placed.
         @extend .new-line;
     }
 }
-@include mq(small) {
+@include breakpoint(small) {
     [class*="figure--"] {
         margin-top: 0;
         max-width: 50%;
@@ -136,11 +136,11 @@ like it placed.
         }
         &--left    {
             float: left;
-            padding-right: $double-side;
+            padding-right: h-rhythm(0.5);
         }
         &--right   {
             float: right;
-            padding-left: $double-side;
+            padding-left: h-rhythm(2, small);
         }
     }
 }

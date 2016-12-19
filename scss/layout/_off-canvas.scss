@@ -224,7 +224,7 @@ $TODO: Show better example w/ Reveal plugin
         }
 }
 
-@include mq(medium) {
+@include breakpoint(medium) {
     .js [class*="off-canvas--"] {
         &.is-active,
         &.was-active {
@@ -267,7 +267,7 @@ $TODO: Show better example w/ Reveal plugin
         }
     }
 }
-@include mq(large) {
+@include breakpoint(large) {
     
     .js .off-canvas {
         &--right,
@@ -329,15 +329,15 @@ $TODO: Show better example w/ Reveal plugin
         /* Display & Box Model */
         width: 80%;
 
-        @include mq(medium) {
+        @include breakpoint(medium) {
             width: 33%;
         }
 
-        @include mq(large) {
+        @include breakpoint(large) {
             width: 25%;
         }
 
-        @include mq(wide) {
+        @include breakpoint(wide) {
             width: 20%;
         }
     }
@@ -367,15 +367,15 @@ $TODO: Show better example w/ Reveal plugin
         /* Display & Box Model */
         height: 90%;
 
-        @include mq(medium) {
+        @include breakpoint(medium) {
             height: 33%;
         }
 
-        @include mq(large) {
+        @include breakpoint(large) {
             height: 25%;
         }
 
-        @include mq(wide) {
+        @include breakpoint(wide) {
             height: 20%;
         }
     }

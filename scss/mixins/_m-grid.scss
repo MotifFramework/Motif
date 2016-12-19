@@ -174,16 +174,16 @@ $lyt-aliases: (
 
         @if $min-width {
             @if $max-width {
-                @include mq($label, only) {
+                @include breakpoint($label, only) {
                     @include lyt-generate($columns, $abbr, $gutter);
                 }
             } @else {
-                @include mq($label) {
+                @include breakpoint($label) {
                     @include lyt-generate($columns, $abbr, $gutter);
                 }
             }
         } @else if $max-width {
-            @include mq($label, max) {
+            @include breakpoint($label, max) {
                 @include lyt-generate($columns, $abbr, $gutter);
             }
         } @else {

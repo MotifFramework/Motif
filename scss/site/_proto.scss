@@ -458,7 +458,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         margin: 0;
     }
 }
-@include mq(small) {
+@include breakpoint(small) {
 
     [class*="nav-bar__list"] {
         > li,
@@ -476,7 +476,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         }
     }
 }
-@include mq(medium) {
+@include breakpoint(medium) {
     .nav-bar {
 
         &__link {
@@ -702,7 +702,7 @@ td[data-th]:before {
     /* Pretty */
     font-weight: 700;
 }
-@include mq(medium) {
+@include breakpoint(medium) {
     th {
         border-bottom: $border-width solid $grey-4;
     }

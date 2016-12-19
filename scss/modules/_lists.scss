@@ -37,7 +37,7 @@ than the default Horizontal List.
 }
 
 // Small screens and onward
-@include mq(small) {
+@include breakpoint(small) {
     [class*="list--x--forceful"] {
 
         // Mixins
@@ -151,7 +151,7 @@ and floating it and the ordered list.
     @include margin-leader();
 
     &__label {
-        margin: 0 $half-side 0 0;
+        margin: 0 h-rhythm(0.5) 0 0;
         float: left;
     }
     &__list--x {
@@ -159,7 +159,7 @@ and floating it and the ordered list.
         float: left;
     }
         li {
-            margin-right: $half-side;
+            margin-right: h-rhythm(0.5);
         }
 }
 
