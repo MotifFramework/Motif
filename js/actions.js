@@ -2,7 +2,7 @@
  * Sample actions execution file
  */
 
-(function ( $, window, document, Motif, undefined ) {
+(function ( $, window, document, Modernizr, Motif, undefined ) {
 
     "use strict";
 
