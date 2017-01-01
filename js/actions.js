@@ -2,7 +2,7 @@
  * Sample actions execution file
  */
 
-(function ( $, window, document, Motif, undefined ) {
+(function ( $, window, document, Modernizr, Motif, undefined ) {
 
     "use strict";
 
@@ -43,7 +43,7 @@
 
     new App();
 
-}( jQuery, window, document, window.Motif = window.Motif || {
+}( jQuery, window, document, Modernizr, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );

@@ -3,12 +3,13 @@ var buildFiles = {};
 var distFiles = {};
 var scripts = {
     helpers: [
-        paths.sourceJs + "vendor/modernizr.js",
+        // paths.sourceJs + "vendor/modernizr.js",
         paths.sourceJs + "vendor/viewport.js",
         paths.sourceJs + "utils/motif.utils.load-script.js"
     ],
     main: [
         paths.sourceJs + "vendor/jquery-2.1.4.js",
+	    paths.sourceJs + "vendor/modernizr.js", // <- It works if lib is here
         paths.sourceJs + "vendor/requestAnimFrame.js",
         paths.sourceJs + "utils/motif.utils.plugins.js",
         paths.sourceJs + "forms/motif.gauntlet.js",
