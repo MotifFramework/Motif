@@ -43,7 +43,7 @@
 
     new App();
 
-}( jQuery, window, document, window.Motif = window.Motif || {
+}( jQuery, window, document, Modernizr, window.Motif = window.Motif || {
     "utils": {},
     "apps": {}
 } ) );
