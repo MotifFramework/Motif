@@ -3,7 +3,7 @@
   "version": "3.7.0",
   "description": "Motif: a responsive front-end framework that supports you",
   "main": "index.js",
-  "preCSS": "sass",
+  "preCSS": "less",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
