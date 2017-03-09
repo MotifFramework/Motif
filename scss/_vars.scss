@@ -29,11 +29,11 @@
 // Take the base vertical unit, divide it (if necessary), then divide 
 // the result by the `body`'s base text size. Convert to ems.
 
-$full-vertical: 1em * ($base-vertical / $base-text-size);
-$half-vertical: 1em * (($base-vertical / 2) / $base-text-size);
-$quarter-vertical: 1em * (($base-vertical / 4) / $base-text-size);
-$eighth-vertical: 1em * (($base-vertical / 8) / $base-text-size);
-$double-vertical: 1em * (($base-vertical * 2) / $base-text-size);
+$full-vertical: v-rhythm(1);
+$half-vertical: v-rhythm(0.5);
+$quarter-vertical: v-rhythm(0.25);
+$eighth-vertical: v-rhythm(0.125);
+$double-vertical: v-rhythm(2);
 
 // Minus Border
 // 
@@ -79,9 +79,9 @@ $full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $bas
 
     @if $bp {
         $min: map-get($bp, min-width);
-        $min-width: if($min, px($min), null);
+        $min-width: if($min, px($min, em), null);
         $max: map-get($bp, max-width);
-        $max-width: if($max, px($max), null);
+        $max-width: if($max, px($max, em), null);
 
         @if ($limit == max && $max-width) {
             @return all and (max-width: #{$max-width});
@@ -98,11 +98,14 @@ $full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $bas
 }
 
 // Pixel equivalents
+@function calc-em($px) {
+    @return ($px / $root-text-size);
+}
 @function calc-rem($px) {
     @return ($px / $root-text-size);
 }
-@function px($val) {
-    @return calc-rem($val) * 1rem;
+@function px($val, $unit: rem) {
+    @return calc-rem($val) * 1#{unit};
 }
 
 
