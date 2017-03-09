@@ -1,87 +1,126 @@
 module.exports = function (grunt) {
+  var pkg = grunt.file.readJSON('package.json')
 
   // Load the plugins that provide the tasks.
   require('load-grunt-config')(grunt)
 
-  // Default task, compiles LESS and JS into "build" folder
   grunt.registerTask('default', [
+    'node_version',
     'svgstore:build',
-    'sass:globalBuild',
-    'sass:globalFixedBuild',
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
+    pkg.preCSS + ':global',
+    'postcss:build',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:build',
+    'cachebuster:dist'
   ])
-
-  // Run when you want to refresh everything
   grunt.registerTask('refresh', [
+    'node_version',
     'svgstore:build',
-    'sass:globalBuild',
-    'sass:globalFixedBuild',
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
+    pkg.preCSS + ':global',
+    'postcss:build',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('build', [
+    'node_version',
     'svgstore:build',
-    'sass:globalBuild',
-    'sass:globalFixedBuild',
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
+    pkg.preCSS + ':global',
+    'postcss:build',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:build',
+    'cachebuster:dist'
   ])
 
   // Distribution Build
   grunt.registerTask('dist', [
+    'node_version',
     'svgmin:dist',
     'svgstore:dist',
-    'sass:globalDist',
-    'sass:globalFixedDist',
-    'less:globalDist',
-    'less:globalFixedDist',
-    'uglify:dist'
+    pkg.preCSS + ':global',
+    'postcss:dist',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:dist',
+    'cachebuster:dist'
+  ])
+
+  grunt.registerTask('css', [
+    'node_version',
+    pkg.preCSS + ':global',
+    'postcss:build',
+    'cachebuster:dist'
   ])
 
   // Compile Dev Sass Files
   grunt.registerTask('sass-build', [
-    'sass:globalBuild',
-    'sass:globalFixedBuild'
+    'node_version',
+    'sass:global',
+    'postcss:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('sass-dist', [
-    'sass:globalDist',
-    'sass:globalFixedDist'
+    'node_version',
+    'sass:global',
+    'postcss:dist',
+    'cachebuster:dist'
   ])
 
   // Compile Dev Icons
   grunt.registerTask('icons', [
-    'svgstore:build'
+    'node_version',
+    'svgstore:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('icons-build', [
-    'svgstore:build'
+    'node_version',
+    'svgstore:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('icons-dist', [
+    'node_version',
     'svgmin:dist',
-    'svgstore:dist'
+    'svgstore:dist',
+    'cachebuster:dist'
   ])
 
   // Compile Dev LESS Files
   grunt.registerTask('less-build', [
-    'less:globalBuild',
-    'less:globalFixedBuild'
+    'node_version',
+    'less:global',
+    'postcss:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('less-dist', [
-    'less:globalDist',
-    'less:globalFixedDist'
+    'node_version',
+    'less:global',
+    'postcss:dist',
+    'cachebuster:dist'
   ])
 
   // Compile Dev JS
   grunt.registerTask('js', [
-    'uglify:build'
+    'node_version',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('js-build', [
-    'uglify:build'
+    'node_version',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('js-dist', [
-    'uglify:dist'
+    'node_version',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:dist',
+    'cachebuster:dist'
   ])
 }

@@ -552,8 +552,10 @@ Vertical Nav
 */
 
 .nav--vert {
-    selector-unify("ul", &) {
-        @extend .list--unstyled;
+    @at-root {
+        ul#{&} {
+            @extend .list--unstyled;
+        }
     }
     a {
         color: $blue-4;
@@ -728,7 +730,8 @@ Messaging
 .bubble {
 
     // Variables
-    $wisp-width: px(5);
+    $wisp-width: 5;
+    $wisp-width-px: px($wisp-width);
     $bubble-color: $white;
     $shadow: fadeout($black, 50%);
     $shadow-radius: px(7);
@@ -746,7 +749,7 @@ Messaging
 
     &:after {
         position: absolute;
-        border: $wisp-width solid transparent;
+        border: $wisp-width-px solid transparent;
     
         // Mixins
         @include pseudo-clear();
@@ -755,18 +758,18 @@ Messaging
     &.right-wisp {
         &:after {
             top: 50%;
-            margin-top: -$wisp-width;
+            margin-top: px($wisp-width * -1);
         }
     }
     &.left-wisp {
         &:after {
-            left: -$wisp-width * 2;
+            left: px($wisp-width * -2);
             border-right-color: $bubble-color;
         }
     }
     &.right-wisp {
         &:after {
-            right: -$wisp-width * 2;
+            right: px($wisp-width * -2);
             border-left-color: $bubble-color;
         }
     }
@@ -774,18 +777,18 @@ Messaging
     &.bottom-wisp {
         &:after {
             left: 50%;
-            margin-left: -$wisp-width;
+            margin-left: px($wisp-width * -1);
         }
     }
     &.top-wisp {
         &:after {
-            top: -$wisp-width * 2;
+            top: px($wisp-width * -2);
             border-bottom-color: $bubble-color;
         }
     }
     &.bottom-wisp {
         &:after {
-            bottom: -$wisp-width * 2;
+            bottom: px($wisp-width * -2);
             border-top-color: $bubble-color;
         }
     }
@@ -800,7 +803,8 @@ Input Alerts
 [class*="input-alert"] {
 
     // Variables
-    $wisp-width: px(5);
+    $wisp-width: 5;
+    $wisp-width-px: px($wisp-width);
     $bubble-color: $white;
     $shadow: fadeout($black, 50%);
     $shadow-radius: px(7);
@@ -815,7 +819,7 @@ Input Alerts
     &:after {
         left: $half-vertical;
         margin-left: 0;
-        top: -$wisp-width * 2;
+        top: px($wisp-width * -2);
         border-bottom-color: $bubble-color;
     }
 }

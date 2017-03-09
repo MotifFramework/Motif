@@ -1,32 +1,39 @@
-var paths = require("../grunt-vars");
+var paths = require('../grunt-vars')
 
 module.exports = {
+  options: {
+    livereload: 35729
+  },
+  grunt: {
+    files: ['Gruntfile.js'],
+    tasks: ['refresh']
+  },
+  js: {
+    files: [paths.sourceJs + '**/*.js'],
+    tasks: ['js-dist']
+  },
+  less: {
     options: {
-        livereload: 35729
+      livereload: false
     },
-    grunt: {
-        files: ["Gruntfile.js"],
-        tasks: ["refresh"]
+    files: [paths.sourceLess + '**/*.less'],
+    tasks: ['less-dist']
+  },
+  sass: {
+    options: {
+      livereload: false
     },
-    js: {
-        files: [paths.sourceJs + "**/*.js"],
-        tasks: ["js"]
-    },
-    less: {
-        options: {
-            livereload: false
-        },
-        files: [paths.sourceLess + "**/*.less"],
-        tasks: ["less-build"]
-    },
-    css: {
-        files: [paths.distCss + "**/*.css", paths.buildCss + "**/*.css"]
-    },
-    icons: {
-        files: [paths.sourceIcons + "*.svg"],
-        tasks: ["refresh"]
-    },
-    html: {
-        files: [paths.projectDir + "**/*.view", paths.projectDir + "**/*.html" ]
-    }
-};
+    files: [paths.sourceSass + '**/*.sass'],
+    tasks: ['sass-dist']
+  },
+  css: {
+    files: [paths.distCss + '**/*.css', paths.buildCss + '**/*.css']
+  },
+  icons: {
+    files: [paths.sourceIcons + '*.svg'],
+    tasks: ['icons-dist']
+  },
+  html: {
+    files: [paths.projectDir + '**/*.view', paths.projectDir + '**/*.html']
+  }
+}

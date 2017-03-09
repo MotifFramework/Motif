@@ -67,29 +67,40 @@ $lyt-aliases: (
 }
 @mixin lyt-generate-keywords($abbr) {
     @each $keyword, $width in $lyt-keywords {
-        [class*="#{$abbr}-#{$keyword}"] {
+
+        %lyt-col-keyword-#{$abbr}-#{$keyword} {
             width: $width;
+        }
+        [class*="#{$abbr}-#{$keyword}"] {
+            @extend %lyt-col-keyword-#{$abbr}-#{$keyword};
         }
     }
 }
 @mixin lyt-generate-aliases($abbr) {
     @each $alias, $keyword in $lyt-aliases {
         .g#{$abbr}-#{$alias} {
-            @extend [class*="g#{$abbr}-row"];
-            @extend .g#{$abbr}-row--flex;
+            @extend %lyt-row-#{$abbr};
+            @extend %lyt-row-flex;
 
             > * {
-                @extend [class*="gc#{$abbr}"];
+                @extend %lyt-col-#{$abbr};
                 @extend %lyt-row-flex-child-#{$abbr};
-                @extend [class*="#{$abbr}-#{$keyword}"];
+                @extend %lyt-col-keyword-#{$abbr}-#{$keyword};
+            }
+            .opera-only :-o-prefocus,
+            & {
+                word-spacing: -0.43em;
             }
         }
     }
 }
 @mixin lyt-generate-columns($total, $abbr, $gutter) {
-    [class*="gc#{$abbr}"] {
+    %lyt-col-#{$abbr} {
         @include lyt-col-auto;
         @include lyt-col-padding($gutter);
+    }
+    [class*="gc#{$abbr}"] {
+        @extend %lyt-col-#{$abbr};
     }
     @include lyt-generate-column-variants($total, $abbr);
 }
@@ -113,13 +124,11 @@ $lyt-aliases: (
     }
 }
 @mixin lyt-generate-rows($abbr, $gutter) {
-    [class*="g#{$abbr}-row"] {
-        @include lyt-row($gutter);
-        
-        selector-unify("ul", &) {
-            padding-left: 0;
-            list-style: none outside none;
-        }
+    .g#{$abbr}-row,
+    .g#{$abbr}-row--flex,
+    .g#{$abbr}-row--rtl,
+    .g#{$abbr}-row--ltr {
+        @extend %lyt-row-#{$abbr};
     }
     .g#{$abbr}-row {
         &--rtl {
@@ -134,8 +143,21 @@ $lyt-aliases: (
         }
     }
     .g#{$abbr}-row--flex {
+        @extend %lyt-row-flex;
+    }
+    %lyt-row-flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
+    }
+    %lyt-row-#{$abbr} {
+        @include lyt-row($gutter);
+
+        @at-root {
+            ul#{&} {
+                padding-left: 0;
+                list-style: none outside none;
+            }
+        }
     }
     %lyt-row-flex-child-#{$abbr} {
         float: none;
@@ -145,18 +167,21 @@ $lyt-aliases: (
         vertical-align: top;
         text-rendering: auto;
     }
+    %lyt-row-flex-opera-#{abbr} {
+        // Opera as of 12 on Windows needs word-spacing.
+        // The ".opera-only" selector is used to prevent
+        // actual prefocus styling and is not required 
+        // in markup.
+        .opera-only :-o-prefocus,
+        .g#{$abbr}-row--flex {
+            word-spacing: -0.43em;
+        }
+    }
     .g#{$abbr}-row--flex > [class*="gc#{$abbr}"] {
         @extend %lyt-row-flex-child-#{$abbr};
     }
 
-    // Opera as of 12 on Windows needs word-spacing.
-    // The ".opera-only" selector is used to prevent
-    // actual prefocus styling and is not required 
-    // in markup.
-    .opera-only :-o-prefocus,
-    .g#{$abbr}-row--flex {
-        word-spacing: -0.43em;
-    }
+    @extend %lyt-row-flex-opera-#{$abbr};
 }
 @mixin lyt-generate($columns, $abbr, $gutter) {
     @include lyt-generate-rows($abbr, $gutter);

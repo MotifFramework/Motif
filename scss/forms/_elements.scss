@@ -51,7 +51,7 @@ input {
     }
 }
 textarea {
-    height: $full-vertical * 4;
+    height: v-rhythmn(4);
 }
 select {
     width: auto;

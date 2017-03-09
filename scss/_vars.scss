@@ -8,49 +8,24 @@
 // 
 // Take the base grid margin, divide it (if necessary), then divide 
 // the result by the `body`'s base text size. Convert to ems.
-
-// $full-side: 1em * (($base-margin / 2) / $base-text-size);
-// $half-side: 1em * (($base-margin / 4) / $base-text-size);
-// $quarter-side: 1em * (($base-margin / 8) / $base-text-size);
-// $double-side: 1em * ($base-margin / $base-text-size);
-
-// Minus Border
-// 
-// Ditto, but subtract the project's default border width before 
-// dividing by the base text size.
-
-// $full-side-bordered: 1em * ((($base-margin / 2) - $default-border-width) / $base-text-size);
-// $half-side-bordered: 1em * ((($base-margin / 4) - $default-border-width) / $base-text-size);
-// $quarter-side-bordered: 1em * ((($base-margin / 8) - $default-border-width) / $base-text-size);
-// $double-side-bordered: 1em * (($base-margin - $default-border-width) / $base-text-size);
+$full-side: h-rhythm(0.5, large);
+$half-side: h-rhythm(0.25, large);
+$quarter-side: h-rhythm(0.125, large);
+$double-side: h-rhythm(1, large);
 
 // Vertical Margins
 // 
 // Take the base vertical unit, divide it (if necessary), then divide 
 // the result by the `body`'s base text size. Convert to ems.
-
 $full-vertical: v-rhythm(1);
 $half-vertical: v-rhythm(0.5);
 $quarter-vertical: v-rhythm(0.25);
 $eighth-vertical: v-rhythm(0.125);
 $double-vertical: v-rhythm(2);
 
-// Minus Border
-// 
-// Ditto, but subtract the project's default border width before 
-// dividing by the base text size.
-
-$full-vertical-bordered: 1em * (($base-vertical - $default-border-width) / $base-text-size);
-$half-vertical-bordered: 1em * ((($base-vertical / 2) - $default-border-width) / $base-text-size);
-$quarter-vertical-bordered: 1em * ((($base-vertical / 4) - $default-border-width) / $base-text-size);
-$double-vertical-bordered: 1em * ((($base-vertical * 2) - $default-border-width) / $base-text-size);
-
 // Misc
-
-$default-radius: 1em * ($default-border-radius / $base-text-size);
-$border-width: 1em * ($default-border-width / $base-text-size);
-$grid-width: 1em * (((($base-column + $base-margin) * $total-columns) - $base-margin) / $base-text-size);
-$full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $base-text-size);
+$default-radius: px($default-border-radius);
+$border-width: px($default-border-width);
 
 @function v-rhythm($increment) {
     @return px($increment * $base-vertical);
@@ -105,7 +80,7 @@ $full-grid-width: 1em * ((($base-column + $base-margin) * $total-columns) / $bas
     @return ($px / $root-text-size);
 }
 @function px($val, $unit: rem) {
-    @return calc-rem($val) * 1#{unit};
+    @return (calc-rem($val) * 1#{unit});
 }
 
 
