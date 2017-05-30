@@ -18,6 +18,7 @@ config.distCss = config.distDir + 'css/'
 config.distFonts = config.distDir + 'fonts/'
 config.distJs = config.distDir + 'js/'
 config.distIcons = config.distDir + 'icons/'
+config.distImages = config.distDir + 'images/'
 
 // Build - temporary directories
 config.buildLess = config.buildDir + 'less/'

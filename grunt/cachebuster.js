@@ -7,7 +7,7 @@ module.exports = {
       basedir: paths.distDir,
       formatter: function (hashes) {
         var output = ''
-        function writeArray (object, depth) {
+        function writeArray(object, depth) {
           if (depth === 0) {
             output += '<?php $resourcesVersions = '
           }
@@ -41,6 +41,6 @@ module.exports = {
       paths.distDir + 'js/*.js',
       paths.distDir + 'icons/*.svg'
     ],
-    dest: paths.projectDir + 'src/resourcesVersion.php'
+    dest: paths.projectDir + 'resourcesVersion.php'
   }
 }

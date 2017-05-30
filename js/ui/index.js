@@ -5,6 +5,7 @@ import Tabs from 'motif-tabs'
 export default function () {
   initReveals()
   initTabs()
+  initIcons()
 }
 
 function initReveals () {
@@ -33,4 +34,24 @@ function initTabs () {
   $('.js-tabs').tabs({
     'cssTransition': Modernizr.csstransitions
   })
+}
+
+function initIcons () {
+  var request = new XMLHttpRequest()
+  request.open('GET', '/resources/motif/dist/icons/icons-sprite.svg', true)
+
+  request.onload = function () {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      document.body.children[0].insertAdjacentHTML('beforebegin', request.responseText)
+    } else {
+      console.error('Icons could not be fetched.')
+    }
+  }
+
+  request.onerror = function () {
+    console.error('Icons could not be fetched.')
+  }
+
+  request.send()
 }

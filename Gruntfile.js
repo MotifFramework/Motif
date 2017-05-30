@@ -4,47 +4,38 @@ module.exports = function (grunt) {
   // Load the plugins that provide the tasks.
   require('load-grunt-config')(grunt)
 
-  grunt.registerTask('default', [
-    'node_version',
-    'svgstore:build',
-    pkg.preCSS + ':global',
-    'postcss:build',
-    'modernizr:dist',
-    'browserify:build',
-    'uglify:build',
-    'cachebuster:dist'
-  ])
   grunt.registerTask('refresh', [
     'node_version',
-    'svgstore:build',
-    pkg.preCSS + ':global',
-    'postcss:build',
-    'modernizr:dist',
-    'browserify:build',
-    'uglify:build',
+    'concurrent:buildPreCSSModernizrSvg',
+    'concurrent:buildCssJs',
     'cachebuster:dist'
+  ])
+  grunt.registerTask('default', [
+    'refresh'
   ])
   grunt.registerTask('build', [
-    'node_version',
-    'svgstore:build',
-    pkg.preCSS + ':global',
-    'postcss:build',
-    'modernizr:dist',
-    'browserify:build',
-    'uglify:build',
-    'cachebuster:dist'
+    'refresh'
   ])
 
-  // Distribution Build
-  grunt.registerTask('dist', [
+  // CI Build (Non-Concurrent)
+  grunt.registerTask('ci-build', [
     'node_version',
     'svgmin:dist',
+    'svgmin:resources',
     'svgstore:dist',
     pkg.preCSS + ':global',
     'postcss:dist',
     'modernizr:dist',
     'browserify:build',
     'uglify:dist',
+    'cachebuster:dist'
+  ])
+
+  // Distribution Build
+  grunt.registerTask('dist', [
+    'node_version',
+    'concurrent:distSvgLessModernizr',
+    'concurrent:distSvgCssJs',
     'cachebuster:dist'
   ])
 
@@ -90,22 +81,19 @@ module.exports = function (grunt) {
   // Compile Dev JS
   grunt.registerTask('js', [
     'node_version',
-    'modernizr:dist',
-    'browserify:build',
+    'concurrent:buildModernizrBrowserify',
     'uglify:build',
     'cachebuster:dist'
   ])
   grunt.registerTask('js-build', [
     'node_version',
-    'modernizr:dist',
-    'browserify:build',
+    'concurrent:buildModernizrBrowserify',
     'uglify:build',
     'cachebuster:dist'
   ])
   grunt.registerTask('js-dist', [
     'node_version',
-    'modernizr:dist',
-    'browserify:build',
+    'concurrent:buildModernizrBrowserify',
     'uglify:dist',
     'cachebuster:dist'
   ])

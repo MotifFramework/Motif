@@ -29,7 +29,7 @@ module.exports = {
           browsers: [
             'last 3 versions',
             'ie >= 10',
-            'iOS >= 7',
+            'iOS >= 8',
             'Firefox ESR',
             'Android >= 4'
           ]
