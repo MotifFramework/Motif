@@ -1,6 +1,6 @@
 {
   "name": "motif",
-  "version": "3.2.1",
+  "version": "3.7.0",
   "homepage": "http://getmotif.com",
   "description": "A responsive front-end framework to tell your story.",
   "authors": [
@@ -9,11 +9,7 @@
   "main": [
     "less/global.less",
     "js/actions.js",
-    "dist/css/motif.css",
-    "dist/fonts/motif-icons/motif-icons.ttf",
-    "dist/fonts/motif-icons/motif-icons.eot",
-    "dist/fonts/motif-icons/motif-icons.svg",
-    "dist/fonts/motif-icons/motif-icons.woff"
+    "dist/css/motif.css"
   ],
   "keywords": [
     "css",

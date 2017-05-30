@@ -1,8 +1,0 @@
-@mixin input-alert-color($color)
-{
-	background-color:			$color;
-
-	&:after	{
-		border-bottom-color:	$color;
-	}
-}

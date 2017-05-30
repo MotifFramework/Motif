@@ -55,20 +55,6 @@ module.exports = function (grunt) {
     'cachebuster:dist'
   ])
 
-  // Compile Dev Sass Files
-  grunt.registerTask('sass-build', [
-    'node_version',
-    'sass:global',
-    'postcss:build',
-    'cachebuster:dist'
-  ])
-  grunt.registerTask('sass-dist', [
-    'node_version',
-    'sass:global',
-    'postcss:dist',
-    'cachebuster:dist'
-  ])
-
   // Compile Dev Icons
   grunt.registerTask('icons', [
     'node_version',

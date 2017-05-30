@@ -1,9 +1,0 @@
-// Determine background and border colors for .alert boxes
-@mixin alert-color($text-color: $dark-blue, $color:  $blue) {
-    h1, h2, h3, h4, h5, h6{
-        color: $text-color;
-    }
-
-    border: 1px solid lighten(desaturate($color, 50%), 10%);
-    background-color: fadeout(lighten($color, 20%), 95%);
-}

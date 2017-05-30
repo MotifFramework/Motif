@@ -105,10 +105,8 @@
     "grunt-modernizr": "^1.0.2",
     "grunt-node-version": "^1.0.2",
     "grunt-postcss": "^0.8.0",
-    "grunt-sass": "^2.0.0",
     "grunt-svgmin": "^4.0.0",
     "grunt-svgstore": "^1.0.0",
-    "load-grunt-config": "^0.19.2",
-    "node-sass": "^4.5.0"
+    "load-grunt-config": "^0.19.2"
   }
 }
