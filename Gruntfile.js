@@ -1,58 +1,100 @@
 module.exports = function (grunt) {
+  var pkg = grunt.file.readJSON('package.json')
 
   // Load the plugins that provide the tasks.
   require('load-grunt-config')(grunt)
 
-  // Default task, compiles LESS and JS into "build" folder
-  grunt.registerTask('default', [
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
-  ])
-
-  // Run when you want to refresh everything
   grunt.registerTask('refresh', [
-    'svgstore:build',
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
+    'node_version',
+    'concurrent:buildPreCSSModernizrSvg',
+    'concurrent:buildCssJs',
+    'cachebuster:dist'
+  ])
+  grunt.registerTask('default', [
+    'refresh'
   ])
   grunt.registerTask('build', [
-    'svgstore:build',
-    'less:globalBuild',
-    'less:globalFixedBuild',
-    'uglify:build'
+    'refresh'
+  ])
+
+  // CI Build (Non-Concurrent)
+  grunt.registerTask('ci-build', [
+    'node_version',
+    'svgmin:dist',
+    'svgmin:resources',
+    'svgstore:dist',
+    pkg.preCSS + ':global',
+    'postcss:dist',
+    'modernizr:dist',
+    'browserify:build',
+    'uglify:dist',
+    'cachebuster:dist'
   ])
 
   // Distribution Build
   grunt.registerTask('dist', [
-    'svgmin:dist',
-    'svgstore:dist',
-    'less:globalDist',
-    'less:globalFixedDist',
-    'uglify:dist'
+    'node_version',
+    'concurrent:distSvgLessModernizr',
+    'concurrent:distSvgCssJs',
+    'cachebuster:dist'
+  ])
+
+  grunt.registerTask('css', [
+    'node_version',
+    pkg.preCSS + ':global',
+    'postcss:build',
+    'cachebuster:dist'
   ])
 
   // Compile Dev Icons
   grunt.registerTask('icons', [
-    'svgstore:build'
+    'node_version',
+    'svgstore:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('icons-build', [
-    'svgstore:build'
+    'node_version',
+    'svgstore:build',
+    'cachebuster:dist'
   ])
   grunt.registerTask('icons-dist', [
+    'node_version',
     'svgmin:dist',
-    'svgstore:dist'
+    'svgstore:dist',
+    'cachebuster:dist'
   ])
 
   // Compile Dev LESS Files
   grunt.registerTask('less-build', [
-    'less:globalBuild',
-    'less:globalFixedBuild'
+    'node_version',
+    'less:global',
+    'postcss:build',
+    'cachebuster:dist'
+  ])
+  grunt.registerTask('less-dist', [
+    'node_version',
+    'less:global',
+    'postcss:dist',
+    'cachebuster:dist'
   ])
 
   // Compile Dev JS
   grunt.registerTask('js', [
-    'uglify:build'
+    'node_version',
+    'concurrent:buildModernizrBrowserify',
+    'uglify:build',
+    'cachebuster:dist'
+  ])
+  grunt.registerTask('js-build', [
+    'node_version',
+    'concurrent:buildModernizrBrowserify',
+    'uglify:build',
+    'cachebuster:dist'
+  ])
+  grunt.registerTask('js-dist', [
+    'node_version',
+    'concurrent:buildModernizrBrowserify',
+    'uglify:dist',
+    'cachebuster:dist'
   ])
 }

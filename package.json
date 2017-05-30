@@ -1,8 +1,9 @@
 {
   "name": "motif",
-  "version": "3.6.1",
+  "version": "3.7.0",
   "description": "Motif: a responsive front-end framework that supports you",
   "main": "index.js",
+  "preCSS": "less",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,14 +14,99 @@
   "author": "Lifeblue",
   "license": "MIT Open Source",
   "gitHead": "cce044bb9b91bffe6cddd736bc925a22b58fbcd8",
+  "engines": {
+    "node": ">= 6.10.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "browser": {
+    "jquery": "./js/vendor/jquery-3.1.1.js",
+    "raf": "./js/vendor/requestAnimFrame.js",
+    "motif-reveal": "./js/ui/motif.reveal.js",
+    "motif-tabs": "./js/ui/motif.tabs.js",
+    "motif-herald": "./js/scroll/motif.herald.js",
+    "motif-gauntlet": "./js/forms/motif.gauntlet.js",
+    "motif-ajaxsubmission": "./js/forms/motif.ajax-submission.js",
+    "motif-plugins": "./js/utils/motif.utils.plugins.js"
+  },
+  "browserify": {
+    "debug": true,
+    "transform": [
+      "browserify-shim",
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "raf": "requestAnimFrame",
+    "motif-reveal": {
+      "depends": [
+        "jquery:$",
+        "raf:requestAnimFrame"
+      ]
+    },
+    "motif-tabs": {
+      "depends": [
+        "jquery:$",
+        "raf:requestAnimFrame",
+        "motif-plugins",
+        "motif-reveal"
+      ]
+    },
+    "motif-herald": {
+      "depends": [
+        "jquery:$"
+      ]
+    },
+    "motif-gauntlet": {
+      "depends": [
+        "jquery:$",
+        "motif-plugins"
+      ]
+    },
+    "motif-ajaxsubmission": {
+      "depends": [
+        "jquery:$",
+        "motif-plugins",
+        "motif-gauntlet"
+      ]
+    },
+    "motif-plugins": {
+      "depends": [
+        "jquery:$"
+      ]
+    }
+  },
   "dependencies": {
-    "grunt": "~0.4.x",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-less": "~1.0.x",
-    "grunt-contrib-uglify": "~0.9.x",
-    "grunt-contrib-watch": "~0.6.x",
-    "grunt-svgmin": "^3.1.2",
+    "autoprefixer": "^6.7.6",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babelify": "^7.3.0",
+    "browserify-shim": "^3.8.13",
+    "cssnano": "^3.10.0",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.0.0",
+    "grunt-cachebuster": "^0.1.7",
+    "grunt-cli": "^1.2.0",
+    "grunt-concurrent": "^2.3.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-uglify": "^2.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-modernizr": "^1.0.2",
+    "grunt-node-version": "^1.0.2",
+    "grunt-postcss": "^0.8.0",
+    "grunt-svgmin": "^4.0.0",
     "grunt-svgstore": "^1.0.0",
-    "load-grunt-config": "^0.19.1"
+    "load-grunt-config": "^0.19.2"
   }
 }

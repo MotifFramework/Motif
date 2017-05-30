@@ -118,21 +118,6 @@ Motif comes bundled with a small starter icon font created from 30+ SVG icons. F
 
 - Command line terminal
 - [NodeJS](http://nodejs.org) (which includes NPM, the Node Package Manager)
-- The [Grunt Command Line Interface](http://gruntjs.com/getting-started), which you can easily grab via the terminal:
-	    
-	    npm install -g grunt-cli
-
-- FontForge and ttfautohint (for creating our icon font).
-	
-	On Mac OS X (requires [Homebrew](http://brew.sh/)):
-	
-		brew install fontforge ttfautohint
-	
-	On Linux:
-	
-		sudo apt-get install fontforge ttfautohint
-		
-	On Windows, [download ttfautohint](http://www.freetype.org/ttfautohint/#download).
 
 #### Installation
 
@@ -144,7 +129,7 @@ Once that has finished, build Motif from the source files:
 
 	grunt build
 
-Look in the `/build/` folder and you should see folders and files for Motif's styles, scripts, and font. Congrats!
+Look in the `/dist/` folder and you should see folders and files for Motif's styles, scripts, and font. Congrats!
 
 
 #### Grunt Tasks
@@ -155,7 +140,7 @@ Command            | Description
 -------------------|-------------------
 `grunt`            | The default task compiles Less, concatenates JS.
 `grunt build`      | Compiles Less, concatenates JS, re-creates icon webfont.
-`grunt dist`       | The task we use to create distribution files for Motif. Might not be useful in your project, but it does the same thing as `grunt build` except into a `/dist/` folder, and it compresses and minifies the code.
+`grunt dist`       | The task we use to create distribution files for Motif. Might not be useful in your project, but it does the same thing as `grunt build` except it compresses and minifies the code.
 `grunt watch`      | Watches Less, JS, and SVG files for changes and recompiles automatically. If you have the LiveReload extension installed, it will appropriately refresh you page.
 `grunt less-build` | Compiles Less.
 `grunt fonts`      | Creates icon webfont.
