@@ -53,7 +53,7 @@
 }
 
 // http://developer.yahoo.com/blogs/ydn/posts/2012/10/clip-your-hidden-content-for-better-accessibility/
-.visually-hidden() { 
+.visually-hidden(@includeHover: true, @includeFocus: false) { 
     width: 1px;
     height: 1px;
     padding: 0;
@@ -63,38 +63,43 @@
     border: 0;
     overflow: hidden;
     
-    &.focusable:active,
-    &.focusable:focus {
-        width: auto;
-        height: auto;
-        margin: 0;
-        clip: auto;
-        overflow: visible;
-        position: static;
+    & when (@includeFocus = true) {
+        &.focusable:active,
+        &.focusable:focus {
+            width: auto;
+            height: auto;
+            margin: 0;
+            clip: auto;
+            overflow: visible;
+            position: static;
+        }
     }
-
-    body:hover & {
-        a,
-        input,
-        button {
-            display: none;
+    & when (@includeHover = true) {
+        body:hover & {
+            a,
+            input,
+            button {
+                display: none;
+            }
         }
     }
 }
-.show-hidden() {
+.show-hidden(@includeHover: true) {
     width: auto;
     height: auto;
     margin: 0;
     position: relative;
     clip: auto;
-    
-    body:hover & {
-        a,
-        input,
-        button {
 
-            // Mixins
-            .inline-block-fallback();
+    & when (@includeHover = true) {
+        body:hover & {
+            a,
+            input,
+            button {
+
+                // Mixins
+                .inline-block-fallback();
+            }
         }
     }
 }
