@@ -1,5 +1,5 @@
 /*!
- * Motif Herald v0.3.4
+ * Motif Herald v0.3.5
  * Fire off events depending on scroll position.
  * http://getmotif.com
  *
@@ -387,7 +387,7 @@
       this.isSplicing = true;
 
       $.each(this.spliceQueue, $.proxy(function eachSplice(i, v) {
-        this.options.events.splice(v, 1);
+        this.options.events[v].suspended = true;
       }, this));
 
       this.spliceQueue = [];
