@@ -1,5 +1,5 @@
 /*!
- * Motif Sidekick v0.1.0
+ * Motif Sidekick v0.1.1
  * A basic sticky sidebar built on Motif Herald
  * http://getmotif.com
  * 
@@ -28,7 +28,8 @@
             "bottomOffset": null,
             "keepWidth": true,
             "minWidth": false,
-            "window": $( window )
+            "window": $( window ),
+            "throttle": 50
         },
 
         "init": function ( userOptions ) {
@@ -167,7 +168,8 @@
                 var self = this;
 
                 self.$window.plugin("herald", {
-                    "events": self.heraldEvents
+                    "events": self.heraldEvents,
+                    "throttle": self.options.throttle
                 });
             }
     };
