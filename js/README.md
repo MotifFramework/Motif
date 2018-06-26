@@ -81,7 +81,7 @@ A basic sticky sidebar. (Requires **Herald**.)
 Addition of the ability to pass how much Throttle should be applied to your listener for when to apply/remove Sticky. Default is 50ms. If you see flickers, lessen this number.
 
 ```
-$(".js-stickey-element").sidekick({
+$(".js-sticky-element").sidekick({
 	"minWidth": 768,
 	"throttle": 0
 })

@@ -1,5 +1,5 @@
 /*!
- * Motif Sidekick v0.1.0
+ * Motif Sidekick v0.1.1
  * A basic sticky sidebar built on Motif Herald
  * http://getmotif.com
  * 
