@@ -1,6 +1,6 @@
 import Reveal from "./motif.reveal.es6";
 
-export default function() {
+export default function () {
   initReveals();
   initTabs();
   initIcons();
@@ -38,7 +38,7 @@ function initIcons() {
   var request = new XMLHttpRequest();
   request.open("GET", "/resources/motif/dist/icons/icons-sprite.svg", true);
 
-  request.onload = function() {
+  request.onload = function () {
     if (request.status >= 200 && request.status < 400) {
       // Success!
       document.body.children[0].insertAdjacentHTML(
@@ -50,7 +50,7 @@ function initIcons() {
     }
   };
 
-  request.onerror = function() {
+  request.onerror = function () {
     console.error("Icons could not be fetched.");
   };
 

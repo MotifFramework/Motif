@@ -19,48 +19,63 @@
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
 
-import {customEvent} from '../utils/motif.events.es6';
+import { customEvent } from '../utils/motif.events.es6';
 import RevealTrigger from './motif.reveal-trigger.es6';
 
 const queueDoneEvent = customEvent("reveal/queue/done");
 
 export default class Reveal {
-    constructor(elems, userOptions) {
-        if (typeof elems === "string") {
-            elems = document.querySelectorAll(elems);
-        }
-        if (elems.length) {
-            elems = [].slice.call(elems);
-        } else {
-            elems = [elems];
-        }
-
-        this.revealTriggers = elems.map(elem => {
-            return new RevealTrigger(elem, userOptions);
-        });
-
-        this.executeQueue();
+  constructor(elems, userOptions) {
+    if (!elems) {
+      return false;
     }
+
+    if (typeof elems === "string") {
+      elems = document.querySelectorAll(elems);
+
+      if (!elems.length) {
+        return false;
+      }
+    }
+
+    if (elems) {
+      if (elems.length) {
+        elems = [].slice.call(elems);
+      } else {
+        elems = [elems];
+      }
+    }
+
+    if (!elems.length) {
+      return false;
+    }
+
+    this.revealTriggers = elems.map(elem => {
+      return new RevealTrigger(elem, userOptions);
+    });
+
+    this.executeQueue();
+  }
+
+  /**
+   * Execute the queue for this reveal group
+   */
+  executeQueue() {
+    const queue = window.Reveal.queue;
 
     /**
-     * Execute the queue for this reveal group
+     * If there's anything in the queue, loop through it
+     * and trigger a show for each one
      */
-    executeQueue() {
-        const queue = window.Reveal.queue;
-
-        /**
-         * If there's anything in the queue, loop through it
-         * and trigger a show for each one
-         */
-        if (queue.length) {
-            queue.forEach(queueEvent => {
-                document.dispatchEvent(queueEvent);
-            });
-        }
-
-        // Clear queue
-        window.Reveal.queue = [];
-
-        document.dispatchEvent(queueDoneEvent);
+    if (queue.length) {
+      queue.forEach(queueEvent => {
+        document.dispatchEvent(queueEvent);
+      });
     }
+
+    // Clear queue
+    window.Reveal.queue = [];
+
+    document.dispatchEvent(queueDoneEvent);
+  }
 }
