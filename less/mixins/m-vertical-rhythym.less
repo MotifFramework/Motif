@@ -66,23 +66,34 @@
 
 
  //Apply leading whitespace as margin.
-.m-vertical-rhythm__margin-leader(@lines: 1, @font-size: @base-text-size)		{
+.m-vertical-rhythm__margin-leader(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(margin-top, @lines, @font-size);
 }
-.m-vertical-rhythm__margin-trailer(@lines: 1, @font-size: @base-text-size)		{
+
+.m-vertical-rhythm__margin-trailer(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(margin-bottom, @lines, @font-size);
 }
-.m-vertical-rhythm__margin-vertical(@lines: 1, @font-size: @base-text-size)	{
+
+.m-vertical-rhythm__margin-vertical(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(margin-top, @lines, @font-size);
   .m-vertical-rhythm__rhythm(margin-bottom, @lines, @font-size);
 }
-.m-vertical-rhythm__padding-leader(@lines: 1, @font-size: @base-text-size)		{
+
+.m-vertical-rhythm__padding-leader(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(padding-top, @lines, @font-size);
 }
-.m-vertical-rhythm__padding-trailer(@lines: 1, @font-size: @base-text-size)	{
+
+.m-vertical-rhythm__padding-trailer(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(padding-bottom, @lines, @font-size);
 }
-.m-vertical-rhythm__padding-vertical(@lines: 1, @font-size: @base-text-size)	{
+
+.m-vertical-rhythm__padding-vertical(@lines: 1, @font-size: @base-text-size) {
+
   .m-vertical-rhythm__rhythm(padding-top, @lines, @font-size);
   .m-vertical-rhythm__rhythm(padding-bottom, @lines, @font-size);
 }
