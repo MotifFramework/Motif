@@ -40,7 +40,9 @@ textarea {
         z-index: 1;        
     }
 }
+
 input {
+
     &[type="checkbox"],
     &[type="radio"] {
         width: auto;
@@ -50,9 +52,11 @@ input {
         }
     }
 }
+
 textarea {
     height: @full-vertical * 4;
 }
+
 select {
     width: auto;
     max-width: 100%;
@@ -64,20 +68,20 @@ select {
 
 Input Label Elements
 
-Child form elements of the `.input-label` class are given a little bit of 
-spacing to separate them from the label text. (See also `.input-label` in the
-form `_type.less` file.)
+Child form elements of the `.elements__input-label` class are given a little bit of 
+spacing to separate them from the label text. (See also `.type__input-label` in the
+form `type.less` file.)
 
 ````input-label-elements
-<label class="input-label">
+<label class="elements__input-label">
     Text Field
     <input type="text" name="text" placeholder="Placeholder text" required>
 </label>
-<label class="input-label">
+<label class="elements__input-label">
     Textarea
     <textarea placeholder="Placeholder text"></textarea>
 </label>
-<label class="input-label">
+<label class="elements__input-label">
     Select
     <select>
         <option>Placeholder text</option>
@@ -87,14 +91,14 @@ form `_type.less` file.)
 
 */
 
-.input-label {
+.elements__input-label {
 
     input,
     textarea,
     select {
     
         // Mixins
-        .margin-vertical(0.5);
+        .m-vertical-rhythm__margin-vertical(0.5);
     }
 }
 
@@ -106,38 +110,46 @@ While you are encouraged to use the responsive grid system in conjunction with
 your form styles, sometimes it's useful to have form field widths that are 
 simply consistent across viewports. These are those.
 
-    <label class="input-label">
+    <label class="elements__input-label">
         Text Field
-        <input class="input--xs" type="text" name="text" required>
+        <input class="elements__input--xs" type="text" name="text" required>
     </label>
 
 */
 
-.input--eighth {
+.elements__input--eighth {
     width: 12.5%;
 }
-.input--quarter {
+
+.elements__input--quarter {
     width: 25%;
 }
-.input--half {
+
+.elements__input--half {
     width: 50%;
 }
-.input--xxxs {
+
+.elements__input--xxxs {
     max-width: @30px;
 }
-.input--xxs {
+
+.elements__input--xxs {
     max-width: @50px;
 }
-.input--xs {
+
+.elements__input--xs {
     max-width: @100px;
 }
-.input--s {
+
+.elements__input--s {
     max-width: @175px;
 }
-.input--m {
+
+.elements__input--m {
     max-width: @250px;
 }
-.input--l {
+
+.elements__input--l {
     max-width: @350px;
 }
 
@@ -147,28 +159,28 @@ Form Modules
 
 ````attached-label-before
 <label class="attached-label">
-    <small class="label">$</small>
+    <small class="proto__label">$</small>
     <input type="num" id="attached-label-before" required>
 </label>
 ````
 
 ````attached-label-after
-<label class="attached-label">
+<label class="elements__attached-label">
     <input type="text" id="attached-label-after" required>
-    <small class="label">.com</small>
+    <small class="proto__label">.com</small>
 </label>
 ````
 
 ````attached-label-before-and-after
-<label class="attached-label">
-    <small class="label">www.</small>
+<label class="elements__attached-label">
+    <small class="proto__label">www.</small>
     <input type="text" id="attached-label" placeholder="domain" required>
-    <small class="label">.com</small>
+    <small class="proto__label">.com</small>
 </label>
 ````
 
 ````attached-label-submit
-<form class="attached-label">
+<form class="elements__attached-label">
     <label class="is-hidden" for="attached-label-submit">Search</label>
     <input type="search" id="attached-label-submit" required>
     <div>
@@ -182,7 +194,7 @@ Form Modules
 
 */
 
-.attached-label {
+.elements__attached-label {
     display: table;
     overflow: hidden;
 
