@@ -7,25 +7,24 @@ Simple classes to adjust your text alignment. They can be added to individual el
 */
 
 
-.align {
-    &--left {
-        text-align: left;
-    }
-    &--center {
-        text-align: center;
-    }
-    &--right {
-        text-align: right;
-    }
-    &--sub {
-        vertical-align: sub;
-    }
-    &--middle {
-        vertical-align: middle;
-    }
-    &--top {
-        vertical-align: top;
-    }
+
+.presentational__align-left {
+    text-align: left;
+}
+.presentational__align-center {
+    text-align: center;
+}
+.presentational__align-right {
+    text-align: right;
+}
+.presentational__align-sub {
+    vertical-align: sub;
+}
+.presentational__align-middle {
+    vertical-align: middle;
+}
+.presentational__align--top {
+    vertical-align: top;
 }
 
 /*
@@ -51,7 +50,7 @@ Next, we have classes for floating elements.
         float: none;
     }
 }
-.clear {
+.presentational__clear {
     clear: both;
 }
 
@@ -63,53 +62,56 @@ Turns an `inline` or `inline-block` element into a `block` one.
 
 */
 
-.new-line {
+.presentational__new-line {
     display: block;
 }
-.group {
+.presentational__group {
 
     /* Mixins */
-    .clearfix();
+    .m-grid__clearfix();
 }
 
 /*
 
 "Is Hidden"
 
-Visually hides content in a way that leaves it accessible to screen readers. 
+Visually hides content in a way that leaves it accessible to screen readers.
 Like more magic, makes the visible invisible.
 
 */
 
-.is-hidden {
+.presentational__is-hidden {
 
     // Mixins
-    .visually-hidden();
+    .m-presentational__visually-hidden();
 }
 
 @media @small-screens-max {
-    .is-hidden-small {
+
+    .presentational__is-hidden-small {
 
         // Mixins
-        .visually-hidden();
+        .m-presentational__visually-hidden();
 
     }
 }
 
 @media @medium-screens-only {
-    .is-hidden-medium {
+
+    .presentational__is-hidden-medium {
 
         // Mixins
-        .visually-hidden();
+        .m-presentational__visually-hidden();
 
     }
 }
 
 @media @large-screens-min {
-    .is-hidden-large {
+
+    .presentational__is-hidden-large {
 
         // Mixins
-        .visually-hidden();
+        .m-presentational__visually-hidden();
 
     }
 }
@@ -122,7 +124,7 @@ Undoes `.is-hidden`.
 
 */
 
-.isnt-hidden {
+.presentational__isnt-hidden {
 
     /* Mixins */
     .show-hidden();
@@ -136,6 +138,6 @@ Exactly what it sounds like.
 
 */
 
-.relative-container {
+.presentational__relative-container {
     position: relative;
 }
