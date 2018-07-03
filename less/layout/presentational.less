@@ -6,23 +6,26 @@ Simple classes to adjust your text alignment. They can be added to individual el
 
 */
 
-
-
 .presentational__align-left {
     text-align: left;
 }
+
 .presentational__align-center {
     text-align: center;
 }
+
 .presentational__align-right {
     text-align: right;
 }
+
 .presentational__align-sub {
     vertical-align: sub;
 }
+
 .presentational__align-middle {
     vertical-align: middle;
 }
+
 .presentational__align--top {
     vertical-align: top;
 }
@@ -35,21 +38,23 @@ Next, we have classes for floating elements.
 
 */
 
-.float {
-    &--left {
-        float: left;
-    }
-    &--center {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    &--right {
-        float: right;
-    }
-    &--none {
-        float: none;
-    }
+.presentational__float-left {
+    float: left;
 }
+
+.presentational__float-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.presentational__float-right {
+    float: right;
+}
+
+.presentational__float-none {
+    float: none;
+}
+
 .presentational__clear {
     clear: both;
 }
@@ -65,6 +70,7 @@ Turns an `inline` or `inline-block` element into a `block` one.
 .presentational__new-line {
     display: block;
 }
+
 .presentational__group {
 
     /* Mixins */
@@ -92,7 +98,6 @@ Like more magic, makes the visible invisible.
 
         // Mixins
         .m-presentational__visually-hidden();
-
     }
 }
 
@@ -102,7 +107,6 @@ Like more magic, makes the visible invisible.
 
         // Mixins
         .m-presentational__visually-hidden();
-
     }
 }
 
@@ -112,7 +116,6 @@ Like more magic, makes the visible invisible.
 
         // Mixins
         .m-presentational__visually-hidden();
-
     }
 }
 
@@ -127,7 +130,7 @@ Undoes `.is-hidden`.
 .presentational__isnt-hidden {
 
     /* Mixins */
-    .show-hidden();
+    .m-presentational__show-hidden();
 }
 
 /*
