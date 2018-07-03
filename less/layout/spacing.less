@@ -1,0 +1,147 @@
+/*
+
+Spacing Helpers
+
+Spacing helpers are quick but powerful classes that add margin or padding to
+any given element. These classes are `!important`, so they override all other
+styles.
+
+* `p`, `m`                          =   padding, margin
+* `a`, `t`, `r`, `b`, `l`, `h`, `v` =   all, top, right, bottom, left, horizontal, vertical
+* `s`, `m`, `l`, `n`                =   small (~`5px`), medium (~`10px`), large (~`20px`), none (`0`)
+
+For example: `.spacing__pam` means "padding, all, medium".
+
+**Note:** These are all based on the current element's font size and the
+project's vertical rhythm (even on the sides, to provide uniform spacing).
+As such, they require `_vars.less`.
+
+*/
+
+.spacing__ptn, .spacing__pvn, .spacing__pan {
+    padding-top: 0 !important;
+}
+
+.spacing__pts, .spacing__pvs, .spacing__pas {
+    padding-top: @quarter-vertical !important;
+}
+
+.spacing__ptm, .spacing__pvm, .spacing__pam {
+    padding-top: @half-vertical !important;
+}
+
+.spacing__ptl, .spacing__pvl, .spacing__pal {
+    padding-top: @full-vertical !important;
+}
+
+.spacing__prn, .spacing__phn, .spacing__pan {
+    padding-right: 0 !important;
+}
+
+.spacing__prs, .spacing__phs, .spacing__pas {
+    padding-right: @quarter-vertical !important;
+}
+
+.spacing__prm, .spacing__phm, .spacing__pam {
+    padding-right: @half-vertical !important;
+}
+
+.spacing__prl, .spacing__phl, .spacing__pal {
+    padding-right: @full-vertical !important;
+}
+
+.spacing__pbn, .spacing__pvn, .spacing__pan {
+    padding-bottom: 0 !important;
+}
+
+.spacing__pbs, .spacing__pvs, .spacing__pas {
+    padding-bottom: @quarter-vertical !important;
+}
+
+.spacing__pbm, .spacing__pvm, .spacing__pam {
+    padding-bottom: @half-vertical !important;
+}
+
+.spacing__pbl, .spacing__pvl, .spacing__pal {
+    padding-bottom: @full-vertical !important;
+}
+
+.spacing__pln, .spacing__phn, .spacing__pan {
+    padding-left: 0 !important;
+}
+
+.spacing__pls, .spacing__phs, .spacing__pas {
+    padding-left: @quarter-vertical !important;
+}
+
+.spacing__plm, .spacing__phm, .spacing__pam {
+    padding-left: @half-vertical !important;
+}
+
+.spacing__pll, .spacing__phl, .spacing__pal {
+    padding-left: @full-vertical !important;
+}
+
+.spacing__mtn, .spacing__mvn, .spacing__man {
+    margin-top: 0 !important;
+}
+
+.spacing__mts, .spacing__mvs, .spacing__mas {
+    margin-top: @quarter-vertical !important;
+}
+
+.spacing__mtm, .spacing__mvm, .spacing__mam {
+    margin-top: @half-vertical !important;
+}
+
+.spacing__mtl, .spacing__mvl, .spacing__mal {
+    margin-top: @full-vertical !important;
+}
+
+.spacing__mrn, .spacing__mhn, .spacing__man {
+    margin-right: 0 !important;
+}
+
+.spacing__mrs, .spacing__mhs, .spacing__mas {
+    margin-right: @quarter-vertical !important;
+}
+
+.spacing__mrm, .spacing__mhm, .spacing__mam {
+    margin-right: @half-vertical !important;
+}
+
+.spacing__mrl, .spacing__mhl, .spacing__mal {
+    margin-right: @full-vertical !important;
+}
+
+.spacing__mbn, .spacing__mvn, .spacing__man {
+    margin-bottom: 0 !important;
+}
+
+.spacing__mbs, .spacing__mvs, .spacing__mas {
+    margin-bottom: @quarter-vertical !important;
+}
+
+.spacing__mbm, .spacing__mvm, .spacing__mam {
+    margin-bottom: @half-vertical !important;
+}
+
+.spacing__mbl, .spacing__mvl, .spacing__mal {
+    margin-bottom: @full-vertical !important;
+}
+
+.spacing__mln, .spacing__mhn, .spacing__man {
+    margin-left: 0 !important;
+}
+
+.spacing__mls, .spacing__mhs, .spacing__mas {
+    margin-left: @quarter-vertical !important;
+}
+
+.spacing__mlm, .spacing__mhm, .spacing__mam {
+    margin-left: @half-vertical !important;
+}
+
+.spacing__mll, .spacing__mhl, .spacing__mal {
+    margin-left: @full-vertical !important;
+}
