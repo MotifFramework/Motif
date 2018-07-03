@@ -22,16 +22,19 @@
 .m-type__lines-for-font-size(@font-size, @line-height) when (isnumber(@line-height))    {
     line-height: @line-height / @font-size;
 }
+
 .m-type__lines-for-font-size(@font-size, @round) when (@round = quarter)    {
     @unit: @base-vertical / 4;
     @ceil: ceil(@font-size / @unit);
     line-height: (@ceil * @unit) / @font-size;
 }
+
 .m-type__lines-for-font-size(@font-size, @round) when (@round = half)   {
     @unit: @base-vertical / 2;
     @ceil: ceil(@font-size / @unit);
     line-height: (@ceil * @unit) / @font-size;
 }
+
 .m-type__lines-for-font-size(@font-size)    {
     @unit: @base-vertical;
     @ceil: ceil(@font-size / @unit);
@@ -70,6 +73,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 .m-type__web-font-svg(@name: "Web Font", @folder: folder, @filename: webfont, @svg-name: WebFont) {
     font-family: "@{name}";
     src: url("/resources/fonts/@{folder}/@{filename}.eot");
