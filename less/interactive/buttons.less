@@ -14,14 +14,14 @@ Default interactive button styles. This `.btn` class can be applied to `<a>`,
 with size classes, much like the type modules.
 
 ````buttons
-<a class="btn" href="#">Default</a>
-<a class="btn--primary" href="#">Primary</a>
-<a class="btn--danger" href="#">Danger</a>
+<a class="buttons__btn" href="#">Default</a>
+<a class="buttons__btn--primary" href="#">Primary</a>
+<a class="buttons__btn--danger" href="#">Danger</a>
 ````
 
 */
 
-.btn,
+.buttons__btn,
 [class*="btn"] {
 
     // Baseline
@@ -89,27 +89,27 @@ with size classes, much like the type modules.
 
 */
 
-.btn {
-    &--tiny {
-        
-        // Mixins
-        // @TODO: Extend?
-        .size-for-font(@petite-text-size);
+.buttons__btn--tiny {       
+    // Mixins
+    // @TODO: Extend?
+    .m-type__size-for-font(@petite-text-size);
 
-        // Create
-        padding: @quarter-vertical @half-side;
-    }
-    &--small {
-        // @TODO: Extend?
-        .size-for-font(@petite-text-size);
-    }
-    &--large {
-        // @TODO: Extend?
-        .size-for-font(@tertia-text-size);
-    }
-    &--full-width { 
-        width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
+    // Create
+    padding: @quarter-vertical @half-side;
+}
+
+.buttons__btn--small {
+    // @TODO: Extend?
+    .m-type__size-for-font(@petite-text-size);
+}
+
+.buttons__btn--large {
+    // @TODO: Extend?
+    .m-type__size-for-font(@tertia-text-size);
+}
+
+.buttons__btn--full-width { 
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }

@@ -8,7 +8,7 @@
 // Size For Font
 // Convert type size into rems, with a pixel fallback.
 
-.size-for-font(@font-size)	{
+.m-type__size-for-font(@font-size)	{
     @rem: @font-size / @root-text-size;
     @px: @font-size;
     font-size: ~"@{px}px";
@@ -19,20 +19,20 @@
 // Calculate the minimum multiple of rhythm units needed to contain the font-size.
 // Optionally, you can specify a custom line-height (sans unit).
 
-.lines-for-font-size(@font-size, @line-height) when (isnumber(@line-height))    {
+.m-type__lines-for-font-size(@font-size, @line-height) when (isnumber(@line-height))    {
     line-height: @line-height / @font-size;
 }
-.lines-for-font-size(@font-size, @round) when (@round = quarter)    {
+.m-type__lines-for-font-size(@font-size, @round) when (@round = quarter)    {
     @unit: @base-vertical / 4;
     @ceil: ceil(@font-size / @unit);
     line-height: (@ceil * @unit) / @font-size;
 }
-.lines-for-font-size(@font-size, @round) when (@round = half)   {
+.m-type__lines-for-font-size(@font-size, @round) when (@round = half)   {
     @unit: @base-vertical / 2;
     @ceil: ceil(@font-size / @unit);
     line-height: (@ceil * @unit) / @font-size;
 }
-.lines-for-font-size(@font-size)    {
+.m-type__lines-for-font-size(@font-size)    {
     @unit: @base-vertical;
     @ceil: ceil(@font-size / @unit);
     line-height: (@ceil * @unit) / @font-size;
@@ -42,17 +42,17 @@
 // Type Size
 // Combine the font sizing mixin with the line-height one. Package deal.
 
-.type-size(@font-size, @round: @round-to-nearest)   {
+.m-type__type-size(@font-size, @round: @round-to-nearest)   {
 
     // Mixins
-    .size-for-font(@font-size);
-    .lines-for-font-size(@font-size, @round);
+    .m-type__size-for-font(@font-size);
+    .m-type__lines-for-font-size(@font-size, @round);
 }
 
 
 // Lists
 
-.unstyled-list()        {
+.m-type__unstyled-list()        {
     padding-left: 0;
     list-style: none outside none;
 }
@@ -61,7 +61,7 @@
 // Webfonts
 // Mixins to generate `@font-face` code, with and sans SVG.
 
-.web-font(@name: "Web Font", @folder: folder, @filename: webfont) {
+.m-type__web-font(@name: "Web Font", @folder: folder, @filename: webfont) {
     font-family: "@{name}";
     src: url("/resources/fonts/@{folder}/@{filename}.eot");
     src: url("/resources/fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
@@ -70,7 +70,7 @@
     font-weight: normal;
     font-style: normal;
 }
-.web-font-svg(@name: "Web Font", @folder: folder, @filename: webfont, @svg-name: WebFont) {
+.m-type__web-font-svg(@name: "Web Font", @folder: folder, @filename: webfont, @svg-name: WebFont) {
     font-family: "@{name}";
     src: url("/resources/fonts/@{folder}/@{filename}.eot");
     src: url("/resources/fonts/@{folder}/@{filename}.eot?#iefix") format('embedded-opentype'),
