@@ -15,14 +15,14 @@ with size classes, much like the type modules.
 
 ````buttons
 <a class="buttons__btn" href="#">Default</a>
-<a class="buttons__btn--primary" href="#">Primary</a>
-<a class="buttons__btn--danger" href="#">Danger</a>
+<a class="buttons__primary" href="#">Primary</a>
+<a class="buttons__danger" href="#">Danger</a>
 ````
 
 */
 
-.buttons__btn,
-[class*="btn"] {
+.buttons__base,
+[class*="buttons__base"] {
 
     // Baseline
     width: auto;
@@ -62,9 +62,9 @@ with size classes, much like the type modules.
 /*
 
 ````tiny-buttons
-<a class="btn--tiny" href="#">Tiny Button</a>
-<a class="btn--tiny btn--primary" href="#">Tiny Button Primary</a>
-<a class="btn--tiny btn--danger" href="#">Tiny Button Danger</a>
+<a class="buttons__tiny" href="#">Tiny Button</a>
+<a class="buttons__tiny buttons__primary" href="#">Tiny Button Primary</a>
+<a class="buttons__tiny buttons__danger" href="#">Tiny Button Danger</a>
 ````
 
 */
@@ -72,9 +72,9 @@ with size classes, much like the type modules.
 /*
 
 ````small-buttons
-<a class="btn--small" href="#">Small Button</a>
-<a class="btn--small btn--primary" href="#">Small Button Primary</a>
-<a class="btn--small btn--danger" href="#">Small Button Danger</a>
+<a class="buttons__small" href="#">Small Button</a>
+<a class="buttons__small buttons__primary" href="#">Small Button Primary</a>
+<a class="buttons__small buttons__danger" href="#">Small Button Danger</a>
 ````
 
 */
@@ -82,14 +82,14 @@ with size classes, much like the type modules.
 /*
 
 ````large-buttons
-<a class="btn--large" href="#">Large Button</a>
-<a class="btn--large btn--primary" href="#">Large Button Primary</a>
-<a class="btn--large btn--danger" href="#">Large Button Danger</a>
+<a class="buttons__large" href="#">Large Button</a>
+<a class="buttons__large buttons__primary" href="#">Large Button Primary</a>
+<a class="buttons__large buttons__danger" href="#">Large Button Danger</a>
 ````
 
 */
 
-.buttons__btn--tiny {       
+.buttons__tiny {       
     // Mixins
     // @TODO: Extend?
     .m-type__size-for-font(@petite-text-size);
@@ -98,17 +98,17 @@ with size classes, much like the type modules.
     padding: @quarter-vertical @half-side;
 }
 
-.buttons__btn--small {
+.buttons__small {
     // @TODO: Extend?
     .m-type__size-for-font(@petite-text-size);
 }
 
-.buttons__btn--large {
+.buttons__large {
     // @TODO: Extend?
     .m-type__size-for-font(@tertia-text-size);
 }
 
-.buttons__btn--full-width { 
+.buttons__full-width { 
     width: 100%;
     padding-left: 0;
     padding-right: 0;
