@@ -39,22 +39,26 @@ and input hints that typically go underneath the input field.
 
     &:extend( .presentational__new-line );
 }
+
 .type__input-hint,
 .type__input-desc {
 
     &:extend( .styles__body-text );
 }
+
 .type__input-label {
 
     // Mixins
     .m-vertical-rhythm__padding-leader( 1 );
 }
+
 .type__input-hint {
     color: @grey;
 
     // Mixins
     .m-vertical-rhythm__margin-leader( 0.25 );
 }
+
 .type__input-desc {
 
     // Mixins
@@ -125,11 +129,13 @@ possible, meaning a fieldset, with a legend, and a list of inputs:
     // Mixins
     .m-vertical-rhythm__margin-leader( 0.5 );
 }
+
 legend + .type__checkbox-list {
 
     // Mixins
     .m-vertical-rhythm__margin-leader( 0 );
 }
+
 legend {
     
     .type__input-label {
