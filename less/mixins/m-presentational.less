@@ -1,4 +1,4 @@
-.remove-styles() {
+.m-presentational__remove-styles() {
 
     /* Mixins */
     .box-shadow-none();
@@ -19,7 +19,7 @@
     background: none;
     outline: none;
 }
-.pseudo-clear() {
+.m-presentational__pseudo-clear() {
     content: "";
     width: 0;
     height: 0;
@@ -27,7 +27,8 @@
     padding: 0;
     display: block;
 }
-.hasLayout() {
+.m-presentational__hasLayout() {
+
     .lte7 & {
         display: inline;
         zoom: 1;
@@ -37,13 +38,13 @@
     display: inline-block;
 
     // Mixins
-    .hasLayout();
+    .m-presentational__hasLayout();
 }
-.hidden() {
+.m-presentational__hidden() {
     display: none !important;
     visibility: hidden;
 }
-.word-wrap() {
+.m-presentational__word-wrap() {
     -ms-word-break: break-all;
     word-break: break-all;
     word-break: break-word;
@@ -53,7 +54,7 @@
 }
 
 // http://developer.yahoo.com/blogs/ydn/posts/2012/10/clip-your-hidden-content-for-better-accessibility/
-.visually-hidden() { 
+.m-presentational__visually-hidden() {
     width: 1px;
     height: 1px;
     padding: 0;
@@ -62,7 +63,7 @@
     clip: rect(1px, 1px, 1px, 1px);
     border: 0;
     overflow: hidden;
-    
+
     &.focusable:active,
     &.focusable:focus {
         width: auto;
@@ -81,13 +82,13 @@
         }
     }
 }
-.show-hidden() {
+.m-presentational__show-hidden() {
     width: auto;
     height: auto;
     margin: 0;
     position: relative;
     clip: auto;
-    
+
     body:hover & {
         a,
         input,

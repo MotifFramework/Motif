@@ -1,12 +1,12 @@
-// 
+//
 // Helpful Variables
-// 
+//
 // Mostly spacing, to be honest.
-// 
+//
 
 // Horizontal Margins
-// 
-// Take the base grid margin, divide it (if necessary), then divide 
+//
+// Take the base grid margin, divide it (if necessary), then divide
 // the result by the `body`'s base text size. Convert to ems.
 
 @full-side: 1rem * ((@base-margin / 2) / @root-text-size);
@@ -15,8 +15,8 @@
 @double-side: 1rem * (@base-margin / @root-text-size);
 
 // Minus Border
-// 
-// Ditto, but subtract the project's default border width before 
+//
+// Ditto, but subtract the project's default border width before
 // dividing by the base text size.
 
 @full-side-bordered: 1rem * (((@base-margin / 2) - @default-border-width) / @root-text-size);
@@ -25,8 +25,8 @@
 @double-side-bordered: 1rem * ((@base-margin - @default-border-width) / @root-text-size);
 
 // Vertical Margins
-// 
-// Take the base vertical unit, divide it (if necessary), then divide 
+//
+// Take the base vertical unit, divide it (if necessary), then divide
 // the result by the `body`'s base text size. Convert to ems.
 
 @full-vertical: 1rem * (@base-vertical / @root-text-size);
@@ -36,8 +36,8 @@
 @double-vertical: 1rem * ((@base-vertical * 2) / @root-text-size);
 
 // Minus Border
-// 
-// Ditto, but subtract the project's default border width before 
+//
+// Ditto, but subtract the project's default border width before
 // dividing by the base text size.
 
 @full-vertical-bordered: 1rem * ((@base-vertical - @default-border-width) / @root-text-size);
