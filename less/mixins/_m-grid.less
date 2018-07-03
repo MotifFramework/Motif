@@ -1,20 +1,6 @@
 // Set @total-width to 100% for a fluid layout
 @total-width: 960px;
 
-// Clearfix Mixin
-.clearfix() {
-    &:before,
-    &:after {
-        content: "\0020";
-        height: 0;
-        display: block;
-        overflow: hidden;
-    }
-    &:after {
-        clear: both;
-    }
-}
-
 #mixed {
     .row(@mar: @base-margin)    {
 
@@ -26,7 +12,7 @@
         margin-right: -@grid-margin;
 
         // Mixins
-        .clearfix();
+        .m-grid__clearfix();
         //.inline-block-fallback();
     }
     .grid-column(@float: left)  {

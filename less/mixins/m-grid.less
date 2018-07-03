@@ -1,0 +1,16 @@
+// Set @total-width to 100% for a fluid layout
+@total-width: 960px;
+
+// Clearfix Mixin
+.m-grid__clearfix() {
+    &:before,
+    &:after {
+        content: "\0020";
+        height: 0;
+        display: block;
+        overflow: hidden;
+    }
+    &:after {
+        clear: both;
+    }
+}
