@@ -69,13 +69,23 @@ Fire off events depending on scroll position.
 
 ### Sidekick
 
-**Version:** 0.1.0
+**Version:** 0.1.1
 
 **Location:** `/scroll/motif.sidekick.js`
 
 A basic sticky sidebar. (Requires **Herald**.)
 
 *Documentation coming soon!*
+
+**June 26th, 2018**
+Addition of the ability to pass how much Throttle should be applied to your listener for when to apply/remove Sticky. Default is 50ms. If you see flickers, lessen this number.
+
+```
+$(".js-sticky-element").sidekick({
+	"minWidth": 768,
+	"throttle": 0
+})
+```
 
 ### Scroll Patrol
 

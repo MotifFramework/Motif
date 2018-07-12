@@ -1,16 +1,17 @@
-import ui from './ui'
-import forms from './forms'
+import "babel-polyfill";
+import ui from "./ui";
+import forms from "./forms";
 
 class App {
-  constructor () {
-    ui()
-    forms()
+  constructor() {
+    ui();
+    forms();
   }
 }
 
-const app = new App()
+const app = new App();
 
-window.Motif = window.Motif || {}
-window.Motif.app = app
+window.Motif = window.Motif || {};
+window.Motif.app = app;
 
-export default app
+export default app;
