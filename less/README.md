@@ -664,21 +664,21 @@ The building blocks for the site's type sizes. Almost exclusively, an element's 
 The list of type sizes can grow or shrink, but be vigilant in keeping the number of sizes to a minimum. A nice rule of thumb is that no two sizes can one pixel in difference (forcing you to choose one over the other, giving you one class where you previously had two).
 
 ```html
-<p class="canon-text">Canon Text (38px)</p>
-<p class="paragon-text">Paragon Text (30px)</p>
-<p class="primer-text">Primer Text (24px)</p>
-<p class="tertia-text">Tertia Text (18px)</p>
-<p class="normal-text">Normal Text (14px)</p>
-<p class="petite-text">Petite Text (12px)</p>
+<p class="hierarchy__canon-text">Canon Text (38px)</p>
+<p class="hierarchy__paragon-text">Paragon Text (30px)</p>
+<p class="hierarchy__primer-text">Primer Text (24px)</p>
+<p class="hierarchy__tertia-text">Tertia Text (18px)</p>
+<p class="hierarchy__normal-text">Normal Text (14px)</p>
+<p class="hierarchy__petite-text">Petite Text (12px)</p>
 ```
 
 #### Long Modifiers
 
-The smaller type sizes are given the `--long` modifier, allowing you to use each type size with varying line heights.
+The type sizes are given the `--long` modifier, allowing you to use each type size with varying line heights.
 
 ```html
-<p class="petite-text">I'm just a small bit of text, my `line-height` can be tight.</p>
-<p class="petite-text--long">I'm a longer paragraph, so my `line-height` should be longer to enhance legibility.</p>
+<p class="hierarchy__petite-text">I'm just a small bit of text, my `line-height` can be tight.</p>
+<p class="hierarchy__petite-text--long">I'm a longer paragraph, so my `line-height` should be longer to enhance legibility.</p>
 ```
 
 ### Icons

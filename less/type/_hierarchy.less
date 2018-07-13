@@ -12,15 +12,30 @@ pixel in difference (forcing you to choose one over the other, giving you one
 class where you previously had two).
 
 ````typographic-scale
-<p class="canon-text">Canon Text (38px)</p>
-<p class="paragon-text">Paragon Text (30px)</p>
-<p class="primer-text">Primer Text (24px)</p>
-<p class="tertia-text">Tertia Text (18px)</p>
-<p class="normal-text">Normal Text (14px)</p>
-<p class="petite-text">Petite Text (12px)</p>
+<p class="hierarchy__canon-text">Canon Text (38px)</p>
+<p class="hierarchy__paragon-text">Paragon Text (30px)</p>
+<p class="hierarchy__primer-text">Primer Text (24px)</p>
+<p class="hierarchy__tertia-text">Tertia Text (18px)</p>
+<p class="hierarchy__normal-text">Normal Text (14px)</p>
+<p class="hierarchy__petite-text">Petite Text (12px)</p>
 ````
 
+Long Modifiers
+
+The type sizes are given the `--long` modifier, allowing you to use
+each type size with varying line heights.
+
+    <p class="hierarchy__petite-text">I'm just a small bit of text, my `line-height` 
+    can be tight.</p>
+
+    <p class="hierarchy__petite-text--long">I'm a long paragraph, so my `line-height` 
+    should be longer to enhance legibility. ... </p>
+
 */
+
+.hierarchy__long-text {
+    line-height: 1.5;
+}
 
 /*
 
@@ -28,10 +43,13 @@ Canon Text
 
 */
 
-.canon-text {
+.hierarchy__canon-text {
+    .m-type__type-size(@canon-text-size, 45);
+}
 
-    // Mixins
-    .type-size(@canon-text-size, 45);
+.hierarchy__canon-text--long {
+    &:extend(.hierarchy__canon-text);
+    &:extend(.hierarchy__long-text);
 }
 
 /*
@@ -40,10 +58,13 @@ Paragon Text
 
 */
 
-.paragon-text {
+.hierarchy__paragon-text {
+    .m-type__type-size(@paragon-text-size, 35);
+}
 
-    // Mixins
-    .type-size(@paragon-text-size, 35);
+.hierarchy__paragon-text--long {
+    &:extend(.hierarchy__paragon-text);
+    &:extend(.hierarchy__long-text);
 }
 
 /*
@@ -52,10 +73,13 @@ Primer Text
 
 */
 
-[class*="primer-text"] {
+.hierarchy__primer-text {
+    .m-type__type-size(@primer-text-size, 30);
+}
 
-    // Mixins
-    .type-size(@primer-text-size, 30);
+.hierarchy__primer-text--long {
+    &:extend(.hierarchy__primer-text);
+    &:extend(.hierarchy__long-text);
 }
 
 /*
@@ -64,10 +88,13 @@ Tertia Text
 
 */
 
-[class*="tertia-text"] {
+.hierarchy__tertia-text {
+    .m-type__type-size(@tertia-text-size, 25);
+}
 
-    // Mixins
-    .type-size(@tertia-text-size, 25);
+.hierarchy__tertia-text--long {
+    &:extend(.hierarchy__tertia-text);
+    &:extend(.hierarchy__long-text);
 }
 
 /*
@@ -76,10 +103,13 @@ Normal Text
 
 */
 
-[class*="normal-text"] {
+.hierarchy__normal-text {
+    .m-type__type-size(@normal-text-size);
+}
 
-    // Mixins
-    .type-size(@normal-text-size);
+.hierarchy__normal-text--long {
+    &:extend(.hierarchy__normal-text);
+    &:extend(.hierarchy__long-text);
 }
 
 /*
@@ -88,30 +118,11 @@ Petite Text
 
 */
 
-[class*="petite-text"] {
-
-    // Mixins
-    .type-size(@petite-text-size);
+.hierarchy__petite-text {
+    .m-type__type-size(@petite-text-size);
 }
 
-/*
-
-Long Modifiers
-
-The smaller type sizes are given the `--long` modifier, allowing you to use
-each type size with varying line heights.
-
-    <p class="petite-text">I'm just a small bit of text, my `line-height` 
-    can be tight.</p>
-
-    <p class="petite-text--long">I'm a long paragraph, so my `line-height` 
-    should be longer to enhance legibility. ... </p>
-
-*/
-
-.primer-text--long,
-.tertia-text--long,
-.normal-text--long,
-.petite-text--long {
-    line-height: 1.5;
+.hierarchy__petite-text--long {
+    &:extend(.hierarchy__petite-text);
+    &:extend(.hierarchy__long-text);
 }
