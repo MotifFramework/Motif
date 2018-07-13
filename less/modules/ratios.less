@@ -1,0 +1,62 @@
+/*
+
+Ratios
+
+Ratios are used primarily for objects that must scale in both width and height
+proportionally, such as embedded videos.
+
+See: (http://daverupert.com/2012/04/uncle-daves-ol-padded-box/)
+
+The `.ratios__` dimension class is placed on a wrapping element, with 
+its child contents wrapped by the `.ratios__content` class.
+
+    <div class="ratios__square">
+        <div class="ratios__content">
+            ...
+        </div>
+    </div>
+
+For embedded videos, use the `.ratios__video` class, and it will assume an 
+`iframe` is the direct child:
+
+    <div class="ratios__video">
+        <iframe src="http://youtube.com/myVidEmbed"></iframe>
+    </div>
+
+*/
+
+.ratios__base {
+    .m-ratios__base();
+}
+
+.ratios__video {
+    &:extend(.ratios__base);
+    .m-ratios__dimensions(16, 9);
+}
+
+.ratios__1x1,
+.ratios__square {
+    &:extend(.ratios__base);
+    .m-ratios__dimensions(1, 1);
+}
+
+.ratios__2x1 {
+    &:extend(.ratios__base);
+    .m-ratios__dimensions(2, 1);
+}
+
+.ratios__1x2 {
+    &:extend(.ratios__base);
+    .m-ratios__dimensions(1, 2);
+}
+
+.ratios__content,
+.ratios__video > iframe {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
