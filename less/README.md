@@ -437,36 +437,36 @@ Great for integrating images into bodies of text, the `.figure` class is modifie
 
 ### Ratios
 
-**Location:** `/modules/_ratios.less`
+**Location:** `/modules/ratios.less`
 
 Ratios are used primarily for objects that must scale in both width and height proportionally, such as embedded videos.
 
 See: [Uncle Dave's Ol' Padded Box](http://daverupert.com/2012/04/uncle-daves-ol-padded-box/)
 
-The `.ratio` class (and its modifier) are placed on a wrapping element, with its child contents wrapped by the `.ratio__content` class.
+The `.ratios__` dimension class is placed on a wrapping element, with its child contents wrapped by the `.ratios__content` class.
 
 ```html
-<div class="ratio--square">
-    <div class="ratio__content">
+<div class="ratios__square">
+    <div class="ratios__content">
         ...
     </div>
 </div>
 ```
 
-For embedded videos, use the `.ratio--video` class, and it will assume an `iframe` is the direct child:
+For embedded videos, use the `.ratios__video` class, and it will assume an `iframe` is the direct child:
 
 ```html
-<div class="ratio--video">
+<div class="ratios__video">
     <iframe src="http://youtube.com/myVidEmbed"></iframe>
 </div>
 ```
 
-Classes                       | Description
-------------------------------|------------------------------
-`ratio--video`                | 16x9 with child `iframe` assumption
-`ratio--square`, `ratio--1x1` | Square ratio
-`ratio--1x2`                  | Proportional box twice as tall as it is wide
-`ratio--2x1`                  | Proportional box twice as wide as it is tall
+Classes                         | Description
+--------------------------------|------------------------------
+`ratios__video`                 | 16x9 with child `iframe` assumption
+`ratios__square`, `ratios__1x1` | Square ratio
+`ratios__1x2`                   | Proportional box twice as tall as it is wide
+`ratios__2x1`                   | Proportional box twice as wide as it is tall
 
 ### Blocks
 
