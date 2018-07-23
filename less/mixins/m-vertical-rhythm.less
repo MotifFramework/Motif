@@ -1,0 +1,99 @@
+// Calculate rhythm units.
+.m-vertical-rhythm__rhythm(
+    @property:	margin-top,
+    @lines:		1,
+    @size:		@base-text-size,
+    @vertical:	@base-vertical
+)
+when
+(@property = margin-top)
+{
+    // Variables
+    @rhythm:			@lines * @vertical;
+    @rhythm-em:			@rhythm / @size;
+
+    // Create
+    margin-top: 		~"@{rhythm-em}em";
+}
+.m-vertical-rhythm__rhythm(
+    @property:	margin-top,
+    @lines:		1,
+    @size:		@base-text-size,
+    @vertical:	@base-vertical
+)
+when
+(@property = margin-bottom)
+{
+    // Variables
+    @rhythm:			@lines * @vertical;
+    @rhythm-em:			@rhythm / @size;
+
+    // Create
+    margin-bottom: 		~"@{rhythm-em}em";
+}
+.m-vertical-rhythm__rhythm(
+    @property:	margin-top,
+    @lines:		1,
+    @size:		@base-text-size,
+    @vertical:	@base-vertical
+)
+when
+(@property = padding-top)
+{
+    // Variables
+    @rhythm:			@lines * @vertical;
+    @rhythm-em:			@rhythm / @size;
+
+    // Create
+    padding-top: 		~"@{rhythm-em}em";
+}
+.m-vertical-rhythm__rhythm(
+    @property:	margin-top,
+    @lines:		1,
+    @size:		@base-text-size,
+    @vertical:	@base-vertical
+)
+when
+(@property = padding-bottom)
+{
+    // Variables
+    @rhythm:			@lines * @vertical;
+    @rhythm-em:			@rhythm / @size;
+
+    // Create
+    padding-bottom: 	~"@{rhythm-em}em";
+}
+
+
+//Apply leading whitespace as margin.
+.m-vertical-rhythm__margin-leader(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(margin-top, @lines, @font-size);
+}
+
+.m-vertical-rhythm__margin-trailer(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(margin-bottom, @lines, @font-size);
+}
+
+.m-vertical-rhythm__margin-vertical(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(margin-top, @lines, @font-size);
+    .m-vertical-rhythm__rhythm(margin-bottom, @lines, @font-size);
+}
+
+.m-vertical-rhythm__padding-leader(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(padding-top, @lines, @font-size);
+}
+
+.m-vertical-rhythm__padding-trailer(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(padding-bottom, @lines, @font-size);
+}
+
+.m-vertical-rhythm__padding-vertical(@lines: 1, @font-size: @base-text-size) {
+
+    .m-vertical-rhythm__rhythm(padding-top, @lines, @font-size);
+    .m-vertical-rhythm__rhythm(padding-bottom, @lines, @font-size);
+}
