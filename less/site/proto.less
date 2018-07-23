@@ -194,7 +194,7 @@ textarea {
     // Mixins
     &:extend( .body-text );
     line-height: normal;
-    .border-radius( @default-radius );
+    .m-border-radius( @default-radius );
     .box-shadow-inset(0, @3px, @3px, @inner-shadow);
 
     &:hover,
@@ -227,7 +227,7 @@ Buttons
     &:extend( .lato-bold );
 
     // Mixins
-    .border-radius( @default-radius );
+    .m-border-radius( @default-radius );
 
     background-color: @grey-3;
     border: 1px solid @grey-2;
@@ -288,7 +288,7 @@ Panels
 .panel,
 [class*="panel-"],
 [class*="-panel"] {
-    .border-radius( @default-radius );
+    .m-border-radius( @default-radius );
 
     color: @light-black;
     border: 1px solid @grey-2;
@@ -609,11 +609,11 @@ Button List
 
     li {
         &:not(:first-child) a {
-            .border-radius-left( 0 );
+            .m-border-radius__left( 0 );
         }
 
         &:not(:last-child) a {
-            .border-radius-right( 0 );
+            .m-border-radius__right( 0 );
         }
     }
     a {
@@ -651,7 +651,7 @@ Tabs
             &:extend( .lato-bold );
 
             // Mixins
-            .border-radius-top( @default-radius );
+            .m-border-radius__top( @default-radius );
 
             padding: @half-vertical @full-side;
             color: @grey-2;
@@ -740,7 +740,7 @@ Messaging
     position: relative;
 
     // Mixins
-    .border-radius( @default-radius );
+    .m-border-radius( @default-radius );
     .box-shadow(0, 0, @shadow-radius, @shadow);
     .transition(opacity, 0.15s, linear);
 
@@ -850,7 +850,7 @@ Form Modules
 .attached-label {
 
     // Mixins
-    .border-radius( @default-radius );
+    .m-border-radius( @default-radius );
 
     /* Pretty */
     border: 1px solid @grey-4;
@@ -878,7 +878,7 @@ Form Modules
     [class*="btn"] {
 
         // Mixins
-        .border-radius(0);
+        .m-border-radius(0);
 
         /* Pretty */
         border: none;
