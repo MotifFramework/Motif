@@ -8,15 +8,16 @@ horizontal list/navigation without adding too much style (yet).
 
 */
 
-[class*="list--x"] {
-    &:extend( .list--unstyled );
+.lists__horizontal {
+    &:extend(.styles__unstyled-list);
 
     li {
         display: inline;
     }
-        a {
-            display: inline-block;
-        }
+    
+    a {
+        display: inline-block;
+    }
 }
 
 /*
@@ -29,26 +30,25 @@ than the default Horizontal List.
 
 */
 
-[class*="list--x--forceful"] {
-    li,
+.lists__horizontal--forceful {
+    &:extend(.styles__unstyled-list);
+
+    @media @small-screens-min {
+        .m-grid__clearfix();
+    }
+    
+    li {
+        display: block;
+
+        @media @small-screens-min {
+            float: left;
+        }
+    }
+    
     a {
         display: block;
     }
 }
-
-// Small screens and onward
-@media @small-screens-min {
-    [class*="list--x--forceful"] {
-
-        // Mixins
-        .m-grid__clearfix();
-
-        li {
-            float: left;
-        }
-    }
-}
-
 
 /*
 
@@ -78,18 +78,23 @@ without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
 */
 
-[class*="link-list--x"] {
+.lists__horizontal--links {
+    &:extend(.lists__horizontal);
+    
+    li {
+        &:extend(.lists__horizontal li);
+    }
+    
     a {
-        margin-right: @30px;
+        &:extend(.lists__horizontal a);
+
+        margin-right: 30px;
     }
 
-    li:last-child {
-        a {
-            margin-right: 0;
-        }
+    li:last-child a {
+        margin-right: 0;
     }
 }
-
 
 /*
 
@@ -100,12 +105,20 @@ the links for pagination.
 
 */
 
-.list--x--pgs {
+.lists__horizontal--pgs {
+    &:extend(.lists__horizontal);
+    
+    li {
+        &:extend(.lists__horizontal li);
+    }
+
     a {
+        &:extend(.lists__horizontal a);
+
         padding: 0 0.625em;
 
         &[href] {
-            &:extend( .link all );
+            &:extend( .links__link all );
         }
 
         &,
@@ -115,7 +128,6 @@ the links for pagination.
         }
     }
 }
-
 
 /*
 
@@ -142,25 +154,31 @@ and floating it and the ordered list.
 
 */
 
-.breadcrumb {
-
-    // Extends
-    &:extend( .group );
-
-    // Mixins
+.lists__breadcrumb {
+    &:extend(.presentational__group);
     .m-vertical-rhythm__margin-leader();
+}
 
-    &__label {
-        margin: 0 @half-side 0 0;
-        float: left;
+.lists__breadcrumb-label {
+    margin: 0 @half-side 0 0;
+    float: left;
+}
+
+.lists__breadcrumb-list {
+    &:extend(.lists__horizontal);
+
+    margin: 0;
+    float: left;
+
+    li {
+        &:extend(.lists__horizontal li);
+
+        margin-right: @half-side;
     }
-    &__list--x {
-        margin: 0;
-        float: left;
+
+    a {
+        &:extend(.lists__horizontal a);
     }
-        li {
-            margin-right: @half-side;
-        }
 }
 
 /*
@@ -183,17 +201,22 @@ Button List
 
 */
 
-[class*="button-list--x"] {
+.lists__horizontal--buttons {
+    &:extend(.lists__horizontal);
+
     margin-top: 0;
     overflow: hidden;
-
-    li,
-    a {
-        display: block;
-    }
-
+    
     li {
+        &:extend(.lists__horizontal li);
+
+        display: block;
         float: left;
     }
+    
+    a {
+        &:extend(.lists__horizontal a);
 
+        display: block;
+    }
 }
