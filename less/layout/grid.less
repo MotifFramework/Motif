@@ -26,28 +26,28 @@ cutoff value for `grid, large`)
 Understanding that, the syntax should be easy to understand. In these examples,
 we will talk about `grid, small`:
 
-- **Rows**: `.gs-row` (Grid, Small, Row)
-- **Columns**: `.gcs` (Grid, Column, Small)
-- **Column Width**: `.gs-half` (Grid, Small, Half-Width)
+- **Rows**: `.grid__sm-row` (Grid, Small, Row)
+- **Columns**: `.grid__sm` (Grid, Column, Small)
+- **Column Width**: `.grid__sm-half` (Grid, Small, Half-Width)
 
-    <div class="gs-row">
-        <div class="gcs gs-half">...</div>
-        <div class="gcs gs-half">...</div>
+    <div class="grid__sm-row">
+        <div class="grid__sm-half">...</div>
+        <div class="grid__sm-half">...</div>
     </div>
 
 However, to be slightly more succinct, you can use the condensed column syntax:
 
-- **Columns (Condensed)**: `.gcs-half` (Grid, Column, Small, Half-Width)
+- **Columns (Condensed)**: `.grid__sm-half` (Grid, Column, Small, Half-Width)
 
-    <div class="gs-row">
-        <div class="gcs-half">...</div>
-        <div class="gcs-half">...</div>
+    <div class="grid__sm-row">
+        <div class="grid__sm-half">...</div>
+        <div class="grid__sm-half">...</div>
     </div>
 
-In brief, the way the grid works is that `.gcs` floats the element to the left
+In brief, the way the grid works is that `.grid__sm` floats the element to the left
 (by default), and adds padding to both the left and the right. `-half` gives
 it a width of `50%`. The combined padding of the two columns bumped up against 
-each other form the full "gutter". The `.gs-row` then clears the floats and has
+each other form the full "gutter". The `.grid__sm-row` then clears the floats and has
 a *negative* margin on both the left and the right that pops the columns out to
 the sides the exact width of their paddings, meaning the column content lines 
 up with the site boundaries on the left and right without the need to specify 
@@ -55,11 +55,11 @@ up with the site boundaries on the left and right without the need to specify
 
 To use this responsively, then, you just add the classes by breakpoint:
 
-    <div class="gs-row gm-row gl-row">
-        <div class="gcs-half gcm-third gcl-quarter">
+    <div class="grid__sm-row grid__med-row grid__lg-row">
+        <div class="grid__sm-half grid__med-third grid__lg-quarter">
             ...
         </div>
-        <div class="gcs-half gcm-two-thirds gcl-three-quarters">
+        <div class="grid__sm-half grid__med-two-thirds grid__lg-three-quarters">
             ...
         </div>
     </div>
@@ -72,8 +72,8 @@ By default, the column breakdown of each grid breakpoint:
 
 For the larger grids, the classes follow the numbers closely...
 
-    - `.gcl-10of12
-    - `.gcm-4of9`
+    - `.grid__lg-10of12
+    - `.grid__med-4of9`
 
 ...in just about every combination (based on their total column number), but 
 all of the grids also have a few "fuzzy" shortcuts as well:
@@ -87,11 +87,11 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 */
 
 // Aliases for all breakpoints
-.g-halves,
-.g-thirds,
-.g-quarters {
+.grid__halves,
+.grid__thirds,
+.grid__quarters {
     // Mixins
-    #mixed > .row( @mobile-margin );
+    #mixed > .m-grid__row( @mobile-margin );
 
     /* Pretty */
     letter-spacing: -0.31em;
@@ -104,8 +104,8 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     
     > * {
         // Mixins
-        #mixed > .grid-column();
-        #mixed > .grid-padding( @mobile-margin );
+        #mixed > .m-grid__column();
+        #mixed > .m-grid__padding( @mobile-margin );
 
         /* Display & Box Model */
         display: inline-block;
@@ -120,13 +120,16 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         text-rendering: auto;
     }
 }
-.g-halves > * {
+
+.grid__halves > * {
     width: 50%;
 }
-.g-thirds > * {
+
+.grid__thirds > * {
     width: round( ( 100% / 3 ), 5 );
 }
-.g-quarters > * {
+
+.grid__quarters > * {
     width: 25%;
 }
 
@@ -135,7 +138,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 // actual prefocus styling and is not required 
 // in markup.
 .opera-only :-o-prefocus,
-.g-thirds {
+.grid__thirds {
     word-spacing: -0.43em;
 }
 
@@ -143,98 +146,108 @@ all of the grids also have a few "fuzzy" shortcuts as well:
  * Mobile Grid
  */
 @media @small-screens-max {
-    [class*="gs-row"] {
-        #mixed > .row( @mobile-margin );
+
+    [class*="grid__sm-row"] {
+
+        #mixed > .m-grid__row( @mobile-margin );
         
         ul& {
             padding-left: 0;
             list-style: none outside none;
         }
     }
-    .gs-row {
-        &--rtl {
-            > [class*="gcs"] {
-                float: right;
-            }
-        }
-        &--ltr {
-            > [class*="gcs"] {
-                float: left;
-            }
+
+    .grid__sm-row--rtl {
+
+        > [class*="grid__sm"] {
+            float: right;
         }
     }
 
-    [class*="gcs"] {
-        #mixed > .grid-column();
-        #mixed > .grid-padding( @mobile-margin );
+    .grid__sm-row--ltr {
+
+        > [class*="grid__sm"] {
+            float: left;
+        }
     }
-    .gs-quarter,
-    .gcs-quarter {
+
+    [class*="grid__sm"] {
+        #mixed > .m-grid__column();
+        #mixed > .m-grid__padding( @mobile-margin );
+    }
+
+    .grid__sm-quarter {
         width: 25%;
     }
-    .gs-third,
-    .gcs-third {
+
+    .grid__sm-third {
         width: round( ( 100% / 3 ), 5 );
     }
-    .gs-half,
-    .gcs-half {
+
+    .grid__sm-half {
         width: 50%;
     }
-    .gs-two-thirds,
-    .gcs-two-thirds {
+
+    .grid__sm-two-thirds {
         width: round( ( ( 100% / 3 ) * 2 ), 5 );
     }
-    .gs-three-quarters,
-    .gcs-three-quarters {
+
+    .grid__sm-three-quarters {
         width: 75%;
     }
-    .gs-full,
-    .gcs-full {
+
+    .grid__sm-full {
         width: 100%;
     }
-    .gs-row--flex {
+
+    .grid__sm-row--flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
     }
-        .gs-row--flex > [class*="gcs"] {
-            float: none;
-            display: inline-block;
-            letter-spacing: normal;
-            word-spacing: normal;
-            vertical-align: top;
-            text-rendering: auto;
-        }
+
+    .grid__sm-row--flex > [class*="grid__sm"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
 
     // Opera as of 12 on Windows needs word-spacing.
     // The ".opera-only" selector is used to prevent
     // actual prefocus styling and is not required 
     // in markup.
     .opera-only :-o-prefocus,
-    .gs-row--flex {
+    .grid__sm-row--flex {
         word-spacing: -0.43em;
     }
 
     // Shortcuts/Aliases
-    .gs {
+    .grid__sm {
+
         &-quarters,
         &-thirds,
         &-halves {
-            &:extend( [class*="gs-row"] all );
-            &:extend( .gs-row--flex );
+            &:extend( [class*="grid__sm-row"] all );
+            &:extend( .grid__sm-row--flex );
 
             > * {
-                &:extend( [class*="gcs"] );
-                &:extend( .gs-row--flex > [class*="gcs"] );
+                &:extend( [class*="grid__sm"] );
+                &:extend( .grid__sm-row--flex > [class*="grid__sm"] );
             }
         }
+
         &-quarters > * {
-            &:extend( .gs-quarter );
+            &:extend( .grid__sm-quarter );
         }
+
         &-thirds > * {
-            &:extend( .gs-third );
+            &:extend( .grid__sm-third );
         }
+
         &-halves > * {
-            &:extend( .gs-half );
+            &:extend( .grid__sm-half );
         }
     }
 }
@@ -243,97 +256,105 @@ all of the grids also have a few "fuzzy" shortcuts as well:
  * Tablet Grid
  */
 @media @medium-screens-only {
-    [class*="gm-row"] {
-        #mixed > .row( @tablet-margin );
+
+    [class*="grid__med-row"] {
+        #mixed > .m-grid__row( @tablet-margin );
         
         ul& {
             padding-left: 0;
             list-style: none outside none;
         }
     }
-    .gm-row {
-        &--rtl {
-            > [class*="gcm"] {
-                float: right;
-            }
-        }
-        &--ltr {
-            > [class*="gcm"] {
-                float: left;
-            }
+
+    .grid__med-row--rtl {
+
+        > [class*="grid__med"] {
+            float: right;
         }
     }
 
-    [class*="gcm"] {
-        #mixed > .grid-column();
-        #mixed > .grid-padding( @tablet-margin );
+    .grid__med-row--ltr {
+
+        > [class*="grid__med"] {
+            float: left;
+        }
     }
-    .gm-quarter,
-    .gcm-quarter {
+
+    [class*="grid__med"] {
+        #mixed > .m-grid__column();
+        #mixed > .m-grid__padding( @tablet-margin );
+    }
+
+    .grid__med-quarter {
         width: 25%;
     }
-    .gm-third,
-    .gcm-third {
+
+    .grid__med-third {
         width: round( ( 100% / 3 ), 5 );
     }
-    .gm-half,
-    .gcm-half {
+
+    .grid__med-half {
         width: 50%;
     }
-    .gm-two-thirds,
-    .gcm-two-thirds {
+
+    .grid__med-two-thirds {
         width: round( ( ( 100% / 3 ) * 2 ), 5 );
     }
-    .gm-three-quarters,
-    .gcm-three-quarters {
+
+    .grid__med-three-quarters {
         width: 75%;
     }
-    .gm-full,
-    .gcm-full {
+
+    .grid__med-full {
         width: 100%;
     }
-    #mixins > .grid-all( ( @tablet-total-cols - 1 ), @tablet-total-cols, m );
+
+    #mixins > .m-grid__all( ( @tablet-total-cols - 1 ), @tablet-total-cols, m );
     
-    .gm-row--flex {
+    .grid__med-row--flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
     }
 
-        .gm-row--flex > [class*="gcm"] {
-            float: none;
-            display: inline-block;
-            letter-spacing: normal;
-            word-spacing: normal;
-            vertical-align: top;
-            text-rendering: auto;
-        }
+    .grid__med-row--flex > [class*="grid__med"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
 
     .opera-only :-o-prefocus,
-    .gm-row--flex {
+    .grid__med-row--flex {
         word-spacing: -0.43em;
     }
 
     // Shortcuts/Aliases
-    .gm {
+    .grid__med {
+
         &-quarters,
         &-thirds,
         &-halves {
-            &:extend( [class*="gm-row"] all );
-            &:extend( .gm-row--flex );
+            &:extend( [class*="grid__med-row"] all );
+            &:extend( .grid__med-row--flex );
 
             > * {
-                &:extend( [class*="gcm"] );
-                &:extend( .gm-row--flex > [class*="gcm"] );
+                &:extend( [class*="grid__med"] );
+                &:extend( .grid__med-row--flex > [class*="grid__med"] );
             }
         }
+
         &-quarters > * {
-            &:extend( .gm-quarter );
+            &:extend( .grid__med-quarter );
         }
+
         &-thirds > * {
-            &:extend( .gm-third );
+            &:extend( .grid__med-third );
         }
+
         &-halves > * {
-            &:extend( .gm-half );
+            &:extend( .grid__med-half );
         }
     }
 }
@@ -345,7 +366,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 /*
 
 ````desktop-grid
-<div class="gl-quarters">
+<div class="grid__lg-quarters">
     <div>
         <div class="block">Quarter</div>
     </div>
@@ -359,7 +380,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         <div class="block">Quarter</div>
     </div>
 </div>
-<div class="gl-thirds">
+<div class="grid__lg-thirds">
     <div>
         <div class="block">Third</div>
     </div>
@@ -370,7 +391,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         <div class="block">Third</div>
     </div>
 </div>
-<div class="gl-halves">
+<div class="grid__lg-halves">
     <div>
         <div class="block">Half</div>
     </div>
@@ -378,19 +399,19 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         <div class="block">Half</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-two-thirds">
+<div class="grid__lg-row">
+    <div class="grid__lg-two-thirds">
         <div class="block">Two Thirds</div>
     </div>
-    <div class="gcl-third">
+    <div class="grid__lg-third">
         <div class="block">Third</div>
     </div>
 </div>
-<div class="gl-row">
-    <div class="gcl-three-quarters">
+<div class="grid__lg-row">
+    <div class="grid__lg-three-quarters">
         <div class="block">Three Quarters</div>
     </div>
-    <div class="gcl-quarter">
+    <div class="grid__lg-quarter">
         <div class="block">Quarter</div>
     </div>
 </div>
@@ -399,56 +420,66 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 */
 
 @media @large-screens-min {
-    [class*="gl-row"] {
-        #mixed > .row( @base-margin );
+
+    [class*="grid__lg-row"] {
+        #mixed > .m-grid__row( @base-margin );
         
         ul& {
             padding-left: 0;
             list-style: none outside none;
         }
     }
-    .gl-row {
-        &--rtl {
-            > [class*="gcl"] {
-                float: right;
-            }
-        }
-        &--ltr {
-            > [class*="gcl"] {
-                float: left;
-            }
+
+    .grid__lg-row--rtl {
+
+        > [class*="grid__lg"] {
+            float: right;
         }
     }
 
-    [class*="gcl"] {
-        #mixed > .grid-column();
-        #mixed > .grid-padding( @base-margin );
+    .grid__lg-row--ltr {
+
+        > [class*="grid__lg"] {
+            float: left;
+        }
     }
-    .gl-quarter,
-    .gcl-quarter {
+
+    [class*="grid__lg"] {
+        #mixed > .m-grid__column();
+        #mixed > .m-grid__padding( @base-margin );
+    }
+
+    .grid__lg-quarter,
+    .grid__lg-quarter {
         width: 25%;
     }
-    .gl-third,
-    .gcl-third {
+
+    .grid__lg-third,
+    .grid__lg-third {
         width: round( ( 100% / 3 ), 5 );
     }
-    .gl-half,
-    .gcl-half {
+
+    .grid__lg-half,
+    .grid__lg-half {
         width: 50%;
     }
-    .gl-two-thirds,
-    .gcl-two-thirds {
+
+    .grid__lg-two-thirds,
+    .grid__lg-two-thirds {
         width: round( ( ( 100% / 3 ) * 2 ), 5 );
     }
-    .gl-three-quarters,
-    .gcl-three-quarters {
+
+    .grid__lg-three-quarters,
+    .grid__lg-three-quarters {
         width: 75%;
     }
-    .gl-full,
-    .gcl-full {
+
+    .grid__lg-full,
+    .grid__lg-full {
         width: 100%;
     }
-    #mixins > .grid-all( ( @total-columns - 1 ), @total-columns, l );
+
+    #mixins > .m-grid__all( ( @total-columns - 1 ), @total-columns, lg );
 
 
 /*
@@ -465,7 +496,7 @@ The syntax is simply the same as the regular responsive grid system, except
 the row class has a `--flex` modifier.
 
 ````media-grid
-<ul class="gs-halves gm-thirds gl-quarters">
+<ul class="grid__sm-halves grid__med-thirds grid__lg-quarters">
     <li>
         <figure class="figure">
             <img src="http://placehold.it/400">
@@ -509,11 +540,11 @@ the row class has a `--flex` modifier.
 
 */
 
-    .gl-row--flex {
+    .grid__lg-row--flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
     }
-        .gl-row--flex > [class*="gcl"] {
+        .grid__lg-row--flex > [class*="grid__lg"] {
             float: none;
             display: inline-block;
             letter-spacing: normal;
@@ -522,31 +553,35 @@ the row class has a `--flex` modifier.
             text-rendering: auto;
         }
     .opera-only :-o-prefocus,
-    .gl-row--flex {
+    .grid__lg-row--flex {
         word-spacing: -0.43em;
     }
 
     // Shortcuts/Aliases
-    .gl {
+    .grid__lg {
+
         &-quarters,
         &-thirds,
         &-halves {
-            &:extend( [class*="gl-row"] all );
-            &:extend( .gl-row--flex );
+            &:extend( [class*="grid__lg-row"] all );
+            &:extend( .grid__lg-row--flex );
 
             > * {
-                &:extend( [class*="gcl"] );
-                &:extend( .gl-row--flex > [class*="gcl"] );
+                &:extend( [class*="grid__lg"] );
+                &:extend( .grid__lg-row--flex > [class*="grid__lg"] );
             }
         }
+
         &-quarters > * {
-            &:extend( .gl-quarter );
+            &:extend( .grid__lg-quarter );
         }
+
         &-thirds > * {
-            &:extend( .gl-third );
+            &:extend( .grid__lg-third );
         }
+
         &-halves > * {
-            &:extend( .gl-half );
+            &:extend( .grid__lg-half );
         }
     }
 }
