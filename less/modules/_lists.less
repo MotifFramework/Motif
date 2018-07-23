@@ -2,7 +2,7 @@
 
 Horizontal List
 
-The basic `.list--x` module simply removes bullets from lists and inlines the list 
+The basic horizontal list module simply removes bullets from lists and inlines the list 
 items, making the link `inline-block`. The idea is to give the skeleton of a 
 horizontal list/navigation without adding too much style (yet).
 
@@ -57,13 +57,8 @@ Link List
 A basic extension of the Horizontal List, this adds some margin to the links in
 the list for a more pleasant looking list of links.
 
-**Note:** Because we are using the `[class*=""]` attribute selector, using the 
-`.link-list--x` class takes advantage of the `list--x` module we declared 
-earlier, as well as the Forceful variation (`.link-list--x--forceful`) 
-without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
-
 ````link-list
-<ul class="link-list--x">
+<ul class="lists__horizontal--links">
     <li>
         <a href="#">Basic Link</a>
     </li>
@@ -100,7 +95,7 @@ without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
 
 Pagination
 
-An extension of the basic `.list--x` module that simply adds enough padding on
+An extension of the basic horizontal list module that simply adds enough padding on
 the links for pagination.
 
 */
@@ -133,12 +128,12 @@ the links for pagination.
 
 Breadcrumb
 
-Another extension of the `.list--x` module, adding a breadcrumb `label` 
+Another extension of the horizontal list module, adding a breadcrumb `label` 
 and floating it and the ordered list.
 
 ````breadcrumb
-<nav class="breadcrumb" role="navigation">
-    <ol class="breadcrumb__list--x">
+<nav class="lists__breadcrumb" role="navigation">
+    <ol class="lists__breadcrumb-list">
         <li>
             <a href="#">Breadcrumb Link</a>
         </li>
@@ -186,7 +181,7 @@ and floating it and the ordered list.
 Button List
 
 ````button-list
-<ul class="button-list--x">
+<ul class="lists__horizontal--buttons">
     <li>
         <a class="btn--primary" href="#">Button</a>
     </li>

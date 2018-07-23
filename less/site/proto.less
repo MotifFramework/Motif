@@ -393,7 +393,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
         <svg class="icon"><use xlink:href="#rows"></svg>
         <b class="button-label">Main Menu</b>
     </h3>
-    <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">
+    <ul class="nav-bar__list expand__target" id="main-nav-list">
         <li>
             <a class="nav-bar__link is-current" href="#">
                 Current Nav Link
@@ -415,92 +415,55 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 */
 
-.nav-bar {
-    &__title {
+.nav-bar__title {
 
-        // Create
-        margin: 0;
-        padding: @half-vertical 4%;
-        display: inline-block;
-        color: @white;
-        background: @blue-1;
-        cursor: pointer;
+    // Create
+    margin: 0;
+    padding: @half-vertical 4%;
+    display: inline-block;
+    color: @white;
+    background: @blue-1;
+    cursor: pointer;
 
-        &:hover,
-        &:focus,
-        &.is-expanded {
-            background: @blue-4;
-        }
-
+    &:hover,
+    &:focus,
+    &.is-expanded {
+        background: @blue-4;
     }
-    &__link {
-        color: @white;
-        text-decoration: none;
-        padding: @half-vertical 4%;
-        
-        &:hover,
-        &:focus,
-        &.is-current {
-            color: @white;
 
-            // Mixins
-            background: @blue-4;
+    @media @medium-screens-min {
+
+        .js .nav-bar--menu & {
+            display: none;
         }
     }
 }
-[class*="nav-bar__list"] {
+
+.nav-bar__list {
+    &:extend(.lists__horizontal--forceful);
+
     margin: 0;
-    
-    // Mixins
     background: @blue-1;
 
-    ul {
-        margin: 0;
-    }
-}
-@media @small-screens-min {
+    @media @medium-screens-min {
 
-    [class*="nav-bar__list"] {
-        > li,
-        [class*="list--x"] > li {
+        .js .nav-bar--menu & {
+            max-height: 999px;
+        }
+    }
+
+    > li {
+        &:extend(.lists__horizontal--forceful li);
+
+        @media @small-screens-min {
             width: 50%;
 
             &:nth-child( odd ) {
                 clear: both;
             }
         }
-    }
-    .nav-bar {
-        &__link {
-            padding: @half-vertical @full-side;
-        }
-    }
-}
-@media @medium-screens-min {
-    .nav-bar {
 
-        &__link {
-            padding: @full-vertical @full-side;
-        }
-
-        .js & {
-            &--menu {
-                .nav-bar__title {
-                    display: none;
-                }
-                [class*="nav-bar__list"] {
-                    max-height: 999px;
-                }
-            }
-        }
-    }
-
-    [class*="nav-bar__list"] {
-
-        background: @blue-1;
-
-        > li,
-        [class*="list--x"] > li {
+        @media @small-screens-min {
             width: auto;
 
             &:nth-child( odd ) {
@@ -508,8 +471,31 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
             }
         }
     }
+
+    ul {
+        margin: 0;
+    }
 }
 
+.nav-bar__link {
+    color: @white;
+    text-decoration: none;
+    padding: @half-vertical 4%;
+    
+    &:hover,
+    &:focus,
+    &.is-current {
+        color: @white;
+        background: @blue-4;
+    }
+
+    @media @small-screens-min {
+        padding: @half-vertical @full-side;
+    }
+    @media @medium-screens-min {
+        padding: @full-vertical @full-side;
+    }
+}
 
 /*
 
@@ -583,20 +569,20 @@ Breadcrumb
 
 */
 
-.breadcrumb {
-    &__list--x {
-        text-transform: capitalize;
-    }
-        li {
-            &:before {
-                content: "/";
-                margin-right: @half-side;
-            }
-            &:first-child:before {
-                content: "";
-                margin: 0;
-            }
+.lists__breadcrumb-list {
+    text-transform: capitalize;
+
+    li {
+        &:before {
+            content: "/";
+            margin-right: @half-side;
         }
+
+        &:first-child:before {
+            content: "";
+            margin: 0;
+        }
+    }
 }
 
 /*
@@ -605,24 +591,26 @@ Button List
 
 */
 
-[class*="button-list--x"] {
+.lists__horizontal--buttons {
 
     li {
+
         &:not(:first-child) a {
-            .m-border-radius__left( 0 );
+            .m-border-radius__left(0);
         }
 
         &:not(:last-child) a {
-            .m-border-radius__right( 0 );
+            .m-border-radius__right(0);
         }
     }
+
     a {
         border-left-width: 0;
     }
+
     li:first-child a {
         border-left-width: 1px;
     }
-
 }
 
 
@@ -636,53 +624,55 @@ Tabs
     .m-vertical-rhythm__margin-leader();
 
     nav > ul {
-        &:extend( [class*="list--x"] all );
+        &:extend(.lists__horizontal all);
     }
-    nav > ul,
-    &__list--x,
-    &__list--x--forceful {
+}
 
-        border-bottom: 1px solid @grey-4;
-        margin-bottom: @full-vertical;
+.tabs nav > ul,
+.tabs__list {
+    border-bottom: 1px solid @grey-4;
+    margin-bottom: @full-vertical;
 
-        a {
+    a {
 
-            /* Extends .lato-bold */
-            &:extend( .lato-bold );
+        /* Extends .lato-bold */
+        &:extend( .lato-bold );
 
-            // Mixins
-            .m-border-radius__top( @default-radius );
+        // Mixins
+        .m-border-radius__top( @default-radius );
 
-            padding: @half-vertical @full-side;
-            color: @grey-2;
-            text-decoration: none;
-            position: relative;
-            bottom: -1px;
-            z-index: 30;
-            border: 1px solid transparent;
+        padding: @half-vertical @full-side;
+        color: @grey-2;
+        text-decoration: none;
+        position: relative;
+        bottom: -1px;
+        z-index: 30;
+        border: 1px solid transparent;
 
-            &:hover,
-            &:focus {
-                color: @light-black;
-            }
-        }
-        .is-current {
+        &:hover,
+        &:focus {
             color: @light-black;
-            background-color: @white;
-            border-color: @grey-2;
-            border-bottom-color: transparent;
-            z-index: 60;
         }
     }
-
-    .js.csstransitions & {
-        > nav + *,
-        &__section {
-
-            // Mixins
-            .transition( height, 0.3s, @easeOutCubic );
-        }
+    .is-current {
+        color: @light-black;
+        background-color: @white;
+        border-color: @grey-2;
+        border-bottom-color: transparent;
+        z-index: 60;
     }
+}
+
+.js.csstransitions .tabs {
+    > nav + *,
+    &__section {
+
+        // Mixins
+        .transition( height, 0.3s, @easeOutCubic );
+    }
+}
+
+.tabs {
     > nav + * > *,
     .tab {
         > :first-child {
