@@ -1,11 +1,11 @@
-.transform (@value: scale(1)) 
+.transformation__transform (@value: scale(1)) 
 {
     -webkit-transform : @value;
     -moz-transform    : @value;
     -o-transform      : @value;
     transform         : @value;
 }
-.skew (@angle-x: 35deg, @angle-y: 0) 
+.transformation__skew (@angle-x: 35deg, @angle-y: 0) 
 {
     -webkit-transform : skew(@angle-x, @angle-y);
     -moz-transform    : skew(@angle-x, @angle-y);
@@ -13,7 +13,7 @@
     -ms-transform     : skew(@angle-x, @angle-y);
     transform         : skew(@angle-x, @angle-y);
 }
-.scale (@scale-x: 1) 
+.transformation__scale (@scale-x: 1) 
 {
     -webkit-transform : scale(@scale-x);
     -moz-transform    : scale(@scale-x);
@@ -21,7 +21,7 @@
     -ms-transform     : scale(@scale-x);
     transform         : scale(@scale-x);
 }
-.rotate (@angle: 35deg) 
+.transformation__rotate (@angle: 35deg) 
 {
     -webkit-transform : rotate(@angle);
     -moz-transform    : rotate(@angle);
@@ -29,14 +29,14 @@
     -ms-transform     : rotate(@angle);
     transform         : rotate(@angle);
 }
-.origin(@arguments) {
+.transformation__origin(@arguments) {
     -webkit-transform-origin : @arguments;
     -moz-transform-origin    : @arguments;
     -o-transform-origin      : @arguments;
     -ms-transform-origin     : @arguments;
     transform-origin         : @arguments;
 }
-.translate (@move-x: 10px, @move-y: 10px) 
+.transformation__translate (@move-x: 10px, @move-y: 10px) 
 {
     -webkit-transform : translate(@move-x, @move-y);
     -moz-transform    : translate(@move-x, @move-y);
@@ -44,7 +44,7 @@
     -ms-transform     : translate(@move-x, @move-y);
     transform         : translate(@move-x, @move-y);
 }
-.translate3d (@move-x: 0, @move-y: 0, @move-z: 0) 
+.transformation__translate3d (@move-x: 0, @move-y: 0, @move-z: 0) 
 {
     -webkit-transform : translate3d(@move-x, @move-y, @move-z);
     -moz-transform    : translate3d(@move-x, @move-y, @move-z);
@@ -52,7 +52,7 @@
     -ms-transform     : translate3d(@move-x, @move-y, @move-z);
     transform         : translate3d(@move-x, @move-y, @move-z);
 }
-#transform {
+#transformation__transform {
     .backface ( @vis: hidden ) {
         -webkit-backface-visibility: @vis;
         -moz-backface-visibility: @vis;

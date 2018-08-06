@@ -14,7 +14,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 
 
 ````media-object
-<div class="media-object">
+<div class="media__media-object">
     <figure>
         <img src="http://placehold.it/213" alt="A media object image">
     </figure>
@@ -26,7 +26,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 
 */
 
-.media-object {
+.media__media-object {
     &:extend( .new-line );
 
     &,
@@ -63,7 +63,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 
 // Small Screens and onward
 @media @small-screens-min {
-    .media-object {
+    .media__media-object {
         > :first-child,
         &__figure {
             max-width: 40%;
@@ -82,7 +82,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 
 // Medium Screens and onward
 @media @medium-screens-min {
-    .media-object {
+    .media__media-object {
         > :first-child,
         &__figure {
             max-width: 50%;
@@ -94,26 +94,26 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 
 Figures
 
-Great for integrating images into bodies of text, the `.figure` class is 
+Great for integrating images into bodies of text, the `.media__figure` class is 
 modified by the `--left` and `--right` keywords depending on where you would 
 like it placed.
 
 ````plain-media
-<figure class="figure">
+<figure class="media__figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo">
 </figure>
 ````
 
 ````captioned-media
-<figure class="figure">
+<figure class="media__figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo with a caption">
-    <figcaption class="figcaption">This caption enhances the photo above. It should only be a brief sentence or two long.</figcaption>
+    <figcaption class="media__figcaption">This caption enhances the photo above. It should only be a brief sentence or two long.</figcaption>
 </figure>
 ````
 
 */
 
-.figure,
+.media__figure,
 [class*="figure--"] {
 
     // Mixins
@@ -125,11 +125,11 @@ like it placed.
     }
 }
 @media @small-screens-min {
-    [class*="figure--"] {
+    [class*="media__figure--"] {
         margin-top: 0;
         max-width: 50%;
     }
-    .figure {
+    .media__figure {
         &--left,
         &--right {
             padding-bottom: @half-vertical;
