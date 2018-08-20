@@ -21,6 +21,23 @@ with size classes, much like the type modules.
 
 */
 
+button {
+    font-size: 100%;
+    margin: 0;
+    -webkit-appearance: button;
+    display: inline-block;
+    cursor: pointer;
+    line-height: normal;
+
+    &[disabled] {
+        cursor: default;
+    }
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
 .buttons__base,
 [class*="buttons__base"] {
 
