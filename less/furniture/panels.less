@@ -1,27 +1,27 @@
 /*
 
-Panel
+Panels
 
 Used to provide messaging to the user, whether it be direct or through calls to 
 action. The panel typically indicates a visual separation and implied 
 sub-grouping of its content.
 
 ```panels
-<div class="panel">
+<div class="panels">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel">
+<div class="panels">
     <p>This is a feedback panel with no heading.</p>
 </div>
 ````
 
 */
 
-.panel,
-[class*="panel-"],
-[class*="-panel"] {
+.panels,
+[class*="panels"],
+[class*="panels__"] {
 
     // Mixins
     .m-vertical-rhythm__margin-leader();
@@ -43,7 +43,7 @@ sub-grouping of its content.
         color: inherit;
     }
 }
-[class*="panel--thin"] {
+[class*="panels--thin"] {
     padding: @half-vertical;
 }
 
@@ -71,12 +71,12 @@ or preventative.
 /*
 
 ````error-alert-panels
-<div class="alert-panel--error">
+<div class="panels__alert--error">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="alert-panel--error">
+<div class="panels__alert--error">
     <p>This is an alert panel with no heading.</p>
 </div>
 ````
@@ -86,22 +86,22 @@ or preventative.
 /*
 
 ````success-alert-panels
-<div class="alert-panel--success">
+<div class="panels__alert--success">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="alert-panel--success">
+<div class="panels__alert--success">
     <p>This is an alert panel with no heading.</p>
 </div>
 ````
 
 */
 
-[class*="alert-panel"] {
+[class*="panels__alert"] {
     color: @white;
 }
-.alert-panel {
+.panels__alert {
     background: @info-color;
     
     &--error {
