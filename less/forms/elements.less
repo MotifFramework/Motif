@@ -4,6 +4,24 @@ Forms
 
 */
 
+form {
+    margin: 0;
+}
+
+fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    width: 100%;
+    border: 0;
+    padding: 0;
+    display: block;
+    white-space: normal;
+}
+
 /*
 
 Basic Form Elements
@@ -20,6 +38,14 @@ Almost all the form elements in Motif are best used inside a `label`.
     </label>
 
 */
+
+input,
+select,
+textarea {
+    font-size: 100%;
+    margin: 0;
+    display: block;
+}
 
 input,
 textarea {
@@ -42,18 +68,47 @@ textarea {
 }
 
 input {
+    line-height: normal;
+
+    &[type="button"],
+    &[type="reset"],
+    &[type="submit"] {
+        -webkit-appearance: button;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    &[disabled] {
+        cursor: default;
+    }
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
 
     &[type="checkbox"],
     &[type="radio"] {
+        margin: 3px;
+        padding: 0;
+        box-sizing: border-box;
+        position: relative;
+        vertical-align: top;
         width: auto;
+    }
 
-        .lte7 & {
-            width: 13px;
+    &[type="search"] {
+        -webkit-appearance: textfield;
+
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration {
+            -webkit-appearance: none;
         }
     }
 }
 
 textarea {
+    overflow: auto;
+    vertical-align: top;
     height: @full-vertical * 4;
 }
 
@@ -130,27 +185,27 @@ simply consistent across viewports. These are those.
 }
 
 .elements__input--xxxs {
-    max-width: @30px;
+    max-width: 30px;
 }
 
 .elements__input--xxs {
-    max-width: @50px;
+    max-width: 50px;
 }
 
 .elements__input--xs {
-    max-width: @100px;
+    max-width: 100px;
 }
 
 .elements__input--s {
-    max-width: @175px;
+    max-width: 175px;
 }
 
 .elements__input--m {
-    max-width: @250px;
+    max-width: 250px;
 }
 
 .elements__input--l {
-    max-width: @350px;
+    max-width: 350px;
 }
 
 /*
