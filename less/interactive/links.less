@@ -7,6 +7,15 @@ file. Hover, focus, and current states are accounted for.
 
 */
 
+a {
+
+	&:focus,
+	&:active,
+	&:hover {
+		outline: 0;
+	}
+}
+
 a,
 .links__link {
 	color: @primary-link-color;
