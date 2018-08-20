@@ -70,37 +70,37 @@ embedded via `@font-face` declarations.
 
 */
 
-.lato-light,
-.lato-regular,
-.lato-bold,
-.lato-black {
+.proto__lato-light,
+.proto__lato-regular,
+.proto__lato-bold,
+.proto__lato-black {
     font-family: @lato;
 }
-.lato-light {
+.proto__lato-light {
     font-weight: 300;
 }
-.lato-regular {
+.proto__lato-regular {
     font-weight: 400;
 }
-.lato-bold {
+.proto__lato-bold {
     font-weight: 700;
 }
-.lato-black {
+.proto__lato-black {
     font-weight: 900;
 }
 
 // This is how you'd import the Lato font straight from the folder:
 
-// .lato-light {
+// .proto__lato-light {
 //     font-family: @lato-light;
 // }
-// .lato-regular {
+// .proto__lato-regular {
 //     font-family: @lato-regular;
 // }
-// .lato-bold {
+// .proto__lato-bold {
 //     font-family: @lato-bold;
 // }
-// .lato-black {
+// .proto__lato-black {
 //     font-family: @lato-black;
 // }
 
@@ -116,8 +116,8 @@ h3,
 h4,
 h5,
 h6,
-.primary-heading {
-    &:extend( .lato-bold );
+.styles__primary-heading {
+    &:extend( .proto__lato-bold );
 }
 
 h1,
@@ -126,16 +126,16 @@ h3,
 h4,
 h5,
 h6,
-.primary-heading,
-.secondary-heading {
+.styles__primary-heading,
+.styles__secondary-heading {
     color: @primary-header-color;
 }
 
-.secondary-heading  {
-    &:extend( .lato-light );
+.styles__secondary-heading  {
+    &:extend( .proto__lato-light );
 }
-.tertiary-heading  {
-    &:extend( .lato-black );
+.styles__tertiary-heading  {
+    &:extend( .proto__lato-black );
 
     color: @grey;
     text-transform: uppercase;
@@ -150,8 +150,8 @@ A quick class to help make any element's text look like the site's default body 
 */
 
 body,
-.body-text {
-    &:extend( .lato-regular );
+.styles__body-text {
+    &:extend( .proto__lato-regular );
 }
 
 dt,
@@ -167,7 +167,7 @@ Blockquote
 
 */
 
-.blockquote {
+.styles__blockquote {
     padding-left: @full-side;
     font-size: 128%;
     color: @grey;
@@ -211,8 +211,8 @@ textarea {
 }
 
 a,
-.link {
-    &:extend( .lato-bold );
+.links__link {
+    &:extend( .proto__lato-bold );
 }
 
 /*
@@ -221,10 +221,10 @@ Buttons
 
 */
 
-[class*="btn"] {
+.buttons__base {
     
     // Extends
-    &:extend( .lato-bold );
+    &:extend( .proto__lato-bold );
 
     // Mixins
     .m-border-radius( @default-radius );
@@ -245,15 +245,15 @@ Buttons
         border-color: @grey-1;
     }
 }
-.btn {
-    &--blue,
-    &--primary {
-        .m-buttons__color( @blue, @dark-blue );
-    }
-    &--red,
-    &--danger {
-        .m-buttons__color( @red, @dark-red );
-    }
+
+.buttons__blue,
+.buttons__primary {
+    .m-buttons__color( @blue, @dark-blue );
+}
+
+.buttons__red,
+.buttons__danger {
+    .m-buttons__color( @red, @dark-red );
 }
 
 
@@ -635,8 +635,8 @@ Tabs
 
     a {
 
-        /* Extends .lato-bold */
-        &:extend( .lato-bold );
+        /* Extends .proto__lato-bold */
+        &:extend( .proto__lato-bold );
 
         // Mixins
         .m-border-radius__top( @default-radius );
