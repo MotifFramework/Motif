@@ -1,4 +1,3 @@
-import "babel-polyfill";
 import ui from "./ui";
 import forms from "./forms";
 
