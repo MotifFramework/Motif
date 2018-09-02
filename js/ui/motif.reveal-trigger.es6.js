@@ -39,6 +39,13 @@ const DEFAULTS = {
     returns: false
 };
 
+const ARIA = {
+    hidden: "aria-hidden",
+    expanded: "aria-expanded",
+    selected: "aria-selected",
+    checked: "aria-checked"
+};
+
 const GROUP_ATTR = "data-reveal-group";
 const CURRENT_ATTR = "data-reveal-current";
 const HIDE_ATTR = "data-reveal-hide";
@@ -584,6 +591,18 @@ export default class RevealTrigger {
         });
     }
 
+    ariaToggle(elem) {
+        for (const [key, val] of Object.entries(ARIA)) {
+            if (elem.hasAttribute(val)) {
+                if (elem.getAttribute(val) == "true") {
+                    elem.setAttribute(val, "false") 
+                } else {
+                    elem.setAttribute(val, "true")
+                }
+            }
+        }
+    }
+
     show(elem) {
         this.addClass(elem, this.options.activeClass);
     }
@@ -596,6 +615,7 @@ export default class RevealTrigger {
 
         targets.forEach(target => {
             this.show(target);
+            this.ariaToggle(target);
         });
     }
 
@@ -625,6 +645,7 @@ export default class RevealTrigger {
 
         targets.forEach(target => {
             this.hide(target);
+            this.ariaToggle(target);
         });
     }
 
