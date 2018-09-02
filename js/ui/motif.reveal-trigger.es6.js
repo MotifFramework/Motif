@@ -39,12 +39,14 @@ const DEFAULTS = {
     returns: false
 };
 
-const ARIA = {
-    hidden: "aria-hidden",
-    expanded: "aria-expanded",
-    selected: "aria-selected",
-    checked: "aria-checked"
-};
+const ARIA = [
+    "aria-hidden",
+    "aria-expanded",
+    "aria-selected",
+    "aria-checked"
+];
+
+console.log(ARIA);
 
 const GROUP_ATTR = "data-reveal-group";
 const CURRENT_ATTR = "data-reveal-current";
@@ -592,15 +594,15 @@ export default class RevealTrigger {
     }
 
     ariaToggle(elem) {
-        for (const [key, val] of Object.entries(ARIA)) {
-            if (elem.hasAttribute(val)) {
-                if (elem.getAttribute(val) == "true") {
-                    elem.setAttribute(val, "false") 
+        ARIA.forEach(attr => {
+            if (elem.hasAttribute(attr)) {
+                if (elem.getAttribute(attr) == "true") {
+                    elem.setAttribute(attr, "false") 
                 } else {
-                    elem.setAttribute(val, "true")
+                    elem.setAttribute(attr, "true")
                 }
             }
-        }
+        });
     }
 
     show(elem) {
