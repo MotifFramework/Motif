@@ -46,8 +46,6 @@ const ARIA = [
     "aria-checked"
 ];
 
-console.log(ARIA);
-
 const GROUP_ATTR = "data-reveal-group";
 const CURRENT_ATTR = "data-reveal-current";
 const HIDE_ATTR = "data-reveal-hide";
