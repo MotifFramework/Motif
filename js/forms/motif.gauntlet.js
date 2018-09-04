@@ -48,7 +48,8 @@
             "errorReport": null,
             "ajaxSubmit": null,
             "scrollToError": true,
-            "addTest": []
+            "addTest": [],
+            "accessibility": true
         },
 
         "fields": [
@@ -267,7 +268,12 @@
                         currentMessage = elem.next( "." + this.options.alertClasses.error );
 
                     if ( !currentMessage.length ) {
-                        elem.after("<strong class='" + this.options.alertClasses.error + "'>" + input.errorMessage + "</strong>");
+                        var message = "<strong class='" + this.options.alertClasses.error + "'>" + input.errorMessage + "</strong>"
+                        if ( this.options.accessibility ) {
+                            elem.siblings("[role='alert'], [aria-live]").html(message);
+                        } else {
+                            elem.after(message);
+                        }
                     }
                 },
             "inputSuccess": function ( input ) {
