@@ -1,3 +1,5 @@
+import "picturefill";
+import "lazysizes";
 import ui from "./ui";
 import forms from "./forms";
 
