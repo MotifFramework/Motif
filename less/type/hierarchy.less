@@ -2,13 +2,13 @@
 
 Typographic Scale
 
-The building blocks for the site's type sizes. Almost exclusively, an element's 
-font size is assigned with one of these classes. If a new size is needed, a new 
+The building blocks for the site's type sizes. Almost exclusively, an element's
+font size is assigned with one of these classes. If a new size is needed, a new
 class is created here so it can be used and reused elsewhere.
 
-The list of type sizes can grow or shrink, but be vigilant in keeping the 
-number of sizes to a minimum. A nice rule of thumb is that no two sizes can one 
-pixel in difference (forcing you to choose one over the other, giving you one 
+The list of type sizes can grow or shrink, but be vigilant in keeping the
+number of sizes to a minimum. A nice rule of thumb is that no two sizes can one
+pixel in difference (forcing you to choose one over the other, giving you one
 class where you previously had two).
 
 ````typographic-scale
@@ -25,10 +25,10 @@ Long Modifiers
 The type sizes are given the `--long` modifier, allowing you to use
 each type size with varying line heights.
 
-    <p class="hierarchy__petite-text">I'm just a small bit of text, my `line-height` 
+    <p class="hierarchy__petite-text">I'm just a small bit of text, my `line-height`
     can be tight.</p>
 
-    <p class="hierarchy__petite-text--long">I'm a long paragraph, so my `line-height` 
+    <p class="hierarchy__petite-text--long">I'm a long paragraph, so my `line-height`
     should be longer to enhance legibility. ... </p>
 
 */
@@ -43,8 +43,15 @@ Canon Text
 
 */
 
+#mixed {
+
+    .hierarchy__canon-text() {
+        .m-type__type-size(@canon-text-size, 45);
+    }
+}
+
 .hierarchy__canon-text {
-    .m-type__type-size(@canon-text-size, 45);
+    #mixed > .hierarchy__canon-text();
 }
 
 .hierarchy__canon-text--long {
@@ -58,8 +65,14 @@ Paragon Text
 
 */
 
+#mixed {
+
+    .hierarchy__paragon-text() {
+        .m-type__type-size(@paragon-text-size, 35);
+    }
+}
 .hierarchy__paragon-text {
-    .m-type__type-size(@paragon-text-size, 35);
+    #mixed > .hierarchy__paragon-text();
 }
 
 .hierarchy__paragon-text--long {
@@ -73,8 +86,15 @@ Primer Text
 
 */
 
+#mixed {
+
+    .hierarchy__primer-text() {
+        .m-type__type-size(@primer-text-size, 30);
+    }
+}
+
 .hierarchy__primer-text {
-    .m-type__type-size(@primer-text-size, 30);
+    #mixed > .hierarchy__primer-text();
 }
 
 .hierarchy__primer-text--long {
@@ -88,8 +108,15 @@ Tertia Text
 
 */
 
+#mixed {
+
+    .hierarchy__tertia-text() {
+        .m-type__type-size(@tertia-text-size, 25);
+    }
+}
+
 .hierarchy__tertia-text {
-    .m-type__type-size(@tertia-text-size, 25);
+    #mixed > .hierarchy__tertia-text();
 }
 
 .hierarchy__tertia-text--long {
@@ -103,8 +130,15 @@ Normal Text
 
 */
 
+#mixed {
+
+    .hierarchy__normal-text {
+        .m-type__type-size(@normal-text-size);
+    }
+}
+
 .hierarchy__normal-text {
-    .m-type__type-size(@normal-text-size);
+    #mixed > .hierarchy__normal-text();
 }
 
 .hierarchy__normal-text--long {
@@ -118,8 +152,15 @@ Petite Text
 
 */
 
+#mixed {
+
+    .hierarchy__petite-text {
+        .m-type__type-size(@petite-text-size);
+    }
+}
+
 .hierarchy__petite-text {
-    .m-type__type-size(@petite-text-size);
+    #mixed > .hierarchy__petite-text();
 }
 
 .hierarchy__petite-text--long {

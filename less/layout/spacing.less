@@ -8,7 +8,7 @@ styles.
 
 * `p`, `m`                          =   padding, margin
 * `a`, `t`, `r`, `b`, `l`, `h`, `v` =   all, top, right, bottom, left, horizontal, vertical
-* `s`, `m`, `l`, `n`                =   small (~`5px`), medium (~`10px`), large (~`20px`), none (`0`)
+* `s`, `m`, `l`, `x`, `n`                =   small (~`5px`), medium (~`10px`), large (~`20px`), x-large (~`40px`) none (`0`)
 
 For example: `.spacing__pam` means "padding, all, medium".
 
@@ -34,6 +34,10 @@ As such, they require `vars.less`.
     padding-top: @full-vertical !important;
 }
 
+.spacing__ptx, .spacing__pvx, .spacing__pax {
+    padding-top: @double-vertical !important;
+}
+
 .spacing__prn, .spacing__phn, .spacing__pan {
     padding-right: 0 !important;
 }
@@ -48,6 +52,10 @@ As such, they require `vars.less`.
 
 .spacing__prl, .spacing__phl, .spacing__pal {
     padding-right: @full-vertical !important;
+}
+
+.spacing__prx, .spacing__phx, .spacing__pax {
+    padding-right: @double-vertical !important;
 }
 
 .spacing__pbn, .spacing__pvn, .spacing__pan {
@@ -66,6 +74,10 @@ As such, they require `vars.less`.
     padding-bottom: @full-vertical !important;
 }
 
+.spacing__pbx, .spacing__pvx, .spacing__pax {
+    padding-bottom: @double-vertical !important;
+}
+
 .spacing__pln, .spacing__phn, .spacing__pan {
     padding-left: 0 !important;
 }
@@ -80,6 +92,10 @@ As such, they require `vars.less`.
 
 .spacing__pll, .spacing__phl, .spacing__pal {
     padding-left: @full-vertical !important;
+}
+
+.spacing__plx, .spacing__phx, .spacing__pax {
+    padding-left: @double-vertical !important;
 }
 
 .spacing__mtn, .spacing__mvn, .spacing__man {
@@ -98,6 +114,10 @@ As such, they require `vars.less`.
     margin-top: @full-vertical !important;
 }
 
+.spacing__mtx, .spacing__mvx, .spacing__max {
+    margin-top: @double-vertical !important;
+}
+
 .spacing__mrn, .spacing__mhn, .spacing__man {
     margin-right: 0 !important;
 }
@@ -112,6 +132,10 @@ As such, they require `vars.less`.
 
 .spacing__mrl, .spacing__mhl, .spacing__mal {
     margin-right: @full-vertical !important;
+}
+
+.spacing__mrx, .spacing__mhx, .spacing__max {
+    margin-right: @double-vertical !important;
 }
 
 .spacing__mbn, .spacing__mvn, .spacing__man {
@@ -130,6 +154,10 @@ As such, they require `vars.less`.
     margin-bottom: @full-vertical !important;
 }
 
+.spacing__mbx, .spacing__mvx, .spacing__max {
+    margin-bottom: @double-vertical !important;
+}
+
 .spacing__mln, .spacing__mhn, .spacing__man {
     margin-left: 0 !important;
 }
@@ -144,4 +172,8 @@ As such, they require `vars.less`.
 
 .spacing__mll, .spacing__mhl, .spacing__mal {
     margin-left: @full-vertical !important;
+}
+
+.spacing__mlx, .spacing__mhx, .spacing__max {
+    margin-left: @double-vertical !important;
 }
