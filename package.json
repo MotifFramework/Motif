@@ -24,6 +24,8 @@
   },
   "browser": {
     "jquery": "./js/vendor/jquery-3.1.1.js",
+    "lazysizes": "./js/vendor/lazysizes.js",
+    "picturefill": "./js/vendor/picturefill.js",
     "raf": "./js/vendor/requestAnimFrame.js",
     "motif-reveal": "./js/ui/motif.reveal.js",
     "motif-tabs": "./js/ui/motif.tabs.js",
@@ -49,6 +51,8 @@
   "browserify-shim": {
     "jquery": "$",
     "raf": "requestAnimFrame",
+    "lazysizes": "lazysizes",
+    "picturefill": "picturefill",
     "motif-reveal": {
       "depends": [
         "jquery:$",
