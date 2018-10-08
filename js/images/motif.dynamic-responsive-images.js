@@ -1,7 +1,6 @@
 import "lazysizes";
 import getAnimationFrame from './../utils/motif.animationFrame.es6.js';
 
-const LAZYLOAD_CLASS = 'lazyload';
 const animationFrame = getAnimationFrame();
 
 export default function (IMAGE_CLASS = 'js-dynamic-image', multiple = 1) {
@@ -19,10 +18,7 @@ function bindImages (IMAGE_CLASS, multiple) {
     
     animationFrame(() => {
       element.setAttribute('data-src', url);
-
-      if (element.classList.contains(LAZYLOAD_CLASS)) {
-        element.setAttribute('src', url);
-      }
+      element.setAttribute('src', url);
     });
   });
 }
