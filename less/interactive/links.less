@@ -40,3 +40,26 @@ Basic class to remove some link styling.
 .links__unlink {
 	text-decoration: none;
 }
+
+/*
+
+Skip-To Link
+
+*/
+
+.links__skip-to {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+
+    &,
+    &:focus {}
+
+    &:hover {}
+
+    &:not(:focus) {
+        .m-presentational__visually-hidden();
+    }
+}
