@@ -4,7 +4,9 @@ Motif Less Documentation
 ## Table of Contents
 
 - [Leveraging Attribute Selectors](#leveraging-attribute-selectors)
-- [The Folder Structure](#the-folder-structure)
+- [File Structure and Naming Convention Overview](#file-structure-and-naming-convention-overview)
+- [The File Structure](#the-file-structure)
+- [Naming Convention](#naming-convention)
 - [Responsive and Fixed-Width](#responsive-and-fixed-width)
 - [Configuration File](#configuration-file)
 - [Mixins](#mixins)
@@ -29,7 +31,7 @@ As mentioned in the [Getting Started section](https://github.com/MotifFramework/
 What this traditionally translates to are CSS classes that represent the structure...
 
 ```css
-.panel {
+.panels {
     margin: 20px 0 0;
     padding: 20px;
     border: 1px solid;
@@ -39,7 +41,7 @@ What this traditionally translates to are CSS classes that represent the structu
 ...and some modifying "skin" classes:
 
 ```css
-.panel-alert {
+.panels__alert {
     background: pink;
     border-color: red;
 }
@@ -48,29 +50,29 @@ What this traditionally translates to are CSS classes that represent the structu
 Both classes would be applied to the HTML element:
 
 ```html
-<div class="panel panel-alert">...</div>
+<div class="panels panels__alert">...</div>
 ```
 
 We do things slightly different in Motif's stylesheet. Using the magic of some of the more advanced CSS attribute selectors, we accomplish the same technique but without requiring multiple classes:
 
 ```css
-[class*="panel--"] {
+[class*="panels__"] {
     margin: 20px 0 0;
     padding: 20px;
     border: 1px solid;
 }
-.panel--alert {
+.panels__alert {
     background: pink;
     border-color: red;
 }
-.panel--success {
+.panels__success {
     background: yellow;
     border-color: green;
 }
 ```
 
 ```html
-<div class="panel--alert">...</div>
+<div class="panels__alert">...</div>
 ```
 
 (To learn more about this technique, read the excellent 24 Ways article, [A Harder-Working Class](http://24ways.org/2012/a-harder-working-class/).)
@@ -78,34 +80,57 @@ We do things slightly different in Motif's stylesheet. Using the magic of some o
 You'll see a lot of this in Motif's core. We encourage you to also take advantage of this technique, which maintains that organizational and efficient spirit of separating structure from skin, but reduces the amount of classes needed to execute. Be extra careful in how you execute this, as the class attribute selector can be greedy.
 
 ```css
-[class*="button"] {
+[class*="buttons"] {
     ...
 }
 ```
 
-The example above matches `.button`, `.button--modifier`, `.nav-button`, `.altbutton--modifier`, and so on.
+The example above matches `.buttons`, `.buttons__primary`, `.buttons__primary--modifier`, and so on.
 
-## The Folder Structure
+## File Structure and Naming Convention Overview
 
-Motif's Less is organized into folders of partials (files prefixed with `_` that are not directly compiled into CSS, but that are imported into other Less files that are) based on the type of styles we are creating. By default, the file and folder structure looks like this:
+Motif follows methodologies that assist in managing teams or multiple developers working within the same codebase. During our own development, we noticed a consistent issue where either time would be wasted looking for a specific styles or duplicate styles would be created. The first step towards eliminating those pain points is establishing a unified approach to where styles live and how they are named.
+
+Some benefits to following this methodology are:
+- Reduce / Eliminate the risk of accidentally overriding an old style and inadvertently breaking the site.
+- Scalable for multiple people working within the same code base over an extended period of time.
+- Ease and predictability when creating new templates, styles, and scripts.
+- Easier onboarding for developers new the project.
+- Multiple teams working in parallel on the same project can benefit from each other's work and prevent duplicate work.
+
+## The File Structure
+
+Motif's Less is organized into folders based on the type of styles we are creating. By default, there are three main directories files fall into:
 
     + less
-        + mixins
-        + normalize
-        + helpers
-        + modules
-        + type
-        + interactive
-        + forms
-        + layout
-        + furniture
-        + site
-        - _vars.less
-        - _config.less
-        - global.less
-        - global-fixed.less
+        + core
+        + pages
+        + shared
+
+Files within the `core/` directory contain styles that are independent of any particular template and can be used anywhere. Files within the `pages/` directory are directly related to a particular page template. Files within the `shared/` directory are tied directly to a template that can be used across multiple other templates.
+
+Motif comes with default core styles that are already organized into this directory structure:
+
+    + less
+        + core
+            + config
+            + forms
+            + furniture
+            + interactive
+            + layout
+            + media
+            + mixins
+            + modules
+            + site
+            + type
+            - global.less
+            - global-fixed.less
+        + pages
+        + shared
 
 This section of the site should give you a great overview of Motif's built-in modules and ideas, but be sure to get into the actual code for more granular comments and explanations.
+
+## Naming Convention
 
 ## Responsive and Fixed-Width
 
