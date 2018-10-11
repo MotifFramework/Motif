@@ -11,7 +11,6 @@ Motif Less Documentation
 - [Configuration File](#configuration-file)
 - [Mixins](#mixins)
 - [Variables](#variables)
-- [Normalize](#normalize)
 - [Helper Classes](#helper-classes)
 - [Reusable Modules](#reusable-modules)
 - [Typography](#typography)
@@ -162,7 +161,7 @@ We start our classes with the file name the style was created in. In application
 
 ### `global.less`
 
-The site's main (and perhaps only) stylesheet is compiled through `global.less` (notice it's not prefixed with `_` signifying that it is *not* a partial). All supporting Less files are imported into and compiled from here, creating a file named after your `name` in the Motif `package.json` file (`[name].css`). Consider this a responsive stylesheet by default, as the partials will contain breakpoints among themselves (we'll get into the default breakpoints later).
+The site's main (and perhaps only) stylesheet is compiled through `global.less`. All supporting Less files are imported into and compiled from here, creating a file named after your `name` in the Motif `package.json` file (`[name].css`). Consider this a responsive stylesheet by default, as the partials will contain breakpoints among themselves (we'll get into the default breakpoints later).
 
 ### `global-fixed.less`
 
@@ -174,7 +173,7 @@ Like the global stylesheet, this one is compiled to a CSS file based on the name
 
 ## Configuration File
 
-**Location:** `_config.less`
+**Location:** `config/config.less`
 
 Breakpoint, color, typographic, and other settings. Motif's Less configuration file houses groups of Less variables that are used in the other partials. This is where you edit and define new color hex codes into easy-to-remember variables, condense font stack strings into short variables, keep the font sizes of your typographic hierarchy, and edit the default responsive breakpoints. Some examples:
 
@@ -205,13 +204,13 @@ As Motif continues to grow, the configuration file will become more powerful.
 
 **Location:** `/mixins/`
 
-Motif uses its own set of Less mixing, some that fill in browser vendor prefixes on CSS3 attributes, and others that aid in the framework's type scaling and vertical rhythm. There are also some more presentational mixins, like an accessibility-friendly hiding class and a clearfix.
+Motif uses its own set of Less mixing, some that fill in browser vendor prefixes on CSS3 attributes, and others that aid in the framework's type scaling and vertical rhythm. There are also some more presentational mixins, like an accessibility-friendly hiding class and a clearfix. Mixin files are prefixed with `m-` to help differentiate mixins at a glance.
 
 ## Variables
 
-**Location:** `_vars.less`
+**Location:** `config/vars.less`
 
-The `_vars.less` file houses a slew of useful Less variables. These are different than those found in the configuration file in that they're not really meant to be altered, just placed somewhere readily accessible for every partial. These include some spacing variables...
+The `vars.less` file houses a slew of useful Less variables. These are different than those found in the configuration file in that they're not really meant to be altered, just placed somewhere readily accessible for every partial. These include some spacing variables...
 
 ```less
 @full-vertical: 1rem * (@base-vertical / @root-text-size);
@@ -241,36 +240,27 @@ The `_vars.less` file houses a slew of useful Less variables. These are differen
 @easeInOutCubic: cubic-bezier(0.645, 0.045, 0.355, 1.000);
 ```
 
-
-## Normalize
-
-**Location:** `/normalize/`
-
-Motif first normalizes the default cross-browser CSS via [Normalize.css](http://necolas.github.io/normalize.css/), with only minor modification (and broken out into partials based on type).
-
 ## Helper Classes
-
-**Location:** `/helpers/`
 
 ### Spacing
 
-**Location:** `/helpers/_spacing.less`
+**Location:** `/layout/spacing.less`
 
 Spacing helpers are quick but powerful classes that add margin or padding to any given element. These classes are `!important`, so they override all other styles.
 
 * `p`, `m`                          =   "padding", "margin"  
 * `a`, `t`, `r`, `b`, `l`, `h`, `v` =   "all", "top", "right", "bottom", "left", "horizontal", "vertical"  
-* `s`, `m`, `l`, `n`                =   "small" (~`5px`), "medium" (~`10px`), "large" (~`20px`), "none" (`0`)
+* `s`, `m`, `l`, `x`, `n`                =   "small" (~`5px`), "medium" (~`10px`), "large" (~`20px`), "x-large" (~`40px`), "none" (`0`)
 
-For example: `.pam` means "padding all medium".
+For example: `.spacing__pam` means "padding all medium".
 
-**Note:** These are all based on the current element's font size and the project's vertical rhythm (even on the sides, to provide uniform spacing). As such, they require `_vars.less`.
+**Note:** These are all based on the current element's font size and the project's vertical rhythm (even on the sides, to provide uniform spacing). As such, they require `config/vars.less`.
 
 Hat tip: [Nicole Sullivan](http://stubbornella.org)
 
 ### Presentational
 
-**Location:** `/helpers/_presentational.less`
+**Location:** `/layout/presentational.less`
 
 Some basic, Lego-level classes to allow quick adjustment in the HTML.
 
@@ -280,15 +270,15 @@ Simple classes to adjust your text alignment. They can be added to individual el
 
 Classes          | Description
 -----------------|-----------------
-`align--left`    | Left-aligned
-`align--center`  | Center-aligned
-`align--right`   | Right-aligned
-`align--sub`     | Vertical-aligned: sub
-`align--middle`  | Vertical-aligned: middle
-`align--top`     | Vertical-aligned: top
+`presentational__align-left`    | Left-aligned
+`presentational__align-center`  | Center-aligned
+`presentational__align-right`   | Right-aligned
+`presentational__align-sub`     | Vertical-aligned: sub
+`presentational__align-middle`  | Vertical-aligned: middle
+`presentational__align-top`     | Vertical-aligned: top
 
 ```html
-<p class="align--center">I am centered.</p>
+<p class="presentational__align-center">I am centered.</p>
 ```
 
 #### Floats
@@ -297,13 +287,13 @@ Next, we have classes for floating elements.
 
 Classes          | Description
 -----------------|-----------------
-`float--left`    | Floated to the left
-`float--center`  | Faux-center floating via `auto` margin on the left and right
-`float--right`   | Floated to the right
-`float--none`    | Removes floating
+`presentational__float-left`    | Floated to the left
+`presentational__float-center`  | Faux-center floating via `auto` margin on the left and right
+`presentational__float-right`   | Floated to the right
+`presentational__float-none`    | Removes floating
 
 ```html
-<div class="float--right">...</div>
+<div class="presentational__float-right">...</div>
 ```
 
 #### "New Line"
@@ -313,7 +303,7 @@ Turns an `inline` or `inline-block` element into a `block` one.
 ```html
 <p>
     Some text with
-    <em class="new-line">emphasis</em>
+    <em class="presentational__new-line">emphasis</em>
 </p>
 ```
 
@@ -323,16 +313,16 @@ Visually hides content in a way that leaves it accessible to screen readers. Lik
 
 ```html
 <p>
-    You can see me<span class="is-hidden"> but you can't see me</span>.
+    You can see me<span class="presentational__is-hidden"> but you can't see me</span>.
 </p>
 ```
 
 Classes            | Description
 -------------------|-------------------
-`is-hidden`        | Visually hides on all viewports
-`is-hidden-small`  | Visually hides within "small" breakpoints
-`is-hidden-medium` | Visually hides within "medium" breakpoints
-`is-hidden-large`  | Visually hides within "large" breakpoints
+`presentational__is-hidden`        | Visually hides on all viewports
+`presentational__is-hidden-small`  | Visually hides within "small" breakpoints
+`presentational__is-hidden-medium` | Visually hides within "medium" breakpoints
+`presentational__is-hidden-large`  | Visually hides within "large" breakpoints
 
 
 ## Reusable Modules
@@ -341,14 +331,15 @@ Classes            | Description
 
 ### Lists
 
-**Location:** `/modules/_lists.less`
+**Location:** `/modules/lists.less`
 
 #### Horizontal List
 
-The basic `.list--x` module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal list/navigation without adding too much style (yet).
+// TODO: Jonny
+The basic `.lists__horizontal` module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal list/navigation without adding too much style (yet).
 
 ```html
-<ul class="list--x">
+<ul class="lists__horizontal">
     <li>
         <a href="#">Basic Link</a>
     </li>
@@ -366,7 +357,7 @@ The basic `.list--x` module simply removes bullets from lists and inlines the li
 Rather than making the list `inline-block`, it floats the list elements (except on the smallest screen sizes, where it remains vertical). More precise than the default Horizontal List.
 
 ```html
-<ul class="list--x--forceful">
+<ul class="lists__horizontal--forceful">
     <li>
         <a href="#">Basic Link</a>
     </li>
@@ -384,7 +375,7 @@ Rather than making the list `inline-block`, it floats the list elements (except 
 A basic extension of the Horizontal List, this adds some margin to the links in the list for a more pleasant looking list of links.
 
 ```html
-<ul class="link-list--x">
+<ul class="lists__horizontal--links">
     <li>
         <a href="#">Basic Link</a>
     </li>
@@ -397,14 +388,14 @@ A basic extension of the Horizontal List, this adds some margin to the links in 
 </ul>
 ```
 
-**Note:** Because we are using the `[class*=""]` attribute selector, using the `.link-list--x` class takes advantage of the `list--x` module we declared earlier, as well as the Forceful variation (`.link-list--x--forceful`) without having to declare *both* `.list--x` and `.link-list--x` in our HTML.
+**Note:** Because we are using the `[class*=""]` attribute selector, using the `.lists__horizontal--links` class takes advantage of the `lists__horizontal` module we declared earlier, as well as the Forceful variation (`.lists__horizontal--forceful`) without having to declare *both* `.lists__horizontal` and `.lists__horizontal--links` in our HTML.
 
 #### Pagination
 
-An extension of the basic `.list--x` module that simply adds enough padding on the links for pagination.
+An extension of the basic `.lists__horizontal` module that simply adds enough padding on the links for pagination.
 
 ```html
-<ul class="list--x--pgs">
+<ul class="lists__horizontal--pgs">
     <li>
         <a href="#">Basic Link</a>
     </li>
@@ -419,12 +410,12 @@ An extension of the basic `.list--x` module that simply adds enough padding on t
 
 #### Breadcrumb
 
-Another extension of the `.list--x` module, adding a breadcrumb `label` and floating it and the ordered list.
+Another extension of the `.lists__horizontal` module, adding a breadcrumb `label` and floating it and the ordered list.
 
 ```html
 <nav class="breadcrumb" role="navigation">
     <h3 class="breadcrumb__label">You Are Here:</h3>
-    <ul class="breadcrumb__list--x">
+    <ul class="lists__breadcrumb">
         <li>
             <a href="#">Basic Link</a>
         </li>
@@ -440,7 +431,7 @@ Another extension of the `.list--x` module, adding a breadcrumb `label` and floa
 
 ### Media
 
-**Location:** `/modules/_media.less`
+**Location:** `/media/media.less`
 
 #### Media Object
 
@@ -449,11 +440,11 @@ The Media Object is an image (or media-type) to the left with (typically) descri
 See: [The Media Object Saves Hundreds of Lines of Code](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/)
 
 ```html
-<div class="media-object">
-    <div class="media-object__figure">
+<div class="media__media-object">
+    <div class="media__media-object__figure">
         <img src="http://placehold.it/200" alt="A media object image">
     </div>
-    <div class="media-object__desc">
+    <div class="media__media-object__desc">
         <p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
     </div>
 </div>
@@ -461,26 +452,26 @@ See: [The Media Object Saves Hundreds of Lines of Code](http://www.stubbornella.
 
 #### Figures
 
-Great for integrating images into bodies of text, the `.figure` class is modified by the `--left` and `--right` keywords depending on where you would like it placed.
+Great for integrating images into bodies of text, the `.media__figure` class is modified by the `--left` and `--right` keywords depending on where you would like it placed.
 
 ```html
 <!-- Basic Figure -->
-<figure class="figure">
+<figure class="media__figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo">
 </figure>
 
 <!-- Figure floating left -->
-<figure class="figure--left">
+<figure class="media__figure--left">
     <img src="http://placehold.it/300x200" alt="A photo floating left">
 </figure>
 
 <!-- Figure floating right -->
-<figure class="figure--right">
+<figure class="media__figure--right">
     <img src="http://placehold.it/300x200" alt="A photo floating left">
 </figure>
 
 <!-- Figure with caption -->
-<figure class="figure">
+<figure class="media__figure">
     <img src="http://placehold.it/800x444" alt="A full-width photo with a caption">
     <figcaption class="figcaption">This caption enhances the photo above. It should only be a brief sentence or two long.</figcaption>
 </figure>
@@ -519,6 +510,7 @@ Classes                         | Description
 `ratios__1x2`                   | Proportional box twice as tall as it is wide
 `ratios__2x1`                   | Proportional box twice as wide as it is tall
 
+//TODO: Jonny (discuss _blocks)
 ### Blocks
 
 **Location:** `/modules/_blocks.less`
@@ -531,7 +523,7 @@ This is the site-wide containing class. Put it around anything you want to be co
 
 ```html
 <body>
-    <div class="wrapper">
+    <div class="wrappers__wrapper">
         ...
     </div>
 </body>
@@ -541,6 +533,7 @@ This is the site-wide containing class. Put it around anything you want to be co
 
 When JavaScript is enabled, these blocks are used (most easily in conjunction with Motif Reveal jQuery plugins) to reveal and hide blocks of content, sometimes accompanied by CSS3 animations.
 
+//TODO: Jonny (discuss _blocks)
 ##### Reveal Target
 
 `.reveal__target` is a simple class that is accessibly hidden by default. dd the `.is-revealed` class to show it.
@@ -592,7 +585,7 @@ When JavaScript is enabled, these blocks are used (most easily in conjunction wi
 #### Main Nav Module
 
 A minor enhancement to the Reveal or Expand Target modules if added to the main navigation bar. This snippet, on Medium screens and larger, makes sure the expandable Nav (on smaller screens) is no longer hidden, and that the Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
-
+// TODO: After proto
 ```html
 <nav class="nav-bar--menu" role="navigation">
     <h3 class="nav-bar__title pre-icon--rows js-expand" id="reveal-main-nav">
@@ -607,7 +600,7 @@ A minor enhancement to the Reveal or Expand Target modules if added to the main 
 #### Tabs
 
 The tabs module (and accompanying plugin) creates a very basic widget that allows embedding and basic styling.
-
+// TODO: after proto
 ```html
 <section class="tabs">
     <nav role="navigation">
@@ -643,7 +636,7 @@ The tabs module (and accompanying plugin) creates a very basic widget that allow
 
 ### Webfonts
 
-**Location:** `/type/_font-face.less`
+**Location:** `/type/font-face.less`
 
 Using the `.web-font` and `.web-font-svg` mixins, declare webfonts using the "bulletproof" `@font-face` syntax.
 
