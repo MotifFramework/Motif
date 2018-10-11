@@ -1,4 +1,4 @@
-.background__linear-gradient(@stop1: 0   ,   @color1: #AAA, 
+.m-background__linear-gradient(@stop1: 0   ,   @color1: #AAA,
                             @stop2: 100% ,   @color2: #BBB )
 {
     background: @color2;
@@ -11,7 +11,7 @@
 }
 
 
-.background__linear-gradient-and-image(@stop1: 0, @color1: #AAA, @stop2: 50%, @color2: #BBB, @repeat: no-repeat, @left: left, @top: top, @bgimg: img, @imgformat: jpg )
+.m-background__linear-gradient-and-image(@stop1: 0, @color1: #AAA, @stop2: 50%, @color2: #BBB, @repeat: no-repeat, @left: left, @top: top, @bgimg: img, @imgformat: jpg )
 {   
     background:	@color2 url("../images/@{bgimg}.@{imgformat}") @repeat @left @top;
     background: url("../images/@{bgimg}.@{imgformat}") @repeat @left @top, -moz-linear-gradient(top, @color1 @stop1, @color2 @stop2); /* FF3.6+ */
@@ -24,7 +24,7 @@
 
 
 
-.background__image-linear-gradient(@stop1: 0   , @color1: #AAA, 
+.m-background__image-linear-gradient(@stop1: 0   , @color1: #AAA,
                                   @stop2: 100% , @color2: #BBB ) 
 {
     background-image: -moz-linear-gradient(top, @color1 @stop1, @color2 @stop2);
@@ -37,7 +37,7 @@
 
 
 
-.background__linear-gradient--three-stops(    @stop1: 0   , @color1: #AAA, 
+.m-background__linear-gradient--three-stops(    @stop1: 0   , @color1: #AAA,
                                             @stop2: 50% , @color2: #BBB, 
                                             @stop3: 100%, @color3: #CCC     ) 
 {
@@ -51,7 +51,7 @@
 
 
 
-.background__image-linear-gradient--three-stops(  @stop1: 0   , @color1: #AAA, 
+.m-background__image-linear-gradient--three-stops(  @stop1: 0   , @color1: #AAA,
                                                 @stop2: 50% , @color2: #BBB, 
                                                 @stop3: 100%, @color3: #CCC ) 
 {
@@ -67,7 +67,7 @@
     background-image: linear-gradient(center bottom, @color1 @stop1, @color2 @stop2, @color3 @stop3);
 }
 
-.background__origin(@background-origin: border-box) 
+.m-background__origin(@background-origin: border-box)
 {
     -webkit-background-origin:  @background-origin;
     -webkit-background-clip:    @background-origin;
@@ -76,7 +76,7 @@
     background-origin:          @background-origin;
     background-clip:            @background-origin;
 }
-.background__linear-gradient--horizontal(@stop1: 0, @color1: #AAA, @stop2: 100%, @color2: #BBB) {
+.m-background__linear-gradient--horizontal(@stop1: 0, @color1: #AAA, @stop2: 100%, @color2: #BBB) {
     background: @color2; /* Old browsers */
     background: -moz-linear-gradient(left, @color1 @stop1, @color2 @stop2); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, right top, color-stop(@stop1,@color1), color-stop(@stop2,@color2)); /* Chrome,Safari4+ */

@@ -1,4 +1,4 @@
-.transition ( ... ) {
+.m-transition ( ... ) {
 	-webkit-transition: @arguments;
 	-moz-transition:    @arguments;
 	-o-transition:      @arguments;
@@ -6,7 +6,7 @@
 }
 
 
-.transition-property (@tp: all) 
+.m-transition-property (@tp: all) 
 {
 	-webkit-transition-property:@tp;
 	-moz-transition-property:   @tp;
@@ -17,7 +17,7 @@
 
 
 
-.transition-property-two (@tp1, @tp2) 
+.m-transition-property-two (@tp1, @tp2) 
 {
 	-webkit-transition-property:@tp1, @tp2;
 	-moz-transition-property:   @tp1, @tp2;
@@ -25,7 +25,7 @@
 	transition-property:        @tp1, @tp2;
 }
 
-.transition-property-three (@tp1, @tp2, @tp3) 
+.m-transition-property-three (@tp1, @tp2, @tp3) 
 {
 	-webkit-transition-property:@tp1, @tp2, @tp3;
 	-moz-transition-property:   @tp1, @tp2, @tp3;
@@ -36,7 +36,7 @@
 
 
 
-.transition-duration (@td: 0.2s) 
+.m-transition-duration (@td: 0.2s) 
 {
 	-webkit-transition-duration:@td;
 	-moz-transition-duration:   @td;
@@ -47,7 +47,7 @@
 
 
 
-.transition-duration-two (@td1: 0.2s, @td2: 0.2s) 
+.m-transition-duration-two (@td1: 0.2s, @td2: 0.2s) 
 {
 	-webkit-transition-duration:@td1, @td2;
 	-moz-transition-duration:   @td1, @td2;
@@ -58,7 +58,7 @@
 
 
 
-.transition-duration-three (@td1: 0.2s, 
+.m-transition-duration-three (@td1: 0.2s, 
 							@td2: 0.2s, 
 							@td3: 0.2s) 
 {
@@ -71,7 +71,7 @@
 
 
 
-.transition-timing-function (@tf: default) 
+.m-transition-timing-function (@tf: default) 
 {
 	-webkit-transition-timing-function: @tf;
 	-moz-transition-timing-function:    @tf;
@@ -82,7 +82,7 @@
 
 
 
-.transition-timing-function-two (@tf1: default, @tf2: default) 
+.m-transition-timing-function-two (@tf1: default, @tf2: default) 
 {
 	-webkit-transition-timing-function: @tf1, @tf2;
 	-moz-transition-timing-function:    @tf1, @tf2;
@@ -93,7 +93,7 @@
 
 
 
-.transition-timing-function-three ( @tf1: default, 
+.m-transition-timing-function-three ( @tf1: default, 
 									@tf2: default, 
 									@tf3: default) 
 {

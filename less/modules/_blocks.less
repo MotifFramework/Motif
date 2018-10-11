@@ -74,7 +74,7 @@ accompanied by CSS3 animations.
         .fade__target.was-faded {
 
             // Mixins
-            .transition( all, 0.65s, ease-in-out );
+            .m-transition( all, 0.65s, ease-in-out );
         }
 
     /*
@@ -94,17 +94,17 @@ accompanied by CSS3 animations.
     */
 
     .fade__target {
-        .opacity(0);
+        .m-opacity(0);
 
         &.is-faded {
-            .opacity(1);
+            .m-opacity(1);
         }
     }
 }
 
 
 .no-transition {
-    .transition( none ) !important;
+    .m-transition( none ) !important;
 }
 
 /*
