@@ -128,9 +128,35 @@ Motif comes with default core styles that are already organized into this direct
         + pages
         + shared
 
+For the `pages/` and `shared/` directories, we recommend following the same path structure as the corresponding template. This eliminates any guesswork of where a style should live and keeps your template and style structure consistent.
+
+```
+// Template Path
+/views/pages/home/home.view
+
+// Style Path
+/views/pages/home/home.less
+```
+
 This section of the site should give you a great overview of Motif's built-in modules and ideas, but be sure to get into the actual code for more granular comments and explanations.
 
 ## Naming Convention
+
+Motif previously followed the [BEM](http://getbem.com/) methodology, but in application on a long-running large project, the class names became very long and difficult to uniquify. There are many advantages to using BEM, so our nomenclature pulls it's roots from there.
+
+```
+.fileName__element--modifier
+```
+
+We start our class names with the file name the style was created it. In application, this will commonly match up with a template name (ie: `basicCard`). The filename is proceeded by two underscores, then the element name (ie: `title`). If there is a variation for that style, we follow the element name with two dashes and then the modifier name (ie: `large`).
+
+```
+// From /views/shared/cards/basicCard/basicCard.view
+<a href="#" class="basicCard__link">Click Me</a>
+
+// From /less/shared/cards/basicCard/basicCard.less
+.basicCard__link {}
+```
 
 ## Responsive and Fixed-Width
 
