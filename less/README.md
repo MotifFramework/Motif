@@ -638,13 +638,13 @@ The tabs module (and accompanying plugin) creates a very basic widget that allow
 
 **Location:** `/type/font-face.less`
 
-Using the `.web-font` and `.web-font-svg` mixins, declare webfonts using the "bulletproof" `@font-face` syntax.
+Using the `.m-type__web-font` and `.m-type__web-font-svg` mixins, declare webfonts using the "bulletproof" `@font-face` syntax.
 
 See: [Further Hardening of the Bulletproof Syntax](http://www.fontspring.com/blog/further-hardening-of-the-bulletproof-syntax/)
 
 ### Styles
 
-**Location:** `/type/_styles.less`
+**Location:** `/type/styles.less`
 
 Each font family and weight used in the site is given its own LEGO-block class to enable quick use and modularity.
 
@@ -652,18 +652,18 @@ Each font family and weight used in the site is given its own LEGO-block class t
 
 In Motif, typography is broken into pieces that separate skin from structure. In this case, that means the font sizing (structure) is separate from the styling (skin) -- which includes font family, color, etc.
 
-Heading styles are some of the type skins, and we start out with `.primary-heading` (which is also the `h`-tag default) and `.secondary-heading`. Add as necessary.
+Heading styles are some of the type skins, and we start out with `.styles__primary-heading` (which is also the `h`-tag default) and `.styles__secondary-heading`. Add as necessary.
 
 ##### Primary Heading
 
 ```html
-<h1 class="primary-heading">Primary Heading</h1>
+<h1 class="styles__primary-heading">Primary Heading</h1>
 ```
 
 ##### Secondary Heading
 
 ```html
-<h2 class="secondary-heading">Secondary Heading</h2>
+<h2 class="styles__secondary-heading">Secondary Heading</h2>
 ```
 
 #### Body Text
@@ -679,7 +679,7 @@ Another type style, but this mimicks the default body text of the site.
 A basic stripping of list styles.
 
 ```html
-<ul class="list--unstyled">
+<ul class="styles__unstyled-list">
     <li>List Item</li>
     <li>List Item</li>
     <li>List Item</li>
@@ -691,17 +691,17 @@ A basic stripping of list styles.
 A basic blockquote.
 
 ```html
-<figure class="blockquote">
+<figure class="styles__blockquote">
     <blockquote>
         At last we will reveal ourselves to the the Jedi. At last we will have our revenge.
     </blockquote>
-    <figcaption class="blockquote__cite">Darth Maul</figcaption>
+    <figcaption class="styles__blockquote-cite">Darth Maul</figcaption>
 </figure>
 ```
 
 ### Hierarchy
 
-**Location:** `/type/_hierarchy.less`
+**Location:** `/type/hierarchy.less`
 
 The building blocks for the site's type sizes. Almost exclusively, an element's font size is assigned with one of these classes. If a new size is needed, a new class is created here so it can be used and reused elsewhere.
 
@@ -727,8 +727,9 @@ The type sizes are given the `--long` modifier, allowing you to use each type si
 
 ### Icons
 
-Motif comes bundled with a small starter icon font created from 30+ SVG icons. From social icons to those useful in responsive prototyping, they can all be found in the `/fonts/motif-icons/svg/` folder. Motif uses a Grunt plugin to compile those SVGs into a font, meaning you can add and remove SVGs to and from that folder and Grunt will re-create the font with the updated glyphs. [Learn more about the Grunt Webfont plugin](https://github.com/sapegin/grunt-webfont).
+Motif comes bundled with a small starter icon font created from 30+ SVG icons. From social icons to those useful in responsive prototyping, they can all be found in the `/icons/` folder. Motif uses a Grunt plugin to compile those SVGs into a font, meaning you can add and remove SVGs to and from that folder and Grunt will re-create the font with the updated glyphs. [Learn more about the Grunt Webfont plugin](https://github.com/sapegin/grunt-webfont).
 
+//TODO: Jonny
 The plugin generates some CSS classes based on the SVG filename, which is the easiest way to attach these icons to text. (The icon size will be relative to the element's font size, but you can adjust that by targeting the `:before` or `:after` pseudo-element in the Less).
 
 Classes                | Pseudo-Element | Description
@@ -743,53 +744,53 @@ Classes                | Pseudo-Element | Description
 
 ### Buttons
 
-**Location:** `/interactive/_buttons.less`
+**Location:** `/interactive/buttons.less`
 
-Default interactive button styles. This `.btn` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
-
+Default interactive button styles. This `.buttons` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
+// TODO: Revisit actual buttons.less
 ```html
 <!-- Regular Buttons -->
-<a class="btn" href="#">Default</a>
-<a class="btn--primary" href="#">Primary</a>
-<a class="btn--danger" href="#">Danger</a>
+<a class="buttons" href="#">Default</a>
+<a class="buttons__primary" href="#">Primary</a>
+<a class="buttons__danger" href="#">Danger</a>
 
 <!-- Tiny Buttons -->
-<a class="btn--tiny" href="#">Tiny Button</a>
-<a class="btn--tiny btn--primary" href="#">Tiny Button Primary</a>
-<a class="btn--tiny btn--danger" href="#">Tiny Button Danger</a>
+<a class="buttons__tiny" href="#">Tiny Button</a>
+<a class="buttons__tiny buttons__primary" href="#">Tiny Button Primary</a>
+<a class="buttons__tiny buttons__danger" href="#">Tiny Button Danger</a>
 
 <!-- Small Buttons -->
-<a class="btn--small" href="#">Small Button</a>
-<a class="btn--small btn--primary" href="#">Small Button Primary</a>
-<a class="btn--small btn--danger" href="#">Small Button Danger</a>
+<a class="buttons__small" href="#">Small Button</a>
+<a class="buttons__small buttons__primary" href="#">Small Button Primary</a>
+<a class="buttons__small buttons__danger" href="#">Small Button Danger</a>
 
 <!-- Large Buttons -->
-<a class="btn--large" href="#">Large Button</a>
-<a class="btn--large btn--primary" href="#">Large Button Primary</a>
-<a class="btn--large btn--danger" href="#">Large Button Danger</a>
+<a class="buttons__large" href="#">Large Button</a>
+<a class="buttons__large buttons__primary" href="#">Large Button Primary</a>
+<a class="buttons__large buttons__danger" href="#">Large Button Danger</a>
 ```
 
 #### Button Styles
 
 Classes        | Description
 ---------------|---------------
-`btn`          | Default button style
-`btn--primary` | A button that calls attention to the primary focus of the page, form, etc.
-`btn--danger`  | A button for destructive circumstances
+`buttons`          | Default button style
+`buttons__primary` | A button that calls attention to the primary focus of the page, form, etc.
+`buttons__danger`  | A button for destructive circumstances
 
 #### Button Size Variations
 
 Classes      | Description
 -------------|-------------
-`btn--tiny`  | Tiny button (smaller than default)
-`btn--small` | Small button (smaller than default)
-`btn--large` | Large button (larger than default)
+`buttons__tiny`  | Tiny button (smaller than default)
+`buttons__small` | Small button (smaller than default)
+`buttons__large` | Large button (larger than default)
 
 #### Other Variations
 
 Classes           | Description
 ------------------|------------------
-`btn--full-width` | Extends button the full-width of its container
+`buttons__full-width` | Extends button the full-width of its container
 
 ### Links
 
