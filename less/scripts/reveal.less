@@ -1,0 +1,34 @@
+/*
+
+Animated Revealing/Hiding Block Modules
+
+When JavaScript is enabled, these blocks are used (most easily in conjunction 
+with Motif jQuery plugins) to reveal and hide blocks of content, sometimes 
+accompanied by CSS3 animations.
+    
+Reveal Target
+
+`.reveal__target` is a simple class that is accessibly hidden by default.
+Add the `.is-revealed` class to show it.
+
+    <div class="reveal__target">
+        I am hidden.
+    </div>
+    <div class="reveal__target is-revealed">
+        I am no longer hidden.
+    </div>
+
+*/
+
+.reveal__target {
+
+    .js {
+        &:extend(.presentational__is-hidden);
+        
+        &.is-revealed {
+            &:extend(.presentational__isnt-hidden);
+            
+            overflow: visible;
+        }
+    }
+}
