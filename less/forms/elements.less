@@ -213,8 +213,8 @@ simply consistent across viewports. These are those.
 Form Modules
 
 ````attached-label-before
-<label class="attached-label">
-    <small class="proto__label">$</small>
+<label class="elements__attached-label">
+    <small class="label">$</small>
     <input type="num" id="attached-label-before" required>
 </label>
 ````
@@ -222,15 +222,15 @@ Form Modules
 ````attached-label-after
 <label class="elements__attached-label">
     <input type="text" id="attached-label-after" required>
-    <small class="proto__label">.com</small>
+    <small class="label">.com</small>
 </label>
 ````
 
 ````attached-label-before-and-after
 <label class="elements__attached-label">
-    <small class="proto__label">www.</small>
+    <small class="label">www.</small>
     <input type="text" id="attached-label" placeholder="domain" required>
-    <small class="proto__label">.com</small>
+    <small class="label">.com</small>
 </label>
 ````
 
@@ -239,7 +239,7 @@ Form Modules
     <label class="is-hidden" for="attached-label-submit">Search</label>
     <input type="search" id="attached-label-submit" required>
     <div>
-        <button type="submit" class="btn--primary">
+        <button type="submit" class="button__primary">
             <svg class="icon"><use xlink:href="#search"></svg>
             <b class="is-hidden">Submit</b>
         </button>
@@ -264,7 +264,7 @@ Form Modules
     }
 
     // TODO: Update with final button selector
-    [class*="btn"] {
+    [class*="button"] {
         display: block;
         width: 100%;
     }
