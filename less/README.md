@@ -679,7 +679,7 @@ Another type style, but this mimicks the default body text of the site.
 A basic stripping of list styles.
 
 ```html
-<ul class="styles__unstyled-list">
+<ul class="lists__unstyled">
     <li>List Item</li>
     <li>List Item</li>
     <li>List Item</li>
