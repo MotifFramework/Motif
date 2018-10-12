@@ -154,9 +154,10 @@ Motif previously followed the [BEM](http://getbem.com/) methodology, but in appl
 We start our classes with the name of the file the style was created in. In application, this will commonly match up with a template name (ie: `basicCard`). The filename is followed by two underscores, then the element name (ie: `title`). If there is a variation for that style, we follow the element name with two dashes and then the modifier name (ie: `large`).
 
 ```html
-// From example template: /views/shared/cards/basicCard/basicCard.view
+<!-- From example template: /views/shared/cards/basicCard/basicCard.view -->
 <a href="#" class="basicCard__link">Click Me</a>
 ```
+
 ```less
 // From example less: /less/shared/cards/basicCard/basicCard.less
 .basicCard__link {}
