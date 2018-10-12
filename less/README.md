@@ -7,7 +7,7 @@ Motif Less Documentation
 - [File Structure and Naming Convention Overview](#file-structure-and-naming-convention-overview)
 - [The File Structure](#the-file-structure)
 - [Naming Convention](#naming-convention)
-- [Responsive and Fixed-Width](#responsive-and-fixed-width)
+- [Responsive Styling](#responsive-styling)
 - [Configuration File](#configuration-file)
 - [Mixins](#mixins)
 - [Variables](#variables)
@@ -88,44 +88,48 @@ The example above matches `.buttons`, `.buttons__primary`, `.buttons__primary--m
 
 ## File Structure and Naming Convention Overview
 
-Motif follows methodologies that assist in managing teams or multiple developers working within the same codebase. During our own development, we noticed a consistent issue where either time would be wasted looking for a specific styles or duplicate styles would be created. The first step towards eliminating those pain points is establishing a unified approach to where styles live and how they are named.
+Motif follows methodologies that assist in managing teams or multiple developers working within the same codebase. During our own development, we've noticed consistent issues with developers struggling to find specific styles in large codebases, which sometimes results in duplicate styles being created if the existing ones were too difficult to find. The first step towards eliminating that pain point is establishing a unified approach to where styles live and how they are named.
 
 Some benefits to following this methodology are:
-- Reduce / Eliminate the risk of accidentally overriding an old style and inadvertently breaking the site.
-- Scalable for multiple people working within the same code base over an extended period of time.
+
+- Reduced risk of accidentally overriding an old style and inadvertently breaking the site.
+- Scalability for multiple people working within the same codebase over an extended period of time.
 - Ease and predictability when creating new templates, styles, and scripts.
-- Easier onboarding for developers new the project.
-- Multiple teams working in parallel on the same project can benefit from each other's work and prevent duplicate work.
+- Easier onboarding for developers new to the project.
+
 
 ## The File Structure
 
-Motif's Less is organized into folders based on the type of styles we are creating. By default, there are three main directories files fall into:
+Motif's Less is organized into folders based on the type of styles we are creating. By default, there are three main directories:
 
-    + less
-        + core
-        + pages
-        + shared
+```
++ less
+    + core
+    + pages
+    + shared
+```
 
 Files within the `core/` directory contain styles that are independent of any particular template and can be used anywhere. Files within the `pages/` directory are directly related to a particular page template. Files within the `shared/` directory are tied directly to a template that can be used across multiple other templates.
 
 Motif comes with default core styles that are already organized into this directory structure:
 
-    + less
-        + core
-            + config
-            + forms
-            + furniture
-            + interactive
-            + layout
-            + media
-            + mixins
-            + modules
-            + site
-            + type
-            - global.less
-            - global-fixed.less
-        + pages
-        + shared
+```
++ less
+    + core
+        + config
+        + forms
+        + furniture
+        + interactive
+        + layout
+        + media
+        + mixins
+        + modules
+        + site
+        + type
+        - global.less
+    + pages
+    + shared
+```
 
 For the `pages/` and `shared/` directories, we recommend following the same path structure as the corresponding template. This eliminates any guesswork of where a style should live and keeps your template and style structure consistent.
 
@@ -143,33 +147,24 @@ This section of the site should give you a great overview of Motif's built-in mo
 
 Motif previously followed the [BEM](http://getbem.com/) methodology, but in application on long-running large projects, the class names became very long and difficult to keep unique. There are many advantages to using BEM we did not want to loose, so our nomenclature pulls it's roots from there.
 
-```
+```css
 .fileName__element--modifier
 ```
 
-We start our classes with the file name the style was created in. In application, this will commonly match up with a template name (ie: `basicCard`). The filename is proceeded by two underscores, then the element name (ie: `title`). If there is a variation for that style, we follow the element name with two dashes and then the modifier name (ie: `large`).
+We start our classes with the name of the file the style was created in. In application, this will commonly match up with a template name (ie: `basicCard`). The filename is followed by two underscores, then the element name (ie: `title`). If there is a variation for that style, we follow the element name with two dashes and then the modifier name (ie: `large`).
 
-```
+```html
 // From example template: /views/shared/cards/basicCard/basicCard.view
 <a href="#" class="basicCard__link">Click Me</a>
-
+```
+```less
 // From example less: /less/shared/cards/basicCard/basicCard.less
 .basicCard__link {}
 ```
 
-## Responsive and Fixed-Width
-
-### `global.less`
+## Responsive Styling
 
 The site's main (and perhaps only) stylesheet is compiled through `global.less`. All supporting Less files are imported into and compiled from here, creating a file named after your `name` in the Motif `package.json` file (`[name].css`). Consider this a responsive stylesheet by default, as the partials will contain breakpoints among themselves (we'll get into the default breakpoints later).
-
-### `global-fixed.less`
-
-This desktop fixed-width version of the responsive stylesheet, and by default, it's served to Internet Explorer 8 and below.
-
-It's a simple file that first imports `global.less`, replaces a lot of the relevant media queries -- any media query that is relevant to a desktop view -- with `@media all`, which IE8 *can* see, and then adds a couple of additional `min-width` adjustments to key classes. So you can (and should) do all your work in the partials, and only touch `global-fixed.less` if you need any specific fixed-width adjustments.
-
-Like the global stylesheet, this one is compiled to a CSS file based on the name of your project (`[name]-fixed.css`).
 
 ## Configuration File
 
