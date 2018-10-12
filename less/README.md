@@ -739,36 +739,36 @@ Classes                | Pseudo-Element | Description
 **Location:** `/interactive/button.less`
 
 Default interactive button styles. This `.button` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
-// TODO: Revisit actual button.less
+
 ```html
 <!-- Regular button -->
 <a class="button" href="#">Default</a>
 <a class="button__primary" href="#">Primary</a>
-<a class="button__danger" href="#">Danger</a>
+<a class="button__secondary" href="#">Secondary</a>
 
 <!-- Tiny button -->
 <a class="button__tiny" href="#">Tiny Button</a>
 <a class="button__tiny button__primary" href="#">Tiny Button Primary</a>
-<a class="button__tiny button__danger" href="#">Tiny Button Danger</a>
+<a class="button__tiny button__secondary" href="#">Tiny Button Secondary</a>
 
 <!-- Small button -->
 <a class="button__small" href="#">Small Button</a>
 <a class="button__small button__primary" href="#">Small Button Primary</a>
-<a class="button__small button__danger" href="#">Small Button Danger</a>
+<a class="button__small button__secondary" href="#">Small Button Secondary</a>
 
 <!-- Large button -->
 <a class="button__large" href="#">Large Button</a>
 <a class="button__large button__primary" href="#">Large Button Primary</a>
-<a class="button__large button__danger" href="#">Large Button Danger</a>
+<a class="button__large button__secondary" href="#">Large Button Secondary</a>
 ```
 
 #### Button Styles
 
 Classes        | Description
 ---------------|---------------
-`button`          | Default button style
-`button__primary` | A button that calls attention to the primary focus of the page, form, etc.
-`button__danger`  | A button for destructive circumstances
+`button`            | Default button style
+`button__primary`   | A button that calls attention to the primary focus of the page, form, etc.
+`button__secondary` | A button for secondary actions or buttons that are not a main CTA.
 
 #### Button Size Variations
 
