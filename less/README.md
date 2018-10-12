@@ -330,7 +330,6 @@ Classes            | Description
 
 #### Horizontal List
 
-// TODO: Jonny
 The basic `.lists__horizontal` module simply removes bullets from lists and inlines the list items, making the link `inline-block`. The idea is to give the skeleton of a horizontal list/navigation without adding too much style (yet).
 
 ```html
@@ -517,14 +516,9 @@ Classes                         | Description
 `ratios__1x2`                   | Proportional box twice as tall as it is wide
 `ratios__2x1`                   | Proportional box twice as wide as it is tall
 
-//TODO: Jonny (discuss _blocks)
-### Blocks
+### Wrapper
 
-**Location:** `/modules/_blocks.less`
-
-Larger-block classes and modules.
-
-#### Wrapper
+**Location:** `/layout/wrappers.less`
 
 This is the site-wide containing class. Put it around anything you want to be contained in the "site width". By default, caps off at `1150px`.
 
@@ -536,11 +530,14 @@ This is the site-wide containing class. Put it around anything you want to be co
 </body>
 ```
 
+### Scripts
+
+**Location:** `/scripts/`
+
 #### Animated Revealing/Hiding Block Modules
 
 When JavaScript is enabled, these blocks are used (most easily in conjunction with Motif Reveal jQuery plugins) to reveal and hide blocks of content, sometimes accompanied by CSS3 animations.
 
-//TODO: Jonny (discuss _blocks)
 ##### Reveal Target
 
 `.reveal__target` is a simple class that is accessibly hidden by default. dd the `.is-revealed` class to show it.
