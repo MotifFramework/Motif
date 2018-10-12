@@ -221,7 +221,7 @@ Buttons
 
 */
 
-.buttons__base {
+.button__base {
     
     // Extends
     &:extend( .proto__lato-bold );
@@ -246,14 +246,14 @@ Buttons
     }
 }
 
-.buttons__blue,
-.buttons__primary {
-    .m-buttons__color( @blue, @dark-blue );
+.button__blue,
+.button__primary {
+    .m-button__color( @blue, @dark-blue );
 }
 
-.buttons__red,
-.buttons__danger {
-    .m-buttons__color( @red, @dark-red );
+.button__red,
+.button__danger {
+    .m-button__color( @red, @dark-red );
 }
 
 
@@ -261,7 +261,7 @@ Buttons
 
 Panels
 
-````panels-alt
+````panel-alt
 <div class="panel--alt">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -272,7 +272,7 @@ Panels
 </div>
 ````
 
-````panels-inverse
+````panel-inverse
 <div class="panel--inverse">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
@@ -387,25 +387,25 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 ````nav-bar
 <nav class="nav-bar--menu" role="navigation">
-    <h3 class="nav-bar__title js-expand"
+    <h3 class="proto__nav-bar-title js-expand"
      id="reveal-main-nav"
      data-reveal="main-nav-list">
         <svg class="icon"><use xlink:href="#rows"></svg>
         <b class="button-label">Main Menu</b>
     </h3>
-    <ul class="nav-bar__list expand__target" id="main-nav-list">
+    <ul class="proto__nav-bar-list expand__target" id="main-nav-list">
         <li>
-            <a class="nav-bar__link is-current" href="#">
+            <a class="proto__nav-bar-link is-current" href="#">
                 Current Nav Link
             </a>
         </li>
         <li>
-            <a class="nav-bar__link" href="#">
+            <a class="proto__nav-bar-link" href="#">
                 Nav Link
             </a>
         </li>
         <li>
-            <a class="nav-bar__link" href="#">
+            <a class="proto__nav-bar-link" href="#">
                 Nav Link
             </a>
         </li>
@@ -415,7 +415,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 
 */
 
-.nav-bar__title {
+.proto__nav-bar-title {
 
     // Create
     margin: 0;
@@ -439,7 +439,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
     }
 }
 
-.nav-bar__list {
+.proto__nav-bar-list {
     &:extend(.lists__horizontal--forceful);
 
     margin: 0;
@@ -477,7 +477,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
     }
 }
 
-.nav-bar__link {
+.proto__nav-bar-link {
     color: @white;
     text-decoration: none;
     padding: @half-vertical 4%;
@@ -502,7 +502,7 @@ A quick navigation bar, typically good for prototyping the main menu of a site.
 Vertical Nav
 
 ````vertical-nav
-<ul class="nav--vert">
+<ul class="proto__vertical-nav">
     <li>
         <a href="#">Nav Link</a>
     </li>
@@ -537,7 +537,7 @@ Vertical Nav
 
 */
 
-.nav--vert {
+.proto__vertical-nav {
     ul& {
         &:extend(.lists__unstyled);
     }
@@ -715,7 +715,7 @@ Messaging
 
 */
 
-.bubble {
+.proto__bubble {
 
     // Variables
     @wisp-width: @5px;
@@ -787,7 +787,7 @@ Input Alerts
 
 */
 
-[class*="input-alert"] {
+[class*="messaging__input-alert"] {
 
     // Variables
     @wisp-width: @5px;
@@ -796,7 +796,7 @@ Input Alerts
     @shadow-radius: @7px;
 
     // Mixins
-    &:extend( .bubble all );
+    &:extend( .proto__bubble all );
     .m-shadow__box-shadow-none();
 
     padding: @quarter-vertical @half-vertical;
@@ -809,7 +809,7 @@ Input Alerts
         border-bottom-color: @bubble-color;
     }
 }
-.input-alert {
+.messaging__input-alert {
     &--warning {
         .m-forms__input-alert-color(@warning-color);
     }
@@ -825,7 +825,7 @@ Input Alerts
 }
 
 .no-boxshadow {
-    .bubble {
+    .proto__bubble {
         border: 1px solid @grey;
     }
 }
@@ -837,7 +837,7 @@ Form Modules
 
 */
 
-.attached-label {
+.elements__attached-label {
 
     // Mixins
     .m-border-radius( @default-radius );
