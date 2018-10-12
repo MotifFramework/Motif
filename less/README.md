@@ -589,13 +589,13 @@ When JavaScript is enabled, these blocks are used (most easily in conjunction wi
 #### Main Nav Module
 
 A minor enhancement to the Reveal or Expand Target modules if added to the main navigation bar. This snippet, on Medium screens and larger, makes sure the expandable Nav (on smaller screens) is no longer hidden, and that the Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
-// TODO: After proto
+
 ```html
-<nav class="nav-bar--menu" role="navigation">
-    <h3 class="nav-bar__title pre-icon--rows js-expand" id="reveal-main-nav">
+<nav class="proto__nav-bar--menu" role="navigation">
+    <h3 class="proto__nav-bar-title pre-icon--rows js-expand" id="reveal-main-nav">
         Main Menu
     </h3>
-    <ul class="nav-bar__list--x--forceful expand__target" id="main-nav-list">
+    <ul class="proto__nav-bar-list expand__target" id="main-nav-list">
         ...
     </ul>
 </nav>
@@ -604,7 +604,7 @@ A minor enhancement to the Reveal or Expand Target modules if added to the main 
 #### Tabs
 
 The tabs module (and accompanying plugin) creates a very basic widget that allows embedding and basic styling.
-// TODO: after proto
+
 ```html
 <section class="tabs">
     <nav role="navigation">
