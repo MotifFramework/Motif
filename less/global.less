@@ -12,72 +12,84 @@
 
 // Config File
 // Breakpoint, color, typographic, and other settings.
-@import "config/config.less";
+@import "core/config/config.less";
 
 // Variables & Mixins
 // You'll want to keep these.
-@import "config/vars.less";
-@import "mixins/mixins.less";
+@import "core/config/vars.less";
+@import "core/mixins/mixins.less";
 
 /**
  * Normalize
  * Using the Normalize.css (http://necolas.github.io/normalize.css/) with only minor modification.
  */
-@import "layout/display.less";
-@import "type/type.less";
+@import "core/layout/display.less";
+@import "core/type/type.less";
 
 // Reusable Modules
-@import "modules/lists.less";
-@import "modules/ratios.less";
+@import "core/modules/lists.less";
+@import "core/modules/ratios.less";
 
 // Media
-@import "media/media.less";
-@import "media/icons.less";
-@import "media/images.less";
-@import "media/video.less";
+@import "core/media/media.less";
+@import "core/media/icons.less";
+@import "core/media/images.less";
+@import "core/media/video.less";
 
 // Typography
-@import "type/font-face.less";
-@import "type/styles.less";
-@import "type/hierarchy.less";
+@import "core/type/font-face.less";
+@import "core/type/styles.less";
+@import "core/type/hierarchy.less";
 
 // Interactive Elements
-@import "interactive/button.less";
-@import "interactive/links.less";
+@import "core/interactive/button.less";
+@import "core/interactive/links.less";
 
 // Forms
-@import "forms/elements.less";
-@import "forms/messaging.less";
+@import "core/forms/elements.less";
+@import "core/forms/messaging.less";
 
 // Layout
-@import "layout/spacing.less";
-@import "layout/presentational.less";
-@import "layout/grid.less";
-@import "layout/off-canvas.less";
-@import "layout/overflow-list.less";
-@import "layout/wrappers.less";
+@import "core/layout/spacing.less";
+@import "core/layout/presentational.less";
+@import "core/layout/grid.less";
+@import "core/layout/off-canvas.less";
+@import "core/layout/overflow-list.less";
+@import "core/layout/wrappers.less";
 
 // Furniture
-@import "furniture/tables.less";
-@import "furniture/panel.less";
-@import "furniture/wysiwyg.less";
+@import "core/furniture/tables.less";
+@import "core/furniture/panel.less";
+@import "core/furniture/wysiwyg.less";
 
 // Scripts
-@import "scripts/reveal.less";
-@import "scripts/expand.less";
-@import "scripts/fade.less";
-@import "scripts/menu.less";
-@import "scripts/tabs.less";
+@import "core/scripts/reveal.less";
+@import "core/scripts/expand.less";
+@import "core/scripts/fade.less";
+@import "core/scripts/menu.less";
+@import "core/scripts/tabs.less";
+
+/**
+ * Shared
+ */
+
+// Shared Styles
+
+/**
+ * Pages
+ */
+
+// Pages Styles
 
 /**
  * Print
  */
 @media print {
-    @import "site/print.less";
+    @import "core/site/print.less";
 }
 
 /**
  * Prototype Styles
  * REMOVE WHEN BEGINNING PRODUCTION
  */
-@import "site/proto.less";
+@import "core/site/proto.less";

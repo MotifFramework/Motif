@@ -196,7 +196,7 @@ Breakpoint, color, typographic, and other settings. Motif's Less configuration f
 As Motif continues to grow, the configuration file will become more powerful.
 
 ## Mixins
-
+// TODO: Add /core to all of these
 **Location:** `/mixins/`
 
 Motif uses its own set of Less mixing, some that fill in browser vendor prefixes on CSS3 attributes, and others that aid in the framework's type scaling and vertical rhythm. There are also some more presentational mixins, like an accessibility-friendly hiding class and a clearfix. Mixin files are prefixed with `m-` to help differentiate mixins at a glance.
