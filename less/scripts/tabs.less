@@ -36,20 +36,23 @@ allows embedding and basic styling.
 
 */
 
-.js {
-    .tabs {
+.tabs {
+
+    .js & {
+
         > nav + *,
         &__section {
             position: relative;
             overflow: hidden;
         }
-    }
-    .tabs > nav + * > *,
-    .tab {
-        display: none;
 
-        &.is-current {
-            display: block;
+        > nav + * > *,
+        .tab {
+            display: none;
+
+            &.is-current {
+                display: block;
+            }
         }
     }
 }
