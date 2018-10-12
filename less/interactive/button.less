@@ -78,6 +78,28 @@ button {
 
 /*
 
+Button Variations
+
+ */
+
+.button__primary {
+    &:extend(.button__base all);
+    background: @blue;
+    color: @white;
+
+    &:hover,
+    &:focus,
+    &.is-current {
+        background: @dark-blue;
+    }
+}
+
+/*
+.button__secondary {}
+ */
+
+/*
+
 ````tiny-button
 <a class="button__tiny" href="#">Tiny Button</a>
 <a class="button__tiny button__primary" href="#">Tiny Button Primary</a>
