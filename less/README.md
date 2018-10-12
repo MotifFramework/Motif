@@ -30,7 +30,7 @@ As mentioned in the [Getting Started section](https://github.com/MotifFramework/
 What this traditionally translates to are CSS classes that represent the structure...
 
 ```css
-.panels {
+.panel {
     margin: 20px 0 0;
     padding: 20px;
     border: 1px solid;
@@ -40,7 +40,7 @@ What this traditionally translates to are CSS classes that represent the structu
 ...and some modifying "skin" classes:
 
 ```css
-.panels__alert {
+.panel__alert {
     background: pink;
     border-color: red;
 }
@@ -49,29 +49,29 @@ What this traditionally translates to are CSS classes that represent the structu
 Both classes would be applied to the HTML element:
 
 ```html
-<div class="panels panels__alert">...</div>
+<div class="panel panel__alert">...</div>
 ```
 
 We do things slightly different in Motif's stylesheet. Using the magic of some of the more advanced CSS attribute selectors, we accomplish the same technique but without requiring multiple classes:
 
 ```css
-[class*="panels__"] {
+[class*="panel__"] {
     margin: 20px 0 0;
     padding: 20px;
     border: 1px solid;
 }
-.panels__alert {
+.panel__alert {
     background: pink;
     border-color: red;
 }
-.panels__success {
+.panel__success {
     background: yellow;
     border-color: green;
 }
 ```
 
 ```html
-<div class="panels__alert">...</div>
+<div class="panel__alert">...</div>
 ```
 
 (To learn more about this technique, read the excellent 24 Ways article, [A Harder-Working Class](http://24ways.org/2012/a-harder-working-class/).)
@@ -79,12 +79,12 @@ We do things slightly different in Motif's stylesheet. Using the magic of some o
 You'll see a lot of this in Motif's core. We encourage you to also take advantage of this technique, which maintains that organizational and efficient spirit of separating structure from skin, but reduces the amount of classes needed to execute. Be extra careful in how you execute this, as the class attribute selector can be greedy.
 
 ```css
-[class*="buttons"] {
+[class*="button"] {
     ...
 }
 ```
 
-The example above matches `.buttons`, `.buttons__primary`, `.buttons__primary--modifier`, and so on.
+The example above matches `.button`, `.button__primary`, `.button__primary--modifier`, and so on.
 
 ## File Structure and Naming Convention Overview
 
@@ -742,55 +742,55 @@ Classes                | Pseudo-Element | Description
 
 **Location:** `/interactive/`
 
-### Buttons
+### button
 
-**Location:** `/interactive/buttons.less`
+**Location:** `/interactive/button.less`
 
-Default interactive button styles. This `.buttons` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
-// TODO: Revisit actual buttons.less
+Default interactive button styles. This `.button` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
+// TODO: Revisit actual button.less
 ```html
-<!-- Regular Buttons -->
-<a class="buttons" href="#">Default</a>
-<a class="buttons__primary" href="#">Primary</a>
-<a class="buttons__danger" href="#">Danger</a>
+<!-- Regular button -->
+<a class="button" href="#">Default</a>
+<a class="button__primary" href="#">Primary</a>
+<a class="button__danger" href="#">Danger</a>
 
-<!-- Tiny Buttons -->
-<a class="buttons__tiny" href="#">Tiny Button</a>
-<a class="buttons__tiny buttons__primary" href="#">Tiny Button Primary</a>
-<a class="buttons__tiny buttons__danger" href="#">Tiny Button Danger</a>
+<!-- Tiny button -->
+<a class="button__tiny" href="#">Tiny Button</a>
+<a class="button__tiny button__primary" href="#">Tiny Button Primary</a>
+<a class="button__tiny button__danger" href="#">Tiny Button Danger</a>
 
-<!-- Small Buttons -->
-<a class="buttons__small" href="#">Small Button</a>
-<a class="buttons__small buttons__primary" href="#">Small Button Primary</a>
-<a class="buttons__small buttons__danger" href="#">Small Button Danger</a>
+<!-- Small button -->
+<a class="button__small" href="#">Small Button</a>
+<a class="button__small button__primary" href="#">Small Button Primary</a>
+<a class="button__small button__danger" href="#">Small Button Danger</a>
 
-<!-- Large Buttons -->
-<a class="buttons__large" href="#">Large Button</a>
-<a class="buttons__large buttons__primary" href="#">Large Button Primary</a>
-<a class="buttons__large buttons__danger" href="#">Large Button Danger</a>
+<!-- Large button -->
+<a class="button__large" href="#">Large Button</a>
+<a class="button__large button__primary" href="#">Large Button Primary</a>
+<a class="button__large button__danger" href="#">Large Button Danger</a>
 ```
 
 #### Button Styles
 
 Classes        | Description
 ---------------|---------------
-`buttons`          | Default button style
-`buttons__primary` | A button that calls attention to the primary focus of the page, form, etc.
-`buttons__danger`  | A button for destructive circumstances
+`button`          | Default button style
+`button__primary` | A button that calls attention to the primary focus of the page, form, etc.
+`button__danger`  | A button for destructive circumstances
 
 #### Button Size Variations
 
 Classes      | Description
 -------------|-------------
-`buttons__tiny`  | Tiny button (smaller than default)
-`buttons__small` | Small button (smaller than default)
-`buttons__large` | Large button (larger than default)
+`button__tiny`  | Tiny button (smaller than default)
+`button__small` | Small button (smaller than default)
+`button__large` | Large button (larger than default)
 
 #### Other Variations
 
 Classes           | Description
 ------------------|------------------
-`buttons__full-width` | Extends button the full-width of its container
+`button__full-width` | Extends button the full-width of its container
 
 ### Links
 
@@ -1176,9 +1176,9 @@ Simple, clean default styles. Just mark it up like a normal table. Undoes table 
 </table>
 ```
 
-### Panels
+### panel
 
-**Location:** `/furniture/_panels.less`
+**Location:** `/furniture/_panel.less`
 
 Used to provide messaging to the user, whether it be direct or through calls to action. The panel typically indicates a visual separation and implied sub-grouping of its content.
 
@@ -1207,7 +1207,7 @@ Classes          | Description
 This variation of the standard `.panel` is used specifically for delivering direct messages to the user, whether they be informative, complementary, or preventative. (Forms being the primary use case.)
 
 ```html
-<!-- Alert Panels with block content -->
+<!-- Alert panel with block content -->
 <div class="alert-panel--info">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
@@ -1224,7 +1224,7 @@ This variation of the standard `.panel` is used specifically for delivering dire
     <p><a href="#" class="btn">User Action</a></p>
 </div>
 
-<!-- Alert Panels with just text -->
+<!-- Alert panel with just text -->
 <p class="alert-panel--info">
     This is an alert panel with no heading.
 </p>
