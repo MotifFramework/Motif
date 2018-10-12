@@ -1,5 +1,17 @@
 /*
 
+Unstyled List
+
+A basic stripping of list styles.
+
+*/
+
+.lists__unstyled {
+    .m-type__unstyled-list();
+}
+
+/*
+
 Horizontal List
 
 The basic horizontal list module simply removes bullets from lists and inlines the list 
@@ -9,7 +21,7 @@ horizontal list/navigation without adding too much style (yet).
 */
 
 .lists__horizontal {
-    &:extend(.styles__unstyled-list);
+    &:extend(.lists__unstyled);
 
     li {
         display: inline;
@@ -31,7 +43,7 @@ than the default Horizontal List.
 */
 
 .lists__horizontal--forceful {
-    &:extend(.styles__unstyled-list);
+    &:extend(.lists__unstyled);
 
     @media @small-screens-min {
         .m-grid__clearfix();
