@@ -124,7 +124,7 @@ select {
 Input Label Elements
 
 Child form elements of the `.elements__input-label` class are given a little bit of 
-spacing to separate them from the label text. (See also `.type__input-label` in the
+spacing to separate them from the label text. (See also `.elements__input-label` in the
 form `type.less` file.)
 
 ````input-label-elements
@@ -269,3 +269,158 @@ Form Modules
         width: 100%;
     }
 }
+
+/*
+
+Input Label
+
+The `.input-label` class should be added to form labels that want a little 
+extra styling for the label text.
+
+(You may need to do some fancy things with hidden or altered labels, which is
+why these styles aren't added to the `label` element by default.)
+
+    <label class="elements__input-label">
+        Text Field
+        <input type="text" name="text" required>
+    </label>
+
+There are also input descriptions, which go directly underneath the label text,
+and input hints that typically go underneath the input field.
+
+    <label class="elements__input-label">
+        Text Field
+        
+        <small class="elements__input-desc">
+            This is a small description of the field.
+        </small>
+        
+        <input type="text" name="text" required>
+        
+        <strong class="elements__input-hint">
+            This is an important hint.
+        </strong>
+    </label>
+
+*/
+
+
+.elements__input-label,
+.elements__input-hint,
+.elements__input-desc {
+
+    &:extend( .presentational__new-line );
+}
+
+.elements__input-hint,
+.elements__input-desc {
+
+    &:extend( .styles__body-text );
+}
+
+.elements__input-label {
+
+    // Mixins
+    .m-vertical-rhythm__padding-leader( 1 );
+}
+
+.elements__input-hint {
+    color: @grey;
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader( 0.25 );
+}
+
+.elements__input-desc {
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader( 0 );
+}
+
+
+/*
+
+Fieldset
+
+A simple class to add to fieldsets that want a little more spacing.
+
+*/
+
+.elements__fieldset {
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader( 1 );
+    .m-vertical-rhythm__padding-trailer( 1 );
+}
+
+/*
+
+Checkbox List
+
+Lists of radio or checkbox inputs should typically be just that: lists. In 
+Motif, you're encouraged to mark up your input lists as semantically as 
+possible, meaning a fieldset, with a legend, and a list of inputs:
+
+    <fieldset>
+        <legend>
+            <b class="elements__input-label">This is a question for a radio list?</b>
+        </legend>
+
+        <ul class="elements__checkbox-list">
+            <li>
+                <label class="media__media-object">
+                    <input class="media__media-object__figure"
+                     type="radio"
+                     name="radioList"
+                     value="Yes">
+
+                    <b class="media__media-object__desc">
+                        Yes
+                    </b>
+                </label>
+            </li>
+            <li>
+                <label class="media__media-object">
+                    <input class="media__media-object__figure"
+                     type="radio"
+                     name="radioList"
+                     value="No">
+
+                    <b class="media__media-object__desc">
+                        No
+                    </b>
+                </label>
+            </li>
+        </ul>
+    </fieldset>
+
+*/
+
+.elements__checkbox-list {
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader( 0.5 );
+}
+
+legend + .elements__checkbox-list {
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader( 0 );
+}
+
+legend {
+
+    .elements__input-label {
+
+        // Mixins
+        .m-vertical-rhythm__padding-trailer( 0.25 );
+    }
+
+    + .elements__input-desc {
+
+        /* Positioning */
+        position: relative;
+        top: -@5px;
+    }
+}
+

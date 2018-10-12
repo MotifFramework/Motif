@@ -734,7 +734,7 @@ Classes                | Pseudo-Element | Description
 
 **Location:** `/interactive/`
 
-### button
+### Buttons
 
 **Location:** `/interactive/button.less`
 
@@ -1262,40 +1262,6 @@ Large       | `992px`            | The traditional desktop viewport, convenient 
 Extra Large | `1240px`           | Our widescreen breakpoint
 
 **Note:** The default breakpoint units are stated in pixels, but are actually rendered in the equivalent `em` unit in the framework for better responsiveness through relative measurement.
-
-### Breakpoint Partials
-
-Technically speaking, you could do all your non-module site-specific coding in the `/site/_base.less` file, creating media queries when needed, and compile from there. For convenience and organization, the `/site/` folder actually contains Less partials for each breakpoint, making it easy to quickly toss in styles at certain breakpoints.
-
-For example, if I have a style I want to begin at the Medium breakpoint, I could just place it in the `/site/_medium.less` file and compile from there.
-
-
-For each breakpoint, we have a blank partial for:
-
-- when the viewport's minimum width is greater than or equal to the breakpoint
-- when the viewport's width is within the breakpoint's minimum and maximum points
-- when the viewport's width is less than the maximum width of the breakpoint (including everything before this breakpoint as well)
-
-If that's a little unclear, here's a chart.
-
-**Note:** Not all of these partials are imported into `global.less` by default. The lesser used ones are there, but commented out for convenience.
-
-File                | Imported by Default | Description
---------------------|---------------------|---------------------
-`_base.less`        | Yes                 | This covers every viewport
-`_base-only.less`   | No                  | Starts at Base but ends before Small begins
-`_small-max.less`   | Yes                 | Base and Small screens only
-`_small-only.less`  | No                  | Starts at Small but ends before Medium begins
-`_small.less`       | Yes                 | From Small screens onward
-`_medium-max.less`  | No                  | Base, Small, and Medium screens only
-`_medium-only.less` | Yes                 | Starts at Medium but ends before Large begins
-`_medium.less`      | Yes                 | From Medium screens onward
-`_large-max.less`   | No                  | Base, Small, Medium, and Large screens only
-`_large-only.less`  | No                  | Starts at Large but ends before Extra Large begins
-`_large.less`       | Yes                 | From Large screens onward
-`_x-large.less`     | Yes                 | From Extra Large screens onward
-
-
 
 ## Prototype
 
