@@ -838,12 +838,8 @@ Form Modules
 */
 
 .elements__attached-label {
-
-    // Mixins
-    .m-border-radius( @default-radius );
-
-    /* Pretty */
     border: 1px solid @grey-4;
+    border-radius: @default-radius;
 
     &:hover,
     &:focus,
@@ -865,12 +861,9 @@ Form Modules
         }
     }
     input,
-    [class*="btn"] {
+    [class*="button"] {
 
-        // Mixins
-        .m-border-radius(0);
-
-        /* Pretty */
+        border-radius: 0;
         border: none;
     }
 
