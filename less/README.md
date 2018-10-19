@@ -720,16 +720,36 @@ The type sizes are given the `--long` modifier, allowing you to use each type si
 
 ### Icons
 
-Motif comes bundled with a small starter icon font created from 30+ SVG icons. From social icons to those useful in responsive prototyping, they can all be found in the `/icons/` folder. Motif uses a Grunt plugin to compile those SVGs into a font, meaning you can add and remove SVGs to and from that folder and Grunt will re-create the font with the updated glyphs. [Learn more about the Grunt Webfont plugin](https://github.com/sapegin/grunt-webfont).
+Motif comes bundled with a small starter icon sprite created from 30+ SVG icons. From social icons to those useful in responsive prototyping, they can all be found in the `/icons/` folder. Motif uses a Grunt plugin to compile those SVGs into a larger SVG sprite, meaning you can add and remove SVGs to and from that folder and Grunt will re-create the sprite with the updated glyphs. [Learn more about the Grunt SVG Store plugin](https://github.com/FWeinb/grunt-svgstore).
 
-//TODO: Jonny
-The plugin generates some CSS classes based on the SVG filename, which is the easiest way to attach these icons to text. (The icon size will be relative to the element's font size, but you can adjust that by targeting the `:before` or `:after` pseudo-element in the Less).
+Motif automatically fetches the icon sprite and injects it at the top of the page's `<body>` element, making it available for the rest of the page to use. The ID for the corresponding icon will be its original filename.
 
-Classes                | Pseudo-Element | Description
------------------------|----------------|-------
-`pre-icon--[name]` | `:before` | Icon is placed before the text with some relative padding to the right
-`icon--[name]` | `:before` | Icon is placed before the text with *no* padding to the right, because we are assuming this icon will be "solo"
-`post-icon--[name]` | `:after` | Icon is placed after the text with some relative padding to the left
+```html
+<!-- Using `nav-right.svg` -->
+<svg class="icon">
+    <use xlink:href="#nav-right"></use>
+</svg>
+```
+
+Motif also provides the `icon` class to size the icon relative to its font size and fill it with the current text color. This allows you to style it much like you would an icon font:
+
+```html
+<a class="action-link" href="/other/page.html">
+    Learn more
+    <svg class="action-link__icon">
+        <use xlink:href="#nav-right"></use>
+    </svg>
+</a>
+```
+
+```less
+.action-link__icon {
+    &:extend(.icon);
+    color: @red;
+    font-size: 1.25em;
+    margin-left: 0.25em;
+}
+```
 
 ## Interactive Elements
 
