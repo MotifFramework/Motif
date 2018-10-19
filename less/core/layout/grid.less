@@ -96,12 +96,12 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     /* Pretty */
     letter-spacing: -0.31em;
     text-rendering: optimizespeed;
-        
+
     ul& {
         padding-left: 0;
         list-style: none outside none;
     }
-    
+
     > * {
         // Mixins
         #mixed > .m-grid__column();
@@ -150,7 +150,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     [class*="grid__sm-row"] {
 
         #mixed > .m-grid__row( @mobile-margin );
-        
+
         ul& {
             padding-left: 0;
             list-style: none outside none;
@@ -172,8 +172,11 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     }
 
     [class*="grid__sm"] {
-        #mixed > .m-grid__column();
-        #mixed > .m-grid__padding( @mobile-margin );
+
+        &:not([class*="grid__sm-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @mobile-margin );
+        }
     }
 
     .grid__sm-quarter {
@@ -216,7 +219,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 
     // Opera as of 12 on Windows needs word-spacing.
     // The ".opera-only" selector is used to prevent
-    // actual prefocus styling and is not required 
+    // actual prefocus styling and is not required
     // in markup.
     .opera-only :-o-prefocus,
     .grid__sm-row--flex {
@@ -259,7 +262,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 
     [class*="grid__med-row"] {
         #mixed > .m-grid__row( @tablet-margin );
-        
+
         ul& {
             padding-left: 0;
             list-style: none outside none;
@@ -281,8 +284,11 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     }
 
     [class*="grid__med"] {
-        #mixed > .m-grid__column();
-        #mixed > .m-grid__padding( @tablet-margin );
+
+        &:not([class*="grid__med-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @tablet-margin );
+        }
     }
 
     .grid__med-quarter {
@@ -309,8 +315,8 @@ all of the grids also have a few "fuzzy" shortcuts as well:
         width: 100%;
     }
 
-    #mixins > .m-grid__all( ( @tablet-total-cols - 1 ), @tablet-total-cols, m );
-    
+    #mixins > .m-grid__all( ( @tablet-total-cols - 1 ), @tablet-total-cols, med );
+
     .grid__med-row--flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
@@ -423,7 +429,7 @@ all of the grids also have a few "fuzzy" shortcuts as well:
 
     [class*="grid__lg-row"] {
         #mixed > .m-grid__row( @base-margin );
-        
+
         ul& {
             padding-left: 0;
             list-style: none outside none;
@@ -445,8 +451,11 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     }
 
     [class*="grid__lg"] {
-        #mixed > .m-grid__column();
-        #mixed > .m-grid__padding( @base-margin );
+
+        &:not([class*="grid__lg-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @base-margin );
+        }
     }
 
     .grid__lg-quarter,
@@ -482,76 +491,78 @@ all of the grids also have a few "fuzzy" shortcuts as well:
     #mixins > .m-grid__all( ( @total-columns - 1 ), @total-columns, lg );
 
 
-/*
+    /*
 
-Media Grid
+    Media Grid
 
-The Media Grid allows you to place a grid of photos or videos (catalog or 
-retail products, etc.) without floating them, alleviating the need to concern 
-yourself with clearing the floats with rows should an object extend further 
-than another. Also, because they are not floating, it allows you to align 
-the entire group center, making sure any "orphaned" grid entries are centered.
+    The Media Grid allows you to place a grid of photos or videos (catalog or
+    retail products, etc.) without floating them, alleviating the need to concern
+    yourself with clearing the floats with rows should an object extend further
+    than another. Also, because they are not floating, it allows you to align
+    the entire group center, making sure any "orphaned" grid entries are centered.
 
-The syntax is simply the same as the regular responsive grid system, except
-the row class has a `--flex` modifier.
+    The syntax is simply the same as the regular responsive grid system, except
+    the row class has a `--flex` modifier.
 
-````media-grid
-<ul class="grid__sm-halves grid__med-thirds grid__lg-quarters">
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li>
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-</ul>
-````
+    ````media-grid
+    <ul class="grid__sm-halves grid__med-thirds grid__lg-quarters">
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+    </ul>
+    ````
 
-*/
+    */
 
     .grid__lg-row--flex {
         letter-spacing: -0.31em;
         text-rendering: optimizespeed;
     }
-        .grid__lg-row--flex > [class*="grid__lg"] {
-            float: none;
-            display: inline-block;
-            letter-spacing: normal;
-            word-spacing: normal;
-            vertical-align: top;
-            text-rendering: auto;
-        }
+
+    .grid__lg-row--flex > [class*="grid__lg"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+
     .opera-only :-o-prefocus,
     .grid__lg-row--flex {
         word-spacing: -0.43em;
