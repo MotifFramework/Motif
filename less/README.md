@@ -197,14 +197,14 @@ Breakpoint, color, typographic, and other settings. Motif's Less configuration f
 As Motif continues to grow, the configuration file will become more powerful.
 
 ## Mixins
-// TODO: Add /core to all of these
-**Location:** `/mixins/`
+
+**Location:** `core/mixins/`
 
 Motif uses its own set of Less mixing, some that fill in browser vendor prefixes on CSS3 attributes, and others that aid in the framework's type scaling and vertical rhythm. There are also some more presentational mixins, like an accessibility-friendly hiding class and a clearfix. Mixin files are prefixed with `m-` to help differentiate mixins at a glance.
 
 ## Variables
 
-**Location:** `config/vars.less`
+**Location:** `core/config/vars.less`
 
 The `vars.less` file houses a slew of useful Less variables. These are different than those found in the configuration file in that they're not really meant to be altered, just placed somewhere readily accessible for every partial. These include some spacing variables...
 
@@ -240,7 +240,7 @@ The `vars.less` file houses a slew of useful Less variables. These are different
 
 ### Spacing
 
-**Location:** `/layout/spacing.less`
+**Location:** `core/layout/spacing.less`
 
 Spacing helpers are quick but powerful classes that add margin or padding to any given element. These classes are `!important`, so they override all other styles.
 
@@ -256,7 +256,7 @@ Hat tip: [Nicole Sullivan](http://stubbornella.org)
 
 ### Presentational
 
-**Location:** `/layout/presentational.less`
+**Location:** `core/layout/presentational.less`
 
 Some basic, Lego-level classes to allow quick adjustment in the HTML.
 
@@ -323,11 +323,11 @@ Classes            | Description
 
 ## Reusable Modules
 
-**Location:** `/modules/`
+**Location:** `core/modules/`
 
 ### Lists
 
-**Location:** `/modules/lists.less`
+**Location:** `core/modules/lists.less`
 
 #### Horizontal List
 
@@ -438,7 +438,7 @@ A basic stripping of list styles.
 
 ### Media
 
-**Location:** `/media/media.less`
+**Location:** `core/media/media.less`
 
 #### Media Object
 
@@ -486,7 +486,7 @@ Great for integrating images into bodies of text, the `.media__figure` class is 
 
 ### Ratios
 
-**Location:** `/modules/ratios.less`
+**Location:** `core/modules/ratios.less`
 
 Ratios are used primarily for objects that must scale in both width and height proportionally, such as embedded videos.
 
@@ -519,7 +519,7 @@ Classes                         | Description
 
 ### Wrapper
 
-**Location:** `/layout/wrappers.less`
+**Location:** `core/layout/wrappers.less`
 
 This is the site-wide containing class. Put it around anything you want to be contained in the "site width". By default, caps off at `1150px`.
 
@@ -533,7 +533,7 @@ This is the site-wide containing class. Put it around anything you want to be co
 
 ### Scripts
 
-**Location:** `/scripts/`
+**Location:** `core/scripts/`
 
 #### Animated Revealing/Hiding Block Modules
 
@@ -637,11 +637,11 @@ The tabs module (and accompanying plugin) creates a very basic widget that allow
 
 ## Typography
 
-**Location:** `/type/`
+**Location:** `core/type/`
 
 ### Webfonts
 
-**Location:** `/type/font-face.less`
+**Location:** `core/type/font-face.less`
 
 Using the `.m-type__web-font` and `.m-type__web-font-svg` mixins, declare webfonts using the "bulletproof" `@font-face` syntax.
 
@@ -649,7 +649,7 @@ See: [Further Hardening of the Bulletproof Syntax](http://www.fontspring.com/blo
 
 ### Styles
 
-**Location:** `/type/styles.less`
+**Location:** `core/type/styles.less`
 
 Each font family and weight used in the site is given its own LEGO-block class to enable quick use and modularity.
 
@@ -694,7 +694,7 @@ A basic blockquote.
 
 ### Hierarchy
 
-**Location:** `/type/hierarchy.less`
+**Location:** `core/type/hierarchy.less`
 
 The building blocks for the site's type sizes. Almost exclusively, an element's font size is assigned with one of these classes. If a new size is needed, a new class is created here so it can be used and reused elsewhere.
 
@@ -753,11 +753,11 @@ Motif also provides the `icon` class to size the icon relative to its font size 
 
 ## Interactive Elements
 
-**Location:** `/interactive/`
+**Location:** `core/interactive/`
 
 ### Buttons
 
-**Location:** `/interactive/button.less`
+**Location:** `core/interactive/button.less`
 
 Default interactive button styles. This `.button` class can be applied to `<a>`, `<button>`, or `<input>` elements. Button color and style classes can be combined with size classes, much like the type modules.
 
@@ -807,7 +807,7 @@ Classes           | Description
 
 ### Links
 
-**Location:** `/interactive/_links.less`
+**Location:** `core/interactive/_links.less`
 
 Very basic stuff. The primary link color can be altered in the `_config.less` file. Hover, focus, and current states are accounted for.
 
@@ -821,11 +821,11 @@ Basic class to remove some link styling.
 
 ## Forms
 
-**Location:** `/forms/`
+**Location:** `core/forms/`
 
 ### Elements
 
-**Location:** `/forms/_elements.less`
+**Location:** `core/forms/_elements.less`
 
 Inputs and textareas are set to `width: 100%` to adapt to the width of their wrapper. (Great for grids.) Select boxes are set to the width of their content, maxing out at `100%`.
 
@@ -874,7 +874,7 @@ While you are encouraged to use the responsive grid system in conjunction with y
 
 ### Type
 
-**Location:** `/forms/_type.less`
+**Location:** `core/forms/_type.less`
 
 #### Input Label
 
@@ -948,7 +948,7 @@ Lists of radio or checkbox inputs should typically be just that: lists. In Motif
 
 ### Messaging
 
-**Location:** `/forms/_messaging.less`
+**Location:** `core/forms/_messaging.less`
 
 #### Input States
 
@@ -977,11 +977,11 @@ Within labels, there are input alerts that apply to individual fields.
 
 ## Layout
 
-**Location:** `/layout/`
+**Location:** `core/layout/`
 
 ### Grid
 
-**Location:** `/layout/_grid.less`
+**Location:** `core/layout/_grid.less`
 
 The default responsive grid in Motif is built with a few rules in mind:
 
@@ -1004,45 +1004,34 @@ Our default responsive grid system only uses 3 grids to cover all of our bases:
 
 Understanding that, the syntax should be easy to understand. In these examples, we will talk about `grid, small`:
 
-- **Rows**: `.gs-row` (Grid, Small, Row)
-- **Columns**: `.gcs` (Grid, Column, Small)
-- **Column Width**: `.gs-half` (Grid, Small, Half-Width)
+- **Rows**: `.grid__sm-row` (Grid, Small, Row)
+- **Columns**: `.grid__sm` (Grid, Small)
+- **Column Width**: `.grid__sm-half` (Grid, Small, Half-Width)
 
 In practice:
 
 ```html
-<div class="gs-row">
-    <div class="gcs gs-half">...</div>
-    <div class="gcs gs-half">...</div>
+<div class="grid__sm-row">
+    <div class="grid__sm-half">...</div>
+    <div class="grid__sm-half">...</div>
 </div>
 ```
 
-However, to be slightly more succinct, you can use the condensed column syntax:
-
-**Columns (Condensed)**: `.gcs-half` (Grid, Column, Small, Half-Width)
-
-```html
-<div class="gs-row">
-    <div class="gcs-half">...</div>
-    <div class="gcs-half">...</div>
-</div>
-```
-
-In brief, the way the grid works is that `.gcs` floats the element to the left (by default), and adds padding to both the left and the right. `-half` gives it a width of `50%`. The combined padding of the two columns bumped up against each other form the full "gutter". The `.gs-row` then clears the floats and has a *negative* margin on both the left and the right that pops the columns out to the sides the exact width of their paddings, meaning the column content lines up with the site boundaries on the left and right without the need to specify "first" or "last" column classes.
+In brief, the way the grid works is that `.grid__sm` floats the element to the left (by default), and adds padding to both the left and the right. `-half` gives it a width of `50%`. The combined padding of the two columns bumped up against each other form the full "gutter". The `.grid__sm-row` then clears the floats and has a *negative* margin on both the left and the right that pops the columns out to the sides the exact width of their paddings, meaning the column content lines up with the site boundaries on the left and right without the need to specify "first" or "last" column classes.
 
 To use this responsively, then, you just add the classes by breakpoint:
 
 ```html
 <!-- These will be rows on all breakpoints -->
-<div class="gs-row gm-row gl-row">
+<div class="grid__sm-row grid__med-row grid__lg-row">
 
     <!-- Small: 50%; Medium: 33%; Large: 25% -->
-    <div class="gcs-half gcm-third gcl-quarter">
+    <div class="grid__sm-half grid__med-third grid__lg-quarter">
         ...
     </div>
 
     <!-- Small: 50%; Medium: 67%; Large: 75% -->
-    <div class="gcs-half gcm-two-thirds gcl-three-quarters">
+    <div class="grid__sm-half grid__med-two-thirds grid__lg-three-quarters">
         ...
     </div>
 </div>
@@ -1056,8 +1045,8 @@ By default, the column breakdown of each grid breakpoint:
 
 For the larger grids, the classes follow the numbers closely...
 
-- `.gcl-10of12`
-- `.gcm-4of9`
+- `.grid__lg-10of12`
+- `.grid__med-4of9`
 
 ...in just about every combination (based on their total column number), but all of the grids also have a few "fuzzy" shortcuts as well:
 
@@ -1120,7 +1109,7 @@ The syntax is simply the same as the regular responsive grid system, except the 
 
 ### Off-Canvas (Small Screens Only)
 
-**Location:** `/layout/_off-canvas.less`
+**Location:** `core/layout/_off-canvas.less`
 
 The Off-Canvas Trigger is a simple way of pushing a column of content off-canvas and sliding it on upon trigger. In this case, the `is-active` class is placed on the `.off-canvas` wrapping element so that it can adjust both child elements.
 
@@ -1148,11 +1137,11 @@ The Off-Canvas Trigger is a simple way of pushing a column of content off-canvas
 
 ## Furniture
 
-**Location:** `/furniture/`
+**Location:** `core/furniture/`
 
 ### Tables
 
-**Location:** `/furniture/_tables.less`
+**Location:** `core/furniture/_tables.less`
 
 Simple, clean default styles. Just mark it up like a normal table. Undoes table to more of a definition list on smaller viewports. (Hat tip: [Aaron Gustafson](http://codepen.io/aarongustafson/pen/ucJGv))
 
@@ -1191,7 +1180,7 @@ Simple, clean default styles. Just mark it up like a normal table. Undoes table 
 
 ### panel
 
-**Location:** `/furniture/_panel.less`
+**Location:** `core/furniture/_panel.less`
 
 Used to provide messaging to the user, whether it be direct or through calls to action. The panel typically indicates a visual separation and implied sub-grouping of its content.
 
@@ -1257,7 +1246,7 @@ Classes                | Description
 
 ### WYSIWYG
 
-**Location:** `/furniture/_wysiwyg.less`
+**Location:** `core/furniture/_wysiwyg.less`
 
 Though we keep our styles as flexible and modular as possible, there may be times, as when using a WYSIWYG editor, when some styles need to be baked in. Here, we specify a `.wysiwyg` class that wraps around that content, and hardcode some of those styles
 
@@ -1269,7 +1258,7 @@ Though we keep our styles as flexible and modular as possible, there may be time
 
 ## Responsive Breakpoints
 
-**Location:** `/site/`
+**Location:** `core/site/`
 
 By default, Motif starts out with five key viewport breakpoints:
 
@@ -1286,7 +1275,7 @@ Extra Large | `1240px`           | Our widescreen breakpoint
 
 ## Prototype
 
-**Location:** `/site/_proto.less`
+**Location:** `core/site/_proto.less`
 
 Motif's prototype styles add some visual interest, distinction, and polish without looking too "final". They're included in the `global.less` file by default, and we encourage you to leverage them as you prototype.
 
