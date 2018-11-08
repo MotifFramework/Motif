@@ -195,6 +195,61 @@
   }
 
   //
+  // scripts > tabs
+  //
+
+  .m-proto__tabs() {
+    .m-vertical-rhythm__margin-leader();
+  }
+
+  .m-proto__tabs-list() {
+    &:extend(.lists__horizontal all);
+
+    border-bottom: 1px solid @grey-4;
+    margin-bottom: @full-vertical;
+
+    a {
+
+        /* Extends .proto__lato-bold */
+        &:extend( .proto__lato-bold );
+
+        // Mixins
+        .m-border-radius__top( @default-radius );
+
+        padding: @half-vertical @full-side;
+        color: @grey-2;
+        text-decoration: none;
+        position: relative;
+        bottom: -1px;
+        z-index: 30;
+        border: 1px solid transparent;
+
+        &:hover,
+        &:focus {
+            color: @light-black;
+        }
+    }
+    .is-current {
+        color: @light-black;
+        background-color: @white;
+        border-color: @grey-2;
+        border-bottom-color: transparent;
+        z-index: 60;
+    }   
+  }
+
+  .m-proto__tabs-tab {
+    > :first-child {
+      margin-top: 0;
+    }
+  }
+
+  .m-proto__js-csstransitions-tabs-section() {
+    // Mixins
+    .m-transition( height, 0.3s, @easeOutCubic );
+  }
+
+  //
   // media > media
   //
 

@@ -110,12 +110,12 @@ Buttons
 
 */
 
-.button__blue {
+.proto__button--blue {
     #proto > .m-proto__button-primary();
 }
 
-.button__red,
-.button__danger {
+.proto__button--red,
+.proto__button--danger {
     .m-button__color( @red, @dark-red );
 }
 
@@ -125,33 +125,33 @@ Buttons
 Panels
 
 ````panel-alt
-<div class="panel--alt">
+<div class="proto__panel--alt">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel--alt">
+<div class="proto__panel--alt">
     <p>This is a feedback panel with no heading.</p>
 </div>
 ````
 
 ````panel-inverse
-<div class="panel--inverse">
+<div class="proto__panel--inverse">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
     <p><a href="#" class="btn">User Action</a></p>
 </div>
-<div class="panel--inverse">
+<div class="proto__panel--inverse">
     <p>This is a feedback panel with no heading.</p>
 </div>
 ````
 
 */
 
-.panel--alt {
+.proto__panel--alt {
     background-color: @white;
 }
-.panel--inverse {
+.proto__panel--inverse {
     color: @white;
     background-color: @blue;
     border-color: @blue;
@@ -377,73 +377,6 @@ Vertical Nav
 
 /*
 
-Tabs
-
-*/
-
-.tabs {
-    .m-vertical-rhythm__margin-leader();
-
-    nav > ul {
-        &:extend(.lists__horizontal all);
-    }
-}
-
-.tabs nav > ul,
-.tabs__list {
-    border-bottom: 1px solid @grey-4;
-    margin-bottom: @full-vertical;
-
-    a {
-
-        /* Extends .proto__lato-bold */
-        &:extend( .proto__lato-bold );
-
-        // Mixins
-        .m-border-radius__top( @default-radius );
-
-        padding: @half-vertical @full-side;
-        color: @grey-2;
-        text-decoration: none;
-        position: relative;
-        bottom: -1px;
-        z-index: 30;
-        border: 1px solid transparent;
-
-        &:hover,
-        &:focus {
-            color: @light-black;
-        }
-    }
-    .is-current {
-        color: @light-black;
-        background-color: @white;
-        border-color: @grey-2;
-        border-bottom-color: transparent;
-        z-index: 60;
-    }
-}
-
-.js.csstransitions .tabs {
-    > nav + *,
-    &__section {
-
-        // Mixins
-        .m-transition( height, 0.3s, @easeOutCubic );
-    }
-}
-
-.tabs {
-    > nav + * > *,
-    .tab {
-        > :first-child {
-            margin-top: 0;
-        }
-    }
-}
-
-/*
-
 Messaging
 
 */
@@ -519,15 +452,8 @@ Messaging
 Input Alerts
 
 */
-
-.messaging__input-alert {
+.proto__messaging__input-alert {
     &--info {
         .m-forms__input-alert-color(@info-color);
-    }
-}
-
-.no-boxshadow {
-    .proto__bubble {
-        border: 1px solid @grey;
     }
 }

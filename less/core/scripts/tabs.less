@@ -37,22 +37,28 @@ allows embedding and basic styling.
 */
 
 .tabs {
+    #proto > .m-proto__tabs();
+}
+
+.tabs__tab {
+    #proto > .m-proto__tab();
 
     .js & {
+        display: none;
 
-        > nav + *,
-        &__section {
-            position: relative;
-            overflow: hidden;
+        &.is-current {
+            display: block;
         }
+    }
+}
 
-        > nav + * > *,
-        .tab {
-            display: none;
+.tabs__section {
+    .js & {
+        position: relative;
+        overflow: hidden;
+    }
 
-            &.is-current {
-                display: block;
-            }
-        }
+    .js.csstransitions & {
+        #proto > .m-proto__js-csstransitions-tabs-section();
     }
 }
