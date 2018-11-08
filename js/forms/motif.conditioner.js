@@ -353,11 +353,13 @@
 						// ...disable all sub-form elements
 						$(o.affectedElems).each(function () {
 							$(this).prop("disabled", true);
+							$(this).attr("aria-hidden", "true");
 						});
 					}
 				} else if (o.state === "active") {
 					$(o.affectedElems).each(function () {
 						$(this).prop("disabled", true);
+						$(this).attr("aria-hidden", "true");
 					});
 				}
 
@@ -394,11 +396,13 @@
 
 						$(o.affectedElems).each(function () {
 							$(this).prop("disabled", false);
+							$(this).attr("aria-hidden", "false");
 						});
 					}
 				} else if (o.state === "active") {
 					$(o.affectedElems).each(function () {
 						$(this).prop("disabled", false);
+						$(this).attr("aria-hidden", "false");
 					});
 				}
 

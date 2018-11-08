@@ -594,11 +594,7 @@ export default class RevealTrigger {
     ariaToggle(elem) {
         ARIA.forEach(attr => {
             if (elem.hasAttribute(attr)) {
-                if (elem.getAttribute(attr) == "true") {
-                    elem.setAttribute(attr, "false") 
-                } else {
-                    elem.setAttribute(attr, "true")
-                }
+                elem.setAttribute(attr, !(elem.getAttribute(attr) === "true"));
             }
         });
     }

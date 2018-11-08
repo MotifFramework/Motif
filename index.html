@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="js" lang="en">
+
+<head>
+    <title></title>
+    <link href="/dist/css/motif.css" rel="stylesheet" />
+    <script src="/dist/js/helpers.motif.js"></script>
+    <style>
+        [data-conditional-target="target"]:not(.is-active) {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section class="mvl">
+            <ul class="tabs__list--x">
+                <li>
+                    <a class="js-tabs" href="#target1" data-reveal="target1" data-reveal-group="group1" data-reveal-current="true">Trigger 1</a>
+                </li>
+                <li>
+                    <a class="js-tabs" href="#target2" data-reveal="target2" data-reveal-group="group1">Trigger 2</a>
+                </li>
+            </ul>
+            <div class="tabs__section">
+                <div id="target1" class="tab" aria-expanded="false" aria-hidden>Target 1</div>
+                <div id="target2" class="tab" aria-hidden="true">Target 2</div>
+            </div>
+        </section>
+        <section class="mvl">
+            <div class="gl-row gm-row gs-row">
+                <div class="gcl-half gcm-half gcs-full">
+                    <form class="form">
+                        <label>
+                            Phone Number
+                            <input type="tel" name="phone">
+                            <div role="alert"></div>
+                        </label>
+                        <label>
+                            Email Address
+                            <input type="email" required name="email">
+                            <div aria-live="assertive"></div>
+                        </label>
+                        <button class="btn" type="submit" onclick="javascript: void(0);">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="mvl">
+            <div class="gl-row gm-row gs-row">
+                <div class="gcl-half gcm-half gcs-full">
+                    <form class="form">
+                        <label>
+                            Conditioner
+                            <input type="text" name="name">
+                        </label>
+                        <fieldset id="target" class="mtl">
+                            <label>
+                                First Name
+                                <input type="text" name="fname" placeholder="First Name">
+                            </label>
+                        </fieldset>
+                        <button data-conditional-reveal="target">Condition Trigger</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/dist/js/motif.js"></script>
+    <script>
+        $("form").gauntlet();
+    </script>
+</body>
+
+</html>
