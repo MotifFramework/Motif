@@ -123,6 +123,13 @@ like it placed.
     img {
         &:extend( .new-line );
     }
+
+    #proto > .m-proto__media-figure();
+
+    figcaption,
+    .figcaption {
+        #proto > .m-proto__media-figcaption();
+    }
 }
 @media @small-screens-min {
     [class*="media__figure--"] {

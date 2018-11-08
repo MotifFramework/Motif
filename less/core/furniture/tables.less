@@ -66,6 +66,11 @@ td {
     padding: @half-vertical @half-side;
     text-align: left;
 }
+td {
+    &[data-th]:before {
+        #proto > .m-proto__tables-data-th();
+    }
+}
 th {
     padding-top: @half-vertical;
 }
@@ -112,4 +117,6 @@ th {
     td {
         padding: @half-vertical @full-side;
     }
+
+    #proto > .m-proto__tables-medium-screens-min();
 }
