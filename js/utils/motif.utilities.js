@@ -1,16 +1,12 @@
 export function uAddClass (el, classNames) {
   if (el !== null && el !== undefined) {
-    uMakeClassArray(classNames).forEach(c => {
-      el.classList.add(c)
-    })
+    el.classList.add(...uMakeClassArray(classNames))
   }
 }
 
 export function uRemoveClass (el, classNames) {
   if (el !== null && el !== undefined) {
-    uMakeClassArray(classNames).forEach(c => {
-      el.classList.remove(c)
-    })
+    el.classList.remove(...uMakeClassArray(classNames))
   }
 }
 
@@ -31,22 +27,17 @@ export function uHasClass (el, classNames) {
   return truthy
 }
 
-export function uMakeClassArray (classNames) {
+function uMakeClassArray (classNames) {
   return classNames.split(' ')
-}
-
-export function uMakeClassStringWithPeriod (classNames) {
-  const arr = uMakeClassArray(classNames)
-  return `.${arr.join('.')}`
 }
 
 export function uIs (el, selector) {
   return (el.matches || el.matchesSelector || el.msMatchesSelector || el.mozMatchesSelector || el.webkitMatchesSelector || el.oMatchesSelector).call(el, selector)
 }
 
-export function uSiblings (el, classFilter) {
+export function uSiblings (el, selector) {
   return Array.from(el.parentNode.children).filter(child => {
-    return uIs(child, classFilter)
+    return uIs(child, selector)
   }, [])
 }
 
@@ -71,18 +62,18 @@ export function uRemoveElement (el) {
 }
 
 export function uDebounce(func, wait, immediate) {
-  let timeout;
+  let timeout
   return function() {
     let context = this, args = arguments;
     let later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    let callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
+      timeout = null
+      if (!immediate) func.apply(context, args)
+    }
+    let callNow = immediate && !timeout
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+    if (callNow) func.apply(context, args)
+  }
 }
 
 export function uSetCookie(cname, cvalue = true, exdays = 7) {
@@ -108,19 +99,15 @@ export function uGetCookie(cname) {
   return false
 }
 
-export function uScrollTo(selector, speed = 800, offset = 0) {
-  const target = document.querySelectorAll(selector)[0]
+export function uScrollTo(selector, behavior = "smooth", block = "start", inline = "nearest") {
+  const target = document.querySelector(selector)
 
-  if (target !== null) {
-    const clientTop = document.documentElement.clientTop || document.body.clientTop || 0;
+  if (document.contains(target)) {
+    target.scrollIntoView({ behavior, block, inline })
 
     if (selector.indexOf('#') > -1) {
       window.history.replaceState({},"", window.location.pathname + selector)
     }
-
-    $('html, body').animate({
-      scrollTop: target.getBoundingClientRect().top + $(window).scrollTop() - clientTop - offset
-    }, 800)
   } else {
     console.error("uScrollTo Error: Target does not exist.")
   }
@@ -129,7 +116,7 @@ export function uScrollTo(selector, speed = 800, offset = 0) {
 export function uFlatten(arr) {
   return arr.reduce(function (flat, toFlatten) {
     return flat.concat(Array.isArray(toFlatten) ? uFlatten(toFlatten) : toFlatten);
-  }, []);
+  }, [])
 }
 
 export function uAjaxWithResponse (method = 'GET', path = '', async = true, data = null, contentType = 'charset=UTF-8') {
