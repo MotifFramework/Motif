@@ -807,16 +807,16 @@ Classes           | Description
 
 ### Links
 
-**Location:** `core/interactive/_links.less`
+**Location:** `core/interactive/links.less`
 
-Very basic stuff. The primary link color can be altered in the `_config.less` file. Hover, focus, and current states are accounted for.
+Very basic stuff. The primary link color can be altered in the `config.less` file. Hover, focus, and current states are accounted for.
 
 #### Unlink
 
 Basic class to remove some link styling.
 
 ```html
-<a class="unlink" href="#">I look less like a link than I did before</a>
+<a class="links__unlink" href="#">I look less like a link than I did before</a>
 ```
 
 ## Forms
@@ -825,7 +825,7 @@ Basic class to remove some link styling.
 
 ### Elements
 
-**Location:** `core/forms/_elements.less`
+**Location:** `core/forms/elements.less`
 
 Inputs and textareas are set to `width: 100%` to adapt to the width of their wrapper. (Great for grids.) Select boxes are set to the width of their content, maxing out at `100%`.
 
@@ -840,20 +840,18 @@ Almost all the form elements in Motif are best used inside a `label`.
 
 #### Input Label Elements
 
-Child form elements of the `.input-label` class are given a little bit of  spacing to separate them from the label text.
-
-(For label text styling, see also how `.input-label` is handled in the `/forms/_type.less` file.)
+Child form elements of the `.elements__input-label` class are given a little bit of  spacing to separate them from the label text.
 
 ```html
-<label class="input-label">
+<label class="elements__input-label">
     Text Field
     <input type="text" name="text" placeholder="Placeholder text" required>
 </label>
-<label class="input-label">
+<label class="elements__input-label">
     Textarea
     <textarea name="textarea" placeholder="Placeholder text"></textarea>
 </label>
-<label class="input-label">
+<label class="elements__input-label">
     Select
     <select name="select">
         <option value="">Please Choose...</option>
@@ -866,24 +864,20 @@ Child form elements of the `.input-label` class are given a little bit of  spaci
 While you are encouraged to use the responsive grid system in conjunction with your form styles, sometimes it's useful to have form field widths that are simply consistent across viewports. These are those.
 
 ```html
-<label class="input-label">
+<label class="elements__input-label">
     Text Field
-    <input class="input--xs" type="text" name="text" required>
+    <input class="elements__input--xs" type="text" name="text" required>
 </label>
 ```
 
-### Type
-
-**Location:** `core/forms/_type.less`
-
 #### Input Label
 
-The `.input-label` class should be added to form labels that want a little extra styling for the label text.
+The `.elements__input-label` class should be added to form labels that want a little extra styling for the label text.
 
 (You may need to do some fancy things with hidden or altered labels, which is why these styles aren't added to the `label` element by default.)
 
 ```html
-<label class="input-label">
+<label class="elements__input-label">
     Text Field
     <input type="text" name="text" required>
 </label>
@@ -892,16 +886,16 @@ The `.input-label` class should be added to form labels that want a little extra
 There are also input descriptions, which go directly underneath the label text, and input hints that typically go underneath the input field.
 
 ```html
-<label class="input-label">
+<label class="elements__input-label">
     Text Field
 
-    <small class="input-desc">
+    <small class="elements__input-desc">
         This is a small description of the field.
     </small>
 
     <input type="text" name="text" required>
 
-    <strong class="input-hint">
+    <strong class="elements__input-hint">
         This is an important hint.
     </strong>
 </label>
@@ -919,25 +913,25 @@ Lists of radio or checkbox inputs should typically be just that: lists. In Motif
 
     <ul class="checkbox-list">
         <li>
-            <label class="media-object">
-                <input class="media-object__figure"
+            <label class="media__media-object">
+                <input class="media__figure"
                  type="radio"
                  name="radioList"
                  value="Yes">
 
-                <b class="media-object__desc">
+                <b class="media__desc">
                     Yes
                 </b>
             </label>
         </li>
         <li>
-            <label class="media-object">
-                <input class="media-object__figure"
+            <label class="media__media-object">
+                <input class="media__figure"
                  type="radio"
                  name="radioList"
                  value="No">
 
-                <b class="media-object__desc">
+                <b class="media__desc">
                     No
                 </b>
             </label>

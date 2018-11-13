@@ -27,27 +27,27 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 */
 
 .media__media-object {
-    &:extend( .new-line );
+    &:extend( .presentational__new-line );
 
     &,
     & > *,
-    &__desc {
+    .media__desc {
         overflow: hidden;
     }
     &--checkbox {
 
         // Extends
-        &:extend( .group all );
+        &:extend( .presentational__group all );
 
         /* Display & Box Model */
         display: inline-block;
         overflow: visible;
 
         > :first-child,
-        .media-object__figure {
+        .media__figure {
 
             // Extends
-            &:extend( .float--left );
+            &:extend( .presentational__float-left );
 
             /* Display & Box Model */
             margin-right: @quarter-side;
@@ -55,9 +55,9 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
     }
     > *,
     > :first-child img,
-    &__figure img,
-    &__desc {
-        &:extend( .new-line );
+    .media__figure img,
+    .media__desc {
+        &:extend( .presentational__new-line );
     }
 }
 
@@ -65,14 +65,14 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 @media @small-screens-min {
     .media__media-object {
         > :first-child,
-        &__figure {
+        .media__figure {
             max-width: 40%;
             margin-top: 0;
             margin-right: @full-side;
             float: left;
         }
         > *,
-        &__desc { 
+        .media__desc {
             & > :first-child {
                 margin-top: 0;
             }
@@ -84,7 +84,7 @@ See: [The Media Object Saves Hundreds of Lines of Code][1]
 @media @medium-screens-min {
     .media__media-object {
         > :first-child,
-        &__figure {
+        .media__figure {
             max-width: 50%;
         }
     }
@@ -121,7 +121,7 @@ like it placed.
 
     > a,
     img {
-        &:extend( .new-line );
+        &:extend( .presentational__new-line );
     }
 }
 @media @small-screens-min {
