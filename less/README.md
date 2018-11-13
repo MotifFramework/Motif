@@ -151,7 +151,9 @@ views/pages/contact/contact.view
 
 // Parent Style Path
 less/pages/contact/contact.less
+```
 
+```
 // Partial Template Path
 views/pages/contact/contactForm/contactForm.view
 
