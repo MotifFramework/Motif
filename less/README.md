@@ -141,6 +141,24 @@ views/pages/home/home.view
 less/pages/home/home.less
 ```
 
+### Partials
+
+A **partial** is a template that is used on only one template, which can be useful when you want to break out a large template into multiple partials to help legibility. A partial follows the same naming scheme as a page or a shared template, but they their directories are placed within the parent template in which they are used.
+
+```
+// Parent Template Path
+views/pages/contact/contact.view
+
+// Parent Style Path
+less/pages/contact/contact.less
+
+// Partial Template Path
+views/pages/contact/contactForm/contactForm.view
+
+// Partial Style Path
+less/pages/contact/contactForm/contactForm.less
+```
+
 This section of the site should give you a great overview of Motif's built-in modules and ideas, but be sure to get into the actual code for more granular comments and explanations.
 
 ## Naming Convention
