@@ -1245,7 +1245,7 @@ Classes                | Description
 
 ### WYSIWYG
 
-**Location:** `core/furniture/_wysiwyg.less`
+**Location:** `core/furniture/wysiwyg.less`
 
 Though we keep our styles as flexible and modular as possible, there may be times, as when using a WYSIWYG editor, when some styles need to be baked in. Here, we specify a `.wysiwyg` class that wraps around that content, and hardcode some of those styles
 
@@ -1274,7 +1274,7 @@ Extra Large | `1240px`           | Our widescreen breakpoint
 
 ## Prototype
 
-**Location:** `core/site/_proto.less`
+**Location:** `core/site/proto.less`
 
 Motif's prototype styles add some visual interest, distinction, and polish without looking too "final". They're included in the `global.less` file by default, and we encourage you to leverage them as you prototype.
 
@@ -1285,5 +1285,5 @@ Once you're ready to move from prototype to production code, nixing the proto st
  * Prototype Styles
  * REMOVE WHEN BEGINNING PRODUCTION
  */
-@import "site/_proto.less";
+@import "site/proto.less";
 ```
