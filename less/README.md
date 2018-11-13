@@ -143,7 +143,7 @@ less/pages/home/home.less
 
 ### Partials
 
-A **partial** is a template that is used on only one template, which can be useful when you want to break out a large template into multiple partials to help legibility. A partial follows the same naming scheme as a page or a shared template, but they their directories are placed within the parent template in which they are used.
+A **partial** is a template that is used on only one template, which can be useful when you want to break out a large template into smaller, manageable parts. A partial follows the same naming scheme as a page or shared template, but their directories are placed within the parent template in which they are used.
 
 ```
 // Parent Template Path
