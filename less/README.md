@@ -1065,42 +1065,42 @@ The syntax is simply the same as the regular responsive grid system, except the 
 
 ```html
 <!-- Rows with the `--flex` modifier turn a grid into a flexible media grid -->
-<ul class="gs-row--flex gm-row--flex gl-row--flex">
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
+<ul class="grid__sm-row--flex grid__med-row--flex grid__lg-row--flex">
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
             <img src="http://placehold.it/400">
             <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
-            <img src="http://placehold.it/400">
-        </figure>
-    </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
             <img src="http://placehold.it/400">
             <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
-    <li class="gcs-half gcm-third gcl-third">
-        <figure class="figure">
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
+            <img src="http://placehold.it/400">
+            <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+        </figure>
+    </li>
+   <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
+            <img src="http://placehold.it/400">
+        </figure>
+    </li>
+    <li class="grid__sm-half grid__med-third grid__lg-third">
+        <figure class="media__figure">
             <img src="http://placehold.it/400">
         </figure>
     </li>
@@ -1109,27 +1109,27 @@ The syntax is simply the same as the regular responsive grid system, except the 
 
 ### Off-Canvas (Small Screens Only)
 
-**Location:** `core/layout/_off-canvas.less`
+**Location:** `core/layout/off-canvas.less`
 
-The Off-Canvas Trigger is a simple way of pushing a column of content off-canvas and sliding it on upon trigger. In this case, the `is-active` class is placed on the `.off-canvas` wrapping element so that it can adjust both child elements.
+The Off-Canvas Trigger is a simple way of pushing a column of content off-canvas and sliding it on upon trigger. In this case, the `is-active` class is placed on the `.off-canvas__shift-*` wrapping element so that it can adjust both child elements.
 
 ```html
 <!-- Only the primary canvas is showing -->
-<div class="off-canvas">
-    <div class="canvas__primary">
+<div class="off-canvas__shift--left">
+    <div class="off-canvas__primary">
         ...
     </div>
-    <div class="canvas__secondary">
+    <div class="off-canvas__secondary">
         ...
     </div>
 </div>
 
 <!-- Now only the secondary canvas is showing -->
-<div class="off-canvas is-active">
-    <div class="canvas__primary">
+<div class="off-canvas__shift--left is-active">
+    <div class="off-canvas__primary">
         ...
     </div>
-    <div class="canvas__secondary">
+    <div class="off-canvas__secondary">
         ...
     </div>
 </div>
@@ -1141,7 +1141,7 @@ The Off-Canvas Trigger is a simple way of pushing a column of content off-canvas
 
 ### Tables
 
-**Location:** `core/furniture/_tables.less`
+**Location:** `core/furniture/tables.less`
 
 Simple, clean default styles. Just mark it up like a normal table. Undoes table to more of a definition list on smaller viewports. (Hat tip: [Aaron Gustafson](http://codepen.io/aarongustafson/pen/ucJGv))
 
@@ -1180,7 +1180,7 @@ Simple, clean default styles. Just mark it up like a normal table. Undoes table 
 
 ### panel
 
-**Location:** `core/furniture/_panel.less`
+**Location:** `core/furniture/panel.less`
 
 Used to provide messaging to the user, whether it be direct or through calls to action. The panel typically indicates a visual separation and implied sub-grouping of its content.
 
@@ -1189,7 +1189,7 @@ Used to provide messaging to the user, whether it be direct or through calls to 
 <div class="panel">
     <h3>This is a Panel</h3>
     <p>This is a <a href="#">feedback message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
+    <p><a href="#" class="button__primary">User Action</a></p>
 </div>
 
 <!-- Panel with no heading -->
@@ -1201,8 +1201,7 @@ Used to provide messaging to the user, whether it be direct or through calls to 
 Classes          | Description
 -----------------|-----------------
 `panel`          | Default callout panel
-`panel--alt`     | An alternate panel style
-`panel--inverse` | A change-of-pace panel with inverse styles
+`panel--thin`    | An alternate panel style
 
 #### Alert Panel
 
@@ -1210,39 +1209,39 @@ This variation of the standard `.panel` is used specifically for delivering dire
 
 ```html
 <!-- Alert panel with block content -->
-<div class="alert-panel--info">
+<div class="panel__alert--info">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
+    <p><a href="#" class="button__primary">User Action</a></p>
 </div>
-<div class="alert-panel--error">
+<div class="panel__alert--error">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
+    <p><a href="#" class="button__primary">User Action</a></p>
 </div>
-<div class="alert-panel--success">
+<div class="panel__alert--success">
     <h3>This is a Panel</h3>
     <p>This is an <a href="#">alert message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
+    <p><a href="#" class="button__primary">User Action</a></p>
 </div>
 
 <!-- Alert panel with just text -->
-<p class="alert-panel--info">
+<p class="panel__alert--info">
     This is an alert panel with no heading.
 </p>
-<p class="alert-panel--error">
+<p class="panel__alert--error">
     This is an alert panel with no heading.
 </p>
-<p class="alert-panel--success">
+<p class="panel__alert--success">
     This is an alert panel with no heading.
 </p>
 ```
 
 Classes                | Description
 -----------------------|-----------------------
-`alert-panel--info`    | Informational alert
-`alert-panel--error`   | Indicative of errors and warnings
-`alert-panel--success` | A success alert
+`panel__alert--info`    | Informational alert
+`panel__alert--error`   | Indicative of errors and warnings
+`panel__alert--success` | A success alert
 
 ### WYSIWYG
 
