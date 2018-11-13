@@ -948,14 +948,14 @@ Lists of radio or checkbox inputs should typically be just that: lists. In Motif
 
 ### Messaging
 
-**Location:** `core/forms/_messaging.less`
+**Location:** `core/forms/messaging.less`
 
 #### Input States
 
 A couple of classes added to inputs (typically by a JS Validation plugin) that alter the child elements to convey states of success and error.
 
 ```html
-<label class="input-label is-erroneous">
+<label class="elements__input-label messaging__is-erroneous">
     Text Field
     <input type="text" name="text" required>
 </label>
@@ -966,10 +966,10 @@ A couple of classes added to inputs (typically by a JS Validation plugin) that a
 Within labels, there are input alerts that apply to individual fields.
 
 ```html
-<label class="input-label is-erroneous">
+<label class="elements__input-label messaging__is-erroneous">
     Text Field
     <input type="text" name="text" required>
-    <strong class="input-alert--error">
+    <strong class="messaging__input-alert--error">
         This field is required.
     </strong>
 </label>
@@ -981,7 +981,7 @@ Within labels, there are input alerts that apply to individual fields.
 
 ### Grid
 
-**Location:** `core/layout/_grid.less`
+**Location:** `core/layout/grid.less`
 
 The default responsive grid in Motif is built with a few rules in mind:
 
