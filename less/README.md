@@ -928,10 +928,10 @@ Lists of radio or checkbox inputs should typically be just that: lists. In Motif
 ```html
 <fieldset>
     <legend>
-        <b class="input-label">This is a question for a radio list?</b>
+        <b class="elements__input-label">This is a question for a radio list?</b>
     </legend>
 
-    <ul class="checkbox-list">
+    <ul class="elements__checkbox-list">
         <li>
             <label class="media__media-object">
                 <input class="media__figure"
