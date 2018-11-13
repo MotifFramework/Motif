@@ -458,26 +458,28 @@ A basic stripping of list styles.
 
 ### Media
 
-**Location:** `core/media/media.less`
-
 #### Media Object
+
+**Location:** `core/media/media-object.less`
 
 The Media Object is an image (or media-type) to the left with (typically) descriptive content to the right. The media object can be whatever size it wants, the basic format will remain the same. (Text will **not** wrap.)  This has any number of applications, such as a checkbox next to a label with lots of text.
 
 See: [The Media Object Saves Hundreds of Lines of Code](http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code/)
 
 ```html
-<div class="media__media-object">
-    <div class="media__figure">
+<div class="media-object">
+    <div class="media-object__figure">
         <img src="http://placehold.it/200" alt="A media object image">
     </div>
-    <div class="media__desc">
+    <div class="media-object__desc">
         <p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
     </div>
 </div>
 ```
 
 #### Figures
+
+**Location:** `core/media/media.less`
 
 Great for integrating images into bodies of text, the `.media__figure` class is modified by the `--left` and `--right` keywords depending on where you would like it placed.
 
@@ -933,25 +935,25 @@ Lists of radio or checkbox inputs should typically be just that: lists. In Motif
 
     <ul class="elements__checkbox-list">
         <li>
-            <label class="media__media-object">
-                <input class="media__figure"
+            <label class="media-object">
+                <input class="media-object__figure"
                  type="radio"
                  name="radioList"
                  value="Yes">
 
-                <b class="media__desc">
+                <b class="media-object__desc">
                     Yes
                 </b>
             </label>
         </li>
         <li>
-            <label class="media__media-object">
-                <input class="media__figure"
+            <label class="media-object">
+                <input class="media-object__figure"
                  type="radio"
                  name="radioList"
                  value="No">
 
-                <b class="media__desc">
+                <b class="media-object__desc">
                     No
                 </b>
             </label>
