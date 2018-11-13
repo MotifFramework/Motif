@@ -468,10 +468,10 @@ See: [The Media Object Saves Hundreds of Lines of Code](http://www.stubbornella.
 
 ```html
 <div class="media__media-object">
-    <div class="media__media-object__figure">
+    <div class="media__figure">
         <img src="http://placehold.it/200" alt="A media object image">
     </div>
-    <div class="media__media-object__desc">
+    <div class="media__desc">
         <p>He is here. No! Alderaan is peaceful. We have no weapons. You can't possibly&hellip; Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff, but I've never seen anything to make me believe there's one all-powerful Force controlling everything. There's no mystical energy field that controls my destiny. It's all a lot of simple tricks and nonsense. I can't get involved! I've got work to do! It's not that I like the Empire, I hate it, but there's nothing I can do about it right now. It's such a long way from here. I'm surprised you had the courage to take the responsibility yourself. The more you tighten your grip, Tarkin, the more star systems will slip through your fingers.</p>
     </div>
 </div>
