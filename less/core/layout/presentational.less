@@ -144,3 +144,22 @@ Exactly what it sounds like.
 .presentational__relative-container {
     position: relative;
 }
+
+/*
+
+"No Scroll"
+
+Paired with "motif.utitlies.js" to make the page non-scrollable
+
+*/
+
+html,
+body {
+
+    &.presentational__no-scroll {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: fixed
+    }
+}
