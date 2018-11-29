@@ -93,9 +93,6 @@ export default class SyncInput {
         } else {
           storeElement = false
         }
-      } else if (this.element.type == 'checkbox') {
-        this.element.dispatchEvent(uCreateEvent('change'))
-        storeElement = false
       } else {
         this.element.dispatchEvent(uCreateEvent('change'))
       }
