@@ -77,6 +77,7 @@ export default class SyncInput {
 
     this.element.addEventListener('change', this.handleChange.bind(this))
 
+    let storeElement = true
     // First time load
     if (
       (!this.element.hasAttribute('data-sync-input-on-load') || this.element.getAttribute('data-sync-input-on-load') == "true") &&
@@ -84,10 +85,23 @@ export default class SyncInput {
       this.settings.dispatchChange
     ) {
 
-      this.element.dispatchEvent(uCreateEvent('change'))
+      // we don't want to dispatch an event on an unchanged radio button
+      if (this.element.type == 'radio') {
+
+        if (this.element.checked) {
+          this.element.dispatchEvent(uCreateEvent('change'))
+        } else {
+          storeElement = false
+        }
+      } else if (this.element.type == 'checkbox') {
+        this.element.dispatchEvent(uCreateEvent('change'))
+        storeElement = false
+      } else {
+        this.element.dispatchEvent(uCreateEvent('change'))
+      }
     }
 
-    if (this.element.hasAttribute('name')) {
+    if (this.element.hasAttribute('name') && storeElement) {
       window.utils.syncInput.push(this.element.getAttribute('name'))
     }
   }
