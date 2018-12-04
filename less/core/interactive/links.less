@@ -1,0 +1,65 @@
+/*
+
+Link Styles
+
+Very basic stuff. The primary link color can be altered in the `config.less` 
+file. Hover, focus, and current states are accounted for.
+
+*/
+
+a {
+
+	&:focus,
+	&:active,
+	&:hover {
+		outline: 0;
+	}
+}
+
+a,
+.links__link {
+	color: @primary-link-color;
+
+	&:hover,
+	&:focus,
+	&.is-current {
+		color: @primary-link-hover;
+	}
+}
+
+/*
+
+Unlink
+
+Basic class to remove some link styling.
+
+@TODO: Put in `presentational.less` file?
+
+*/
+
+.links__unlink {
+	text-decoration: none;
+}
+
+/*
+
+Skip-To Link
+
+*/
+
+.links__skip-to {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: inline-block;
+
+    &,
+    &:focus {}
+
+    &:hover {}
+
+    &:not(:focus) {
+        .m-presentational__visually-hidden();
+    }
+}

@@ -1,0 +1,53 @@
+/*
+
+WYSIWYG
+
+Though we keep our styles as flexible and modular as possible, there may be 
+times, as when using a WYSIWYG editor, when some styles need to be baked in. 
+Here, we specify a `.wysiwyg` class that wraps around that content, and 
+hardcode some of those styles
+
+    <div class="wysiwyg">
+        [WYSIWYG Content]
+    </div>
+
+*/
+
+.wysiwyg {
+    h1 {
+        margin-top: 0;
+    }
+    h2,
+    h3,
+    h4,
+    h5,
+    h6  {
+        margin-top: 1.5em;
+    }
+}
+.wysiwyg {
+    h1,
+    .hierarchy__canon-text {
+        &:extend( .hierarchy__canon-text );
+    }
+    h2,
+    .hierarchy__paragon-text {
+        &:extend( .hierarchy__paragon-text );
+    }
+    h3,
+    .primer-text {
+        &:extend( .hierarchy__primer-text );
+    }
+    h4,
+    .hierarchy__normal-text {
+        &:extend( .hierarchy__normal-text );
+    }
+    h5,
+    .hierarchy__petite-text {
+        &:extend( .hierarchy__petite-text );
+    }
+    h6,
+    .hierarchy__minion-text {
+        &:extend( .hierarchy__minion-text );
+    }
+}

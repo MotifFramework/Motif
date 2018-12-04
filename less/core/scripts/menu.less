@@ -1,0 +1,34 @@
+/*
+
+Main Nav Module
+
+A minor enhancement to the Reveal or Expand Target modules if added to the
+main navigation bar. This snippet, on Medium screens and larger, makes sure
+the expandable Nav (on smaller screens) is no longer hidden, and that the 
+Menu Title (be it "Main Menu", the hamburger icon, etc.) is hidden from view.
+
+    <nav class="nav-bar--menu" role="navigation">
+        <h3 class="menu__title js-expand" id="reveal-main-nav">
+            <svg class="icon"><use xlink:href="#rows"></svg>
+            Main Menu
+        </h3>
+        <ul class="menu__list expand__target" id="main-nav-list">
+            ...
+        </ul>
+    </nav>
+
+*/
+
+.menu__list {
+    .js & {
+        @media @medium-screens-min {
+            max-height: 999px;
+        }
+    }
+}
+
+.menu__title {
+    @media @medium-screens-min {
+        display: none;
+    }
+}

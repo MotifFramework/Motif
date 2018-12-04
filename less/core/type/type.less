@@ -1,0 +1,135 @@
+/*
+
+Type
+
+*/
+
+/*
+
+HTML Font Size Adjust
+
+1. Corrects text resizing oddly in IE6/7 when body `font-size` is set using
+   `em` units.
+2. Prevents iOS text size adjust after orientation change, without disabling
+   user zoom.
+
+*/
+
+html {
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+html,
+button,
+input,
+select,
+textarea {
+    font-family: sans-serif;
+}
+
+abbr[title] {
+    border: none;
+}
+i,
+cite,
+address {
+    font-style: normal;
+}
+dfn {
+    font-style: italic;
+}
+b {
+    font-weight: normal;
+}
+strong {
+    font-weight: bold;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+blockquote,
+menu,
+ul,
+ol,
+dl,
+table,
+figure {
+
+    /* Display & Box Model */
+    margin: @full-vertical 0 0 0;
+
+    /* Other */
+    font-size: 1em;
+}
+menu,
+ol,
+ul {
+    padding-left: 2.5em;
+}
+li {
+    ul,
+    ol {
+
+        // Mixins
+        .m-vertical-rhythm__margin-vertical(0.5);
+    }
+}
+dd {
+    margin-left: 2.5em;
+}
+
+blockquote {
+    padding: 1.25em 2.5em;
+
+    > :first-child {
+        margin-top: 0;
+    }
+}
+q {
+    quotes: none;
+
+    &:before,
+    &:after {
+        content: "";
+        content: none;
+    }
+}
+mark {
+    background: #ff0;
+    color: #000;
+}
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+    font-size: 1em;
+}
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+small {
+    font-size: 1em;
+}
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sup {
+    top: -0.5em;
+}
+sub {
+    bottom: -0.25em;
+}

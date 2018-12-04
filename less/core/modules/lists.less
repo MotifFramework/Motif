@@ -1,0 +1,229 @@
+/*
+
+Unstyled List
+
+A basic stripping of list styles.
+
+*/
+
+.lists__unstyled {
+    .m-type__unstyled-list();
+}
+
+/*
+
+Horizontal List
+
+The basic horizontal list module simply removes bullets from lists and inlines the list 
+items, making the link `inline-block`. The idea is to give the skeleton of a 
+horizontal list/navigation without adding too much style (yet).
+
+*/
+
+.lists__horizontal {
+    &:extend(.lists__unstyled);
+
+    li {
+        display: inline;
+    }
+    
+    a {
+        display: inline-block;
+    }
+}
+
+/*
+
+Horizontal List (Forceful)
+
+Rather than making the list `inline-block`, it floats the list elements 
+(except on the smallest screen sizes, where it remains vertical). More precise
+than the default Horizontal List.
+
+*/
+
+.lists__horizontal--forceful {
+    &:extend(.lists__unstyled);
+
+    @media @small-screens-min {
+        .m-grid__clearfix();
+    }
+    
+    li {
+        display: block;
+
+        @media @small-screens-min {
+            float: left;
+        }
+    }
+    
+    a {
+        display: block;
+    }
+}
+
+/*
+
+Link List
+
+A basic extension of the Horizontal List, this adds some margin to the links in
+the list for a more pleasant looking list of links.
+
+````link-list
+<ul class="lists__horizontal--links">
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+    <li>
+        <a href="#">Basic Link</a>
+    </li>
+</ul>
+````
+
+*/
+
+.lists__horizontal--links {
+    &:extend(.lists__horizontal);
+    
+    li {
+        &:extend(.lists__horizontal li);
+    }
+    
+    a {
+        &:extend(.lists__horizontal a);
+
+        margin-right: 30px;
+    }
+
+    li:last-child a {
+        margin-right: 0;
+    }
+}
+
+/*
+
+Pagination
+
+An extension of the basic horizontal list module that simply adds enough padding on
+the links for pagination.
+
+*/
+
+.lists__horizontal--pgs {
+    &:extend(.lists__horizontal);
+    
+    li {
+        &:extend(.lists__horizontal li);
+    }
+
+    a {
+        &:extend(.lists__horizontal a);
+
+        padding: 0 0.625em;
+
+        &[href] {
+            &:extend( .links__link all );
+        }
+
+        &,
+        &:hover,
+        &:focus {
+            color: inherit;
+        }
+    }
+}
+
+/*
+
+Breadcrumb
+
+Another extension of the horizontal list module, adding a breadcrumb `label` 
+and floating it and the ordered list.
+
+````breadcrumb
+<nav class="lists__breadcrumb" role="navigation">
+    <ol class="lists__breadcrumb-list">
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a href="#">Breadcrumb Link</a>
+        </li>
+        <li>
+            <a>Breadcrumb Link</a>
+        </li>
+    </ol>
+</nav>
+````
+
+*/
+
+.lists__breadcrumb {
+    &:extend(.presentational__group);
+    .m-vertical-rhythm__margin-leader();
+}
+
+.lists__breadcrumb-label {
+    margin: 0 @half-side 0 0;
+    float: left;
+}
+
+.lists__breadcrumb-list {
+    &:extend(.lists__horizontal);
+
+    margin: 0;
+    float: left;
+
+    li {
+        &:extend(.lists__horizontal li);
+
+        margin-right: @half-side;
+    }
+
+    a {
+        &:extend(.lists__horizontal a);
+    }
+}
+
+/*
+
+Button List
+
+````button-list
+<ul class="lists__horizontal--buttons">
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary is-current" href="#">Button</a>
+    </li>
+    <li>
+        <a class="btn--primary" href="#">Button</a>
+    </li>
+</ul>
+````
+
+*/
+
+.lists__horizontal--buttons {
+    &:extend(.lists__horizontal);
+
+    margin-top: 0;
+    overflow: hidden;
+    
+    li {
+        &:extend(.lists__horizontal li);
+
+        display: block;
+        float: left;
+    }
+    
+    a {
+        &:extend(.lists__horizontal a);
+
+        display: block;
+    }
+}

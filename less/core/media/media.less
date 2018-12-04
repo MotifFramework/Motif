@@ -1,0 +1,54 @@
+/*
+
+Figures
+
+Great for integrating images into bodies of text, the `.media__figure` class is 
+modified by the `--left` and `--right` keywords depending on where you would 
+like it placed.
+
+````plain-media
+<figure class="media__figure">
+    <img src="http://placehold.it/800x444" alt="A full-width photo">
+</figure>
+````
+
+````captioned-media
+<figure class="media__figure">
+    <img src="http://placehold.it/800x444" alt="A full-width photo with a caption">
+    <figcaption class="media__figcaption">This caption enhances the photo above. It should only be a brief sentence or two long.</figcaption>
+</figure>
+````
+
+*/
+
+.media__figure,
+[class*="media__figure--"] {
+
+    // Mixins
+    .m-vertical-rhythm__margin-leader();
+
+    > a,
+    img {
+        &:extend( .presentational__new-line );
+    }
+}
+@media @small-screens-min {
+    [class*="media__figure--"] {
+        margin-top: 0;
+        max-width: 50%;
+    }
+    .media__figure {
+        &--left,
+        &--right {
+            padding-bottom: @half-vertical;
+        }
+        &--left    {
+            float: left;
+            padding-right: @double-side;
+        }
+        &--right   {
+            float: right;
+            padding-left: @double-side;
+        }
+    }
+}
