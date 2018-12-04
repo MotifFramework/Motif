@@ -1,0 +1,185 @@
+// Set @total-width to 100% for a fluid layout
+@total-width: 960px;
+
+.m-grid__clearfix() {
+
+    &:before,
+    &:after {
+        content:		"\0020";
+        height:			0;
+        display:		block;
+        overflow:		hidden;
+    }
+
+    &:after {
+        clear:			both;
+    }
+}
+
+#mixed {
+
+    .m-grid__row(@mar: @base-margin)    {
+
+        // Variables
+        @grid-margin: 1rem * ((@mar / 2) / @root-text-size);
+
+        // Create
+        margin-left: -@grid-margin;
+        margin-right: -@grid-margin;
+
+        // Mixins
+        .m-grid__clearfix();
+        //.inline-block-fallback();
+    }
+
+    .m-grid__column(@float: left)  {
+        display: inline;
+        float: @float;
+    }
+
+    .m-grid__padding(@mar: @base-margin)   {
+    
+        // Variables
+        @grid-margin: 1rem * ((@mar / 2) / @root-text-size);
+    
+        // Create
+        padding-left: @grid-margin;
+        padding-right: @grid-margin;
+    }
+}
+#mixins {
+
+    .m-grid__loop ( @int, @total, @pre ) when ( @int > 0 ) and ( @total > 4 ) {
+        
+        @width: round( ( 100% * ( @int / @total ) ), 5 );
+
+        #mixins > .m-grid__create( @int, @total, @pre, @width );
+        #mixins > .m-grid__loop( @int - 1, @total, @pre );
+    }
+
+    .m-grid__loop ( 0, @total ) {}
+
+    .m-grid__loop ( @int, 4 ) {}
+}
+#mixins {
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = med ) and ( @width = 75% ) {
+
+        [class*="grid__med-@{int}of@{total}"] {
+            &:extend( .grid__med-three-quarters );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = med ) and ( @width = 66.66667% ) {
+
+        [class*="grid__med-@{int}of@{total}"] {
+            &:extend( .grid__med-two-thirds );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = med ) and ( @width = 50% ) {
+
+        [class*="grid__med-@{int}of@{total}"] {
+            &:extend( .grid__med-half );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = med ) and ( @width = 33.33333% ) {
+
+        [class*="grid__med-@{int}of@{total}"] {
+            &:extend( .grid__med-third );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = med ) and ( @width = 25% ) {
+
+        [class*="grid__med-@{int}of@{total}"] {
+            &:extend( .grid__med-quarter );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = sm ) and ( @width = 75% ) {
+
+        [class*="grid__sm-@{int}of@{total}"] {
+            &:extend( .grid__sm-three-quarters );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = sm ) and ( @width = 66.66667% ) {
+
+        [class*="grid__sm-@{int}of@{total}"] {
+            &:extend( .grid__sm-two-thirds );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = sm ) and ( @width = 50% ) {
+
+        [class*="grid__sm-@{int}of@{total}"] {
+            &:extend( .grid__sm-half );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = sm ) and ( @width = 33.33333% ) {
+
+        [class*="grid__sm-@{int}of@{total}"] {
+            &:extend( .grid__sm-third );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = sm ) and ( @width = 25% ) {
+
+        [class*="grid__sm-@{int}of@{total}"] {
+            &:extend( .grid__sm-quarter );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = lg ) and ( @width = 75% ) {
+
+        [class*="grid__lg-@{int}of@{total}"] {
+            &:extend( .grid__lg-three-quarters );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = lg ) and ( @width = 66.66667% ) {
+
+        [class*="grid__lg-@{int}of@{total}"] {
+            &:extend( .grid__lg-two-thirds );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = lg ) and ( @width = 50% ) {
+
+        [class*="grid__lg-@{int}of@{total}"] {
+            &:extend( .grid__lg-half );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = lg ) and ( @width = 33.33333% ) {
+
+        [class*="grid__lg-@{int}of@{total}"] {
+            &:extend( .grid__lg-third );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when ( @pre = lg ) and ( @width = 25% ) {
+
+        [class*="grid__lg-@{int}of@{total}"] {
+            &:extend( .grid__lg-quarter );
+        }
+    }
+
+    .m-grid__create ( @int, @total, @pre, @width ) when not ( @width = 25% ) and not ( @width = 33.33333% ) and not ( @width = 50% ) and not ( @width = 66.66667% ) and not ( @width = 75% ) {
+
+        [class*="grid__@{pre}-@{int}of@{total}"] {
+            width: @width;
+        }
+    }
+}
+#mixins {
+    .m-grid__all ( @int, @total, @pre ) when ( @int > 0 ) and ( @total > 4 ) {
+        #mixins > .m-grid__loop( @int, @total, @pre );
+        #mixins > .m-grid__all( @total - 2, @total - 1, @pre );
+    }
+    .m-grid__all ( 0, @total, @pre ) {}
+    .m-grid__all ( @int, 4, @pre ) {}
+}

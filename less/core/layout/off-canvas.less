@@ -1,0 +1,375 @@
+/*
+
+Off-Canvas Trigger (Small Screens Only)
+
+The Off-Canvas Trigger is a simple way of pushing a column of content
+off-canvas and sliding it on upon trigger. In this case, the `is-active` 
+class is placed on the `.off-canvas` wrapping element so that it can 
+adjust both child elements.
+
+@TODO: Adjust for IE9?
+@TODO: Show better example w/ Reveal plugin
+
+    <div class="off-canvas__shift--left">
+        <div class="off-canvas__primary">
+            ...
+        </div>
+        <div class="off-canvas__secondary">
+            ...
+        </div>
+    </div>
+
+*/
+
+.off-canvas__shift-base {
+    position: relative;
+    overflow: hidden;
+}
+
+.off-canvas__primary-base {
+
+    .js & {
+        position: relative;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .off-canvas__shift-base.is-active > & {
+        transform: translate3d(0, 0, 0);
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .off-canvas__shift-base.is-active > &,
+    .off-canvas__shift-base.was-active > & {
+        transition: all 0.15s @easeOutCubic;
+
+        @media @medium-screens-min {
+            transition-duration: 0.25s;
+        }
+    }
+}
+
+.off-canvas__secondary-base {
+
+    .js & {
+        transform: translate3d(0, 0, 0);
+        position: relative;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .off-canvas__shift-base.is-active > &,
+    .off-canvas__shift-base.was-active > & {
+        transition: all 0.15s @easeOutCubic;
+
+        @media @medium-screens-min {
+            transition-duration: 0.25s;
+        }
+    }
+}
+
+.off-canvas__shift--left {
+
+    .js & {
+        &:extend(.off-canvas__shift-base all);
+
+        &.is-active {
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
+}
+
+.off-canvas__shift--right {
+
+    .js & {
+        &:extend(.off-canvas__shift-base all);
+
+        &.is-active {
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
+}
+
+.off-canvas__shift--top {
+
+    .js & {
+        &:extend(.off-canvas__shift-base all);
+        
+        min-height: 100vh;
+        
+        &.is-active {
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
+}
+
+.off-canvas__shift--bottom {
+
+    .js & {
+        &:extend(.off-canvas__shift-base all);
+        
+        min-height: 100vh;
+        
+        &.is-active {
+            height: 100vh;
+            overflow: hidden;
+        }
+    }
+}
+
+.off-canvas__primary {
+    &:extend(.off-canvas__primary-base all);
+
+    .js .off-canvas__shift--left > &,
+    .js .off-canvas__shift--right > & {
+        min-height: 100vh;
+    }
+
+    .js .off-canvas__shift--left > & {
+        transform: translate3d(-100%, 0, 0);
+        float: right;
+        margin-right: -100%;
+    }
+
+    .js .off-canvas__shift--right > & {
+        transform: translate3d(100%, 0, 0);
+        float: left;
+        margin-left: -100%;
+    }
+
+    .js .off-canvas__shift--right.is-active > & {
+        
+        @media @medium-screens-min {
+            transform: translate3d(30%, 0, 0);
+        }
+
+        @media @large-screens-min {
+            transform: translate3d(40%, 0, 0);
+        }
+    }
+
+    .js .off-canvas__shift--left.is-active > & {
+        
+        @media @medium-screens-min {
+            transform: translate3d(-30%, 0, 0);
+        }
+        
+        @media @large-screens-min {
+            transform: translate3d(-40%, 0, 0);
+        }
+    }
+
+    .js .off-canvas__shift--top.is-active > &,
+    .js .off-canvas__shift--bottom.is-active > & {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+
+    .js .off-canvas__shift--top.is-active > & {
+        transform: translate3d(0, 80vh, 0);
+    }
+
+    .js .off-canvas__shift--bottom.is-active > & {
+        transform: translate3d(0, -80vh, 0);
+    }
+}
+
+.off-canvas__secondary {
+    &:extend(.off-canvas__secondary-base all);
+
+    .js .off-canvas__shift--left > &,
+    .js .off-canvas__shift--right > & {
+        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
+        overflow-y: auto;
+
+        @media @medium-screens-min {
+            width: 70%;
+        }
+
+        @media @large-screens-min {
+            width: 60%;
+        }
+    }
+
+    .js .off-canvas__shift--left > & {
+        transform: translate3d(0, 0, 0);
+        float: left;
+        margin-left: -100%;
+
+        @media @medium-screens-min {
+            margin-left: -70%;
+        }
+
+        @media @large-screens-min {
+            margin-left: -60%;
+        }
+    }
+
+    .js .off-canvas__shift--right > & {
+        transform: translate3d(0, 0, 0);
+        float: right;
+        margin-right: -100%;
+
+        @media @medium-screens-min {
+            margin-right: -70%;
+        }
+
+        @media @large-screens-min {
+            margin-right: -60%;
+        }
+    }
+
+    .js .off-canvas__shift--left.is-active > & {
+        transform: translate3d(100%, 0, 0);
+    }
+
+    .js .off-canvas__shift--right.is-active > & {
+        transform: translate3d(-100%, 0, 0);
+    }
+
+    .js .off-canvas__shift--top > &,
+    .js .off-canvas__shift--bottom > & {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 80vh;
+        overflow: hidden;
+    }
+    
+    .js .off-canvas__shift--top > & {
+        transform: translate3d(0, -100%, 0);
+        top: 0;
+    }
+    
+    .js .off-canvas__shift--bottom > & {
+        transform: translate3d(0, 100%, 0);
+        bottom: 0;
+    }
+
+    .js .off-canvas__shift--top.is-active > &,
+    .js .off-canvas__shift--bottom.is-active > & {
+        transform: translate3d(0, 0, 0);
+        overflow: auto;
+    }
+}
+
+.off-canvas__slide-base {
+    position: fixed;
+    z-index: 110;
+    overflow: auto;
+    overflow-x: hidden;
+    transition: all 0.25s @easeOutCubic;
+
+    &.is-revealed {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.off-canvas__slide--left {
+
+    .js & {
+        &:extend(.off-canvas__slide-base all);
+
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 80%;
+        transform: translate3d(-100%, 0, 0);
+
+        @media @medium-screens-min {
+            width: 33%;
+        }
+
+        @media @large-screens-min {
+            width: 25%;
+        }
+
+        @media @x-large-screens-min {
+            width: 20%;
+        }
+    }
+}
+
+.off-canvas__slide--right {
+
+    .js & {
+        &:extend(.off-canvas__slide-base all);
+
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 80%;
+        transform: translate3d(100%, 0, 0);
+
+        @media @medium-screens-min {
+            width: 33%;
+        }
+
+        @media @large-screens-min {
+            width: 25%;
+        }
+
+        @media @x-large-screens-min {
+            width: 20%;
+        }
+    }
+}
+
+.off-canvas__slide--top {
+
+    .js & {
+        &:extend(.off-canvas__slide-base all);
+
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 90%;
+        transform: translate3d(0, -100%, 0);
+
+        @media @medium-screens-min {
+            height: 33%;
+        }
+
+        @media @large-screens-min {
+            height: 25%;
+        }
+
+        @media @x-large-screens-min {
+            height: 20%;
+        }
+    }
+}
+
+.off-canvas__slide--bottom {
+
+    .js & {
+        &:extend(.off-canvas__slide-base all);
+
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 90%;
+        transform: translate3d(0, 100%, 0);
+
+        @media @medium-screens-min {
+            height: 33%;
+        }
+
+        @media @large-screens-min {
+            height: 25%;
+        }
+
+        @media @x-large-screens-min {
+            height: 20%;
+        }
+    }
+}

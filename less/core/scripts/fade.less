@@ -1,0 +1,42 @@
+/*
+
+Animated Revealing/Hiding Block Modules
+
+When JavaScript is enabled, these blocks are used (most easily in conjunction 
+with Motif jQuery plugins) to reveal and hide blocks of content, sometimes 
+accompanied by CSS3 animations.
+
+Fade Target
+
+`.fade__target` is the same as `.expand__target` (in that it grows in 
+height), but it adds opacity fading to the mix.
+
+    <div class="fade__target">
+        I am hidden.
+    </div>
+    <div class="fade__target is-faded">
+        I have faded and expanded into view.
+    </div>
+
+*/
+
+.fade__target {
+
+    .js & {
+        &:extend( .relative-container );
+
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+    
+        &.is-faded {
+            opacity: 1;
+            max-height: 999px;
+        }
+
+        &.is-faded,
+        &.was-faded {
+            transition: all 0.65s @easeInOutCubic;
+        }
+    }
+}

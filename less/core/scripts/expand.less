@@ -1,0 +1,42 @@
+/*
+
+Animated Revealing/Hiding Block Modules
+
+When JavaScript is enabled, these blocks are used (most easily in conjunction 
+with Motif jQuery plugins) to reveal and hide blocks of content, sometimes 
+accompanied by CSS3 animations.
+    
+Expand Target
+
+`.expand__target` has a maximum height of `0` by default, and once it 
+receives the `.is-expanded` class, animates in height to its maximum value. 
+This is the cheap CSS way of expanding animation, as in collapsible 
+accordions. More precise timing most likely requires JS enhancement.
+
+    <div class="expand__target">
+        I am hidden from view.
+    </div>
+    <div class="expand__target is-expanded">
+        I have expanded into view.
+    </div>
+
+*/
+
+.expand__target {
+    
+    .js & {
+        &:extend(.presentational__relative-container);
+        
+        max-height: 0;
+        overflow: hidden;
+
+        &.is-expanded {
+            max-height: 999px;
+        }
+
+        &.is-expanded,
+        &.was-expanded {
+            transition: all 0.65s @easeInOutCubic;
+        }
+    }
+}

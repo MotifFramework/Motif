@@ -1,0 +1,78 @@
+/*
+
+Form Validation
+
+*/
+
+/*
+
+Input States
+
+A couple of classes added to inputs (typically by a JS Validation plugin) that
+alter the child elements to convey states of success and error.
+
+    <label class="elements__input-label messaging__is-erroneous">
+        Text Field
+        <input type="text" name="text" required>
+    </label>
+
+*/
+
+.messaging__is-successful {
+
+    input,
+    textarea,
+    select {
+        border-color: @success-color;
+    }
+}
+
+.messaging__is-erroneous {
+
+    input,
+    textarea,
+    select {
+        border-color: @error-color;
+    }
+}
+
+/*
+
+Form Messaging
+
+Within labels, there are input alerts that apply to individual fields.
+
+    <label class="elements__input-label messaging__is-erroneous">
+        Text Field
+        <input type="text" name="text" required>
+        <strong class="messaing__input-alert--error">
+            This field is required.
+        </strong>
+    </label>
+
+*/
+
+[class*="messaging__input-alert"] {
+
+    // Extends
+    &:extend(.presentational__relative-container);
+    &:extend(.styles__body-text);
+    
+    /* Display & Box Model */
+    display: inline-block;
+
+    /* Pretty */
+    color: @info-color;
+}
+
+.messaging__input-alert--warning {
+    color: @warning-color;
+}
+
+.messaging__input-alert--error {
+    color: @error-color;
+}
+
+.messaging__input-alert--success {
+    color: @success-color;
+}

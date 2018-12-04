@@ -34,7 +34,7 @@ What this traditionally translates to are CSS classes that represent the structu
 ...and some modifying "skin" classes:
 
 ```css
-.panel-alert {
+.panel__alert {
     background: pink;
     border-color: red;
 }
@@ -43,35 +43,34 @@ What this traditionally translates to are CSS classes that represent the structu
 Both classes would be applied to the HTML element:
 
 ```html
-<div class="panel panel-alert">...</div>
+<div class="panel panel__alert">...</div>
 ```
 
 We do things slightly different in Motif's stylesheet. Using the magic of some of the more advanced CSS attribute selectors, we accomplish the same technique but without requiring multiple classes:
 
 ```css
-[class*="panel--"] {
+[class*="panel__"] {
     margin: 20px 0 0;
     padding: 20px;
     border: 1px solid;
 }
-.panel--alert {
+.panel__alert {
     background: pink;
     border-color: red;
 }
-.panel--success {
+.panel__success {
     background: yellow;
     border-color: green;
 }
 ```
 
 ```html
-<div class="panel--alert">...</div>
+<div class="panel__alert">...</div>
 ```
 
 (To learn more about this technique, read the excellent 24 Ways article, [A Harder-Working Class](http://24ways.org/2012/a-harder-working-class/).)
 
 There's a lot more to how Motif was built, and this section will continue to grow, but these are some of the key philosophies behind how this framework was built and what we hope it encourages.
-
 
 Installation and Dependencies
 ----

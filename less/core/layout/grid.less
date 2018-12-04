@@ -1,0 +1,598 @@
+/*
+
+Responsive Grid
+
+The default responsive grid in Motif is built with a few rules in mind:
+
+1. Each row of columns must be wrapped in a row element
+2. There's no need to specify if a column is first or last
+
+With that in mind, there is a basic syntax to learn for what classes to use.
+Our breakpoints are classified as:
+
+- Base
+- Small
+- Medium
+- Large
+- Extra Large
+
+Our default responsive grid system only uses 3 grids to cover all of our bases:
+
+- `grid, small` covers Base and Small viewports, but cuts off at Medium
+- `grid, medium` covers only Medium
+- `grid, large` starts at Large and covers Extra Large as well (there is no max
+cutoff value for `grid, large`)
+
+Understanding that, the syntax should be easy to understand. In these examples,
+we will talk about `grid, small`:
+
+- **Rows**: `.grid__sm-row` (Grid, Small, Row)
+- **Columns**: `.grid__sm` (Grid, Column, Small)
+- **Column Width**: `.grid__sm-half` (Grid, Small, Half-Width)
+
+    <div class="grid__sm-row">
+        <div class="grid__sm-half">...</div>
+        <div class="grid__sm-half">...</div>
+    </div>
+
+However, to be slightly more succinct, you can use the condensed column syntax:
+
+- **Columns (Condensed)**: `.grid__sm-half` (Grid, Column, Small, Half-Width)
+
+    <div class="grid__sm-row">
+        <div class="grid__sm-half">...</div>
+        <div class="grid__sm-half">...</div>
+    </div>
+
+In brief, the way the grid works is that `.grid__sm` floats the element to the left
+(by default), and adds padding to both the left and the right. `-half` gives
+it a width of `50%`. The combined padding of the two columns bumped up against 
+each other form the full "gutter". The `.grid__sm-row` then clears the floats and has
+a *negative* margin on both the left and the right that pops the columns out to
+the sides the exact width of their paddings, meaning the column content lines 
+up with the site boundaries on the left and right without the need to specify 
+"first" or "last" column classes.
+
+To use this responsively, then, you just add the classes by breakpoint:
+
+    <div class="grid__sm-row grid__med-row grid__lg-row">
+        <div class="grid__sm-half grid__med-third grid__lg-quarter">
+            ...
+        </div>
+        <div class="grid__sm-half grid__med-two-thirds grid__lg-three-quarters">
+            ...
+        </div>
+    </div>
+
+By default, the column breakdown of each grid breakpoint:
+
+- `grid, small`: 4 columns
+- `grid, medium`: 9 columns
+- `grid, large`: 12 columns
+
+For the larger grids, the classes follow the numbers closely...
+
+    - `.grid__lg-10of12
+    - `.grid__med-4of9`
+
+...in just about every combination (based on their total column number), but 
+all of the grids also have a few "fuzzy" shortcuts as well:
+
+    - `half`
+    - `third`
+    - `quarter`
+    - `three-quarters`
+    - `two-thirds`
+
+*/
+
+// Aliases for all breakpoints
+.grid__halves,
+.grid__thirds,
+.grid__quarters {
+    // Mixins
+    #mixed > .m-grid__row( @mobile-margin );
+
+    /* Pretty */
+    letter-spacing: -0.31em;
+    text-rendering: optimizespeed;
+
+    ul& {
+        padding-left: 0;
+        list-style: none outside none;
+    }
+
+    > * {
+        // Mixins
+        #mixed > .m-grid__column();
+        #mixed > .m-grid__padding( @mobile-margin );
+
+        /* Display & Box Model */
+        display: inline-block;
+
+        /* Positioning */
+        float: none;
+
+        /* Pretty */
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+}
+
+.grid__halves > * {
+    width: 50%;
+}
+
+.grid__thirds > * {
+    width: round( ( 100% / 3 ), 5 );
+}
+
+.grid__quarters > * {
+    width: 25%;
+}
+
+// Opera as of 12 on Windows needs word-spacing.
+// The ".opera-only" selector is used to prevent
+// actual prefocus styling and is not required 
+// in markup.
+.opera-only :-o-prefocus,
+.grid__thirds {
+    word-spacing: -0.43em;
+}
+
+/**
+ * Mobile Grid
+ */
+@media @small-screens-max {
+
+    [class*="grid__sm-row"] {
+
+        #mixed > .m-grid__row( @mobile-margin );
+
+        ul& {
+            padding-left: 0;
+            list-style: none outside none;
+        }
+    }
+
+    .grid__sm-row--rtl {
+
+        > [class*="grid__sm"] {
+            float: right;
+        }
+    }
+
+    .grid__sm-row--ltr {
+
+        > [class*="grid__sm"] {
+            float: left;
+        }
+    }
+
+    [class*="grid__sm"] {
+
+        &:not([class*="grid__sm-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @mobile-margin );
+        }
+    }
+
+    .grid__sm-quarter {
+        width: 25%;
+    }
+
+    .grid__sm-third {
+        width: round( ( 100% / 3 ), 5 );
+    }
+
+    .grid__sm-half {
+        width: 50%;
+    }
+
+    .grid__sm-two-thirds {
+        width: round( ( ( 100% / 3 ) * 2 ), 5 );
+    }
+
+    .grid__sm-three-quarters {
+        width: 75%;
+    }
+
+    .grid__sm-full {
+        width: 100%;
+    }
+
+    .grid__sm-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+
+    .grid__sm-row--flex > [class*="grid__sm"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+
+    // Opera as of 12 on Windows needs word-spacing.
+    // The ".opera-only" selector is used to prevent
+    // actual prefocus styling and is not required
+    // in markup.
+    .opera-only :-o-prefocus,
+    .grid__sm-row--flex {
+        word-spacing: -0.43em;
+    }
+
+    // Shortcuts/Aliases
+    .grid__sm {
+
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="grid__sm-row"] all );
+            &:extend( .grid__sm-row--flex );
+
+            > * {
+                &:extend( [class*="grid__sm"] );
+                &:extend( .grid__sm-row--flex > [class*="grid__sm"] );
+            }
+        }
+
+        &-quarters > * {
+            &:extend( .grid__sm-quarter );
+        }
+
+        &-thirds > * {
+            &:extend( .grid__sm-third );
+        }
+
+        &-halves > * {
+            &:extend( .grid__sm-half );
+        }
+    }
+}
+
+/**
+ * Tablet Grid
+ */
+@media @medium-screens-only {
+
+    [class*="grid__med-row"] {
+        #mixed > .m-grid__row( @tablet-margin );
+
+        ul& {
+            padding-left: 0;
+            list-style: none outside none;
+        }
+    }
+
+    .grid__med-row--rtl {
+
+        > [class*="grid__med"] {
+            float: right;
+        }
+    }
+
+    .grid__med-row--ltr {
+
+        > [class*="grid__med"] {
+            float: left;
+        }
+    }
+
+    [class*="grid__med"] {
+
+        &:not([class*="grid__med-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @tablet-margin );
+        }
+    }
+
+    .grid__med-quarter {
+        width: 25%;
+    }
+
+    .grid__med-third {
+        width: round( ( 100% / 3 ), 5 );
+    }
+
+    .grid__med-half {
+        width: 50%;
+    }
+
+    .grid__med-two-thirds {
+        width: round( ( ( 100% / 3 ) * 2 ), 5 );
+    }
+
+    .grid__med-three-quarters {
+        width: 75%;
+    }
+
+    .grid__med-full {
+        width: 100%;
+    }
+
+    #mixins > .m-grid__all( ( @tablet-total-cols - 1 ), @tablet-total-cols, med );
+
+    .grid__med-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+
+    .grid__med-row--flex > [class*="grid__med"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+
+    .opera-only :-o-prefocus,
+    .grid__med-row--flex {
+        word-spacing: -0.43em;
+    }
+
+    // Shortcuts/Aliases
+    .grid__med {
+
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="grid__med-row"] all );
+            &:extend( .grid__med-row--flex );
+
+            > * {
+                &:extend( [class*="grid__med"] );
+                &:extend( .grid__med-row--flex > [class*="grid__med"] );
+            }
+        }
+
+        &-quarters > * {
+            &:extend( .grid__med-quarter );
+        }
+
+        &-thirds > * {
+            &:extend( .grid__med-third );
+        }
+
+        &-halves > * {
+            &:extend( .grid__med-half );
+        }
+    }
+}
+
+/**
+ * Desktop Grid
+ */
+
+/*
+
+````desktop-grid
+<div class="grid__lg-quarters">
+    <div>
+        <div class="block">Quarter</div>
+    </div>
+    <div>
+        <div class="block">Quarter</div>
+    </div>
+    <div>
+        <div class="block">Quarter</div>
+    </div>
+    <div>
+        <div class="block">Quarter</div>
+    </div>
+</div>
+<div class="grid__lg-thirds">
+    <div>
+        <div class="block">Third</div>
+    </div>
+    <div>
+        <div class="block">Third</div>
+    </div>
+    <div>
+        <div class="block">Third</div>
+    </div>
+</div>
+<div class="grid__lg-halves">
+    <div>
+        <div class="block">Half</div>
+    </div>
+    <div>
+        <div class="block">Half</div>
+    </div>
+</div>
+<div class="grid__lg-row">
+    <div class="grid__lg-two-thirds">
+        <div class="block">Two Thirds</div>
+    </div>
+    <div class="grid__lg-third">
+        <div class="block">Third</div>
+    </div>
+</div>
+<div class="grid__lg-row">
+    <div class="grid__lg-three-quarters">
+        <div class="block">Three Quarters</div>
+    </div>
+    <div class="grid__lg-quarter">
+        <div class="block">Quarter</div>
+    </div>
+</div>
+````
+
+*/
+
+@media @large-screens-min {
+
+    [class*="grid__lg-row"] {
+        #mixed > .m-grid__row( @base-margin );
+
+        ul& {
+            padding-left: 0;
+            list-style: none outside none;
+        }
+    }
+
+    .grid__lg-row--rtl {
+
+        > [class*="grid__lg"] {
+            float: right;
+        }
+    }
+
+    .grid__lg-row--ltr {
+
+        > [class*="grid__lg"] {
+            float: left;
+        }
+    }
+
+    [class*="grid__lg"] {
+
+        &:not([class*="grid__lg-row"]) {
+            #mixed > .m-grid__column();
+            #mixed > .m-grid__padding( @base-margin );
+        }
+    }
+
+    .grid__lg-quarter,
+    .grid__lg-quarter {
+        width: 25%;
+    }
+
+    .grid__lg-third,
+    .grid__lg-third {
+        width: round( ( 100% / 3 ), 5 );
+    }
+
+    .grid__lg-half,
+    .grid__lg-half {
+        width: 50%;
+    }
+
+    .grid__lg-two-thirds,
+    .grid__lg-two-thirds {
+        width: round( ( ( 100% / 3 ) * 2 ), 5 );
+    }
+
+    .grid__lg-three-quarters,
+    .grid__lg-three-quarters {
+        width: 75%;
+    }
+
+    .grid__lg-full,
+    .grid__lg-full {
+        width: 100%;
+    }
+
+    #mixins > .m-grid__all( ( @total-columns - 1 ), @total-columns, lg );
+
+
+    /*
+
+    Media Grid
+
+    The Media Grid allows you to place a grid of photos or videos (catalog or
+    retail products, etc.) without floating them, alleviating the need to concern
+    yourself with clearing the floats with rows should an object extend further
+    than another. Also, because they are not floating, it allows you to align
+    the entire group center, making sure any "orphaned" grid entries are centered.
+
+    The syntax is simply the same as the regular responsive grid system, except
+    the row class has a `--flex` modifier.
+
+    ````media-grid
+    <ul class="grid__sm-halves grid__med-thirds grid__lg-quarters">
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+                <figcaption>Alderaan is peaceful. We have no weapons.</figcaption>
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+        <li>
+            <figure class="figure">
+                <img src="http://placehold.it/400">
+            </figure>
+        </li>
+    </ul>
+    ````
+
+    */
+
+    .grid__lg-row--flex {
+        letter-spacing: -0.31em;
+        text-rendering: optimizespeed;
+    }
+
+    .grid__lg-row--flex > [class*="grid__lg"] {
+        float: none;
+        display: inline-block;
+        letter-spacing: normal;
+        word-spacing: normal;
+        vertical-align: top;
+        text-rendering: auto;
+    }
+
+    .opera-only :-o-prefocus,
+    .grid__lg-row--flex {
+        word-spacing: -0.43em;
+    }
+
+    // Shortcuts/Aliases
+    .grid__lg {
+
+        &-quarters,
+        &-thirds,
+        &-halves {
+            &:extend( [class*="grid__lg-row"] all );
+            &:extend( .grid__lg-row--flex );
+
+            > * {
+                &:extend( [class*="grid__lg"] );
+                &:extend( .grid__lg-row--flex > [class*="grid__lg"] );
+            }
+        }
+
+        &-quarters > * {
+            &:extend( .grid__lg-quarter );
+        }
+
+        &-thirds > * {
+            &:extend( .grid__lg-third );
+        }
+
+        &-halves > * {
+            &:extend( .grid__lg-half );
+        }
+    }
+}

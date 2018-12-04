@@ -1,0 +1,165 @@
+/*
+
+Text Align
+
+Simple classes to adjust your text alignment. They can be added to individual elements or on wrapping elements (an outer `div`, perhaps) to adjust the alignment of all the child elements.
+
+*/
+
+.presentational__align-left {
+    text-align: left;
+}
+
+.presentational__align-center {
+    text-align: center;
+}
+
+.presentational__align-right {
+    text-align: right;
+}
+
+.presentational__align-sub {
+    vertical-align: sub;
+}
+
+.presentational__align-middle {
+    vertical-align: middle;
+}
+
+.presentational__align-top {
+    vertical-align: top;
+}
+
+/*
+
+Floats
+
+Next, we have classes for floating elements.
+
+*/
+
+.presentational__float-left {
+    float: left;
+}
+
+.presentational__float-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.presentational__float-right {
+    float: right;
+}
+
+.presentational__float-none {
+    float: none;
+}
+
+.presentational__clear {
+    clear: both;
+}
+
+/*
+
+"New Line"
+
+Turns an `inline` or `inline-block` element into a `block` one.
+
+*/
+
+.presentational__new-line {
+    display: block;
+}
+
+.presentational__group {
+
+    /* Mixins */
+    .m-grid__clearfix();
+}
+
+/*
+
+"Is Hidden"
+
+Visually hides content in a way that leaves it accessible to screen readers.
+Like more magic, makes the visible invisible.
+
+*/
+
+.presentational__is-hidden {
+
+    // Mixins
+    .m-presentational__visually-hidden();
+}
+
+@media @small-screens-max {
+
+    .presentational__is-hidden-small {
+
+        // Mixins
+        .m-presentational__visually-hidden();
+    }
+}
+
+@media @medium-screens-only {
+
+    .presentational__is-hidden-medium {
+
+        // Mixins
+        .m-presentational__visually-hidden();
+    }
+}
+
+@media @large-screens-min {
+
+    .presentational__is-hidden-large {
+
+        // Mixins
+        .m-presentational__visually-hidden();
+    }
+}
+
+/*
+
+"Isn't Hidden"
+
+Undoes `.is-hidden`.
+
+*/
+
+.presentational__isnt-hidden {
+
+    /* Mixins */
+    .m-presentational__show-hidden();
+}
+
+/*
+
+"Relative Container"
+
+Exactly what it sounds like.
+
+*/
+
+.presentational__relative-container {
+    position: relative;
+}
+
+/*
+
+"No Scroll"
+
+Paired with "motif.utitlies.js" to make the page non-scrollable
+
+*/
+
+html,
+body {
+
+    &.presentational__no-scroll {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        position: fixed
+    }
+}

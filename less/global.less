@@ -1,5 +1,5 @@
 /**
- * Motif v3.8.1
+ * Motif v4.0.0
  * A responsive front-end framework to tell *your* story
  * http://getmotif.com
  */
@@ -12,156 +12,84 @@
 
 // Config File
 // Breakpoint, color, typographic, and other settings.
-@import "_config.less";
+@import "core/config/config.less";
 
 // Variables & Mixins
 // You'll want to keep these.
-@import "_vars.less";
-@import "mixins/_mixins.less";
+@import "core/config/vars.less";
+@import "core/mixins/mixins.less";
 
 /**
  * Normalize
  * Using the Normalize.css (http://necolas.github.io/normalize.css/) with only minor modification.
  */
-@import "normalize/_display.less";
-@import "normalize/_type.less";
-@import "normalize/_links.less";
-@import "normalize/_embedded.less";
-@import "normalize/_forms.less";
-@import "normalize/_tables.less";
-
-// Helper Classes
-@import "helpers/_spacing.less";
-@import "helpers/_presentational.less";
+@import "core/layout/display.less";
+@import "core/type/type.less";
 
 // Reusable Modules
-@import "modules/_lists.less";
-@import "modules/_media.less";
-@import "modules/_icons.less";
-@import "modules/_ratios.less";
-@import "modules/_blocks.less";
+@import "core/modules/lists.less";
+@import "core/modules/ratios.less";
+
+// Media
+@import "core/media/media.less";
+@import "core/media/icons.less";
+@import "core/media/images.less";
+@import "core/media/video.less";
 
 // Typography
-@import "type/_font-face.less";
-@import "type/_styles.less";
-@import "type/_hierarchy.less";
+@import "core/type/font-face.less";
+@import "core/type/styles.less";
+@import "core/type/hierarchy.less";
 
 // Interactive Elements
-@import "interactive/_buttons.less";
-@import "interactive/_links.less";
+@import "core/interactive/button.less";
+@import "core/interactive/links.less";
 
 // Forms
-@import "forms/_elements.less";
-@import "forms/_type.less";
-@import "forms/_messaging.less";
+@import "core/forms/elements.less";
+@import "core/forms/messaging.less";
 
 // Layout
-@import "layout/_grid.less";
-@import "layout/_off-canvas.less";
-@import "layout/_overflow-list.less";
+@import "core/layout/spacing.less";
+@import "core/layout/presentational.less";
+@import "core/layout/grid.less";
+@import "core/layout/off-canvas.less";
+@import "core/layout/overflow-list.less";
+@import "core/layout/wrappers.less";
 
 // Furniture
-@import "furniture/_tables.less";
-@import "furniture/_panels.less";
-@import "furniture/_wysiwyg.less";
+@import "core/furniture/tables.less";
+@import "core/furniture/panel.less";
+@import "core/furniture/wysiwyg.less";
 
-
-/**
- * Responsive Breakpoints
- */
-
-/**
- * Base
- */
-@import "site/_base.less";
-
-// /**
-//  * Base Only
-//  */
-// @media @base-screens-max {
-//     @import "site/_base-only.less";
-// }
+// Scripts
+@import "core/scripts/reveal.less";
+@import "core/scripts/expand.less";
+@import "core/scripts/fade.less";
+@import "core/scripts/menu.less";
+@import "core/scripts/tabs.less";
 
 /**
- * Base & Small Only
+ * Shared
  */
-@media @small-screens-max {
-    @import "site/_small-max.less";
-}
 
-// /**
-//  * Small Only
-//  */
-// @media @small-screens-only {
-//     @import "site/_small-only.less";
-// }
+// Shared Styles
 
 /**
- * Small
+ * Pages
  */
-@media @small-screens-min {
-    @import "site/_small.less";
-}
 
-// /**
-//  * Base, Small, & Medium Only
-//  */
-// @media @medium-screens-max {
-//     @import "site/_medium-max.less";
-// }
-
-/**
- * Medium Only
- */
-@media @medium-screens-only {
-    @import "site/_medium-only.less";
-}
-
-/**
- * Medium
- */
-@media @medium-screens-min {
-    @import "site/_medium.less";
-}
-
-// /**
-//  * Base, Small, Medium, & Large Only
-//  */
-// @media @large-screens-max {
-//     @import "site/_large-max.less";
-// }
-
-// /**
-//  * Large Only
-//  */
-// @media @large-screens-only {
-//     @import "site/_large-only.less";
-// }
-
-/**
- * Large
- */
-@media @large-screens-min {
-    @import "site/_large.less";
-}
-
-/**
- * Extra Large
- */
-@media @x-large-screens-min {
-    @import "site/_x-large.less";
-}
+// Pages Styles
 
 /**
  * Print
  */
 @media print {
-    @import "site/_print.less";
+    @import "core/site/print.less";
 }
-
 
 /**
  * Prototype Styles
  * REMOVE WHEN BEGINNING PRODUCTION
  */
-@import "site/_proto.less";
+@import "core/site/proto.less";

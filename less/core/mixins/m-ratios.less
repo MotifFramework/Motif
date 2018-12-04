@@ -1,0 +1,20 @@
+.m-ratios__base() {
+    &:extend(.presentational__relative-container);
+
+    &:before {
+        &:extend(.presentational__new-line);
+        
+        content: "";
+    }
+}
+
+.m-ratios__dimensions(@width, @height) {
+
+    &:before {
+        .m-ratios__padding-top(@width, @height);
+    }
+}
+
+.m-ratios__padding-top(@width, @height) {
+    padding-top: (100% * (@height / @width));
+}
