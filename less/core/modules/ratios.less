@@ -30,23 +30,23 @@ For embedded videos, use the `.ratios__video` class, and it will assume an
 }
 
 .ratios__video {
-    &:extend(.ratios__base);
+    &:extend(.ratios__base all);
     .m-ratios__dimensions(16, 9);
 }
 
 .ratios__1x1,
 .ratios__square {
-    &:extend(.ratios__base);
+    &:extend(.ratios__base all);
     .m-ratios__dimensions(1, 1);
 }
 
 .ratios__2x1 {
-    &:extend(.ratios__base);
+    &:extend(.ratios__base all);
     .m-ratios__dimensions(2, 1);
 }
 
 .ratios__1x2 {
-    &:extend(.ratios__base);
+    &:extend(.ratios__base all);
     .m-ratios__dimensions(1, 2);
 }
 
