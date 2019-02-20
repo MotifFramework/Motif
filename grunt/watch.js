@@ -10,14 +10,14 @@ module.exports = {
   },
   js: {
     files: [paths.sourceJs + '**/*.js'],
-    tasks: ['js-dist']
+    tasks: ['js-build']
   },
   less: {
     options: {
       livereload: false
     },
     files: [paths.sourceLess + '**/*.less'],
-    tasks: ['less-dist']
+    tasks: ['less-build']
   },
   sass: {
     options: {

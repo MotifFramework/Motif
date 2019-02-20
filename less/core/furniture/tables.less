@@ -1,0 +1,115 @@
+/*
+
+Tables
+
+*/
+
+/*
+
+Default Tables
+
+Simple, clean default styles. Just mark it up like a normal table.
+
+Undoes table to more of a definition list on smaller viewports.
+
+See: http://codepen.io/aarongustafson/pen/ucJGv
+
+````tables
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td data-th="#">1</td>
+            <td data-th="First Name">Some</td>
+            <td data-th="Last Name">One</td>
+            <td data-th="Language">English</td>
+        </tr>
+        <tr>
+            <td data-th="#">2</td>
+            <td data-th="First Name">Joe</td>
+            <td data-th="Last Name">Sixpack</td>
+            <td data-th="Language">English</td>
+        </tr>
+        <tr>
+            <td data-th="#">3</td>
+            <td data-th="First Name">Stu</td>
+            <td data-th="Last Name">Dent</td>
+            <td data-th="Language">Code</td>
+        </tr>
+    </tbody>
+</table>
+````
+
+*/
+
+table {
+    //    border-collapse: collapse;
+
+}
+
+table {
+    width: 100%;
+    max-width: 100%;
+    border-spacing: 0;
+    //border-collapse: collapse;
+}
+
+th,
+td {
+    padding: @half-vertical @half-side;
+    text-align: left;
+}
+th {
+    padding-top: @half-vertical;
+}
+
+@media @small-screens-max {
+    table {
+        display: block;
+        width: 100%;
+    }
+
+    tbody,
+    tr,
+    th,
+    td {
+        border: 0;
+        display: block;
+        padding: 0;
+        text-align: left;
+        white-space: normal;
+    }
+    thead {
+        display: none;
+        visibility: hidden;
+    }
+    tr {
+        .m-vertical-rhythm__margin-leader();
+    }
+    td {
+        &[data-th] {
+            &:before {
+                content: attr( data-th ) ":\00A0";
+                display: inline-block;
+                font-weight: bold;
+            }
+        }
+        &:empty {
+            display: none;
+        }
+    }
+}
+
+@media @medium-screens-min {
+    th,
+    td {
+        padding: @half-vertical @full-side;
+    }
+}

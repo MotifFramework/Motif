@@ -1,5 +1,5 @@
 export function customEvent(name, data) {
-  if (window.CustomEvent) {
+  if (typeof window.CustomEvent === "function") {
       return new CustomEvent(name, { detail: data });
   }
 

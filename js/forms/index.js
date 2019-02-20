@@ -1,21 +1,26 @@
 import $ from 'jquery'
 import Gauntlet from 'motif-gauntlet'
 import AjaxSubmission from 'motif-ajaxsubmission'
-import Conditoner from "./motif.conditioner";
+import SyncInput from './motif.sync-input'
 
 export default function () {
   initAjaxSubmission()
   initValidation()
-  initConditioner()
+  initSyncInput()
 }
 
 function initAjaxSubmission () {
   $("[data-validation='ajax']").ajaxSubmission()
 }
+
 function initValidation () {
   $("[data-validation='true']").gauntlet()
 }
 
-function initConditioner () {
-	$("[data-conditional-reveal], [data-conditional-conceal]").conditioner();
+function initSyncInput () {
+  ;[].forEach.call(document.querySelectorAll('.js-sync-input'), el => {
+    return new SyncInput(el, {
+      dispatchChange: true
+    })
+  })
 }

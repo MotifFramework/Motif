@@ -203,14 +203,16 @@ export default class RevealTrigger {
         // If we have a click trigger...
         if (this.options.trigger === "click") {
             // Bind this trigger on click
-            this.elem.addEventListener("click", () => {
+            this.elem.addEventListener("click", (ev) => {
                 // HERE
 
                 // ...to process the trigger
                 this.processBeforeTrigger();
 
                 // ...and return based on the user's preference
-                return this.options.returns;
+                if (!this.options.returns) {
+                  ev.preventDefault();
+                }
             });
 
             // Otherwise, if it's a hover trigger...

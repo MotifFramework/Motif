@@ -1,10 +1,11 @@
-import "babel-polyfill";
 import ui from "./ui";
+import images from "./images";
 import forms from "./forms";
 
 class App {
   constructor() {
     ui();
+    images();
     forms();
   }
 }

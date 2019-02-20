@@ -1,0 +1,82 @@
+.m-transformation__transform (@value: scale(1))
+{
+    -webkit-transform : @value;
+    -moz-transform    : @value;
+    -o-transform      : @value;
+    transform         : @value;
+}
+.m-transformation__skew (@angle-x: 35deg, @angle-y: 0)
+{
+    -webkit-transform : skew(@angle-x, @angle-y);
+    -moz-transform    : skew(@angle-x, @angle-y);
+    -o-transform      : skew(@angle-x, @angle-y);
+    -ms-transform     : skew(@angle-x, @angle-y);
+    transform         : skew(@angle-x, @angle-y);
+}
+.m-transformation__scale (@scale-x: 1)
+{
+    -webkit-transform : scale(@scale-x);
+    -moz-transform    : scale(@scale-x);
+    -o-transform      : scale(@scale-x);
+    -ms-transform     : scale(@scale-x);
+    transform         : scale(@scale-x);
+}
+.m-transformation__rotate (@angle: 35deg)
+{
+    -webkit-transform : rotate(@angle);
+    -moz-transform    : rotate(@angle);
+    -o-transform      : rotate(@angle);
+    -ms-transform     : rotate(@angle);
+    transform         : rotate(@angle);
+}
+.m-transformation__origin(@arguments) {
+    -webkit-transform-origin : @arguments;
+    -moz-transform-origin    : @arguments;
+    -o-transform-origin      : @arguments;
+    -ms-transform-origin     : @arguments;
+    transform-origin         : @arguments;
+}
+.m-transformation__translate (@move-x: 10px, @move-y: 10px)
+{
+    -webkit-transform : translate(@move-x, @move-y);
+    -moz-transform    : translate(@move-x, @move-y);
+    -o-transform      : translate(@move-x, @move-y);
+    -ms-transform     : translate(@move-x, @move-y);
+    transform         : translate(@move-x, @move-y);
+}
+.m-transformation__translate3d (@move-x: 0, @move-y: 0, @move-z: 0)
+{
+    -webkit-transform : translate3d(@move-x, @move-y, @move-z);
+    -moz-transform    : translate3d(@move-x, @move-y, @move-z);
+    -o-transform      : translate3d(@move-x, @move-y, @move-z);
+    -ms-transform     : translate3d(@move-x, @move-y, @move-z);
+    transform         : translate3d(@move-x, @move-y, @move-z);
+}
+#m-transformation__transform {
+    .backface ( @vis: hidden ) {
+        -webkit-backface-visibility: @vis;
+        -moz-backface-visibility: @vis;
+        -ms-backface-visibility: @vis;
+        backface-visibility: @vis;
+    }
+    .perspective ( @num: 100px ) {
+        -webkit-transform: perspective(@num);
+        -moz-transform: perspective(@num);
+        -ms-transform: perspective(@num);
+        transform: perspective(@num);
+    }
+    .rotateY ( @deg: 180deg ) {
+        -webkit-transform: rotateY(@deg);
+        -moz-transform: rotateY(@deg);
+        -o-transform: rotateY(@deg);
+        -ms-transform: rotateY(@deg);
+        transform: rotateY(@deg);
+    }
+    .perspective-rotateY ( @perspective: 500px, @deg: 180deg ) {
+        -webkit-transform: perspective( @perspective) rotateY(@deg);
+        -moz-transform: perspective( @perspective) rotateY(@deg);
+        -o-transform: perspective( @perspective) rotateY(@deg);
+        -ms-transform: perspective( @perspective) rotateY(@deg);
+        transform: perspective( @perspective) rotateY(@deg);
+    }
+}
