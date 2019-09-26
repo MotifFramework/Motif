@@ -52,9 +52,14 @@ export function uStopPageScrollable () {
 
 export function uStartPageScrollable () {
   window.utils = window.utils || {}
+
+  let needsScrollPos = uHasClass(document.body, 'presentational__no-scroll')
   uRemoveClass(document.body, 'presentational__no-scroll')
   uRemoveClass(document.documentElement, 'presentational__no-scroll')
-  window.scrollTo(0, window.utils.currScrollPosition)
+
+  if (needsScrollPos) {
+    window.scrollTo(0, window.utils.currScrollPosition)
+  }
 }
 
 export function uRemoveElement (el) {
