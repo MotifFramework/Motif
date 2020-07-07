@@ -1,9 +1,12 @@
 import Reveal from "./motif.reveal.es6";
+import Slider from "./motif.slider";
 
 export default function () {
+  console.log('init default')
   initReveals();
   initTabs();
   initIcons();
+  initSlider()
 }
 
 function initReveals() {
@@ -55,4 +58,14 @@ function initIcons() {
   };
 
   request.send();
+}
+
+function initSlider() {
+  console.log('initialize slider')
+  ;[].forEach.call(document.querySelectorAll('.js-slider'), el => {
+    console.log('SLIDER')
+    return new Slider(el, {
+      trigger: 'hover',
+    })
+  })
 }
