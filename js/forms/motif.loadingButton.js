@@ -22,7 +22,6 @@ export default class LoadingButton {
     }
 
     init() {
-        console.log(this.settings)
         this.prepButton()
         this.bindEvents()
     }
@@ -44,9 +43,7 @@ export default class LoadingButton {
                 this.initLoading()
             })
         } else if (this.settings.trigger == 'event') {
-            console.log("event")
             document.addEventListener(this.settings.event, ev => {
-                console.log("event triggered")
                 this.initLoading()
             })
         } else {
