@@ -1,3 +1,42 @@
+/*!
+ * Motif Slider
+ * The basis of a slider, which adds a 'is-prev', is-next', and 'is-current'
+ * class to a list of slides based on a button click, as well as a variety of 
+ * modifications and additional options, as indicated by the defaults. 
+ * Please note that this is a 'peeled back' version of the slider in order 
+ * to allow for more custom styling and options. If you are looking for 
+ * a slider that will automatically transform from one slide to the next,
+ * please refer to the Motif Carousel, which is an extention of the Slider.
+ * 
+ * Example Syntax for a basic slider: 
+ * 
+ *          <div class="js-slider">
+ *               <ul class="js-slides">
+ *                   <li class="js-slide"> 
+ *                       Slide One
+ *                   </li>
+ *                   <li class="js-slide">
+ *                       Slide TWo
+ *                   </li>
+ *                   <li class="js-slide">
+ *                       Slide Three
+ *                   </li>
+ *               </ul>
+ *
+ *               <button class="js-slider__direction-nav-prev">
+ *                   Previous
+ *               </button>
+ *               <button class="js-slider__direction-nav-next">
+ *                   Next
+ *               </button>
+ *           </div>
+ * 
+ * http://getmotif.com
+ * 
+ * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ * Additional modificatons by Lindsay Forrister <lindsay@lifeblue.com>
+ */
+
 export default class Slider {
     constructor(elem, options = {}) {
       const defaults = {
