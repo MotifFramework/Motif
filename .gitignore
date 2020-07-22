@@ -3,3 +3,4 @@ build/
 dist/
 test/
 package-lock.json
+index.php
