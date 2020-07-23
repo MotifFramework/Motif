@@ -7,17 +7,18 @@ export default function () {
   initAjaxSubmission()
   initValidation()
   initSyncInput()
+  initLoadingButtons()
 }
 
-function initAjaxSubmission () {
+function initAjaxSubmission() {
   $("[data-validation='ajax']").ajaxSubmission()
 }
 
-function initValidation () {
+function initValidation() {
   $("[data-validation='true']").gauntlet()
 }
 
-function initSyncInput () {
+function initSyncInput() {
   ;[].forEach.call(document.querySelectorAll('.js-sync-input'), el => {
     return new SyncInput(el, {
       dispatchChange: true
