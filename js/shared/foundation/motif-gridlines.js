@@ -10,6 +10,7 @@
  *
  *  <div class="gridlines" id="js-gridlines"></div>
  * 
+ * @author Lindsay Forrister <lindsay@lifeblue.com>
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
 
