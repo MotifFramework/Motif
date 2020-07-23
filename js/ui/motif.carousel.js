@@ -104,7 +104,6 @@ export default class Carousel extends Slider {
     }
   
     updateCarousel() {
-    console.log('updating!')
       this.setStateByIndex(this.state.current)
       this.visibleSlides = this.getVisibleSlides()
       this.adjustSlidesWidth()
