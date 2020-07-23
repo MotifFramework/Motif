@@ -1,0 +1,33 @@
+.js-slider {
+    position: relative;
+}
+
+.js-slides {
+    --slidesOffset: 0px;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    will-change: transform;
+    transform: translate3d(var(--slidesOffset), 0, 0);
+    transition: transform 0.35s ease-out;
+  
+    &.is-dragging {
+      transition-duration: 0.05s;
+      transition-easing: linear;
+    }
+
+}
+
+.js-slide {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    width: 100%;
+    top: 0;
+    left: 0;
+    
+    &:after {
+        display: none !important;
+      }
+}

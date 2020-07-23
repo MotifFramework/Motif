@@ -1,9 +1,13 @@
 import Reveal from "./motif.reveal.es6";
+import Slider from "./motif.slider";
+import Carousel from './motif.carousel';
 
 export default function () {
   initReveals();
   initTabs();
   initIcons();
+  initSlider();
+  initCarousel();
 }
 
 function initReveals() {
@@ -55,4 +59,16 @@ function initIcons() {
   };
 
   request.send();
+}
+
+function initSlider() {
+  ;[].forEach.call(document.querySelectorAll('.js-slider'), el => {
+    return new Slider(el, {})
+  })
+}
+
+function initCarousel() {
+  ;[].forEach.call(document.querySelectorAll('.js-carousel'), el => {
+    return new Carousel(el, {})
+  })
 }
