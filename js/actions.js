@@ -1,12 +1,14 @@
 import ui from "./ui";
 import images from "./images";
 import forms from "./forms";
+import shared from "./shared";
 
 class App {
   constructor() {
     ui();
     images();
     forms();
+    shared();
   }
 }
 
