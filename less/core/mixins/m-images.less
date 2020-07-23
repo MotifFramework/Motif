@@ -5,16 +5,33 @@ Dynamic Responsive Image
 */
 
 .m-images__dynamic-responsive-image() {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    will-change: opacity;
-    transition: opacity 0.15s linear;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  will-change: opacity;
+  transition: opacity 0.15s linear;
 
-    &.lazyloaded {
-        opacity: 1;
-    }
+  &.lazyloaded {
+    opacity: 1;
+  }
+}
+
+.m-images__figure-ratio(@h: 1, @w: 2) {
+  position: relative;
+  width: 100%;
+  margin: 0;
+
+  &:before {
+    content: "";
+    width: 100%;
+    display: block;
+    padding-top: percentage(@h / @w);
+  }
+
+  img {
+    &:extend(.images__image-as-bg all);
+  }
 }
