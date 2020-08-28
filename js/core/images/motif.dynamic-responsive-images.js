@@ -1,5 +1,5 @@
 import "lazysizes";
-import getAnimationFrame from './../utils/motif.animationFrame.es6.js';
+import getAnimationFrame from '../utils/motif.animationFrame.es6';
 
 const animationFrame = getAnimationFrame();
 

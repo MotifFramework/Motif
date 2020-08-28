@@ -15,9 +15,7 @@ module.exports = {
     files: files,
     options: {
       processors: [
-        require('autoprefixer')({
-          browsers: ['last 2 versions']
-        })
+        require('autoprefixer')()
       ]
     }
   },
@@ -25,15 +23,7 @@ module.exports = {
     files: files,
     options: {
       processors: [
-        require('autoprefixer')({
-          browsers: [
-            'last 3 versions',
-            'ie >= 10',
-            'iOS >= 8',
-            'Firefox ESR',
-            'Android >= 4'
-          ]
-        }),
+        require('autoprefixer')(),
         require('cssnano')({
           reduceTransforms: false,
           zindex: false

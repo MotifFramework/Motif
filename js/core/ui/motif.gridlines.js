@@ -14,7 +14,7 @@
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
  */
 
-import { uToggleClass } from '../../utils/motif.utilities';
+import { uToggleClass } from '../utils/motif.utilities';
 
 export default function () {
     const gridButton = document.getElementById('js-gridlines-button')

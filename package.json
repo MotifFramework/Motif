@@ -29,16 +29,16 @@
     ]
   },
   "browser": {
-    "jquery": "./js/vendor/jquery-3.1.1.js",
-    "lazysizes": "./js/vendor/lazysizes.js",
-    "picturefill": "./js/vendor/picturefill.js",
-    "raf": "./js/vendor/requestAnimFrame.js",
-    "motif-reveal": "./js/ui/motif.reveal.js",
-    "motif-tabs": "./js/ui/motif.tabs.js",
-    "motif-herald": "./js/scroll/motif.herald.js",
-    "motif-gauntlet": "./js/forms/motif.gauntlet.js",
-    "motif-ajaxsubmission": "./js/forms/motif.ajax-submission.js",
-    "motif-plugins": "./js/utils/motif.utils.plugins.js"
+    "jquery": "./js/core/vendor/jquery-3.1.1.js",
+    "lazysizes": "./js/core/vendor/lazysizes.js",
+    "picturefill": "./js/core/vendor/picturefill.js",
+    "raf": "./js/vendor/core/requestAnimFrame.js",
+    "motif-reveal": "./js/core/ui/motif.reveal.js",
+    "motif-tabs": "./js/core/ui/motif.tabs.js",
+    "motif-herald": "./js/core/scroll/motif.herald.js",
+    "motif-gauntlet": "./js/core/forms/motif.gauntlet.js",
+    "motif-ajaxsubmission": "./js/core/forms/motif.ajax-submission.js",
+    "motif-plugins": "./js/core/utils/motif.utils.plugins.js"
   },
   "browserify": {
     "debug": true,
@@ -123,6 +123,7 @@
     "grunt-postcss": "^0.9.0",
     "grunt-svgmin": "^5.0.0",
     "grunt-svgstore": "^1.0.0",
+    "hoverintent": "^2.2.1",
     "load-grunt-config": "^0.19.2",
     "time-grunt": "^1.4.0"
   }
