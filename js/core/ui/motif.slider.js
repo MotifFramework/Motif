@@ -337,7 +337,6 @@
           this.options.syncSlider.nextSlide()
          })
         document.addEventListener(`slider/${this.identity}/progressEvent`, ev => {
-          console.log(ev)
           this.options.syncSlider.onIndicatorClick(ev.detail.index)
         })
        }
