@@ -1,8 +1,8 @@
 var paths = require('../grunt-vars')
 var files = {}
 
-files[paths.buildJs + 'actions.js'] = [
-  paths.sourceJs + 'actions.js'
+files[paths.buildJs + 'global.js'] = [
+  paths.sourceJs + 'global.js'
 ]
 
 module.exports = {

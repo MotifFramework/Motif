@@ -6,13 +6,65 @@ This is the site-wide containing class. Put it around anything you want to be
 contained in the "site width". By default, caps off at `1150px`.
 
 */
+
+@wrapper-max-in-pixels: unit(@px-wrapper-width-wide, px);
+
 .wrappers__wrapper {
-    width: 92%;
+    width: percentage(@wrapper-width-base);
     margin-left: auto;
     margin-right: auto;
 
-    @media @x-large-screens-min {
-        width: 80%;
-        max-width: 1150px;
+    @media @large-screens-min {
+        max-width: @wrapper-max-in-pixels;
+    }
+}
+
+.wrappers__wrapper-max {
+	max-width: unit(@wrapper-max-width,px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrappers__image-max {
+    max-width: unit(@image-max-width,px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrappers__padding-before-max() {
+    @wrappers__padding-before-max: percentage((1 - @wrapper-width-base) * 0.5)
+}
+
+.wrappers__padding-before-max-negative() {
+    @wrappers__padding-before-max-negative: percentage((1 - @wrapper-width-base) * -0.5)
+}
+
+.wrappers__padding-after-max() {
+    @wrappers__padding-after-max: calc(~"(100vw - @{wrapper-max-in-pixels}) * 0.5");
+}
+
+.wrappers__padding-after-max-negative() {
+    @wrappers__padding-after-max-negative: calc(~"(100vw - @{wrapper-max-in-pixels}) * -0.5");
+}
+
+.screen-offset-base() {
+    @screen-offset-base: ((100% / percentage(@wrapper-width-base)) * (((1 - @wrapper-width-base) * 100) * 0.5));
+}
+
+.screen-offset-wrapper() {
+    @wrapper-pixels: unit(@px-wrapper-width-wide, px);
+    @screen-offset-wrapper: ~"(100vw - @{wrapper-pixels})";
+}
+
+.wrappers__break-out {
+    .screen-offset-base();
+    width: calc(~"100% + (@{screen-offset-base} * 2)");
+    position: relative;
+    left: ~"-@{screen-offset-base}";
+
+    @media @wrapper-at-maximum {
+        .screen-offset-wrapper();
+        width: calc(~"100% + (@{screen-offset-wrapper})");
+        left: calc(~"(@{screen-offset-wrapper}) / -2");
     }
 }

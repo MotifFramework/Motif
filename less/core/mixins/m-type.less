@@ -53,6 +53,12 @@
 }
 
 
+// Letter Spacing
+
+.m-type__letter-spacing(@spacing, @font-size, @unit: em) {
+    letter-spacing: unit(@spacing / @font-size, @unit);
+}
+
 // Lists
 
 .m-type__unstyled-list()        {

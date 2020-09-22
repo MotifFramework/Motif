@@ -64,6 +64,7 @@
 @mq-large-min: ( 1em * ( @bp-large-width / @root-text-size ) );
 @mq-large-max: ( 1em * ( ( @bp-x-large-width - 1 ) / @root-text-size ) );
 @mq-x-large-min: ( 1em * ( @bp-x-large-width / @root-text-size ) );
+@mq-wrapper-at-maximum: ( 1em * ( @bp-wrapper-at-maximum / @root-text-size ) );
 
 // `@media` responsive strings
 
@@ -87,6 +88,9 @@
 
 // Extra Large
 @x-large-screens-min: ~"all and (min-width: @{mq-x-large-min})";
+
+// Wrapper Maximum
+@wrapper-at-maximum: ~"all and (min-width: @{mq-wrapper-at-maximum})";
 
 // Pixel equivalents
 @1px: ( 1rem * (1 / @root-text-size) );
