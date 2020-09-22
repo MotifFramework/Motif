@@ -4,6 +4,7 @@
  * http://getmotif.com
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
+ * @author Travis Self <travis@lifeblue.com>
  */
 
  const DEFAULT_MESSAGES = {
@@ -64,7 +65,7 @@ export default class Gauntlet {
    */
   getInputs() {
     return Array.from(this.form.elements).filter(elem =>
-      elem.matches("input:not([type=submit]), select, textarea")
+      this.matches(elem, "input:not([type=submit]), select, textarea")
     );
   }
 
@@ -157,7 +158,7 @@ export default class Gauntlet {
   bindEvents() {
     this.form.addEventListener("change", ev => {
       const input = ev.target;
-      if (!input.matches("input, select, textarea")) {
+      if (!this.matches(input, "input, select, textarea")) {
         return true;
       }
 
@@ -165,7 +166,7 @@ export default class Gauntlet {
     });
     this.form.addEventListener("focusout", ev => {
       const input = ev.target;
-      if (!input.matches("input, select, textarea")) {
+      if (!this.matches(input, "input, select, textarea")) {
         return true;
       }
 
@@ -237,7 +238,7 @@ export default class Gauntlet {
    */
   removeReportMessage(input) {
     if (this.needsGroupTest(input)) {
-      const fieldset = input.closest("fieldset");
+      const fieldset = this.closest(input, "fieldset");
       if (fieldset) {
         const inputMessage = fieldset.querySelector(
           ".elements__input-alert-msg"
@@ -248,7 +249,7 @@ export default class Gauntlet {
       }
     } else if (
       input.nextElementSibling &&
-      input.nextElementSibling.matches(".elements__input-alert-msg")
+      this.matches(input.nextElementSibling, ".elements__input-alert-msg")
     ) {
       input.parentNode.removeChild(input.nextElementSibling);
     }
@@ -400,7 +401,7 @@ export default class Gauntlet {
   addReportMessage(input, message) {
     let parentElem = input.parentElement;
     if (this.needsGroupTest(input)) {
-      const fieldset = input.closest("fieldset");
+      const fieldset = this.closest(input, "fieldset");
       if (fieldset && !fieldset.querySelector(".elements__input-alert-msg")) {
         fieldset.appendChild(message);
       }
@@ -480,10 +481,10 @@ export default class Gauntlet {
     let inputType = input.type;
 
     if (!inputType || inputType === "select-one") {
-      if (input.matches("select")) {
+      if (this.matches(input, "select")) {
         return "select";
       }
-      if (input.matches("textarea")) {
+      if (this.matches(input, "textarea")) {
         return "textarea";
       }
       return "text";
@@ -572,4 +573,48 @@ export default class Gauntlet {
   confirmTest(input) {
     return input.value === this.getConfirmedInput(input).value;
   }
+
+  /**
+   * Utility function: checks if a given input 
+   * matches provided selector.
+   * 
+   * @param {HTMLElement} el 
+   * @param {String} selector 
+   * @return {Boolean}
+   */
+  matches(el, selector) {
+    return (
+      el.matches ||
+      el.matchesSelector ||
+      el.msMatchesSelector ||
+      el.mozMatchesSelector ||
+      el.webkitMatchesSelector ||
+      el.oMatchesSelector
+    ).call(el, selector)
+  }
+
+  /**
+   * Utility function: traverses element and it's
+   * parents until it finds a node that matches
+   * provided selector.
+   * 
+   * @param {HTMLElement} el 
+   * @param {String} selector 
+   * @return {HTMLElement}
+   */
+  closest(el, selector) {
+    if (typeof window.Element.prototype.closest === 'function') {
+      return el.closest(selector)
+    }
+  
+    do {
+      if (this.matches(el, selector)) {
+        return el
+      }
+      el = el.parentElement || el.parentNode
+    } while (el !== null && el.nodeType === 1)
+  
+    return null
+  }
+  
 }
