@@ -44,6 +44,21 @@ export function uIs(el, selector) {
   ).call(el, selector);
 }
 
+export function uClosest(el, selector) {
+  if (typeof window.Element.prototype.closest === 'function') {
+    return el.closest(selector)
+  }
+
+  do {
+    if (uIs(el, selector)) {
+      return el
+    }
+    el = el.parentElement || el.parentNode
+  } while (el !== null && el.nodeType === 1)
+
+  return null
+}
+
 export function uSiblings(el, selector) {
   return Array.from(el.parentNode.children).filter(child => {
     return uIs(child, selector);
@@ -349,3 +364,4 @@ export function uGetUrlParams(url = window.location.href) {
 
   return obj;
 }
+
