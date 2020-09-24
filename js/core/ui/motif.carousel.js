@@ -6,36 +6,39 @@
  * one to another. This uses the same classes and options as described
  * in the Motif Slider. In order to invoke Motif Carousel, please also
  * add the 'js-carousel' class along with the 'js-slider' class on your
- * slider container. Please refer to the slider.less styles for a basic
- * carousel setup.
+ * slider container. 
+ * 
+ * Boilerplate styles can be found in less/core/mixins/m-slider.less,
+ * which are used in less/ui/slider.less.
  * 
  * Example Syntax for a basic slider: 
  * 
- *          <div class="js-slider js-carousel">
- *               <ul class="js-slides">
- *                   <li class="js-slide"> 
- *                       Slide One
- *                   </li>
- *                   <li class="js-slide">
- *                       Slide TWo
- *                   </li>
- *                   <li class="js-slide">
- *                       Slide Three
- *                   </li>
- *               </ul>
+ * <div class="carousel js-slider js-carousel">
+ *    <ul class="carousel__slides js-slides">
+ *       <li class="carousel__slide js-slide"> 
+ *          Slide One
+ *       </li>
+ *       <li class="carousel__slide js-slide">
+ *          Slide Two
+ *       </li>
+ *       <li class="carousel__slide js-slide">
+ *          Slide Three
+ *       </li>
+ *    </ul>
  *
- *               <button class="js-slider__direction-nav-prev">
- *                   Previous
- *               </button>
- *               <button class="js-slider__direction-nav-next">
- *                   Next
- *               </button>
- *           </div>
+ *    <button class="carousel__button js-slider__direction-nav-prev" data-direction="prev">
+ *       Previous
+ *    </button>
+ *    <button class="carousel__button js-slider__direction-nav-next" data-direction="next">
+ *       Next
+ *    </button>
+ * </div>
  * 
  * http://getmotif.com
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
- * Additional modificatons by Lindsay Forrister <lindsay@lifeblue.com>
+ * @author Lindsay Forrister <lindsay@lifeblue.com>
+ * 
  */
 
 import Slider from '../ui/motif.slider'

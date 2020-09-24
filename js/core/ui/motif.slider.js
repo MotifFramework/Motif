@@ -6,35 +6,36 @@
  * Please note that this is a 'peeled back' version of the slider in order 
  * to allow for more custom styling and options. If you are looking for 
  * a slider that will automatically transform from one slide to the next,
- * please refer to the Motif Carousel, which is an extention of the Slider.
+ * please refer to the Motif Carousel, which is an extension of the Slider.
  * 
  * Example Syntax for a basic slider: 
  * 
- *          <div class="js-slider">
- *               <ul class="js-slides">
- *                   <li class="js-slide"> 
- *                       Slide One
- *                   </li>
- *                   <li class="js-slide">
- *                       Slide TWo
- *                   </li>
- *                   <li class="js-slide">
- *                       Slide Three
- *                   </li>
- *               </ul>
- *
- *               <button class="js-slider__direction-nav-prev">
- *                   Previous
- *               </button>
- *               <button class="js-slider__direction-nav-next">
- *                   Next
- *               </button>
- *           </div>
+ * <div class="slider js-slider">
+ *     <ul class="slider__slides js-slides">
+ *         <li class="slider__slide js-slide"> 
+ *             Slide One
+ *         </li>
+ *         <li class="slider__slide js-slide">
+ *             Slide Two
+ *         </li>
+ *         <li class="slider__slide js-slide">
+ *             Slide Three
+ *         </li>
+ *     </ul>
+ *    <button class="slider__button js-slider__direction-nav-prev" data-direction="prev">
+ *         Previous
+ *     </button>
+ *     <button class="slider__button js-slider__direction-nav-next" data-direction="next">
+ *         Next
+ *     </button>
+ * </div>
  * 
  * http://getmotif.com
  * 
  * @author Jonathan Pacheco <jonathan@lifeblue.com>
- * Additional modificatons by Lindsay Forrister <lindsay@lifeblue.com>
+ * @author Lindsay Forrister <lindsay@lifeblue.com>
+ * @author Travis Self <travis@lifeblue.com>
+ * 
  */
 
  import { uCreateCustomEvent } from '../utils/motif.utilities'
