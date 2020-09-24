@@ -30,8 +30,8 @@ export default class InputFilled {
     fieldEmptiness(elem = this.element) {
         this.bindEvents(elem)
         this.applyState(elem)
-        this.addRequired(elem)
     }
+
     bindEvents() {
         this.element.addEventListener('change', ev => this.applyState())
         this.element.addEventListener('focusin', ev => this.applyFocusedState())
@@ -120,22 +120,5 @@ export default class InputFilled {
                 this.registerBtn.setAttribute("disabled", true);
             }
         })
-    }
-
-    //This is a special case for the woocommerce forms
-
-    addRequired(elem = this.element) {
-        var required = elem.querySelector('.required')
-        var input = elem.querySelector('input')
-        var select = elem.querySelector('select')
-
-        if (required) {
-            if (input) {
-                input.required = true
-            }
-            if (select) {
-                select.required = true
-            }
-        }
     }
 }
