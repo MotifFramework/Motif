@@ -7,7 +7,8 @@ contained in the "site width". By default, caps off at `1150px`.
 
 */
 
-@wrapper-max-in-pixels: unit(@px-wrapper-width-wide, px);
+@wrapper-max-in-pixels: unit(@px-wrapper-width-max, px);
+@wrapper-full-bleed-in-pixels: unit(@px-wrapper-full-bleed-max, px);
 
 .wrappers__wrapper {
     width: percentage(@wrapper-width-base);
@@ -20,13 +21,13 @@ contained in the "site width". By default, caps off at `1150px`.
 }
 
 .wrappers__wrapper-max {
-	max-width: unit(@wrapper-max-width,px);
+	max-width: @wrapper-max-in-pixels;
     margin-left: auto;
     margin-right: auto;
 }
 
-.wrappers__image-max {
-    max-width: unit(@image-max-width,px);
+.wrappers__full-bleed {
+	max-width: @wrapper-full-bleed-in-pixels;
     margin-left: auto;
     margin-right: auto;
 }
@@ -47,24 +48,21 @@ contained in the "site width". By default, caps off at `1150px`.
     @wrappers__padding-after-max-negative: calc(~"(100vw - @{wrapper-max-in-pixels}) * -0.5");
 }
 
-.screen-offset-base() {
-    @screen-offset-base: ((100% / percentage(@wrapper-width-base)) * (((1 - @wrapper-width-base) * 100) * 0.5));
-}
-
-.screen-offset-wrapper() {
-    @wrapper-pixels: unit(@px-wrapper-width-wide, px);
-    @screen-offset-wrapper: ~"(100vw - @{wrapper-pixels})";
+.wrappers__screen-offset() {
+    @wrapper-screen-offset-base: ((100% / percentage(@wrapper-width-base)) * (((1 - @wrapper-width-base) * 100) * 0.5));
+    @wrapper-pixels: unit(@px-wrapper-width-max, px);
+    @wrapper-screen-offset: ~"(100vw - @{wrapper-pixels})";
 }
 
 .wrappers__break-out {
-    .screen-offset-base();
-    width: calc(~"100% + (@{screen-offset-base} * 2)");
+    .wrappers__screen-offset();
+
+    width: calc(~"100% + (@{wrapper-screen-offset-base} * 2)");
     position: relative;
-    left: ~"-@{screen-offset-base}";
+    left: ~"-@{wrapper-screen-offset-base}";
 
     @media @wrapper-at-maximum {
-        .screen-offset-wrapper();
-        width: calc(~"100% + (@{screen-offset-wrapper})");
-        left: calc(~"(@{screen-offset-wrapper}) / -2");
+        width: calc(~"100% + (@{wrapper-screen-offset})");
+        left: calc(~"(@{wrapper-screen-offset}) / -2");
     }
 }
