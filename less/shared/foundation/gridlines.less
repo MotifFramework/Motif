@@ -21,25 +21,18 @@
     width: 100%;
     position: relative;
     background: fade(@blue, 25);
+    border: @1px solid @blue;
+    border-width: 0px @1px;
     pointer-events: none;
   
-    &:before,
-    &:after {
-      content: "";
+    &:before {
+      content: attr(data-count);
       display: block;
-      width: 1px;
-      height: 100vh;
       position: absolute;
       top: 0;
-      background: @blue;
-    }
-  
-    &:before {
-      left: 0;
-    }
-  
-    &:after {
-      right: 0;
+      left: 50%;
+      transform: translate(-50%, ~"@{10px}");
+      color: @blue;
     }
   }
   

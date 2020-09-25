@@ -7,6 +7,7 @@ import hoverIntent from './core/vendor/hoverIntent'
 import forms from './core/forms/forms'
 import carousels from './core/ui/carousels'
 import sliders from './core/ui/sliders'
+import gridlines from "./core/ui/motif.gridlines";
 
 // pages
 
@@ -28,6 +29,7 @@ class App {
     forms()
     carousels()
     sliders()
+    gridlines()
   }
 
   pages() {
