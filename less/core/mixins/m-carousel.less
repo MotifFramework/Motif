@@ -1,9 +1,12 @@
-.js-slider {
+.m-carousel() {
     position: relative;
+    overflow: hidden;
+    height: 100%;
 }
 
-.js-slides {
+.m-carousel__slides() {
     --slidesOffset: 0px;
+    height: 100%;
     list-style: none outside none;
     margin: 0;
     padding: 0;
@@ -16,18 +19,13 @@
       transition-duration: 0.05s;
       transition-easing: linear;
     }
-
 }
 
-.js-slide {
+.m-carousel__slide() {
     display: flex;
     flex-direction: column;
     flex: 0 0 auto;
     width: 100%;
     top: 0;
     left: 0;
-    
-    &:after {
-        display: none !important;
-      }
 }
