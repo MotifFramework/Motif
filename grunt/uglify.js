@@ -12,7 +12,7 @@ var scripts = {
     paths.sourceJs + 'vendor/fontfaceobserver.min.js'
   ],
   main: [
-    paths.buildJs + 'actions.js'
+    paths.buildJs + 'global.js'
   ]
 }
 

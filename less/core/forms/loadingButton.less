@@ -1,0 +1,40 @@
+@loading-button-text-color: @grey;
+@loading-button-timing: 2;
+@loading-button-delay: 0.25;
+@loading-button-delay-2: @loading-button-delay * 2;
+
+.loadingButton__reset {
+  font-size: 1em;
+  line-height: 1em;
+  
+  .is-loading & {
+    display: none;
+  }
+}
+
+.loadingButton__loader {
+  display: none;
+
+  .is-loading & {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.loadingButton__text {
+  opacity: 0;
+  
+  .is-loading & {
+    opacity: 1;
+  }
+}
+
+@keyframes load {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
