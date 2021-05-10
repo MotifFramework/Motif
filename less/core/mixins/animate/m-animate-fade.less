@@ -1,0 +1,41 @@
+#animate {
+    .m-animate__fade(@props: background; @from: @black; @to: @blue) {
+        #animate > .m-animate__transition(@props;);
+
+        each(@props, .(@v, @k, @i) {
+            @{v}: extract(@from, @i);
+        })
+    
+        &:hover {
+            each(@props, .(@v, @k, @i) {
+                @{v}: extract(@to, @i);
+            })
+        }
+    }
+
+    .m-animate__fade-classes(@property) {
+        .animate__fade-@{property} {
+            #animate > .m-animate__fade(@props: @property;);   
+        }    
+    }
+}
+
+each(@animate-props, {
+    #animate > .m-animate__fade-classes(@value)
+});
+
+.test-animation {
+    #animate > .m-animate__fade(
+        transform,
+        background,
+        color;
+        
+        translateZ(0),
+        @green,
+        @black;
+
+        translateY(-10px),
+        @black,
+        @white
+    );
+}

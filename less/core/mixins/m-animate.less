@@ -1,0 +1,60 @@
+@animate-props: color, background, border-color;
+
+#animate {
+    .m-animate__keyframes(@name; @framelist; @frameprops)
+    {
+        /**
+            HT: https://stackoverflow.com/questions/33033541/add-argument-into-keyframes-property-less
+    
+            Example:
+            ===
+            #animate > .m-animate__keyframes(fade; 
+                0,100;
+                {opacity: 0;},
+                {opacity: 1;}
+            );
+    
+            Output:
+            ===
+            @keyframes fade {
+                0% {
+                    opacity: 0;
+                }
+    
+                100% {
+                    opacity: 1;
+                }
+            }
+        */
+        @keyframes @name {
+            .loop-framelist(@index) when (@index <= length(@framelist)) {
+                @framepos: extract(@framelist, @index) * 1%;
+
+                @{framepos} {
+                    @props: extract(@frameprops, @index);
+                    @props();
+                }
+
+                .loop-framelist(@index + 1);
+            }
+
+            .loop-framelist(1);
+        }
+    }
+
+    .m-animate__transition-properties(...) {
+        transition-property: @arguments;
+    }
+
+    .m-animate__transition(@props; @delay: 0s; @duration: 500ms; @timing: ease-in-out ) {
+        .m-animate__transition-properties(@props;);
+
+        transition-delay: @delay;
+        transition-duration: @duration;
+        transition-timing-function: @timing;
+    }
+}
+
+@import 'animate/m-animate-fade.less';
+@import 'animate/m-animate-move.less';
+@import 'animate/m-animate-scale.less';
