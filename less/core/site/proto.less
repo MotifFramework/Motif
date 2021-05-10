@@ -1,5 +1,5 @@
 // Importing Lato font via Google Fonts
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,900);
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
 
 /*
 
@@ -70,39 +70,16 @@ embedded via `@font-face` declarations.
 
 */
 
-.proto__lato-light,
-.proto__lato-regular,
-.proto__lato-bold,
-.proto__lato-black {
+.proto__lato,
+.proto__lato--black {
     font-family: @lato;
 }
-.proto__lato-light {
-    font-weight: 300;
-}
-.proto__lato-regular {
+.proto__lato {
     font-weight: 400;
 }
-.proto__lato-bold {
-    font-weight: 700;
-}
-.proto__lato-black {
+.proto__lato--black {
     font-weight: 900;
 }
-
-// This is how you'd import the Lato font straight from the folder:
-
-// .proto__lato-light {
-//     font-family: @lato-light;
-// }
-// .proto__lato-regular {
-//     font-family: @lato-regular;
-// }
-// .proto__lato-bold {
-//     font-family: @lato-bold;
-// }
-// .proto__lato-black {
-//     font-family: @lato-black;
-// }
 
 /*
 
@@ -114,31 +91,8 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6,
-.styles__primary-heading {
-    &:extend( .proto__lato-bold );
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.styles__primary-heading,
-.styles__secondary-heading {
-    color: @primary-header-color;
-}
-
-.styles__secondary-heading  {
-    &:extend( .proto__lato-light );
-}
-.styles__tertiary-heading  {
-    &:extend( .proto__lato-black );
-
-    color: @grey;
-    text-transform: uppercase;
+h5 {
+    &:extend( .proto__lato--black );
 }
 
 /*
@@ -151,7 +105,7 @@ A quick class to help make any element's text look like the site's default body 
 
 body,
 .styles__body-text {
-    &:extend( .proto__lato-regular );
+    &:extend( .proto__lato );
 }
 
 dt,
@@ -212,7 +166,7 @@ textarea {
 
 a,
 .links__link {
-    &:extend( .proto__lato-bold );
+    &:extend( .proto__lato--black );
 }
 
 /*
@@ -224,7 +178,7 @@ Buttons
 .button__base {
     
     // Extends
-    &:extend( .proto__lato-bold );
+    &:extend( .proto__lato--black );
 
     // Mixins
     .m-border-radius( @default-radius );
@@ -635,8 +589,8 @@ Tabs
 
     a {
 
-        /* Extends .proto__lato-bold */
-        &:extend( .proto__lato-bold );
+        /* Extends .proto__lato--black */
+        &:extend( .proto__lato--black );
 
         // Mixins
         .m-border-radius__top( @default-radius );

@@ -37,16 +37,50 @@ each type size with varying line heights.
     line-height: 1.5;
 }
 
-/*
-
-Canon Text
-
-*/
-
 #mixed {
 
     .hierarchy__canon-text() {
-        .m-type__type-size(@canon-text-size, 45);
+        .m-type__type-size(@canon-text-size, 89);
+    }
+
+    .hierarchy__tertia-text() {
+        .m-type__type-size(@tertia-text-size, 69);
+    }
+
+    .hierarchy__meridian-text() {
+        .m-type__type-size(@meridian-text-size, 52);
+    }
+
+    .hierarchy__paragon-text() {
+        .m-type__type-size(@paragon-text-size, 44);
+    }
+
+    .hierarchy__columbian-text() {
+        .m-type__type-size(@columbian-text-size, 34);
+    }
+
+    .hierarchy__grand-text() {
+        .m-type__type-size(@grand-text-size, 27);
+    }
+
+    .hierarchy__normal-text() {
+        .m-type__type-size(@normal-text-size, 32);
+    }
+
+    .hierarchy__primer-text() {
+        .m-type__type-size(@primer-text-size, 28);
+    }
+
+    .hierarchy__petite-text() {
+        .m-type__type-size(@petite-text-size, 20);
+    }
+
+    .hierarchy__minion-text() {
+        .m-type__type-size(@minion-text-size, 15);
+    }
+
+    .hierarchy__non-pariel-text() {
+        .m-type__type-size(@non-pariel-text-size, 12);
     }
 }
 
@@ -59,62 +93,6 @@ Canon Text
     &:extend(.hierarchy__long-text);
 }
 
-/*
-
-Paragon Text
-
-*/
-
-#mixed {
-
-    .hierarchy__paragon-text() {
-        .m-type__type-size(@paragon-text-size, 35);
-    }
-}
-.hierarchy__paragon-text {
-    #mixed > .hierarchy__paragon-text();
-}
-
-.hierarchy__paragon-text--long {
-    &:extend(.hierarchy__paragon-text);
-    &:extend(.hierarchy__long-text);
-}
-
-/*
-
-Primer Text
-
-*/
-
-#mixed {
-
-    .hierarchy__primer-text() {
-        .m-type__type-size(@primer-text-size, 30);
-    }
-}
-
-.hierarchy__primer-text {
-    #mixed > .hierarchy__primer-text();
-}
-
-.hierarchy__primer-text--long {
-    &:extend(.hierarchy__primer-text);
-    &:extend(.hierarchy__long-text);
-}
-
-/*
-
-Tertia Text
-
-*/
-
-#mixed {
-
-    .hierarchy__tertia-text() {
-        .m-type__type-size(@tertia-text-size, 25);
-    }
-}
-
 .hierarchy__tertia-text {
     #mixed > .hierarchy__tertia-text();
 }
@@ -124,17 +102,40 @@ Tertia Text
     &:extend(.hierarchy__long-text);
 }
 
-/*
+.hierarchy__meridian-text {
+    #mixed > .hierarchy__meridian-text();
+}
 
-Normal Text
+.hierarchy__meridian-text--long {
+    &:extend(.hierarchy__meridian-text);
+    &:extend(.hierarchy__long-text);
+}
 
-*/
+.hierarchy__paragon-text {
+    #mixed > .hierarchy__paragon-text();
+}
 
-#mixed {
+.hierarchy__paragon-text--long {
+    &:extend(.hierarchy__paragon-text);
+    &:extend(.hierarchy__long-text);
+}
 
-    .hierarchy__normal-text() {
-        .m-type__type-size(@normal-text-size);
-    }
+.hierarchy__columbian-text {
+    #mixed > .hierarchy__columbian-text();
+}
+
+.hierarchy__columbian-text--long {
+    &:extend(.hierarchy__columbian-text);
+    &:extend(.hierarchy__long-text);
+}
+
+.hierarchy__grand-text {
+    #mixed > .hierarchy__grand-text();
+}
+
+.hierarchy__grand-text--long {
+    &:extend(.hierarchy__grand-text);
+    &:extend(.hierarchy__long-text);
 }
 
 .hierarchy__normal-text {
@@ -146,17 +147,13 @@ Normal Text
     &:extend(.hierarchy__long-text);
 }
 
-/*
+.hierarchy__primer-text {
+    #mixed > .hierarchy__primer-text();
+}
 
-Petite Text
-
-*/
-
-#mixed {
-
-    .hierarchy__petite-text() {
-        .m-type__type-size(@petite-text-size);
-    }
+.hierarchy__primer-text--long {
+    &:extend(.hierarchy__primer-text);
+    &:extend(.hierarchy__long-text);
 }
 
 .hierarchy__petite-text {
@@ -165,5 +162,23 @@ Petite Text
 
 .hierarchy__petite-text--long {
     &:extend(.hierarchy__petite-text);
+    &:extend(.hierarchy__long-text);
+}
+
+.hierarchy__minion-text {
+    #mixed > .hierarchy__minion-text();
+}
+
+.hierarchy__minion-text--long {
+    &:extend(.hierarchy__minion-text);
+    &:extend(.hierarchy__long-text);
+}
+
+.hierarchy__non-pariel-text {
+    #mixed > .hierarchy__non-pariel-text();
+}
+
+.hierarchy__non-pariel-text--long {
+    &:extend(.hierarchy__non-pariel-text);
     &:extend(.hierarchy__long-text);
 }
