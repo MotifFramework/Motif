@@ -1,6 +1,3 @@
-// Importing Lato font via Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap');
-
 /*
 
 Config
@@ -8,25 +5,13 @@ Config
 */
 
 // Color Variables
-
-// Greys
-@grey-1: @grey;
-@grey-2: #cfcbca;
-@grey-3: #f7f7f9;
-@grey-4: #ddd;
-
-@blue-1: @blue;
-@blue-2: #00a4d8;
-@blue-3: #eaf7ff;
-@blue-4: #024f82;
-
-@green-1: @green;
-@green-2: #72bc44;
-@green-3: #f4faf2;
-
-@red-1: @red;
-@red-2: #e63c4d;
-@red-3: #f6e1df;
+@white: @brand-1;
+@dark-blue: @brand-2;
+@blueprint: @interactive-primary;
+@dark-blueprint: @interactive-secondary;
+@light-blue: @accent-1;
+@dark-grey: @neutral-1;
+@light-grey: @neutral-2;
 
 // Font Declarations
 @lato: "Lato", @stack-sans-serif;
@@ -124,8 +109,8 @@ Blockquote
 .styles__blockquote {
     padding-left: @full-side;
     font-size: 128%;
-    color: @grey;
-    border-left: 7px solid @grey-4;
+    color: @dark-grey;
+    border-left: 7px solid @light-grey;
 }
 
 
@@ -143,7 +128,7 @@ textarea {
 
     padding: @half-vertical @full-side;
     background: @white;
-    border: 1px solid @grey-4;
+    border: 1px solid @light-grey;
 
     // Mixins
     &:extend( .body-text );
@@ -171,472 +156,6 @@ a,
 
 /*
 
-Buttons
-
-*/
-
-.button__base {
-    
-    // Extends
-    &:extend( .proto__lato--black );
-
-    // Mixins
-    .m-border-radius( @default-radius );
-
-    background-color: @grey-3;
-    border: 1px solid @grey-2;
-
-    &,
-    &:hover,
-    &:focus,
-    &.is-current {
-        color: @light-black;
-    }
-    &:hover,
-    &:focus,
-    &.is-current {
-        background-color: darken(@grey-3, 5%);
-        border-color: @grey-1;
-    }
-}
-
-.button__blue,
-.button__primary {
-    .m-button__color( @blue, @dark-blue );
-}
-
-.button__red,
-.button__danger {
-    .m-button__color( @red, @dark-red );
-}
-
-
-/*
-
-Panels
-
-````panel-alt
-<div class="panel--alt">
-    <h3>This is a Panel</h3>
-    <p>This is a <a href="#">feedback message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
-</div>
-<div class="panel--alt">
-    <p>This is a feedback panel with no heading.</p>
-</div>
-````
-
-````panel-inverse
-<div class="panel--inverse">
-    <h3>This is a Panel</h3>
-    <p>This is a <a href="#">feedback message</a> for the user.</p>
-    <p><a href="#" class="btn">User Action</a></p>
-</div>
-<div class="panel--inverse">
-    <p>This is a feedback panel with no heading.</p>
-</div>
-````
-
-*/
-
-.panel,
-[class*="panel-"],
-[class*="-panel"] {
-    .m-border-radius( @default-radius );
-
-    color: @light-black;
-    border: 1px solid @grey-2;
-    background-color: @grey-3;
-}
-
-.panel--alt {
-    background-color: @white;
-}
-.panel--inverse {
-    color: @white;
-    background-color: @blue;
-    border-color: @blue;
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: inherit;
-    }
-
-    a {
-        &,
-        &:hover,
-        &:focus {
-            color: inherit;
-        }
-        &:hover,
-        &:focus {
-            color: @grey-2;
-        }
-    }
-
-    .btn {
-        &,
-        &:hover,
-        &:focus {
-            color: @light-black;
-        }
-    }
-}
-
-.alert-panel {
-    &--info {
-        border-color: @blue-2;
-        background-color: @blue-3;
-    }
-    &--error {
-        border-color: @red-2;
-        background-color: @red-3;
-    }
-    &--success {
-        border-color: @green-2;
-        background-color: @green-3;
-    }
-}
-
-/*
-
-Figures
-
-*/
-
-.figure,
-[class*="figure--"] {
-    > a {
-        padding: @quarter-vertical;
-        border: 1px solid @light-grey;
-
-        &:hover,
-        &:focus {
-            border-color: @light-blue;
-        }
-    }
-}
-.figure figcaption,
-.figcaption {
-    &:extend(.hierarchy__petite-text);
-    padding: @half-vertical @full-side;
-}
-
-
-/*
-
-List Modules
-
-*/
-
-/*
-
-Nav Bar
-
-A quick navigation bar, typically good for prototyping the main menu of a site.
-
-````nav-bar
-<nav class="nav-bar--menu" role="navigation">
-    <h3 class="proto__nav-bar-title js-expand"
-     id="reveal-main-nav"
-     data-reveal="main-nav-list">
-        <svg class="icon"><use xlink:href="#rows"></svg>
-        <b class="button-label">Main Menu</b>
-    </h3>
-    <ul class="proto__nav-bar-list expand__target" id="main-nav-list">
-        <li>
-            <a class="proto__nav-bar-link is-current" href="#">
-                Current Nav Link
-            </a>
-        </li>
-        <li>
-            <a class="proto__nav-bar-link" href="#">
-                Nav Link
-            </a>
-        </li>
-        <li>
-            <a class="proto__nav-bar-link" href="#">
-                Nav Link
-            </a>
-        </li>
-    </ul>
-</nav>
-````
-
-*/
-
-.proto__nav-bar-title {
-
-    // Create
-    margin: 0;
-    padding: @half-vertical 4%;
-    display: inline-block;
-    color: @white;
-    background: @blue-1;
-    cursor: pointer;
-
-    &:hover,
-    &:focus,
-    &.is-expanded {
-        background: @blue-4;
-    }
-
-    @media @medium-screens-min {
-
-        .js .nav-bar--menu & {
-            display: none;
-        }
-    }
-}
-
-.proto__nav-bar-list {
-    &:extend(.lists__horizontal--forceful);
-
-    margin: 0;
-    background: @blue-1;
-
-    @media @medium-screens-min {
-
-        .js .nav-bar--menu & {
-            max-height: 999px;
-        }
-    }
-
-    > li {
-        &:extend(.lists__horizontal--forceful li);
-
-        @media @small-screens-min {
-            width: 50%;
-
-            &:nth-child( odd ) {
-                clear: both;
-            }
-        }
-
-        @media @small-screens-min {
-            width: auto;
-
-            &:nth-child( odd ) {
-                clear: none;
-            }
-        }
-    }
-
-    ul {
-        margin: 0;
-    }
-}
-
-.proto__nav-bar-link {
-    color: @white;
-    text-decoration: none;
-    padding: @half-vertical 4%;
-    
-    &:hover,
-    &:focus,
-    &.is-current {
-        color: @white;
-        background: @blue-4;
-    }
-
-    @media @small-screens-min {
-        padding: @half-vertical @full-side;
-    }
-    @media @medium-screens-min {
-        padding: @full-vertical @full-side;
-    }
-}
-
-/*
-
-Vertical Nav
-
-````vertical-nav
-<ul class="proto__vertical-nav">
-    <li>
-        <a href="#">Nav Link</a>
-    </li>
-    <li>
-        <a href="#" class="is-current">Current Nav Link</a>
-        <ul>
-            <li>
-                <a href="#">Nav Link</a>
-            </li>
-            <li>
-                <a href="#">Nav Link</a>
-            </li>
-            <li>
-                <a href="#" class="is-current">Current Nav Link</a>
-            </li>
-            <li>
-                <a href="#">Nav Link</a>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <a href="#">Nav Link</a>
-    </li>
-    <li>
-        <a href="#">Nav Link</a>
-    </li>
-    <li>
-        <a href="#">Nav Link</a>
-    </li>
-</ul>
-````
-
-*/
-
-.proto__vertical-nav {
-    ul& {
-        &:extend(.lists__unstyled);
-    }
-    a {
-        color: @blue-4;
-        padding: @quarter-vertical @full-side;
-        display: block;
-        text-decoration: none;
-    }
-    a:hover,
-    a:focus,
-    .is-current {
-        background-color: @blue-3;
-    }
-    li ul {
-        margin: 0;
-        padding: 0 0 0 @full-side;
-    
-        li {
-            list-style: none outside none;
-        }
-    } 
-}
-
-
-/*
-
-Breadcrumb
-
-*/
-
-.lists__breadcrumb-list {
-    text-transform: capitalize;
-
-    li {
-        &:before {
-            content: "/";
-            margin-right: @half-side;
-        }
-
-        &:first-child:before {
-            content: "";
-            margin: 0;
-        }
-    }
-}
-
-/*
-
-Button List
-
-*/
-
-.lists__horizontal--buttons {
-
-    li {
-
-        &:not(:first-child) a {
-            .m-border-radius__left(0);
-        }
-
-        &:not(:last-child) a {
-            .m-border-radius__right(0);
-        }
-    }
-
-    a {
-        border-left-width: 0;
-    }
-
-    li:first-child a {
-        border-left-width: 1px;
-    }
-}
-
-
-/*
-
-Tabs
-
-*/
-
-.tabs {
-    .m-vertical-rhythm__margin-leader();
-
-    nav > ul {
-        &:extend(.lists__horizontal all);
-    }
-}
-
-.tabs nav > ul,
-.tabs__list {
-    border-bottom: 1px solid @grey-4;
-    margin-bottom: @full-vertical;
-
-    a {
-
-        /* Extends .proto__lato--black */
-        &:extend( .proto__lato--black );
-
-        // Mixins
-        .m-border-radius__top( @default-radius );
-
-        padding: @half-vertical @full-side;
-        color: @grey-2;
-        text-decoration: none;
-        position: relative;
-        bottom: -1px;
-        z-index: 30;
-        border: 1px solid transparent;
-
-        &:hover,
-        &:focus {
-            color: @light-black;
-        }
-    }
-    .is-current {
-        color: @light-black;
-        background-color: @white;
-        border-color: @grey-2;
-        border-bottom-color: transparent;
-        z-index: 60;
-    }
-}
-
-.js.csstransitions .tabs {
-    > nav + *,
-    &__section {
-
-        // Mixins
-        .m-transition( height, 0.3s, @easeOutCubic );
-    }
-}
-
-.tabs {
-    > nav + * > *,
-    .tab {
-        > :first-child {
-            margin-top: 0;
-        }
-    }
-}
-
-/*
-
 Tables
 
 */
@@ -648,18 +167,18 @@ td[data-th]:before {
 }
 @media @medium-screens-min {
     th {
-        border-bottom: @border-width solid @grey-4;
+        border-bottom: @border-width solid @light-grey;
     }
     th + th,
     td + td {
-        border-left: @border-width solid @grey-4;
+        border-left: @border-width solid @light-grey;
     }
     tr + tr td {
-        border-top: @border-width solid @grey-4;
+        border-top: @border-width solid @light-grey;
     }
     tbody tr:nth-child( odd ),
     table > tr:nth-child( odd ) {
-        background: @grey-3;
+        background: lighten(@dark-grey, 30%);
     }
 }
 
@@ -780,7 +299,7 @@ Input Alerts
 
 .no-boxshadow {
     .proto__bubble {
-        border: 1px solid @grey;
+        border: 1px solid @dark-grey;
     }
 }
 
@@ -792,7 +311,7 @@ Form Modules
 */
 
 .elements__attached-label {
-    border: 1px solid @grey-4;
+    border: 1px solid @light-grey;
     border-radius: @default-radius;
 
     &:hover,
@@ -805,9 +324,9 @@ Form Modules
     .label {
         text-align: center;
         padding: 0 @full-side;
-        background-color: @grey-3;
-        border-left: 1px solid @grey-4;
-        border-right: 1px solid @grey-4;
+        background-color: lighten(@dark-grey, 30%);
+        border-left: 1px solid @light-grey;
+        border-right: 1px solid @light-grey;
 
         &:first-child,
         + input {

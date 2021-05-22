@@ -1,5 +1,5 @@
 #animate {
-    .m-animate__fade(@props: background; @from: @black; @to: @blue) {
+    .m-animate__fade(@props: background; @from: @black; @to: @interactive-primary) {
         #animate > .m-animate__transition(@props;);
 
         each(@props, .(@v, @k, @i) {
@@ -31,11 +31,11 @@ each(@animate-props, {
         color;
         
         translateZ(0),
-        @green,
-        @black;
+        @interactive-primary,
+        @white;
 
         translateY(-10px),
-        @black,
-        @white
+        @accent-1,
+        @black
     );
 }
