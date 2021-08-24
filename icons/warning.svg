@@ -3,12 +3,7 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
 <g>
-	<g>
-		<path d="M16,32C7.2,32,0,24.8,0,16S7.2,0,16,0s16,7.2,16,16S24.8,32,16,32z M16,2C8.3,2,2,8.3,2,16s6.3,14,14,14s14-6.3,14-14
-			S23.7,2,16,2z"/>
-	</g>
-	<g>
-		<polygon points="26,17 15,17 15,6 17,6 17,15 26,15 		"/>
-	</g>
+	<path d="M16,0C7.2,0,0,7.2,0,16s7.2,16,16,16s16-7.2,16-16S24.8,0,16,0z M17.9,7L17,19h-2L14.1,7H17.9z M16,25c-1.1,0-2-0.9-2-2
+		s0.9-2,2-2s2,0.9,2,2S17.1,25,16,25z"/>
 </g>
 </svg>

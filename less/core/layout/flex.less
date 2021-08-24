@@ -1,0 +1,149 @@
+/*
+FLEX UTILITIES
+@author Enid Soto <enid@lifeblue.com>
+
+Create a parent flex element by applying the class `.flex`, and add flex items with the class `.flex__col`. You can also use the grid system's column classes, i.e. `grid__lg-half`.
+    <div class="flex">
+        <div class="flex__col">...</div>
+        <div class="flex__col">...</div>
+    </div>
+
+    Add gutters to the columns by adding the class `.flex__gutters` to the parent flex container:
+    <div class="flex flex__gutters">
+        <div class="flex__col">...</div>
+        <div class="flex__col">...</div>
+    </div>
+
+    .m-flex__element()
+    --------------------
+    This mixin will set the display to flex, and also set the flex-direction and flex-wrap to their default values (row and nowrap, respectively). If you are using the standard motif column classes (i.e. grid__sm-half), you must set the gutters to true.
+    You can set new values with the variables `@direction` and `@wrap`, like so: 
+    .m-flex__element(@direction: column, @wrap: wrap);
+
+.m-flex__order(@number)
+-------------------------
+Use this mixin to set the order of each flex item within a parent flex element. Accepts a unitless value only. 
+
+.m-flex(@grow, @shrink, @basis)
+--------------------------------
+This mixin sets the shorthand `flex` property, which combines flex-grow, flex-shrink and flex-basis.
+    @grow: specifies how much a flex item will grow relative to the rest of the flexible items inside the same container. Accepts a unitless value only. Negative values are invalid. 
+    @shrink: specifies how much a flex item will shrink relative to the rest of the flexible items inside the same container. Accepts a unitless value only. Negative values are invalid.
+    @basis: specifies the initial length of a flexible item. Accepts a length (20%, 5rem, etc) or a keyword.
+Note: IE 9 and earlier do not support the flex property.
+
+*/
+
+.flex {
+    .m-flex__element();
+}
+
+.flex--inline {
+    .m-flex__element(@inline: true);
+}
+
+.flex__col {
+    width: 100%;
+}
+
+.flex__gutters {
+    .m-flex__gutters();
+}
+
+// HELPER CLASSES
+// NOTE: Add these classes directly to html tags, not to less files
+
+/* The `flex-direction` helper classes are:
+    .flex__dir--row
+    .flex__dir--row-reverse
+    .flex__dir--column
+    .flex__dir--column-reverse
+*/ 
+
+@flex-direction: row, row-reverse, column, column-reverse;
+each(@flex-direction, {
+    .flex__dir--@{value} {
+        flex-direction: @value;
+    }
+});
+
+/* The `flex-wrap` helper classes are:
+    .flex__wrp--nowrap
+    .flex__wrp--wrap
+    .flex__wrp--wrap-reverse
+*/ 
+
+@flex-wrap: nowrap, wrap, wrap-reverse;
+each(@flex-wrap, {
+    .flex__wrp--@{value} {
+        flex-wrap: @value;
+    }
+});
+
+/* The `justify-content` helper classes are:
+    .flex__jc--flex-start
+    .flex__jc--flex-end
+    .flex__jc--center
+    .flex__jc--space-between
+    .flex__jc--space-around
+    .flex__jc--space-evenly
+*/ 
+
+@justify-content: flex-start, flex-end, center, space-between, space-around, space-evenly;
+each(@justify-content, {
+    .flex__jc--@{value} {
+        justify-content: @value;
+    }
+});
+
+/* The `align-items` helper classes are:
+    .flex__ai--flex-start
+    .flex__ai--flex-end
+    .flex__ai--center
+    .flex__ai--stretch
+    .flex__ai--baseline
+*/
+
+@align-items: flex-start, flex-end, center, stretch, baseline;
+each(@align-items, {
+    .flex__ai--@{value} {
+        align-items: @value;
+    }
+});
+
+/* The `align-content` helper classes are:
+    .flex__ac--normal
+    .flex__ac--flex-start
+    .flex__ac--flex-end
+    .flex__ac--center
+    .flex__ac--space-between
+    .flex__ac--space-around
+    .flex__ac--space-evenly
+    .flex__ac--stretch
+    NOTE: These properties ONLY take effect on multi-line flexible containers, where flex-flow is set to either wrap or wrap-reverse
+*/
+
+@align-content: normal, flex-start, flex-end, center, space-between, space-around, space-evenly, stretch;
+each(@align-content, {
+    .flex__ac--@{value} {
+        align-content: @value;
+    }
+});
+
+/* The `align-self` helper classes are:
+    .flex__as--auto
+    .flex__as--flex-start
+    .flex__as--flex-end
+    .flex__as--center
+    .flex__as--baseline
+    .flex__as--stretch
+*/
+
+@align-self: auto, flex-start, flex-end, center, baseline, stretch;
+each(@align-self, {
+    .flex__as--@{value} {
+        align-self: @value;
+    }
+});
+
+//NOTE: thinking of adding individual classes for flex direction and flex wrap instead of having a mixin

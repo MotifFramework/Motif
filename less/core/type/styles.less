@@ -38,33 +38,53 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6 {
+h5 {
     margin-top: 1.75em;
 }
 
 h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.styles__primary-heading {
-    font-weight: normal;
+.styles__h1  {
+    .m-type__type-size(@paragon-text-size, 44);
+
+    @media @medium-screens-min {
+        .m-type__type-size(@meridian-text-size, 50);
+    }
 }
 
-/*
+h2,
+.styles__h2  {
+    .m-type__type-size(@columbian-text-size, 34);
+    
+    @media @medium-screens-min {
+        .m-type__type-size(@paragon-text-size, 44);
+    }
+}
 
-Secondary Heading
+h3,
+.styles__h3  {
+    .m-type__type-size(@grand-text-size, 27);
+    
+    @media @medium-screens-min {
+        .m-type__type-size(@columbian-text-size, 34);
+    }
+}
 
-````secondary-heading
-<h2 class="secondary-heading">Secondary Heading</h2>
-````
+h4,
+.styles__h4  {
+    .m-type__type-size(@normal-text-size, 22);
+    
+    @media @medium-screens-min {
+        .m-type__type-size(@grand-text-size, 27);
+    }
+}
 
-*/
-
-.styles__secondary-heading  {
-    // CODE
+h5,
+.styles__h5  {
+    .m-type__type-size(@primer-text-size, 19);
+    
+    @media @medium-screens-min {
+        .m-type__type-size(@normal-text-size, 22);
+    }
 }
 
 /*
