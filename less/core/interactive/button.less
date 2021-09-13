@@ -14,9 +14,8 @@ Default interactive button styles. This `.btn` class can be applied to `<a>`,
 with size classes, much like the type modules.
 
 ````button
-<a class="button__btn" href="#">Default</a>
 <a class="button__primary" href="#">Primary</a>
-<a class="button__danger" href="#">Danger</a>
+<a class="button__secondary button--tiny" href="#">Secondary (Tiny Size)</a>
 ````
 
 */
@@ -38,9 +37,7 @@ button {
     }
 }
 
-.button__base,
-[class*="button"] {
-
+.button__base {
     // Baseline
     width: auto;
     height: auto;
@@ -58,45 +55,98 @@ button {
     cursor: pointer;
     vertical-align: middle;
     display: inline-block;
-    background: @light-grey;
+
+    .m-vertical-rhythm__margin-leader();
+    .m-button__sizing(@desired-height: 44, @line-height: 16, @font-size: @primer-text-size);
+    .m-type__type-size(@primer-text-size, 16);
+    .proto__lato--black;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+    padding: @button-vertical-padding 23px;
     color: @light-black;
     text-align: center; 
-    padding: @half-vertical @full-side;
-    
-    .m-vertical-rhythm__margin-leader();
-    
-    p > & {
-        margin-top: 0;
-    }
+    background: @light-grey;
     
     &:hover,
     &:focus,
     &.is-current {
         background: lighten( @light-grey, 10% );
     }
-}
 
-/*
-
-Button Variations
-
- */
-
-.button__primary {
-    &:extend(.button__base all);
-    background: @blue;
-    color: @white;
-
-    &:hover,
-    &:focus,
-    &.is-current {
-        background: @dark-blue;
+    &:focus {
+        box-shadow: 0 0 0 5px @accent-1;
+    }    
+    
+    p > & {
+        margin-top: 0;
     }
 }
 
-/*
-.button__secondary {}
- */
+.button__primary {
+    &:extend(.button__base all);
+
+    background: @interactive-primary;
+    color: @white;
+
+    &:hover,
+    &.is-current {
+        background: @interactive-secondary;
+        color: @white;
+    }
+
+    &:focus {
+        background: @interactive-primary;
+        color: @white;
+    }
+}
+
+.button__secondary {
+    &:extend(.button__base all);
+
+    border-color: @interactive-primary;
+    background: transparent;
+    color: @interactive-primary;
+
+    &:hover,
+    &.is-current {
+        border-color: @interactive-secondary;
+        background: @interactive-secondary;
+        color: @white;
+    }
+
+    &:focus {
+        background-color: transparent;
+        color: @interactive-primary;
+    }
+}
+
+.button--large {
+    .m-button__sizing(@desired-height: 58, @line-height: 22, @font-size: @normal-text-size);
+    .m-type__type-size(@normal-text-size, 22);
+
+    padding: @button-vertical-padding 42px;
+}
+
+.button--small {
+    .m-button__sizing(@desired-height: 37, @line-height: 17, @font-size: @petite-text-size);
+    .m-type__type-size(@petite-text-size, 17);
+
+    padding: @button-vertical-padding 18px;
+}
+
+.button--tiny {
+    .m-button__sizing(@desired-height: 27, @line-height: 12, @font-size: @non-pariel-text-size);
+    .m-type__type-size(@non-pariel-text-size, 12);
+
+    padding: @button-vertical-padding 11px
+}
+
+.button__full-width { 
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .button__no-button {
     background: transparent;
@@ -109,59 +159,4 @@ Button Variations
         background: transparent;
         color: inherit;
     }
-}
-
-/*
-
-````tiny-button
-<a class="button__tiny" href="#">Tiny Button</a>
-<a class="button__tiny button__primary" href="#">Tiny Button Primary</a>
-<a class="button__tiny button__danger" href="#">Tiny Button Danger</a>
-````
-
-*/
-
-/*
-
-````small-button
-<a class="button__small" href="#">Small Button</a>
-<a class="button__small button__primary" href="#">Small Button Primary</a>
-<a class="button__small button__danger" href="#">Small Button Danger</a>
-````
-
-*/
-
-/*
-
-````large-button
-<a class="button__large" href="#">Large Button</a>
-<a class="button__large button__primary" href="#">Large Button Primary</a>
-<a class="button__large button__danger" href="#">Large Button Danger</a>
-````
-
-*/
-
-.button__tiny {       
-    // Mixins
-    // @TODO: Extend?
-    .m-type__size-for-font(@petite-text-size);
-
-    // Create
-    padding: @quarter-vertical @half-side;
-}
-
-.button__small {
-    // @TODO: Extend?
-    .m-type__size-for-font(@petite-text-size);
-}
-
-.button__large {
-    // @TODO: Extend?
-    .m-type__size-for-font(@tertia-text-size);
-}
-
-.button__full-width { 
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
 }

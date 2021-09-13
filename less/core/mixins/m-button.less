@@ -16,3 +16,14 @@
         border-color: darken(@border, 15%);
     }
 }
+
+.m-button__sizing(
+    @desired-height,
+    @line-height: 19,
+    @font-size: @normal-text-size
+) {
+  @button-vertical-padding: unit(
+    (@desired-height - (@default-border-width * 2) - @line-height) / 2,
+    px
+  );
+}
