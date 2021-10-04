@@ -32,25 +32,27 @@
     flex: @grow @shrink @basis;
 }
 .m-flex__gutters(@size:@full-side) {
-    #mixed > .m-grid__row( @mobile-margin );
+    /**
+     * As of 2020, all gap related properties work in Flexbox
+     * as well as CSS Grid. The following will apply our grid
+     * gutters to any child of a flexbox container that runs
+     * this mixin. This will also remove the gutters applied 
+     * via padding to any children utilizing a grid column class. 
+    */
+    #mixed > .m-grid__gap(@mobile-margin);
+
+    > [class*="grid__lg"],
+    > [class*="grid__med"],
+    > [class*="grid__sm"] {
+        padding: 0; // remove grid column padding
+    }
 
     @media @medium-screens-only {
-        #mixed > .m-grid__row( @tablet-margin );
+        #mixed > .m-grid__gap(@tablet-margin);
     }
 
     @media @large-screens-min {
-        #mixed > .m-grid__row( @base-margin );
+        #mixed > .m-grid__gap(@base-margin);
     }
 
-    .flex__col {
-        #mixed > .m-grid__padding( @mobile-margin );
-
-        @media @medium-screens-only {
-            #mixed > .m-grid__padding( @tablet-margin );
-        }
-
-        @media @large-screens-min {
-            #mixed > .m-grid__padding( @base-margin );
-        }
-    }
 }

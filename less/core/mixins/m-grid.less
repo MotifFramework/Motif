@@ -46,6 +46,15 @@
         padding-left: @grid-margin;
         padding-right: @grid-margin;
     }
+
+    .m-grid__gap(@gap: @base-margin)   {
+
+        // Variables
+        @grid-gap: 1rem * ((@gap / 2) / @root-text-size);
+    
+        // Create
+        column-gap: @grid-gap;
+    }
 }
 #mixins {
 
