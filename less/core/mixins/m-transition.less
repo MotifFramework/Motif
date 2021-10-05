@@ -1,0 +1,119 @@
+#m-transition() {
+    /* 
+        Helper mixins used by the #m-transition.generate() mixin.
+        Each accept a comma-separated list of values.
+    */
+    .property(...) {
+      transition-property: @arguments;
+    }
+    .delay(...) {
+      transition-delay: @arguments;
+    }
+    .duration(...) {
+      transition-duration: @arguments;
+    }
+    .timing(...) {
+      transition-timing-function: @arguments;
+    }
+
+    /* 
+    Builds out transition properties and to/from style declarations for each style property passed in.
+        @param {props} Comma-separated properties to transition i.e. background, font-size.
+        @param {from} Comma-separated default style values for each property i.e. black, 12px.
+        @param {to} Comma-separated transitioned style values for each property i.e. white, 18px.
+        @param {delay} Comma-separated list of delay values for each property (default 0s).
+        @param {duration} Comma-separated list of duration values for each property (default 500ms).
+        @param {timing} Comma-separated list of timing-function values for each property (default ease-in-out).
+        @param {onPsuedo} Value representing a psuedo selector for when the transition will apply i.e. hover, focus (default false).
+        @param {onSelector} Escaped string representing a selector for when the transition will apply i.e. ~"&.is-animating" (default false).
+
+        Note: for more complex selectors, set the @to argument to false and handle it outside of the mixin.
+
+        Example
+            .button__primary {
+                #m-transition.genrate (
+                    @onPsuedo: hover;
+                    @props: background, color;
+                    @duration: 250ms, 500ms;
+                    @from: white, black;
+                    @to: black, white
+                );
+            }
+        Outputs
+            .button__primary {
+                transition-property: background, color;
+                transition-delay: 0s;
+                transition-duration: 250ms, 500ms;
+                transition-timing-function: ease-in-out;
+                background: white;
+                color: black;
+            }
+
+            .button__primary:hover {
+                background: black;
+                color: white;
+            }
+        Example
+            .button__secondary {
+                #m-transition.generate(
+                    @onSelector: ~"&.is-active";
+                    @props: border-color;
+                    @from: black;
+                    @to: blue;
+                )
+
+                border-style: solid;
+                border-width: 2px;
+            }
+
+        Outputs
+            .button__secondary {
+                transition-property: border-color;
+                transition-delay: 0s;
+                transition-duration: 500ms;
+                transition-timing-function: ease-in-out;
+                border-color: black;
+                border-style: solid;
+                border-width: 2px;
+            }
+            
+            .button__secondary.is-active {
+                border-color: blue;
+            }
+    */
+    .generate(
+      @onPsuedo: false;
+      @onSelector: false;
+      @props;
+      @delay: 0s;
+      @duration: 500ms;
+      @timing: ease-in-out;
+      @from;
+      @to;
+    ){
+      #m-transition.property(@props);
+      #m-transition.delay(@delay);
+      #m-transition.duration(@duration);
+      #m-transition.timing(@timing);
+      
+      each(@props, .(@v, @k, @i) {
+        @{v}: extract(@from, @i);
+      })
+    
+      & when not (@onPsuedo = false) and not (@to = false) {
+        &:@{onPsuedo} {
+          each(@props, .(@v, @k, @i) {
+            @{v}: extract(@to, @i);
+          })
+        }
+      }
+      
+      & when not (@onSelector = false) and not (@to = false) {
+        @{onSelector} {
+          each(@props, .(@v, @k, @i) {
+            @{v}: extract(@to, @i);
+          })
+        }
+      }
+    }  
+  }

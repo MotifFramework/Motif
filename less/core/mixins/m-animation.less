@@ -1,0 +1,30 @@
+
+#m-animation() {
+    /*  
+    Generates percentage-based keyframes.
+        @param {name} Name of keyframes.
+        @param {framelist} Comma-separated percentage values for each keyframe.
+        @param {frameprops} Comma-seperated declaration list for each keyframe.
+    */
+    .keyframes(
+      @name;
+      @framelist;
+      @frameprops
+    ){
+      /* HT: https://stackoverflow.com/questions/33033541/add-argument-into-keyframes-property-less */
+      @keyframes @name {
+        .loop-framelist(@index) when (@index <= length(@framelist)) {
+          @framepos: extract(@framelist, @index) * 1%;
+  
+          @{framepos} {
+            @props: extract(@frameprops, @index);
+            @props();
+          }
+  
+          .loop-framelist(@index + 1);
+        }
+  
+        .loop-framelist(1);
+      }
+    }
+  }
